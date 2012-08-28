@@ -1,4 +1,4 @@
-This is the SETL framework. The 'S' stands for Simple or Spatial ETL.
+This is the SETL framework. The 'S' stands for Simple or Spatial ETL. SETL is Open Source.
 
 SETL originated in the inspire-foss project (www.inspire-foss.org)
 and was created by Just van den Broecke. Since SETL evolved into a wider use like 
