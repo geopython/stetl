@@ -37,7 +37,7 @@ and feed this upstream into the ETL chain.
 
 More to follow...see some examples under the test dir.
 
-See an extended config example in http://code.google.com/p/inspire-foss/source/browse/trunk/etl/NL.Kadaster/Addresses/etl.cfg
+Another example in http://code.google.com/p/inspire-foss/source/browse/trunk/etl/NL.Kadaster/Addresses
 (Dutch Addresses (BAG) to INSPIRE Addresses)
 
 
