@@ -1,6 +1,6 @@
-This is the SETL framework. The 'S' stands for Simple or Spatial ETL. SETL is Open Source.
+This is the SETL framework. The 'S' stands for Simple or Spatial or Streaming ETL. SETL is Open Source (GNU GPL v3).
 
-SETL originated in the inspire-foss project (www.inspire-foss.org)
+SETL originated in the INSPIRE-FOSS project (www.inspire-foss.org)
 and was created by Just van den Broecke. Since SETL evolved into a wider use like 
 transforming Dutch GML-based datasets such as IMGEO/BGT (Large Scale Topography) 
 and IMKAD/BRK (Kadastral Data) it has now a repo of its own.
@@ -37,7 +37,7 @@ and feed this upstream into the ETL chain.
 
 More to follow...see some examples under the test dir.
 
-See an extended config example in http://code.google.com/p/inspire-foss/source/browse/trunk/etl/NL.Kadaster/Addresses/etl.cfg
+Another example in http://code.google.com/p/inspire-foss/source/browse/trunk/etl/NL.Kadaster/Addresses
 (Dutch Addresses (BAG) to INSPIRE Addresses)
 
 
