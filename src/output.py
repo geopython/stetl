@@ -7,8 +7,8 @@
 #
 from postgis import PostGIS
 from component import Component
-from util import ConfigSection, Util, etree, StringIO
-import os,sys
+from util import  Util, etree
+import os
 import httplib
 
 log = Util.get_log('output')
@@ -163,7 +163,8 @@ class DeegreeFSLoaderOutput(Output):
         Output.__init__(self, configdict, section)
 
     def write(self, gml_doc):
-        from subprocess import Popen, PIPE, STDOUT
+        from subprocess import Popen, PIPE
+
         d3tools_path = self.cfg.get('d3tools_path')
         workspace_path = self.cfg.get('workspace_path')
         feature_store = self.cfg.get('feature_store')

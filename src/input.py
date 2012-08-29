@@ -5,13 +5,8 @@
 #
 # Author: Just van den Broecke
 #
-import os
-import optparse
-import shutil
-import re
 import subprocess
 from util import Util, ConfigSection, etree
-from ConfigParser import ConfigParser
 from gmlsplitter import GmlSplitter
 from component import Component
 
@@ -50,6 +45,74 @@ class XmlFileInput(Input):
         except Exception, e:
             log.info("file read and parsed NOT OK : %s" % self.file_path)
         return self.doc
+
+
+class BigXmlFileInput(Input):
+    # Constructor
+    def __init__(self, configdict, section):
+        Input.__init__(self, configdict, section)
+        self.file_path = self.cfg.get('file_path')
+        self.doc = None
+        self.file = None
+        # Reusable XML parser
+        self.xml_parser = etree.XMLParser(remove_blank_text=True)
+
+    def buffer_to_doc(self, buffer):
+
+        # Process/transform data in buffer
+        buffer.seek(0)
+        try:
+            self.gml_doc = etree.parse(buffer, self.xml_parser)
+        except Exception, e:
+            bufStr = buffer.getvalue()
+            if not bufStr:
+                log.info("parse buffer empty: content=[%s]" % bufStr)
+            else:
+                log.error("error in buffer parsing %s" % str(e))
+                raise
+        buffer.close()
+
+    def readline(self):
+        if self.eof_stdout is True:
+            return None
+
+        line = self.file.readline()
+        if not line or line == '':
+            self.eof_stdout = True
+            log.info("EOF file")
+            return None
+
+        line = line.decode('utf-8')
+        return line
+
+    def read(self):
+        if self.file is None:
+            self.file = open(self.file_path, 'r')
+            self.eof_stdout = False
+            self.gml_splitter = GmlSplitter(self.configdict)
+
+        self.gml_doc = None
+        while 1:
+            line = self.readline()
+#            print '|' + line
+            if line is None:
+                buffer = self.gml_splitter.buffer
+                if buffer is not None:
+                    # EOF but still data in buffer: make doc
+                    log.info("Last Buffer")
+                    self.buffer_to_doc(buffer)
+
+                break
+            else:
+                # Valid line: push to the splitter
+                # If buffer filled process it
+                buffer = self.gml_splitter.push_line(line)
+                if buffer is not None:
+                    self.buffer_to_doc(buffer)
+                    break
+
+        return self.gml_doc
+
 
 class OgrPostgisInput(Input):
     pg_conn_tmpl = "PG:host=%s dbname=%s active_schema=%s user=%s password=%s port=%s"
@@ -93,7 +156,7 @@ class OgrPostgisInput(Input):
 
         # Bouw ogr2ogr commando
         cmd = OgrPostgisInput.cmd_tmpl % (
-        t_srs, s_srs, gml_out_file, gml_format, dimension, self.pg, sql, new_layer_name, geotype)
+            t_srs, s_srs, gml_out_file, gml_format, dimension, self.pg, sql, new_layer_name, geotype)
         cmd = cmd.split('|')
         self.exec_cmd(cmd)
 
