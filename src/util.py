@@ -89,7 +89,10 @@ class ConfigSection():
         if result is None:
             result = default
         else:
-            result = bool(result)
+            if result == 'false' or result == 'False':
+                result = False
+            else:
+                result = bool(result)
         return result
 
     def to_string(self):

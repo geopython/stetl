@@ -82,6 +82,7 @@ Output: GML FeatureCollection met als featureMember's IMGEO objecten
              <xsl:apply-templates/>
          </gml:Surface>
      </xsl:template>
+
     <xsl:template match="gml:Polygon">
         <gml:Polygon>
             <xsl:attribute name="srsName">EPSG:28992</xsl:attribute>
