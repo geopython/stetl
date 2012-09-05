@@ -63,11 +63,13 @@ class BigXmlFileInput(Input):
         buffer.seek(0)
         try:
             self.gml_doc = etree.parse(buffer, self.xml_parser)
+#            print buffer.getvalue()
         except Exception, e:
             bufStr = buffer.getvalue()
             if not bufStr:
                 log.info("parse buffer empty: content=[%s]" % bufStr)
             else:
+                print bufStr
                 log.error("error in buffer parsing %s" % str(e))
                 raise
         buffer.close()

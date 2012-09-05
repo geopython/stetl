@@ -91,6 +91,7 @@ class DeegreeBlobstoreOutput(Output):
         log.info('inserting features in DB')
         db = PostGIS(self.cfg.get_dict())
         db.connect()
+#        print self.to_string(gml_doc, False, False)
 #        NS = {'base': 'urn:x-inspire:specification:gmlas:BaseTypes:3.2', 'gml': 'http://www.opengis.net/gml/3.2'}
 #        featureMembers = gml_doc.xpath('//base:member/*', namespaces=NS)
         featureMembers = gml_doc.xpath("//*[local-name() = '%s']/*" % self.feature_member_tag)

@@ -21,16 +21,24 @@ class GmlSplitter(Component):
 
         log.info("cfg = %s" % self.cfg.to_string())
         self.max_features = self.cfg.get_int('max_features', 10000)
+        # File preamble
         self.start_container = self.cfg.get('start_container')
+        # File postamble
         self.end_container = self.cfg.get('end_container')
-        self.feature_tags = self.cfg.get('feature_tags').split(',')
-        self.start_feature_tags = []
-        self.end_feature_tags = []
+        self.container_tag = self.cfg.get('container_tag')
+#        self.feature_tags = self.cfg.get('feature_tags').split(',')
+        self.start_feature_markers = self.cfg.get('start_feature_markers').split(',')
+        self.end_feature_markers = self.cfg.get('end_feature_markers').split(',')
         self.total_feature_count = 0
+
+        # End of file is line with end_container_tag
+        self.end_container_tag = '</%s' % self.container_tag
+
         # Derive start and end tags from feature_tags
-        for feature_tag in self.feature_tags:
-            self.start_feature_tags.append('<%s' % feature_tag)
-            self.end_feature_tags.append('</%s' % feature_tag)
+#        for feature_tag in self.feature_tags:
+#            self.start_feature_markers.append('<%s' % feature_tag)
+#            self.end_feature_markers.append('</%s>' % feature_tag)
+        self.expect_end_feature_markers = []
         self.expect_end_feature_tag = None
         self.buffer = None
         self.eof = False
@@ -42,10 +50,13 @@ class GmlSplitter(Component):
 
     def is_start_feature(self, line):
         index = 0
-        for feature_tag in self.start_feature_tags:
+        for feature_tag in self.start_feature_markers:
             if line.find(feature_tag) >= 0:
                 # found it ! Now we expect the end tag for this start_tag
-                self.expect_end_feature_tag = self.end_feature_tags[index]
+                self.expect_end_feature_tag = self.end_feature_markers[index]
+                self.expect_end_feature_markers.append(self.expect_end_feature_tag)
+                self.feature_count += 1
+                self.total_feature_count += 1
                 return True
 
             # Not found: next tag
@@ -59,12 +70,16 @@ class GmlSplitter(Component):
         if self.expect_end_feature_tag is None:
             return False
 
-        # ASSERTION: expect_end_feature_tag set, thus within feature
+        # ASSERTION: one or more expect_end_feature_tag set, thus within feature
 
         # End-of-feature reached ?
         if line.find(self.expect_end_feature_tag) >= 0:
             self.expect_end_feature_tag = None
-            self.total_feature_count += 1
+            self.expect_end_feature_markers.pop()
+            if len(self.expect_end_feature_markers) > 0:
+                # Set expected end-tag to last in list
+                self.expect_end_feature_tag = self.expect_end_feature_markers[-1]
+
             return True
 
         # Still within feature
@@ -81,9 +96,8 @@ class GmlSplitter(Component):
         # Start new buffer filling
         if self.buffer is None and self.eof is False:
             self.buffer = self.init_buf()
-            self.in_heading = True
-            self.in_feature = False
             self.feature_count = 0
+            self.in_heading = True
 
         if self.is_start_feature(line) is True:
             if self.in_heading:
@@ -93,39 +107,35 @@ class GmlSplitter(Component):
                 self.in_heading = False
 
             self.buffer.write(line)
-            self.feature_count += 1
             self.buffer.write('<!-- Feature #%s -->\n' % self.feature_count)
-            self.in_feature = True
 
         else:
+            # If within feature or end-of-feature: write
+            if self.expect_end_feature_tag is not None:
+                self.buffer.write(line)
+
             # If endtag of feature found may also indicate buffer filled with max_features
             if self.is_end_feature(line) is True:
                 # Start or end tag of ogr:feature  element
                 self.in_heading = False
-                self.in_feature = False
 
-                # Start or end feature
-                self.buffer.write(line)
-                if self.feature_count % self.max_features is 0:
+                if self.feature_count >= self.max_features and self.expect_end_feature_tag is None:
                     self.buffer.write(self.end_container)
                     buffer = self.buffer
                     self.buffer = None
-                    log.info("Buffer filled feat_count = %d" % self.feature_count)
+                    log.info("Buffer filled feat_count = %d total_feat_count= %d" % (self.feature_count, self.total_feature_count))
+                    self.feature_count = 0
                     return buffer
 
-
-            if self.in_feature:
-                self.buffer.write(line)
-
             # Last tag (end of container) reaching
-            if line.find(self.end_container) >= 0:
+            if line.find(self.end_container_tag) >= 0:
                 if self.buffer is not None and self.feature_count > 0:
-                    if self.feature_count % self.max_features > 0:
-                        self.buffer.write(line)
+                    self.buffer.write(self.end_container)
                     buffer = self.buffer
                     self.buffer = None
                     self.eof = True
                     log.info("Buffer filled (EOF) feat_count = %d total_feat_count= %d" % (self.feature_count, self.total_feature_count))
+                    self.feature_count = 0
                     return buffer
 
         return None
