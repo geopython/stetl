@@ -6,8 +6,8 @@
 # Author: Just van den Broecke
 #
 import codecs
-from util import Util, etree, StringIO
-from filter import Filter
+from setl.util import Util, etree, StringIO
+from setl.filter import Filter
 
 log = Util.get_log('gmlsplitter')
 

@@ -5,55 +5,12 @@
 #
 # Author: Just van den Broecke
 #
-from postgis import PostGIS
-from component import Component
-from util import  Util, etree
+from setl.postgis import PostGIS
+from setl.output import Output
+from setl.util import  Util, etree
 import os
-import httplib
 
-log = Util.get_log('output')
-
-# Base class: Output Component
-class Output(Component):
-    # Constructor
-    def __init__(self, configdict, section):
-        Component.__init__(self, configdict, section)
-
-        log.info("cfg = %s" % self.cfg.to_string())
-
-    def invoke(self, packet):
-        packet = self.write(packet)
-        packet.consume()
-        return packet
-
-    def to_string(self, gml_doc, pretty_print=True, xml_declaration=True, encoding='utf-8'):
-        return etree.tostring(gml_doc, pretty_print=pretty_print, xml_declaration = xml_declaration, encoding=encoding)
-
-    def write(self, packet):
-        if packet.data is None:
-             return packet
-
-        # Default: print to stdout
-        print(self.to_string(packet.data))
-        return packet
-
-# Pretty print XML to file
-class FileOutput(Output):
-    def __init__(self, configdict, section):
-        Output.__init__(self, configdict, section)
-        log.info("working dir %s" %os.getcwd())
-
-    def write(self, packet):
-        if packet.data is None:
-             return packet
-
-        file_path = self.cfg.get('file_path')
-        log.info('writing to file %s' % file_path)
-        out_file = open(file_path, 'w')
-        out_file.writelines(self.to_string(packet.data))
-        out_file.close()
-        log.info("written to %s" % file_path)
-        return packet
+log = Util.get_log('deegreeoutput')
 
 # Insert features into deegree Blobstore
 class DeegreeBlobstoreOutput(Output):
@@ -205,37 +162,3 @@ class DeegreeFSLoaderOutput(Output):
 
          # print(result)
 
-# Insert features via WFS-T (WFS Transaction) OGC protocol
-class WFSTOutput(Output):
-    wfst_req = '''<?xml version="1.0" encoding="UTF-8"?>
-<wfs:Transaction version="1.1.0" service="WFS"
-                 xmlns:wfs="http://www.opengis.net/wfs"
-                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                 xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd">
-
-    <wfs:Insert handle="insert" idgen="%s">
-    %s
-    </wfs:Insert>
-</wfs:Transaction>
-    '''
-    headers = {"Content−type" : 'Content-type: text/xml',"Accept":"text/xml"}
-
-    def __init__(self, configdict, section):
-        Output.__init__(self, configdict, section)
-        self.wfs_host = self.cfg.get('host')
-        self.wfs_port = self.cfg.get('port', '80')
-        self.wfs_path = self.cfg.get('path')
-        self.idgen = self.cfg.get('idgen', 'GenerateNew')
-
-    def write(self, packet):
-        if packet.data is None:
-             return packet
-
-        conn = httplib.HTTPConnection(self.wfs_host, self.wfs_port)
-        conn.request("POST", self.wfs_path, WFSTOutput.wfst_req % (self.idgen, self.to_string(packet.data, False, False)), WFSTOutput.headers)
-
-        response = conn.getresponse()
-        log.info('status=%s msg=%s' % (response.status, response.msg))
-        log.info('response=%s' % response.read(1024))
-        conn.close()
-        return packet

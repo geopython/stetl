@@ -4,4 +4,5 @@
 #
 # Author: Just van den Broecke
 #
-python ../../src/etl.py -c etl-bgt.cfg
+export PYTHONPATH=${PYTHONPATH}:../..
+python ../../setl/main.py -c etl-bgt.cfg

@@ -7,10 +7,10 @@
 #
 import optparse
 from ConfigParser import ConfigParser
-from util import Util
-from chain import Chain
+from setl.util import Util
+from setl.chain import Chain
 
-log = Util.get_log('etl')
+log = Util.get_log('main')
 
 class ETL:
 

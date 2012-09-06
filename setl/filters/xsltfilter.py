@@ -5,28 +5,15 @@
 #
 # Author:Just van den Broecke
 
-from util import Util, etree
-from filter import Filter
+from setl.util import Util, etree
+from setl.filter import Filter
 
-log = Util.get_log("transformer")
+log = Util.get_log("xsltfilter")
 
-
-# Base class: Output Component
-class Transformer(Filter):
+class XsltFilter(Filter):
     # Constructor
     def __init__(self, configdict, section):
         Filter.__init__(self, configdict, section)
-
-    def invoke(self, packet):
-        return self.transform(packet)
-
-    def transform(self, packet):
-        return packet
-
-class XsltTransformer(Transformer):
-    # Constructor
-    def __init__(self, configdict, section):
-        Transformer.__init__(self, configdict, section)
 
         self.xslt_file_path = self.cfg.get('script')
         self.xslt_file = open(self.xslt_file_path, 'r')
@@ -34,10 +21,12 @@ class XsltTransformer(Transformer):
         self.xslt_obj = etree.XSLT(self.xslt_doc)
         self.xslt_file.close()
 
-    def transform(self, packet):
+    def invoke(self, packet):
         if packet.data is None:
             return packet
+        return self.transform(packet)
 
+    def transform(self, packet):
         log.info("XSLT Transform")
         packet.data = self.xslt_obj(packet.data)
         return packet
