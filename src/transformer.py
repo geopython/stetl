@@ -5,23 +5,23 @@
 #
 # Author:Just van den Broecke
 
-from util import ConfigSection, Util, etree
-from component import Component
+from util import Util, etree
+from filter import Filter
 
 log = Util.get_log("transformer")
 
+
 # Base class: Output Component
-class Transformer(Component):
+class Transformer(Filter):
     # Constructor
     def __init__(self, configdict, section):
-        Component.__init__(self, configdict, section)
-        log.info("cfg = %s" % self.cfg.to_string())
+        Filter.__init__(self, configdict, section)
 
-    def invoke(self, doc):
-        return self.transform(doc)
+    def invoke(self, packet):
+        return self.transform(packet)
 
-    def transform(self, gml_doc):
-        return None
+    def transform(self, packet):
+        return packet
 
 class XsltTransformer(Transformer):
     # Constructor
@@ -34,7 +34,11 @@ class XsltTransformer(Transformer):
         self.xslt_obj = etree.XSLT(self.xslt_doc)
         self.xslt_file.close()
 
-    def transform(self, doc):
+    def transform(self, packet):
+        if packet.data is None:
+            return packet
+
         log.info("XSLT Transform")
-        return self.xslt_obj(doc)
+        packet.data = self.xslt_obj(packet.data)
+        return packet
 

@@ -5,9 +5,8 @@
 #
 # Author:Just van den Broecke
 
-import os
 import logging
-from ConfigParser import ConfigParser
+
 logging.basicConfig(level=logging.INFO,
                      format='%(asctime)s %(name)s %(levelname)s %(message)s')
 

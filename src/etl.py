@@ -5,11 +5,10 @@
 #
 # Author: Just van den Broecke
 #
-import codecs
 import optparse
 from ConfigParser import ConfigParser
-from util import Util, etree, StringIO
-from factory import factory
+from util import Util
+from chain import Chain
 
 log = Util.get_log('etl')
 
@@ -38,28 +37,19 @@ class ETL:
         # The main ETL processing
         log.info("START")
 
-        etl_chain = self.configdict.get('etl', 'chain').split('|')
-        if not etl_chain:
+        # Get the ETL Chain pipeline config strings
+        chains_str = self.configdict.get('etl', 'chains')
+        if not chains_str:
             raise ValueError('ETL chain entry not defined in section [etl]')
 
-        # Create input/transformer/output (ETL Component) objects
-        etl_comps = []
-        for etl_section in etl_chain:
-            etl_comps.append(factory.create_obj(self.configdict, etl_section))
+        chains_str_arr = chains_str.split(',')
+        for chain_str in chains_str_arr:
+            # Build single Chain of components and let it run
+            chain = Chain(chain_str.strip(), self.configdict)
+            chain.assemble()
+            chain.run()
 
-        # Do ETL as long as input available
-        while 1:
-            # Input
-            doc = etl_comps[0].invoke()
-
-            # Halt when no input available any more
-            if doc is None:
-                 log.info("DONE")
-                 break
-
-            # Processing : invoke the chain of Transformers and Output Components
-            for i in range(1, len(etl_comps)):
-                doc = etl_comps[i].invoke(doc)
+        log.info("ALL DONE")
 
 def main():
     # Do the ETL

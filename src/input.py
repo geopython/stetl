@@ -6,8 +6,7 @@
 # Author: Just van den Broecke
 #
 import subprocess
-from util import Util, ConfigSection, etree
-from gmlsplitter import GmlSplitter
+from util import Util, etree
 from component import Component
 
 log = Util.get_log('input')
@@ -20,11 +19,11 @@ class Input(Component):
 
         log.info("cfg = %s" % self.cfg.to_string())
 
-    def invoke(self, doc=None):
-        return self.read()
+    def invoke(self, packet):
+        return self.read(packet)
 
-    def read(self):
-        return None
+    def read(self, packet):
+        return packet
 
 
 class XmlFileInput(Input):
@@ -32,19 +31,20 @@ class XmlFileInput(Input):
     def __init__(self, configdict, section):
         Input.__init__(self, configdict, section)
         self.file_path = self.cfg.get('file_path')
-        self.doc = None
 
-    def read(self):
+    def read(self, packet):
         # One-time read/parse only
-        if self.doc is not None:
-            return None
-
         try:
-            self.doc = etree.parse(self.file_path)
+            packet.data = etree.parse(self.file_path)
             log.info("file read and parsed OK : %s" % self.file_path)
         except Exception, e:
             log.info("file read and parsed NOT OK : %s" % self.file_path)
-        return self.doc
+
+        # One-time read: we're all done
+        packet.set_end_of_doc()
+        packet.set_end_of_stream()
+
+        return packet
 
 
 class BigXmlFileInput(Input):
@@ -52,132 +52,87 @@ class BigXmlFileInput(Input):
     def __init__(self, configdict, section):
         Input.__init__(self, configdict, section)
         self.file_path = self.cfg.get('file_path')
-        self.doc = None
         self.file = None
-        # Reusable XML parser
-        self.xml_parser = etree.XMLParser(remove_blank_text=True)
 
-    def buffer_to_doc(self, buffer):
-
-        # Process/transform data in buffer
-        buffer.seek(0)
-        try:
-            self.gml_doc = etree.parse(buffer, self.xml_parser)
-#            print buffer.getvalue()
-        except Exception, e:
-            bufStr = buffer.getvalue()
-            if not bufStr:
-                log.info("parse buffer empty: content=[%s]" % bufStr)
-            else:
-                print bufStr
-                log.error("error in buffer parsing %s" % str(e))
-                raise
-        buffer.close()
-
-    def readline(self):
-        if self.eof_stdout is True:
-            return None
-
-        line = self.file.readline()
-        if not line or line == '':
-            self.eof_stdout = True
-            log.info("EOF file")
-            return None
-
-        line = line.decode('utf-8')
-        return line
-
-    def read(self):
+    def read(self, packet):
         if self.file is None:
             self.file = open(self.file_path, 'r')
-            self.eof_stdout = False
-            self.gml_splitter = GmlSplitter(self.configdict)
 
-        self.gml_doc = None
-        while 1:
-            line = self.readline()
-#            print '|' + line
-            if line is None:
-                buffer = self.gml_splitter.buffer
-                if buffer is not None:
-                    # EOF but still data in buffer: make doc
-                    log.info("Last Buffer")
-                    self.buffer_to_doc(buffer)
+        if packet.is_end_of_stream():
+            return packet
 
-                break
-            else:
-                # Valid line: push to the splitter
-                # If buffer filled process it
-                buffer = self.gml_splitter.push_line(line)
-                if buffer is not None:
-                    self.buffer_to_doc(buffer)
-                    break
+        # Assume valid line
+        line = self.file.readline()
+        if not line or line == '':
+            packet.data = None
+            packet.set_end_of_stream()
+            log.info("EOF file")
+            return packet
 
-        return self.gml_doc
+        packet.data = line.decode('utf-8')
+        return packet
 
 
 class OgrPostgisInput(Input):
+    # TODO make this template configurable so we can have generic ogr2ogr input....
     pg_conn_tmpl = "PG:host=%s dbname=%s active_schema=%s user=%s password=%s port=%s"
     cmd_tmpl = 'ogr2ogr|-t_srs|%s|-s_srs|%s|-f|GML|%s|-dsco|FORMAT=%s|-lco|DIM=%s|%s|-SQL|%s|-nln|%s|%s'
 
     # Constructor
     def __init__(self, configdict, section):
         Input.__init__(self, configdict, section)
-        self.init()
 
     def init(self):
-    #        self.cmd='ogr2ogr|-t_srs|EPSG:4258|-s_srs|EPSG:28992|-f|GML|/vsistdout/|-dsco|FORMAT=GML3|-lco|DIM=2|%s|-SQL|%s|-nln|adres|POINT'
-        host = self.cfg.get('host', 'localhost')
-        db = self.cfg.get('database')
-        schema = self.cfg.get('schema', 'public')
-        user = self.cfg.get('user', 'postgres')
-        password = self.cfg.get('password', 'postgres')
-        port = self.cfg.get('port', '5432')
-
-        self.pg = OgrPostgisInput.pg_conn_tmpl % (host, db, schema, user, password, port)
-        self.layer_names = self.cfg.get('layers').split(',')
-        self.gml_splitter = None
-        self.layer_index = -1
-        # Reusable XML parser
-        self.xml_parser = etree.XMLParser(remove_blank_text=True)
-
-    def get_layer_names(self):
-        return self.layer_names
-
-    def exec_layer(self, db_layer_section):
-        lcfg = ConfigSection(self.configdict.items(db_layer_section))
-        log.info("run_layer section = [%s] name = [%s]" % (db_layer_section, lcfg.get('name')))
-        t_srs = self.cfg.get('t_srs')
-        s_srs = self.cfg.get('s_srs')
-        gml_out_file = lcfg.get('gml_out_file')
-        gml_format = lcfg.get('gml_format')
-        dimension = lcfg.get('dimension')
-        sql = lcfg.get('sql')
-        new_layer_name = lcfg.get('new_layer_name')
-        geotype = lcfg.get('geotype', '')
-
-        # Bouw ogr2ogr commando
-        cmd = OgrPostgisInput.cmd_tmpl % (
-            t_srs, s_srs, gml_out_file, gml_format, dimension, self.pg, sql, new_layer_name, geotype)
-        cmd = cmd.split('|')
-        self.exec_cmd(cmd)
-
-    def exec_cmd(self, cmd):
-        log.info("start ogr2ogr cmd = %s" % repr(cmd))
+        self.ogr_process = None
         self.eof_stdout = False
         self.eof_stderr = False
-        self.process = subprocess.Popen(cmd,
+
+        in_pg_host = self.cfg.get('in_pg_host', 'localhost')
+        in_pg_db = self.cfg.get('in_pg_db')
+        in_pg_schema = self.cfg.get('in_pg_schema', 'public')
+        in_pg_user = self.cfg.get('in_pg_user', 'postgres')
+        in_pg_password = self.cfg.get('in_pg_password', 'postgres')
+        in_pg_port = self.cfg.get('in_pg_port', '5432')
+        in_srs = self.cfg.get('in_srs')
+        in_pg_sql = self.cfg.get('in_pg_sql')
+
+        out_srs = self.cfg.get('out_srs')
+        out_file = '/vsistdout/'
+        out_gml_format = self.cfg.get('out_gml_format')
+        out_dimension = self.cfg.get('out_dimension', '2')
+        out_layer_name = self.cfg.get('out_layer_name')
+        out_geotype = self.cfg.get('out_geotype', '')
+
+        #
+        # Build ogr2ogr command line
+        #
+        # PostGIS PG: options
+        self.pg = OgrPostgisInput.pg_conn_tmpl % (in_pg_host, in_pg_db, in_pg_schema, in_pg_user, in_pg_password, in_pg_port)
+
+        # Entire ogr2ogr command line
+        self.cmd = OgrPostgisInput.cmd_tmpl % (
+            out_srs, in_srs, out_file, out_gml_format, out_dimension, self.pg, in_pg_sql, out_layer_name, out_geotype)
+
+        # Make array to make it easy for Popen with quotes etc
+        self.cmd = self.cmd.split('|')
+
+    def exec_cmd(self):
+        log.info("start ogr2ogr cmd = %s" % repr(self.cmd))
+        self.ogr_process = subprocess.Popen(self.cmd,
                                         shell=False,
                                         stdout=subprocess.PIPE,
                                         stderr=subprocess.PIPE)
 
-    #        exit_code = self.process.returncode
+        err_line = self.readline_err()
+        if err_line:
+            log.warning('ogr2ogr: %s ' % err_line)
+    #        exit_code = self.ogr_process.returncode
 
     def readline(self):
         if self.eof_stdout is True:
             return None
 
-        line = self.process.stdout.readline()
+        line = self.ogr_process.stdout.readline()
         if not line:
             self.eof_stdout = True
             log.info("EOF stdout")
@@ -190,7 +145,7 @@ class OgrPostgisInput(Input):
         if self.eof_stderr is True:
             return None
 
-        line = self.process.stderr.readline()
+        line = self.ogr_process.stderr.readline()
         if not line:
             self.eof_stderr = True
             log.info("EOF stderr")
@@ -198,76 +153,25 @@ class OgrPostgisInput(Input):
 
         return line
 
-    def read(self):
-        if self.layer_index < 0:
-            self.layer_index = 0
+    def read(self, packet):
+        if packet.is_end_of_stream():
+            return packet
 
-        if self.layer_index >= len(self.layer_names):
-            return None
-
-        if self.gml_splitter is None:
+        # First time here : spawn the ogr2ogr command
+        if self.ogr_process is None:
             # New splitter for each layer
-            self.gml_splitter = GmlSplitter(self.configdict)
-            self.exec_layer(self.layer_names[self.layer_index])
+            self.exec_cmd()
 
-        self.gml_doc = None
-        while 1:
-            line = self.readline()
-            if not line:
-                line = self.readline_err()
-                if not line:
-                    log.info("EOF Layer %s" % self.layer_names[self.layer_index])
-                    buffer = self.gml_splitter.buffer
-                    if buffer is not None:
-                        # EOF but still data in buffer: make doc
-                        log.info("Buffer ready layer = %s" % self.layer_names[self.layer_index])
-                        self.buffer_to_doc(buffer)
+        packet.data = self.readline()
+        if not packet.data:
+            err_line = self.readline_err()
+            if err_line:
+                log.warning('ogr2ogr: %s ' % err_line)
 
-                    self.nextLayer()
-                    break
-            else:
-                # Valid line: push to the splitter
-                # If buffer filled process it
-                buffer = self.gml_splitter.push_line(line)
-                if buffer is not None:
-                    self.buffer_to_doc(buffer)
+            packet.set_end_of_stream()
+            log.info('EOF ogr2ogr output')
 
-                    # GMLSplitter may have reached end-of-container
-                    # Proceed to next layer
-                    if self.gml_splitter.eof is True:
-                        self.nextLayer()
+        return packet
 
-                    break
-
-        return self.gml_doc
-
-    def nextLayer(self):
-        self.layer_index += 1
-        self.gml_splitter = None
-
-    def buffer_to_doc(self, buffer):
-        # Process/transform data in buffer
-        buffer.seek(0)
-        # bufStr = buffer.getvalue()
-        # log.info("parse buffer: content=[%s]" % bufStr)
-        self.gml_doc = etree.parse(buffer, self.xml_parser)
-        buffer.close()
-
-    def process_layer(self, layer_name):
-        self.exec_layer(layer_name)
-
-        while 1:
-            line = self.readline()
-            if not line:
-                line = self.readline_err()
-                if not line:
-                    log.info("EOF All")
-                    break
-            print line
-
-    def process(self):
-        layer_names = self.get_layer_names()
-        for layer_name in layer_names:
-            self.process_layer(layer_name)
 
 

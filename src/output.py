@@ -21,15 +21,21 @@ class Output(Component):
 
         log.info("cfg = %s" % self.cfg.to_string())
 
-    def invoke(self, doc):
-        self.write(doc)
-        return None
+    def invoke(self, packet):
+        packet = self.write(packet)
+        packet.consume()
+        return packet
 
     def to_string(self, gml_doc, pretty_print=True, xml_declaration=True, encoding='utf-8'):
         return etree.tostring(gml_doc, pretty_print=pretty_print, xml_declaration = xml_declaration, encoding=encoding)
 
-    def write(self, gml_doc):
-        print(self.to_string(gml_doc))
+    def write(self, packet):
+        if packet.data is None:
+             return packet
+
+        # Default: print to stdout
+        print(self.to_string(packet.data))
+        return packet
 
 # Pretty print XML to file
 class FileOutput(Output):
@@ -37,13 +43,17 @@ class FileOutput(Output):
         Output.__init__(self, configdict, section)
         log.info("working dir %s" %os.getcwd())
 
-    def write(self, gml_doc):
+    def write(self, packet):
+        if packet.data is None:
+             return packet
+
         file_path = self.cfg.get('file_path')
         log.info('writing to file %s' % file_path)
         out_file = open(file_path, 'w')
-        out_file.writelines(self.to_string(gml_doc))
+        out_file.writelines(self.to_string(packet.data))
         out_file.close()
         log.info("written to %s" % file_path)
+        return packet
 
 # Insert features into deegree Blobstore
 class DeegreeBlobstoreOutput(Output):
@@ -54,7 +64,6 @@ class DeegreeBlobstoreOutput(Output):
         self.srid = self.cfg.get_int('srid', -1)
         self.feature_member_tag = self.cfg.get('feature_member_tag')
         self.feature_type_ids = {}
-        self.init()
 
     def init(self):
         self.get_feature_types()
@@ -87,7 +96,11 @@ class DeegreeBlobstoreOutput(Output):
         sql = "ALTER TABLE gml_objects ADD CONSTRAINT enforce_srid_gml_bounded_by CHECK  (st_srid(gml_bounded_by) = (%s));" % srid
         db.tx_execute(sql)
 
-    def write(self, gml_doc):
+    def write(self, packet):
+        if packet.data is None:
+             return packet
+
+        gml_doc = packet.data
         log.info('inserting features in DB')
         db = PostGIS(self.cfg.get_dict())
         db.connect()
@@ -153,6 +166,7 @@ class DeegreeBlobstoreOutput(Output):
             log.error("error in commit")
 
         log.info("inserted %s features" % count)
+        return packet
 
 # Insert features via deegree FSLoader
 class DeegreeFSLoaderOutput(Output):
@@ -163,9 +177,12 @@ class DeegreeFSLoaderOutput(Output):
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section)
 
-    def write(self, gml_doc):
+    def write(self, packet):
         from subprocess import Popen, PIPE
+        if packet.data is None:
+             return packet
 
+        gml_doc = packet.data
         d3tools_path = self.cfg.get('d3tools_path')
         workspace_path = self.cfg.get('workspace_path')
         feature_store = self.cfg.get('feature_store')
@@ -184,6 +201,7 @@ class DeegreeFSLoaderOutput(Output):
         p.stdin.write(self.to_string(gml_doc))
 
         result = p.communicate()[0]
+        return packet
 
          # print(result)
 
@@ -209,12 +227,15 @@ class WFSTOutput(Output):
         self.wfs_path = self.cfg.get('path')
         self.idgen = self.cfg.get('idgen', 'GenerateNew')
 
-    def write(self, gml_doc):
+    def write(self, packet):
+        if packet.data is None:
+             return packet
 
         conn = httplib.HTTPConnection(self.wfs_host, self.wfs_port)
-        conn.request("POST", self.wfs_path, WFSTOutput.wfst_req % (self.idgen, self.to_string(gml_doc, False, False)), WFSTOutput.headers)
+        conn.request("POST", self.wfs_path, WFSTOutput.wfst_req % (self.idgen, self.to_string(packet.data, False, False)), WFSTOutput.headers)
 
         response = conn.getresponse()
         log.info('status=%s msg=%s' % (response.status, response.msg))
         log.info('response=%s' % response.read(1024))
         conn.close()
+        return packet

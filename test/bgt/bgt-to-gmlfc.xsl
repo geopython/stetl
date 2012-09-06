@@ -32,7 +32,7 @@ Output: GML FeatureCollection met als featureMember's IMGEO objecten
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
             <!-- Loop through all features. -->
-            <xsl:apply-templates select="//imgeo-lv:nieuw/*"/>
+            <xsl:apply-templates/>
 
         </gml:FeatureCollection>
     </xsl:template>
