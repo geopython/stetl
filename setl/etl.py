@@ -15,7 +15,7 @@ log = Util.get_log('main')
 class ETL:
 
     def __init__(self):
-        usage = "usage: %prog [options]"
+        usage = "usage: %prog -c <setl_config_file>"
         parser = optparse.OptionParser(usage)
         parser.add_option("-c", "--config", action="store", type="string", dest="config_file",
                           default="etl.cfg",
@@ -50,11 +50,3 @@ class ETL:
             chain.run()
 
         log.info("ALL DONE")
-
-def main():
-    # Do the ETL
-    etl = ETL()
-    etl.run()
-
-if __name__ == "__main__":
-    main()

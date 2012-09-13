@@ -5,7 +5,10 @@
 #
 # Author: Just van den Broecke
 #
-from util import ConfigSection
+from setl.util import Util
+from setl.util import ConfigSection
+
+log = Util.get_log('component')
 
 
 # Base class for all Input, Transformer, Outputs
@@ -32,7 +35,7 @@ class Component:
 
         # If there is a next component, let it do its init()
         if self.next:
-            self.next.init()
+            self.next.do_init()
 
     def do_exit(self):
         # Notify all comps that we exit
@@ -40,7 +43,7 @@ class Component:
 
         # If there is a next component, let it do its exit()
         if self.next:
-            self.next.exit()
+            self.next.do_exit()
 
     def invoke(self, packet):
         return packet

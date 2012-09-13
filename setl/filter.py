@@ -1,4 +1,4 @@
-from component import Component
+from setl.component import Component
 
 # Base class: Filter
 class Filter(Component):

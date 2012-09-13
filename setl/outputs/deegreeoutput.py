@@ -76,6 +76,7 @@ class DeegreeBlobstoreOutput(Output):
                         gml_ns = childNode.nsmap['GML']
 
             gml_id = childNode.get('{%s}id' % gml_ns)
+
             feature_type_id = self.feature_type_ids[childNode.tag]
 
             # Find a GML geometry in the GML NS

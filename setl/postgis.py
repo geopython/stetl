@@ -5,7 +5,7 @@
 #
 # Author: Just van den Broecke
 #
-from util import Util
+from setl.util import Util
 
 log = Util.get_log("postgis")
 

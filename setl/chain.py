@@ -6,9 +6,9 @@
 # Author: Just van den Broecke
 #
 
-from factory import factory
-from packet import Packet
-from util import Util
+from setl.factory import factory
+from setl.packet import Packet
+from setl.util import Util
 
 log = Util.get_log('chain')
 
@@ -49,12 +49,12 @@ class Chain:
         # Do ETL as long as input available in Packet
         packet = Packet()
         while not packet.is_end_of_stream():
-            try:
+#            try:
                 # Invoke the first component to start the chain
                 packet = self.first_comp.process(packet)
-            except (Exception), e:
-                log.error("Fatal Error in ETL: %s"% str(e))
-                break
+#            except (Exception), e:
+#                log.error("Fatal Error in ETL: %s"% str(e))
+#                break
 
         # One time exit for entire Chain
         self.first_comp.do_exit()
