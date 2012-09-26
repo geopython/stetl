@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Main ETL program.
+# Main SETL program.
 #
 # Author: Just van den Broecke
 #

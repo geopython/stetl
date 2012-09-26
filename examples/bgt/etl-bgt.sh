@@ -5,4 +5,4 @@
 # Author: Just van den Broecke
 #
 # PYTHONPATH=${PYTHONPATH}:../..
-python ../../main.py -c etl-bgt.cfg
+python ../../src/main.py -c etl-bgt.cfg
