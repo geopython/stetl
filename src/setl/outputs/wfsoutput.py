@@ -5,8 +5,9 @@
 #
 # Author: Just van den Broecke
 #
-from setl.output import Output
-from setl.util import  Util
+from ..output import Output
+from ..util import  Util
+from .. packet import  FORMAT
 import httplib
 
 log = Util.get_log('wfsoutput')
@@ -27,7 +28,7 @@ class WFSTOutput(Output):
     headers = {"Content−type" : 'Content-type: text/xml',"Accept":"text/xml"}
 
     def __init__(self, configdict, section):
-        Output.__init__(self, configdict, section)
+        Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)
         self.wfs_host = self.cfg.get('host')
         self.wfs_port = self.cfg.get('port', '80')
         self.wfs_path = self.cfg.get('path')

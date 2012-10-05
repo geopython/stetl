@@ -13,10 +13,12 @@ log = Util.get_log('component')
 
 # Base class for all Input, Transformer, Outputs
 class Component:
-    def __init__(self, configdict, section):
+    def __init__(self, configdict, section, consumes=None, produces=None):
         self.configdict = configdict
         self.cfg = ConfigSection(configdict.items(section))
         self.next = None
+        self.output_format = produces
+        self.input_format = consumes
 
     def process(self, packet):
         # Do something with the data
@@ -53,3 +55,13 @@ class Component:
 
     def exit(self):
         pass
+
+    def is_compatible(self):
+        # Ok, nothing next in Chain
+        if self.next is None:
+            return True
+
+        # return if our Output is compatible with the next Component's Input
+        return self.output_format is not None \
+                and self.next.input_format is not None \
+                    and self.output_format == self.next.input_format

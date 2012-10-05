@@ -5,9 +5,10 @@
 #
 # Author: Just van den Broecke
 #
-from setl.postgis import PostGIS
-from setl.output import Output
-from setl.util import  Util, etree
+from ..postgis import PostGIS
+from ..output import Output
+from ..util import  Util, etree
+from .. packet import  FORMAT
 import os
 
 log = Util.get_log('deegreeoutput')
@@ -16,7 +17,7 @@ log = Util.get_log('deegreeoutput')
 class DeegreeBlobstoreOutput(Output):
 
     def __init__(self, configdict, section):
-        Output.__init__(self, configdict, section)
+        Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)
         self.overwrite = self.cfg.get_bool('overwrite')
         self.srid = self.cfg.get_int('srid', -1)
         self.feature_member_tag = self.cfg.get('feature_member_tag')
@@ -133,7 +134,7 @@ class DeegreeFSLoaderOutput(Output):
     cmd_tmpl = '%s|FeatureStoreLoader|-action|insert|-dataset|%s|-format|%s|-fsconfig|%s|-idgen|%s|-workspace|%s'
 
     def __init__(self, configdict, section):
-        Output.__init__(self, configdict, section)
+        Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)
 
     def write(self, packet):
         from subprocess import Popen, PIPE

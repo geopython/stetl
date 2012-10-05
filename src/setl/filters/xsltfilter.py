@@ -5,15 +5,16 @@
 #
 # Author:Just van den Broecke
 
-from setl.util import Util, etree
-from setl.filter import Filter
+from ..util import Util, etree
+from ..filter import Filter
+from .. packet import  FORMAT
 
 log = Util.get_log("xsltfilter")
 
 class XsltFilter(Filter):
     # Constructor
     def __init__(self, configdict, section):
-        Filter.__init__(self, configdict, section)
+        Filter.__init__(self, configdict, section, consumes=FORMAT.etree_doc, produces=FORMAT.etree_doc)
 
         self.xslt_file_path = self.cfg.get('script')
         self.xslt_file = open(self.xslt_file_path, 'r')

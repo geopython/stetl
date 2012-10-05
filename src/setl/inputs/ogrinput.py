@@ -6,8 +6,9 @@
 # Author: Just van den Broecke
 #
 import subprocess
-from setl.util import Util
-from setl.input import Input
+from .. util import Util
+from .. input import Input
+from .. packet import  FORMAT
 log = Util.get_log('ogrinput')
 
 class OgrPostgisInput(Input):
@@ -17,7 +18,7 @@ class OgrPostgisInput(Input):
 
     # Constructor
     def __init__(self, configdict, section):
-        Input.__init__(self, configdict, section)
+        Input.__init__(self, configdict, section, produces=FORMAT.xml_line_stream)
 
     def init(self):
         self.ogr_process = None

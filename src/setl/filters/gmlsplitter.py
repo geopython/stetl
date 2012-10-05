@@ -6,15 +6,16 @@
 # Author: Just van den Broecke
 #
 import codecs
-from setl.util import Util, etree, StringIO
-from setl.filter import Filter
+from ..util import Util, etree, StringIO
+from ..filter import Filter
+from .. packet import  FORMAT
 
 log = Util.get_log('gmlsplitter')
 
 class GmlSplitter(Filter):
     # Constructor
     def __init__(self, configdict, section='gml_splitter'):
-        Filter.__init__(self, configdict, section)
+        Filter.__init__(self, configdict, section, consumes=FORMAT.xml_line_stream, produces=FORMAT.etree_doc)
 
         log.info("cfg = %s" % self.cfg.to_string())
         self.max_features = self.cfg.get_int('max_features', 10000)

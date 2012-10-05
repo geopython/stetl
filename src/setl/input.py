@@ -13,8 +13,8 @@ log = Util.get_log('input')
 # Base class: Input Component
 class Input(Component):
     # Constructor
-    def __init__(self, configdict, section):
-        Component.__init__(self, configdict, section)
+    def __init__(self, configdict, section, produces):
+        Component.__init__(self, configdict, section, consumes=None, produces=produces)
 
         log.info("cfg = %s" % self.cfg.to_string())
 

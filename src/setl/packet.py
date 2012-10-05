@@ -30,3 +30,11 @@ class Packet:
     def set_end_of_doc(self, val=True):
         self.end_of_doc = val
 
+# Simple enum emulation
+# See http://stackoverflow.com/questions/1969005/enumerations-in-python
+class Enum(object):
+  def __init__(self, *keys):
+    self.__dict__.update(zip(keys, range(len(keys))))
+
+
+FORMAT=Enum('xml_line_stream', 'etree_doc', 'xml_doc_as_string')

@@ -29,14 +29,17 @@ class Chain:
             # Create the ETL component by name and properties
             etl_comp = factory.create_obj(self.config_dict, etl_section_name)
             self.add(etl_comp)
- 
+
     def add(self, etl_comp):
         if not self.first_comp:
             self.first_comp = etl_comp
         else:
             # Already component(s) in chain add to current
             self.cur_comp.next = etl_comp
-            
+
+            if not self.cur_comp.is_compatible():
+                raise ValueError('Incompatible components linked: %s and %s' % (str(self.cur_comp),str(self.cur_comp.next)))
+
         # Remember current
         self.cur_comp = etl_comp       
 

@@ -7,13 +7,14 @@
 #
 from .. util import Util,etree
 from .. input import Input
+from .. packet import  FORMAT
 
 log = Util.get_log('fileinput')
 
 class XmlFileInput(Input):
     # Constructor
     def __init__(self, configdict, section):
-        Input.__init__(self, configdict, section)
+        Input.__init__(self, configdict, section, produces=FORMAT.etree_doc)
         self.file_path = self.cfg.get('file_path')
 
     def read(self, packet):
@@ -31,10 +32,10 @@ class XmlFileInput(Input):
         return packet
 
 
-class BigXmlFileInput(Input):
+class XmlLineStreamerFileInput(Input):
     # Constructor
     def __init__(self, configdict, section):
-        Input.__init__(self, configdict, section)
+        Input.__init__(self, configdict, section, produces=FORMAT.xml_line_stream)
         self.file_path = self.cfg.get('file_path')
         self.file = None
 

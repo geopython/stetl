@@ -13,9 +13,8 @@ log = Util.get_log('output')
 # Base class: Output Component
 class Output(Component):
     # Constructor
-    def __init__(self, configdict, section):
-        Component.__init__(self, configdict, section)
-
+    def __init__(self, configdict, section, consumes):
+        Component.__init__(self, configdict, section, consumes=consumes, produces=None)
         log.info("cfg = %s" % self.cfg.to_string())
 
     def invoke(self, packet):
@@ -27,9 +26,4 @@ class Output(Component):
         return etree.tostring(gml_doc, pretty_print=pretty_print, xml_declaration = xml_declaration, encoding=encoding)
 
     def write(self, packet):
-        if packet.data is None:
-             return packet
-
-        # Default: print to stdout
-        print(self.to_string(packet.data))
         return packet

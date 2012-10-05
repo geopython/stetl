@@ -8,16 +8,17 @@
 import codecs
 import re
 
-from setl.postgis import PostGIS
-from setl.input import Input
-from setl.util import  Util, etree, StringIO
+from .. postgis import PostGIS
+from .. input import Input
+from .. util import  Util, etree, StringIO
+from .. packet import  FORMAT
 
 log = Util.get_log('deegreeinput')
 
 # Read features from deegree Blobstore DB.
 class DeegreeBlobstoreInput(Input):
     def __init__(self, configdict, section):
-        Input.__init__(self, configdict, section)
+        Input.__init__(self, configdict, section, produces=FORMAT.etree_doc)
         self.max_features_per_doc = self.cfg.get_int('max_features_per_doc', 10000)
         self.start_container = self.cfg.get('start_container')
         self.end_container = self.cfg.get('end_container')
