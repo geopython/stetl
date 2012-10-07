@@ -37,4 +37,4 @@ class Enum(object):
     self.__dict__.update(zip(keys, range(len(keys))))
 
 
-FORMAT=Enum('xml_line_stream', 'etree_doc', 'xml_doc_as_string')
+FORMAT=Enum('xml_line_stream', 'etree_doc','etree_feature_array', 'xml_doc_as_string')
