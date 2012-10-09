@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Splits stream of GML (from OGR) into buffers.
+# Splits stream of GML lines into etree docs.
 #
 # Author: Just van den Broecke
 #

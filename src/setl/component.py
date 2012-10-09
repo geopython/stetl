@@ -56,6 +56,7 @@ class Component:
     def exit(self):
         pass
 
+    # Check our compatibility with the next Component in the Chain
     def is_compatible(self):
         # Ok, nothing next in Chain
         if self.next is None:

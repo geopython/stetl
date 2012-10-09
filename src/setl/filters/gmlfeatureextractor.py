@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Extracts collections of etree GML features from an GML etree document.
+# Extracts arrays of etree GML features from an GML etree document.
 #
 # Author: Just van den Broecke
 #

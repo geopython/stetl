@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Transformation modules.
+# Transformation of an etree doc with XSLT.
 #
 # Author:Just van den Broecke
 
@@ -18,6 +18,7 @@ class XsltFilter(Filter):
 
         self.xslt_file_path = self.cfg.get('script')
         self.xslt_file = open(self.xslt_file_path, 'r')
+        # Parse XSLT file only once
         self.xslt_doc = etree.parse(self.xslt_file)
         self.xslt_obj = etree.XSLT(self.xslt_doc)
         self.xslt_file.close()
