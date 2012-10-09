@@ -1,8 +1,17 @@
-<?xml version='1.0' encoding='utf-8'?>
-<gml:FeatureCollection xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:top10nl="http://www.kadaster.nl/schemas/top10nl/v20120116" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:smil20="http://www.w3.org/2001/SMIL20/" xmlns:smil20lang="http://www.w3.org/2001/SMIL20/Language" xsi:schemaLocation="http://www.kadaster.nl/schemas/top10nl/v20120116 TOP10NL_1_1_1.xsd" gml:id="uuidf074ae61-93b9-448a-b1db-289fd15e8752">
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--Created by GO Publisher Agent 2.1.2 Build 28125 from 2012-03-22 11:26--><!--Snowflake Software Ltd. (http://www.snowflakesoftware.com)--><gml:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:top10nl="http://www.kadaster.nl/schemas/top10nl/v20120116" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:smil20="http://www.w3.org/2001/SMIL20/" xmlns:smil20lang="http://www.w3.org/2001/SMIL20/Language" xsi:schemaLocation="http://www.kadaster.nl/schemas/top10nl/v20120116 http://www.kadaster.nl/schemas/top10nl/v20120116/TOP10NL_1_1_1.xsd">
+  <gml:boundedBy>
+    <gml:Envelope srsName="urn:ogc:def:crs:EPSG::28992">
+      <gml:lowerCorner>43662.62 406692.0</gml:lowerCorner>
+      <gml:upperCorner>171507.2 581000.0</gml:upperCorner>
+    </gml:Envelope>
+  </gml:boundedBy>
+
+
+  <!-- Wegdeel - punt / hartpunt -->
   <gml:featureMember>
-    <Wegdeel_Punt>
-      <fid>114519761</fid>
+    <top10nl:Wegdeel gml:id="nl.top10nl.114519761">
       <top10nl:identificatie>NL.TOP10NL.114519761</top10nl:identificatie>
       <top10nl:brontype>top10vector</top10nl:brontype>
       <top10nl:bronbeschrijving>TOP10vector 2003</top10nl:bronbeschrijving>
@@ -13,35 +22,17 @@
       <top10nl:versieBeginTijd>2008-11-24T00:00:00.000</top10nl:versieBeginTijd>
       <top10nl:visualisatieCode>10900</top10nl:visualisatieCode>
       <top10nl:tdnCode>341</top10nl:tdnCode>
-      <top10nl:gescheidenRijbaan>nee</top10nl:gescheidenRijbaan>
-      <top10nl:hoofdverkeersgebruik>voetgangers</top10nl:hoofdverkeersgebruik>
-      <top10nl:hoogteniveau>0</top10nl:hoogteniveau>
-      <top10nl:status>in gebruik</top10nl:status>
-      <top10nl:typeInfrastructuurWegdeel>kruising</top10nl:typeInfrastructuurWegdeel>
-      <top10nl:typeWeg>overig</top10nl:typeWeg>
-      <top10nl:verhardingsbreedteklasse>&lt; 2 meter</top10nl:verhardingsbreedteklasse>
-      <top10nl:verhardingstype>half verhard</top10nl:verhardingstype>
       <top10nl:geometriePunt>
         <gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
           <gml:pos>139946.548 467083.777</gml:pos>
         </gml:Point>
       </top10nl:geometriePunt>
-    </Wegdeel_Punt>
-  </gml:featureMember>
-  <gml:featureMember>
-    <Wegdeel_HartPunt>
-      <fid>114519761</fid>
-      <top10nl:identificatie>NL.TOP10NL.114519761</top10nl:identificatie>
-      <top10nl:brontype>top10vector</top10nl:brontype>
-      <top10nl:bronbeschrijving>TOP10vector 2003</top10nl:bronbeschrijving>
-      <top10nl:bronactualiteit>2003-01-01</top10nl:bronactualiteit>
-      <top10nl:bronnauwkeurigheid>2</top10nl:bronnauwkeurigheid>
-      <top10nl:dimensie>2D</top10nl:dimensie>
-      <top10nl:objectBeginTijd>2008-11-24T00:00:00.000</top10nl:objectBeginTijd>
-      <top10nl:versieBeginTijd>2008-11-24T00:00:00.000</top10nl:versieBeginTijd>
-      <top10nl:visualisatieCode>10900</top10nl:visualisatieCode>
-      <top10nl:tdnCode>341</top10nl:tdnCode>
       <top10nl:gescheidenRijbaan>nee</top10nl:gescheidenRijbaan>
+      <top10nl:hartPunt>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
+          <gml:pos>139946.548 467083.777</gml:pos>
+        </gml:Point>
+      </top10nl:hartPunt>
       <top10nl:hoofdverkeersgebruik>voetgangers</top10nl:hoofdverkeersgebruik>
       <top10nl:hoogteniveau>0</top10nl:hoogteniveau>
       <top10nl:status>in gebruik</top10nl:status>
@@ -49,16 +40,12 @@
       <top10nl:typeWeg>overig</top10nl:typeWeg>
       <top10nl:verhardingsbreedteklasse>&lt; 2 meter</top10nl:verhardingsbreedteklasse>
       <top10nl:verhardingstype>half verhard</top10nl:verhardingstype>
-      <top10nl:hartPunt>
-        <gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
-          <gml:pos>139946.548 467083.777</gml:pos>
-        </gml:Point>
-      </top10nl:hartPunt>
-    </Wegdeel_HartPunt>
+    </top10nl:Wegdeel>
   </gml:featureMember>
+
+  <!-- Wegdeel - lijn / hartlijn -->
   <gml:featureMember>
-    <Wegdeel_Lijn>
-      <fid>114359472</fid>
+    <top10nl:Wegdeel gml:id="nl.top10nl.114359472">
       <top10nl:identificatie>NL.TOP10NL.114359472</top10nl:identificatie>
       <top10nl:brontype>top10vector</top10nl:brontype>
       <top10nl:bronbeschrijving>TOP10vector 2003</top10nl:bronbeschrijving>
@@ -69,35 +56,17 @@
       <top10nl:versieBeginTijd>2008-11-24T00:00:00.000</top10nl:versieBeginTijd>
       <top10nl:visualisatieCode>10740</top10nl:visualisatieCode>
       <top10nl:tdnCode>362</top10nl:tdnCode>
-      <top10nl:gescheidenRijbaan>nee</top10nl:gescheidenRijbaan>
-      <top10nl:hoofdverkeersgebruik>fietsers, bromfietsers</top10nl:hoofdverkeersgebruik>
-      <top10nl:hoogteniveau>0</top10nl:hoogteniveau>
-      <top10nl:status>in gebruik</top10nl:status>
-      <top10nl:typeInfrastructuurWegdeel>verbinding</top10nl:typeInfrastructuurWegdeel>
-      <top10nl:typeWeg>overig</top10nl:typeWeg>
-      <top10nl:verhardingsbreedteklasse>&lt; 2 meter</top10nl:verhardingsbreedteklasse>
-      <top10nl:verhardingstype>verhard</top10nl:verhardingstype>
       <top10nl:geometrieLijn>
         <gml:LineString srsName="urn:ogc:def:crs:EPSG::28992">
           <gml:posList srsDimension="2" count="5">139724.332 466944.086 139733.871 466952.724 139769.048 466989.642 139820.722 467042.96 139860.852 467084.806</gml:posList>
         </gml:LineString>
       </top10nl:geometrieLijn>
-    </Wegdeel_Lijn>
-  </gml:featureMember>
-  <gml:featureMember>
-    <Wegdeel_HartLijn>
-      <fid>114359472</fid>
-      <top10nl:identificatie>NL.TOP10NL.114359472</top10nl:identificatie>
-      <top10nl:brontype>top10vector</top10nl:brontype>
-      <top10nl:bronbeschrijving>TOP10vector 2003</top10nl:bronbeschrijving>
-      <top10nl:bronactualiteit>2003-01-01</top10nl:bronactualiteit>
-      <top10nl:bronnauwkeurigheid>2</top10nl:bronnauwkeurigheid>
-      <top10nl:dimensie>2D</top10nl:dimensie>
-      <top10nl:objectBeginTijd>2008-11-24T00:00:00.000</top10nl:objectBeginTijd>
-      <top10nl:versieBeginTijd>2008-11-24T00:00:00.000</top10nl:versieBeginTijd>
-      <top10nl:visualisatieCode>10740</top10nl:visualisatieCode>
-      <top10nl:tdnCode>362</top10nl:tdnCode>
       <top10nl:gescheidenRijbaan>nee</top10nl:gescheidenRijbaan>
+      <top10nl:hartLijn>
+        <gml:LineString srsName="urn:ogc:def:crs:EPSG::28992">
+          <gml:posList srsDimension="2" count="7">139726.373 466940.101 139724.332 466944.086 139733.871 466952.724 139769.048 466989.642 139820.722 467042.96 139860.852 467084.806 139864.514 467088.625</gml:posList>
+        </gml:LineString>
+      </top10nl:hartLijn>
       <top10nl:hoofdverkeersgebruik>fietsers, bromfietsers</top10nl:hoofdverkeersgebruik>
       <top10nl:hoogteniveau>0</top10nl:hoogteniveau>
       <top10nl:status>in gebruik</top10nl:status>
@@ -105,16 +74,12 @@
       <top10nl:typeWeg>overig</top10nl:typeWeg>
       <top10nl:verhardingsbreedteklasse>&lt; 2 meter</top10nl:verhardingsbreedteklasse>
       <top10nl:verhardingstype>verhard</top10nl:verhardingstype>
-      <top10nl:hartLijn>
-        <gml:LineString srsName="urn:ogc:def:crs:EPSG::28992">
-          <gml:posList srsDimension="2" count="7">139726.373 466940.101 139724.332 466944.086 139733.871 466952.724 139769.048 466989.642 139820.722 467042.96 139860.852 467084.806 139864.514 467088.625</gml:posList>
-        </gml:LineString>
-      </top10nl:hartLijn>
-    </Wegdeel_HartLijn>
+    </top10nl:Wegdeel>
   </gml:featureMember>
+
+  <!-- Wegdeel - vlak / hartpunt -->
   <gml:featureMember>
-    <Wegdeel_Vlak>
-      <fid>115257115</fid>
+    <top10nl:Wegdeel gml:id="nl.top10nl.115257115">
       <top10nl:identificatie>NL.TOP10NL.115257115</top10nl:identificatie>
       <top10nl:brontype>top10vector</top10nl:brontype>
       <top10nl:bronbeschrijving>TOP10vector 2003</top10nl:bronbeschrijving>
@@ -125,15 +90,6 @@
       <top10nl:versieBeginTijd>2012-02-06T23:00:03.000</top10nl:versieBeginTijd>
       <top10nl:visualisatieCode>10410</top10nl:visualisatieCode>
       <top10nl:tdnCode>320</top10nl:tdnCode>
-      <top10nl:gescheidenRijbaan>nee</top10nl:gescheidenRijbaan>
-      <top10nl:hoofdverkeersgebruik>gemengd verkeer</top10nl:hoofdverkeersgebruik>
-      <top10nl:hoogteniveau>0</top10nl:hoogteniveau>
-      <top10nl:status>in gebruik</top10nl:status>
-      <top10nl:typeInfrastructuurWegdeel>kruising</top10nl:typeInfrastructuurWegdeel>
-      <top10nl:typeWeg>regionale weg</top10nl:typeWeg>
-      <top10nl:typeWeg>overig</top10nl:typeWeg>
-      <top10nl:verhardingsbreedteklasse>4 - 7 meter</top10nl:verhardingsbreedteklasse>
-      <top10nl:verhardingstype>verhard</top10nl:verhardingstype>
       <top10nl:geometrieVlak>
         <gml:Polygon srsName="urn:ogc:def:crs:EPSG::28992">
           <gml:exterior>
@@ -143,22 +99,12 @@
           </gml:exterior>
         </gml:Polygon>
       </top10nl:geometrieVlak>
-    </Wegdeel_Vlak>
-  </gml:featureMember>
-  <gml:featureMember>
-    <Wegdeel_HartPunt>
-      <fid>115257115</fid>
-      <top10nl:identificatie>NL.TOP10NL.115257115</top10nl:identificatie>
-      <top10nl:brontype>top10vector</top10nl:brontype>
-      <top10nl:bronbeschrijving>TOP10vector 2003</top10nl:bronbeschrijving>
-      <top10nl:bronactualiteit>2003-01-01</top10nl:bronactualiteit>
-      <top10nl:bronnauwkeurigheid>2</top10nl:bronnauwkeurigheid>
-      <top10nl:dimensie>2D</top10nl:dimensie>
-      <top10nl:objectBeginTijd>2008-11-24T00:00:00.000</top10nl:objectBeginTijd>
-      <top10nl:versieBeginTijd>2012-02-06T23:00:03.000</top10nl:versieBeginTijd>
-      <top10nl:visualisatieCode>10410</top10nl:visualisatieCode>
-      <top10nl:tdnCode>320</top10nl:tdnCode>
       <top10nl:gescheidenRijbaan>nee</top10nl:gescheidenRijbaan>
+      <top10nl:hartPunt>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
+          <gml:pos>139735.434 466926.659</gml:pos>
+        </gml:Point>
+      </top10nl:hartPunt>
       <top10nl:hoofdverkeersgebruik>gemengd verkeer</top10nl:hoofdverkeersgebruik>
       <top10nl:hoogteniveau>0</top10nl:hoogteniveau>
       <top10nl:status>in gebruik</top10nl:status>
@@ -167,16 +113,12 @@
       <top10nl:typeWeg>overig</top10nl:typeWeg>
       <top10nl:verhardingsbreedteklasse>4 - 7 meter</top10nl:verhardingsbreedteklasse>
       <top10nl:verhardingstype>verhard</top10nl:verhardingstype>
-      <top10nl:hartPunt>
-        <gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
-          <gml:pos>139735.434 466926.659</gml:pos>
-        </gml:Point>
-      </top10nl:hartPunt>
-    </Wegdeel_HartPunt>
+    </top10nl:Wegdeel>
   </gml:featureMember>
+
+  <!-- Wegdeel - vlak / hartlijn -->
   <gml:featureMember>
-    <Wegdeel_Vlak>
-      <fid>116588605</fid>
+    <top10nl:Wegdeel gml:id="nl.top10nl.116588605">
       <top10nl:identificatie>NL.TOP10NL.116588605</top10nl:identificatie>
       <top10nl:brontype>luchtfoto</top10nl:brontype>
       <top10nl:bronbeschrijving>orthogerectificeerde luchtfoto's van het terrein opgenomen in een per geografische eenheid afgebakende mozaïek.</top10nl:bronbeschrijving>
@@ -187,14 +129,6 @@
       <top10nl:versieBeginTijd>2012-06-01T12:41:06.000</top10nl:versieBeginTijd>
       <top10nl:visualisatieCode>10710</top10nl:visualisatieCode>
       <top10nl:tdnCode>340</top10nl:tdnCode>
-      <top10nl:gescheidenRijbaan>nee</top10nl:gescheidenRijbaan>
-      <top10nl:hoofdverkeersgebruik>gemengd verkeer</top10nl:hoofdverkeersgebruik>
-      <top10nl:hoogteniveau>0</top10nl:hoogteniveau>
-      <top10nl:status>in gebruik</top10nl:status>
-      <top10nl:typeInfrastructuurWegdeel>verbinding</top10nl:typeInfrastructuurWegdeel>
-      <top10nl:typeWeg>overig</top10nl:typeWeg>
-      <top10nl:verhardingsbreedteklasse>2 - 4 meter</top10nl:verhardingsbreedteklasse>
-      <top10nl:verhardingstype>onbekend</top10nl:verhardingstype>
       <top10nl:geometrieVlak>
         <gml:Polygon srsName="urn:ogc:def:crs:EPSG::28992">
           <gml:exterior>
@@ -204,22 +138,12 @@
           </gml:exterior>
         </gml:Polygon>
       </top10nl:geometrieVlak>
-    </Wegdeel_Vlak>
-  </gml:featureMember>
-  <gml:featureMember>
-    <Wegdeel_HartLijn>
-      <fid>116588605</fid>
-      <top10nl:identificatie>NL.TOP10NL.116588605</top10nl:identificatie>
-      <top10nl:brontype>luchtfoto</top10nl:brontype>
-      <top10nl:bronbeschrijving>orthogerectificeerde luchtfoto's van het terrein opgenomen in een per geografische eenheid afgebakende mozaïek.</top10nl:bronbeschrijving>
-      <top10nl:bronactualiteit>2005-04-28</top10nl:bronactualiteit>
-      <top10nl:bronnauwkeurigheid>0.4</top10nl:bronnauwkeurigheid>
-      <top10nl:dimensie>2D</top10nl:dimensie>
-      <top10nl:objectBeginTijd>2008-11-24T00:00:00.000</top10nl:objectBeginTijd>
-      <top10nl:versieBeginTijd>2012-06-01T12:41:06.000</top10nl:versieBeginTijd>
-      <top10nl:visualisatieCode>10710</top10nl:visualisatieCode>
-      <top10nl:tdnCode>340</top10nl:tdnCode>
       <top10nl:gescheidenRijbaan>nee</top10nl:gescheidenRijbaan>
+      <top10nl:hartLijn>
+        <gml:LineString srsName="urn:ogc:def:crs:EPSG::28992">
+          <gml:posList srsDimension="2" count="29">139883.737 456600.171 139910.796 456593.651 139938.891 456583.286 139980.926 456565.645 140000.0 456556.302 140065.986 456528.651 140074.287 456524.497 140115.196 456508.48 140128.832 456502.548 140135.947 456496.616 140142.468 456490.091 140144.84 456485.938 140153.14 456481.192 140164.405 456478.227 140174.336 456479.709 140195.679 456480.302 140202.794 456478.522 140234.217 456463.395 140240.442 456463.988 140251.41 456482.378 140263.268 456498.099 140276.015 456511.743 140284.908 456523.311 140291.134 456535.768 140293.209 456544.963 140294.098 456555.344 140294.987 456574.921 140352.819 456706.257 140353.731 456708.327</gml:posList>
+        </gml:LineString>
+      </top10nl:hartLijn>
       <top10nl:hoofdverkeersgebruik>gemengd verkeer</top10nl:hoofdverkeersgebruik>
       <top10nl:hoogteniveau>0</top10nl:hoogteniveau>
       <top10nl:status>in gebruik</top10nl:status>
@@ -227,16 +151,12 @@
       <top10nl:typeWeg>overig</top10nl:typeWeg>
       <top10nl:verhardingsbreedteklasse>2 - 4 meter</top10nl:verhardingsbreedteklasse>
       <top10nl:verhardingstype>onbekend</top10nl:verhardingstype>
-      <top10nl:hartLijn>
-        <gml:LineString srsName="urn:ogc:def:crs:EPSG::28992">
-          <gml:posList srsDimension="2" count="29">139883.737 456600.171 139910.796 456593.651 139938.891 456583.286 139980.926 456565.645 140000.0 456556.302 140065.986 456528.651 140074.287 456524.497 140115.196 456508.48 140128.832 456502.548 140135.947 456496.616 140142.468 456490.091 140144.84 456485.938 140153.14 456481.192 140164.405 456478.227 140174.336 456479.709 140195.679 456480.302 140202.794 456478.522 140234.217 456463.395 140240.442 456463.988 140251.41 456482.378 140263.268 456498.099 140276.015 456511.743 140284.908 456523.311 140291.134 456535.768 140293.209 456544.963 140294.098 456555.344 140294.987 456574.921 140352.819 456706.257 140353.731 456708.327</gml:posList>
-        </gml:LineString>
-      </top10nl:hartLijn>
-    </Wegdeel_HartLijn>
+    </top10nl:Wegdeel>
   </gml:featureMember>
+
+  <!-- Wegdeel - friestalig -->
   <gml:featureMember>
-    <Wegdeel_Vlak>
-      <fid>116168333</fid>
+    <top10nl:Wegdeel gml:id="nl.top10nl.116168333">
       <top10nl:identificatie>NL.TOP10NL.116168333</top10nl:identificatie>
       <top10nl:brontype>luchtfoto</top10nl:brontype>
       <top10nl:bronbeschrijving>orthogerectificeerde luchtfoto's van het terrein opgenomen in een per geografische eenheid afgebakende mozaïek.</top10nl:bronbeschrijving>
@@ -247,15 +167,6 @@
       <top10nl:versieBeginTijd>2011-08-25T00:00:00.000</top10nl:versieBeginTijd>
       <top10nl:visualisatieCode>10510</top10nl:visualisatieCode>
       <top10nl:tdnCode>334</top10nl:tdnCode>
-      <top10nl:gescheidenRijbaan>nee</top10nl:gescheidenRijbaan>
-      <top10nl:hoofdverkeersgebruik>gemengd verkeer</top10nl:hoofdverkeersgebruik>
-      <top10nl:hoogteniveau>0</top10nl:hoogteniveau>
-      <top10nl:status>in gebruik</top10nl:status>
-      <top10nl:straatnaamFries>Nesserwei</top10nl:straatnaamFries>
-      <top10nl:typeInfrastructuurWegdeel>verbinding</top10nl:typeInfrastructuurWegdeel>
-      <top10nl:typeWeg>lokale weg</top10nl:typeWeg>
-      <top10nl:verhardingsbreedteklasse>2 - 4 meter</top10nl:verhardingsbreedteklasse>
-      <top10nl:verhardingstype>verhard</top10nl:verhardingstype>
       <top10nl:geometrieVlak>
         <gml:Polygon srsName="urn:ogc:def:crs:EPSG::28992">
           <gml:exterior>
@@ -265,22 +176,12 @@
           </gml:exterior>
         </gml:Polygon>
       </top10nl:geometrieVlak>
-    </Wegdeel_Vlak>
-  </gml:featureMember>
-  <gml:featureMember>
-    <Wegdeel_HartLijn>
-      <fid>116168333</fid>
-      <top10nl:identificatie>NL.TOP10NL.116168333</top10nl:identificatie>
-      <top10nl:brontype>luchtfoto</top10nl:brontype>
-      <top10nl:bronbeschrijving>orthogerectificeerde luchtfoto's van het terrein opgenomen in een per geografische eenheid afgebakende mozaïek.</top10nl:bronbeschrijving>
-      <top10nl:bronactualiteit>2005-04-28</top10nl:bronactualiteit>
-      <top10nl:bronnauwkeurigheid>0.4</top10nl:bronnauwkeurigheid>
-      <top10nl:dimensie>2D</top10nl:dimensie>
-      <top10nl:objectBeginTijd>2008-11-24T00:00:00.000</top10nl:objectBeginTijd>
-      <top10nl:versieBeginTijd>2011-08-25T00:00:00.000</top10nl:versieBeginTijd>
-      <top10nl:visualisatieCode>10510</top10nl:visualisatieCode>
-      <top10nl:tdnCode>334</top10nl:tdnCode>
       <top10nl:gescheidenRijbaan>nee</top10nl:gescheidenRijbaan>
+      <top10nl:hartLijn>
+        <gml:LineString srsName="urn:ogc:def:crs:EPSG::28992">
+          <gml:posList srsDimension="2" count="21">195103.187 600050.221 195102.863 600045.915 195101.416 600026.684 195104.548 600020.417 195139.345 600000.0 195172.184 599983.962 195180.105 599980.425 195225.749 599968.18 195260.293 599963.925 195393.421 599931.064 195403.739 599929.063 195436.887 599928.746 195552.52 599950.939 195602.05 599962.75 195614.211 599966.592 195623.45 599969.989 195640.944 599980.308 195642.024 599982.658 195646.088 599987.039 195650.314 600021.326 195650.778 600025.097</gml:posList>
+        </gml:LineString>
+      </top10nl:hartLijn>
       <top10nl:hoofdverkeersgebruik>gemengd verkeer</top10nl:hoofdverkeersgebruik>
       <top10nl:hoogteniveau>0</top10nl:hoogteniveau>
       <top10nl:status>in gebruik</top10nl:status>
@@ -289,16 +190,12 @@
       <top10nl:typeWeg>lokale weg</top10nl:typeWeg>
       <top10nl:verhardingsbreedteklasse>2 - 4 meter</top10nl:verhardingsbreedteklasse>
       <top10nl:verhardingstype>verhard</top10nl:verhardingstype>
-      <top10nl:hartLijn>
-        <gml:LineString srsName="urn:ogc:def:crs:EPSG::28992">
-          <gml:posList srsDimension="2" count="21">195103.187 600050.221 195102.863 600045.915 195101.416 600026.684 195104.548 600020.417 195139.345 600000.0 195172.184 599983.962 195180.105 599980.425 195225.749 599968.18 195260.293 599963.925 195393.421 599931.064 195403.739 599929.063 195436.887 599928.746 195552.52 599950.939 195602.05 599962.75 195614.211 599966.592 195623.45 599969.989 195640.944 599980.308 195642.024 599982.658 195646.088 599987.039 195650.314 600021.326 195650.778 600025.097</gml:posList>
-        </gml:LineString>
-      </top10nl:hartLijn>
-    </Wegdeel_HartLijn>
+    </top10nl:Wegdeel>
   </gml:featureMember>
+
+  <!-- Wegdeel - alleen hartpunt -->
   <gml:featureMember>
-    <Wegdeel_HartPunt>
-      <fid>119161295</fid>
+    <top10nl:Wegdeel gml:id="nl.top10nl.119161295">
       <top10nl:identificatie>NL.TOP10NL.119161295</top10nl:identificatie>
       <top10nl:brontype>luchtfoto</top10nl:brontype>
       <top10nl:bronbeschrijving>orthogerectificeerde luchtfoto's van het terrein opgenomen in een per geografische eenheid afgebakende mozaïek.</top10nl:bronbeschrijving>
@@ -310,22 +207,23 @@
       <top10nl:visualisatieCode>10790</top10nl:visualisatieCode>
       <top10nl:tdnCode>340</top10nl:tdnCode>
       <top10nl:gescheidenRijbaan>nee</top10nl:gescheidenRijbaan>
+      <top10nl:hartPunt>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
+          <gml:pos>129204.054 454567.983</gml:pos>
+        </gml:Point>
+      </top10nl:hartPunt>
       <top10nl:hoofdverkeersgebruik>overig</top10nl:hoofdverkeersgebruik>
       <top10nl:hoogteniveau>0</top10nl:hoogteniveau>
       <top10nl:status>in gebruik</top10nl:status>
       <top10nl:typeInfrastructuurWegdeel>kruising</top10nl:typeInfrastructuurWegdeel>
       <top10nl:typeWeg>overig</top10nl:typeWeg>
       <top10nl:verhardingstype>onbekend</top10nl:verhardingstype>
-      <top10nl:hartPunt>
-        <gml:Point srsName="urn:ogc:def:crs:EPSG::28992">
-          <gml:pos>129204.054 454567.983</gml:pos>
-        </gml:Point>
-      </top10nl:hartPunt>
-    </Wegdeel_HartPunt>
+    </top10nl:Wegdeel>
   </gml:featureMember>
+
+  <!-- Wegdeel - alleen hartlijn -->
   <gml:featureMember>
-    <Wegdeel_HartLijn>
-      <fid>119161335</fid>
+    <top10nl:Wegdeel gml:id="nl.top10nl.119161335">
       <top10nl:identificatie>NL.TOP10NL.119161335</top10nl:identificatie>
       <top10nl:brontype>top10vector</top10nl:brontype>
       <top10nl:bronbeschrijving>TOP10vector 2003</top10nl:bronbeschrijving>
@@ -337,6 +235,11 @@
       <top10nl:visualisatieCode>10600</top10nl:visualisatieCode>
       <top10nl:tdnCode>353</top10nl:tdnCode>
       <top10nl:gescheidenRijbaan>nee</top10nl:gescheidenRijbaan>
+      <top10nl:hartLijn>
+        <gml:LineString srsName="urn:ogc:def:crs:EPSG::28992">
+          <gml:posList srsDimension="2" count="2">129586.838 454493.818 129578.209 454494.853</gml:posList>
+        </gml:LineString>
+      </top10nl:hartLijn>
       <top10nl:hoofdverkeersgebruik>gemengd verkeer</top10nl:hoofdverkeersgebruik>
       <top10nl:hoogteniveau>0</top10nl:hoogteniveau>
       <top10nl:status>in gebruik</top10nl:status>
@@ -344,11 +247,7 @@
       <top10nl:typeWeg>straat</top10nl:typeWeg>
       <top10nl:verhardingsbreedteklasse>2 - 4 meter</top10nl:verhardingsbreedteklasse>
       <top10nl:verhardingstype>verhard</top10nl:verhardingstype>
-      <top10nl:hartLijn>
-        <gml:LineString srsName="urn:ogc:def:crs:EPSG::28992">
-          <gml:posList srsDimension="2" count="2">129586.838 454493.818 129578.209 454494.853</gml:posList>
-        </gml:LineString>
-      </top10nl:hartLijn>
-    </Wegdeel_HartLijn>
+    </top10nl:Wegdeel>
   </gml:featureMember>
+
 </gml:FeatureCollection>

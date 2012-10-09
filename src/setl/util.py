@@ -4,7 +4,7 @@
 #
 # Author:Just van den Broecke
 
-import logging
+import logging,os,glob,sys,types
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(name)s %(levelname)s %(message)s')
@@ -15,6 +15,39 @@ class Util:
         log = logging.getLogger(name)
         log.setLevel(logging.DEBUG)
         return log
+
+    @staticmethod
+    def make_file_list(candidate_file, file_list=None, filename_pattern='*.[gxGX][mM][lL]', depth_search=False):
+
+        if file_list is None:
+            file_list = []
+
+        input_list = candidate_file.split(',')
+        if len(input_list) > 1:
+            for file in input_list:
+                Util.make_file_list(file, file_list, filename_pattern, depth_search)
+            return file_list
+
+        if os.path.isdir(candidate_file):
+            # Is a dir: get list
+            matching_file_list = glob.glob(os.path.join(candidate_file, filename_pattern))
+            for file in matching_file_list:
+                # Matching file: append to file
+                file_list.append(file)
+
+            for dir in os.listdir(candidate_file):
+                dir = os.path.join(candidate_file, dir)
+                if os.path.isdir(dir):
+                    Util.make_file_list(dir, file_list, filename_pattern, depth_search)
+
+        else:
+            # A single file or list of files
+            matching_file_list = glob.glob(candidate_file)
+            for file in matching_file_list:
+                # Matching file: append to file
+                file_list.append(file)
+
+        return file_list
 
 log = Util.get_log("util")
 
@@ -105,4 +138,12 @@ class ConfigSection():
     def to_string(self):
         return repr(self.config_dict)
 
+def main():
+    # Test file listing
+    cand_file = sys.argv[1]
+    file_list = Util.make_file_list(cand_file)
+    print(str(file_list))
+
+if __name__ == "__main__":
+    main()
 

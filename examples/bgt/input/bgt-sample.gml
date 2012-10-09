@@ -374,88 +374,97 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     </imgeo-lv:nieuw>
   </imgeo-lv:ObjectAanlevering>
 </imgeo-lv:object>
-<imgeo-lv:object>
-  <imgeo-lv:ObjectAanlevering>
-    <imgeo-lv:nieuw>
-      <imgeo:Waterdeel gml:id="d1e2952660">
-        <imgeo:identificatie>
-          <imgeo:NEN3610ID>
-             <imgeo:namespace>NL.IMGeo</imgeo:namespace>
-             <imgeo:lokaalID>00796.ce0563da-4f54-4170-92f5-af211150334d</imgeo:lokaalID>
-          </imgeo:NEN3610ID>
-       </imgeo:identificatie>
-        <imgeo:objectBeginTijd>2012-02-08T09:30:47Z</imgeo:objectBeginTijd>
-        <imgeo:tijdstipRegistratie>2012-02-08T12:34:56</imgeo:tijdstipRegistratie>
-        <imgeo:bronhouder>00796</imgeo:bronhouder>
-        <imgeo:inOnderzoek>0</imgeo:inOnderzoek>
-        <imgeo:relatieveHoogteligging>0</imgeo:relatieveHoogteligging>
-        <imgeo:status>bestaand</imgeo:status>
-        <imgeo:type>waterloop</imgeo:type>
-        <imgeo:geometrie2dWaterdeel>
-          <gml:Polygon>
-             <gml:exterior>
-                <gml:LinearRing>
-                   <gml:posList>146818.447 414165.704 146818.578 414165.745 146818.714 414165.763 146818.851 414165.758 146818.99 414165.729 146819.123 414165.677 146819.244 414165.603 146819.35 414165.508 146819.439 414165.397 146823.275 414155.258 146821.584 414155.258 146817.973 414164.687 146817.941 414164.82 146817.932 414164.957 146817.946 414165.094 146817.983 414165.226 146818.041 414165.35 146818.119 414165.463 146818.214 414165.562 146818.324 414165.643 146818.447 414165.704</gml:posList>
-                </gml:LinearRing>
-             </gml:exterior>
-          </gml:Polygon>
-       </imgeo:geometrie2dWaterdeel>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283B8B6B1EFA91312AD9A323"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BA4121EFA91312AD9A236"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BA58C1EFA913128D9A1AF"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BB2061EFA913128D9A056"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BB3381EFA913128D99F34"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BB69D1EFA913128D99EBE"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BB7E41EFA913128D99D49"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283509F01EFA913128D99BF3"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283B2ADF1EFA913128D99AA3"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283B806F1EFA913128D99954"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283B824B1EFA913128D99886"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283B88451EFA913128D99796"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283B898B1EFA913128D99632"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BE2DE1EFA9110F83453FA"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BE6861EFA9110F834524F"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BE7341EFA9110F8345174"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BF0BD1EFA9110F734506B"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BF1361EFA9110F7344FE4"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BDE8F1EFA9110F7344E91"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A286009A11EFA9110F7344D89"/>
-      </imgeo:Waterdeel>
-    </imgeo-lv:nieuw>
-  </imgeo-lv:ObjectAanlevering>
-</imgeo-lv:object>
-<imgeo-lv:object>
-  <imgeo-lv:ObjectAanlevering>
-    <imgeo-lv:nieuw>
-      <imgeo:Waterdeel gml:id="d1e2979909">
-        <imgeo:identificatie>
-          <imgeo:NEN3610ID>
-             <imgeo:namespace>NL.IMGeo</imgeo:namespace>
-             <imgeo:lokaalID>00796.c9a639a7-f4aa-4beb-86b3-1359fa7265fd</imgeo:lokaalID>
-          </imgeo:NEN3610ID>
-       </imgeo:identificatie>
-        <imgeo:objectBeginTijd>2012-02-08T09:30:47Z</imgeo:objectBeginTijd>
-        <imgeo:tijdstipRegistratie>2012-02-08T12:34:56</imgeo:tijdstipRegistratie>
-        <imgeo:bronhouder>00796</imgeo:bronhouder>
-        <imgeo:inOnderzoek>0</imgeo:inOnderzoek>
-        <imgeo:relatieveHoogteligging>0</imgeo:relatieveHoogteligging>
-        <imgeo:status>bestaand</imgeo:status>
-        <imgeo:type>waterloop</imgeo:type>
-        <imgeo:geometrie2dWaterdeel>
-          <gml:Polygon>
-             <gml:exterior>
-                <gml:LinearRing>
-                   <gml:posList>145385.653 415354.655 145386.091 415354.414 145380.943 415344.891 145380.504 415345.13 145385.653 415354.655</gml:posList>
-                </gml:LinearRing>
-             </gml:exterior>
-          </gml:Polygon>
-       </imgeo:geometrie2dWaterdeel>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA622513714261EFA911A0855F7B1"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA6225137068C1EFA911A0855F63C"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA62251C42A4B1EFA91174C47B336"/>
-        <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA62251C432E91EFA91174C47B2DB"/>
-      </imgeo:Waterdeel>
-    </imgeo-lv:nieuw>
-  </imgeo-lv:ObjectAanlevering>
-</imgeo-lv:object>
+   <imgeo-lv:object>
+        <imgeo-lv:ObjectAanlevering>
+            <imgeo-lv:nieuw>
+                <imgeo:Waterdeel gml:id="d1e2952660">
+                    <imgeo:identificatie>
+                        <imgeo:NEN3610ID>
+                            <imgeo:namespace>NL.IMGeo</imgeo:namespace>
+                            <imgeo:lokaalID>00796.ce0563da-4f54-4170-92f5-af211150334d</imgeo:lokaalID>
+                        </imgeo:NEN3610ID>
+                    </imgeo:identificatie>
+                    <imgeo:objectBeginTijd>2012-02-08T09:30:47Z</imgeo:objectBeginTijd>
+                    <imgeo:tijdstipRegistratie>2012-02-08T12:34:56</imgeo:tijdstipRegistratie>
+                    <imgeo:bronhouder>00796</imgeo:bronhouder>
+                    <imgeo:inOnderzoek>0</imgeo:inOnderzoek>
+                    <imgeo:relatieveHoogteligging>0</imgeo:relatieveHoogteligging>
+                    <imgeo:status>bestaand</imgeo:status>
+                    <imgeo:type>waterloop</imgeo:type>
+                    <imgeo:geometrie2dWaterdeel>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>146818.447 414165.704 146818.578 414165.745 146818.714 414165.763
+                                        146818.851 414165.758 146818.99 414165.729 146819.123 414165.677 146819.244
+                                        414165.603 146819.35 414165.508 146819.439 414165.397 146823.275 414155.258
+                                        146821.584 414155.258 146817.973 414164.687 146817.941 414164.82 146817.932
+                                        414164.957 146817.946 414165.094 146817.983 414165.226 146818.041 414165.35
+                                        146818.119 414165.463 146818.214 414165.562 146818.324 414165.643 146818.447
+                                        414165.704
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </imgeo:geometrie2dWaterdeel>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283B8B6B1EFA91312AD9A323"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BA4121EFA91312AD9A236"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BA58C1EFA913128D9A1AF"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BB2061EFA913128D9A056"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BB3381EFA913128D99F34"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BB69D1EFA913128D99EBE"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BB7E41EFA913128D99D49"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283509F01EFA913128D99BF3"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283B2ADF1EFA913128D99AA3"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283B806F1EFA913128D99954"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283B824B1EFA913128D99886"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283B88451EFA913128D99796"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283B898B1EFA913128D99632"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BE2DE1EFA9110F83453FA"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BE6861EFA9110F834524F"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BE7341EFA9110F8345174"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BF0BD1EFA9110F734506B"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BF1361EFA9110F7344FE4"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A283BDE8F1EFA9110F7344E91"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA61A286009A11EFA9110F7344D89"/>
+                </imgeo:Waterdeel>
+            </imgeo-lv:nieuw>
+        </imgeo-lv:ObjectAanlevering>
+    </imgeo-lv:object>
+    <imgeo-lv:object>
+        <imgeo-lv:ObjectAanlevering>
+            <imgeo-lv:nieuw>
+                <imgeo:Waterdeel gml:id="d1e2979909">
+                    <imgeo:identificatie>
+                        <imgeo:NEN3610ID>
+                            <imgeo:namespace>NL.IMGeo</imgeo:namespace>
+                            <imgeo:lokaalID>00796.c9a639a7-f4aa-4beb-86b3-1359fa7265fd</imgeo:lokaalID>
+                        </imgeo:NEN3610ID>
+                    </imgeo:identificatie>
+                    <imgeo:objectBeginTijd>2012-02-08T09:30:47Z</imgeo:objectBeginTijd>
+                    <imgeo:tijdstipRegistratie>2012-02-08T12:34:56</imgeo:tijdstipRegistratie>
+                    <imgeo:bronhouder>00796</imgeo:bronhouder>
+                    <imgeo:inOnderzoek>0</imgeo:inOnderzoek>
+                    <imgeo:relatieveHoogteligging>0</imgeo:relatieveHoogteligging>
+                    <imgeo:status>bestaand</imgeo:status>
+                    <imgeo:type>waterloop</imgeo:type>
+                    <imgeo:geometrie2dWaterdeel>
+                        <gml:Polygon>
+                            <gml:exterior>
+                                <gml:LinearRing>
+                                    <gml:posList>145385.653 415354.655 145386.091 415354.414 145380.943 415344.891
+                                        145380.504 415345.13 145385.653 415354.655
+                                    </gml:posList>
+                                </gml:LinearRing>
+                            </gml:exterior>
+                        </gml:Polygon>
+                    </imgeo:geometrie2dWaterdeel>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA622513714261EFA911A0855F7B1"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA6225137068C1EFA911A0855F63C"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA62251C42A4B1EFA91174C47B336"/>
+                    <imgeo:plaatsbepalingspuntWaterdeel xlink:href="#02ADA62251C432E91EFA91174C47B2DB"/>
+                </imgeo:Waterdeel>
+            </imgeo-lv:nieuw>
+        </imgeo-lv:ObjectAanlevering>
+    </imgeo-lv:object>
   </imgeo-lv:IMGeoAanlevering>

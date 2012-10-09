@@ -46,7 +46,7 @@ class GmlSplitter(Filter):
 
     def invoke(self, packet):
         if packet.data is None:
-            if packet.is_end_of_stream() and self.buffer is not None:
+            if (packet.is_end_of_stream() or packet.is_end_of_doc()) and self.buffer:
                 # EOF but still data in buffer: make doc
                 log.info("Last Buffer")
                 self.buffer_to_doc(packet)
