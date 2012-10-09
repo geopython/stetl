@@ -36,5 +36,5 @@ class Enum(object):
   def __init__(self, *keys):
     self.__dict__.update(zip(keys, range(len(keys))))
 
-
-FORMAT=Enum('xml_line_stream', 'etree_doc','etree_feature_array', 'xml_doc_as_string')
+# The data types allowed to pass in Packets, "any" can be used as wildcard
+FORMAT=Enum('xml_line_stream', 'etree_doc','etree_feature_array', 'xml_doc_as_string', 'any')

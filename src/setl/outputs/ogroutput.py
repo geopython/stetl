@@ -20,14 +20,6 @@ class Ogr2OgrOutput(Output):
         self.temp_file = self.cfg.get('temp_file')
         self.ogr2ogr_cmd = self.cfg.get('ogr2ogr_cmd')
 
-    def write(self, packet):
-        if packet.data is None:
-            return packet
-
-        self.save_doc(packet, self.temp_file)
-        self.execute_cmd(self.ogr2ogr_cmd)
-        return packet
-
     def save_doc(self, packet, file_path):
         if packet.data is None:
              return packet
@@ -44,5 +36,17 @@ class Ogr2OgrOutput(Output):
         if os.name == 'nt':
             use_shell = False
 
-        print cmd
+        log.info("executing cmd=%s" % cmd)
         subprocess.call(cmd, shell=use_shell)
+
+    def write(self, packet):
+        if packet.data is None:
+            return packet
+
+        # Save the doc to a temp file
+        self.save_doc(packet, self.temp_file)
+
+        # Execute ogr2ogr
+        self.execute_cmd(self.ogr2ogr_cmd)
+        return packet
+

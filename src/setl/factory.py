@@ -6,7 +6,6 @@
 # Author: Just van den Broecke
 #
 # http://stackoverflow.com/questions/2226330/instantiate-a-python-class-from-a-name
-
 class Factory:
 
     def create_obj(self, configdict, section):

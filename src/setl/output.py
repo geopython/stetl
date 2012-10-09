@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Output classes for ETL.
+# Output base class for ETL.
 #
 # Author: Just van den Broecke
 #

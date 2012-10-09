@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# Author: Just van den Broecke
+#
 from setl.component import Component
 
 # Base class: Filter

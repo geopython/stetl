@@ -11,7 +11,7 @@ from setl.util import ConfigSection
 log = Util.get_log('component')
 
 
-# Base class for all Input, Transformer, Outputs
+# Base class for all Input, Filter and Output Components
 class Component:
     def __init__(self, configdict, section, consumes=None, produces=None):
         self.configdict = configdict

@@ -12,6 +12,7 @@ from setl.chain import Chain
 
 log = Util.get_log('main')
 
+# The main program: build Chains of Components and let them run
 class ETL:
 
     def __init__(self):
@@ -42,11 +43,14 @@ class ETL:
         if not chains_str:
             raise ValueError('ETL chain entry not defined in section [etl]')
 
+        # Multiple Chains may be specified in the config
         chains_str_arr = chains_str.split(',')
         for chain_str in chains_str_arr:
             # Build single Chain of components and let it run
             chain = Chain(chain_str.strip(), self.configdict)
             chain.assemble()
+
+            # Run the ETL for this Chain
             chain.run()
 
         log.info("ALL DONE")

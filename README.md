@@ -35,7 +35,7 @@ For example: using the OgrPostgisInput module an GML stream can be generated fro
 A component called the GmlSplitter can split this stream into managable chunks (like 20000 features) 
 and feed this upstream into the ETL chain.
 
-More to follow...see some examples under the test dir.
+More to follow...see some examples under the examples dir.
 
 Another example in http://code.google.com/p/inspire-foss/source/browse/trunk/etl/NL.Kadaster/Addresses
 (Dutch Addresses (BAG) to INSPIRE Addresses)

@@ -9,6 +9,7 @@ import logging,os,glob,sys,types
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(name)s %(levelname)s %(message)s')
 
+# Static utility methods
 class Util:
     @staticmethod
     def get_log(name):

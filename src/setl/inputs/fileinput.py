@@ -40,6 +40,9 @@ class XmlFileInput(Input):
         self.file_list_done.append(file_path)
         return packet
 
+# Streams lines from an XML file(s)
+# NB assumed is that lines in the file have newlines !!
+# TODO: make a stream-parsing lxml solution
 class XmlLineStreamerFileInput(Input):
     # Constructor
     def __init__(self, configdict, section):
@@ -50,11 +53,13 @@ class XmlLineStreamerFileInput(Input):
         self.file = None
 
     def read(self, packet):
+        # No more files left and done with current file ?
         if not len(self.file_list) and self.file is None:
             packet.set_end_of_stream()
             log.info("EOF file list")
             return packet
 
+        # Done with current file or first file ?
         if self.file is None:
             self.cur_file_path = self.file_list.pop(0)
             self.file = open(self.cur_file_path, 'r')
@@ -65,6 +70,8 @@ class XmlLineStreamerFileInput(Input):
 
         # Assume valid line
         line = self.file.readline()
+
+        # EOF reached ?
         if not line or line == '':
             packet.data = None
 
@@ -74,9 +81,9 @@ class XmlLineStreamerFileInput(Input):
                 self.file_list_done.append(self.cur_file_path)
                 self.cur_file_path = None
                 if not len(self.file_list):
+                    # No more files left: end of stream reached
                     packet.set_end_of_stream()
                     log.info("EOF file list")
-
 
             self.file = None
 

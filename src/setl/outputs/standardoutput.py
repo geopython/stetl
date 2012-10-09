@@ -11,7 +11,7 @@ from .. packet import  FORMAT
 
 log = Util.get_log('standardoutput')
 
-# Pretty print XML to file
+# Pretty print XML to standard output
 class StandardOutput(Output):
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)

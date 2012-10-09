@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Output classes for ETL.
+# Output Components for deegree server storage (www.deegree.org).
 #
 # Author: Just van den Broecke
+#
+# NB deegree also supports WFS-T!
 #
 from ..postgis import PostGIS
 from ..output import Output
