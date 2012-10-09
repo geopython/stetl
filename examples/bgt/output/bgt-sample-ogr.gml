@@ -1,19 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!--
-  ~ This program is free software: you can redistribute it and/or modify
-  ~ it under the terms of the GNU General Public License as published by
-  ~ the Free Software Foundation, either version 3 of the License, or
-  ~ (at your option) any later version.
-  ~
-  ~ This program is distributed in the hope that it will be useful,
-  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~ GNU General Public License for more details.
-  ~
-  ~ You should have received a copy of the GNU General Public License
-  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  -->
-
 <ogr:FeatureCollection
      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
      xsi:schemaLocation="http://ogr.maptools.org/ bgt-sample-ogr.xsd"
@@ -21,7 +6,7 @@
      xmlns:gml="http://www.opengis.net/gml">
   <gml:boundedBy>
     <gml:Box>
-      <gml:coord><gml:X>146001.945</gml:X><gml:Y>414155.258</gml:Y></gml:coord>
+      <gml:coord><gml:X>145380.504</gml:X><gml:Y>414155.258</gml:Y></gml:coord>
       <gml:coord><gml:X>147223.012</gml:X><gml:Y>416099.478</gml:Y></gml:coord>
     </gml:Box>
   </gml:boundedBy>
@@ -94,6 +79,21 @@
       <ogr:gml_id>NL.IMGeo.00796.ce0563da-4f54-4170-92f5-af211150334d</ogr:gml_id>
       <ogr:namespace>NL.IMGeo</ogr:namespace>
       <ogr:lokaalID>00796.ce0563da-4f54-4170-92f5-af211150334d</ogr:lokaalID>
+      <ogr:objectBeginTijd>2012-02-08T09:30:47Z</ogr:objectBeginTijd>
+      <ogr:tijdstipRegistratie>2012-02-08T12:34:56</ogr:tijdstipRegistratie>
+      <ogr:bronhouder>796</ogr:bronhouder>
+      <ogr:inOnderzoek>0</ogr:inOnderzoek>
+      <ogr:relatieveHoogteligging>0</ogr:relatieveHoogteligging>
+      <ogr:status>bestaand</ogr:status>
+      <ogr:type>waterloop</ogr:type>
+    </ogr:Waterdeel>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:Waterdeel fid="F4">
+      <ogr:geometryProperty><gml:Polygon srsName="EPSG:28992"><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates>145385.653,415354.655 145386.091,415354.414 145380.943,415344.891 145380.504,415345.13 145385.653,415354.655</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></ogr:geometryProperty>
+      <ogr:gml_id>NL.IMGeo.00796.c9a639a7-f4aa-4beb-86b3-1359fa7265fd</ogr:gml_id>
+      <ogr:namespace>NL.IMGeo</ogr:namespace>
+      <ogr:lokaalID>00796.c9a639a7-f4aa-4beb-86b3-1359fa7265fd</ogr:lokaalID>
       <ogr:objectBeginTijd>2012-02-08T09:30:47Z</ogr:objectBeginTijd>
       <ogr:tijdstipRegistratie>2012-02-08T12:34:56</ogr:tijdstipRegistratie>
       <ogr:bronhouder>796</ogr:bronhouder>
