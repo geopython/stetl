@@ -11,12 +11,33 @@ from .. packet import  FORMAT
 
 log = Util.get_log('fileinput')
 
-class XmlFileInput(Input):
+# Abstract base class for specific FileInputs
+class FileInput(Input):
+    # Constructor
+    def __init__(self, configdict, section, produces):
+        Input.__init__(self, configdict, section, produces)
+
+        # path to file or files: can be a dir or files or even multiple, comma separated
+        self.file_path = self.cfg.get('file_path')
+
+        # The filename pattern according to Python glob.glob
+        self.filename_pattern = self.cfg.get('filename_pattern', '*.[gxGX][mM][lL]')
+
+        # Recurse into directories ?
+        self.depth_search = self.cfg.get_bool('depth_search', False)
+
+        # Create the list of files to be used as input
+        self.file_list = Util.make_file_list(self.file_path, None, self.filename_pattern, self.depth_search)
+
+    # Override in subclass
+    def read(self, packet):
+       pass
+
+# Parses XML files into etree docs
+class XmlFileInput(FileInput):
     # Constructor
     def __init__(self, configdict, section):
-        Input.__init__(self, configdict, section, produces=FORMAT.etree_doc)
-        self.file_path = self.cfg.get('file_path')
-        self.file_list = Util.make_file_list(self.file_path)
+        FileInput.__init__(self, configdict, section, produces=FORMAT.etree_doc)
         self.file_list_done = []
 
     def read(self, packet):
@@ -43,12 +64,10 @@ class XmlFileInput(Input):
 # Streams lines from an XML file(s)
 # NB assumed is that lines in the file have newlines !!
 # TODO: make a stream-parsing lxml solution
-class XmlLineStreamerFileInput(Input):
+class XmlLineStreamerFileInput(FileInput):
     # Constructor
     def __init__(self, configdict, section):
-        Input.__init__(self, configdict, section, produces=FORMAT.xml_line_stream)
-        self.file_path = self.cfg.get('file_path')
-        self.file_list = Util.make_file_list(self.file_path)
+        FileInput.__init__(self, configdict, section, produces=FORMAT.xml_line_stream)
         self.file_list_done = []
         self.file = None
 
