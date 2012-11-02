@@ -32,5 +32,5 @@ class XmlSchemaValidator(Filter):
     def validate(self, packet):
         log.info("Validating doc against schema=%s ..." % self.xsd)
         result = self.schema.validate(packet.data)
-        log.info('Validation result: %s', str(result))
+        log.info("Validation result: %s" % str(result))
         return packet
