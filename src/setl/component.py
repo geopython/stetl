@@ -66,3 +66,6 @@ class Component:
         return self.output_format is not None \
                 and self.next.input_format is not None \
                     and self.output_format == self.next.input_format
+
+#    def __str__(self):
+#        return "foo"

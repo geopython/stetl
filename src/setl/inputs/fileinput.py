@@ -5,9 +5,10 @@
 #
 # Author: Just van den Broecke
 #
-from .. util import Util,etree
+from .. util import Util, etree
 from .. input import Input
 from .. packet import  FORMAT
+from copy import deepcopy
 
 log = Util.get_log('fileinput')
 
@@ -31,7 +32,7 @@ class FileInput(Input):
 
     # Override in subclass
     def read(self, packet):
-       pass
+        pass
 
 # Parses XML files into etree docs
 class XmlFileInput(FileInput):
@@ -111,3 +112,61 @@ class XmlLineStreamerFileInput(FileInput):
         packet.data = line.decode('utf-8')
         return packet
 
+#  Extracts XML elements from a file
+class XmlElementStreamerFileInput(FileInput):
+    # Constructor
+    def __init__(self, configdict, section):
+        FileInput.__init__(self, configdict, section, produces=FORMAT.etree_element_stream)
+        self.element_tags = self.cfg.get('element_tags').split(',')
+        self.file_list_done = []
+        self.context = None
+        self.root = None
+
+    def read(self, packet):
+    # One-time read/parse only
+    #        try:
+    #            packet.data = etree.parse(file_path)
+    #            log.info("file read and parsed OK : %s" % file_path)
+    #        except Exception, e:
+    #            log.info("file read and parsed NOT OK : %s" % file_path)
+
+
+        event = None
+        if self.context is None:
+            if not len(self.file_list):
+                # No more files left
+                return packet
+
+            file_path = self.file_list.pop(0)
+            file = open(file_path)
+            self.context = etree.iterparse(file, events=("start", "end"))
+            self.context = iter(self.context)
+            event, self.root = self.context.next()
+
+        try:
+            event, elem = self.context.next()
+        except StopIteration, e:
+            elem = None
+
+        if elem is None:
+            self.context = None
+            packet.set_end_of_doc()
+            if not len(self.file_list):
+                # No more files left
+                packet.set_end_of_stream()
+
+            return packet
+
+        if event == "start" and elem.tag in self.element_tags:
+            children = elem.getchildren()
+            child_list = []
+            for child in children:
+                child_list.append(child.tag)
+            # print elem.tag + ":" + str(child_list)
+            packet.data = deepcopy(elem)
+            self.root.clear()
+
+        elif event == "end" and elem.tag in self.element_tags and self.root is not None:
+            self.root.clear()
+
+        return packet
