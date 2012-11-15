@@ -112,7 +112,7 @@ class XmlLineStreamerFileInput(FileInput):
         packet.data = line.decode('utf-8')
         return packet
 
-#  Extracts XML elements from a file
+#  Extracts XML elements from a file, outputs each feature element in Packet
 class XmlElementStreamerFileInput(FileInput):
     # Constructor
     def __init__(self, configdict, section):
@@ -123,18 +123,10 @@ class XmlElementStreamerFileInput(FileInput):
         self.root = None
 
     def read(self, packet):
-    # One-time read/parse only
-    #        try:
-    #            packet.data = etree.parse(file_path)
-    #            log.info("file read and parsed OK : %s" % file_path)
-    #        except Exception, e:
-    #            log.info("file read and parsed NOT OK : %s" % file_path)
-
-
         event = None
         if self.context is None:
             if not len(self.file_list):
-                # No more files left
+                # No more files left, all done
                 return packet
 
             file_path = self.file_list.pop(0)
@@ -150,23 +142,33 @@ class XmlElementStreamerFileInput(FileInput):
 
         if elem is None:
             self.context = None
+
+            # Always end of doc
             packet.set_end_of_doc()
+
+            # Maybe end of stream (all docs done)
             if not len(self.file_list):
-                # No more files left
+                # No more files left: end of stream
                 packet.set_end_of_stream()
 
             return packet
 
-        if event == "start" and elem.tag in self.element_tags:
-            children = elem.getchildren()
-            child_list = []
-            for child in children:
-                child_list.append(child.tag)
-            # print elem.tag + ":" + str(child_list)
-            packet.data = deepcopy(elem)
-            self.root.clear()
+        # Filter out Namespace from the tag
+        # this is the easiest way to go for now
+        tag = elem.tag.split('}')
+        if len(tag) == 2:
+            # Namespaced tag: 2nd is tag
+            tag = tag[1]
+        else:
+            # Non-namespaced tag: first
+            tag = tag[0]
 
-        elif event == "end" and elem.tag in self.element_tags and self.root is not None:
-            self.root.clear()
+        if tag in self.element_tags:
+            if event == "start":
+                # TODO check if deepcopy is the right thing to do here.
+                packet.data = deepcopy(elem)
+            elif event == "end":
+                # Delete the element from the tree
+                self.root.clear()
 
         return packet

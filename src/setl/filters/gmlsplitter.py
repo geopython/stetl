@@ -13,7 +13,8 @@ from .. packet import  FORMAT
 log = Util.get_log('gmlsplitter')
 
 # Split a stream of text XML lines into documents
-# TODO GmlAssembler would be a better name
+# DEPRECATED: use XmlAssembler instead!!
+# TODO phase out
 class GmlSplitter(Filter):
     # Constructor
     def __init__(self, configdict, section='gml_splitter'):
