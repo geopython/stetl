@@ -166,9 +166,13 @@ class XmlElementStreamerFileInput(FileInput):
         if tag in self.element_tags:
             if event == "start":
                 # TODO check if deepcopy is the right thing to do here.
-                packet.data = deepcopy(elem)
+                # packet.data = elem
+                pass
+                # self.root.remove(elem)
             elif event == "end":
                 # Delete the element from the tree
-                self.root.clear()
+                # self.root.clear()
+                packet.data = elem
+                self.root.remove(elem)
 
         return packet

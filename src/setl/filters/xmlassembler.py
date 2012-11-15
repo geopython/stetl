@@ -5,7 +5,6 @@
 #
 # Author: Just van den Broecke
 #
-import codecs
 from ..util import Util, etree
 from ..filter import Filter
 from .. packet import FORMAT
@@ -37,7 +36,7 @@ class XmlAssembler(Filter):
 
         if packet.is_end_of_stream() or packet.is_end_of_doc() or len(self.element_arr) >= self.max_elements:
             # EOF but still data in buffer: make doc
-            log.info("Flush doc")
+            # log.info("Flush doc")
             self.flush_elements(packet)
 
         return packet
