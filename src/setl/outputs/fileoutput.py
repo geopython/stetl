@@ -43,6 +43,7 @@ class MultiFileOutput(FileOutput):
         if packet.data is None:
              return packet
 
+        # file_path can be of the form: gmlcities-%03d.gml
         file_path = self.cfg.get('file_path')
         file_path = file_path % self.file_num
         self.file_num += 1

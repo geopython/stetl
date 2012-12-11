@@ -1,5 +1,6 @@
 This is the sETL framework. The 'S' stands for Simple or Spatial or Streaming ETL. sETL is Open Source (GNU GPL v3).
-Read a 5-minute introduction here: http://www.slideshare.net/justb4/5-minute-intro-to-setl
+Read a 5-minute introduction here: http://www.slideshare.net/justb4/5-minute-intro-to-setl and a longer presentation
+here: http://www.slideshare.net/justb4/setl-preparing-rich-gml-data-for-deegree.
 
 sETL originated in the INSPIRE-FOSS project (www.inspire-foss.org)
 and was created by Just van den Broecke. Since sETL evolved into a wider use like 
