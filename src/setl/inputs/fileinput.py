@@ -29,10 +29,51 @@ class FileInput(Input):
 
         # Create the list of files to be used as input
         self.file_list = Util.make_file_list(self.file_path, None, self.filename_pattern, self.depth_search)
+        log.info("file_list=%s" % str(self.file_list))
 
     # Override in subclass
     def read(self, packet):
         pass
+
+# Returns file as String
+class StringFileInput(FileInput):
+    # Constructor
+    def __init__(self, configdict, section):
+        FileInput.__init__(self, configdict, section, produces=FORMAT.string)
+        self.file_list_done = []
+        self.file = None
+        # Optional positional formatting of content according to Python String.format()
+        self.format_args = self.cfg.get_tuple('format_args')
+
+    def read(self, packet):
+        # No more files left and done with current file ?
+        if not len(self.file_list) and self.file is None:
+            packet.set_end_of_stream()
+            log.info("EOF file list, all files done")
+            return packet
+
+        # Done with current file or first file ?
+        if self.file is None:
+            self.cur_file_path = self.file_list.pop(0)
+            self.file = open(self.cur_file_path, 'r')
+            log.info("file opened : %s" % self.cur_file_path)
+
+        # Assume valid file content
+        file_content = self.file.read()
+
+        # Optional: string substitution based on Python String.format()
+        # But you can also use StringSubstitutionFilter from filters.
+        if self.format_args:
+            file_content = file_content.format(*self.format_args)
+
+        # Cleanup
+        self.file.close()
+        self.file = None
+
+        log.info("file read : %s size=%d" % (self.cur_file_path, len(file_content)))
+
+        packet.data = file_content
+        return packet
 
 # Parses XML files into etree docs
 class XmlFileInput(FileInput):

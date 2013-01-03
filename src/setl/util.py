@@ -120,6 +120,7 @@ class ConfigSection():
             result = int(result)
         return result
 
+    # Get value as bool
     def get_bool(self, name, default=False):
         s = self.get(name)
         if s is None:
@@ -135,6 +136,23 @@ class ConfigSection():
 
         return result
 
+    # Get value as list
+    def get_list(self, name, split_char=',', default=None):
+        result = self.get(name)
+        if result is None:
+            result = default
+        else:
+            result = result.split(split_char)
+        return result
+
+    # Get value as tuple
+    def get_tuple(self, name, split_char=',', default=None):
+        result = self.get_list(name, split_char)
+        if result is None:
+            result = default
+        else:
+            result = tuple(result)
+        return result
 
     def to_string(self):
         return repr(self.config_dict)

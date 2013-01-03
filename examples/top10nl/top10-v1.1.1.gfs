@@ -264,8 +264,7 @@
     <PropertyDefn>
       <Name>typeGebouw</Name>
       <ElementPath>typeGebouw</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>hoogteklasse</Name>
@@ -1002,7 +1001,7 @@
       <!-- Top10NL property nog niet aangetroffen -->
       <Name>nummer</Name>
       <ElementPath>nummer</ElementPath>
-      <Type>Real</Type>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>hoogteniveau</Name>
@@ -1123,7 +1122,7 @@
       <!-- Top10NL property nog niet aangetroffen -->
       <Name>nummer</Name>
       <ElementPath>nummer</ElementPath>
-      <Type>Real</Type>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>hoogteniveau</Name>
@@ -1750,7 +1749,7 @@
       <!-- Top10NL property nog niet aangetroffen -->
       <Name>nummer</Name>
       <ElementPath>nummer</ElementPath>
-      <Type>Integer</Type>
+      <Type>IntegerList</Type>
     </PropertyDefn>
     <!-- Begin properties top10nl:Top10Object -->
     <PropertyDefn>
@@ -1860,7 +1859,7 @@
       <!-- Top10NL property nog niet aangetroffen -->
       <Name>nummer</Name>
       <ElementPath>nummer</ElementPath>
-      <Type>Integer</Type>
+      <Type>IntegerList</Type>
     </PropertyDefn>
     <!-- Begin properties top10nl:Top10Object -->
     <PropertyDefn>
@@ -1975,8 +1974,7 @@
     <PropertyDefn>
       <Name>fysiekVoorkomen</Name>
       <ElementPath>fysiekVoorkomen</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>spoorbreedte</Name>
@@ -2138,8 +2136,7 @@
     <PropertyDefn>
       <Name>fysiekVoorkomen</Name>
       <ElementPath>fysiekVoorkomen</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>spoorbreedte</Name>
@@ -2295,14 +2292,12 @@
     <PropertyDefn>
       <Name>fysiekVoorkomen</Name>
       <ElementPath>fysiekVoorkomen</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>voorkomen</Name>
       <ElementPath>voorkomen</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>hoogteniveau</Name>
@@ -2440,8 +2435,7 @@
     <PropertyDefn>
       <Name>fysiekVoorkomen</Name>
       <ElementPath>fysiekVoorkomen</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>functie</Name>
@@ -2615,8 +2609,7 @@
     <PropertyDefn>
       <Name>fysiekVoorkomen</Name>
       <ElementPath>fysiekVoorkomen</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>functie</Name>
@@ -2790,8 +2783,7 @@
     <PropertyDefn>
       <Name>fysiekVoorkomen</Name>
       <ElementPath>fysiekVoorkomen</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>functie</Name>
@@ -2923,8 +2915,7 @@
     <PropertyDefn>
       <Name>typeWeg</Name>
       <ElementPath>typeWeg</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>typeInfrastructuurWegdeel</Name>
@@ -2935,14 +2926,12 @@
     <PropertyDefn>
       <Name>hoofdverkeersgebruik</Name>
       <ElementPath>hoofdverkeersgebruik</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>fysiekVoorkomen</Name>
       <ElementPath>fysiekVoorkomen</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>verhardingsbreedteklasse</Name>
@@ -2988,26 +2977,22 @@
     <PropertyDefn>
       <Name>aWegnummer</Name>
       <ElementPath>aWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>nWegnummer</Name>
       <ElementPath>nWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>eWegnummer</Name>
       <ElementPath>eWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>sWegnummer</Name>
       <ElementPath>sWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>afritnummer</Name>
@@ -3134,8 +3119,7 @@
     <PropertyDefn>
       <Name>typeWeg</Name>
       <ElementPath>typeWeg</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>typeInfrastructuurWegdeel</Name>
@@ -3146,14 +3130,12 @@
     <PropertyDefn>
       <Name>hoofdverkeersgebruik</Name>
       <ElementPath>hoofdverkeersgebruik</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>fysiekVoorkomen</Name>
       <ElementPath>fysiekVoorkomen</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>verhardingsbreedteklasse</Name>
@@ -3199,26 +3181,22 @@
     <PropertyDefn>
       <Name>aWegnummer</Name>
       <ElementPath>aWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>nWegnummer</Name>
       <ElementPath>nWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>eWegnummer</Name>
       <ElementPath>eWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>sWegnummer</Name>
       <ElementPath>sWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>afritnummer</Name>
@@ -3345,8 +3323,7 @@
     <PropertyDefn>
       <Name>typeWeg</Name>
       <ElementPath>typeWeg</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>typeInfrastructuurWegdeel</Name>
@@ -3357,14 +3334,12 @@
     <PropertyDefn>
       <Name>hoofdverkeersgebruik</Name>
       <ElementPath>hoofdverkeersgebruik</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>fysiekVoorkomen</Name>
       <ElementPath>fysiekVoorkomen</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>verhardingsbreedteklasse</Name>
@@ -3410,26 +3385,22 @@
     <PropertyDefn>
       <Name>aWegnummer</Name>
       <ElementPath>aWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>nWegnummer</Name>
       <ElementPath>nWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>eWegnummer</Name>
       <ElementPath>eWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>sWegnummer</Name>
       <ElementPath>sWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>afritnummer</Name>
@@ -3556,8 +3527,7 @@
     <PropertyDefn>
       <Name>typeWeg</Name>
       <ElementPath>typeWeg</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>typeInfrastructuurWegdeel</Name>
@@ -3568,14 +3538,12 @@
     <PropertyDefn>
       <Name>hoofdverkeersgebruik</Name>
       <ElementPath>hoofdverkeersgebruik</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>fysiekVoorkomen</Name>
       <ElementPath>fysiekVoorkomen</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>verhardingsbreedteklasse</Name>
@@ -3621,26 +3589,22 @@
     <PropertyDefn>
       <Name>aWegnummer</Name>
       <ElementPath>aWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>nWegnummer</Name>
       <ElementPath>nWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>eWegnummer</Name>
       <ElementPath>eWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>sWegnummer</Name>
       <ElementPath>sWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>afritnummer</Name>
@@ -3767,8 +3731,7 @@
     <PropertyDefn>
       <Name>typeWeg</Name>
       <ElementPath>typeWeg</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>typeInfrastructuurWegdeel</Name>
@@ -3779,14 +3742,12 @@
     <PropertyDefn>
       <Name>hoofdverkeersgebruik</Name>
       <ElementPath>hoofdverkeersgebruik</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>fysiekVoorkomen</Name>
       <ElementPath>fysiekVoorkomen</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>verhardingsbreedteklasse</Name>
@@ -3832,26 +3793,22 @@
     <PropertyDefn>
       <Name>aWegnummer</Name>
       <ElementPath>aWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>nWegnummer</Name>
       <ElementPath>nWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>eWegnummer</Name>
       <ElementPath>eWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>sWegnummer</Name>
       <ElementPath>sWegnummer</ElementPath>
-      <Type>String</Type>
-      <Width>250</Width>
+      <Type>StringList</Type>
     </PropertyDefn>
     <PropertyDefn>
       <Name>afritnummer</Name>

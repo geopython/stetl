@@ -37,4 +37,4 @@ class Enum(object):
     self.__dict__.update(zip(keys, range(len(keys))))
 
 # The data types allowed to pass in Packets, "any" can be used as wildcard
-FORMAT=Enum('xml_line_stream', 'etree_doc','etree_element_stream','etree_feature_array', 'xml_doc_as_string', 'any')
+FORMAT=Enum('xml_line_stream', 'etree_doc','etree_element_stream','etree_feature_array', 'xml_doc_as_string', 'string', 'any')
