@@ -5,12 +5,14 @@
 # Author:Just van den Broecke
 
 import logging,os,glob,sys,types
+from time import *
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(name)s %(levelname)s %(message)s')
 
 # Static utility methods
 class Util:
+
     @staticmethod
     def get_log(name):
         log = logging.getLogger(name)
@@ -49,6 +51,17 @@ class Util:
                 file_list.append(file)
 
         return file_list
+
+    # Start (global) + print timer: useful to time for processing and optimization
+    @staticmethod
+    def startTimer(message=""):
+        log.info("Timer start: " + message)
+        return time()
+
+    # End (global) timer + print seconds passed: useful to time for processing and optimization
+    @staticmethod
+    def endTimer(start_time, message=""):
+        log.info("Timer end: " + message + " time=" + str( round( (time() - start_time) , 0)) + " sec")
 
 log = Util.get_log("util")
 

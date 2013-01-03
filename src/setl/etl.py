@@ -9,34 +9,47 @@ import optparse
 from ConfigParser import ConfigParser
 from setl.util import Util
 from setl.chain import Chain
+import StringIO
+log = Util.get_log('ETL')
 
-log = Util.get_log('main')
-
-# The main program: build Chains of Components and let them run
+# The main class: build Chains of Components from a config and let them run
 class ETL:
 
-    def __init__(self):
-        usage = "usage: %prog -c <setl_config_file>"
-        parser = optparse.OptionParser(usage)
-        parser.add_option("-c", "--config", action="store", type="string", dest="config_file",
-                          default="etl.cfg",
-                          help="ETL config file")
-
-        self.options, args = parser.parse_args()
-
-        # Get config file path
-        config_file = self.options.config_file
+    def __init__(self, options, args=None):
+        # Assume path to config .ini file is in options dict
+        # args are optional and used to do string substitutions in config file
+        config_file = options.config_file
         log.info("config_file = %s" % config_file)
+
         self.configdict = ConfigParser()
         try:
-            # parse config file
-            self.configdict.read(config_file)
+            if args:
+                # Arguments given: substitute into config file
+                args_tuple = tuple(args)
+
+                # Get config file as string
+                file = open(config_file, 'r')
+                config_str = file.read()
+                file.close()
+
+                # Do replacements
+                config_str = config_str.format(*args_tuple)
+
+                # Put Config string into buffer (readfp() needs a readline() method)
+                config_buf = StringIO.StringIO(config_str)
+
+                # Parse config from file buffer
+                self.configdict.readfp(config_buf, config_file)
+            else:
+                # Parse config file directly
+                self.configdict.read(config_file)
         except:
-            log.warning("Found " + str(config_file) + " but cannot read it.")
+            log.warning("Cannot read config file: %s" % config_file)
 
     def run(self):
         # The main ETL processing
         log.info("START")
+        t1 = Util.startTimer("total ETL")
 
         # Get the ETL Chain pipeline config strings
         chains_str = self.configdict.get('etl', 'chains')
@@ -52,5 +65,7 @@ class ETL:
 
             # Run the ETL for this Chain
             chain.run()
+
+        Util.endTimer(t1, "total ETL")
 
         log.info("ALL DONE")

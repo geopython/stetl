@@ -26,10 +26,10 @@ $$
 LANGUAGE plpgsql;
 
 SELECT _nlx_dedup_data('functioneelgebied_punt');
--- SELECT _nlx_dedup_data('functioneelgebied_vlak');
+SELECT _nlx_dedup_data('functioneelgebied_vlak');
 SELECT _nlx_dedup_data('gebouw_vlak');
 SELECT _nlx_dedup_data('geografischgebied_punt');
--- SELECT _nlx_dedup_data('geografischgebied_vlak');
+SELECT _nlx_dedup_data('geografischgebied_vlak');
 SELECT _nlx_dedup_data('hoogteofdiepte_punt');
 SELECT _nlx_dedup_data('hoogteverschilhz_lijn');
 SELECT _nlx_dedup_data('hoogteverschillz_lijn');
@@ -38,8 +38,8 @@ SELECT _nlx_dedup_data('inrichtingselement_punt');
 SELECT _nlx_dedup_data('isohoogte_lijn');
 SELECT _nlx_dedup_data('kadeofwal_lijn');
 SELECT _nlx_dedup_data('overigrelief_lijn');
--- SELECT _nlx_dedup_data('overigrelief_punt');
--- SELECT _nlx_dedup_data('registratiefgebied_punt');
+SELECT _nlx_dedup_data('overigrelief_punt');
+SELECT _nlx_dedup_data('registratiefgebied_punt');
 SELECT _nlx_dedup_data('registratiefgebied_vlak');
 SELECT _nlx_dedup_data('spoorbaandeel_lijn');
 SELECT _nlx_dedup_data('spoorbaandeel_punt');

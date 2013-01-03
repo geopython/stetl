@@ -5,7 +5,9 @@
 #
 # Author: Just van den Broecke
 #
-import subprocess,types,os
+import subprocess
+import os
+import shutil
 from ..output import Output
 from ..util import  Util
 from .. packet import  FORMAT
@@ -18,6 +20,12 @@ class Ogr2OgrOutput(Output):
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)
         self.temp_file = self.cfg.get('temp_file')
+
+        # For creating tables the GFS file needs to be newer than
+        # the .gml file. -lco GML_GFS_TEMPLATE somehow does not work
+        # so we copy the .gfs file each time with the .gml file with
+        # the same base name
+        self.gfs_file = self.cfg.get('gfs_file')
         self.ogr2ogr_cmd = self.cfg.get('ogr2ogr_cmd')
 
     def save_doc(self, packet, file_path):
@@ -28,6 +36,13 @@ class Ogr2OgrOutput(Output):
         out_file = open(file_path, 'w')
         out_file.writelines(self.to_string(packet.data))
         out_file.close()
+
+        # Copy the .gfs file if required, use the same base name
+        # so ogr2ogr will pick it up.
+        if self.gfs_file:
+            file_ext = os.path.splitext(file_path)
+            shutil.copy(self.gfs_file, file_ext[0] + '.gfs')
+
         log.info("written to %s" % file_path)
         return packet
 

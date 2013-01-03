@@ -105,7 +105,7 @@ class XmlFileInput(FileInput):
 
 # Streams lines from an XML file(s)
 # NB assumed is that lines in the file have newlines !!
-# TODO: make a stream-parsing lxml solution
+# NB: better is to use XmlElementStreamerFileInput for GML features
 class XmlLineStreamerFileInput(FileInput):
     # Constructor
     def __init__(self, configdict, section):
@@ -153,7 +153,8 @@ class XmlLineStreamerFileInput(FileInput):
         packet.data = line.decode('utf-8')
         return packet
 
-#  Extracts XML elements from a file, outputs each feature element in Packet
+# Extracts XML elements from a file, outputs each feature element in Packet
+# Parsing is streaming (no internal DOM buildup) so any file size can be handled.
 class XmlElementStreamerFileInput(FileInput):
     # Constructor
     def __init__(self, configdict, section):
