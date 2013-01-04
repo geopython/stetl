@@ -25,18 +25,24 @@ class StringFilter(Filter):
         pass
 
 # String filtering using Python advanced String formatting
-# The string should contain {0} {1} etc. These are substituted
-# with configured 'format_args', a tuple of strings.
+# String should have substitutable values like {schema} {foo}
+# format_args should be of the form format_args = schema:test foo:bar ...
 class StringSubstitutionFilter(StringFilter):
     # Constructor
     def __init__(self, configdict, section):
         StringFilter.__init__(self, configdict, section, consumes=FORMAT.string, produces=FORMAT.string)
-        # Positional formatting of content according to Python String.format()
-        self.format_args = self.cfg.get_tuple('format_args')
+
+        # Formatting of content according to Python String.format()
+        # String should have substitutable values like {schema} {foo}
+        # format_args should be of the form format_args = schema:test foo:bar ...
+        self.format_args = self.cfg.get('format_args')
+
+        # Convert string to dict: http://stackoverflow.com/a/1248990
+        self.format_args_dict = Util.string_to_dict(self.format_args, ':')
 
     def filter_string(self, packet):
         # String substitution based on Python String.format()
-        packet.data = packet.data.format(*self.format_args)
+        packet.data = packet.data.format(**self.format_args_dict)
         return packet
 
 

@@ -54,14 +54,20 @@ class Util:
 
     # Start (global) + print timer: useful to time for processing and optimization
     @staticmethod
-    def startTimer(message=""):
+    def start_timer(message=""):
         log.info("Timer start: " + message)
         return time()
 
     # End (global) timer + print seconds passed: useful to time for processing and optimization
     @staticmethod
-    def endTimer(start_time, message=""):
+    def end_timer(start_time, message=""):
         log.info("Timer end: " + message + " time=" + str( round( (time() - start_time) , 0)) + " sec")
+
+    # Convert a string to a dict
+    @staticmethod
+    def string_to_dict(s, separator='='):
+        # Convert string to dict: http://stackoverflow.com/a/1248990
+        return dict([x.split(separator) for x in s.split()])
 
 log = Util.get_log("util")
 

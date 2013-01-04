@@ -15,25 +15,22 @@ log = Util.get_log('ETL')
 # The main class: build Chains of Components from a config and let them run
 class ETL:
 
-    def __init__(self, options, args=None):
+    def __init__(self, options, args_dict=None):
         # Assume path to config .ini file is in options dict
-        # args are optional and used to do string substitutions in config file
+        # args_dict is optional and is used to do string substitutions in config file
         config_file = options.config_file
         log.info("config_file = %s" % config_file)
 
         self.configdict = ConfigParser()
         try:
-            if args:
-                # Arguments given: substitute into config file
-                args_tuple = tuple(args)
-
+            if args_dict:
                 # Get config file as string
                 file = open(config_file, 'r')
                 config_str = file.read()
                 file.close()
 
-                # Do replacements
-                config_str = config_str.format(*args_tuple)
+                # Do replacements  see http://docs.python.org/2/library/string.html#formatstrings
+                config_str = config_str.format(**args_dict)
 
                 # Put Config string into buffer (readfp() needs a readline() method)
                 config_buf = StringIO.StringIO(config_str)
@@ -49,7 +46,7 @@ class ETL:
     def run(self):
         # The main ETL processing
         log.info("START")
-        t1 = Util.startTimer("total ETL")
+        t1 = Util.start_timer("total ETL")
 
         # Get the ETL Chain pipeline config strings
         chains_str = self.configdict.get('etl', 'chains')
@@ -66,6 +63,6 @@ class ETL:
             # Run the ETL for this Chain
             chain.run()
 
-        Util.endTimer(t1, "total ETL")
+        Util.end_timer(t1, "total ETL")
 
         log.info("ALL DONE")

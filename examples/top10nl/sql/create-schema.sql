@@ -22,7 +22,7 @@ END;
 $$
 LANGUAGE plpgsql;
 
-SELECT _nlx_createschema('{0}');
+SELECT _nlx_createschema('{schema}');
 
 DROP FUNCTION _nlx_createschema(schemaname VARCHAR);
 

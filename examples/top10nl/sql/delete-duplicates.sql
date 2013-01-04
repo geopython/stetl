@@ -1,7 +1,7 @@
 -- Auteur: Frank Steggink
 -- Doel: script om dubbele records te verwijderen, middels een hulptabel
 
-SET search_path={0},public;
+SET search_path={schema},public;
 
 DROP TABLE IF EXISTS _nlx_temp;
 

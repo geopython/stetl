@@ -2,7 +2,7 @@
 -- Doel: script om Top10NL tabellen te verwijderen.
 -- Zowel de originele als de opgesplitste tabellen worden hiermee verwijderd.
 
-SET search_path={0},public;
+SET search_path={schema},public;
 
 DROP TABLE IF EXISTS	functioneelgebied;
 DROP TABLE IF EXISTS	functioneelgebied_punt;

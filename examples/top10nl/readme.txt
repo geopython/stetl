@@ -13,8 +13,10 @@ to have their own parameterization convention, a simple string substitution
 mechanism is used:
 
 parameters within the .cfg file that are provided externally can be specified
-with Python-based formatting values, e.g. {0}, {1}. Using main.py positional args
-these values are substituted at init time.
+with Python-based formatting values, e.g. {host}, {port}. Using main.py -a option
+these values are substituted, for example:
+
+    main.py -c myetl.cfg -a "host=localhost port=5432"
 
 There are 3 chains:
 - SQL pre-processing: dropping tables, optionally creating a (non-public) PG schema

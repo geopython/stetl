@@ -42,8 +42,15 @@ class StringFileInput(FileInput):
         FileInput.__init__(self, configdict, section, produces=FORMAT.string)
         self.file_list_done = []
         self.file = None
-        # Optional positional formatting of content according to Python String.format()
-        self.format_args = self.cfg.get_tuple('format_args')
+
+        # Optional formatting of content according to Python String.format()
+        # Input file should have substitutable values like {schema} {foo}
+        # format_args should be of the form format_args = schema:test foo:bar
+        self.format_args = self.cfg.get('format_args')
+
+        if self.format_args:
+            # Convert string to dict: http://stackoverflow.com/a/1248990
+            self.format_args = Util.string_to_dict(self.format_args, ':')
 
     def read(self, packet):
         # No more files left and done with current file ?
@@ -64,7 +71,7 @@ class StringFileInput(FileInput):
         # Optional: string substitution based on Python String.format()
         # But you can also use StringSubstitutionFilter from filters.
         if self.format_args:
-            file_content = file_content.format(*self.format_args)
+            file_content = file_content.format(**self.format_args)
 
         # Cleanup
         self.file.close()

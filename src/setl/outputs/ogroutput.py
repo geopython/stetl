@@ -26,7 +26,9 @@ class Ogr2OgrOutput(Output):
         # so we copy the .gfs file each time with the .gml file with
         # the same base name
         self.gfs_file = self.cfg.get('gfs_file')
+        self.lco = self.cfg.get('lco')
         self.ogr2ogr_cmd = self.cfg.get('ogr2ogr_cmd')
+        self.first_run = True
 
     def save_doc(self, packet, file_path):
         if packet.data is None:
@@ -62,6 +64,11 @@ class Ogr2OgrOutput(Output):
         self.save_doc(packet, self.temp_file)
 
         # Execute ogr2ogr
-        self.execute_cmd(self.ogr2ogr_cmd)
+        ogr2ogr_cmd = self.ogr2ogr_cmd
+        if self.lco and self.first_run is True:
+            ogr2ogr_cmd += ' ' + self.lco
+            self.first_run = False
+
+        self.execute_cmd(ogr2ogr_cmd)
         return packet
 
