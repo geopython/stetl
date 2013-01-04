@@ -9,7 +9,10 @@
 # Represents units of (any) data and status passed along Chain of Components
 class Packet:
     def __init__(self, data=None):
-        self.data = data
+        self.init(data)
+
+    def init(self, data=None):
+        self.data = None
         self.end_of_stream = False
         self.end_of_doc = False
 

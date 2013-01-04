@@ -60,7 +60,6 @@ class XmlAssembler(Filter):
         # Start new doc (TODO clone)
         try:
             etree_doc = etree.fromstring(self.container_doc, self.xml_parser)
-            log.info("new container doc OK")
         except Exception, e:
             log.error("new container doc not OK")
             return packet
@@ -72,6 +71,7 @@ class XmlAssembler(Filter):
         for element in self.element_arr:
             parent_element.append(element)
 
+        log.info("xmldoc ready: elms=%d total_elms=%d" % (len(self.element_arr), self.total_element_count))
         packet.data = etree_doc
         self.element_arr = []
         return packet

@@ -29,7 +29,7 @@ class XsltFilter(Filter):
         return self.transform(packet)
 
     def transform(self, packet):
-        log.info("XSLT Transform")
         packet.data = self.xslt_obj(packet.data)
+        log.info("XSLT Transform OK")
         return packet
 

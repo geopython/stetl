@@ -63,6 +63,7 @@ class Chain:
         while not packet.is_end_of_stream():
 #            try:
                 # Invoke the first component to start the chain
+                packet.init()
                 packet = self.first_comp.process(packet)
 #            except (Exception), e:
 #                log.error("Fatal Error in ETL: %s"% str(e))
