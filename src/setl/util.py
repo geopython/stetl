@@ -65,9 +65,13 @@ class Util:
 
     # Convert a string to a dict
     @staticmethod
-    def string_to_dict(s, separator='='):
+    def string_to_dict(s, separator='=', space='~'):
         # Convert string to dict: http://stackoverflow.com/a/1248990
-        return dict([x.split(separator) for x in s.split()])
+        dict_arr = [x.split(separator) for x in s.split()]
+        for x in dict_arr:
+	        x[1] = x[1].replace(space, ' ')
+
+        return dict(dict_arr)
 
 log = Util.get_log("util")
 

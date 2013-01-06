@@ -55,6 +55,7 @@ class Ogr2OgrOutput(Output):
 
         log.info("executing cmd=%s" % cmd)
         subprocess.call(cmd, shell=use_shell)
+        log.info("execute done")
 
     def write(self, packet):
         if packet.data is None:
