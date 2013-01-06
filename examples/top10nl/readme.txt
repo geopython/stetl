@@ -2,7 +2,7 @@ This example shows how to convert the Dutch national topographic dataset Top10NL
 PostGIS.
 
 The entire ETL is driven through the file etl-top10nl.cfg without any
-Python programming (except for the XSLT step). The script etl-top10nl.sh is a shortcut to
+programming (except for the XSLT step). The script etl-top10nl.sh is a shortcut to
 call sETL main.py.
 
 This example also uses the "custom parameters" feature.
@@ -28,6 +28,9 @@ See also etl-top10nl.cfg and etl-top10nl.sh for more details.
 
 (top10-nlextract.sh is here for testing/comparing with the existing ETL via
 nlextract.nl).
+
+top10extract.py is a simple wrapper to test if we can keep the same commandline
+parameters when using sETL for Top10-extract (see www.nlextract.nl).
 
 To test: a PostGIS database named top10nl with same user/pw needs to exist.
 Data will be written in the schema "test".

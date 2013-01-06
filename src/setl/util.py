@@ -25,6 +25,7 @@ class Util:
         if file_list is None:
             file_list = []
 
+        candidate_file = candidate_file.strip()
         input_list = candidate_file.split(',')
         if len(input_list) > 1:
             for file in input_list:

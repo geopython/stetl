@@ -22,7 +22,7 @@ def main():
         args.config_args = Util.string_to_dict(args.config_args)
 
     # Do the ETL
-    etl = ETL(args, args.config_args)
+    etl = ETL(vars(args), args.config_args)
     etl.run()
 
 if __name__ == "__main__":
