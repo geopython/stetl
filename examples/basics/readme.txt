@@ -1,4 +1,4 @@
-The directories below each show basic examples oF SETL.
+The directories below each show basic examples oF stETL.
 The examples build up from simple to more complex by directory number prefix.
 
 1_copystd - just copy an XML file to standard output

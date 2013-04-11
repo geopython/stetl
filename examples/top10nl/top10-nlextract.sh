@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Auteur: Just van den Broecke
-# Test script om sETL resultaten met NLExtract te  vergelijken
+# Test script om stETL resultaten met NLExtract te  vergelijken
 #
 TOP10NL_HOME=/Users/just/project/ogg/nlextract/git/top10nl
 TOP10NL_BIN=$TOP10NL_HOME/bin

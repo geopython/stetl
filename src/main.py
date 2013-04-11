@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Main sETL program.
+# Main stETL program.
 #
 # Author: Just van den Broecke
 #
@@ -12,7 +12,7 @@ import argparse #apt-get install python-argparse
 log = Util.get_log('main')
 
 def main():
-    argparser = argparse.ArgumentParser(description='Invoke sETL')
+    argparser = argparse.ArgumentParser(description='Invoke stETL')
     argparser.add_argument('-c ',  '--config', type=str,   help='ETL config file in .ini format' , dest='config_file', required=True)
     argparser.add_argument('-a ',  '--args', type=str,   help='Arguments to be substituted for {argN}s in config file, as "arg1=foo arg2=bar" etc' , dest='config_args', required=False)
     args = argparser.parse_args()

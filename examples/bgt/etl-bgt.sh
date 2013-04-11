@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ETL for BGT using sETL.
+# ETL for BGT using stETL.
 #
 # Author: Just van den Broecke
 #

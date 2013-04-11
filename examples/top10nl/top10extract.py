@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Auteur: Frank Steggink, bewerkt door Just van den Broecke tbv voorbeeld sETL embedding
+# Auteur: Frank Steggink, bewerkt door Just van den Broecke tbv voorbeeld stETL embedding
 # Doel: overzetten van een Top10NL GML-bestand naar een door OGR ondersteund formaat (bijv.
 # PostGIS).
 
@@ -42,12 +42,12 @@ import os
 import sys
 from time import localtime, strftime
 
-# Importeren submodule sETL, maar moet netter kunnen
+# Importeren submodule stETL, maar moet netter kunnen
 sys.path.insert(0, '../../src')
 from setl.etl import ETL
 
 # Constanten
-DEFAULT_SETL_INI = 'etl-top10nl.cfg'
+DEFAULT_STETL_INI = 'etl-top10nl.cfg'
 MAX_SPLIT_FEATURES = 30000
 MULTI_OPTS = {'eerste': '-splitlistfields -maxsubfields 1', 'meerdere': '-splitlistfields', 'stringlist': '-fieldTypeToString StringList', 'array': ' ' }
 
@@ -70,7 +70,7 @@ def elaborate_args(args):
 	return vars(args)
 
 
-# Verwerkt de data via sETL
+# Verwerkt de data via stETL
 def process(args):
 	etl = ETL(args, args)
 	etl.run()
@@ -81,8 +81,8 @@ def main():
 	argparser.add_argument('gml_files', type=str, help='het GML-bestand of de lijst met GML-bestanden', metavar='gml_files',
 		nargs='+')
 	argparser.add_argument('--dir', type=str, help='lokatie getransformeerde bestanden', dest='temp_dir', required=True)
-	argparser.add_argument('--ini', type=str, help='het sETL config-bestand (default: %s)' % DEFAULT_SETL_INI, dest='config_file',
-		default=DEFAULT_SETL_INI)
+	argparser.add_argument('--ini', type=str, help='het stETL config-bestand (default: %s)' % DEFAULT_STETL_INI, dest='config_file',
+		default=DEFAULT_STETL_INI)
 	#    argparser.add_argument('--pre',   type=str,   help='SQL-script vooraf', dest='pre_sql')
 	#    argparser.add_argument('--post',  type=str,   help='SQL-script achteraf', dest='post_sql')
 #	argparser.add_argument('--spat', type=float, help='spatial filter', dest='spat', nargs=4, metavar=('xmin', 'ymin', 'xmax', 'ymax'))

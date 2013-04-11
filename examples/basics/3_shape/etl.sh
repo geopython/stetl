@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Shortcut to call SETL main.py with etl config.
+# Shortcut to call stETL main.py with etl config.
 #
 # Author: Just van den Broecke
 #

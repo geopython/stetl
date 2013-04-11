@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ETL for Top10NL using SETL.
+# ETL for Top10NL using stETL.
 #
 # Author: Just van den Broecke
 #
