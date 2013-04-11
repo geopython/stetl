@@ -5,8 +5,8 @@
 #
 # Author: Just van den Broecke
 #
-from setl.util import Util
-from setl.util import ConfigSection
+from stetl.util import Util
+from stetl.util import ConfigSection
 
 log = Util.get_log('component')
 

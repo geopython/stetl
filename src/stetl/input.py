@@ -5,8 +5,8 @@
 #
 # Author: Just van den Broecke
 #
-from setl.util import Util
-from setl.component import Component
+from stetl.util import Util
+from stetl.component import Component
 
 log = Util.get_log('input')
 

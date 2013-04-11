@@ -5,8 +5,8 @@
 #
 # Author: Just van den Broecke
 #
-from setl.component import Component
-from setl.util import  Util, etree
+from stetl.component import Component
+from stetl.util import  Util, etree
 
 log = Util.get_log('output')
 

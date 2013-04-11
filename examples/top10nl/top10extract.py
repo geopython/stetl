@@ -44,7 +44,7 @@ from time import localtime, strftime
 
 # Importeren submodule stETL, maar moet netter kunnen
 sys.path.insert(0, '../../src')
-from setl.etl import ETL
+from stetl.etl import ETL
 
 # Constanten
 DEFAULT_STETL_INI = 'etl-top10nl.cfg'

@@ -6,9 +6,9 @@
 # Author: Just van den Broecke
 #
 
-from setl.factory import factory
-from setl.packet import Packet
-from setl.util import Util
+from stetl.factory import factory
+from stetl.packet import Packet
+from stetl.util import Util
 
 log = Util.get_log('chain')
 

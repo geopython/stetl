@@ -5,7 +5,7 @@
 #
 # Author: Just van den Broecke
 #
-from setl.util import Util
+from stetl.util import Util
 
 log = Util.get_log("postgis")
 
@@ -79,13 +79,13 @@ class PostGIS:
 
 
     def log_action(self, action, bestand="n.v.t", bericht='geen', error=False):
-        sql = "INSERT INTO setl_log(actie, bestand, error, bericht) VALUES (%s, %s, %s, %s)"
+        sql = "INSERT INTO stetl_log(actie, bestand, error, bericht) VALUES (%s, %s, %s, %s)"
         parameters = (action, bestand, error, bericht)
         self.tx_execute(sql, parameters)
 
 
     def log_meta(self, key, value):
-        sql = "INSERT INTO setl_info(sleutel, waarde) VALUES (%s, %s)"
+        sql = "INSERT INTO stetl_info(sleutel, waarde) VALUES (%s, %s)"
         parameters = (key, value)
         self.tx_execute(sql, parameters)
 

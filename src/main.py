@@ -5,8 +5,8 @@
 #
 # Author: Just van den Broecke
 #
-from setl.etl import ETL
-from setl.util import Util
+from stetl.etl import ETL
+from stetl.util import Util
 import argparse #apt-get install python-argparse
 
 log = Util.get_log('main')

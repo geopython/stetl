@@ -8,8 +8,8 @@
 import os
 import sys
 from ConfigParser import ConfigParser
-from setl.util import Util
-from setl.chain import Chain
+from stetl.util import Util
+from stetl.chain import Chain
 import StringIO
 
 log = Util.get_log('ETL')

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Author: Just van den Broecke
 #
-from setl.component import Component
+from stetl.component import Component
 
 # Base class: Filter
 class Filter(Component):
