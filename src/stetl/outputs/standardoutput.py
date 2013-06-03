@@ -6,8 +6,8 @@
 # Author: Just van den Broecke
 #
 from ..output import Output
-from ..util import  Util
-from .. packet import  FORMAT
+from ..util import Util
+from ..packet import FORMAT
 
 log = Util.get_log('standardoutput')
 
@@ -18,7 +18,7 @@ class StandardOutput(Output):
 
     def write(self, packet):
         if packet.data is None:
-             return packet
+            return packet
 
         # Default: print to stdout
         print(self.to_string(packet.data))

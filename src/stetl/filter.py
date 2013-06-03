@@ -3,12 +3,15 @@
 #
 from stetl.component import Component
 
-# Base class: Filter
+
 class Filter(Component):
-    # Constructor
+    """
+    Maps input to output. Abstract base class for specific Filters.
+
+    """
+
     def __init__(self, configdict, section, consumes, produces):
         Component.__init__(self, configdict, section, consumes, produces)
 
     def invoke(self, packet):
         return packet
-

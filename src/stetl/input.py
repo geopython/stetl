@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 # Input classes for ETL.
@@ -10,9 +9,13 @@ from stetl.component import Component
 
 log = Util.get_log('input')
 
-# Base class: Input Component
+
 class Input(Component):
-    # Constructor
+    """
+    Abstract Base class for all Input Components.
+
+    """
+
     def __init__(self, configdict, section, produces):
         Component.__init__(self, configdict, section, consumes=None, produces=produces)
 

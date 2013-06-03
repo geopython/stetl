@@ -6,8 +6,8 @@
 # Author: Just van den Broecke
 #
 from ..output import Output
-from ..util import  Util
-from .. packet import  FORMAT
+from ..util import Util
+from ..packet import FORMAT
 import os
 
 log = Util.get_log('fileoutput')
@@ -16,11 +16,11 @@ log = Util.get_log('fileoutput')
 class FileOutput(Output):
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)
-        log.info("working dir %s" %os.getcwd())
+        log.info("working dir %s" % os.getcwd())
 
     def write(self, packet):
         if packet.data is None:
-             return packet
+            return packet
 
         file_path = self.cfg.get('file_path')
         return self.write_file(packet, file_path)
@@ -41,7 +41,7 @@ class MultiFileOutput(FileOutput):
 
     def write(self, packet):
         if packet.data is None:
-             return packet
+            return packet
 
         # file_path can be of the form: gmlcities-%03d.gml
         file_path = self.cfg.get('file_path')

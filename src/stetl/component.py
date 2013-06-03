@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 # Component base class for ETL.
@@ -11,8 +10,12 @@ from stetl.util import ConfigSection
 log = Util.get_log('component')
 
 
-# Base class for all Input, Filter and Output Components
 class Component:
+    """
+    Abstract Base class for all Input, Filter and Output Components.
+
+    """
+
     def __init__(self, configdict, section, consumes=None, produces=None):
         self.configdict = configdict
         self.cfg = ConfigSection(configdict.items(section))
@@ -64,8 +67,8 @@ class Component:
 
         # return if our Output is compatible with the next Component's Input
         return self.output_format is not None \
-                and self.next.input_format is not None \
-                    and self.output_format == self.next.input_format
+                   and self.next.input_format is not None \
+            and self.output_format == self.next.input_format
 
-#    def __str__(self):
-#        return "foo"
+        #    def __str__(self):
+        #        return "foo"

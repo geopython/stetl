@@ -9,15 +9,14 @@
 #
 from ..postgis import PostGIS
 from ..output import Output
-from ..util import  Util, etree
-from .. packet import  FORMAT
+from ..util import Util, etree
+from ..packet import FORMAT
 import os
 
 log = Util.get_log('deegreeoutput')
 
 # Insert features into deegree Blobstore
 class DeegreeBlobstoreOutput(Output):
-
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)
         self.overwrite = self.cfg.get_bool('overwrite')
@@ -58,15 +57,15 @@ class DeegreeBlobstoreOutput(Output):
 
     def write(self, packet):
         if packet.data is None:
-             return packet
+            return packet
 
         gml_doc = packet.data
         log.info('inserting features in DB')
         db = PostGIS(self.cfg.get_dict())
         db.connect()
-#        print self.to_string(gml_doc, False, False)
-#        NS = {'base': 'urn:x-inspire:specification:gmlas:BaseTypes:3.2', 'gml': 'http://www.opengis.net/gml/3.2'}
-#        featureMembers = gml_doc.xpath('//base:member/*', namespaces=NS)
+        #        print self.to_string(gml_doc, False, False)
+        #        NS = {'base': 'urn:x-inspire:specification:gmlas:BaseTypes:3.2', 'gml': 'http://www.opengis.net/gml/3.2'}
+        #        featureMembers = gml_doc.xpath('//base:member/*', namespaces=NS)
         featureMembers = gml_doc.xpath("//*[local-name() = '%s']/*" % self.feature_member_tag)
         count = 0
         gml_ns = None
@@ -84,13 +83,14 @@ class DeegreeBlobstoreOutput(Output):
 
             # Find a GML geometry in the GML NS
             ogrGeomWKT = None
-#            gmlMembers = childNode.xpath(".//gml:Point|.//gml:Curve|.//gml:Surface|.//gml:MultiSurface", namespaces=NS)
-            gmlMembers = childNode.xpath(".//*[local-name() = 'Point']|.//*[local-name() = 'Polygon']|.//*[local-name() = 'Curve']|.//*[local-name() = 'Surface']|.//*[local-name() = 'MultiSurface']")
+            #            gmlMembers = childNode.xpath(".//gml:Point|.//gml:Curve|.//gml:Surface|.//gml:MultiSurface", namespaces=NS)
+            gmlMembers = childNode.xpath(
+                ".//*[local-name() = 'Point']|.//*[local-name() = 'Polygon']|.//*[local-name() = 'Curve']|.//*[local-name() = 'Surface']|.//*[local-name() = 'MultiSurface']")
             geom_str = None
             for gmlMember in gmlMembers:
                 if geom_str is None:
                     geom_str = etree.tostring(gmlMember)
-            #                   no need for GDAL Python bindings for now, maybe when we'll optimize with COPY iso INSERT
+                #                   no need for GDAL Python bindings for now, maybe when we'll optimize with COPY iso INSERT
             #                    ogrGeom = ogr.CreateGeometryFromGML(str(gmlStr))
             #                    if ogrGeom is not None:
             #                        ogrGeomWKT = ogrGeom.ExportToWkt()
@@ -119,7 +119,6 @@ class DeegreeBlobstoreOutput(Output):
                 db.connect()
                 count = 0
 
-
             count += 1
 
         exception = db.commit()
@@ -140,8 +139,9 @@ class DeegreeFSLoaderOutput(Output):
 
     def write(self, packet):
         from subprocess import Popen, PIPE
+
         if packet.data is None:
-             return packet
+            return packet
 
         gml_doc = packet.data
         d3tools_path = self.cfg.get('d3tools_path')
@@ -164,5 +164,5 @@ class DeegreeFSLoaderOutput(Output):
         result = p.communicate()[0]
         return packet
 
-         # print(result)
+        # print(result)
 

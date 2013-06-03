@@ -23,16 +23,16 @@ class DbOutput(Output):
 # Input is an SQL string
 # Output by executing input SQL string
 class PostgresDbOutput(DbOutput):
-     def __init__(self, configdict, section):
-         DbOutput.__init__(self, configdict, section, consumes=FORMAT.string)
+    def __init__(self, configdict, section):
+        DbOutput.__init__(self, configdict, section, consumes=FORMAT.string)
 
-     def write(self, packet):
-         if packet.data is None:
-              return packet
+    def write(self, packet):
+        if packet.data is None:
+            return packet
 
-         log.info('executing SQL')
-         db = PostGIS(self.cfg.get_dict())
-         rowcount = db.tx_execute(packet.data)
-         log.info('executed SQL, rowcount=%d' % rowcount)
-         return packet
+        log.info('executing SQL')
+        db = PostGIS(self.cfg.get_dict())
+        rowcount = db.tx_execute(packet.data)
+        log.info('executed SQL, rowcount=%d' % rowcount)
+        return packet
 

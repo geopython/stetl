@@ -8,10 +8,10 @@
 import codecs
 import re
 
-from .. postgis import PostGIS
-from .. input import Input
-from .. util import  Util, etree, StringIO
-from .. packet import  FORMAT
+from ..postgis import PostGIS
+from ..input import Input
+from ..util import Util, etree, StringIO
+from ..packet import FORMAT
 
 log = Util.get_log('deegreeinput')
 
@@ -117,7 +117,6 @@ class DeegreeBlobstoreInput(Input):
                     self.buffer.write(self.end_container)
                     self.buffer_to_doc(packet)
                     break
-
 
         if self.cur is None:
             # All records handled: close off

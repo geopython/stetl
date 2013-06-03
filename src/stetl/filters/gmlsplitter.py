@@ -8,7 +8,7 @@
 import codecs
 from ..util import Util, etree, StringIO
 from ..filter import Filter
-from .. packet import  FORMAT
+from ..packet import FORMAT
 
 log = Util.get_log('gmlsplitter')
 
@@ -100,7 +100,7 @@ class GmlSplitter(Filter):
                 if self.feature_count >= self.max_features and self.expect_end_feature_tag is None:
                     self.buffer.write(self.end_container)
                     log.info("Buffer filled feat_count = %d total_feat_count= %d" % (
-                    self.feature_count, self.total_feature_count))
+                        self.feature_count, self.total_feature_count))
                     self.feature_count = 0
                     packet.set_end_of_doc()
                     return packet
@@ -110,7 +110,7 @@ class GmlSplitter(Filter):
                 if self.buffer is not None and self.feature_count > 0:
                     self.buffer.write(self.end_container)
                     log.info("Buffer filled (EOF) feat_count = %d total_feat_count= %d" % (
-                    self.feature_count, self.total_feature_count))
+                        self.feature_count, self.total_feature_count))
                     self.feature_count = 0
                     packet.set_end_of_doc()
                     return packet

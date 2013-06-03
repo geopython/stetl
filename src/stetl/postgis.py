@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 # PostGIS support wrapper.
@@ -15,6 +14,7 @@ try:
 except ImportError:
     log.error("cannot find packages psycopg2 for Postgres client support")
     sys.exit(-1)
+
 
 class PostGIS:
     def __init__(self, config):

@@ -4,7 +4,7 @@
 #
 # Author:Just van den Broecke
 
-import logging,os,glob,sys,types
+import logging, os, glob, sys, types
 from time import *
 
 logging.basicConfig(level=logging.INFO,
@@ -12,7 +12,6 @@ logging.basicConfig(level=logging.INFO,
 
 # Static utility methods
 class Util:
-
     @staticmethod
     def get_log(name):
         log = logging.getLogger(name)
@@ -62,7 +61,7 @@ class Util:
     # End (global) timer + print seconds passed: useful to time for processing and optimization
     @staticmethod
     def end_timer(start_time, message=""):
-        log.info("Timer end: " + message + " time=" + str( round( (time() - start_time) , 0)) + " sec")
+        log.info("Timer end: " + message + " time=" + str(round((time() - start_time), 0)) + " sec")
 
     # Convert a string to a dict
     @staticmethod
@@ -70,9 +69,10 @@ class Util:
         # Convert string to dict: http://stackoverflow.com/a/1248990
         dict_arr = [x.split(separator) for x in s.split()]
         for x in dict_arr:
-	        x[1] = x[1].replace(space, ' ')
+            x[1] = x[1].replace(space, ' ')
 
         return dict(dict_arr)
+
 
 log = Util.get_log("util")
 
@@ -123,6 +123,7 @@ except:
     from StringIO import StringIO
 
     log.warning("running with StringIO (this is suboptimal, try cStringIO")
+
 
 class ConfigSection():
     def __init__(self, config_section):
@@ -181,11 +182,13 @@ class ConfigSection():
     def to_string(self):
         return repr(self.config_dict)
 
+
 def main():
     # Test file listing
     cand_file = sys.argv[1]
     file_list = Util.make_file_list(cand_file)
     print(str(file_list))
+
 
 if __name__ == "__main__":
     main()

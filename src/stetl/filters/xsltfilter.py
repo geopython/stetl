@@ -7,9 +7,10 @@
 
 from ..util import Util, etree
 from ..filter import Filter
-from .. packet import  FORMAT
+from ..packet import FORMAT
 
 log = Util.get_log("xsltfilter")
+
 
 class XsltFilter(Filter):
     # Constructor

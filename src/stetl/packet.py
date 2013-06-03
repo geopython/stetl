@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 # Unit of data streamed through ETL chain.
@@ -6,8 +5,11 @@
 # Author: Just van den Broecke
 #
 
-# Represents units of (any) data and status passed along Chain of Components
 class Packet:
+    """
+    Represents units of (any) data and status passed along Chain of Components.
+
+    """
     def __init__(self, data=None):
         self.init(data)
 
@@ -36,8 +38,9 @@ class Packet:
 # Simple enum emulation
 # See http://stackoverflow.com/questions/1969005/enumerations-in-python
 class Enum(object):
-  def __init__(self, *keys):
-    self.__dict__.update(zip(keys, range(len(keys))))
+    def __init__(self, *keys):
+        self.__dict__.update(zip(keys, range(len(keys))))
 
 # The data types allowed to pass in Packets, "any" can be used as wildcard
-FORMAT=Enum('xml_line_stream', 'etree_doc','etree_element_stream','etree_feature_array', 'xml_doc_as_string', 'string', 'any')
+FORMAT = Enum('xml_line_stream', 'etree_doc', 'etree_element_stream', 'etree_feature_array', 'xml_doc_as_string',
+              'string', 'any')

@@ -6,8 +6,8 @@
 # Author: Just van den Broecke
 #
 from ..output import Output
-from ..util import  Util
-from .. packet import  FORMAT
+from ..util import Util
+from ..packet import FORMAT
 import httplib
 
 log = Util.get_log('wfsoutput')
@@ -25,7 +25,7 @@ class WFSTOutput(Output):
     </wfs:Insert>
 </wfs:Transaction>
     '''
-    headers = {"Content−type" : 'Content-type: text/xml',"Accept":"text/xml"}
+    headers = {"Content−type": 'Content-type: text/xml', "Accept": "text/xml"}
 
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)
@@ -36,10 +36,11 @@ class WFSTOutput(Output):
 
     def write(self, packet):
         if packet.data is None:
-             return packet
+            return packet
 
         conn = httplib.HTTPConnection(self.wfs_host, self.wfs_port)
-        conn.request("POST", self.wfs_path, WFSTOutput.wfst_req % (self.idgen, self.to_string(packet.data, False, False)), WFSTOutput.headers)
+        conn.request("POST", self.wfs_path,
+                     WFSTOutput.wfst_req % (self.idgen, self.to_string(packet.data, False, False)), WFSTOutput.headers)
 
         response = conn.getresponse()
         log.info('status=%s msg=%s' % (response.status, response.msg))

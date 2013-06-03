@@ -9,8 +9,8 @@ import subprocess
 import os
 import shutil
 from ..output import Output
-from ..util import  Util
-from .. packet import  FORMAT
+from ..util import Util
+from ..packet import FORMAT
 
 log = Util.get_log('ogroutput')
 
@@ -32,7 +32,7 @@ class Ogr2OgrOutput(Output):
 
     def save_doc(self, packet, file_path):
         if packet.data is None:
-             return packet
+            return packet
 
         log.info('writing to file %s' % file_path)
         out_file = open(file_path, 'w')

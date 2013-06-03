@@ -7,7 +7,7 @@
 #
 from ..util import Util, etree
 from ..filter import Filter
-from .. packet import FORMAT
+from ..packet import FORMAT
 
 log = Util.get_log('xmlassembler')
 
@@ -48,7 +48,7 @@ class XmlAssembler(Filter):
         if element is None or packet.is_end_of_stream() is True:
             return packet
 
-        self.total_element_count +=1
+        self.total_element_count += 1
 
         self.element_arr.append(element)
         return packet

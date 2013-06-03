@@ -6,10 +6,12 @@
 # Author: Just van den Broecke
 #
 import subprocess
-from .. util import Util
-from .. input import Input
-from .. packet import  FORMAT
+from ..util import Util
+from ..input import Input
+from ..packet import FORMAT
+
 log = Util.get_log('ogrinput')
+
 
 class OgrPostgisInput(Input):
     # TODO make this template configurable so we can have generic ogr2ogr input....
@@ -45,7 +47,8 @@ class OgrPostgisInput(Input):
         # Build ogr2ogr command line
         #
         # PostGIS PG: options
-        self.pg = OgrPostgisInput.pg_conn_tmpl % (in_pg_host, in_pg_db, in_pg_schema, in_pg_user, in_pg_password, in_pg_port)
+        self.pg = OgrPostgisInput.pg_conn_tmpl % (
+        in_pg_host, in_pg_db, in_pg_schema, in_pg_user, in_pg_password, in_pg_port)
 
         # Entire ogr2ogr command line
         self.cmd = OgrPostgisInput.cmd_tmpl % (
@@ -57,14 +60,15 @@ class OgrPostgisInput(Input):
     def exec_cmd(self):
         log.info("start ogr2ogr cmd = %s" % repr(self.cmd))
         self.ogr_process = subprocess.Popen(self.cmd,
-                                        shell=False,
-                                        stdout=subprocess.PIPE,
-                                        stderr=subprocess.PIPE)
+                                            shell=False,
+                                            stdout=subprocess.PIPE,
+                                            stderr=subprocess.PIPE)
 
         err_line = self.readline_err()
         if err_line:
             log.warning('ogr2ogr: %s ' % err_line)
-    #        exit_code = self.ogr_process.returncode
+
+        #        exit_code = self.ogr_process.returncode
 
     def readline(self):
         if self.eof_stdout is True:

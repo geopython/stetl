@@ -1,12 +1,10 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#
-# Object and class Factory (Pattern).
-#
-# Author: Just van den Broecke
-#
-# http://stackoverflow.com/questions/2226330/instantiate-a-python-class-from-a-name
+
 class Factory:
+    """
+    Object and class Factory (Pattern).
+    Based on: http://stackoverflow.com/questions/2226330/instantiate-a-python-class-from-a-name
+    """
 
     def create_obj(self, configdict, section):
         # Get value for 'class' property
@@ -37,6 +35,7 @@ class Factory:
             class_name)
         return class_obj
 
+
     def new_instance(self, class_obj, configdict, section):
         """Returns object instance from class instance.
 
@@ -46,6 +45,7 @@ class Factory:
             kwargs: standard args.
         """
         return class_obj(configdict, section)
+
 
 factory = Factory()
 
