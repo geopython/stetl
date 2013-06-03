@@ -5,6 +5,7 @@ geospatial data conversion. Stetl is Open Source (GNU GPL v3).
 The main website and documentation can be found on http://stetl.org.
 Read a 5-minute introduction here: http://www.slideshare.net/justb4/5-minute-intro-to-setl and a longer presentation
 here: http://www.slideshare.net/justb4/setl-preparing-rich-gml-data-for-deegree.
+Stetl will also presented at FOSS4G 2013 in Nottingham http://2013.foss4g.org (sat sept 21).
 
 Stetl originated in the INSPIRE-FOSS project (www.inspire-foss.org)
 and was created by Just van den Broecke. Since Stetl evolved into a wider use like
