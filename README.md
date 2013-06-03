@@ -2,13 +2,14 @@ Stetl, streaming ETL, pronounced "staedl", is a lightweight ETL-framework for th
 geospatial data conversion. Stetl is Open Source (GNU GPL v3).
 (Stetl used to be called sETL but this was colliding with the SET Language or SETL).
 
+The main website and documentation can be found on http://stetl.org.
 Read a 5-minute introduction here: http://www.slideshare.net/justb4/5-minute-intro-to-setl and a longer presentation
 here: http://www.slideshare.net/justb4/setl-preparing-rich-gml-data-for-deegree.
 
 Stetl originated in the INSPIRE-FOSS project (www.inspire-foss.org)
 and was created by Just van den Broecke. Since Stetl evolved into a wider use like
 transforming Dutch GML-based datasets such as IMGEO/BGT (Large Scale Topography) 
-and IMKAD/BRK (Kadastral Data) it has now a repo of its own.
+and IMKAD/BRK (Cadastral Data) it has now a repo of its own.
 
 Stetl basically glues together existing parsing and transformation tools like GDAL/OGR (ogr2ogr) and XSLT.
 By using native tools like libxml and libxslt (via Python lxml) Stetl is speed-optimized.
