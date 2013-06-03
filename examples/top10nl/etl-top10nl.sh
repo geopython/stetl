@@ -20,6 +20,6 @@ gml_files=input
 # multi_opts=~
 
 multi="multi_opts=-fieldTypeToString~StringList"
-python ../../src/main.py -c etl-top10nl.cfg -a "database=top10nl host=localhost port=5432 user=top10nl password=top10nl schema=test temp_dir=temp max_features=20 gml_files=$gml_files $multi"
+python ../../stetl/main.py -c etl-top10nl.cfg -a "database=top10nl host=localhost port=5432 user=top10nl password=top10nl schema=test temp_dir=temp max_features=20 gml_files=$gml_files $multi"
 
 

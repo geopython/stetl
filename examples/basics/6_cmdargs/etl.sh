@@ -4,6 +4,6 @@
 #
 # Author: Just van den Broecke
 #
-python ../../../src/main.py -c etl.cfg -a "in_xml=input/cities.xml in_xsl=cities2gml.xsl out_xml=output/gmlcities.gml"
+python ../../../stetl/main.py -c etl.cfg -a "in_xml=input/cities.xml in_xsl=cities2gml.xsl out_xml=output/gmlcities.gml"
 
 

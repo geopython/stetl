@@ -8,7 +8,7 @@ Main Entry Points
 
 There are two main entry points through which Stetl can be called.
 
-.. automodule:: main
+.. automodule:: stetl.main
    :members:
 
 .. automodule:: stetl.etl

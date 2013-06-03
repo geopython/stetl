@@ -43,7 +43,7 @@ import sys
 from time import localtime, strftime
 
 # Importeren submodule stETL, maar moet netter kunnen
-sys.path.insert(0, '../../src')
+sys.path.insert(0, '../../stetl')
 from stetl.etl import ETL
 
 # Constanten
