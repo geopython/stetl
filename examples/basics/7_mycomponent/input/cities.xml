@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<cities>
+    <city>
+        <name>Amsterdam</name>
+        <lat>52.4</lat>
+        <lon>4.9</lon>
+    </city>
+    <city>
+        <name>Bonn</name>
+        <lat>50.7</lat>
+        <lon>7.1</lon>
+    </city>
+    <city>
+        <name>Rome</name>
+        <lat>41.9</lat>
+        <lon>12.5</lon>
+    </city>
+</cities>

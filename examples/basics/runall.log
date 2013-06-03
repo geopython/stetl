@@ -1,3 +1,18 @@
+2013-06-03 18:55:39,939 util INFO running with lxml.etree
+2013-06-03 18:55:39,939 util INFO running with cStringIO
+2013-06-03 18:55:39,950 ETL INFO Reading config_file = etl.cfg
+2013-06-03 18:55:39,950 ETL INFO START
+2013-06-03 18:55:39,950 util INFO Timer start: total ETL
+2013-06-03 18:55:39,950 chain INFO Assembling Chain: input_xml_file|output_std...
+2013-06-03 18:55:39,951 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2013-06-03 18:55:39,951 fileinput INFO file_list=['input/cities.xml']
+2013-06-03 18:55:39,952 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
+2013-06-03 18:55:39,952 chain INFO Running Chain: input_xml_file|output_std
+2013-06-03 18:55:39,952 fileinput INFO file read and parsed OK : input/cities.xml
+2013-06-03 18:55:39,952 fileinput INFO all files done
+2013-06-03 18:55:39,952 chain INFO DONE input_xml_file|output_std 
+2013-06-03 18:55:39,952 util INFO Timer end: total ETL time=0.0 sec
+2013-06-03 18:55:39,952 ETL INFO ALL DONE
 <?xml version='1.0' encoding='utf-8'?>
 <cities>
     <city>
@@ -17,6 +32,111 @@
     </city>
 </cities>
 
+2013-06-03 18:55:40,063 util INFO running with lxml.etree
+2013-06-03 18:55:40,063 util INFO running with cStringIO
+2013-06-03 18:55:40,074 ETL INFO Reading config_file = etl.cfg
+2013-06-03 18:55:40,074 ETL INFO START
+2013-06-03 18:55:40,074 util INFO Timer start: total ETL
+2013-06-03 18:55:40,074 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_file...
+2013-06-03 18:55:40,075 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2013-06-03 18:55:40,075 fileinput INFO file_list=['input/cities.xml']
+2013-06-03 18:55:40,077 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2013-06-03 18:55:40,077 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/2_xslt
+2013-06-03 18:55:40,077 chain INFO Running Chain: input_xml_file|transformer_xslt|output_file
+2013-06-03 18:55:40,077 fileinput INFO file read and parsed OK : input/cities.xml
+2013-06-03 18:55:40,078 fileinput INFO all files done
+2013-06-03 18:55:40,078 xsltfilter INFO XSLT Transform OK
+2013-06-03 18:55:40,078 fileoutput INFO writing to file output/gmlcities.gml
+2013-06-03 18:55:40,078 fileoutput INFO written to output/gmlcities.gml
+2013-06-03 18:55:40,078 chain INFO DONE input_xml_file|transformer_xslt|output_file 
+2013-06-03 18:55:40,078 util INFO Timer end: total ETL time=0.0 sec
+2013-06-03 18:55:40,078 ETL INFO ALL DONE
+2013-06-03 18:55:40,190 util INFO running with lxml.etree
+2013-06-03 18:55:40,190 util INFO running with cStringIO
+2013-06-03 18:55:40,201 ETL INFO Reading config_file = etl.cfg
+2013-06-03 18:55:40,201 ETL INFO START
+2013-06-03 18:55:40,201 util INFO Timer start: total ETL
+2013-06-03 18:55:40,201 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_ogr_shape...
+2013-06-03 18:55:40,202 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2013-06-03 18:55:40,202 fileinput INFO file_list=['input/cities.xml']
+2013-06-03 18:55:40,210 output INFO cfg = {'ogr2ogr_cmd': 'ogr2ogr \\\n-overwrite \\\n-f "ESRI Shapefile" \\\n-a_srs epsg:4326 \\\noutput/gmlcities.shp \\\ntemp/gmlcities.gml', 'class': 'outputs.ogroutput.Ogr2OgrOutput', 'temp_file': 'temp/gmlcities.gml'}
+2013-06-03 18:55:40,211 chain INFO Running Chain: input_xml_file|transformer_xslt|output_ogr_shape
+2013-06-03 18:55:40,211 fileinput INFO file read and parsed OK : input/cities.xml
+2013-06-03 18:55:40,211 fileinput INFO all files done
+2013-06-03 18:55:40,211 xsltfilter INFO XSLT Transform OK
+2013-06-03 18:55:40,211 ogroutput INFO writing to file temp/gmlcities.gml
+2013-06-03 18:55:40,212 ogroutput INFO written to temp/gmlcities.gml
+2013-06-03 18:55:40,212 ogroutput INFO executing cmd=ogr2ogr \
+-overwrite \
+-f "ESRI Shapefile" \
+-a_srs epsg:4326 \
+output/gmlcities.shp \
+temp/gmlcities.gml
+2013-06-03 18:55:40,243 ogroutput INFO execute done
+2013-06-03 18:55:40,243 chain INFO DONE input_xml_file|transformer_xslt|output_ogr_shape 
+2013-06-03 18:55:40,243 util INFO Timer end: total ETL time=0.0 sec
+2013-06-03 18:55:40,244 ETL INFO ALL DONE
+2013-06-03 18:55:40,356 util INFO running with lxml.etree
+2013-06-03 18:55:40,356 util INFO running with cStringIO
+2013-06-03 18:55:40,367 ETL INFO Reading config_file = etl.cfg
+2013-06-03 18:55:40,367 ETL INFO START
+2013-06-03 18:55:40,367 util INFO Timer start: total ETL
+2013-06-03 18:55:40,367 chain INFO Assembling Chain: input_xml_file|transformer_xslt|xml_schema_validator|output_file...
+2013-06-03 18:55:40,368 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2013-06-03 18:55:40,368 fileinput INFO file_list=['input/cities.xml']
+2013-06-03 18:55:40,370 xmlvalidator INFO Building the Schema once with (GML XSD) dependencies for schema=gmlcities.xsd (be patient...)
+2013-06-03 18:55:57,951 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2013-06-03 18:55:57,951 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/4_validate
+2013-06-03 18:55:57,951 chain INFO Running Chain: input_xml_file|transformer_xslt|xml_schema_validator|output_file
+2013-06-03 18:55:57,951 fileinput INFO file read and parsed OK : input/cities.xml
+2013-06-03 18:55:57,952 fileinput INFO all files done
+2013-06-03 18:55:57,952 xsltfilter INFO XSLT Transform OK
+2013-06-03 18:55:57,952 xmlvalidator INFO Validating doc against schema=gmlcities.xsd ...
+2013-06-03 18:55:57,952 xmlvalidator INFO Validation result: True
+2013-06-03 18:55:57,952 fileoutput INFO writing to file output/gmlcities.gml
+2013-06-03 18:55:57,953 fileoutput INFO written to output/gmlcities.gml
+2013-06-03 18:55:57,953 chain INFO DONE input_xml_file|transformer_xslt|xml_schema_validator|output_file 
+2013-06-03 18:55:57,953 util INFO Timer end: total ETL time=18.0 sec
+2013-06-03 18:55:57,953 ETL INFO ALL DONE
+2013-06-03 18:55:58,065 util INFO running with lxml.etree
+2013-06-03 18:55:58,065 util INFO running with cStringIO
+2013-06-03 18:55:58,076 ETL INFO Reading config_file = etl.cfg
+2013-06-03 18:55:58,076 ETL INFO START
+2013-06-03 18:55:58,076 util INFO Timer start: total ETL
+2013-06-03 18:55:58,076 chain INFO Assembling Chain: input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file...
+2013-06-03 18:55:58,077 input INFO cfg = {'element_tags': 'city', 'class': 'inputs.fileinput.XmlElementStreamerFileInput', 'file_path': 'input'}
+2013-06-03 18:55:58,078 fileinput INFO file_list=['input/cities.xml']
+2013-06-03 18:55:58,078 xmlassembler INFO cfg = {'max_elements': '2', 'element_container_tag': 'cities', 'class': 'filters.xmlassembler.XmlAssembler', 'container_doc': "<?xml version='1.0' encoding='utf-8'?>\n<cities>\n</cities>"}
+2013-06-03 18:55:58,079 output INFO cfg = {'class': 'outputs.fileoutput.MultiFileOutput', 'file_path': 'output/gmlcities-%03d.gml'}
+2013-06-03 18:55:58,079 chain INFO Running Chain: input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file
+2013-06-03 18:55:58,080 fileinput INFO file opened : input/cities.xml
+2013-06-03 18:55:58,080 xmlassembler INFO xmldoc ready: elms=2 total_elms=2
+2013-06-03 18:55:58,080 xsltfilter INFO XSLT Transform OK
+2013-06-03 18:55:58,080 fileoutput INFO writing to file output/gmlcities-001.gml
+2013-06-03 18:55:58,081 fileoutput INFO written to output/gmlcities-001.gml
+2013-06-03 18:55:58,081 fileinput INFO End of doc: input/cities.xml elem_count=3
+2013-06-03 18:55:58,081 fileinput INFO End of stream
+2013-06-03 18:55:58,081 xmlassembler INFO xmldoc ready: elms=1 total_elms=3
+2013-06-03 18:55:58,081 xsltfilter INFO XSLT Transform OK
+2013-06-03 18:55:58,081 fileoutput INFO writing to file output/gmlcities-002.gml
+2013-06-03 18:55:58,082 fileoutput INFO written to output/gmlcities-002.gml
+2013-06-03 18:55:58,082 chain INFO DONE input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file 
+2013-06-03 18:55:58,082 chain INFO Assembling Chain: input_big_xml_file|xml_assembler|transformer_xslt|output_std...
+2013-06-03 18:55:58,082 input INFO cfg = {'element_tags': 'city', 'class': 'inputs.fileinput.XmlElementStreamerFileInput', 'file_path': 'input'}
+2013-06-03 18:55:58,082 fileinput INFO file_list=['input/cities.xml']
+2013-06-03 18:55:58,082 xmlassembler INFO cfg = {'max_elements': '2', 'element_container_tag': 'cities', 'class': 'filters.xmlassembler.XmlAssembler', 'container_doc': "<?xml version='1.0' encoding='utf-8'?>\n<cities>\n</cities>"}
+2013-06-03 18:55:58,083 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
+2013-06-03 18:55:58,083 chain INFO Running Chain: input_big_xml_file|xml_assembler|transformer_xslt|output_std
+2013-06-03 18:55:58,083 fileinput INFO file opened : input/cities.xml
+2013-06-03 18:55:58,084 xmlassembler INFO xmldoc ready: elms=2 total_elms=2
+2013-06-03 18:55:58,084 xsltfilter INFO XSLT Transform OK
+2013-06-03 18:55:58,084 fileinput INFO End of doc: input/cities.xml elem_count=3
+2013-06-03 18:55:58,084 fileinput INFO End of stream
+2013-06-03 18:55:58,084 xmlassembler INFO xmldoc ready: elms=1 total_elms=3
+2013-06-03 18:55:58,084 xsltfilter INFO XSLT Transform OK
+2013-06-03 18:55:58,084 chain INFO DONE input_big_xml_file|xml_assembler|transformer_xslt|output_std 
+2013-06-03 18:55:58,085 util INFO Timer end: total ETL time=0.0 sec
+2013-06-03 18:55:58,085 ETL INFO ALL DONE
 <?xml version='1.0' encoding='utf-8'?>
 <ogr:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://ogr.maptools.org/" xmlns:gml="http://www.opengis.net/gml" xsi:schemaLocation="http://ogr.maptools.org/ ../gmlcities.xsd  http://www.opengis.net/gml http://schemas.opengis.net/gml/2.1.2/feature.xsd">
   <gml:boundedBy>
@@ -78,4 +198,60 @@
     </ogr:City>
   </gml:featureMember>
 </ogr:FeatureCollection>
+
+2013-06-03 18:55:58,194 util INFO running with lxml.etree
+2013-06-03 18:55:58,194 util INFO running with cStringIO
+2013-06-03 18:55:58,205 ETL INFO Reading config_file = etl.cfg
+2013-06-03 18:55:58,205 ETL INFO Substituting 3 args in config file from args_dict: {'out_xml': 'output/gmlcities.gml', 'in_xsl': 'cities2gml.xsl', 'in_xml': 'input/cities.xml'}
+2013-06-03 18:55:58,205 ETL INFO Substituting args OK
+2013-06-03 18:55:58,206 ETL INFO START
+2013-06-03 18:55:58,206 util INFO Timer start: total ETL
+2013-06-03 18:55:58,206 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_file...
+2013-06-03 18:55:58,207 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2013-06-03 18:55:58,207 fileinput INFO file_list=['input/cities.xml']
+2013-06-03 18:55:58,208 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2013-06-03 18:55:58,208 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/6_cmdargs
+2013-06-03 18:55:58,208 chain INFO Running Chain: input_xml_file|transformer_xslt|output_file
+2013-06-03 18:55:58,209 fileinput INFO file read and parsed OK : input/cities.xml
+2013-06-03 18:55:58,209 fileinput INFO all files done
+2013-06-03 18:55:58,209 xsltfilter INFO XSLT Transform OK
+2013-06-03 18:55:58,209 fileoutput INFO writing to file output/gmlcities.gml
+2013-06-03 18:55:58,209 fileoutput INFO written to output/gmlcities.gml
+2013-06-03 18:55:58,209 chain INFO DONE input_xml_file|transformer_xslt|output_file 
+2013-06-03 18:55:58,210 util INFO Timer end: total ETL time=0.0 sec
+2013-06-03 18:55:58,210 ETL INFO ALL DONE
+2013-06-03 18:55:58,320 util INFO running with lxml.etree
+2013-06-03 18:55:58,320 util INFO running with cStringIO
+2013-06-03 18:55:58,331 ETL INFO Reading config_file = etl.cfg
+2013-06-03 18:55:58,331 ETL INFO START
+2013-06-03 18:55:58,331 util INFO Timer start: total ETL
+2013-06-03 18:55:58,331 chain INFO Assembling Chain: input_xml_file|my_filter|output_std...
+2013-06-03 18:55:58,332 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2013-06-03 18:55:58,332 fileinput INFO file_list=['input/cities.xml']
+2013-06-03 18:55:58,333 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
+2013-06-03 18:55:58,333 chain INFO Running Chain: input_xml_file|my_filter|output_std
+2013-06-03 18:55:58,334 fileinput INFO file read and parsed OK : input/cities.xml
+2013-06-03 18:55:58,334 fileinput INFO all files done
+2013-06-03 18:55:58,334 myfilter INFO CALLING MyFilter OK!!!!
+2013-06-03 18:55:58,334 chain INFO DONE input_xml_file|my_filter|output_std 
+2013-06-03 18:55:58,334 util INFO Timer end: total ETL time=0.0 sec
+2013-06-03 18:55:58,334 ETL INFO ALL DONE
+<?xml version='1.0' encoding='utf-8'?>
+<cities>
+    <city>
+        <name>Amsterdam</name>
+        <lat>52.4</lat>
+        <lon>4.9</lon>
+    </city>
+    <city>
+        <name>Bonn</name>
+        <lat>50.7</lat>
+        <lon>7.1</lon>
+    </city>
+    <city>
+        <name>Rome</name>
+        <lat>41.9</lat>
+        <lon>12.5</lon>
+    </city>
+</cities>
 
