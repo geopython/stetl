@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 # Output classes for ETL.
@@ -13,6 +12,19 @@ log = Util.get_log('standardoutput')
 
 # Pretty print XML to standard output
 class StandardOutput(Output):
+    def __init__(self, configdict, section):
+        Output.__init__(self, configdict, section, consumes=FORMAT.any)
+
+    def write(self, packet):
+        if packet.data is None:
+            return packet
+
+        # Default: print to stdout
+        print(str(packet.data))
+        return packet
+
+# Pretty print XML to standard output
+class StandardXmlOutput(Output):
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)
 

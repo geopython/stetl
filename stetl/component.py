@@ -4,8 +4,8 @@
 #
 # Author: Just van den Broecke
 #
-from util import Util
-from util import ConfigSection
+from util import Util, ConfigSection
+from packet import FORMAT
 
 log = Util.get_log('component')
 
@@ -68,7 +68,7 @@ class Component:
         # return if our Output is compatible with the next Component's Input
         return self.output_format is not None \
                    and self.next.input_format is not None \
-            and self.output_format == self.next.input_format
+            and (self.output_format == self.next.input_format or self.next.input_format == FORMAT.any)
 
         #    def __str__(self):
         #        return "foo"
