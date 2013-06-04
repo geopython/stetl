@@ -2,7 +2,7 @@ Stetl, streaming ETL, pronounced "staedl", is a lightweight ETL-framework for th
 geospatial data conversion. Stetl is Open Source (GNU GPL v3).
 (Stetl used to be called sETL but this was colliding with the SET Language or SETL).
 
-The main website and documentation can be found on http://stetl.org.
+The main website and documentation can be found on http://stetl.org (or http://stetl.readthedocs.org).
 Read a 5-minute introduction here: http://www.slideshare.net/justb4/5-minute-intro-to-setl and a longer presentation
 here: http://www.slideshare.net/justb4/setl-preparing-rich-gml-data-for-deegree.
 Stetl will also presented at FOSS4G 2013 in Nottingham http://2013.foss4g.org (sat sept 21).
