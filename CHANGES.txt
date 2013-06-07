@@ -1,0 +1,9 @@
+Changes
+=======
+
+Next (1.0.0)
+------------
+
+- First version
+- Add to Python Package Index (#3).
+- Generic ogr Input Class (#4).

@@ -26,6 +26,7 @@ class DeegreeBlobstoreInput(Input):
         self.end_feature_tag = self.cfg.get('end_feature_tag')
         self.cur_feature_blob = None
         self.rowcount = 0
+
         # http://www.mkyong.com/regular-expressions/how-to-extract-html-links-with-regular-expression/
         self.regex_xlink_href = re.compile("\\s*(?i)xlink:href\\s*=\\s*(\"#([^\"]*\")|'#[^']*'|(#[^'\">\\s]+))")
 

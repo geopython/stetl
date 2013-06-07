@@ -182,14 +182,3 @@ class ConfigSection():
     def to_string(self):
         return repr(self.config_dict)
 
-
-def main():
-    # Test file listing
-    cand_file = sys.argv[1]
-    file_list = Util.make_file_list(cand_file)
-    print(str(file_list))
-
-
-if __name__ == "__main__":
-    main()
-

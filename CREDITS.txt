@@ -1,0 +1,9 @@
+Credits
+=======
+
+Stetl is written by:
+
+* Just van den Broecke (http://www.justobjects.nl)
+
+Stetl would not be possible without the great work of Frank Warmerdam and other
+GDAL/OGR developers (http://gdal.org).

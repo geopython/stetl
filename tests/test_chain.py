@@ -17,6 +17,17 @@ class ConfigTest(unittest.TestCase):
         etl = ETL(cfg_dict)
         self.failUnlessEqual(etl.configdict.get('etl', 'chains'), 'input_xml_file|output_std')
 #        etl.run()
+#
+# def main():
+#     # Test file listing
+#     cand_file = sys.argv[1]
+#     file_list = Util.make_file_list(cand_file)
+#     print(str(file_list))
+#
+#
+# if __name__ == "__main__":
+#     main()
+#
 
 # def geometry_wkb(wkb):
 #     return GeomBuilder().build_wkb(wkb)

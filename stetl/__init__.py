@@ -1,4 +1,6 @@
 #
+__version__ = "1.0.0"
+
 from chain import *
 from component import *
 from etl import *

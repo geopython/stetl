@@ -18,10 +18,11 @@ There are offcourse existing Open Source ETL tools like GeoKettle and Talend Geo
 in many cases a simpler/bulk ETL is required. 
 
 So why en when to use Stetl.
-- when ogr2ogr or XSLT alone cannot do the job
-- when GeoKettle/Talend is too heavy/complex 
-- when FME is too expensive, too closed and/or too slow ;-)
-- when having to deal with complex GML as source or destination
+
+* when ogr2ogr or XSLT alone cannot do the job
+* when GeoKettle/Talend is too heavy/complex
+* when FME is too expensive, too closed and/or too slow ;-)
+* when having to deal with complex GML as source or destination
 
 So Stetl is in particularly useful for INSPIRE-related transformations and other complex GML-related ETL.
 
