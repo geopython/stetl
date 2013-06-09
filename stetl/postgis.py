@@ -4,6 +4,7 @@
 #
 # Author: Just van den Broecke
 #
+import sys
 from util import Util
 
 log = Util.get_log("postgis")

@@ -1,6 +1,5 @@
 Stetl, streaming ETL, pronounced "staedl", is a lightweight ETL-framework for the conversion of rich (as GML)
 geospatial data conversion. Stetl is Open Source (GNU GPL v3).
-(Stetl used to be called sETL but this was colliding with the SET Language or SETL).
 
 The main website and documentation can be found on http://stetl.org (or http://stetl.readthedocs.org).
 Read a 5-minute introduction here: http://www.slideshare.net/justb4/5-minute-intro-to-setl and a longer presentation
@@ -14,14 +13,10 @@ and IMKAD/BRK (Cadastral Data) it has now a repo of its own.
 
 Stetl basically glues together existing parsing and transformation tools like GDAL/OGR (ogr2ogr) and XSLT.
 By using native tools like libxml and libxslt (via Python lxml) Stetl is speed-optimized.
-There are offcourse existing Open Source ETL tools like GeoKettle and Talend Geospatial, but
-in many cases a simpler/bulk ETL is required. 
 
 So why en when to use Stetl.
 
 * when ogr2ogr or XSLT alone cannot do the job
-* when GeoKettle/Talend is too heavy/complex
-* when FME is too expensive, too closed and/or too slow ;-)
 * when having to deal with complex GML as source or destination
 
 So Stetl is in particularly useful for INSPIRE-related transformations and other complex GML-related ETL.
@@ -43,7 +38,7 @@ For example: using the OgrPostgisInput module an GML stream can be generated fro
 A component called the GmlSplitter can split this stream into managable chunks (like 20000 features) 
 and feed this upstream into the ETL chain.
 
-More to follow...see some examples under the examples dir.
+See examples under the examples dir.
 
 Another example in http://code.google.com/p/inspire-foss/source/browse/trunk/etl/NL.Kadaster/Addresses
 (Dutch Addresses (BAG) to INSPIRE Addresses)

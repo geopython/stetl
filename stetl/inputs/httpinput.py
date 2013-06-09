@@ -4,9 +4,9 @@
 #
 # Author: Just van den Broecke
 #
-from input import Input
-from util import Util, etree
-from packet import FORMAT
+from stetl.input import Input
+from stetl.util import Util, etree
+from stetl.packet import FORMAT
 import urllib
 import urllib2
 

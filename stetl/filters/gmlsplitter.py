@@ -6,9 +6,9 @@
 # Author: Just van den Broecke
 #
 import codecs
-from util import Util, etree, StringIO
-from filter import Filter
-from packet import FORMAT
+from stetl.util import Util, etree, StringIO
+from stetl.filter import Filter
+from stetl.packet import FORMAT
 
 log = Util.get_log('gmlsplitter')
 

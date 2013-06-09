@@ -5,6 +5,6 @@
 # Author: Just van den Broecke
 #
 rm -rf output/* temp/*
-python ../../../stetl/main.py -c etl.cfg
+stetl  -c etl.cfg
 
 

@@ -6,9 +6,9 @@
 # Author: Just van den Broecke
 #
 import subprocess
-from util import Util
-from input import Input
-from packet import FORMAT
+from stetl.util import Util
+from stetl.input import Input
+from stetl.packet import FORMAT
 
 log = Util.get_log('ogrinput')
 

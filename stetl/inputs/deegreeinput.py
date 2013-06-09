@@ -8,10 +8,10 @@
 import codecs
 import re
 
-from postgis import PostGIS
-from input import Input
-from util import Util, etree, StringIO
-from packet import FORMAT
+from stetl.postgis import PostGIS
+from stetl.input import Input
+from stetl.util import Util, etree, StringIO
+from stetl.packet import FORMAT
 
 log = Util.get_log('deegreeinput')
 

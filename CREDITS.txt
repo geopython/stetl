@@ -5,5 +5,11 @@ Stetl is written by:
 
 * Just van den Broecke (http://www.justobjects.nl)
 
-Stetl would not be possible without the great work of Frank Warmerdam and other
+This project would not be possible without the great work of Frank Warmerdam and other
 GDAL/OGR developers (http://gdal.org).
+
+Plus the people that brought Python, PostGIS (like Paul Ramsey), lxml and the libs
+like GEOS, Proj, libxml2 and libxslt.
+
+We are mainly standing on the shoulders of these giants.
+

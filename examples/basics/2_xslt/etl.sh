@@ -4,6 +4,6 @@
 #
 # Author: Just van den Broecke
 #
-python ../../../stetl/main.py -c etl.cfg
+stetl  -c etl.cfg
 
 

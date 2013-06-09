@@ -4,6 +4,7 @@
 #
 # Author: Just van den Broecke
 #
+import stetl
 import os
 import sys
 from ConfigParser import ConfigParser
@@ -30,7 +31,11 @@ class ETL:
         Assume path to config .ini file is in options dict
         """
         # args_dict is optional and is used to do string substitutions in options_dict.config file
-        config_file = options_dict.get('config_file')
+
+        log.info("INIT - Stetl version is %s" % str(stetl.__version__))
+
+        self.options_dict = options_dict
+        config_file = self.options_dict.get('config_file')
 
         if not os.path.isfile(config_file):
             print 'No config file found at: %s' % config_file
@@ -70,7 +75,13 @@ class ETL:
         t1 = Util.start_timer("total ETL")
 
         # Get the ETL Chain pipeline config strings
-        chains_str = self.configdict.get('etl', 'chains')
+        # Default is to use the section [etl], but may be overidden on cmd line
+
+        config_section = self.options_dict.get('config_section')
+        if config_section is None:
+            config_section = 'etl'
+
+        chains_str = self.configdict.get(config_section, 'chains')
         if not chains_str:
             raise ValueError('ETL chain entry not defined in section [etl]')
 

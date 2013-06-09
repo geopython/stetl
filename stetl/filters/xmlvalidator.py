@@ -9,9 +9,9 @@
 #
 # Author:Just van den Broecke
 #
-from util import Util, etree
-from filter import Filter
-from packet import FORMAT
+from stetl.util import Util, etree
+from stetl.filter import Filter
+from stetl.packet import FORMAT
 
 log = Util.get_log("xmlvalidator")
 

@@ -87,13 +87,13 @@ log = Util.get_log("util")
 try:
     from lxml import etree
 
-    log.info("running with lxml.etree")
+    log.info("running with lxml.etree, good!")
 except ImportError:
     try:
         # Python 2.5
         import xml.etree.cElementTree as etree
 
-        log.warning("running with cElementTree on Python 2.5+")
+        log.warning("running with cElementTree on Python 2.5+ (suboptimal)")
     except ImportError:
         try:
             # Python 2.5
@@ -118,7 +118,7 @@ except ImportError:
 try:
     from cStringIO import StringIO
 
-    log.info("running with cStringIO")
+    log.info("running with cStringIO, fabulous!")
 except:
     from StringIO import StringIO
 

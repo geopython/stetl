@@ -5,5 +5,5 @@
 # Shortcut to call stETL main.py with etl config.
 #
 
-python ../../../stetl/main.py -c etl.cfg
+stetl  -c etl.cfg
 

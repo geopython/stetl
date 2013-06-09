@@ -4,9 +4,9 @@
 #
 # Author:Just van den Broecke
 
-from util import Util
-from filter import Filter
-from packet import FORMAT
+from stetl.util import Util
+from stetl.filter import Filter
+from stetl.packet import FORMAT
 
 log = Util.get_log("myfilter")
 

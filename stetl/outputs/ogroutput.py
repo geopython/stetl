@@ -8,9 +8,9 @@
 import subprocess
 import os
 import shutil
-from output import Output
-from util import Util
-from packet import FORMAT
+from stetl.output import Output
+from stetl.util import Util
+from stetl.packet import FORMAT
 
 log = Util.get_log('ogroutput')
 

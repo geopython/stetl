@@ -7,10 +7,10 @@
 #
 # NB deegree also supports WFS-T!
 #
-from postgis import PostGIS
-from output import Output
-from util import Util, etree
-from packet import FORMAT
+from stetl.postgis import PostGIS
+from stetl.output import Output
+from stetl.util import Util, etree
+from stetl.packet import FORMAT
 import os
 
 log = Util.get_log('deegreeoutput')
