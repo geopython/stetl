@@ -11,8 +11,11 @@ of geospatial data.  Stetl is based on existing ETL tools like GDAL/OGR and
 XSLT. Stetl processing is driven from a configuration (.ini) file.
 Stetl is written in Python and in particular suited for processing GML.
 
-This is the documentation of the Stetl ETL toolkit.
-The code is on GitHub: https://github.com/justb4/stetl
+This is the documentation of the Stetl toolkit.
+The code is on GitHub: https://github.com/justb4/stetl.
+
+See an `introductory Stetl presentation at Slideshare <http://www.slideshare.net/justb4/stetl-bolsena2013800v1>`_.
+
 
 Contents:
 

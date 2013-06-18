@@ -7,7 +7,7 @@ Stetl, streaming ETL, pronounced "staedl", is a lightweight ETL-framework for th
 geospatial data. Stetl is Open Source (GNU GPL v3).
 
 Read a 5-minute introduction here: http://www.slideshare.net/justb4/5-minute-intro-to-setl and a longer presentation
-here: http://www.slideshare.net/justb4/setl-preparing-rich-gml-data-for-deegree.
+here: http://www.slideshare.net/justb4/stetl-bolsena2013800v1.
 
 Stetl originated in the `INSPIRE-FOSS project <http//www.inspire-foss.org>`_
 and was originally created by Just van den Broecke. Since Stetl evolved into a wider use like
