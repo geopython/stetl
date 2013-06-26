@@ -84,7 +84,7 @@ Best is to install GDAL and python using the OSGeo4W Installer from http://trac.
 * Choose `Advanced Install`
 * On the `Select Packages` page expand `Commandline_Utilities` and Select from the list `gdal` and `python`
 * (`psycopg2`??)
-* Install `easy_instal`l to allow you to install `lxml`
+* Install `easy_install` to allow you to install `lxml`
 * Download the `ez_setup.py` script
 * Open the OSGeo4W Shell (Start > Programs > OSGeo4W > OSGeo4W > OSGeo4W Shell)
 * Change to the folder that you downloaded `ez_setup.py` to (if you downloaded to C:\Temp then run cd C:\Temp)
@@ -93,6 +93,9 @@ Best is to install GDAL and python using the OSGeo4W Installer from http://trac.
 
 Only Psycopg2 needs explicit installation. Many install via: http://www.stickpeople.com/projects/python/win-psycopg.
 Once the above has been installed you should have everything required to run Stetl.
+
+Alternatively you may use Portable GIS. Still you will need to manually install psycopg2.
+See http://www.archaeogeek.com/portable-gis.html for details.
 
 Test Installation
 -----------------
