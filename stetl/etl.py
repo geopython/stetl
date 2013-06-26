@@ -4,16 +4,15 @@
 #
 # Author: Just van den Broecke
 #
-import stetl
 import os
 import sys
 from ConfigParser import ConfigParser
+import version
 from util import Util
 from chain import Chain
 import StringIO
 
 log = Util.get_log('ETL')
-
 
 class ETL:
     """The main class: builds ETL Chains with connected Components from a config and let them run.
@@ -32,7 +31,7 @@ class ETL:
         """
         # args_dict is optional and is used to do string substitutions in options_dict.config file
 
-        log.info("INIT - Stetl version is %s" % str(stetl.__version__))
+        log.info("INIT - Stetl version is %s" % str(version.__version__))
 
         self.options_dict = options_dict
         config_file = self.options_dict.get('config_file')

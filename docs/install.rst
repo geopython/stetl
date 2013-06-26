@@ -3,23 +3,31 @@
 Installation
 ============
 
-(To be finalized, a rough version below)
+Easiest is to first install the Stetl-dependencies (see below) and then
+install and maintain Stetl on your system as a Python package. ::
 
-(A Python package is in progress. For now download Stetl from
+    (sudo) pip install stetl
+    or
+    easy_install stetl
+
+Alternatively you can download Stetl from
 Github: https://github.com/justb4/stetl/archive/master.zip
-run  ::
+and then install locally  ::
 
 	(sudo) python setup.py install
 
-and try the examples first.)
+and try the examples first. This should work on Linuxes and Mac OSX.
+Windows installation may be more involved depending on your local Python setup. Platform-specific
+installations below.
+
 
 Dependencies
 ------------
 
 Stetl depends on the following Python packages:
 
-* GDAL
-* psycopg2
+* GDAL bindings for Python
+* psycopg2 (PostgreSQL client)
 * lxml
 
 `GDAL` requires the native GDAL/OGR tools to be installed.
@@ -56,7 +64,7 @@ Most packages should be able to be installed by apt-get or Python `pip` or `easy
    apt-get of yum install gdal-bin
    apt-get of yum install python-gdal
 
-- de PostgreSQL python bibliotheek psycopg2
+- the PostgreSQL client library for Python psycopg2
   ::
 
    sudo easy_install psycopg2
@@ -83,6 +91,7 @@ Best is to install GDAL and python using the OSGeo4W Installer from http://trac.
 * Install `easy_install` by running python `ez_setup.py`
 * To install `lxml` with easy_install run `easy_install lxml`
 
+Only Psycopg2 needs explicit installation. Many install via: http://www.stickpeople.com/projects/python/win-psycopg.
 Once the above has been installed you should have everything required to run Stetl.
 
 Test Installation

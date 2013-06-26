@@ -3,7 +3,7 @@ PostGIS.
 
 The entire ETL is driven through the file etl-top10nl.cfg without any
 programming (except for the XSLT step). The script etl-top10nl.sh is a shortcut to
-call stETL main.py.
+call Stetl main.py.
 
 This example also uses the "custom parameters" feature.
 
@@ -30,7 +30,7 @@ See also etl-top10nl.cfg and etl-top10nl.sh for more details.
 nlextract.nl).
 
 top10extract.py is a simple wrapper to test if we can keep the same commandline
-parameters when using stETL for Top10-extract (see www.nlextract.nl).
+parameters when using Stetl for Top10-extract (see www.nlextract.nl).
 
 To test: a PostGIS database named top10nl with same user/pw needs to exist.
 Data will be written in the schema "test".

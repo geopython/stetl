@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Auteur: Frank Steggink, bewerkt door Just van den Broecke tbv voorbeeld stETL embedding
+# Auteur: Frank Steggink, bewerkt door Just van den Broecke tbv voorbeeld Stetl embedding
 # Doel: overzetten van een Top10NL GML-bestand naar een door OGR ondersteund formaat (bijv.
 # PostGIS).
 
@@ -42,7 +42,7 @@ import os
 import sys
 from time import localtime, strftime
 
-# Importeren submodule stETL, maar moet netter kunnen
+# Importeren submodule Stetl, maar moet netter kunnen
 sys.path.insert(0, '../../stetl')
 from stetl.etl import ETL
 
@@ -70,7 +70,7 @@ def elaborate_args(args):
 	return vars(args)
 
 
-# Verwerkt de data via stETL
+# Verwerkt de data via Stetl
 def process(args):
 	etl = ETL(args, args)
 	etl.run()
@@ -81,7 +81,7 @@ def main():
 	argparser.add_argument('gml_files', type=str, help='het GML-bestand of de lijst met GML-bestanden', metavar='gml_files',
 		nargs='+')
 	argparser.add_argument('--dir', type=str, help='lokatie getransformeerde bestanden', dest='temp_dir', required=True)
-	argparser.add_argument('--ini', type=str, help='het stETL config-bestand (default: %s)' % DEFAULT_STETL_INI, dest='config_file',
+	argparser.add_argument('--ini', type=str, help='het Stetl config-bestand (default: %s)' % DEFAULT_STETL_INI, dest='config_file',
 		default=DEFAULT_STETL_INI)
 	#    argparser.add_argument('--pre',   type=str,   help='SQL-script vooraf', dest='pre_sql')
 	#    argparser.add_argument('--post',  type=str,   help='SQL-script achteraf', dest='post_sql')

@@ -13,7 +13,7 @@ log = Util.get_log('main')
 
 def parse_args():
 
-    argparser = argparse.ArgumentParser(description='Invoke stETL')
+    argparser = argparse.ArgumentParser(description='Invoke Stetl')
     argparser.add_argument('-c ', '--config', type=str, help='ETL config file in .ini format', dest='config_file',
                            required=True)
 

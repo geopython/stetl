@@ -9,7 +9,7 @@ logging.basicConfig()
 log = logging.getLogger()
 
 # Parse the version from the stetl module.
-with open('stetl/__init__.py', 'r') as f:
+with open('stetl/version.py', 'r') as f:
     for line in f:
         if line.find("__version__") >= 0:
             version = line.split("=")[1].strip()
@@ -61,12 +61,12 @@ setup(
     test_suite='nose.collector',
     classifiers=[
         'Development Status :: 4 - Beta',
+        'Environment :: Console',
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
-        'License :: OSI Approved :: GNU GPL v2',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Operating System :: OS Independent',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 2',
         'Topic :: Scientific/Engineering :: GIS',
-    ],
+    ]
 )
