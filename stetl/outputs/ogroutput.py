@@ -27,7 +27,7 @@ class Ogr2OgrOutput(Output):
         # the same base name
         self.gfs_file = self.cfg.get('gfs_file')
         self.lco = self.cfg.get('lco')
-        self.ogr2ogr_cmd = self.cfg.get('ogr2ogr_cmd')
+        self.ogr2ogr_cmd = self.cfg.get('ogr2ogr_cmd').replace('\\\n', ' ').replace('\n', ' ')
         self.first_run = True
 
     def save_doc(self, packet, file_path):
