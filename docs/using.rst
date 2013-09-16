@@ -15,7 +15,7 @@ that are connected as a `processing chain`. A bit like in electrical engineering
 through several filters, that each modify the current. In our case the current is geospatial information.
 
 The particular components (inputs, filters, outputs) and their interconnection
-is specified in a Stetl config file. The file format follows the python `.ini file-format`.
+are specified in a Stetl config file. The file format follows the python `.ini file-format`.
 To illustrate let's look at the example `2_xslt <https://github.com/justb4/stetl/tree/master/examples/basics/2_xslt>`_.
 This example takes an input .xml file and transforms this file to a valid GML file. The Stetl config file looks as follows. ::
 
@@ -107,6 +107,31 @@ Note the symbolic input, xsl and output files. We can now perform this ETL using
 	stetl -c etl.cfg -a "in_xml=input/cities.xml in_xsl=cities2gml.xsl out_xml=output/gmlcities.gml".
 
 This makes an ETL chain highly reusable.
+
+Connection Compatibility
+------------------------
+
+Components typically pass data to a next Component.
+A Filter component both consumes and produces data, Inputs produce data and
+Outputs consume data.
+
+Data and status flows as :class:`stetl.packet.Packet`s. The type of the data in these Packets need
+to be compatible. Stetl does not define one single data structure, but leaves this to the Components themselves.
+For XML-based data the `etree_doc`, a complete DOM-document, is used by many components, but also ordinary strings.
+Stetl will check if inputs and outputs for connected Components are compatible.
+
+The following data types are currently symbolically defined: ::
+
+	'xml_line_stream', 'etree_doc', 'etree_element_stream', 'etree_feature_array', 'xml_doc_as_string', 'string', 'any'
+
+Many components, in particular Filters are able to transform one data type to another type.
+For example the `XmlElementStreamerFileInput` can produce an
+`etree_element_stream`, a subsequent `XmlAssembler` can create small in-memory `etree_doc` s that
+can be fed into an `XsltFilter`, which outputs a transformed `etree_doc`.
+
+
+
+
 
 
 

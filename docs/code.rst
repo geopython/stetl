@@ -114,6 +114,26 @@ Components: Outputs
    :members:
    :show-inheritance:
 
+.. automodule:: stetl.outputs.standardoutput
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.outputs.ogroutput
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.outputs.dboutput
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.outputs.wfsoutput
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.outputs.deegreeoutput
+   :members:
+   :show-inheritance:
+
 
 
 
