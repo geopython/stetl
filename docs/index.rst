@@ -25,6 +25,7 @@ Contents:
    intro.rst
    install.rst
    background.rst
+   using.rst
    code.rst
    contact.rst
    links.rst

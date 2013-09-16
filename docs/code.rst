@@ -6,7 +6,12 @@ Below is the API documention for the the Stetl Python code.
 Main Entry Points
 -----------------
 
-There are two main entry points through which Stetl can be called.
+There are several entry points through which Stetl can be called.
+The most common is to use the commandline script `bin\stetl`. This command should
+be available after doing an install.
+
+In some contexts like integrations
+you may want to call Stetl via Python. The entries are then.
 
 .. automodule:: stetl.main
    :members:
