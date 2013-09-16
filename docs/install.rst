@@ -4,7 +4,7 @@ Installation
 ============
 
 Easiest is to first install the Stetl-dependencies (see below) and then
-install and maintain Stetl on your system as a Python package. ::
+install and maintain Stetl on your system as a Python package (pip is preferred). ::
 
     (sudo) pip install stetl
     or
@@ -20,6 +20,8 @@ and try the examples first. This should work on Linuxes and Mac OSX.
 Windows installation may be more involved depending on your local Python setup. Platform-specific
 installations below.
 
+You may also want to download the complete .tar.gz distro from PyPi:
+https://pypi.python.org/pypi/Stetl . This includes the examples and tests.
 
 Dependencies
 ------------
@@ -100,8 +102,23 @@ See http://www.archaeogeek.com/portable-gis.html for details.
 Test Installation
 -----------------
 
-cd examples/basics
-./runall.sh
+If you installed via Python 'pip' you can check if you run the latest version ::
+
+    stetl -h
+
+You should get meaningful output like ::
+
+	2013-09-16 18:25:12,093 util INFO running with lxml.etree, good!
+	2013-09-16 18:25:12,100 util INFO running with cStringIO, fabulous!
+	2013-09-16 18:25:12,122 main INFO Stetl version = 1.0.3
+	usage: stetl [-h] -c  CONFIG_FILE [-s  CONFIG_SECTION] [-a  CONFIG_ARGS]
+
+Especially check the Stetl version number.
+
+Try running the examples when running with a downloaded distro. ::
+
+	cd examples/basics
+	./runall.sh
 
 Look for any error messages in your output.
 
