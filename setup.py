@@ -51,7 +51,7 @@ setup(
     maintainer_email='justb4@gmail.com',
     url='http://github.com/justb4/stetl',
     long_description=readme + "\n" + changes + "\n" + credits,
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests']),
     namespace_packages=['stetl'],
     include_package_data=True,
     package_data={'': ['*.cfg','*.xml','*.gml']},

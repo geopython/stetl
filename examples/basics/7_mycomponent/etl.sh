@@ -5,5 +5,8 @@
 # Shortcut to call Stetl main.py with etl config.
 #
 
-stetl  -c etl.cfg
+# Usually requried in order to have Python find your package
+PYTHONPATH=.:$PYTHONPATH
+
+stetl -c etl.cfg
 

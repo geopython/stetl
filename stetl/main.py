@@ -7,11 +7,13 @@
 #
 from etl import ETL
 from util import Util
+from version import __version__
 import argparse #apt-get install python-argparse
 
 log = Util.get_log('main')
 
 def parse_args():
+    log.info("Stetl version = %s" % __version__)
 
     argparser = argparse.ArgumentParser(description='Invoke Stetl')
     argparser.add_argument('-c ', '--config', type=str, help='ETL config file in .ini format', dest='config_file',
@@ -23,6 +25,7 @@ def parse_args():
     argparser.add_argument('-a ', '--args', type=str,
                            help='Arguments to be substituted for {argN}s in config file, as "arg1=foo arg2=bar" etc',
                            dest='config_args', required=False)
+
     args = argparser.parse_args()
 
     if args.config_args:
