@@ -115,7 +115,7 @@ Components typically pass data to a next Component.
 A Filter component both consumes and produces data, Inputs produce data and
 Outputs consume data.
 
-Data and status flows as :class:`stetl.packet.Packet`s. The type of the data in these Packets need
+Data and status flows as :class:`stetl.packet.Packet`. The type of the data in these Packets need
 to be compatible. Stetl does not define one single data structure, but leaves this to the Components themselves.
 For XML-based data the `etree_doc`, a complete DOM-document, is used by many components, but also ordinary strings.
 Stetl will check if inputs and outputs for connected Components are compatible.
