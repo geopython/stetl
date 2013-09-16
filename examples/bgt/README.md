@@ -1,2 +1,4 @@
-This is a trivial example: transforming Dutch topo-data (BGT) to a GML feature collection.
+In this example Dutch large-scale topo-data (BGT) to a flattened GML feature collection.
+Needs some finalization.
+
 
