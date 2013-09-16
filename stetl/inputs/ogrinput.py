@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Input classes for ETL.
+# Input classes for ETL via GDAL OGR.
 #
 # Author: Just van den Broecke
 #
@@ -14,6 +14,10 @@ log = Util.get_log('ogrinput')
 
 
 class OgrPostgisInput(Input):
+    """
+     Input from PostGIS via ogr2ogr command.
+    """
+
     # TODO make this template configurable so we can have generic ogr2ogr input....
     pg_conn_tmpl = "PG:host=%s dbname=%s active_schema=%s user=%s password=%s port=%s"
     cmd_tmpl = 'ogr2ogr|-t_srs|%s|-s_srs|%s|-f|GML|%s|-dsco|FORMAT=%s|-lco|DIM=%s|%s|-SQL|%s|-nln|%s|%s'

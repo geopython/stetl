@@ -11,8 +11,10 @@ from stetl.packet import FORMAT
 
 log = Util.get_log('xmlassembler')
 
-# Split a stream of text XML elements into documents
 class XmlAssembler(Filter):
+    """
+    Split a stream of text XML elements into documents
+    """
     xpath_base = "//*[local-name() = '%s']"
 
     # Constructor

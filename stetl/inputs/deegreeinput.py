@@ -15,8 +15,11 @@ from stetl.packet import FORMAT
 
 log = Util.get_log('deegreeinput')
 
-# Read features from deegree Blobstore DB.
 class DeegreeBlobstoreInput(Input):
+    """
+    Read features from deegree Blobstore DB into an etree doc.
+    """
+
     def __init__(self, configdict, section):
         Input.__init__(self, configdict, section, produces=FORMAT.etree_doc)
         self.max_features_per_doc = self.cfg.get_int('max_features_per_doc', 10000)

@@ -12,8 +12,11 @@ import httplib
 
 log = Util.get_log('wfsoutput')
 
-# Insert features via WFS-T (WFS Transaction) OGC protocol
 class WFSTOutput(Output):
+    """
+    Insert features via WFS-T (WFS Transaction) OGC protocol from an etree doc.
+    """
+
     wfst_req = '''<?xml version="1.0" encoding="UTF-8"?>
 <wfs:Transaction version="1.1.0" service="WFS"
                  xmlns:wfs="http://www.opengis.net/wfs"

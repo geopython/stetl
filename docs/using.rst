@@ -58,7 +58,7 @@ Suppose we want to convert the resulting GML to an ESRI Shapefile. As we cannot 
 file, we need to combine XSLT and `ogr2ogr`. See example
 `3_shape <https://github.com/justb4/stetl/tree/master/examples/basics/3_shape>`_. Now we replace the output
 by using `outputs.ogroutput.Ogr2OgrOutput`, which can execute any `ogr2ogr` command, converting
- whatever it gets as input from the previous Filter in the Chain. ::
+whatever it gets as input from the previous Filter in the Chain. ::
 
 	[etl]
 	chains = input_xml_file|transformer_xslt|output_ogr_shape

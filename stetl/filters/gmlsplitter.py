@@ -12,11 +12,12 @@ from stetl.packet import FORMAT
 
 log = Util.get_log('gmlsplitter')
 
-# Split a stream of text XML lines into documents
-# DEPRECATED: use XmlAssembler instead!!
-# TODO phase out
 class GmlSplitter(Filter):
-    # Constructor
+    """
+    Split a stream of text XML lines into documents
+    DEPRECATED: use XmlAssembler instead!!
+    TODO phase out
+    """
     def __init__(self, configdict, section='gml_splitter'):
         Filter.__init__(self, configdict, section, consumes=FORMAT.xml_line_stream, produces=FORMAT.etree_doc)
 

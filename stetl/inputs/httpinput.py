@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 #
-# Input classes for ETL.
+# Input classes for ETL via HTTP.
 #
 # Author: Just van den Broecke
 #
 from stetl.input import Input
-from stetl.util import Util, etree
+from stetl.util import Util
 from stetl.packet import FORMAT
 import urllib
 import urllib2

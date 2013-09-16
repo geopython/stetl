@@ -14,9 +14,11 @@ from stetl.packet import FORMAT
 
 log = Util.get_log('ogroutput')
 
-# Output from GML etree doc to any OGR2OGR output
-# using the GDAL/OGR ogr2ogr command
 class Ogr2OgrOutput(Output):
+    """
+    Output from GML etree doc to any OGR2OGR output using the GDAL/OGR ogr2ogr command
+    """
+
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)
         self.temp_file = self.cfg.get('temp_file')

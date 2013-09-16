@@ -12,8 +12,11 @@ import os
 
 log = Util.get_log('fileoutput')
 
-# Pretty print XML to file
 class FileOutput(Output):
+    """
+    Pretty print XML to file from an etree doc.
+    """
+
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)
         log.info("working dir %s" % os.getcwd())
@@ -33,8 +36,10 @@ class FileOutput(Output):
         log.info("written to %s" % file_path)
         return packet
 
-# Pretty print XML to multiple files
 class MultiFileOutput(FileOutput):
+    """
+    Pretty print XML to multiple files from subsequent etree docs.
+    """
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)
         self.file_num = 1

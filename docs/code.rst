@@ -50,14 +50,69 @@ the subpackages inputs, filters, and outputs.
 
 .. automodule:: stetl.input
    :members:
+   :show-inheritance:
 
 .. automodule:: stetl.output
    :members:
+   :show-inheritance:
 
 .. automodule:: stetl.filter
    :members:
+   :show-inheritance:
 
 
+Components: Inputs
+------------------
+
+.. automodule:: stetl.inputs.fileinput
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.inputs.httpinput
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.inputs.ogrinput
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.inputs.deegreeinput
+   :members:
+   :show-inheritance:
+
+Components: Filters
+-------------------
+
+.. automodule:: stetl.filters.xsltfilter
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.filters.xmlassembler
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.filters.xmlvalidator
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.filters.stringfilter
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.filters.gmlfeatureextractor
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.filters.gmlsplitter
+   :members:
+   :show-inheritance:
+
+Components: Outputs
+-------------------
+
+.. automodule:: stetl.outputs.fileoutput
+   :members:
+   :show-inheritance:
 
 
 

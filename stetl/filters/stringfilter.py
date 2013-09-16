@@ -10,8 +10,11 @@ from stetl.packet import FORMAT
 
 log = Util.get_log("stringfilter")
 
-# Base class for any string filtering
 class StringFilter(Filter):
+    """
+    Base class for any string filtering
+    """
+
     # Constructor
     def __init__(self, configdict, section, consumes, produces):
         Filter.__init__(self, configdict, section, consumes, produces)

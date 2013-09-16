@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Input classes for ETL.
+# Input classes for ETL, Files.
 #
 # Author: Just van den Broecke
 #
@@ -10,9 +10,11 @@ from stetl.packet import FORMAT
 
 log = Util.get_log('fileinput')
 
-# Abstract base class for specific FileInputs
 class FileInput(Input):
-    # Constructor
+    """
+    Abstract base class for specific FileInputs.
+    """
+
     def __init__(self, configdict, section, produces):
         Input.__init__(self, configdict, section, produces)
 
@@ -29,12 +31,17 @@ class FileInput(Input):
         self.file_list = Util.make_file_list(self.file_path, None, self.filename_pattern, self.depth_search)
         log.info("file_list=%s" % str(self.file_list))
 
-    # Override in subclass
     def read(self, packet):
+        """
+        Override in subclass.
+        """
         pass
 
-# Returns file as String
 class StringFileInput(FileInput):
+    """
+    Reads and produces file as String.
+    """
+
     # Constructor
     def __init__(self, configdict, section):
         FileInput.__init__(self, configdict, section, produces=FORMAT.string)
@@ -80,8 +87,12 @@ class StringFileInput(FileInput):
         packet.data = file_content
         return packet
 
-# Parses XML files into etree docs
+
 class XmlFileInput(FileInput):
+    """
+    Parses XML files into etree docs (do not use for large files!).
+    """
+
     # Constructor
     def __init__(self, configdict, section):
         FileInput.__init__(self, configdict, section, produces=FORMAT.etree_doc)
@@ -108,10 +119,14 @@ class XmlFileInput(FileInput):
         self.file_list_done.append(file_path)
         return packet
 
-# Streams lines from an XML file(s)
-# NB assumed is that lines in the file have newlines !!
-# NB: better is to use XmlElementStreamerFileInput for GML features
+
 class XmlLineStreamerFileInput(FileInput):
+    """
+    DEPRECATED Streams lines from an XML file(s)
+    NB assumed is that lines in the file have newlines !!
+    DEPRECATED better is to use XmlElementStreamerFileInput for GML features
+    """
+
     # Constructor
     def __init__(self, configdict, section):
         FileInput.__init__(self, configdict, section, produces=FORMAT.xml_line_stream)
@@ -158,9 +173,12 @@ class XmlLineStreamerFileInput(FileInput):
         packet.data = line.decode('utf-8')
         return packet
 
-# Extracts XML elements from a file, outputs each feature element in Packet
-# Parsing is streaming (no internal DOM buildup) so any file size can be handled.
 class XmlElementStreamerFileInput(FileInput):
+    """
+    Extracts XML elements from a file, outputs each feature element in Packet
+    Parsing is streaming (no internal DOM buildup) so any file size can be handled.
+    """
+
     # Constructor
     def __init__(self, configdict, section):
         FileInput.__init__(self, configdict, section, produces=FORMAT.etree_element_stream)

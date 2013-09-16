@@ -10,8 +10,11 @@ from stetl.packet import FORMAT
 
 log = Util.get_log('standardoutput')
 
-# Pretty print XML to standard output
+#
 class StandardOutput(Output):
+    """
+    Print any input to standard output
+    """
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.any)
 
@@ -23,8 +26,10 @@ class StandardOutput(Output):
         print(str(packet.data))
         return packet
 
-# Pretty print XML to standard output
 class StandardXmlOutput(Output):
+    """
+    Pretty print XML from etree doc to standard output
+    """
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)
 

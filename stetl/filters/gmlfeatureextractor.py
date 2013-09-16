@@ -11,8 +11,12 @@ from stetl.packet import FORMAT
 
 log = Util.get_log('gmlfeatureextractor')
 
-# Extract arrays of GML features etree elements from etree docs
+
 class GmlFeatureExtractor(Filter):
+    """
+    Extract arrays of GML features etree elements from etree docs
+    """
+
     # XPATH Query base for extracting features by (non-namespaced thus local-name) tagname
     xpath_base = "//*[local-name() = '%s']"
 

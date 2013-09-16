@@ -13,6 +13,10 @@ log = Util.get_log("xsltfilter")
 
 
 class XsltFilter(Filter):
+    """
+    Invokes XSLT on an etree doc.
+    """
+
     # Constructor
     def __init__(self, configdict, section):
         Filter.__init__(self, configdict, section, consumes=FORMAT.etree_doc, produces=FORMAT.etree_doc)

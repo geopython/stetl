@@ -15,8 +15,10 @@ import os
 
 log = Util.get_log('deegreeoutput')
 
-# Insert features into deegree Blobstore
 class DeegreeBlobstoreOutput(Output):
+    """
+    Insert features into deegree Blobstore from an etree doc.
+    """
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)
         self.overwrite = self.cfg.get_bool('overwrite')
@@ -128,8 +130,11 @@ class DeegreeBlobstoreOutput(Output):
         log.info("inserted %s features" % count)
         return packet
 
-# Insert features via deegree FSLoader
+#
 class DeegreeFSLoaderOutput(Output):
+    """
+    Insert features via deegree using deegree's FSLoader tool from an etree doc.
+    """
     # d3toolbox FeatureStoreLoader -action insert -dataset ${DATASET} -format ${GML_VERSION} -fsconfig ${1} -idgen ${IDGEN_MODE} -workspace ${WORKSPACE}
 
     cmd_tmpl = '%s|FeatureStoreLoader|-action|insert|-dataset|%s|-format|%s|-fsconfig|%s|-idgen|%s|-workspace|%s'

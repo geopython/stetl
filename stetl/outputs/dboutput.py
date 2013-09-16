@@ -11,18 +11,25 @@ from stetl.postgis import PostGIS
 
 log = Util.get_log('dboutput')
 
-# Output to any database (abstract base class)
+
 class DbOutput(Output):
+    """
+    Output to any database (abstract base class).
+    """
+
     def __init__(self, configdict, section, consumes):
         Output.__init__(self, configdict, section, consumes)
 
     def write(self, packet):
         return packet
 
-# Output to PostgreSQL database
-# Input is an SQL string
-# Output by executing input SQL string
 class PostgresDbOutput(DbOutput):
+    """
+    Output to PostgreSQL database.
+    Input is an SQL string.
+    Output by executing input SQL string.
+    """
+
     def __init__(self, configdict, section):
         DbOutput.__init__(self, configdict, section, consumes=FORMAT.string)
 
