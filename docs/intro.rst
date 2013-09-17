@@ -19,17 +19,18 @@ Stetl basically glues together existing parsing and transformation tools like `G
 `XSLT <http://en.wikipedia.org/wiki/XSLT>`_. By using native tools like `libxml2` and `libxslt` (via `Python lxml <http://lxml.de>`_)
 Stetl is speed-optimized.
 
-Stetl has (currently) no GUI. There are off course existing Open Source ETL tools like GeoKettle and Talend
-Geospatial with a GUI, but some of us would like to stay close to the commandline, remain Pythonic and
+Stetl has (currently) no GUI. There are powerful Open Source ETL tools like `GeoKettle <http://www.spatialytics.org/projects/geokettle>`_
+and Talend Geospatial with a GUI. Check these out. But some of us would like to stay close to the commandline, be Pythonic and
 reuse existing tools 'close to the iron'.
 
 So why en when to use Stetl.
 
 * when ogr2ogr or XSLT alone cannot do the job
-* when GeoKettle/Talend is too heavy/complex
-* when FME is too expensive, too closed and/or too slow ;-)
 * when having to deal with complex GML as source or destination
+* when you want to use simple command-line tooling or (Python) program integrations
+* when you need speed
+* when you are a `Pythonista`
 
-So Stetl is in particularly useful for INSPIRE-related transformations and other complex GML-related ETL.
+Stetl is in particularly useful for INSPIRE-related transformations and other complex GML-related ETL.
 
 Stetl is presented at FOSS4G 2013 in Nottingham, see http://2013.foss4g.org/conf/programme/presentations/156
