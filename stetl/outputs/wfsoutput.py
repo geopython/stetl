@@ -15,6 +15,8 @@ log = Util.get_log('wfsoutput')
 class WFSTOutput(Output):
     """
     Insert features via WFS-T (WFS Transaction) OGC protocol from an etree doc.
+
+    consumes=FORMAT.etree_doc
     """
 
     wfst_req = '''<?xml version="1.0" encoding="UTF-8"?>

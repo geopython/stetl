@@ -18,6 +18,8 @@ log = Util.get_log('deegreeoutput')
 class DeegreeBlobstoreOutput(Output):
     """
     Insert features into deegree Blobstore from an etree doc.
+
+    consumes=FORMAT.etree_doc
     """
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)

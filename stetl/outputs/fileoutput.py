@@ -15,6 +15,8 @@ log = Util.get_log('fileoutput')
 class FileOutput(Output):
     """
     Pretty print XML to file from an etree doc.
+
+    consumes=FORMAT.etree_doc
     """
 
     def __init__(self, configdict, section):
@@ -39,6 +41,8 @@ class FileOutput(Output):
 class MultiFileOutput(FileOutput):
     """
     Pretty print XML to multiple files from subsequent etree docs.
+
+    consumes=FORMAT.etree_doc
     """
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)

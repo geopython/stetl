@@ -28,6 +28,8 @@ class PostgresDbOutput(DbOutput):
     Output to PostgreSQL database.
     Input is an SQL string.
     Output by executing input SQL string.
+
+    consumes=FORMAT.string
     """
 
     def __init__(self, configdict, section):

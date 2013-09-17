@@ -17,6 +17,8 @@ log = Util.get_log('httpinput')
 class HttpInput(Input):
     """
      Input via HTTP protocol.
+
+     produces=FORMAT.any
     """
 
     def __init__(self, configdict, section, produces=FORMAT.any):

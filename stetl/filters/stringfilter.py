@@ -31,9 +31,10 @@ class StringFilter(Filter):
 class StringSubstitutionFilter(StringFilter):
     """
     String filtering using Python advanced String formatting.
-    consumes=FORMAT.string, produces=FORMAT.string
     String should have substitutable values like {schema} {foo}
     format_args should be of the form format_args = schema:test foo:bar ...
+
+    consumes=FORMAT.string, produces=FORMAT.string
     """
 
     # Constructor

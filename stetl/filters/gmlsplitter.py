@@ -15,9 +15,10 @@ log = Util.get_log('gmlsplitter')
 class GmlSplitter(Filter):
     """
     Split a stream of text XML lines into documents
-    consumes=FORMAT.xml_line_stream, produces=FORMAT.etree_doc
-    DEPRECATED: use XmlAssembler instead!!
+    DEPRECATED: use the more robust XmlElementStreamerFileInput+XmlAssembler instead!!!
     TODO phase out
+
+    consumes=FORMAT.xml_line_stream, produces=FORMAT.etree_doc
     """
     def __init__(self, configdict, section='gml_splitter'):
         Filter.__init__(self, configdict, section, consumes=FORMAT.xml_line_stream, produces=FORMAT.etree_doc)

@@ -16,6 +16,9 @@ log = Util.get_log('ogrinput')
 class OgrPostgisInput(Input):
     """
      Input from PostGIS via ogr2ogr command.
+     TODO: look to use Fiona or direct OGR via Python.
+
+     produces=FORMAT.xml_line_stream
     """
 
     # TODO make this template configurable so we can have generic ogr2ogr input....

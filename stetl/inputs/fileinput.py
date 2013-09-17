@@ -40,6 +40,8 @@ class FileInput(Input):
 class StringFileInput(FileInput):
     """
     Reads and produces file as String.
+
+    produces=FORMAT.string
     """
 
     # Constructor
@@ -91,6 +93,8 @@ class StringFileInput(FileInput):
 class XmlFileInput(FileInput):
     """
     Parses XML files into etree docs (do not use for large files!).
+
+    produces=FORMAT.etree_doc
     """
 
     # Constructor
@@ -124,7 +128,9 @@ class XmlLineStreamerFileInput(FileInput):
     """
     DEPRECATED Streams lines from an XML file(s)
     NB assumed is that lines in the file have newlines !!
-    DEPRECATED better is to use XmlElementStreamerFileInput for GML features
+    DEPRECATED better is to use XmlElementStreamerFileInput for GML features.
+
+    produces=FORMAT.xml_line_stream
     """
 
     # Constructor
@@ -177,6 +183,8 @@ class XmlElementStreamerFileInput(FileInput):
     """
     Extracts XML elements from a file, outputs each feature element in Packet
     Parsing is streaming (no internal DOM buildup) so any file size can be handled.
+
+    produces=FORMAT.etree_element_stream
     """
 
     # Constructor

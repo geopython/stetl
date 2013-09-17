@@ -13,7 +13,9 @@ log = Util.get_log('standardoutput')
 #
 class StandardOutput(Output):
     """
-    Print any input to standard output
+    Print any input to standard output.
+
+    consumes=FORMAT.any
     """
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.any)
@@ -28,7 +30,9 @@ class StandardOutput(Output):
 
 class StandardXmlOutput(Output):
     """
-    Pretty print XML from etree doc to standard output
+    Pretty print XML from etree doc to standard output.
+
+    consumes=FORMAT.etree_doc
     """
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)

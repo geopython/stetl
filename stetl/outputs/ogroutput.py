@@ -17,6 +17,8 @@ log = Util.get_log('ogroutput')
 class Ogr2OgrOutput(Output):
     """
     Output from GML etree doc to any OGR2OGR output using the GDAL/OGR ogr2ogr command
+
+    consumes=FORMAT.etree_doc
     """
 
     def __init__(self, configdict, section):

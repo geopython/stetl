@@ -15,6 +15,7 @@ log = Util.get_log('gmlfeatureextractor')
 class GmlFeatureExtractor(Filter):
     """
     Extract arrays of GML features etree elements from etree docs.
+
     consumes=FORMAT.etree_doc, produces=FORMAT.etree_feature_array
     """
 
