@@ -15,6 +15,7 @@ log = Util.get_log('gmlsplitter')
 class GmlSplitter(Filter):
     """
     Split a stream of text XML lines into documents
+    consumes=FORMAT.xml_line_stream, produces=FORMAT.etree_doc
     DEPRECATED: use XmlAssembler instead!!
     TODO phase out
     """

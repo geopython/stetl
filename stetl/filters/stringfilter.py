@@ -27,10 +27,15 @@ class StringFilter(Filter):
     def filter_string(self, packet):
         pass
 
-# String filtering using Python advanced String formatting
-# String should have substitutable values like {schema} {foo}
-# format_args should be of the form format_args = schema:test foo:bar ...
+
 class StringSubstitutionFilter(StringFilter):
+    """
+    String filtering using Python advanced String formatting.
+    consumes=FORMAT.string, produces=FORMAT.string
+    String should have substitutable values like {schema} {foo}
+    format_args should be of the form format_args = schema:test foo:bar ...
+    """
+
     # Constructor
     def __init__(self, configdict, section):
         StringFilter.__init__(self, configdict, section, consumes=FORMAT.string, produces=FORMAT.string)

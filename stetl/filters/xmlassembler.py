@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Splits stream of GML lines into etree docs.
+# Splits stream of XML elements into etree docs.
 #
 # Author: Just van den Broecke
 #
@@ -13,7 +13,10 @@ log = Util.get_log('xmlassembler')
 
 class XmlAssembler(Filter):
     """
-    Split a stream of text XML elements into documents
+    Split a stream of etree DOM XML elements (usually Features) into etree DOM docs.
+    Consumes and buffers elements until max_elements reached, will then produce an etree doc.
+
+    consumes=FORMAT.etree_element_stream, produces=FORMAT.etree_doc
     """
     xpath_base = "//*[local-name() = '%s']"
 

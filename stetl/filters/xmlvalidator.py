@@ -18,7 +18,9 @@ log = Util.get_log("xmlvalidator")
 
 class XmlSchemaValidator(Filter):
     """
-    Validates an etree doc.
+    Validates an etree doc and prints result to log.
+
+    consumes=FORMAT.etree_doc, produces=FORMAT.etree_doc
     """
 
     # Constructor

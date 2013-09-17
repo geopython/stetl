@@ -14,7 +14,9 @@ log = Util.get_log("xsltfilter")
 
 class XsltFilter(Filter):
     """
-    Invokes XSLT on an etree doc.
+    Invokes XSLT processor (via lxml) for given XSLT script on an etree doc.
+
+    consumes=FORMAT.etree_doc, produces=FORMAT.etree_doc
     """
 
     # Constructor
