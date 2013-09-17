@@ -10,14 +10,18 @@ Read a 5-minute introduction here: http://www.slideshare.net/justb4/5-minute-int
 here: http://www.slideshare.net/justb4/stetl-bolsena2013800v1.
 
 Stetl originated in the `INSPIRE-FOSS project <http//www.inspire-foss.org>`_
-and was originally created by Just van den Broecke. Since Stetl evolved into a wider use like
+and was originally created by `Just van den Broecke <http://nl.linkedin.com/in/justb4>`_.
+Since Stetl evolved into a wider use like
 transforming Dutch GML-based datasets such as Top10NL, IMGEO/BGT (Large Scale Topography)
-and IMKAD/BRK (Kadastral Data) it has now a repository of its own.
+and IMKAD/BRK (Kadastral Data), it has now a repository of its own at `GitHub <https://github.com/justb4/stetl>`_ .
 
-Stetl basically glues together existing parsing and transformation tools like `GDAL/OGR (ogr2ogr) <http://gdal.org>`_ and XSLT.
-By using native tools like `libxml2` and `libxslt` (via `Python lxml <http://lxml.de>`_) Stetl is speed-optimized.
-There are off course existing Open Source ETL tools like GeoKettle and Talend Geospatial, but
-in many cases a simpler/bulk ETL can do the job.
+Stetl basically glues together existing parsing and transformation tools like `GDAL/OGR (ogr2ogr) <http://gdal.org>`_ and
+`XSLT <http://en.wikipedia.org/wiki/XSLT>`_. By using native tools like `libxml2` and `libxslt` (via `Python lxml <http://lxml.de>`_)
+Stetl is speed-optimized.
+
+Stetl has (currently) no GUI. There are off course existing Open Source ETL tools like GeoKettle and Talend
+Geospatial with a GUI, but some of us would like to stay close to the commandline, remain Pythonic and
+reuse existing tools 'close to the iron'.
 
 So why en when to use Stetl.
 
@@ -27,3 +31,5 @@ So why en when to use Stetl.
 * when having to deal with complex GML as source or destination
 
 So Stetl is in particularly useful for INSPIRE-related transformations and other complex GML-related ETL.
+
+Stetl is presented at FOSS4G 2013 in Nottingham, see http://2013.foss4g.org/conf/programme/presentations/156
