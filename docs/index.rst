@@ -14,7 +14,7 @@ Stetl is written in Python and in particular suited for processing GML.
 This is the documentation of the Stetl toolkit.
 The code is on GitHub: https://github.com/justb4/stetl.
 
-See an `introductory Stetl presentation at Slideshare <http://www.slideshare.net/justb4/stetl-bolsena2013800v1>`_.
+See an `introductory Stetl presentation at Slideshare <http://www.slideshare.net/justb4/stetl-foss4g20131024v1>`_.
 
 
 Contents:
