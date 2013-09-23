@@ -1,9 +1,21 @@
 Changes
 =======
 
-Next (1.0.0)
-------------
+v1.0.4 - 23 sept 2013
+---------------------
+
+- more documention
+- Dutch BGT (Basis Registratie Grootschalige Topografie) example
+- Ordnance Survey Mastermap example
+- strip XML namespaces option to XmlElementStreamerFileInput
+
+v1.0.1 v1.0.3 - aug/sept 2013
+-----------------------------
+Minor changes to enable distribution.
+
+
+v1.0.0 - june 2013
+------------------
 
 - First version
 - Add to Python Package Index (#3).
-- Generic ogr Input Class (#4).
