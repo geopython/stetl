@@ -136,6 +136,8 @@ class DeegreeBlobstoreOutput(Output):
 class DeegreeFSLoaderOutput(Output):
     """
     Insert features via deegree using deegree's FSLoader tool from an etree doc.
+
+    consumes=FORMAT.etree_doc
     """
     # d3toolbox FeatureStoreLoader -action insert -dataset ${DATASET} -format ${GML_VERSION} -fsconfig ${1} -idgen ${IDGEN_MODE} -workspace ${WORKSPACE}
 

@@ -181,8 +181,9 @@ class XmlLineStreamerFileInput(FileInput):
 
 class XmlElementStreamerFileInput(FileInput):
     """
-    Extracts XML elements from a file, outputs each feature element in Packet
+    Extracts XML elements from a file, outputs each feature element in Packet.
     Parsing is streaming (no internal DOM buildup) so any file size can be handled.
+    Use this class for your big GML files!
 
     produces=FORMAT.etree_element_stream
     """
@@ -192,6 +193,7 @@ class XmlElementStreamerFileInput(FileInput):
         FileInput.__init__(self, configdict, section, produces=FORMAT.etree_element_stream)
         self.element_tags = self.cfg.get('element_tags').split(',')
         self.file_list_done = []
+        self.strip_namespaces = self.cfg.get('strip_namespaces', False)
         self.context = None
         self.root = None
         self.cur_file_path = None
@@ -256,5 +258,8 @@ class XmlElementStreamerFileInput(FileInput):
                 packet.data = elem
                 self.elem_count += 1
                 self.root.remove(elem)
+
+                if self.strip_namespaces:
+                    packet.data = Util.stripNamespaces(elem).getroot()
 
         return packet

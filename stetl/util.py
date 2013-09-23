@@ -12,6 +12,32 @@ logging.basicConfig(level=logging.INFO,
 
 # Static utility methods
 class Util:
+    # http://wiki.tei-c.org/index.php/Remove-Namespaces.xsl
+    xslt_strip_ns = '''<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="xml" indent="no"/>
+
+    <xsl:template match="/|comment()|processing-instruction()">
+        <xsl:copy>
+          <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="*">
+        <xsl:element name="{local-name()}">
+          <xsl:apply-templates select="@*|node()"/>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="@*">
+        <xsl:attribute name="{local-name()}">
+          <xsl:value-of select="."/>
+        </xsl:attribute>
+    </xsl:template>
+    </xsl:stylesheet>
+    '''
+
+    xslt_strip_ns_doc = False
+
     @staticmethod
     def get_log(name):
         log = logging.getLogger(name)
@@ -72,6 +98,17 @@ class Util:
             x[1] = x[1].replace(space, ' ')
 
         return dict(dict_arr)
+
+
+    # Remove all Namespaces from an etree Node
+    # Handy for e.g. XPath expressions
+    @staticmethod
+    def stripNamespaces(node):
+        if not Util.xslt_strip_ns_doc:
+            Util.xslt_strip_ns_doc = etree.fromstring(Util.xslt_strip_ns)
+
+        transform = etree.XSLT(Util.xslt_strip_ns_doc)
+        return transform(node)
 
 
 log = Util.get_log("util")
