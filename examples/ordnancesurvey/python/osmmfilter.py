@@ -11,7 +11,7 @@ from stetl.factory import factory
 log = Util.get_log("osfilter")
 
 
-class OrdSurveyFilter(Filter):
+class OrdSurveyGmlFilter(Filter):
     # Constructor
     def __init__(self, configdict, section):
         Filter.__init__(self, configdict, section, consumes=FORMAT.etree_element_stream, produces=FORMAT.etree_element_stream)
@@ -25,6 +25,7 @@ class OrdSurveyFilter(Filter):
         if packet.data is None:
             return packet
 
-        # trivial implementation: just let preparer do the work
-        self.preparer._prepare_feat_elm(packet.data)
+        # trivial implementation: Just let Astuntech osmgml preparer do the work
+        feat_elm = packet.data[0]
+        self.preparer._prepare_feat_elm(feat_elm)
         return packet

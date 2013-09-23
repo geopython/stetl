@@ -1,5 +1,3 @@
-
-
 #!/usr/bin/python
 
 ## Copyright (c) 2011 Astun Technology
@@ -24,7 +22,7 @@
 
 """
 A collection of classes used to manipulate Ordnance Survey GB GML data,
-used with prepgml4ogr.py.
+used with prepgml4ogr.py. (But here used/called from Stetl Filter)
 """
 
 import os
