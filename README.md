@@ -3,8 +3,8 @@ geospatial data conversion. Stetl is Open Source (GNU GPL v3).
 
 The main website and documentation can be found on http://stetl.org (or http://stetl.readthedocs.org).
 Read a 5-minute introduction here: http://www.slideshare.net/justb4/5-minute-intro-to-setl and a longer presentation
-here: http://www.slideshare.net/justb4/setl-preparing-rich-gml-data-for-deegree.
-Stetl will also presented at FOSS4G 2013 in Nottingham http://2013.foss4g.org (sat sept 21).
+here: http://www.slideshare.net/justb4/stetl-foss4g20131024v1.
+Stetl was presented at FOSS4G 2013 in Nottingham http://2013.foss4g.org (sat sept 21).
 
 Stetl originated in the INSPIRE-FOSS project (www.inspire-foss.org)
 and was created by Just van den Broecke. Since Stetl evolved into a wider use like
@@ -21,7 +21,7 @@ So why en when to use Stetl.
 
 So Stetl is in particularly useful for INSPIRE-related transformations and other complex GML-related ETL.
 
-Stetl has a similar design as Spring (Java) and other modern frameworks based on IoC (Inversion of COntrol, http://en.wikipedia.org/wiki/Inversion_of_Control).
+Stetl has a similar design as Spring (Java) and other modern frameworks based on IoC (Inversion of Control, http://en.wikipedia.org/wiki/Inversion_of_Control).
 A configuration file (in Python config format) specifies your chain of ETL steps.
 This chain is formed by a series of Python modules/objects and their parameters. These are 
 symbolically specified in the config file. You just invoke etl.py the main program with a config file.
