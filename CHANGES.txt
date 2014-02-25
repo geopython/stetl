@@ -1,6 +1,11 @@
 Changes
 =======
 
+v1.0.6 - UPCOMING
+-----------------
+
+- allow spatial_extent in OGROutput Top10NL example
+
 v1.0.5 - 19 feb 2014
 --------------------
 

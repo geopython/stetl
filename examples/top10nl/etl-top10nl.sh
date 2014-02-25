@@ -19,7 +19,9 @@ gml_files=input
 # multi_opts=-fieldTypeToString~StringList
 # multi_opts=~
 
+# spatial_extent="spatial_extent=120000~450000~160000~500000"
+spatial_extent="spatial_extent="
 multi="multi_opts=-fieldTypeToString~StringList"
-python ../../stetl/main.py -c etl-top10nl.cfg -a "database=top10nl host=localhost port=5432 user=top10nl password=top10nl schema=test temp_dir=temp max_features=20 gml_files=$gml_files $multi"
+python ../../stetl/main.py -c etl-top10nl.cfg -a "database=top10nl host=localhost port=5432 user=top10nl password=top10nl schema=test temp_dir=temp max_features=20 gml_files=$gml_files $multi $spatial_extent"
 
 

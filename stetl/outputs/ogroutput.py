@@ -31,7 +31,10 @@ class Ogr2OgrOutput(Output):
         # the same base name
         self.gfs_file = self.cfg.get('gfs_file')
         self.lco = self.cfg.get('lco')
+        self.spatial_extent = self.cfg.get('spatial_extent')
         self.ogr2ogr_cmd = self.cfg.get('ogr2ogr_cmd').replace('\\\n', ' ').replace('\n', ' ')
+        if self.spatial_extent:
+            self.ogr2ogr_cmd += ' -spat ' + self.spatial_extent
         self.first_run = True
 
     def save_doc(self, packet, file_path):
