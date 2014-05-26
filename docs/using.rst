@@ -56,7 +56,7 @@ The above ETL spec can be found in the file `etl.cfg`. Now Stetl can be run, sim
 	stetl -c etl.cfg
 
 Stetl will parse `etl.cfg`, create all Components by their class name and link them in a Chain and execute
-that Chain. Offcourse this example is very trivial, as we could just call XSLT without Stetl. But it becomes interesting
+that Chain. Of course this example is very trivial, as we could just call XSLT without Stetl. But it becomes interesting
 with more complex transformations.
 
 Suppose we want to convert the resulting GML to an ESRI Shapefile. As we cannot use GDAL `ogr2ogr` on the input
@@ -138,11 +138,23 @@ Each Component will indicate the type of data it `consumes` and/or `produces`.
 Stetl will only check if these input and output-types for connecting Components are compatible
 when constructing a Chain.
 
-The following data types are currently symbolically defined in the :class:`stetl.packet.Packet` file: ::
+The following data types are currently symbolically defined in the :class:`stetl.packet.Packet` file:
 
-	'xml_line_stream', 'etree_doc', 'etree_element_stream', 'etree_feature_array', 'xml_doc_as_string', 'string', 'any'
+- ``xml_line_stream``
 
-Many components, in particular Filters are able to transform one data type to another type.
+- ``etree_doc``
+
+- ``etree_element_stream``
+
+- ``etree_feature_array``
+
+- ``xml_doc_as_string``
+
+- ``string``
+
+- ``any``
+
+Many components, in particular Filters, are able to transform one data type to another type.
 For example the `XmlElementStreamerFileInput` can produce an
 `etree_element_stream`, a subsequent `XmlAssembler` can create small in-memory `etree_doc` s that
 can be fed into an `XsltFilter`, which outputs a transformed `etree_doc`. The type `any` is a catch-all,
@@ -156,10 +168,12 @@ Usually a complete ETL will require multiple steps/commands. For example we need
 a database, maybe tables and/or making tables empty. Also we may need to do postprocessing, like
 removing duplicates in a table etc. In order to have repeatable/reusable ETL without any
 manual steps, we can specify multiple Chains within a single Stetl config.
-The syntax is via comma-separation. Chains are executed in order. We can even reuse the
+The syntax: chains are separated by commas (steps are sill separated by pipe symbols). 
+
+Chains are executed in order. We can even reuse the
 specified components from within the same file. Each will have a separate instance within a Chain.
 
-For example in the `Top10NL example <https://github.com/justb4/stetl/blob/master/examples/top10nl/etl-top10nl.cfg>`_  we see three Chains: ::
+For example in the `Top10NL example <https://github.com/justb4/stetl/blob/master/examples/top10nl/etl-top10nl.cfg>`_  we see three Chains::
 
 		[etl]
 		chains = input_sql_pre|schema_name_filter|output_postgres,
@@ -169,20 +183,3 @@ For example in the `Top10NL example <https://github.com/justb4/stetl/blob/master
 Here the Chain `input_sql_pre|schema_name_filter|output_postgres` sets up a PostgreSQL schema and
 creates tables.  `input_big_gml_files|xml_assembler|transformer_xslt|output_ogr2ogr` does the actual ETL and
 `input_sql_post|schema_name_filter|output_postgres` does some PostgreSQL postprocessing.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
