@@ -23,7 +23,7 @@ Stetl has (currently) no GUI. There are powerful Open Source ETL tools like `Geo
 and Talend Geospatial with a GUI. Check these out. But some of us would like to stay close to the commandline, be Pythonic and
 reuse existing tools 'close to the iron'.
 
-So why en when to use Stetl.
+So why and when to use Stetl:
 
 * when ogr2ogr or XSLT alone cannot do the job
 * when having to deal with complex GML as source or destination
