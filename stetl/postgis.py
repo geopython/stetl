@@ -50,11 +50,22 @@ class PostGIS:
             log.warn("cannot connect to database '%s'" % (self.config['database']))
 
 
-    def commit(self):
+    def disconnect(self):
+        self.e = None
+        try:
+            self.connection.close()
+        except (Exception), e:
+            self.e = e
+            log.error("error %s in close" % (str(e)))
+
+        return self.e
+
+    def commit(self, close=True):
         self.e = None
         try:
             self.connection.commit()
-            self.connection.close()
+            if close is True:
+                self.connection.close()
         except (Exception), e:
             self.e = e
             log.error("error %s in commit" % (str(e)))

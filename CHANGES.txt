@@ -5,6 +5,10 @@ v1.0.6 - UPCOMING
 -----------------
 
 - allow spatial_extent in OGROutput Top10NL example
+- httpinput more robust
+- Packet: new type 'record', as Python dict structure
+- httpinput: ApacheDirInput, input data from Apache index listing
+- dboutput: PostgresInsertOutput, insert single record into Postgres
 
 v1.0.5 - 19 feb 2014
 --------------------
