@@ -6,6 +6,9 @@ Background
 The text below gives some introduction to ETL, the
 rationale why Stetl was developed and where and how it attempts to fit in.
 
+Problem
+-------
+
 Data conversion combined with model and coordinate transformation
 from a source to a target datastore (files, databases) is a recurring task
 in almost every geospatial project.
@@ -19,27 +22,39 @@ effort in Europe.
 Many National Mapping and Cadastral Agencies (NMCAs) use GML-encoded datasets as their bulk
 format for download and exchange and via Web Feature Services (WFSs).
 As geospatial professionals we are often confronted with ETL-tasks involving (complex) GML
-or worse: "GML-lookalikes", which are often XML Schema's embedded with GML-namespaced elements.
+or worse: "GML-lookalikes", which are often XML Schemas embedded with GML-namespaced elements.
 
 Luckily, in many cases `GDAL/OGR <http://gdal.org>`_, the Swiss Army Knife for geo-data conversion,
 can do the job. If `"ogr2ogr" <http://www.gdal.org/ogr2ogr.html>`_ sounds like gibberish to you, check out http://gdal.org !
-But when complex, some say rich, GML Application Schema's are involved,
+But when complex, some say rich, GML Application Schemas are involved,
 data conversion can be a daunting task when GDAL/OGR alone is not sufficient.
 Firstly, often complex data model transformations have to be applied.
-In addition we may be confronted with the bulkiness of
-GML: Megabyte/Gigabyte-files, deeply nested elements where the nuggets, the actual attribute values,
-reside, trees of .zip files and possibly more nasty surprises once we have unboxed a GML-delivery.
-High resource consumption in memory and CPU and long processing hours, up to complete machine-lockup, can be the
-the side-effects of naive GML-processing.
 
-Within the FOSS4G world we can resort to higher level,
+In addition we may be confronted with the bulkiness of
+GML: 
+
+- Megabyte/Gigabyte-files. 
+
+- Deeply nested elements where the nuggets, the actual attribute values,
+  reside.
+  
+- Trees of .zip files and possibly more nasty surprises once we have unboxed a GML-delivery.
+
+- High resource consumption in memory and CPU and long processing hours, up to complete machine-lockup, 
+  can be the the side-effects of naive GML-processing.
+
+
+Existing (partial) solutions
+----------------------------
+
+Within the FOSS4G world we can resort to high level,
 GUI-based, ETL-tools such as GeoKettle, Humboldt tools and Talend GeoSpatial. These are very powerful
 tools by themselves, check them out as well. Some of us, like the author, like to stay closer
-to GDAL/OGR, to XSLT for model transforms, some command line tools and some Python scripting, but without
+to GDAL/OGR and XSLT for model transforms, some command line tools and a bit of Python scripting, but without
 having to write a complete, ad-hoc ETL-program each time. This is the space where Stetl tries to fit in,
 so read on.
 
-So we already have great FOSS tools for XML/GML parsing, data-conversion and
+We already have great FOSS tools for XML/GML parsing, data-conversion and
 model-transformation like GDAL/OGR (ogr2ogr!), XSLT (Extensible
 Stylesheet Language Transformations, for transforming XML) and native XML-parsing libraries like libxml2.
 Each individual tool/library is extremely powerful and performant by itself.
@@ -51,6 +66,10 @@ XSLT (xsltproc/libxslt) to transform
 the resulting flat GML to rich INSPIRE GML. But with millions of addresses we cannot
 simply use a single GML memory datastructure (DOM) or single intermediate GML-file.
 
+
+Stetl: Python, streaming and configuration
+------------------------------------------
+
 Add Python and a configuration convention to this equation and we have
 Stetl: Streaming ETL. Stetl is a lightweight, geospatial ETL (Extract Transform Load)
 framework written in Python. ETL-processing with Stetl is driven from a configuration
@@ -59,11 +78,25 @@ is declared through which the data flows ("streams"). A module may be an input,
 filter or output module. Modules have input and output data types declared such that only
 compatible modules can be connected. However, Stetl does not define a grand internal data structure
 to which all data is mapped as many ETL-tools do. Data formats are kept close to the
-external tools that Stetl uses. Stetl comes with pre-defined modules for GML-parsing,
-XSLT processing, XSD Validation, PostGIS/OGR input and output, GML-splitting and many more.
+external tools that Stetl uses. 
+
+Stetl comes with pre-defined modules for:
+
+- GML-parsing
+
+- XSLT processing
+
+- XSD Validation
+
+- PostGIS/OGR input and output
+
+- GML-splitting
+
+- ... and many more.
+
 Stetl calls on the above tools like OGR, libxslt and libxml2 via their native interfaces.
 Stetl is even more speed-optimized as no intermediate file-storage
-is used and through other means such as native string buffers.
+is used: we use other means such as native string buffers.
 For example large XML/GML-files can be split into manageable
 documents and streamed into an XSLT filter module. Stetl-modules are off course extensible
 and can be user-defined. Reusable ETL-configurations invoked through parameterized commandline scripts
