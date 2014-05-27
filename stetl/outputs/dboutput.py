@@ -45,3 +45,49 @@ class PostgresDbOutput(DbOutput):
         log.info('executed SQL, rowcount=%d' % rowcount)
         return packet
 
+class PostgresInsertOutput(PostgresDbOutput):
+    """
+    Output by inserting single record into Postgres database.
+    Input is a record (Python dic structure).
+    Creates an INSERT for Postgres to insert single record.
+
+    consumes=FORMAT.record
+    """
+
+    def __init__(self, configdict, section):
+        DbOutput.__init__(self, configdict, section, consumes=FORMAT.record)
+        self.query = None
+        self.db = None
+        self.key = self.cfg.get('key')
+
+    def write(self, packet):
+        if packet.data is None:
+            return packet
+
+        # Connect only once to DB
+        if self.db is None:
+            self.db = PostGIS(self.cfg.get_dict())
+            self.db.connect()
+
+        # record is Python dict
+        record = packet.data
+
+        # Generate INSERT query template once
+        if self.query is None:
+            # See http://grokbase.com/t/postgresql/psycopg/12735bvkmv/insert-into-with-a-dictionary-or-generally-with-a-variable-number-of-columns
+            # e.g. INSERT INTO lml_files ("file_name", "file_data") VALUES (%s,%s)
+            self.query = "INSERT INTO %s (%s) VALUES (%s)" % (self.cfg.get('table'), ",".join(['"%s"' % k for k in record]), ",".join(["%s",]*len(record.keys())))
+            log.info('query is %s', self.query)
+
+        # Do insert with values from the record
+        self.db.execute(self.query, record.values())
+        self.db.commit(close=False)
+        log.info('committed record key=%s' % record[self.key])
+
+        if packet.is_end_of_stream() is True:
+            # Disconnect from DB when done
+            log.info('End of stream: disconnect from DB')
+            self.db.disconnect()
+            self.db = None
+
+        return packet
