@@ -60,14 +60,20 @@ class PostgresInsertOutput(PostgresDbOutput):
         self.db = None
         self.key = self.cfg.get('key')
 
+    def init(self):
+        # Connect only once to DB
+        log.info('Init: connect to DB')
+        self.db = PostGIS(self.cfg.get_dict())
+        self.db.connect()
+
+    def exit(self):
+        # Disconnect from DB when done
+        log.info('Exit: disconnect from DB')
+        self.db.disconnect()
+
     def write(self, packet):
         if packet.data is None:
             return packet
-
-        # Connect only once to DB
-        if self.db is None:
-            self.db = PostGIS(self.cfg.get_dict())
-            self.db.connect()
 
         # record is Python dict
         record = packet.data
@@ -83,11 +89,5 @@ class PostgresInsertOutput(PostgresDbOutput):
         self.db.execute(self.query, record.values())
         self.db.commit(close=False)
         log.info('committed record key=%s' % record[self.key])
-
-        if packet.is_end_of_stream() is True:
-            # Disconnect from DB when done
-            log.info('End of stream: disconnect from DB')
-            self.db.disconnect()
-            self.db = None
 
         return packet

@@ -109,18 +109,15 @@ class ApacheDirInput(HttpInput):
         if not self.url.endswith('/'):
             self.url += '/'
 
-    def list_apache_dir(self, url):
+    def init(self):
         """
         Read the list of files from the Apache index URL.
-        :param url:
-        :return array:
         """
-        log.info('Fetching file list from URL: %s ...' % url)
-        html = self.read_from_url(url)
-        file_list = self.parse_re.findall(html)
-        log.info('Found %4d file' % len(file_list) + 's' * (len(file_list) != 1))
-        return file_list
-
+        # One time: get all files from remote Apache dir
+        log.info('Init: fetching file list from URL: %s ...' % self.url)
+        html = self.read_from_url(self.url)
+        self.file_list = self.parse_re.findall(html)
+        log.info('Found %4d file' % len(self.file_list) + 's' * (len(self.file_list) != 1))
 
     def next_file(self):
         """
@@ -152,10 +149,6 @@ class ApacheDirInput(HttpInput):
         :param packet:
         :return:
         """
-        # If first time here: get all files from remote Apache dir
-        if self.file_list is None:
-            self.file_list = self.list_apache_dir(self.url)
-
         file_name = self.next_file()
 
         file_name = self.filter_file(file_name)

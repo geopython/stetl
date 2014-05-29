@@ -25,13 +25,25 @@ class Component:
 
     def process(self, packet):
         # Do something with the data
+        result = self.before_invoke(packet)
+        if result is False:
+            # Component indicates it does not want the chain to proceed
+            return packet
+
+        # Do component-specific processing, e.g. read or write or filter
         packet = self.invoke(packet)
+
+        result = self.after_invoke(packet)
+        if result is False:
+            # Component indicates it does not want the chain to proceed
+            return packet
 
         # If there is a next component, let it process
         if self.next:
             # Hand-over data (line, doc whatever) to the next component
             packet = self.next.process(packet)
 
+        result = self.after_chain_invoke(packet)
         return packet
 
     def do_init(self):
@@ -50,13 +62,40 @@ class Component:
         if self.next:
             self.next.do_exit()
 
+    def before_invoke(self, packet):
+        """
+        Called just before Component invoke.
+        """
+        return True
+
+    def after_invoke(self, packet):
+        """
+        Called right after Component invoke.
+        """
+        return True
+
+    def after_chain_invoke(self, packet):
+        """
+        Called right after entire Component Chain invoke.
+        """
+        return True
+
     def invoke(self, packet):
+        """
+        Components override for Component-specific behaviour, typically read, filter or write actions.
+        """
         return packet
 
     def init(self):
+        """
+        Allows derived Components to perform a one-time init.
+        """
         pass
 
     def exit(self):
+        """
+        Allows derived Components to perform a one-time exit/cleanup.
+        """
         pass
 
     # Check our compatibility with the next Component in the Chain

@@ -9,6 +9,7 @@ v1.0.6 - UPCOMING
 - Packet: new type 'record', as Python dict structure
 - httpinput: ApacheDirInput, input data from Apache index listing
 - dboutput: PostgresInsertOutput, insert single record into Postgres
+- component: add before_/after_invoke and after_chain_invoke() for intercepting
 
 v1.0.5 - 19 feb 2014
 --------------------
