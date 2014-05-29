@@ -48,8 +48,8 @@ class PostgresDbOutput(DbOutput):
 class PostgresInsertOutput(PostgresDbOutput):
     """
     Output by inserting single record into Postgres database.
-    Input is a record (Python dic structure).
-    Creates an INSERT for Postgres to insert single record.
+    Input is a record (Python dic structure) or a Python list of dicts (records).
+    Creates an INSERT for Postgres to insert each single record.
 
     consumes=FORMAT.record
     """
@@ -75,19 +75,38 @@ class PostgresInsertOutput(PostgresDbOutput):
         if packet.data is None:
             return packet
 
-        # record is Python dict
+        # record is Python dict or list of Python dict (multiple records)
         record = packet.data
 
         # Generate INSERT query template once
+        first_record = record
+        if type(record) is list and len(record) > 0:
+            first_record = record[0]
+
         if self.query is None:
+            # We assume that all records do the same INSERT key/values
             # See http://grokbase.com/t/postgresql/psycopg/12735bvkmv/insert-into-with-a-dictionary-or-generally-with-a-variable-number-of-columns
             # e.g. INSERT INTO lml_files ("file_name", "file_data") VALUES (%s,%s)
-            self.query = "INSERT INTO %s (%s) VALUES (%s)" % (self.cfg.get('table'), ",".join(['"%s"' % k for k in record]), ",".join(["%s",]*len(record.keys())))
+            self.query = "INSERT INTO %s (%s) VALUES (%s)" % (self.cfg.get('table'), ",".join(['"%s"' % k for k in first_record]), ",".join(["%s",]*len(first_record.keys())))
             log.info('query is %s', self.query)
 
-        # Do insert with values from the record
-        self.db.execute(self.query, record.values())
-        self.db.commit(close=False)
-        log.info('committed record key=%s' % record[self.key])
+        # Check if record is single (dict) or array (list of dict)
+        if type(record) is dict:
+            # Do insert with values from the single record
+            self.db.execute(self.query, record.values())
+            self.db.commit(close=False)
+
+            log.info('committed record key=%s' % record[self.key])
+
+        else:
+            if type(record) is list:
+                # Multiple records in list
+                for rec in record:
+                    # Do insert with values from the record
+                    self.db.execute(self.query, rec.values())
+                    self.db.commit(close=False)
+
+                log.info('committed %d records' % len(record))
+
 
         return packet
