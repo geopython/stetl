@@ -24,6 +24,7 @@ class Component:
         self.input_format = consumes
 
     def process(self, packet):
+
         # Do something with the data
         result = self.before_invoke(packet)
         if result is False:

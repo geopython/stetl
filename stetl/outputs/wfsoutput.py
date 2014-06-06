@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Output classes for ETL.
+# POST data via WFS Transactional protocol (WFS-T).
 #
 # Author: Just van den Broecke
 #

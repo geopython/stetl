@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from util import Util
+log = Util.get_log('factory')
+
 class Factory:
     """
     Object and class Factory (Pattern).
@@ -7,16 +10,24 @@ class Factory:
     """
 
     def create_obj(self, configdict, section):
+        class_obj_inst = None
+
         # Get value for 'class' property
         class_string = configdict.get(section, 'class')
-        if not class_string:
-            raise ValueError('Class name not defined in section %s.' % section)
+        try:
+            if not class_string:
+                raise ValueError('Class name not defined in section %s.' % section)
 
-        # class object from module.class name
-        class_obj = self.class_forname(class_string)
+            # class object from module.class name
+            class_obj = self.class_forname(class_string)
 
-        # class instance from class object with constructor args
-        return self.new_instance(class_obj, configdict, section)
+            # class instance from class object with constructor args
+            class_obj_inst = self.new_instance(class_obj, configdict, section)
+        except Exception, e:
+            log.error("cannot create object instance from class '%s' e=%s" % (class_string, str(e)))
+            raise e
+
+        return class_obj_inst
 
     def class_forname(self, class_string):
         """Returns class instance specified by a string.
@@ -27,12 +38,18 @@ class Factory:
         Raises:
             ValueError if module part of the class is not specified.
         """
-        module_name, _, class_name = class_string.rpartition('.')
-        if module_name == '':
-            raise ValueError('Class name must contain module part.')
-        class_obj = getattr(
-            __import__(module_name, globals(), locals(), [class_name], -1),
-            class_name)
+        class_obj = None
+        try:
+            module_name, _, class_name = class_string.rpartition('.')
+            if module_name == '':
+                raise ValueError('Class name must contain module part.')
+            class_obj = getattr(
+                __import__(module_name, globals(), locals(), [class_name], -1),
+                class_name)
+        except Exception, e:
+            log.error("cannot create class '%s'" % class_string)
+            raise e
+
         return class_obj
 
 
