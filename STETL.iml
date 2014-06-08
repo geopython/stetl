@@ -9,7 +9,10 @@
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/stetl" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 2.6.1 (/System/Library/Frameworks/Python.framework/Versions/2.6/bin/python2.6)" jdkType="Python SDK" />
+    <content url="file:///opt/gpkgtools/gpkgtools">
+      <sourceFolder url="file:///opt/gpkgtools/gpkgtools/gpkgtools" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="Python 2.7.6 (/usr/local/bin/python2.7)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

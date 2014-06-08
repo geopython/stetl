@@ -37,6 +37,7 @@ class PostgresDbInput(Input):
         Input.__init__(self, configdict, section, produces=FORMAT.record)
         self.query = self.cfg.get('query')
         self.read_once = self.cfg.get_bool('read_once', False)
+        self.column_names = self.cfg.get('column_names', None)
         self.db = None
 
     def init(self):
@@ -44,6 +45,10 @@ class PostgresDbInput(Input):
         log.info('Init: connect to DB')
         self.db = PostGIS(self.cfg.get_dict())
         self.db.connect()
+
+        # If no explicit column names given, get from DB meta info
+        if self.column_names is None:
+            self.column_names = self.db.get_column_names(self.cfg.get('table'), self.cfg.get('schema'))
 
     def exit(self):
         # Disconnect from DB when done
@@ -56,7 +61,11 @@ class PostgresDbInput(Input):
         log.info('read recs: %d' % recs_len)
 
         # record is Python list of Python dict (multiple records)
-        packet.data = recs
+        packet.data = list()
+
+        # Convert list of lists to list of dict using column_names
+        for record in recs:
+            packet.data.append(dict(zip(self.column_names, record)))
 
         # No more records to process?
         if recs_len == 0 or self.read_once is True:

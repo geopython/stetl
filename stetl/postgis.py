@@ -105,6 +105,12 @@ class PostGIS:
     def make_bytea(self, blob):
         return psycopg2.Binary(blob)
 
+    def get_column_names(self, table, schema='public'):
+        column_names = []
+
+        self.cursor.execute("select column_name from information_schema.columns where table_schema = '%s' and table_name='%s'" % (schema, table))
+        column_names = [row[0] for row in self.cursor]
+        return column_names
 
     def execute(self, sql, parameters=None):
         try:
