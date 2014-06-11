@@ -32,11 +32,14 @@ class HttpOutput(Output):
 
         # If we receive a list(), should we create a HTTP req for each member?
         self.list_fanout = self.cfg.get_bool('list_fanout', True)
+        self.req_nr = 0
 
     def create_payload(self, packet):
         return packet.data
 
     def post(self, packet, payload):
+        self.req_nr += 1
+
         webservice = httplib.HTTP(self.host)
         # write your headers
         webservice.putrequest(self.method, self.path)
@@ -58,7 +61,7 @@ class HttpOutput(Output):
 
         # get the response
         statuscode, statusmessage, header = webservice.getreply()
-        log.info("Response status: code=%d msg=%s" % (statuscode, statusmessage))
+        log.info("Req nr %d - response status: code=%d msg=%s" % (self.req_nr, statuscode, statusmessage))
         if statuscode != 200:
             log.error("Headers: %s" % str(header))
             res = webservice.getfile().read()
