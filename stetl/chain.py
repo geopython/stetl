@@ -75,15 +75,17 @@ class Chain:
 
         # Do ETL as long as input available in Packet
         packet = Packet()
+        rounds = 0
         while not packet.is_end_of_stream():
         #            try:
             # Invoke the first component to start the chain
             packet.init()
             packet = self.first_comp.process(packet)
+            rounds += 1
             #            except (Exception), e:
         #                log.error("Fatal Error in ETL: %s"% str(e))
         #                break
 
         # One time exit for entire Chain
         self.first_comp.do_exit()
-        log.info('DONE %s ' % self.chain_str)
+        log.info('DONE - %d rounds - chain=%s ' % (rounds, self.chain_str))
