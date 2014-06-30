@@ -72,10 +72,13 @@ class PostgresInsertOutput(PostgresDbOutput):
         self.db.disconnect()
 
     def write(self, packet):
-        if packet.data is None:
+        # Deal with empty or zero-length data structures (list or dict)
+        if packet.data is None or len(packet.data) == 0:
             return packet
 
-        # record is Python dict or list of Python dict (multiple records)
+        # ASSERT: record data present
+
+        # record is Python dict (single record) or list of Python dict (multiple records)
         record = packet.data
 
         # Generate INSERT query template once
