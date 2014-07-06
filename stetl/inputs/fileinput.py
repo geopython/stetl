@@ -4,16 +4,29 @@
 #
 # Author: Just van den Broecke
 #
+from stetl.component import Attr
 from stetl.input import Input
 from stetl.util import Util, etree
 from stetl.packet import FORMAT
 
 log = Util.get_log('fileinput')
 
+
+
 class FileInput(Input):
     """
-    Abstract base class for specific FileInputs.
+    Abstract base class for specific FileInputs, use derived classes.
     """
+
+    # Start attribute config meta
+    cfg_file_path = Attr(str, True, None,
+    "path to file or files: can be a dir or files or even multiple, comma separated")
+
+    cfg_filename_pattern = Attr(str, False, '*.[gxGX][mM][lL]',
+    "filename pattern according to Python glob.glob")
+
+    cfg_depth_search = Attr(bool, False, False, "Recurse into directories ?")
+    # End attribute config meta
 
     def __init__(self, configdict, section, produces):
         Input.__init__(self, configdict, section, produces)
@@ -22,7 +35,7 @@ class FileInput(Input):
         self.file_path = self.cfg.get('file_path')
 
         # The filename pattern according to Python glob.glob
-        self.filename_pattern = self.cfg.get('filename_pattern', '*.[gxGX][mM][lL]')
+        self.filename_pattern = self.cfg.get('filename_pattern', Attr.cfg_filename_pattern.default)
 
         # Recurse into directories ?
         self.depth_search = self.cfg.get_bool('depth_search', False)
@@ -44,7 +57,15 @@ class StringFileInput(FileInput):
     produces=FORMAT.string
     """
 
-    # Constructor
+    # Start attribute config meta
+    cfg_format_args = Attr(str, False, None,
+    """
+    formatting of content according to Python String.format()
+    Input file should have substitutable values like {schema} {foo}
+    format_args should be of the form format_args = schema:test foo:bar
+    """)
+    # End attribute config meta
+
     def __init__(self, configdict, section):
         FileInput.__init__(self, configdict, section, produces=FORMAT.string)
         self.file_list_done = []
@@ -187,6 +208,19 @@ class XmlElementStreamerFileInput(FileInput):
 
     produces=FORMAT.etree_element_stream
     """
+
+    # Start attribute config meta
+    cfg_element_tags = Attr(str, True, None,
+    """
+    comma-separated string of XML (feaature) element tagnames of the elements that should be extracted
+    and added to the output element stream.
+    """)
+
+    cfg_strip_namespaces = Attr(bool, False, False,
+    """
+    should namespaces be removed from the input document and thus not be present in the output element stream?
+    """)
+    # End attribute config meta
 
     # Constructor
     def __init__(self, configdict, section):

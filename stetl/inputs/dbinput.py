@@ -4,6 +4,7 @@
 #
 # Author: Just van den Broecke
 #
+from stetl.component import Attr
 from stetl.input import Input
 from stetl.util import Util
 from stetl.packet import FORMAT
@@ -32,6 +33,25 @@ class PostgresDbInput(Input):
 
     produces=FORMAT.record
     """
+
+    # Start attribute config meta
+    cfg_database = Attr(str, True, None, "database name")
+
+    cfg_host = Attr(str, False, 'localhost', "host name or host IP-address")
+
+    cfg_user = Attr(str, False, 'postgres', "User name")
+
+    cfg_password = Attr(str, False, 'postgres', "User password")
+
+    cfg_schema = Attr(str, False, 'public', "Schema name")
+
+    cfg_table = Attr(str, False, None, "Table name")
+
+    cfg_table = Attr(str, False, None, "Column names to populate records with")
+
+    cfg_read_once = Attr(bool, False, False, "Read once? i.e. only do query once and stop")
+
+    # End attribute config meta
 
     def __init__(self, configdict, section):
         Input.__init__(self, configdict, section, produces=FORMAT.record)

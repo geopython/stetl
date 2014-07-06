@@ -9,6 +9,32 @@ from packet import FORMAT
 
 log = Util.get_log('component')
 
+class Attr():
+    """
+    Util class to privide metadata for per component config attr options.
+    Each component should document its configuration metadata using the following
+    conventions, for say a config attr 'my_attr':
+
+    - name a component class attribute cfg_<my_attr>
+    - assign an instance of this class with type, mandatory, default value and documentation
+
+    For example:
+
+      class FileInput(Input):
+
+        cfg_file_path = Attr(str, True, None,
+        "path to file or files: can be a dir or files or even multiple, comma separated")
+
+    Via the Stetl command 'stetl --doc <Component>' the documentation can be viewed.
+
+    NB this convention came out of struggling with autodoc and class attribute __doc__
+    strings tried first. Somehow that did not work.
+    """
+    def __init__(self, typ=str, mandatory=False, default=None, doc="No doc"):
+        self.type = typ
+        self.mandatory = mandatory
+        self.default = default
+        self.doc = doc
 
 class Component:
     """

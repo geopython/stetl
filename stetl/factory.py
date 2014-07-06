@@ -44,8 +44,7 @@ class Factory:
             if module_name == '':
                 raise ValueError('Class name must contain module part.')
             class_obj = getattr(
-                __import__(module_name, globals(), locals(), [class_name], -1),
-                class_name)
+                __import__(module_name, globals(), locals(), [class_name], -1), class_name)
         except Exception, e:
             log.error("cannot create class '%s'" % class_string)
             raise e

@@ -101,8 +101,7 @@ class PostgresInsertOutput(PostgresDbOutput):
 
             log.info('committed record key=%s' % record[self.key])
 
-        else:
-            if type(record) is list:
+        elif type(record) is list:
                 # Multiple records in list
                 for rec in record:
                     # Do insert with values from the record
@@ -110,6 +109,5 @@ class PostgresInsertOutput(PostgresDbOutput):
                     self.db.commit(close=False)
 
                 log.info('committed %d records' % len(record))
-
 
         return packet
