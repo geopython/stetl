@@ -36,7 +36,7 @@ class ETL:
         self.options_dict = options_dict
         config_file = self.options_dict.get('config_file')
 
-        if not os.path.isfile(config_file):
+        if config_file is None or not os.path.isfile(config_file):
             print 'No config file found at: %s' % config_file
             sys.exit(1)
 
