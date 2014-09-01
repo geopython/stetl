@@ -108,12 +108,13 @@ def main():
        -c  --config <config_file>  the Stetl config file.
        -s  --section <section_name> the section in the Stetl config (ini) file to execute (default is [etl]).
        -a  --args <arglist> substitutable args for symbolic, {arg}, values in Stetl config file, in format "arg1=foo arg2=bar" etc.
-       -h  --help <subject> Get component documentation like its configuration parameters, e.g. stetl doc stetl.inputs.fileinput.FileInput
+       -d  --doc <class> Get component documentation like its configuration parameters, e.g. stetl --doc stetl.inputs.fileinput.FileInput
+       -h  --help get help info
 
     """
     args = parse_args()
 
-    if args.config_args:
+    if args.config_file:
         # Do the ETL
         etl = ETL(vars(args), args.config_args)
         etl.run()
@@ -121,7 +122,7 @@ def main():
     elif args.doc_args:
         print_doc(args.doc_args)
     else:
-        print('Try stetl -h for help')
+        print('Unknown option, try stetl -h for help')
 
 if __name__ == "__main__":
     main()
