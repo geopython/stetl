@@ -10,6 +10,7 @@ from factory import factory
 from util import Util
 from version import __version__
 import argparse #apt-get install python-argparse
+import inspect
 
 log = Util.get_log('main')
 
@@ -67,11 +68,27 @@ def print_config_attrs(clazz):
     if attr_count == 0:
         print ('No config attributes or class not yet documented')
 
+def print_classes(package):
+    # is_module = inspect.ismodule(class_name)
+    import inputs
+    import pkgutil
+    package=inputs
+    for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__,
+                                                          prefix=package.__name__+'.',
+                                                          onerror=lambda x: None):
+        print('stetl.' + modname)
+        for name, data in inspect.getmembers(modname, inspect.isclass):
+            if name == '__builtins__':
+                continue
+            print name, data
+
+
 def print_doc(class_name):
     """Print documentation for class in particular config options"""
+    # print_classes(class_name)
+    # return
 
     try:
-
         # class object from module.class name
         class_obj = factory.class_forname(class_name)
         print ('DOCUMENTATION\n')

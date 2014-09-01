@@ -35,10 +35,10 @@ class FileInput(Input):
         self.file_path = self.cfg.get('file_path')
 
         # The filename pattern according to Python glob.glob
-        self.filename_pattern = self.cfg.get('filename_pattern', Attr.cfg_filename_pattern.default)
+        self.filename_pattern = self.cfg.get('filename_pattern', FileInput.cfg_filename_pattern.default)
 
         # Recurse into directories ?
-        self.depth_search = self.cfg.get_bool('depth_search', False)
+        self.depth_search = self.cfg.get_bool('depth_search', FileInput.cfg_depth_search.default)
 
         # Create the list of files to be used as input
         self.file_list = Util.make_file_list(self.file_path, None, self.filename_pattern, self.depth_search)
@@ -212,7 +212,7 @@ class XmlElementStreamerFileInput(FileInput):
     # Start attribute config meta
     cfg_element_tags = Attr(str, True, None,
     """
-    comma-separated string of XML (feaature) element tagnames of the elements that should be extracted
+    comma-separated string of XML (feature) element tagnames of the elements that should be extracted
     and added to the output element stream.
     """)
 
@@ -227,7 +227,7 @@ class XmlElementStreamerFileInput(FileInput):
         FileInput.__init__(self, configdict, section, produces=FORMAT.etree_element_stream)
         self.element_tags = self.cfg.get('element_tags').split(',')
         self.file_list_done = []
-        self.strip_namespaces = self.cfg.get('strip_namespaces', False)
+        self.strip_namespaces = self.cfg.get('strip_namespaces', XmlElementStreamerFileInput.cfg_element_tags.default)
         self.context = None
         self.root = None
         self.cur_file_path = None
