@@ -8,6 +8,7 @@ from stetl.component import Attr
 from stetl.input import Input
 from stetl.util import Util, etree
 from stetl.packet import FORMAT
+import csv
 
 log = Util.get_log('fileinput')
 
@@ -296,5 +297,36 @@ class XmlElementStreamerFileInput(FileInput):
 
                 if self.strip_namespaces:
                     packet.data = Util.stripNamespaces(elem).getroot()
+
+        return packet
+
+
+class CsvFileInput(FileInput):
+    """
+    Parse CSV file into stream of records (dict structures).
+    NB raw version: CSV needs to have first line with fieldnames.
+
+    produces=FORMAT.record
+    """
+
+    # Constructor
+    def __init__(self, configdict, section):
+        FileInput.__init__(self, configdict, section, produces=FORMAT.record)
+        self.file = None
+
+    def init(self):
+        # Init CSV reader
+        log.info('Open CSV file: %s', self.file_path)
+        self.file = open(self.file_path)
+
+        self.csv_reader = csv.DictReader(self.file)
+
+    def read(self, packet):
+        try:
+            packet.data = self.csv_reader.next()
+            log.info("CSV row nr %d read: %s" % (self.csv_reader.line_num-1, packet.data))
+        except Exception, e:
+            packet.set_end_of_stream()
+            self.file.close()
 
         return packet

@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- A very basic template, to be substituted by values from csv. -->
+<city>
+    <name>amsterdam</name>
+    <lat>52.4</lat> <!-- either $ or ${}  allowed (we're escaping here) -->
+    <lon>4.9</lon>
+    <desc>The city of amsterdam is at location 4.9, 52.4</desc>
+</city>

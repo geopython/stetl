@@ -11,6 +11,10 @@ As a general heath test you may run all examples using ./runall.sh
 6_cmdargs - reuse ETL config file by substituting symbolic variables via command line (-a) arguments
 7_mycomponent - adding custom/user-defined Input, Filter and/or Output Components
 8_wfs - fetch input data from WFS and process it
+9_string_templating - transform using standard Python string template with CSV input vars
+
+
+
 
 
 

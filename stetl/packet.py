@@ -18,6 +18,7 @@ class Packet:
         self.meta = {}
         self.end_of_stream = False
         self.end_of_doc = False
+        self.format = FORMAT.any
 
     def consume(self):
         data = self.data

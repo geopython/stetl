@@ -68,6 +68,7 @@ class Component:
         # If there is a next component, let it process
         if self.next:
             # Hand-over data (line, doc whatever) to the next component
+            packet.format = self.output_format
             packet = self.next.process(packet)
 
         result = self.after_chain_invoke(packet)
