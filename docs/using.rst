@@ -154,6 +154,8 @@ The following data types are currently symbolically defined in the :class:`stetl
 
 - ``record``(a Python ``dict`` or array of ``dict``s)
 
+- ``struct``(a JSON-like generic tree structure)
+
 - ``any``
 
 Many components, in particular Filters, are able to transform one data type to another type.

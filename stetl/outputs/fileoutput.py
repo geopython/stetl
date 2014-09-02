@@ -47,7 +47,7 @@ class MultiFileOutput(FileOutput):
     """
     Print to multiple files from subsequent packets like strings or etree docs.
 
-    consumes=FORMAT.etree_doc
+    consumes=FORMAT.any
     """
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.any)

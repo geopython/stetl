@@ -330,3 +330,30 @@ class CsvFileInput(FileInput):
             self.file.close()
 
         return packet
+
+class JsonFileInput(FileInput):
+    """
+    Parse JSON file into hierarchical data struct.
+
+    produces=FORMAT.any
+    """
+
+    # Constructor
+    def __init__(self, configdict, section):
+        FileInput.__init__(self, configdict, section, produces=FORMAT.struct)
+
+    def read(self, packet):
+        try:
+            log.info('Read JSON file: %s', self.file_path)
+            import json
+
+            with open(self.file_path) as data_file:
+                packet.data = json.load(data_file)
+
+        except Exception, e:
+            log.error('Cannot read JSON file, err= %s', str(e))
+            raise e
+
+        packet.set_end_of_stream()
+
+        return packet

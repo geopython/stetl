@@ -1,0 +1,17 @@
+{
+    "globs": {
+        "name": "Test for GML generation via Jinja2 templating",
+        "description": "This example tests GML generation with Jinja2 templating, including the use of Jinja2 globals., such as for this description. Globals provide more or less constant/semi static information like point of contacts, global names, id-prefixes etc.",
+        "srs_name": "urn:ogc:def:crs:EPSG:4326",
+        "bounding_box": {
+            "lower_left": {
+                "Y": -90.0,
+                "X": -180.0
+            },
+            "upper_right": {
+                "Y": 90.0,
+                "X": 180.0
+            }
+        }
+    }
+}

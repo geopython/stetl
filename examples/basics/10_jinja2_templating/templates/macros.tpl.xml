@@ -1,0 +1,19 @@
+<macros>
+
+    {% macro render_bounded_by(lower_left_X, lower_left_Y, upper_right_X, upper_right_Y) -%}
+    <!-- Rendered by macro render_bounded_by() -->
+    <gml:boundedBy>
+        <gml:Box>
+            <gml:coord>
+                <gml:X>{{ lower_left_X }}</gml:X>
+                <gml:Y>{{ lower_left_Y }}</gml:Y>
+            </gml:coord>
+            <gml:coord>
+                <gml:X>{{ upper_right_X }}</gml:X>
+                <gml:Y>{{ upper_right_Y }}</gml:Y>
+            </gml:coord>
+        </gml:Box>
+    </gml:boundedBy>
+    {%- endmacro %}
+
+</macros>
