@@ -99,6 +99,10 @@ Components: Filters
    :members:
    :show-inheritance:
 
+.. automodule:: stetl.filters.templatingfilter
+   :members:
+   :show-inheritance:
+
 .. automodule:: stetl.filters.gmlfeatureextractor
    :members:
    :show-inheritance:

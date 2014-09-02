@@ -152,6 +152,8 @@ The following data types are currently symbolically defined in the :class:`stetl
 
 - ``string``
 
+- ``record``(a Python ``dict`` or array of ``dict``s)
+
 - ``any``
 
 Many components, in particular Filters, are able to transform one data type to another type.
