@@ -1,0 +1,44 @@
+
+{# Macro that renders a bounding box element from feature list #}
+{% macro render_bounded_by(features) -%}
+
+    {# first assemble all latitudes and longitudes #}
+    {% set longitudes = [] %}
+    {% set latitudes = [] %}
+
+    {% for feature in features %}
+        {% do longitudes.append(feature.lon) %}
+        {% do latitudes.append(feature.lat) %}
+    {% endfor %}
+
+    <!-- Rendered by macro render_bounded_by() -->
+    {# use the maximum and minimum Jinja2 Filters to get max/min from lists #}
+    <gml:boundedBy>
+        <gml:Box>
+            <gml:coord>
+                <gml:X>{{ longitudes|minimum }}</gml:X>
+                <gml:Y>{{ latitudes|minimum }}</gml:Y>
+            </gml:coord>
+            <gml:coord>
+                <gml:X>{{ longitudes|maximum }}</gml:X>
+                <gml:Y>{{ latitudes|maximum }}</gml:Y>
+            </gml:coord>
+        </gml:Box>
+    </gml:boundedBy>
+{%- endmacro %}
+
+{# Macro that renders a name element #}
+{% macro render_name(name) -%}
+    <!-- Rendered by macro render_name() -->
+    <gml:name>
+       {{ name }}
+    </gml:name>
+{%- endmacro %}
+
+{# Macro that renders any element with tag and content :-) #}
+{% macro render_element(tag, content) -%}
+    <!-- Rendered by macro render_element() -->
+    <{{tag}}>
+       {{ content }}
+    </{{tag}}>
+{%- endmacro %}

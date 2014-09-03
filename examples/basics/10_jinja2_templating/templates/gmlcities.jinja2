@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<cities:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                       xmlns:cities="http://cities.maptools.org/"
+                       xmlns:gml="http://www.opengis.net/gml"
+                       xsi:schemaLocation="http://cities.maptools.org/ ../gmlcities.xsd  http://www.opengis.net/gml http://schemas.opengis.net/gml/2.1.2/feature.xsd">
+
+    <!--
+    Generated with a Jinja2 template. The 'globs' variables come from the file globals.json containing global
+    variables/structures. The actual/dynamic data (cities) comes from the input CSV file cities.json.
+    Also a file with macros templates/macros.tpl.xml is imported, allowing reuse for common structures like INSPIRE id's.
+    -->
+
+
+    {#  Show the use of globals, more or less static content. #}
+    <gml:description>
+       {{ globs.description }}
+    </gml:description>
+
+    {#  Show the use of macro's, a very powerful reuse mechanism, e.g. for common elements and structures like INSPIRE id. #}
+    {% import 'templates/macros.jinja2' as macros %}
+
+    {# {{ macros.render_element('gml:description', globs.description) }} #}
+
+    {{ macros.render_name(globs.name) }}
+    {{ macros.render_bounded_by(cities) }}
+
+    {% for city in cities %}
+        <gml:featureMember>
+            <cities:City>
+                <cities:name>{{ city.name }}</cities:name>
+                <cities:geometry>
+                    <gml:Point srsName="{{ globs.srs_name }}">
+                        <gml:coordinates>{{ city.lat }},{{ city.lon }}</gml:coordinates>
+                    </gml:Point>
+                </cities:geometry>
+            </cities:City>
+        </gml:featureMember>
+    {% endfor %}
+
+</cities:FeatureCollection>

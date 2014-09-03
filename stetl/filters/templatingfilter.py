@@ -103,9 +103,16 @@ class Jinja2TemplatingFilter(TemplatingFilter):
     """
     Implements Templating using Jinja2. Jinja2 http://jinja.pocoo.org,
     is a modern and designer-friendly templating language for Python
-    modelled after Django’s templates.
+    modelled after Django’s templates. A 'struct' format as input provides
+    a tree-like structure that could originate from a JSON file or REST service.
+    This input struct provides all the variables to be inserted into the template.
+    The template itself can be configured in this component as a Jinja2 string or -file.
+    An optional 'template_search_paths' provides a list of directories from which templates
+    can be fethced. Default is the current working directory. Via the optional 'globals_path'
+    a JSON structure can be inserted into the Template environment. The variables in this
+    globals struture are typically "boilerplate" constants like: id-prefixes, point of contacts etc.
 
-    consumes=FORMAT.any, produces=FORMAT.string
+    consumes=FORMAT.struct, produces=FORMAT.string
     """
 
     cfg_template_search_paths = Attr(str, False, [os.getcwd()],
@@ -142,7 +149,12 @@ class Jinja2TemplatingFilter(TemplatingFilter):
 
         # Load and Init Template once
         loader = FileSystemLoader(self.template_search_paths)
-        self.jinja2_env = Environment(loader=loader)
+        self.jinja2_env = Environment(loader=loader, extensions=['jinja2.ext.do'])
+
+        # Register additional Filters on the template environment by updating the filters dict:
+        # Somehow min and max of list are not present
+        self.jinja2_env.filters['maximum'] = max
+        self.jinja2_env.filters['minimum'] = min
 
         if self.template_file is not None:
             # Get template string from file content and pass optional globals into context
