@@ -1,8 +1,8 @@
 Changes
 =======
 
-v1.0.6 - UPCOMING
------------------
+v1.0.6 - 5 sept 2014
+--------------------
 
 - allow spatial_extent in OGROutput Top10NL example
 - httpinput more robust
@@ -10,6 +10,12 @@ v1.0.6 - UPCOMING
 - httpinput: ApacheDirInput, input data from Apache index listing
 - dboutput: PostgresInsertOutput, insert single record into Postgres
 - component: add before_/after_invoke and after_chain_invoke() for intercepting
+- filters: start of Python Templating filters: simple string and Jinja2 templating
+- Packet: new type 'struct' basically a free form dict, the result of reading CSV
+- input: CSV file input
+- new examples: 9_string_templating and 10_jinja2_templating
+- start stetl --doc option to print class configuration info
+- config: start of add ing meta attribute config info via class vars of type Attr
 
 v1.0.5 - 19 feb 2014
 --------------------
