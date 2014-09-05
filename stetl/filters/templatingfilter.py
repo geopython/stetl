@@ -149,7 +149,7 @@ class Jinja2TemplatingFilter(TemplatingFilter):
 
         # Load and Init Template once
         loader = FileSystemLoader(self.template_search_paths)
-        self.jinja2_env = Environment(loader=loader, extensions=['jinja2.ext.do'])
+        self.jinja2_env = Environment(loader=loader, extensions=['jinja2.ext.do'], lstrip_blocks=True, trim_blocks=True)
 
         # Register additional Filters on the template environment by updating the filters dict:
         # Somehow min and max of list are not present
