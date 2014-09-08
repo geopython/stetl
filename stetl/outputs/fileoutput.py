@@ -34,7 +34,7 @@ class FileOutput(Output):
         log.info('writing to file %s' % file_path)
         out_file = open(file_path, 'w')
 
-        if packet.format is FORMAT.etree_doc:
+        if packet.format == FORMAT.etree_doc:
             out_file.writelines(self.to_string(packet.data))
         else:
             out_file.writelines(str(packet.data))

@@ -1,0 +1,79 @@
+{"type": "FeatureCollection", "features": [
+
+    {
+        "type": "Feature",
+        "id": "1359",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [4.894836363636363, 52.373045454545455]
+        },
+        "geometry_name": "the_geom",
+        "properties": {
+            "ObjectID": 12386305,
+            "CITY_NAME": "Amsterdam",
+            "GMI_ADMIN": "NLD-NHL",
+            "ADMIN_NAME": "Noord-Holland",
+            "FIPS_CNTRY": "NL",
+            "CNTRY_NAME": "Netherlands",
+            "STATUS": "National capital",
+            "POP_RANK": 3,
+            "POP_CLASS": "500,000 to 1,000,000",
+            "PORT_ID": 31060,
+            "LABEL_FLAG": 0,
+            "bbox": [4.894836363636363, 52.373045454545455, 4.894836363636363, 52.373045454545455]
+        }
+    },
+
+    {
+        "type": "Feature",
+        "id": "1374",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [7.099818181818182, 50.73455454545454]
+        },
+        "geometry_name": "the_geom",
+        "properties": {
+            "ObjectID": 12517379,
+            "CITY_NAME": "Bonn",
+            "GMI_ADMIN": "DEU-NWS",
+            "ADMIN_NAME": "Nordrhein-Westfalen",
+            "FIPS_CNTRY": "GM",
+            "CNTRY_NAME": "Germany",
+            "STATUS": "Other",
+            "POP_RANK": 4,
+            "POP_CLASS": "250,000 to 500,000",
+            "PORT_ID": 0,
+            "LABEL_FLAG": 0,
+            "bbox": [7.099818181818182, 50.73455454545454, 7.099818181818182, 50.73455454545454]
+        }
+    },
+    {
+        "type": "Feature",
+        "id": "1027",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [12.52, 41.88]
+        },
+        "geometry_name": "the_geom",
+        "properties": {
+            "ObjectID": 9306117,
+            "CITY_NAME": "Rome",
+            "GMI_ADMIN": "ITA-LAZ",
+            "ADMIN_NAME": "Lazio",
+            "FIPS_CNTRY": "IT",
+            "CNTRY_NAME": "Italy",
+            "STATUS": "National and provincial capital",
+            "POP_RANK": 2,
+            "POP_CLASS": "1,000,000 to 5,000,000",
+            "PORT_ID": 39820,
+            "LABEL_FLAG": 0,
+            "bbox": [12.52, 41.88, 12.52, 41.88]
+        }
+    }
+
+], "crs": {
+    "type": "EPSG",
+    "properties": {
+        "code": "4326"
+    }
+}, "bbox": [4.88, 41.88, 12.52, 53.98]}

@@ -30,7 +30,7 @@
                 <cities:name>{{ city.name }}</cities:name>
                 <cities:geometry>
                     <gml:Point srsName="{{ globs.srs_name }}">
-                        <gml:coordinates>{{ city.lat }},{{ city.lon }}</gml:coordinates>
+                        <gml:coordinates>{{ city.lon }}, {{ city.lat }}</gml:coordinates>
                     </gml:Point>
                 </cities:geometry>
             </cities:City>

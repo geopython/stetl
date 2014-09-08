@@ -121,6 +121,8 @@ class Jinja2TemplatingFilter(TemplatingFilter):
     cfg_template_globals_path = Attr(str, False, None,
     "JSON file with global variables that can be used anywhere in template")
 
+    json_package = None
+
     def __init__(self, configdict, section):
         TemplatingFilter.__init__(self, configdict, section, consumes=FORMAT.struct)
         self.template_search_paths = self.cfg.get_list('template_search_paths', default=Jinja2TemplatingFilter.cfg_template_search_paths.default)
@@ -140,6 +142,7 @@ class Jinja2TemplatingFilter(TemplatingFilter):
             try:
                 log.info('Read JSON file: %s', self.template_globals_path)
                 import json
+                Jinja2TemplatingFilter.json_package = json
 
                 with open(self.template_globals_path) as template_globals_fp:
                     self.template_globals = json.load(template_globals_fp)
@@ -155,6 +158,7 @@ class Jinja2TemplatingFilter(TemplatingFilter):
         # Somehow min and max of list are not present
         self.jinja2_env.filters['maximum'] = max
         self.jinja2_env.filters['minimum'] = min
+        self.jinja2_env.filters['geojson2gml'] = Jinja2TemplatingFilter.geojson2gml_filter
 
         if self.template_file is not None:
             # Get template string from file content and pass optional globals into context
@@ -167,4 +171,42 @@ class Jinja2TemplatingFilter(TemplatingFilter):
     def render_template(self, packet):
         packet.data = self.template.render(packet.data)
         return packet
+
+
+    @staticmethod
+    def geojson2gml_filter(value, crs=4326, gml_format='GML2', gml_longsrs='NO'):
+        try:
+            from osgeo import ogr, osr
+        except Exception, e:
+            log.error('Cannot import Python ogr package, err= %s; You probably need to install GDAL/OGR Python bindings, see https://pypi.python.org/pypi/GDAL' % str(e))
+            raise e
+
+        try:
+            geojson_str = Jinja2TemplatingFilter.json_package.dumps(value)
+            geom = ogr.CreateGeometryFromJson(geojson_str)
+
+            # "crs": {
+            #    "type": "EPSG",
+            #    "properties": {
+            #        "code": "4326"
+            #    }
+            spatial_ref = osr.SpatialReference()
+            if type(crs) is dict and crs['type'] == 'EPSG':
+                # from the GeoJSON source data, though in future deprecated
+                spatial_ref.ImportFromEPSG(int(crs['properties']['code']))
+            elif type(crs) is str:
+                # Like "EPSG:4326"
+                spatial_ref.SetFromUserInput(crs)
+            elif type(crs) is int:
+                # Like 4326
+                spatial_ref.ImportFromEPSG(crs)
+
+            geom.AssignSpatialReference(spatial_ref)
+            options = ['FORMAT=%s' % gml_format, 'GML3_LONGSRS=%s' % gml_longsrs]
+            gml_str = geom.ExportToGML(options=options)
+        except Exception, e:
+            gml_str = 'Failure in CreateGeometryFromJson or ExportToGML, err= %s; check your data and Stetl log' % str(e)
+            log.error(gml_str)
+
+        return gml_str
 
