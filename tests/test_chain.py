@@ -16,6 +16,8 @@ class ConfigTest(unittest.TestCase):
         cfg_dict = {'config_file': 'tests/configs/copy_in_out.cfg'}
         etl = ETL(cfg_dict)
         self.failUnlessEqual(etl.configdict.get('etl', 'chains'), 'input_xml_file|output_std')
+
+
 #        etl.run()
 #
 # def main():

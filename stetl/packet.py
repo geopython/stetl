@@ -38,7 +38,7 @@ class Packet:
     def set_end_of_doc(self, val=True):
         self.end_of_doc = val
 
-# Simple enum emulation NOT ANY MORE: TOO INVOLVED AND INFLEXIBLE: use STrings with predefined ones in FORMAT.*
+# Simple enum emulation NOT ANY MORE: TOO INVOLVED AND INFLEXIBLE: use Strings with predefined ones in FORMAT.*
 # See http://stackoverflow.com/questions/1969005/enumerations-in-python
 # class Enum(object):
 #     def __init__(self, *keys):
@@ -46,7 +46,7 @@ class Packet:
 
 # The data types allowed to pass in Packets, "any" can be used as wildcard
 # FORMAT = Enum('xml_line_stream', 'etree_doc', 'etree_element_stream', 'etree_feature_array', 'xml_doc_as_string',
-#              'string', 'record', 'geojson_record', 'struct', 'any')
+#              'string', 'record', 'geojson_struct', 'struct', 'any')
 
 
 class FORMAT:
@@ -57,6 +57,11 @@ class FORMAT:
     xml_doc_as_string = 'xml_doc_as_string'
     string = 'string'
     record = 'record'
-    geojson_record = 'geojson_record'
     struct = 'struct'
+    geojson_struct = 'geojson_struct'
     any = 'any'
+
+    @staticmethod
+    def add_format(fmt):
+        # Add to existing formats via class dict
+        FORMAT.__dict__[fmt] = fmt

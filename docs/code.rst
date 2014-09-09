@@ -111,6 +111,10 @@ Components: Filters
    :members:
    :show-inheritance:
 
+.. automodule:: stetl.filters.formatconverter
+   :members:
+   :show-inheritance:
+
 Components: Outputs
 -------------------
 

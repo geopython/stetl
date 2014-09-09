@@ -9,16 +9,16 @@ especially the core ones found in the `examples/basics directory <https://github
 These examples start numbering from 1, building up more complex ETL cases like the Dutch
 Topo map (Top10NL) ETL in the `examples/top10nl directory <https://github.com/justb4/stetl/tree/master/examples/top10nl>`_ .
 
-The core concepts of Stetl though are pretty simple: an input resource (file, database etc) is
+The core concepts of Stetl remain pretty simple: an input resource (file, database etc) is
 mapped to an output resource (file database, etc) via a set of Python components
 that are connected as a `processing chain`. A bit like in electrical engineering: an input flows
-through several filters, that each modify the current. In our case the current is geospatial information.
+through several filters, that each modify the current. In our case the current is (geospatial) information.
 
 Stetl Config
 ------------
 The particular components (inputs, filters, outputs) and their interconnection
 are specified in a Stetl config file. The file format follows the Python `.ini file-format`.
-To illustrate let's look at the example `2_xslt <https://github.com/justb4/stetl/tree/master/examples/basics/2_xslt>`_.
+To illustrate, let's look at the example `2_xslt <https://github.com/justb4/stetl/tree/master/examples/basics/2_xslt>`_.
 This example takes an input .xml file and transforms this file to a valid GML file. The Stetl config file looks as follows. ::
 
 	[etl]
@@ -44,9 +44,68 @@ applies XSLT with the script file  `cities2gml.xsl` that is in the same director
 component specifies the output, in this case a file.
 
 These components are coupled in a Stetl `Chain` using the special .ini section `[etl]`. That section specifies one
-or more chains. Each Chain is specified by the names of the component sections, their interconnection using
-a '|', the Unix pipe symbol. So the above chain is `input_xml_file|transformer_xslt|output_file`. The names
+or more processing chains. Each Chain is specified by the names of the component sections, their interconnection using
+a the Unix pipe symbol "|".
+
+So the above Chain is `input_xml_file|transformer_xslt|output_file`. The names
 of the component sections are arbitrary.
+
+Configuring Components
+----------------------
+Most Stetl Components, i.e. inputs, filters, outputs, have configuration properties that can be configured within their
+respective [section] in the config file. But what are the possible properties, values and defaults?
+Offcourse one can look in the source files, but since Stetl 1.0.6 work is underway for autodocumenting
+these attributes. For a given class the command `stetl --doc <class name>` can be issued on the command line.
+For example, the command `stetl --doc stetl.inputs.fileinput.StringFileInput` produces something like. ::
+
+    CLASS: stetl.inputs.fileinput.StringFileInput
+
+        Reads and produces file as String.
+
+        produces=FORMAT.string
+
+
+    Configuration attributes:
+
+    ----------------------------------------------
+    NAME: depth_search
+    MANDATORY: False
+    TYPE: <type 'bool'>
+
+    Recurse into directories ?
+
+    DEFAULT: False
+    ----------------------------------------------
+    NAME: filename_pattern
+    MANDATORY: False
+    TYPE: <type 'str'>
+
+    filename pattern according to Python glob.glob
+
+    DEFAULT: *.[gxGX][mM][lL]
+    ----------------------------------------------
+    NAME: file_path
+    MANDATORY: True
+    TYPE: <type 'str'>
+
+    path to file or files: can be a dir or files or even multiple, comma separated
+
+    DEFAULT: None
+    ----------------------------------------------
+    NAME: format_args
+    MANDATORY: False
+    TYPE: <type 'str'>
+
+    formatting of content according to Python String.format()
+    Input file should have substitutable values like {schema} {foo}
+    format_args should be of the form format_args = schema:test foo:bar
+
+
+    DEFAULT: None
+
+Though not all classes may yet be documented. This is a matter of time. For class authors: this information is added
+via class global/static members of type :class:`stetl.component.Attr`. At a later stage we may also have automatic checks whether
+all mandatory attributes have been configured.
 
 Running Stetl
 -------------
@@ -93,12 +152,13 @@ Stetl Integration
 
 Note: one can also run Stetl via its main ETL class: :class:`stetl.etl.ETL`.
 This may be useful for integrations in for example Python programs
-or even OGC WPS servers.
+or even OGC WPS servers (planned).
 
 Reusable Stetl Configs
 ----------------------
 What we saw in the last example is that it is hard to reuse this `etl.cfg` when we have for example a different input file
-or want to map to different output files. For this Stetl supports `parameter substitution`. See
+or want to map to different output files. For this Stetl supports `parameter substitution`. Here command line parameters are substituted
+for variables in `etl.cfg`. A variable is declared between curly brackets like `{out_xml}`. See
 example `6_cmdargs <https://github.com/justb4/stetl/tree/master/examples/basics/6_cmdargs>`_. ::
 
 	[etl]
@@ -138,25 +198,27 @@ Each Component will indicate the type of data it `consumes` and/or `produces`.
 Stetl will only check if these input and output-types for connecting Components are compatible
 when constructing a Chain.
 
-The following data types are currently symbolically defined in the :class:`stetl.packet.Packet` file:
+The following data types are currently symbolically defined in the :class:`stetl.packet.FORMAT` class:
 
-- ``xml_line_stream``
+- ``xml_line_stream`` - each Packet contains a line (string) from an XML file or string representation (DEPRECATED)
 
-- ``etree_doc``
+- ``etree_doc`` - a complete in-memory XML DOM structure using the ``lxml`` etree
 
-- ``etree_element_stream``
+- ``etree_element_stream`` - each Packet contains a single DOM Element (usually a Feature) in ``lxml`` etree format
 
-- ``etree_feature_array``
+- ``etree_feature_array`` - each Packet contains an array of DOM Elements (usually Features) in ``lxml`` etree format
 
-- ``xml_doc_as_string``
+- ``xml_doc_as_string`` - a string representation of a complete XML document
 
-- ``string``
+- ``string``- a general string
 
-- ``record``(a Python ``dict`` or array of ``dict``s)
+- ``record`` - a Python ``dict`` or array of ``dict``s)
 
-- ``struct``(a JSON-like generic tree structure)
+- ``struct`` - a JSON-like generic tree structure
 
-- ``any``
+- ``geojson_struct`` - as ``struct`` but following naming conventions according to the GeoJSON spec: http://geojson.org
+
+- ``any`` - 'catch-all' type, may be any of the above.
 
 Many components, in particular Filters, are able to transform one data type to another type.
 For example the `XmlElementStreamerFileInput` can produce an
@@ -164,6 +226,13 @@ For example the `XmlElementStreamerFileInput` can produce an
 can be fed into an `XsltFilter`, which outputs a transformed `etree_doc`. The type `any` is a catch-all,
 for example used for printing any object to standard output in the :class:`stetl.packet.Component`.
 An `etree_element_stream` may also be interesting to be able to process single features.
+
+Starting with Stetl 1.0.7 a new :class:`stetl.filters.formatconverter.FormatConverterFilter` class provides a Stetl Filter
+to allow almost any conversion between otherwise incompatible Components.
+
+TODO: the Packet typing system is still under constant review and extension. Soon it will be possible
+to add new data types and converters. We have deliberately chosen not to define a single internal datatype
+like a "Feature", both for flexibility and performance reasons.
 
 Multiple Chains
 ---------------

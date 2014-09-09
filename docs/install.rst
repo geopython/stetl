@@ -11,12 +11,12 @@ install and maintain Stetl on your system as a Python package (pip is preferred)
     easy_install stetl
 
 Alternatively you can download Stetl from
-Github: https://github.com/justb4/stetl/archive/master.zip
+Github: by cloning (preferred) or downloading: https://github.com/justb4/stetl/archive/master.zip
 and then install locally  ::
 
 	(sudo) python setup.py install
 
-and try the examples first. This should work on Linuxes and Mac OSX.
+Try the examples first. This should work on Linuxes and Mac OSX.
 Windows installation may be more involved depending on your local Python setup. Platform-specific
 installations below.
 
@@ -38,6 +38,10 @@ Stetl depends on the following Python packages:
 
 * libxslt (required by lxml)
 * libxml2 (required by lxml)
+
+When using the ``Jinja2`` templating filter, ``Jinja2TemplatingFilter``, see http://jinja.pocoo.org:
+
+* Python Jinja2 package
 
 Linux
 -----

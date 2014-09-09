@@ -1,7 +1,7 @@
 The directories below each show basic examples for Setl.
 The examples build up from simple to more complex by directory number prefix.
 
-As a general heath test you may run all examples using ./runall.sh
+As a general health test you may run all examples using ./runall.sh
 
 1_copystd - just copy an XML file to standard output
 2_xslt - transform an input XML file to a GML file
@@ -12,6 +12,9 @@ As a general heath test you may run all examples using ./runall.sh
 7_mycomponent - adding custom/user-defined Input, Filter and/or Output Components
 8_wfs - fetch input data from WFS and process it
 9_string_templating - transform using standard Python string template with CSV input vars
+10_jinja2_templating - transform using standard Jinja2 http://jinja.pocoo.org Templating
+11_formatconvert - adapt incompatible inputs to outputs via the FormatConvertFilter
+
 
 
 
