@@ -6,7 +6,7 @@
 Welcome to Stetl
 ================
 
-Stetl, Streaming ETL, is a toolkit for the transformation (ETL)
+Stetl, Streaming ETL, is an open source (GNU GPL) toolkit for the transformation (ETL)
 of geospatial data.  Stetl is based on existing ETL tools like GDAL/OGR and
 XSLT. Stetl processing is driven from a configuration (.ini) file.
 Stetl is written in Python and in particular suited for processing GML.

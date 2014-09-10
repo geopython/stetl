@@ -43,7 +43,15 @@
             <cities:City>
                 <cities:name>{{ feature.properties.CITY_NAME }}</cities:name>
                 <cities:geometry>
-                    {{ feature.geometry | geojson2gml(crs=crs, gml_format='GML3', gml_longsrs='YES') }}
+                    {# Generate gml id #}
+                    {% set gml_id = 'point-%d' % loop.index %}
+                    {# Generate a Point (or any other) GML geometry from a GeoJSON geometry using the geojson2gml
+                       Jinja2 custom Filter.
+                        By specifying a target_crs we can even reproject from the source CRS.
+                       The gml_format=GML2|GML3 determines the general GML form: e.g. pos/posList or coordinates. gml_longsrs=YES|NO
+                       determines the srsName format like EPSG:4326 or urn:ogc:def:crs:EPSG::4326 (long).
+                    #}
+                    {{ feature.geometry | geojson2gml(source_crs=crs, target_crs=4258, gml_id=gml_id, gml_format='GML3', gml_longsrs='YES') }}
                 </cities:geometry>
             </cities:City>
         </gml:featureMember>

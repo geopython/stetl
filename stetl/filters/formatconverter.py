@@ -90,7 +90,7 @@ class FormatConverter(Filter):
 
 
 # 'xml_line_stream', 'etree_doc', 'etree_element_stream', 'etree_feature_array', 'xml_doc_as_string',
-#  'string', 'record', 'geojson_record', 'struct', 'any'
+#  'string', 'record', 'geojson_struct', 'struct', 'any'
 FORMAT_CONVERTERS = {
     FORMAT.xml_line_stream: {FORMAT.string: FormatConverter.no_op},
     FORMAT.etree_doc: {FORMAT.string: FormatConverter.etree_doc2string, FORMAT.xml_doc_as_string: FormatConverter.etree_doc2string},
