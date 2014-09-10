@@ -119,7 +119,7 @@ class Jinja2TemplatingFilter(TemplatingFilter):
     "list of directories where to search for templates, default is current working directory only")
 
     cfg_template_globals_path = Attr(str, False, None,
-    "JSON file with global variables that can be used anywhere in template")
+    "One or more JSON files or URLs with global variables that can be used anywhere in template. Multiple files will be merged into one globals dictionary")
 
     json_package = None
     ogr_package = None

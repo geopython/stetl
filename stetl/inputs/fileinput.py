@@ -21,7 +21,7 @@ class FileInput(Input):
 
     # Start attribute config meta
     cfg_file_path = Attr(str, True, None,
-    "path to file or files: can be a dir or files or even multiple, comma separated")
+    "path to file or files or URLs: can be a dir or files or URLs (JSON only now) or even multiple, comma separated")
 
     cfg_filename_pattern = Attr(str, False, '*.[gxGX][mM][lL]',
     "filename pattern according to Python glob.glob")
@@ -55,6 +55,7 @@ class FileInput(Input):
 
         file_path = self.file_list.pop(0)
 
+        log.info("Read/parse for start for file=%s...." % file_path)
         packet.data = self.read_file(file_path)
         log.info("Read/parse ok for file=%s" % file_path)
 
@@ -144,29 +145,15 @@ class XmlFileInput(FileInput):
     def __init__(self, configdict, section):
         FileInput.__init__(self, configdict, section, produces=FORMAT.etree_doc)
 
-    def read(self, packet):
-        if not len(self.file_list):
-            return packet
-
-        file_path = self.file_list.pop(0)
-
+    def read_file(self, file_path):
         # One-time read/parse only
+        data = None
         try:
-            packet.data = etree.parse(file_path)
-            log.info("file read and parsed OK : %s" % file_path)
+            data = etree.parse(file_path)
         except Exception, e:
             log.info("file read and parsed NOT OK : %s" % file_path)
 
-        # One-time read: we're all done
-        packet.set_end_of_doc()
-        if not len(self.file_list):
-            log.info("all files done")
-            packet.set_end_of_stream()
-
-        self.file_list_done.append(file_path)
-        return packet
-
-
+        return data
 
 class XmlLineStreamerFileInput(FileInput):
     """
@@ -369,8 +356,7 @@ class JsonFileInput(FileInput):
         # One-time read/parse only
         try:
             import json
-            log.info('Reading JSON from: %s ...', file_path)
-
+            # may read/parse JSON from file or URL
             if file_path.startswith('http'):
                 import urllib2
                 fp = urllib2.urlopen(file_path)
