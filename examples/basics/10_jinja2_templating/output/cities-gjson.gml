@@ -40,6 +40,7 @@
         <gml:featureMember>
             <cities:City>
                 <cities:name>Amsterdam</cities:name>
+                <cities:population>779808</cities:population>
                 <cities:geometry>
                     <gml:Point srsName="urn:ogc:def:crs:EPSG::4258" gml:id="point-1"><gml:pos>52.373045454545455 4.894836363636363</gml:pos></gml:Point>
                 </cities:geometry>
@@ -48,6 +49,7 @@
         <gml:featureMember>
             <cities:City>
                 <cities:name>Bonn</cities:name>
+                <cities:population>327913</cities:population>
                 <cities:geometry>
                     <gml:Point srsName="urn:ogc:def:crs:EPSG::4258" gml:id="point-2"><gml:pos>50.734554545454543 7.099818181818182</gml:pos></gml:Point>
                 </cities:geometry>
@@ -56,6 +58,7 @@
         <gml:featureMember>
             <cities:City>
                 <cities:name>Rome</cities:name>
+                <cities:population>2753000</cities:population>
                 <cities:geometry>
                     <gml:Point srsName="urn:ogc:def:crs:EPSG::4258" gml:id="point-3"><gml:pos>41.88 12.52</gml:pos></gml:Point>
                 </cities:geometry>

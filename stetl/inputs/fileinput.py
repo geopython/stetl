@@ -44,8 +44,30 @@ class FileInput(Input):
         # Create the list of files to be used as input
         self.file_list = Util.make_file_list(self.file_path, None, self.filename_pattern, self.depth_search)
         log.info("file_list=%s" % str(self.file_list))
+        if not len(self.file_list):
+            raise Exception('File list is empty!!')
+
+        self.file_list_done = []
 
     def read(self, packet):
+        if not len(self.file_list):
+            return packet
+
+        file_path = self.file_list.pop(0)
+
+        packet.data = self.read_file(file_path)
+        log.info("Read/parse ok for file=%s" % file_path)
+
+        # One-time read: we're all done
+        packet.set_end_of_doc()
+        if not len(self.file_list):
+            log.info("all files done")
+            packet.set_end_of_stream()
+
+        self.file_list_done.append(file_path)
+        return packet
+
+    def read_file(self, file_path):
         """
         Override in subclass.
         """
@@ -69,7 +91,6 @@ class StringFileInput(FileInput):
 
     def __init__(self, configdict, section):
         FileInput.__init__(self, configdict, section, produces=FORMAT.string)
-        self.file_list_done = []
         self.file = None
 
         # Optional formatting of content according to Python String.format()
@@ -122,13 +143,13 @@ class XmlFileInput(FileInput):
     # Constructor
     def __init__(self, configdict, section):
         FileInput.__init__(self, configdict, section, produces=FORMAT.etree_doc)
-        self.file_list_done = []
 
     def read(self, packet):
         if not len(self.file_list):
             return packet
 
         file_path = self.file_list.pop(0)
+
         # One-time read/parse only
         try:
             packet.data = etree.parse(file_path)
@@ -144,6 +165,7 @@ class XmlFileInput(FileInput):
 
         self.file_list_done.append(file_path)
         return packet
+
 
 
 class XmlLineStreamerFileInput(FileInput):
@@ -331,29 +353,34 @@ class CsvFileInput(FileInput):
 
         return packet
 
+
 class JsonFileInput(FileInput):
     """
-    Parse JSON file into hierarchical data struct.
+    Parse JSON file from file system or URL into hierarchical data struct.
 
-    produces=FORMAT.any
+    produces=FORMAT.struct
     """
 
     # Constructor
     def __init__(self, configdict, section):
         FileInput.__init__(self, configdict, section, produces=FORMAT.struct)
 
-    def read(self, packet):
+    def read_file(self, file_path):
+        # One-time read/parse only
         try:
-            log.info('Read JSON file: %s', self.file_path)
             import json
+            log.info('Reading JSON from: %s ...', file_path)
 
-            with open(self.file_path) as data_file:
-                packet.data = json.load(data_file)
+            if file_path.startswith('http'):
+                import urllib2
+                fp = urllib2.urlopen(file_path)
+                file_data = json.loads(fp.read())
+            else:
+                with open(file_path) as data_file:
+                    file_data = json.load(data_file)
 
         except Exception, e:
-            log.error('Cannot read JSON file, err= %s', str(e))
+            log.error('Cannot read JSON from %s, err= %s' % (file_path, str(e)))
             raise e
 
-        packet.set_end_of_stream()
-
-        return packet
+        return file_data

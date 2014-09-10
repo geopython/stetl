@@ -128,7 +128,6 @@ class Jinja2TemplatingFilter(TemplatingFilter):
         TemplatingFilter.__init__(self, configdict, section, consumes=FORMAT.struct)
         self.template_search_paths = self.cfg.get_list('template_search_paths', default=Jinja2TemplatingFilter.cfg_template_search_paths.default)
         self.template_globals_path = self.cfg.get('template_globals_path', default=Jinja2TemplatingFilter.cfg_template_globals_path.default)
-        self.template_globals = None
 
     def create_template(self):
         try:
@@ -137,19 +136,37 @@ class Jinja2TemplatingFilter(TemplatingFilter):
             log.error('Cannot import modules from Jinja2, err= %s; You probably need to install Jinja2 first, see http://jinja.pocoo.org', str(e))
             raise e
 
+        import json
+        Jinja2TemplatingFilter.json_package = json
+
         # Check for a file with global variables configured in json format
         # TODO get globals in other formats like XML and possibly from a web service
+        template_globals = None
         if self.template_globals_path is not None:
-            try:
-                log.info('Read JSON file: %s', self.template_globals_path)
-                import json
-                Jinja2TemplatingFilter.json_package = json
+            globals_path_list = self.template_globals_path.strip().split(',')
 
-                with open(self.template_globals_path) as template_globals_fp:
-                    self.template_globals = json.load(template_globals_fp)
-            except Exception, e:
-                log.error('Cannot read JSON file, err= %s', str(e))
-                raise e
+            for file_path in globals_path_list:
+
+                try:
+                    log.info('Read JSON file with globals from: %s', file_path)
+                    # Globals can come from local file or remote URL
+                    if file_path.startswith('http'):
+                        import urllib2
+                        fp = urllib2.urlopen(file_path)
+                        globals_struct = json.loads(fp.read())
+                    else:
+                        with open(file_path) as data_file:
+                            globals_struct = json.load(data_file)
+
+                    # First file: starts a globals dict, additional globals are merged into that dict
+                    if template_globals is None:
+                        template_globals = globals_struct
+                    else:
+                        template_globals.update(globals_struct)
+
+                except Exception, e:
+                    log.error('Cannot read JSON file, err= %s', str(e))
+                    raise e
 
         # Load and Init Template once
         loader = FileSystemLoader(self.template_search_paths)
@@ -160,11 +177,11 @@ class Jinja2TemplatingFilter(TemplatingFilter):
 
         if self.template_file is not None:
             # Get template string from file content and pass optional globals into context
-            self.template = self.jinja2_env.get_template(self.template_file, globals=self.template_globals)
+            self.template = self.jinja2_env.get_template(self.template_file, globals=template_globals)
             log.info("template file read and template created OK: %s" % self.template_file)
         elif self.template_string is None:
             # If no file present, template_string should have been configured
-            self.template = self.jinja2_env.from_string(self.template_string, globals=self.template_globals)
+            self.template = self.jinja2_env.from_string(self.template_string, globals=template_globals)
 
     def render_template(self, packet):
         packet.data = self.template.render(packet.data)

@@ -42,6 +42,8 @@
         <gml:featureMember>
             <cities:City>
                 <cities:name>{{ feature.properties.CITY_NAME }}</cities:name>
+                {#  get population from reference data in globals struct #}
+                <cities:population>{{ refdata.city_population[feature.properties.CITY_NAME] }}</cities:population>
                 <cities:geometry>
                     {# Generate gml id #}
                     {% set gml_id = 'point-%d' % loop.index %}
