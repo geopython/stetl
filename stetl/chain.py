@@ -54,7 +54,7 @@ class Chain:
             self.first_comp = etl_comp
         else:
             # Already component(s) in chain add to current
-            self.cur_comp.next = etl_comp
+            self.cur_comp.add_next(etl_comp)
 
             if not self.cur_comp.is_compatible():
                 raise ValueError(

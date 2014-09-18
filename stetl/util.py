@@ -170,6 +170,9 @@ class ConfigSection():
     def get_dict(self):
         return self.config_dict
 
+    def has(self, name):
+        return name in self.config_dict
+
     def get(self, name, default=None):
         if not self.config_dict.has_key(name):
             return default
@@ -215,6 +218,20 @@ class ConfigSection():
             result = default
         else:
             result = tuple(result)
+        return result
+
+    def get_dict(self, name, default=None):
+        """
+        Get value as dict
+        """
+        result = self.get(name)
+        if result is None:
+            result = default
+        else:
+            import ast
+            # http://stackoverflow.com/questions/988228/converting-a-string-to-dictionary
+            # ast.literal_eval("{'muffin' : 'lolz', 'foo' : 'kitty'}")
+            result = ast.literal_eval(result)
         return result
 
     def to_string(self):

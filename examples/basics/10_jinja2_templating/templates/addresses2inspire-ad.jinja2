@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+{#
+This is a Jinja2 template for generating one of the most complex INSPIRE Schema's: Annex I Addresses specified in
+http://inspire.jrc.ec.europa.eu/documents/Data_Specifications/INSPIRE_DataSpecification_AD_v3.1.pdf
+The GML Application Schema is complex and verbose, but the actual required input is quite small.
+At a minimum just 4 variables for a complete address: street, house number, postal code, city plus a point (lat,lon)
+for each address. This makes Templating so powerful. The input in Stetl are both records (an array of records (dict's)
+called "addresses" originating from a CSV (here addresses.csv) or possibly some database records. The other input is a
+JSON file (addresses-globals.json) with global static variables, called "globs" below. The output is plain GML according to
+the XSD http://inspire.ec.europa.eu/schemas/ad/3.0/Addresses.xsd to which the output also validates. Note the verbosity:
+a one-line CSV address expands to 100 lines/elements of uncommented GML
+ #}
+
+{#  Macro's, a very powerful reuse mechanism, e.g. for common elements and structures like INSPIRE id and GeographicalName's. #}
+{% import 'templates/macros-inspire.jinja2' as macros_inspire %}
+
+<base:SpatialDataSet xmlns:base="urn:x-inspire:specification:gmlas:BaseTypes:3.2"
+                     xmlns:AD="urn:x-inspire:specification:gmlas:Addresses:3.0"
+                     xmlns:GN="urn:x-inspire:specification:gmlas:GeographicalNames:3.0"
+                     xmlns:gmd="http://www.isotc211.org/2005/gmd"
+                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xmlns:gml="http://www.opengis.net/gml/3.2"
+                     xsi:schemaLocation="urn:x-inspire:specification:gmlas:BaseTypes:3.2 http://inspire.ec.europa.eu/schemas/base/3.2/BaseTypes.xsd
+                            urn:x-inspire:specification:gmlas:Addresses:3.0 http://inspire.ec.europa.eu/schemas/ad/3.0/Addresses.xsd
+                                urn:x-inspire:specification:gmlas:GeographicalNames:3.0 http://inspire.ec.europa.eu/schemas/gn/3.0/GeographicalNames.xsd"
+                     gml:id="{{ globs.namespace }}">
+    <base:identifier>
+        <base:Identifier>
+            <base:localId>0</base:localId>
+            <base:namespace>{{ globs.namespace }}</base:namespace>
+        </base:Identifier>
+    </base:identifier>
+    <base:metadata xsi:nil="true"/>
+    {# Tracking for Address components that should appear only once, as they are xlinked as AD:component-s #}
+    {% set cities = {} %}
+    {% set streets = {} %}
+    {% set postal_codes = {} %}
+
+    {% for address in addresses %}
+    <base:member>
+        <AD:Address gml:id="{{ globs.namespace }}.Address.{{ address.address_id }}">
+            <gml:identifier
+                    codeSpace="{{ globs.inspire_codespace_uri }}">{{ globs.inspire_urn_prefix_id }}:{{ globs.namespace }}.Address.{{ address.address_id }}</gml:identifier>
+            <AD:inspireId>
+                {{ macros_inspire.render_inspire_id(globs.namespace, address.address_id) }}
+            </AD:inspireId>
+            <AD:position>
+                <AD:GeographicPosition>
+                    <AD:geometry>
+                        <gml:Point gml:id="{{ globs.namespace }}.Address.{{ address.address_id }}_P"
+                                   srsName="{{ globs.srs_name }}">
+                            <gml:pos>{{ address.lat }} {{ address.lon }}</gml:pos>
+                        </gml:Point>
+                    </AD:geometry>
+                    <AD:specification>entrance</AD:specification>
+                    <AD:method>byOtherParty</AD:method>
+                    <AD:default>true</AD:default>
+                </AD:GeographicPosition>
+            </AD:position>
+            <AD:locator>
+                <AD:AddressLocator>
+                    {# In the Netherlands a house number is always required #}
+                    <AD:designator>
+                        <AD:LocatorDesignator>
+                            <AD:designator>{{ address.house_number }}</AD:designator>
+                            <AD:type>{{ globs.locator_designator.house_number }}</AD:type>
+                        </AD:LocatorDesignator>
+                    </AD:designator>
+                    {% if address.house_letter %}
+                        <!-- Optional House Letter Addition, e.g. "Huisletter" in The Netherlands -->
+                        <AD:designator>
+                            <AD:LocatorDesignator>
+                                <AD:designator>{{ address.house_letter }}</AD:designator>
+                                <AD:type>{{ globs.locator_designator.house_letter }}</AD:type>
+                            </AD:LocatorDesignator>
+                        </AD:designator>
+                    {% endif %}
+                    {% if address.house_number_add %}
+                        <!-- Optional House Number Addition, e.g. Floornumber "Huisnummertoevoeging" in The Netherlands -->
+                        <AD:designator>
+                            <AD:LocatorDesignator>
+                                <AD:designator>{{ address.house_number_add }}</AD:designator>
+                                <AD:type>{{ globs.locator_designator.house_number_add }}</AD:type>
+                            </AD:LocatorDesignator>
+                        </AD:designator>
+                    {% endif %}
+                    <AD:level>unitLevel</AD:level>
+                </AD:AddressLocator>
+            </AD:locator>
+            <AD:validFrom>{{ globs.valid_from }}</AD:validFrom>
+            <AD:validTo xsi:nil="true" nilReason="other:unpopulated"/>
+
+            <AD:beginLifespanVersion xsi:nil="true" nilReason="other:unpopulated"/>
+            <AD:endLifespanVersion xsi:nil="true" nilReason="other:unpopulated"/>
+            <!-- Inline reference to address components: street (ThoroughfareName_, city (AddressAreaName)
+            and postal code (PostalDescriptor)  -->
+            <AD:component xmlns:xlink="http://www.w3.org/1999/xlink"
+                       xlink:href="#{{ globs.namespace }}.ThoroughfareName.{{ address.street_id }}"/>
+            <AD:component xmlns:xlink="http://www.w3.org/1999/xlink"
+                       xlink:href="#{{ globs.namespace }}.AddressAreaName.{{ address.city_id }}"/>
+            <AD:component xmlns:xlink="http://www.w3.org/1999/xlink"
+                       xlink:href="#{{ globs.namespace }}.PostalDescriptor.{{ address.postal_code }}"/>
+        </AD:Address>
+    </base:member>
+        {% if streets[address.street_id] is not defined %}
+          {# Each street (BAG id) may appear only once within the Spatial Dataset.
+            Track the unique street id in a map (dict) and check below to add only once. #}
+          {% do streets.update({address.street_id:address.street_id}) %}
+
+    <base:member>
+        <AD:ThoroughfareName gml:id="{{ globs.namespace }}.ThoroughfareName.{{ address.street_id }}">
+            <gml:identifier codeSpace="{{ globs.inspire_codespace_uri }}">
+                {{ globs.inspire_urn_prefix_id }}:{{ globs.namespace }}.ThoroughfareName.{{ address.street_id }}
+            </gml:identifier>
+            <AD:inspireId>
+                {{ macros_inspire.render_inspire_id(globs.namespace, address.street_id) }}
+            </AD:inspireId>
+            <AD:beginLifespanVersion xsi:nil="true" nilReason="other:unpopulated"/>
+            <AD:endLifespanVersion xsi:nil="true" nilReason="other:unpopulated"/>
+            <AD:validFrom>{{ globs.valid_from }}</AD:validFrom>
+            <AD:validTo xsi:nil="true" nilReason="other:unpopulated"/>
+            <AD:name>
+                <AD:ThoroughfareNameValue>
+                    <AD:name>
+                        {{ macros_inspire.render_geographical_name(address.street_name, globs.geographical_name) }}
+                    </AD:name>
+                </AD:ThoroughfareNameValue>
+            </AD:name>
+        </AD:ThoroughfareName>
+    </base:member>
+        {% endif %}
+        {% if cities[address.city_id] is not defined %}
+          {# Each city may appear only once within the Spatial Dataset.
+            Track the unique city id in a map (dict) and check below to add only once. #}
+          {% do cities.update({address.city_id:address.city_id}) %}
+    <base:member>
+        <AD:AddressAreaName gml:id="{{ globs.namespace }}.AddressAreaName.{{ address.city_id }}">
+            <gml:identifier codeSpace="{{ globs.inspire_codespace_uri }}">
+                {{ globs.inspire_urn_prefix_id }}:{{ globs.namespace }}.AddressAreaName.{{ address.city_id }}
+            </gml:identifier>
+            <AD:inspireId>
+                {{ macros_inspire.render_inspire_id(globs.namespace, address.city_id) }}
+            </AD:inspireId>
+            <AD:beginLifespanVersion xsi:nil="true" nilReason="other:unpopulated"/>
+            <AD:endLifespanVersion xsi:nil="true" nilReason="other:unpopulated"/>
+            <AD:validFrom>{{ globs.valid_from }}</AD:validFrom>
+            <AD:validTo xsi:nil="true" nilReason="other:unpopulated"/>
+            <AD:name>
+                {{ macros_inspire.render_geographical_name(address.city_name, globs.geographical_name) }}
+            </AD:name>
+            <AD:namedPlace xsi:nil="true" nilReason="other:unpopulated"/>
+        </AD:AddressAreaName>
+    </base:member>
+        {% endif %}
+
+        {% if postal_codes[address.postal_code] is not defined %}
+          {# Each postal code (NL Postcode) may appear only once within the Spatial Dataset.
+            Track the unique posatl codes id in a map (dict) and check below to add only once. #}
+          {% do postal_codes.update({address.postal_code:address.postal_code}) %}
+    <base:member>
+        <AD:PostalDescriptor gml:id="{{ globs.namespace }}.PostalDescriptor.{{ address.postal_code }}">
+            <gml:identifier codeSpace="{{ globs.inspire_codespace_uri }}">
+                {{ globs.inspire_urn_prefix_id }}:{{ globs.namespace }}.PostalDescriptor.{{ address.postal_code }}
+            </gml:identifier>
+            <AD:inspireId>
+                {{ macros_inspire.render_inspire_id(globs.namespace, address.postal_code) }}
+           </AD:inspireId>
+            <AD:beginLifespanVersion xsi:nil="true" nilReason="other:unpopulated"/>
+            <AD:endLifespanVersion xsi:nil="true" nilReason="other:unpopulated"/>
+            <AD:validFrom>{{ globs.valid_from }}</AD:validFrom>
+            <AD:validTo xsi:nil="true" nilReason="other:unpopulated"/>
+            <AD:postCode>{{ address.postal_code }}</AD:postCode>
+        </AD:PostalDescriptor>
+    </base:member>
+        {% endif %}
+    {% endfor %}
+
+</base:SpatialDataSet>

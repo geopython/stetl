@@ -56,6 +56,9 @@ class TemplatingFilter(Filter):
         self.destroy_template()
 
     def create_template(self):
+        '''
+        To be overridden in subclasses.
+        '''
         pass
 
     def destroy_template(self):
@@ -73,7 +76,7 @@ class StringTemplatingFilter(TemplatingFilter):
     """
     Implements Templating using Python's internal string.Template.
     A template string or file should be configured. The input record
-    contains the actual values to be substituted in the template string.
+    contains the actual values to be substituted in the template string as a record (key/value pairs).
     Output is a regular string.
 
     consumes=FORMAT.record, produces=FORMAT.string
@@ -188,8 +191,9 @@ class Jinja2TemplatingFilter(TemplatingFilter):
         return packet
 
     def add_env_filters(self, jinja2_env):
-        # Register additional Filters on the template environment by updating the filters dict:
-        # Somehow min and max of list are not present
+        '''Register additional Filters on the template environment by updating the filters dict:
+        Somehow min and max of list are not present so add them as well.
+        '''
         jinja2_env.filters['maximum'] = max
         jinja2_env.filters['minimum'] = min
         jinja2_env.filters['geojson2gml'] = Jinja2TemplatingFilter.geojson2gml_filter

@@ -195,6 +195,9 @@ to be compatible only between two coupled Components.
 Stetl does not define one single data structure, but leaves this to the Components themselves.
 For XML-based data the `etree_doc`, a complete DOM-document, is used by many components, but also ordinary strings.
 Each Component will indicate the type of data it `consumes` and/or `produces`.
+If a Component can produce multiple data types, like a single stream of `records` or a `record array`
+the `produces` parameter can be a list (array) of data types. During `Chain` construction Stetl will check
+for a compatible output data type and if exists will set that data type as the `output_format`.
 Stetl will only check if these input and output-types for connecting Components are compatible
 when constructing a Chain.
 

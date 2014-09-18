@@ -320,7 +320,7 @@ class CsvFileInput(FileInput):
 
     # Constructor
     def __init__(self, configdict, section):
-        FileInput.__init__(self, configdict, section, produces=FORMAT.record)
+        FileInput.__init__(self, configdict, section, produces=[FORMAT.record, FORMAT.record_array])
         self.file = None
 
     def init(self):
@@ -330,11 +330,22 @@ class CsvFileInput(FileInput):
 
         self.csv_reader = csv.DictReader(self.file)
 
+        if self.output_format == FORMAT.record_array:
+            self.arr = list()
+
     def read(self, packet):
         try:
             packet.data = self.csv_reader.next()
+            if self.output_format == FORMAT.record_array:
+                while True:
+                    self.arr.append(packet.data)
+                    packet.data = self.csv_reader.next()
+
             log.info("CSV row nr %d read: %s" % (self.csv_reader.line_num-1, packet.data))
         except Exception, e:
+            if self.output_format == FORMAT.record_array:
+                packet.data = self.arr
+
             packet.set_end_of_stream()
             self.file.close()
 

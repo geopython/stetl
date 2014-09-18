@@ -57,6 +57,7 @@ class FORMAT:
     xml_doc_as_string = 'xml_doc_as_string'
     string = 'string'
     record = 'record'
+    record_array = 'record_array'
     struct = 'struct'
     geojson_struct = 'geojson_struct'
     any = 'any'

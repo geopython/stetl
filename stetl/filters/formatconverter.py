@@ -30,7 +30,7 @@ class FormatConverter(Filter):
     cfg_output_format = Attr(str, True, None,
                              "the output format to which the input format is converted")
 
-    cfg_depth_search = Attr(bool, False, False, "Recurse into directories ?")
+    cfg_converter_args = Attr(dict, False, None, "Custom converter-specific arguments")
     # End attribute config meta
 
     # Constructor
@@ -42,12 +42,14 @@ class FormatConverter(Filter):
         # the output format to which the input format is converted
         self.output_format = self.cfg.get('output_format', None)
 
+        self.converter_args = self.cfg.get_dict('converter_args', None)
+
         self.consumes = self.input_format
         self.produces = self.output_format
 
     def invoke(self, packet):
-        if packet.data is None:
-            return packet
+        # if packet.data is None:
+        #     return packet
 
         # Any as output is always valid, just return
         if self.output_format == FORMAT.any:
@@ -60,10 +62,15 @@ class FormatConverter(Filter):
         # ASSERT converters present for input_format
 
         if self.output_format not in FORMAT_CONVERTERS[self.input_format].keys():
-            raise NotImplementedError('No format converters found for input format %s to output format %s' % (self.input_format, self.output_format))
+            raise NotImplementedError('No format converters found for input format %s to output format %s' % (
+            self.input_format, self.output_format))
 
         packet.format = self.output_format
-        FORMAT_CONVERTERS[self.input_format][self.output_format](packet)
+        if self.converter_args is not None:
+            FORMAT_CONVERTERS[self.input_format][self.output_format](packet, self.converter_args)
+        else:
+            FORMAT_CONVERTERS[self.input_format][self.output_format](packet)
+
         return packet
 
     @staticmethod
@@ -80,11 +87,45 @@ class FormatConverter(Filter):
 
     @staticmethod
     def etree_doc2string(packet):
+        if packet.data is None:
+            return packet
+
         packet.data = etree.tostring(packet.data, pretty_print=True, xml_declaration=True)
         return packet
 
     @staticmethod
+    def record2struct(packet, converter_args=None):
+        if packet.data is None:
+            return packet
+        if converter_args is not None:
+            struct = dict()
+            struct[converter_args['top_name']] = packet.data
+            packet.data = struct
+
+        return packet
+
+    @staticmethod
+    def record2record_array(packet):
+        if not hasattr(packet, 'arr'):
+            packet.arr = list()
+
+        if packet.is_end_of_stream() is True:
+            packet.data = packet.arr
+            return packet
+
+        packet.arr.append(packet.data)
+        packet.consume()
+        return packet
+
+    @staticmethod
+    def record_array2struct(packet, converter_args=None):
+        return FormatConverter.record2struct(packet, converter_args)
+
+    @staticmethod
     def string2etree_doc(packet):
+        if packet.data is None:
+            return packet
+
         packet.data = etree.fromstring(packet.data)
         return packet
 
@@ -93,7 +134,12 @@ class FormatConverter(Filter):
 #  'string', 'record', 'geojson_struct', 'struct', 'any'
 FORMAT_CONVERTERS = {
     FORMAT.xml_line_stream: {FORMAT.string: FormatConverter.no_op},
-    FORMAT.etree_doc: {FORMAT.string: FormatConverter.etree_doc2string, FORMAT.xml_doc_as_string: FormatConverter.etree_doc2string},
-    FORMAT.xml_doc_as_string: {FORMAT.etree_doc: FormatConverter.string2etree_doc, FORMAT.string: FormatConverter.no_op},
+    FORMAT.etree_doc: {FORMAT.string: FormatConverter.etree_doc2string,
+                       FORMAT.xml_doc_as_string: FormatConverter.etree_doc2string},
+    FORMAT.xml_doc_as_string: {FORMAT.etree_doc: FormatConverter.string2etree_doc,
+                               FORMAT.string: FormatConverter.no_op},
     FORMAT.string: {FORMAT.etree_doc: FormatConverter.string2etree_doc},
+    FORMAT.record: {FORMAT.struct: FormatConverter.record2struct,
+                    FORMAT.record_array: FormatConverter.record2record_array},
+    FORMAT.record_array: {FORMAT.struct: FormatConverter.record_array2struct}
 }

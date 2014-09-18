@@ -1,0 +1,4 @@
+address_id,street_name,street_id,house_number,house_number_add,postal_code,city_name,city_id,lon,lat
+362010002013564,Van der Hoochlaan,362300000018600,3,,1181PL,Amstelveen,1050,4.85291,52.31217
+362010002038696,Van IJsselsteinlaan,362300000054003,26,,1181PV,Amstelveen,1050,4.85947,52.30955
+363010000596724,Brouwersgracht,363300000003032,6,3,1013GW,Amsterdam,3594,4.937363,47.993188

@@ -49,6 +49,18 @@ class Component:
         self.output_format = produces
         self.input_format = consumes
 
+    def add_next(self, component):
+        # Some components may have multiple (list) output formats.
+        # In that case, the actual output format is specified via the user-config
+        # or if not present, the first (default) from the list.
+        if type(self.output_format) is list:
+            if component.input_format in self.output_format:
+                self.output_format = component.input_format
+            else:
+                raise ValueError('No compatible output format in list: %s, needing %s' % (str(self.output_format), component.input_format))
+
+        self.next = component
+
     def process(self, packet):
 
         # Do something with the data

@@ -1,0 +1,32 @@
+{# Jinja2 Macros for INSPIRE-related elements #}
+
+{# Macro that renders an inspireId (base:Identifier) element with optional version id #}
+{% macro render_inspire_id(namespace, local_id, version_id=None) -%}
+                            <!-- Rendered by macro render_inspire_id() -->
+                            <base:Identifier>
+                                 <base:localId>{{ local_id }}</base:localId>
+                                 <base:namespace>{{ namespace }}</base:namespace>
+                            {% if version_id != None %}
+                                 <base:versionId>{{ version }}</base:versionId>
+                            {%  endif %}
+                             </base:Identifier>
+{%- endmacro %}
+
+{# Macro that renders a minimal GeographicalName #}
+{% macro render_geographical_name(name, globals) -%}
+                                <GN:GeographicalName>
+                                     <GN:language xsi:nil="true"/>
+                                     <GN:nativeness codeSpace="http://schemas.kademo.nl/inspire/codelist-1004/NativenessValue.xml">endonym</GN:nativeness>
+                                     <GN:nameStatus codeSpace="http://schemas.kademo.nl/inspire/codelist-1004/NameStatusValue.xml">official</GN:nameStatus>
+                                     <GN:sourceOfName>{{ globals.source }}</GN:sourceOfName>
+                                     <GN:pronunciation xsi:nil="true" nilReason="other:unpopulated"/>
+                                     <GN:spelling>
+                                         <GN:SpellingOfName>
+                                             <GN:text>{{ name }}</GN:text>
+                                             <GN:script>{{ globals.script }}</GN:script>
+                                         </GN:SpellingOfName>
+                                     </GN:spelling>
+                                     <GN:grammaticalGender xsi:nil="true"/>
+                                     <GN:grammaticalNumber xsi:nil="true"/>
+                                 </GN:GeographicalName>
+{%- endmacro %}

@@ -15,7 +15,8 @@ log = Util.get_log('ogrinput')
 
 class OgrPostgisInput(Input):
     """
-     Input from PostGIS via ogr2ogr command.
+     Input from PostGIS via ogr2ogr command. For now hardcoded to produce an ogr GML line stream.
+
      TODO: look to use Fiona or direct OGR via Python.
 
      produces=FORMAT.xml_line_stream
