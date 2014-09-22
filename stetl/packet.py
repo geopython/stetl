@@ -50,6 +50,7 @@ class Packet:
 
 
 class FORMAT:
+    none = 'none'
     xml_line_stream = 'xml_line_stream'
     etree_doc = 'etree_doc'
     etree_element_stream = 'etree_element_stream'

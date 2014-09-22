@@ -9,32 +9,63 @@ from packet import FORMAT
 
 log = Util.get_log('component')
 
-class Attr():
-    """
-    Util class to privide metadata for per component config attr options.
-    Each component should document its configuration metadata using the following
-    conventions, for say a config attr 'my_attr':
+    class Config(object):
+        """
+        Decorator class to tie config values from the .ini file to object instance
+        property values. Somewhat like the Python standard @property but with
+        the possibility to define default values, typing and making properties required.
 
-    - name a component class attribute cfg_<my_attr>
-    - assign an instance of this class with type, mandatory, default value and documentation
+        Each property is defined by @Config(type, default, required).
+        Basic idea comes from:  https://wiki.python.org/moin/PythonDecoratorLibrary#Cached_Properties
+        """
+        def __init__(self, python_type=str, default=None, required=False):
+            """
+            If there are no decorator arguments, the function
+            to be decorated is passed to the constructor.
+            """
+            # print "Inside __init__()"
+            self.python_type = python_type
+            self.default = default
+            self.required = required
 
-    For example:
+        def __call__(self, fget):
+            """
+            The __call__ method is not called until the
+            decorated function is called. self is returned such that __get__ below is called
+            with the Component instance. That allows us to cache the actual property value
+            in the Component itself.
+            """
+            # print "Inside __call__()"
+            self.property_name = fget.__name__
+            return self
 
-      class FileInput(Input):
+        def __get__(self, comp_inst, owner):
+            if self.property_name not in comp_inst.cfg_vals:
+                cfg, name, value = comp_inst.cfg, self.property_name, self.default
 
-        cfg_file_path = Attr(str, True, None,
-        "path to file or files: can be a dir or files or even multiple, comma separated")
+                # Do type conversion where needed from the string values
+                if self.python_type is str:
+                    value = cfg.get(name, value)
+                elif self.python_type is bool:
+                    value = cfg.get_bool(name, value)
+                elif self.python_type is list:
+                    value = cfg.get_list(name, value)
+                elif self.python_type is dict:
+                    value = cfg.get_dict(name, value)
+                elif self.python_type is int:
+                    value = cfg.get_int(name, value)
+                elif self.python_type is tuple:
+                    value = cfg.get_tuple(name, value)
+                else:
+                    value = cfg.get(name, value)
 
-    Via the Stetl command 'stetl --doc <Component>' the documentation can be viewed.
+                if self.required is True and value is None:
+                    raise Exception('Config property: %s is required in config for %s' % (name, str(comp_inst)))
 
-    NB this convention came out of struggling with autodoc and class attribute __doc__
-    strings tried first. Somehow that did not work.
-    """
-    def __init__(self, typ=str, mandatory=False, default=None, doc="No doc"):
-        self.type = typ
-        self.mandatory = mandatory
-        self.default = default
-        self.doc = doc
+                comp_inst.cfg_vals[self.property_name] = value
+
+            return comp_inst.cfg_vals[self.property_name]
+
 
 class Component:
     """
@@ -42,24 +73,73 @@ class Component:
 
     """
 
-    def __init__(self, configdict, section, consumes=None, produces=None):
-        self.configdict = configdict
+    @Config(str, default=None, required=False)
+    def input_format(self):
+        """
+        The specific input format if the consumes parameter is a list or the format to be converted to the output_format.
+        Required: False
+        Default: None
+        """
+        pass
+
+    @Config(str, default=None, required=False)
+    def output_format(self):
+        """
+        The specific output format if the produces parameter is a list or the format to which the input format is converted.
+        Required: False
+        Default: None
+        """
+        pass
+
+    def __init__(self, configdict, section, consumes=FORMAT.none, produces=FORMAT.none):
+        # The raw config values from the cfg file
         self.cfg = ConfigSection(configdict.items(section))
+
+        # The actual typed values as populated within Config Decorator
+        self.cfg_vals = dict()
         self.next = None
-        self.output_format = produces
-        self.input_format = consumes
 
-    def add_next(self, component):
-        # Some components may have multiple (list) output formats.
-        # In that case, the actual output format is specified via the user-config
-        # or if not present, the first (default) from the list.
-        if type(self.output_format) is list:
-            if component.input_format in self.output_format:
-                self.output_format = component.input_format
+        # Some components may have multiple output formats: in that case either a
+        # specific output_format needs to be configured or the first format is taken as default
+        self._output_format = produces
+        if type(produces) is list:
+            if self.cfg.has('output_format'):
+                self._output_format = self.cfg.get('output_format')
+                if self._output_format not in produces:
+                    raise ValueError(
+                        'Configured output format %s not in list: %s' % (self._output_format, str(produces)))
             else:
-                raise ValueError('No compatible output format in list: %s, needing %s' % (str(self.output_format), component.input_format))
+                self._output_format = produces[0]
 
-        self.next = component
+        # Some components may have multiple input formats: in that case either a
+        # specific output_format needs to be configured or the first format is taken as default
+        self._input_format = consumes
+        if type(consumes) is list:
+            if self.cfg.has('input_format'):
+                self._input_format = self.cfg.get('input_format')
+                if self._input_format not in consumes:
+                    raise ValueError('Configured input format %s not in list: %s' % (self._input_format, str(consumes)))
+            else:
+                self._input_format = consumes[0]
+
+    def add_next(self, next_component):
+        self.next = next_component
+
+        if not self.is_compatible():
+            raise ValueError(
+                'Incompatible components linked: %s and %s' % (str(self), str(self.next)))
+
+    # Check our compatibility with the next Component in the Chain
+    def is_compatible(self):
+        # Ok, nothing next in Chain
+        if self.next is None or self._output_format is FORMAT.none or self.next._input_format == FORMAT.any:
+            return True
+
+        # return if our Output is compatible with the next Component's Input
+        return self._output_format == self.next._input_format
+
+    def __str__(self):
+        return "%s: in=%s out=%s" % (str(self.__class__), self._input_format, self._output_format)
 
     def process(self, packet):
 
@@ -80,7 +160,7 @@ class Component:
         # If there is a next component, let it process
         if self.next:
             # Hand-over data (line, doc whatever) to the next component
-            packet.format = self.output_format
+            packet.format = self._output_format
             packet = self.next.process(packet)
 
         result = self.after_chain_invoke(packet)
@@ -138,16 +218,3 @@ class Component:
         """
         pass
 
-    # Check our compatibility with the next Component in the Chain
-    def is_compatible(self):
-        # Ok, nothing next in Chain
-        if self.next is None:
-            return True
-
-        # return if our Output is compatible with the next Component's Input
-        return self.output_format is not None \
-                   and self.next.input_format is not None \
-            and (self.output_format == self.next.input_format or self.next.input_format == FORMAT.any)
-
-        #    def __str__(self):
-        #        return "foo"

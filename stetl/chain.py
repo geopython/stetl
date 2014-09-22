@@ -56,10 +56,6 @@ class Chain:
             # Already component(s) in chain add to current
             self.cur_comp.add_next(etl_comp)
 
-            if not self.cur_comp.is_compatible():
-                raise ValueError(
-                    'Incompatible components linked: %s and %s' % (str(self.cur_comp), str(self.cur_comp.next)))
-
         # Remember current
         self.cur_comp = etl_comp
 

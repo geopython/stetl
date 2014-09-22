@@ -4,7 +4,7 @@
 #
 # Author: Just van den Broecke
 #
-from stetl.component import Attr
+from stetl.component import Config
 from stetl.input import Input
 from stetl.util import Util, etree
 from stetl.packet import FORMAT
@@ -13,33 +13,48 @@ import csv
 log = Util.get_log('fileinput')
 
 
-
 class FileInput(Input):
     """
     Abstract base class for specific FileInputs, use derived classes.
     """
 
     # Start attribute config meta
-    # cfg_file_path = Attr(str, True, None,
-    # "path to file or files or URLs: can be a dir or files or URLs (JSON only now) or even multiple, comma separated")
+    # Applying Decorator pattern with the Config class to provide
+    # read-only config values from the configured properties.
 
-    cfg_filename_pattern = Attr(str, False, '*.[gxGX][mM][lL]',
-    "filename pattern according to Python glob.glob")
+    @Config(str, default='*.[gxGX][mM][lL]', required=False)
+    def filename_pattern(self):
+        """
+        Filename pattern according to Python glob.glob for example:
+        '*.[gxGX][mM][lL]'
+        Required: False
+        Default: '*.[gxGX][mM][lL]'
+        """
+        pass
 
-    cfg_depth_search = Attr(bool, False, False, "Recurse into directories ?")
+    @Config(bool, default=False, required=False)
+    def depth_search(self):
+        """
+        Should we recurse into sub-directories to find files?
+        Required: False
+        Default: False
+        """
+        pass
+
+    @Config(str, default=None, required=False)
+    def file_path(self):
+        """
+        Path to file or files or URLs: can be a dir or files or URLs
+        or even multiple, comma separated. For URLs only JSON is supported now.
+        Required: True
+        Default: None
+        """
+        pass
+
     # End attribute config meta
 
     def __init__(self, configdict, section, produces):
         Input.__init__(self, configdict, section, produces)
-
-        # path to file or files: can be a dir or files or even multiple, comma separated
-        # self.file_path = self.cfg.get('file_path')
-
-        # The filename pattern according to Python glob.glob
-        self.filename_pattern = self.cfg.get('filename_pattern', FileInput.cfg_filename_pattern.default)
-
-        # Recurse into directories ?
-        self.depth_search = self.cfg.get_bool('depth_search', FileInput.cfg_depth_search.default)
 
         # Create the list of files to be used as input
         self.file_list = Util.make_file_list(self.file_path, None, self.filename_pattern, self.depth_search)
@@ -48,14 +63,6 @@ class FileInput(Input):
             raise Exception('File list is empty!!')
 
         self.file_list_done = []
-
-    @property
-    def file_path(self):
-        """
-        Path to file or files or URLs: can be a dir or files or URLs
-        or even multiple, comma separated. For URLs only JSON is supported now.
-        """
-        return self.cfg.get('file_path')
 
     def read(self, packet):
         if not len(self.file_list):
@@ -82,6 +89,7 @@ class FileInput(Input):
         """
         pass
 
+
 class StringFileInput(FileInput):
     """
     Reads and produces file as String.
@@ -90,12 +98,17 @@ class StringFileInput(FileInput):
     """
 
     # Start attribute config meta
-    cfg_format_args = Attr(str, False, None,
-    """
-    formatting of content according to Python String.format()
-    Input file should have substitutable values like {schema} {foo}
-    format_args should be of the form format_args = schema:test foo:bar
-    """)
+    @Config(str, default=None, required=False)
+    def format_args(self):
+        """
+        Formatting of content according to Python String.format()
+        Input file should have substitutable values like {schema} {foo}
+        format_args should be of the form format_args = schema:test foo:bar
+        Required: False
+        Default: None
+        """
+        pass
+
     # End attribute config meta
 
     def __init__(self, configdict, section):
@@ -105,7 +118,6 @@ class StringFileInput(FileInput):
         # Optional formatting of content according to Python String.format()
         # Input file should have substitutable values like {schema} {foo}
         # format_args should be of the form format_args = schema:test foo:bar
-        self.format_args = self.cfg.get('format_args')
 
         if self.format_args:
             # Convert string to dict: http://stackoverflow.com/a/1248990
@@ -163,60 +175,7 @@ class XmlFileInput(FileInput):
 
         return data
 
-class XmlLineStreamerFileInput(FileInput):
-    """
-    DEPRECATED Streams lines from an XML file(s)
-    NB assumed is that lines in the file have newlines !!
-    DEPRECATED better is to use XmlElementStreamerFileInput for GML features.
 
-    produces=FORMAT.xml_line_stream
-    """
-
-    # Constructor
-    def __init__(self, configdict, section):
-        FileInput.__init__(self, configdict, section, produces=FORMAT.xml_line_stream)
-        self.file_list_done = []
-        self.file = None
-
-    def read(self, packet):
-        # No more files left and done with current file ?
-        if not len(self.file_list) and self.file is None:
-            packet.set_end_of_stream()
-            log.info("EOF file list")
-            return packet
-
-        # Done with current file or first file ?
-        if self.file is None:
-            self.cur_file_path = self.file_list.pop(0)
-            self.file = open(self.cur_file_path, 'r')
-            log.info("file opened : %s" % self.cur_file_path)
-
-        if packet.is_end_of_stream():
-            return packet
-
-        # Assume valid line
-        line = self.file.readline()
-
-        # EOF reached ?
-        if not line or line == '':
-            packet.data = None
-
-            packet.set_end_of_doc()
-            log.info("EOF file")
-            if self.cur_file_path is not None:
-                self.file_list_done.append(self.cur_file_path)
-                self.cur_file_path = None
-                if not len(self.file_list):
-                    # No more files left: end of stream reached
-                    packet.set_end_of_stream()
-                    log.info("EOF file list")
-
-            self.file = None
-
-            return packet
-
-        packet.data = line.decode('utf-8')
-        return packet
 
 class XmlElementStreamerFileInput(FileInput):
     """
@@ -228,24 +187,31 @@ class XmlElementStreamerFileInput(FileInput):
     """
 
     # Start attribute config meta
-    cfg_element_tags = Attr(str, True, None,
-    """
-    comma-separated string of XML (feature) element tagnames of the elements that should be extracted
-    and added to the output element stream.
-    """)
+    @Config(list, default=None, required=True)
+    def element_tags(self):
+        """
+        Comma-separated string of XML (feature) element tagnames of the elements that should be extracted
+        and added to the output element stream.
+        Required: True
+        Default: None
+        """
+        pass
 
-    cfg_strip_namespaces = Attr(bool, False, False,
-    """
-    should namespaces be removed from the input document and thus not be present in the output element stream?
-    """)
+    @Config(bool, default=False, required=False)
+    def strip_namespaces(self):
+        """
+        should namespaces be removed from the input document and thus not be present in the output element stream?
+        Required: False
+        Default: False
+        """
+        pass
+
     # End attribute config meta
 
     # Constructor
     def __init__(self, configdict, section):
         FileInput.__init__(self, configdict, section, produces=FORMAT.etree_element_stream)
-        self.element_tags = self.cfg.get('element_tags').split(',')
         self.file_list_done = []
-        self.strip_namespaces = self.cfg.get('strip_namespaces', XmlElementStreamerFileInput.cfg_element_tags.default)
         self.context = None
         self.root = None
         self.cur_file_path = None
@@ -317,6 +283,61 @@ class XmlElementStreamerFileInput(FileInput):
 
         return packet
 
+class XmlLineStreamerFileInput(FileInput):
+    """
+    DEPRECATED Streams lines from an XML file(s)
+    NB assumed is that lines in the file have newlines !!
+    DEPRECATED better is to use XmlElementStreamerFileInput for GML features.
+
+    produces=FORMAT.xml_line_stream
+    """
+
+    # Constructor
+    def __init__(self, configdict, section):
+        FileInput.__init__(self, configdict, section, produces=FORMAT.xml_line_stream)
+        self.file_list_done = []
+        self.file = None
+
+    def read(self, packet):
+        # No more files left and done with current file ?
+        if not len(self.file_list) and self.file is None:
+            packet.set_end_of_stream()
+            log.info("EOF file list")
+            return packet
+
+        # Done with current file or first file ?
+        if self.file is None:
+            self.cur_file_path = self.file_list.pop(0)
+            self.file = open(self.cur_file_path, 'r')
+            log.info("file opened : %s" % self.cur_file_path)
+
+        if packet.is_end_of_stream():
+            return packet
+
+        # Assume valid line
+        line = self.file.readline()
+
+        # EOF reached ?
+        if not line or line == '':
+            packet.data = None
+
+            packet.set_end_of_doc()
+            log.info("EOF file")
+            if self.cur_file_path is not None:
+                self.file_list_done.append(self.cur_file_path)
+                self.cur_file_path = None
+                if not len(self.file_list):
+                    # No more files left: end of stream reached
+                    packet.set_end_of_stream()
+                    log.info("EOF file list")
+
+            self.file = None
+
+            return packet
+
+        packet.data = line.decode('utf-8')
+        return packet
+
 
 class CsvFileInput(FileInput):
     """
@@ -328,7 +349,7 @@ class CsvFileInput(FileInput):
 
     # Constructor
     def __init__(self, configdict, section):
-        FileInput.__init__(self, configdict, section, produces=[FORMAT.record_array,FORMAT.record])
+        FileInput.__init__(self, configdict, section, produces=[FORMAT.record_array, FORMAT.record])
         self.file = None
 
     def init(self):
@@ -338,20 +359,20 @@ class CsvFileInput(FileInput):
 
         self.csv_reader = csv.DictReader(self.file)
 
-        if self.output_format == FORMAT.record_array:
+        if self._output_format == FORMAT.record_array:
             self.arr = list()
 
     def read(self, packet):
         try:
             packet.data = self.csv_reader.next()
-            if self.output_format == FORMAT.record_array:
+            if self._output_format == FORMAT.record_array:
                 while True:
                     self.arr.append(packet.data)
                     packet.data = self.csv_reader.next()
 
-            log.info("CSV row nr %d read: %s" % (self.csv_reader.line_num-1, packet.data))
+            log.info("CSV row nr %d read: %s" % (self.csv_reader.line_num - 1, packet.data))
         except Exception, e:
-            if self.output_format == FORMAT.record_array:
+            if self._output_format == FORMAT.record_array:
                 packet.data = self.arr
 
             packet.set_end_of_stream()
@@ -381,6 +402,7 @@ class JsonFileInput(FileInput):
             # may read/parse JSON from file or URL
             if file_path.startswith('http'):
                 import urllib2
+
                 fp = urllib2.urlopen(file_path)
                 file_data = json.loads(fp.read())
             else:

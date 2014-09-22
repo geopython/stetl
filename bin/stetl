@@ -30,8 +30,8 @@ def main():
         etl = ETL(vars(args), args.config_args)
         etl.run()
 
-    elif args.doc_args:
-        print_doc(args.doc_args)
+    # elif args.doc_args:
+    #     print_doc(args.doc_args)
     else:
         print('Try stetl -h for help')
 

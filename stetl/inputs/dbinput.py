@@ -4,7 +4,7 @@
 #
 # Author: Just van den Broecke
 #
-from stetl.component import Attr
+from stetl.component import Config
 from stetl.input import Input
 from stetl.util import Util
 from stetl.packet import FORMAT
@@ -35,29 +35,73 @@ class PostgresDbInput(Input):
     """
 
     # Start attribute config meta
-    cfg_database = Attr(str, True, None, "database name")
+    @Config(str, required=True, default=None)
+    def database_name(self):
+        """
+        database name
+        """
+        pass
 
-    cfg_host = Attr(str, False, 'localhost', "host name or host IP-address")
+    @Config(str, required=False, default='localhost')
+    def host(self):
+        """
+        host name or host IP-address
+        """
+        pass
 
-    cfg_user = Attr(str, False, 'postgres', "User name")
+    @Config(str, required=False, default='postgres')
+    def user(self):
+        """
+        User name
+        """
+        pass
 
-    cfg_password = Attr(str, False, 'postgres', "User password")
+    @Config(str, required=False, default='postgres')
+    def password(self):
+        """
+        User password
+        """
+        pass
 
-    cfg_schema = Attr(str, False, 'public', "Schema name")
+    @Config(str, required=False, default='public')
+    def schema(self):
+        """
+        Schema (postgres schema) name
+        """
+        pass
 
-    cfg_table = Attr(str, False, None, "Table name")
+    @Config(str, required=False, default=None)
+    def table(self):
+        """
+        Table name
+        """
+        pass
 
-    cfg_table = Attr(str, False, None, "Column names to populate records with")
+    @Config(str, required=False, default=None)
+    def column_names(self):
+        """
+        Column names to populate records with
+        """
+        pass
 
-    cfg_read_once = Attr(bool, False, False, "Read once? i.e. only do query once and stop")
+    @Config(bool, required=False, default=False)
+    def read_once(self):
+        """
+        Read once? i.e. only do query once and stop
+        """
+        pass
 
+
+    @Config(str, required=False, default=None)
+    def query(self):
+        """
+        The query (string) to fire.
+        """
+        pass
     # End attribute config meta
 
     def __init__(self, configdict, section):
-        Input.__init__(self, configdict, section, produces=FORMAT.record)
-        self.query = self.cfg.get('query')
-        self.read_once = self.cfg.get_bool('read_once', False)
-        self.column_names = self.cfg.get('column_names', None)
+        Input.__init__(self, configdict, section, produces=[FORMAT.record_array,FORMAT.record])
         self.db = None
 
     def init(self):
@@ -67,8 +111,9 @@ class PostgresDbInput(Input):
         self.db.connect()
 
         # If no explicit column names given, get from DB meta info
+        self.columns = self.column_names
         if self.column_names is None:
-            self.column_names = self.db.get_column_names(self.cfg.get('table'), self.cfg.get('schema'))
+            self.columns = self.db.get_column_names(self.cfg.get('table'), self.cfg.get('schema'))
 
     def exit(self):
         # Disconnect from DB when done
@@ -88,7 +133,7 @@ class PostgresDbInput(Input):
 
         # Convert list of lists to list of dict using column_names
         for db_record in db_records:
-            records.append(dict(zip(self.column_names, db_record)))
+            records.append(dict(zip(self.columns, db_record)))
 
         return records
 

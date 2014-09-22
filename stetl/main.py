@@ -29,8 +29,8 @@ def parse_args():
                            dest='config_args', required=False)
 
     argparser.add_argument('-d ', '--doc', type=str,
-                           help='Get component documentation like its configuration parameters, e.g. stetl doc stetl.inputs.fileinput.FileInput',
-                           dest='doc_args', required=False)
+                          help='Get component documentation like its configuration parameters, e.g. stetl doc stetl.inputs.fileinput.FileInput',
+                          dest='doc_args', required=False)
 
     args = argparser.parse_args()
 
@@ -40,6 +40,7 @@ def parse_args():
 
     return args
 
+# DEPRECATED, now using @Config which also documents with Sphinx
 def print_config_attrs(clazz):
     skip =['Filter', 'Input', 'Output', 'Component']
     for base in clazz.__bases__:
@@ -83,6 +84,7 @@ def print_classes(package):
             print name, data
 
 
+# DEPRECATED, now using @Config which also documents with Sphinx
 def print_doc(class_name):
     """Print documentation for class in particular config options"""
     # print_classes(class_name)
@@ -94,8 +96,8 @@ def print_doc(class_name):
         print ('DOCUMENTATION\n')
         print ('CLASS: %s' % class_name)
         print (class_obj.__doc__)
-        print ('\nConfiguration attributes: \n')
-        print_config_attrs(class_obj)
+        # print ('\nConfiguration attributes: \n')
+        # print_config_attrs(class_obj)
 
     except Exception, e:
         log.error("cannot print info class named '%s' e=%s - you made a typo?" % (class_name, str(e)))

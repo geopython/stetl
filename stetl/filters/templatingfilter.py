@@ -10,7 +10,7 @@
 # Author:Just van den Broecke
 
 from stetl.util import Util
-from stetl.component import Attr
+from stetl.component import Config
 from stetl.filter import Filter
 from stetl.packet import FORMAT
 from string import Template
@@ -29,17 +29,32 @@ class TemplatingFilter(Filter):
     """
 
     # Start attribute config meta
-    cfg_template_file = Attr(str, False, None,
-    "path to template file (one of template_file or template_string needs to be configured)")
+    # Applying Decorator pattern with the Config class to provide
+    # read-only config values from the configured properties.
 
-    cfg_template_string = Attr(str, False, None,
-    "template as string (one of template_file or template_string needs to be configured)")
+    @Config(str, default=None, required=False)
+    def template_file(self):
+        """
+        Path to template file. One of template_file or template_string needs to be configured.
+        Required: False
+        Default: None
+        """
+        pass
+
+    @Config(str, default=None, required=False)
+    def template_string(self):
+        """
+        Template string. One of template_file or template_string needs to be configured.
+        Required: False
+        Default: None
+        """
+        pass
+
+    # End attribute config meta
 
     # Constructor
     def __init__(self, configdict, section, consumes=FORMAT.any, produces=FORMAT.string):
         Filter.__init__(self, configdict, section, consumes, produces)
-        self.template_file = self.cfg.get('template_file', StringTemplatingFilter.cfg_template_file.default)
-        self.template_string = self.cfg.get('template_string', StringTemplatingFilter.cfg_template_string.default)
 
     def init(self):
         log.info('Init: templating')
@@ -118,19 +133,36 @@ class Jinja2TemplatingFilter(TemplatingFilter):
     consumes=FORMAT.struct, produces=FORMAT.string
     """
 
-    cfg_template_search_paths = Attr(str, False, [os.getcwd()],
-    "list of directories where to search for templates, default is current working directory only")
+    # Start attribute config meta
+    # Applying Decorator pattern with the Config class to provide
+    # read-only config values from the configured properties.
 
-    cfg_template_globals_path = Attr(str, False, None,
-    "One or more JSON files or URLs with global variables that can be used anywhere in template. Multiple files will be merged into one globals dictionary")
+    @Config(str, default=[os.getcwd()], required=False)
+    def template_search_paths(self):
+        """
+        List of directories where to search for templates, default is current working directory only.
+        Required: False
+        Default: [os.getcwd()]
+        """
+        pass
+
+    @Config(str, default=None, required=False)
+    def template_globals_path(self):
+        """
+        One or more JSON files or URLs with global variables that can be used anywhere in template.
+        Multiple files will be merged into one globals dictionary
+        Required: False
+        Default: None
+        """
+        pass
+
+    # End attribute config meta
 
     json_package = None
     ogr_package = None
 
     def __init__(self, configdict, section):
-        TemplatingFilter.__init__(self, configdict, section, consumes=FORMAT.struct)
-        self.template_search_paths = self.cfg.get_list('template_search_paths', default=Jinja2TemplatingFilter.cfg_template_search_paths.default)
-        self.template_globals_path = self.cfg.get('template_globals_path', default=Jinja2TemplatingFilter.cfg_template_globals_path.default)
+        TemplatingFilter.__init__(self, configdict, section, consumes=[FORMAT.struct,FORMAT.geojson_struct])
 
     def create_template(self):
         try:

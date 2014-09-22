@@ -6,7 +6,7 @@
 #
 # Author:Just van den Broecke
 
-from stetl.component import Attr
+from stetl.component import Config
 from stetl.util import Util, etree
 from stetl.filter import Filter
 from stetl.packet import FORMAT
@@ -24,28 +24,26 @@ class FormatConverter(Filter):
     """
 
     # Start attribute config meta
-    cfg_input_format = Attr(str, True, None,
-                            "the input format to be converted to the output_format")
+    # Applying Decorator pattern with the Config class to provide
+    # read-only config values from the configured properties.
 
-    cfg_output_format = Attr(str, True, None,
-                             "the output format to which the input format is converted")
+    @Config(dict, default=None, required=False)
+    def converter_args(self):
+        """
+        Custom converter-specific arguments.
+        Type: dictionary
+        Required: False
+        Default: None
+        """
+        pass
 
-    cfg_converter_args = Attr(dict, False, None, "Custom converter-specific arguments")
     # End attribute config meta
 
     # Constructor
     def __init__(self, configdict, section):
         Filter.__init__(self, configdict, section, consumes=FORMAT.any, produces=FORMAT.any)
-
-        self.input_format = self.cfg.get('input_format', None)
-
-        # the output format to which the input format is converted
-        self.output_format = self.cfg.get('output_format', None)
-
-        self.converter_args = self.cfg.get_dict('converter_args', None)
-
-        self.consumes = self.input_format
-        self.produces = self.output_format
+        self._output_format = self.output_format
+        self._input_format = self._input_format
 
     def invoke(self, packet):
         # if packet.data is None:

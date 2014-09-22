@@ -40,7 +40,7 @@ class Factory:
         """
         class_obj = None
         try:
-            module_name, _, class_name = class_string.rpartition('.')
+            module_name, dot, class_name = class_string.rpartition('.')
             if module_name == '':
                 raise ValueError('Class name must contain module part.')
             class_obj = getattr(

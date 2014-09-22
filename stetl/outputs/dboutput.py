@@ -55,7 +55,7 @@ class PostgresInsertOutput(PostgresDbOutput):
     """
 
     def __init__(self, configdict, section):
-        DbOutput.__init__(self, configdict, section, consumes=FORMAT.record)
+        DbOutput.__init__(self, configdict, section, consumes=[FORMAT.record_array, FORMAT.record])
         self.query = None
         self.db = None
         self.key = self.cfg.get('key')

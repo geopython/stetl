@@ -167,9 +167,6 @@ class ConfigSection():
     def __init__(self, config_section):
         self.config_dict = dict(config_section)
 
-    def get_dict(self):
-        return self.config_dict
-
     def has(self, name):
         return name in self.config_dict
 
@@ -220,10 +217,13 @@ class ConfigSection():
             result = tuple(result)
         return result
 
-    def get_dict(self, name, default=None):
+    def get_dict(self, name=None, default=None):
         """
-        Get value as dict
+        Get value as dict or entire config dict if no name given
         """
+        if name is None:
+            return self.config_dict
+
         result = self.get(name)
         if result is None:
             result = default

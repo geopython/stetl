@@ -54,58 +54,66 @@ Configuring Components
 ----------------------
 Most Stetl Components, i.e. inputs, filters, outputs, have configuration properties that can be configured within their
 respective [section] in the config file. But what are the possible properties, values and defaults?
-Offcourse one can look in the source files, but since Stetl 1.0.6 work is underway for autodocumenting
-these attributes. For a given class the command `stetl --doc <class name>` can be issued on the command line.
-For example, the command `stetl --doc stetl.inputs.fileinput.StringFileInput` produces something like. ::
+This is documented within each Component class using the `@Config` decorator much similar to `@property`, only with
+some more intelligence for type conversions, defaults, required presence and documentation.
+It is loosely based on https://wiki.python.org/moin/PythonDecoratorLibrary#Cached_Properties.
 
-    CLASS: stetl.inputs.fileinput.StringFileInput
+For class authors: this information is added
+via the Python Decorators much similar to `@property`. The :class:`stetl.component.Config`
+is used to define read-only properties for each Component instance. For example, ::
 
-        Reads and produces file as String.
+    class FileInput(Input):
+        """
+        Abstract base class for specific FileInputs, use derived classes.
+        """
 
-        produces=FORMAT.string
+        # Start attribute config meta
+        # Applying Decorator pattern with the Config class to provide
+        # read-only config values from the configured properties.
 
+        @Config(str, default=None, required=False)
+        def file_path(self):
+            """
+            Path to file or files or URLs: can be a dir or files or URLs
+            or even multiple, comma separated. For URLs only JSON is supported now.
+            Required: True
+            Default: None
+            """
+            pass
 
-    Configuration attributes:
+        @Config(str, default='*.[gxGX][mM][lL]', required=False)
+        def filename_pattern(self):
+            """
+            Filename pattern according to Python glob.glob for example:
+            '*.[gxGX][mM][lL]'
+            Required: False
+            Default: '*.[gxGX][mM][lL]'
+            """
+            pass
 
-    ----------------------------------------------
-    NAME: depth_search
-    MANDATORY: False
-    TYPE: <type 'bool'>
+        # End attribute config meta
 
-    Recurse into directories ?
+        def __init__(self, configdict, section, produces):
+            Input.__init__(self, configdict, section, produces)
 
-    DEFAULT: False
-    ----------------------------------------------
-    NAME: filename_pattern
-    MANDATORY: False
-    TYPE: <type 'str'>
+            # Create the list of files to be used as input
+            self.file_list = Util.make_file_list(self.file_path, None, self.filename_pattern, self.depth_search)
 
-    filename pattern according to Python glob.glob
+This defines two configurable properties for the class FileInput.
+Each @Config has three parameters: `python_type`, `default` and `required`.
 
-    DEFAULT: *.[gxGX][mM][lL]
-    ----------------------------------------------
-    NAME: file_path
-    MANDATORY: True
-    TYPE: <type 'str'>
+Within the config one can set specific
+config values like, ::
 
-    path to file or files: can be a dir or files or even multiple, comma separated
+    [input_xml_file]
+    class = inputs.fileinput.XmlFileInput
+    file_path = input/cities.xml
 
-    DEFAULT: None
-    ----------------------------------------------
-    NAME: format_args
-    MANDATORY: False
-    TYPE: <type 'str'>
-
-    formatting of content according to Python String.format()
-    Input file should have substitutable values like {schema} {foo}
-    format_args should be of the form format_args = schema:test foo:bar
-
-
-    DEFAULT: None
-
-Though not all classes may yet be documented. This is a matter of time. For class authors: this information is added
-via class global/static members of type :class:`stetl.component.Attr`. At a later stage we may also have automatic checks whether
-all mandatory attributes have been configured.
+This automagically assigns `file_path` to `self.file_path` without any custom code and a
+default value to `filename_pattern`. It is checked if `file_path` is present, its type is string.
+In some cases type conversions may be applied e.g. when type is `dict` or `list`. It is guarded that the value is not
+overwritten and the docstrings will appear in the documenation.  Though not all classes may yet be documented.
+This should be a matter of time.
 
 Running Stetl
 -------------
@@ -186,19 +194,26 @@ This makes an ETL chain highly reusable. A very elaborate Stetl config with para
 Connection Compatibility
 ------------------------
 
-Components typically pass data to a next :class:`stetl.component.Component` .
+During ETL Chain processing Components typically pass data to a next :class:`stetl.component.Component` .
 A :class:`stetl.filter.Filter`  Component both consumes and produces data, Inputs produce data and
-Outputs consume data.
+Outputs only consume data.
 
 Data and status flows as :class:`stetl.packet.Packet` objects between the Components. The type of the data in these Packets needs
 to be compatible only between two coupled Components.
-Stetl does not define one single data structure, but leaves this to the Components themselves.
-For XML-based data the `etree_doc`, a complete DOM-document, is used by many components, but also ordinary strings.
-Each Component will indicate the type of data it `consumes` and/or `produces`.
-If a Component can produce multiple data types, like a single stream of `records` or a `record array`
-the `produces` parameter can be a list (array) of data types. During `Chain` construction Stetl will check
-for a compatible output data type and if exists will set that data type as the `output_format`.
-Stetl will only check if these input and output-types for connecting Components are compatible
+Stetl does not define one unifying data structure, but leaves this to the Components themselves.
+
+Each Component provides the type of data it `consumes` (Filters, Outputs) and/or `produces` (Inputs, Filters).
+This is indicated in its class definition using the `consumes` and `produces` object constructor parameters.
+Some Components can produce and/or consume multiple data types, like a single stream of `records` or a `record array`.
+In those cases the `produces` or `consumes` parameter can be a list (array) of data types.
+
+During `Chain` construction Stetl will check for compatible formats when connecting `Components`.
+If one of the formats is a list of formats, the actual format is determined by:
+
+#. explicit setting: the actual `input_format` and/or `output_format` is set in the Component .ini configuration
+#. no setting provided: the first format in the list is taken as default
+
+Stetl will only check if these input and output-formats for connecting Components are compatible
 when constructing a Chain.
 
 The following data types are currently symbolically defined in the :class:`stetl.packet.FORMAT` class:
@@ -215,7 +230,9 @@ The following data types are currently symbolically defined in the :class:`stetl
 
 - ``string``- a general string
 
-- ``record`` - a Python ``dict`` or array of ``dict``s)
+- ``record`` - a Python ``dict`` (hashmap)
+
+- ``record_array`` - a Python list (array) of ``dict``s
 
 - ``struct`` - a JSON-like generic tree structure
 
@@ -223,7 +240,7 @@ The following data types are currently symbolically defined in the :class:`stetl
 
 - ``any`` - 'catch-all' type, may be any of the above.
 
-Many components, in particular Filters, are able to transform one data type to another type.
+Many components, in particular Filters, are able to transform data formats.
 For example the `XmlElementStreamerFileInput` can produce an
 `etree_element_stream`, a subsequent `XmlAssembler` can create small in-memory `etree_doc` s that
 can be fed into an `XsltFilter`, which outputs a transformed `etree_doc`. The type `any` is a catch-all,
