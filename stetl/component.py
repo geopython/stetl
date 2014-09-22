@@ -28,7 +28,7 @@ class Config(object):
         self.default = default
         self.required = required
 
-    def __call__(self, fget):
+    def __call__(self, fget, doc=None):
         """
         The __call__ method is not called until the
         decorated function is called. self is returned such that __get__ below is called
@@ -37,6 +37,9 @@ class Config(object):
         """
         # print "Inside __call__()"
         self.property_name = fget.__name__
+        self.__doc__ = doc or fget.__doc__
+        self.__name__ = fget.__name__
+        self.__module__ = fget.__module__
         return self
 
     def __get__(self, comp_inst, owner):
