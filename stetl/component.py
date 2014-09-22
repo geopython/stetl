@@ -9,62 +9,62 @@ from packet import FORMAT
 
 log = Util.get_log('component')
 
-    class Config(object):
+class Config(object):
+    """
+    Decorator class to tie config values from the .ini file to object instance
+    property values. Somewhat like the Python standard @property but with
+    the possibility to define default values, typing and making properties required.
+
+    Each property is defined by @Config(type, default, required).
+    Basic idea comes from:  https://wiki.python.org/moin/PythonDecoratorLibrary#Cached_Properties
+    """
+    def __init__(self, python_type=str, default=None, required=False):
         """
-        Decorator class to tie config values from the .ini file to object instance
-        property values. Somewhat like the Python standard @property but with
-        the possibility to define default values, typing and making properties required.
-
-        Each property is defined by @Config(type, default, required).
-        Basic idea comes from:  https://wiki.python.org/moin/PythonDecoratorLibrary#Cached_Properties
+        If there are no decorator arguments, the function
+        to be decorated is passed to the constructor.
         """
-        def __init__(self, python_type=str, default=None, required=False):
-            """
-            If there are no decorator arguments, the function
-            to be decorated is passed to the constructor.
-            """
-            # print "Inside __init__()"
-            self.python_type = python_type
-            self.default = default
-            self.required = required
+        # print "Inside __init__()"
+        self.python_type = python_type
+        self.default = default
+        self.required = required
 
-        def __call__(self, fget):
-            """
-            The __call__ method is not called until the
-            decorated function is called. self is returned such that __get__ below is called
-            with the Component instance. That allows us to cache the actual property value
-            in the Component itself.
-            """
-            # print "Inside __call__()"
-            self.property_name = fget.__name__
-            return self
+    def __call__(self, fget):
+        """
+        The __call__ method is not called until the
+        decorated function is called. self is returned such that __get__ below is called
+        with the Component instance. That allows us to cache the actual property value
+        in the Component itself.
+        """
+        # print "Inside __call__()"
+        self.property_name = fget.__name__
+        return self
 
-        def __get__(self, comp_inst, owner):
-            if self.property_name not in comp_inst.cfg_vals:
-                cfg, name, value = comp_inst.cfg, self.property_name, self.default
+    def __get__(self, comp_inst, owner):
+        if self.property_name not in comp_inst.cfg_vals:
+            cfg, name, value = comp_inst.cfg, self.property_name, self.default
 
-                # Do type conversion where needed from the string values
-                if self.python_type is str:
-                    value = cfg.get(name, value)
-                elif self.python_type is bool:
-                    value = cfg.get_bool(name, value)
-                elif self.python_type is list:
-                    value = cfg.get_list(name, value)
-                elif self.python_type is dict:
-                    value = cfg.get_dict(name, value)
-                elif self.python_type is int:
-                    value = cfg.get_int(name, value)
-                elif self.python_type is tuple:
-                    value = cfg.get_tuple(name, value)
-                else:
-                    value = cfg.get(name, value)
+            # Do type conversion where needed from the string values
+            if self.python_type is str:
+                value = cfg.get(name, value)
+            elif self.python_type is bool:
+                value = cfg.get_bool(name, value)
+            elif self.python_type is list:
+                value = cfg.get_list(name, value)
+            elif self.python_type is dict:
+                value = cfg.get_dict(name, value)
+            elif self.python_type is int:
+                value = cfg.get_int(name, value)
+            elif self.python_type is tuple:
+                value = cfg.get_tuple(name, value)
+            else:
+                value = cfg.get(name, value)
 
-                if self.required is True and value is None:
-                    raise Exception('Config property: %s is required in config for %s' % (name, str(comp_inst)))
+            if self.required is True and value is None:
+                raise Exception('Config property: %s is required in config for %s' % (name, str(comp_inst)))
 
-                comp_inst.cfg_vals[self.property_name] = value
+            comp_inst.cfg_vals[self.property_name] = value
 
-            return comp_inst.cfg_vals[self.property_name]
+        return comp_inst.cfg_vals[self.property_name]
 
 
 class Component:
