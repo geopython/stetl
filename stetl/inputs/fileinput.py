@@ -20,8 +20,8 @@ class FileInput(Input):
     """
 
     # Start attribute config meta
-    cfg_file_path = Attr(str, True, None,
-    "path to file or files or URLs: can be a dir or files or URLs (JSON only now) or even multiple, comma separated")
+    # cfg_file_path = Attr(str, True, None,
+    # "path to file or files or URLs: can be a dir or files or URLs (JSON only now) or even multiple, comma separated")
 
     cfg_filename_pattern = Attr(str, False, '*.[gxGX][mM][lL]',
     "filename pattern according to Python glob.glob")
@@ -33,7 +33,7 @@ class FileInput(Input):
         Input.__init__(self, configdict, section, produces)
 
         # path to file or files: can be a dir or files or even multiple, comma separated
-        self.file_path = self.cfg.get('file_path')
+        # self.file_path = self.cfg.get('file_path')
 
         # The filename pattern according to Python glob.glob
         self.filename_pattern = self.cfg.get('filename_pattern', FileInput.cfg_filename_pattern.default)
@@ -48,6 +48,14 @@ class FileInput(Input):
             raise Exception('File list is empty!!')
 
         self.file_list_done = []
+
+    @property
+    def file_path(self):
+        """
+        Path to file or files or URLs: can be a dir or files or URLs
+        or even multiple, comma separated. For URLs only JSON is supported now.
+        """
+        return self.cfg.get('file_path')
 
     def read(self, packet):
         if not len(self.file_list):
@@ -312,15 +320,15 @@ class XmlElementStreamerFileInput(FileInput):
 
 class CsvFileInput(FileInput):
     """
-    Parse CSV file into stream of records (dict structures).
+    Parse CSV file into stream of records (dict structures) or a one-time record array.
     NB raw version: CSV needs to have first line with fieldnames.
 
-    produces=FORMAT.record
+    produces=FORMAT.record or FORMAT.record_array
     """
 
     # Constructor
     def __init__(self, configdict, section):
-        FileInput.__init__(self, configdict, section, produces=[FORMAT.record, FORMAT.record_array])
+        FileInput.__init__(self, configdict, section, produces=[FORMAT.record_array,FORMAT.record])
         self.file = None
 
     def init(self):
@@ -355,13 +363,16 @@ class CsvFileInput(FileInput):
 class JsonFileInput(FileInput):
     """
     Parse JSON file from file system or URL into hierarchical data struct.
+    The struct format may also be a GeoJSON structure. In that case the
+    output_format needs to be explicitly set to geojson_struct in the component
+    config.
 
-    produces=FORMAT.struct
+    produces=FORMAT.struct or FORMAT.geojson_struct
     """
 
     # Constructor
     def __init__(self, configdict, section):
-        FileInput.__init__(self, configdict, section, produces=FORMAT.struct)
+        FileInput.__init__(self, configdict, section, produces=[FORMAT.struct, FORMAT.geojson_struct])
 
     def read_file(self, file_path):
         # One-time read/parse only
