@@ -21,33 +21,40 @@ class FileInput(Input):
     # Start attribute config meta
     # Applying Decorator pattern with the Config class to provide
     # read-only config values from the configured properties.
-
-    @Config(str, default='*.[gxGX][mM][lL]', required=False)
-    def filename_pattern(self):
-        """
-        Filename pattern according to Python glob.glob for example:
-        '*.[gxGX][mM][lL]'
-        Required: False
-        Default: '*.[gxGX][mM][lL]'
-        """
-        pass
-
-    @Config(bool, default=False, required=False)
-    def depth_search(self):
-        """
-        Should we recurse into sub-directories to find files?
-        Required: False
-        Default: False
-        """
-        pass
-
-    @Config(str, default=None, required=False)
+    
+    @Config(ptype=str, default=None, required=False)
     def file_path(self):
         """
         Path to file or files or URLs: can be a dir or files or URLs
         or even multiple, comma separated. For URLs only JSON is supported now.
+
         Required: True
+
         Default: None
+        """
+        pass
+
+
+    @Config(ptype=str, default='*.[gxGX][mM][lL]', required=False)
+    def filename_pattern(self):
+        """
+        Filename pattern according to Python ``glob.glob`` for example:
+        '\*.[gxGX][mM][lL]'
+
+        Required: False
+
+        Default: '\*.[gxGX][mM][lL]'
+        """
+        pass
+
+    @Config(ptype=bool, default=False, required=False)
+    def depth_search(self):
+        """
+        Should we recurse into sub-directories to find files?
+
+        Required: False
+
+        Default: False
         """
         pass
 
@@ -98,13 +105,15 @@ class StringFileInput(FileInput):
     """
 
     # Start attribute config meta
-    @Config(str, default=None, required=False)
+    @Config(ptype=str, default=None, required=False)
     def format_args(self):
         """
         Formatting of content according to Python String.format()
         Input file should have substitutable values like {schema} {foo}
-        format_args should be of the form format_args = schema:test foo:bar
+        format_args should be of the form ``format_args = schema:test foo:bar``
+
         Required: False
+
         Default: None
         """
         pass
@@ -187,21 +196,25 @@ class XmlElementStreamerFileInput(FileInput):
     """
 
     # Start attribute config meta
-    @Config(list, default=None, required=True)
+    @Config(ptype=list, default=None, required=True)
     def element_tags(self):
         """
-        Comma-separated string of XML (feature) element tagnames of the elements that should be extracted
+        Comma-separated string of XML (feature) element tag names of the elements that should be extracted
         and added to the output element stream.
+
         Required: True
+
         Default: None
         """
         pass
 
-    @Config(bool, default=False, required=False)
+    @Config(ptype=bool, default=False, required=False)
     def strip_namespaces(self):
         """
         should namespaces be removed from the input document and thus not be present in the output element stream?
+
         Required: False
+
         Default: False
         """
         pass

@@ -27,7 +27,7 @@ class FormatConverter(Filter):
     # Applying Decorator pattern with the Config class to provide
     # read-only config values from the configured properties.
 
-    @Config(dict, default=None, required=False)
+    @Config(ptype=dict, default=None, required=False)
     def converter_args(self):
         """
         Custom converter-specific arguments.

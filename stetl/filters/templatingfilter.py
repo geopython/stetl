@@ -32,7 +32,7 @@ class TemplatingFilter(Filter):
     # Applying Decorator pattern with the Config class to provide
     # read-only config values from the configured properties.
 
-    @Config(str, default=None, required=False)
+    @Config(ptype=str, default=None, required=False)
     def template_file(self):
         """
         Path to template file. One of template_file or template_string needs to be configured.
@@ -41,7 +41,7 @@ class TemplatingFilter(Filter):
         """
         pass
 
-    @Config(str, default=None, required=False)
+    @Config(ptype=str, default=None, required=False)
     def template_string(self):
         """
         Template string. One of template_file or template_string needs to be configured.
@@ -137,7 +137,7 @@ class Jinja2TemplatingFilter(TemplatingFilter):
     # Applying Decorator pattern with the Config class to provide
     # read-only config values from the configured properties.
 
-    @Config(str, default=[os.getcwd()], required=False)
+    @Config(ptype=str, default=[os.getcwd()], required=False)
     def template_search_paths(self):
         """
         List of directories where to search for templates, default is current working directory only.
@@ -146,7 +146,7 @@ class Jinja2TemplatingFilter(TemplatingFilter):
         """
         pass
 
-    @Config(str, default=None, required=False)
+    @Config(ptype=str, default=None, required=False)
     def template_globals_path(self):
         """
         One or more JSON files or URLs with global variables that can be used anywhere in template.

@@ -57,6 +57,7 @@ respective [section] in the config file. But what are the possible properties, v
 This is documented within each Component class using the `@Config` decorator much similar to `@property`, only with
 some more intelligence for type conversions, defaults, required presence and documentation.
 It is loosely based on https://wiki.python.org/moin/PythonDecoratorLibrary#Cached_Properties.
+See for example the :class:`stetl.inputs.fileinput.FileInput` documentation.
 
 For class authors: this information is added
 via the Python Decorators much similar to `@property`. The :class:`stetl.component.Config`
@@ -71,23 +72,27 @@ is used to define read-only properties for each Component instance. For example,
         # Applying Decorator pattern with the Config class to provide
         # read-only config values from the configured properties.
 
-        @Config(str, default=None, required=False)
+        @Config(ptype=str, default=None, required=False)
         def file_path(self):
             """
             Path to file or files or URLs: can be a dir or files or URLs
             or even multiple, comma separated. For URLs only JSON is supported now.
+
             Required: True
+
             Default: None
             """
             pass
 
-        @Config(str, default='*.[gxGX][mM][lL]', required=False)
+        @Config(ptype=str, default='*.[gxGX][mM][lL]', required=False)
         def filename_pattern(self):
             """
             Filename pattern according to Python glob.glob for example:
-            '*.[gxGX][mM][lL]'
+            '\*.[gxGX][mM][lL]'
+
             Required: False
-            Default: '*.[gxGX][mM][lL]'
+
+            Default: '\*.[gxGX][mM][lL]'
             """
             pass
 
@@ -100,7 +105,7 @@ is used to define read-only properties for each Component instance. For example,
             self.file_list = Util.make_file_list(self.file_path, None, self.filename_pattern, self.depth_search)
 
 This defines two configurable properties for the class FileInput.
-Each @Config has three parameters: `python_type`, `default` and `required`.
+Each ``@Config`` has three parameters: `p_type`, `default` and `required`.
 
 Within the config one can set specific
 config values like, ::
@@ -109,11 +114,10 @@ config values like, ::
     class = inputs.fileinput.XmlFileInput
     file_path = input/cities.xml
 
-This automagically assigns `file_path` to `self.file_path` without any custom code and a
-default value to `filename_pattern`. It is checked if `file_path` is present, its type is string.
+This automagically assigns `file_path` to `self.file_path` without any custom code and assigns the
+default value to `filename_pattern`. AUtomatic checks are performed: if `file_path` (``required=True``) is present, if its type is string.
 In some cases type conversions may be applied e.g. when type is `dict` or `list`. It is guarded that the value is not
-overwritten and the docstrings will appear in the documenation.  Though not all classes may yet be documented.
-This should be a matter of time.
+overwritten and the docstrings will appear in the auto-generated documentation each property with a ``CONFIG`` tag.
 
 Running Stetl
 -------------
@@ -232,7 +236,7 @@ The following data types are currently symbolically defined in the :class:`stetl
 
 - ``record`` - a Python ``dict`` (hashmap)
 
-- ``record_array`` - a Python list (array) of ``dict``s
+- ``record_array`` - a Python list (array) of ``dict``
 
 - ``struct`` - a JSON-like generic tree structure
 

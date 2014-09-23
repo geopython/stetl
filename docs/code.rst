@@ -7,7 +7,7 @@ Main Entry Points
 -----------------
 
 There are several entry points through which Stetl can be called.
-The most common is to use the commandline script `bin\stetl`. This command should
+The most common is to use the commandline script `bin/stetl`. This command should
 be available after doing an install.
 
 In some contexts like integrations

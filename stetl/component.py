@@ -4,10 +4,12 @@
 #
 # Author: Just van den Broecke
 #
+import os
 from util import Util, ConfigSection
 from packet import FORMAT
 
 log = Util.get_log('component')
+
 
 class Config(object):
     """
@@ -18,13 +20,13 @@ class Config(object):
     Each property is defined by @Config(type, default, required).
     Basic idea comes from:  https://wiki.python.org/moin/PythonDecoratorLibrary#Cached_Properties
     """
-    def __init__(self, python_type=str, default=None, required=False):
+    def __init__(self, ptype=str, default=None, required=False):
         """
         If there are no decorator arguments, the function
         to be decorated is passed to the constructor.
         """
         # print "Inside __init__()"
-        self.python_type = python_type
+        self.python_type = ptype
         self.default = default
         self.required = required
 
@@ -35,14 +37,21 @@ class Config(object):
         with the Component instance. That allows us to cache the actual property value
         in the Component itself.
         """
-        # print "Inside __call__()"
+        # Save the property name (is the name of the function calling us).
         self.property_name = fget.__name__
-        self.__doc__ = doc or fget.__doc__
-        self.__name__ = fget.__name__
-        self.__module__ = fget.__module__
-        return self
+        # print "Inside __call__() name=%s" % self.property_name
+
+        # For Spinx documention build we need the original function with docstring.
+        IS_SPHINX_BUILD = bool(os.getenv('SPHINX_BUILD'))
+        if IS_SPHINX_BUILD:
+            fget.__doc__ = '``CONFIG`` - %s' % fget.__doc__
+            return fget
+        else:
+            return self
 
     def __get__(self, comp_inst, owner):
+        # print "Inside __get__() owner=%s" % owner
+        """ descr.__get__(obj[, type]) -> value """
         if self.property_name not in comp_inst.cfg_vals:
             cfg, name, value = comp_inst.cfg, self.property_name, self.default
 
@@ -76,7 +85,7 @@ class Component:
 
     """
 
-    @Config(str, default=None, required=False)
+    @Config(ptype=str, default=None, required=False)
     def input_format(self):
         """
         The specific input format if the consumes parameter is a list or the format to be converted to the output_format.
@@ -85,7 +94,7 @@ class Component:
         """
         pass
 
-    @Config(str, default=None, required=False)
+    @Config(ptype=str, default=None, required=False)
     def output_format(self):
         """
         The specific output format if the produces parameter is a list or the format to which the input format is converted.

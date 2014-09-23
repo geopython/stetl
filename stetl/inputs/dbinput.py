@@ -35,56 +35,56 @@ class PostgresDbInput(Input):
     """
 
     # Start attribute config meta
-    @Config(str, required=True, default=None)
+    @Config(ptype=str, required=True, default=None)
     def database_name(self):
         """
         database name
         """
         pass
 
-    @Config(str, required=False, default='localhost')
+    @Config(ptype=str, required=False, default='localhost')
     def host(self):
         """
         host name or host IP-address
         """
         pass
 
-    @Config(str, required=False, default='postgres')
+    @Config(ptype=str, required=False, default='postgres')
     def user(self):
         """
         User name
         """
         pass
 
-    @Config(str, required=False, default='postgres')
+    @Config(ptype=str, required=False, default='postgres')
     def password(self):
         """
         User password
         """
         pass
 
-    @Config(str, required=False, default='public')
+    @Config(ptype=str, required=False, default='public')
     def schema(self):
         """
         Schema (postgres schema) name
         """
         pass
 
-    @Config(str, required=False, default=None)
+    @Config(ptype=str, required=False, default=None)
     def table(self):
         """
         Table name
         """
         pass
 
-    @Config(str, required=False, default=None)
+    @Config(ptype=str, required=False, default=None)
     def column_names(self):
         """
         Column names to populate records with
         """
         pass
 
-    @Config(bool, required=False, default=False)
+    @Config(ptype=bool, required=False, default=False)
     def read_once(self):
         """
         Read once? i.e. only do query once and stop
@@ -92,7 +92,7 @@ class PostgresDbInput(Input):
         pass
 
 
-    @Config(str, required=False, default=None)
+    @Config(ptype=str, required=False, default=None)
     def query(self):
         """
         The query (string) to fire.
