@@ -6,20 +6,25 @@ Using Stetl
 This section explains how to use Stetl for your ETL. It assumes Stetl is installed and
 you are able to run the examples. It may be useful to study some of the examples,
 especially the core ones found in the `examples/basics directory <https://github.com/justb4/stetl/tree/master/examples/basics>`_.
-These examples start numbering from 1, building up more complex ETL cases like the Dutch
+These examples start numbering from 1, building up more complex ETL cases like `(INSPIRE) transformation using
+Jinja2 Templating <https://github.com/justb4/stetl/tree/master/examples/basics/10_jinja2_templating>`_.
+
+In addition there are example cases like the Dutch
 Topo map (Top10NL) ETL in the `examples/top10nl directory <https://github.com/justb4/stetl/tree/master/examples/top10nl>`_ .
 
-The core concepts of Stetl remain pretty simple: an input resource (file, database etc) is
-mapped to an output resource (file database, etc) via a set of Python components
-that are connected as a `processing chain`. A bit like in electrical engineering: an input flows
+The core concepts of Stetl remain pretty simple: an input resource like a file or a database table is
+mapped to an output resource (also a file, a database, etc) via one or more filters.
+The input, filters  and output are connected as a `processing chain`. A bit like in electrical engineering: an input flows
 through several filters, that each modify the current. In our case the current is (geospatial) information.
 
 Stetl Config
 ------------
 The particular components (inputs, filters, outputs) and their interconnection
-are specified in a Stetl config file. The file format follows the Python `.ini file-format`.
+are specified in a Stetl config file. The file format follows the Python ``.ini`` file-format.
+
 To illustrate, let's look at the example `2_xslt <https://github.com/justb4/stetl/tree/master/examples/basics/2_xslt>`_.
-This example takes an input .xml file and transforms this file to a valid GML file. The Stetl config file looks as follows. ::
+This example takes the input file ``input/cities.xml`` and transforms this file to a valid GML file called
+``output/gmlcities.gml``. The Stetl config file looks as follows. ::
 
 	[etl]
 	chains = input_xml_file|transformer_xslt|output_file
@@ -38,25 +43,27 @@ This example takes an input .xml file and transforms this file to a valid GML fi
 
 Most of the sections in this ini-file specify a Stetl component: an Input, Filter or Output component.
 Each component is specified by its (Python) class and per-component specific parameters.
-For example `[input_xml_file]` uses the class  `inputs.fileinput.XmlFileInput` reading and parsing the
-file `input/cities.xml` specified by the `file_path` property.  `[transformer_xslt]` is a Filter that
-applies XSLT with the script file  `cities2gml.xsl` that is in the same directory. The `[output_file]`
+For example ``[input_xml_file]`` uses the class  :class:`inputs.fileinput.XmlFileInput` reading and parsing the
+file ``input/cities.xml`` specified by the ``file_path`` property.  ``[transformer_xslt]`` is a Filter that
+applies XSLT with the script file  ``cities2gml.xsl`` that is in the same directory. The ``[output_file]``
 component specifies the output, in this case a file.
 
-These components are coupled in a Stetl `Chain` using the special .ini section `[etl]`. That section specifies one
+These components are coupled in a Stetl `Chain` using the special .ini section ``[etl]``. That section specifies one
 or more processing chains. Each Chain is specified by the names of the component sections, their interconnection using
 a the Unix pipe symbol "|".
 
-So the above Chain is `input_xml_file|transformer_xslt|output_file`. The names
-of the component sections are arbitrary.
+So the above Chain is ``input_xml_file|transformer_xslt|output_file``. The names
+of the component sections like ``[input_xml_file]`` are arbitrary.
 
 Configuring Components
 ----------------------
-Most Stetl Components, i.e. inputs, filters, outputs, have configuration properties that can be configured within their
+Most Stetl Components, i.e. inputs, filters, outputs, have properties that can be configured within their
 respective [section] in the config file. But what are the possible properties, values and defaults?
 This is documented within each Component class using the `@Config` decorator much similar to `@property`, only with
 some more intelligence for type conversions, defaults, required presence and documentation.
-It is loosely based on https://wiki.python.org/moin/PythonDecoratorLibrary#Cached_Properties.
+It is loosely based on https://wiki.python.org/moin/PythonDecoratorLibrary#Cached_Properties and Bruce Eckel's
+http://www.artima.com/weblogs/viewpost.jsp?thread=240845 with a fix/hack for Sphinx documentation.
+
 See for example the :class:`stetl.inputs.fileinput.FileInput` documentation.
 
 For class authors: this information is added
@@ -105,7 +112,8 @@ is used to define read-only properties for each Component instance. For example,
             self.file_list = Util.make_file_list(self.file_path, None, self.filename_pattern, self.depth_search)
 
 This defines two configurable properties for the class FileInput.
-Each ``@Config`` has three parameters: `p_type`, `default` and `required`.
+Each ``@Config`` has three parameters: ``p_type``, the Python type (``str``, ``list``, ``dict``, ``bool``,``int``),
+`default` (default value if not present) and `required` (if property in mandatory or optional).
 
 Within the config one can set specific
 config values like, ::
@@ -115,7 +123,7 @@ config values like, ::
     file_path = input/cities.xml
 
 This automagically assigns `file_path` to `self.file_path` without any custom code and assigns the
-default value to `filename_pattern`. AUtomatic checks are performed: if `file_path` (``required=True``) is present, if its type is string.
+default value to `filename_pattern`. Automatic checks are performed: if `file_path` (``required=True``) is present, if its type is string.
 In some cases type conversions may be applied e.g. when type is `dict` or `list`. It is guarded that the value is not
 overwritten and the docstrings will appear in the auto-generated documentation each property with a ``CONFIG`` tag.
 
