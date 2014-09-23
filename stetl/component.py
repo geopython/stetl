@@ -26,7 +26,7 @@ class Config(object):
         to be decorated is passed to the constructor.
         """
         # print "Inside __init__()"
-        self.python_type = ptype
+        self.ptype = ptype
         self.default = default
         self.required = required
 
@@ -53,23 +53,23 @@ class Config(object):
         # print "Inside __get__() owner=%s" % owner
         """ descr.__get__(obj[, type]) -> value """
         if self.property_name not in comp_inst.cfg_vals:
-            cfg, name, value = comp_inst.cfg, self.property_name, self.default
+            cfg, name, default_value = comp_inst.cfg, self.property_name, self.default
 
             # Do type conversion where needed from the string values
-            if self.python_type is str:
-                value = cfg.get(name, value)
-            elif self.python_type is bool:
-                value = cfg.get_bool(name, value)
-            elif self.python_type is list:
-                value = cfg.get_list(name, value)
-            elif self.python_type is dict:
-                value = cfg.get_dict(name, value)
-            elif self.python_type is int:
-                value = cfg.get_int(name, value)
-            elif self.python_type is tuple:
-                value = cfg.get_tuple(name, value)
+            if self.ptype is str:
+                value = cfg.get(name, default=default_value)
+            elif self.ptype is bool:
+                value = cfg.get_bool(name, default=default_value)
+            elif self.ptype is list:
+                value = cfg.get_list(name, default=default_value)
+            elif self.ptype is dict:
+                value = cfg.get_dict(name, default=default_value)
+            elif self.ptype is int:
+                value = cfg.get_int(name, default=default_value)
+            elif self.ptype is tuple:
+                value = cfg.get_tuple(name, default=default_value)
             else:
-                value = cfg.get(name, value)
+                value = cfg.get(name, default=default_value)
 
             if self.required is True and value is None:
                 raise Exception('Config property: %s is required in config for %s' % (name, str(comp_inst)))

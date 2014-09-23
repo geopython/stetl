@@ -13,5 +13,5 @@ input_file="input/Maastricht_GML_20130924.gml"
 output_file="output/bgt-gml-test.shp"
 # output_file="/Users/just/project/stetl/contrib/duiv/data/20130814_GML_crotec_output.gml"
 
-stetl -c etl-bgt-shp.cfg -a "gml_input=$input_file shp_output=$output_file max_in_memory_features=100000"
+stetl -c etl-bgt-shp.cfg -a "gml_input=$input_file shp_output=$output_file max_in_memory_features=10000"
 

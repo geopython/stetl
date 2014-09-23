@@ -229,6 +229,7 @@ class XmlElementStreamerFileInput(FileInput):
         self.root = None
         self.cur_file_path = None
         self.elem_count = 0
+        log.info("Element tags to be matched: %s" % self.element_tags)
 
     def read(self, packet):
         event = None

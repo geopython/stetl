@@ -1,20 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
-<osgb:FeatureCollection xmlns:osgb="http://www.ordnancesurvey.co.uk/xml/namespaces/osgb"
-                        xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                        xsi:schemaLocation="http://www.ordnancesurvey.co.uk/xml/namespaces/osgb http://www.ordnancesurvey.co.uk/xml/schema/v7/OSDNFFeatures.xsd"
-                        fid="GDS-58116-1">
-    <gml:description>Ordnance Survey, (c) Crown Copyright. All rights reserved, 2009-07-30</gml:description>
-    <gml:boundedBy>
-        <gml:null>unknown</gml:null>
-    </gml:boundedBy>
-    <osgb:queryTime>2009-07-30T02:35:17</osgb:queryTime>
-    <osgb:queryExtent>
-        <osgb:Rectangle srsName="osgb:BNG">
-            <gml:coordinates>291000.000,92000.000 293000.000,94000.000</gml:coordinates>
-        </osgb:Rectangle>
-    </osgb:queryExtent>
-    <topographicMember>
+<osgb:FeatureCollection xmlns:osgb="http://www.ordnancesurvey.co.uk/xml/namespaces/osgb" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ordnancesurvey.co.uk/xml/namespaces/osgb http://www.ordnancesurvey.co.uk/xml/schema/v7/OSDNFFeatures.xsd" fid="GDS-58116-1">
+  <gml:description>Ordnance Survey, (c) Crown Copyright. All rights reserved, 2009-07-30</gml:description>
+  <gml:boundedBy>
+    <gml:null>unknown</gml:null>
+  </gml:boundedBy>
+  <osgb:queryTime>2009-07-30T02:35:17</osgb:queryTime>
+  <osgb:queryExtent>
+    <osgb:Rectangle srsName="osgb:BNG">
+      <gml:coordinates>291000.000,92000.000 293000.000,94000.000</gml:coordinates>
+    </osgb:Rectangle>
+  </osgb:queryExtent>
+  <topographicMember>
         <TopographicArea fid="osgb1000000347738391">
             <featureCode>10123</featureCode>
             <version>10</version>
@@ -223,13 +219,9 @@
                     </innerBoundaryIs>
                 </Polygon>
             </polygon>
-            <fid>osgb1000000347738391</fid>
-            <filename>stetl</filename>
-            <themes>Roads Tracks And Paths</themes>
-            <descriptiveGroups>Path</descriptiveGroups>
-        </TopographicArea>
+        <fid>osgb1000000347738391</fid><filename>stetl</filename><themes>Roads Tracks And Paths</themes><descriptiveGroups>Path</descriptiveGroups></TopographicArea>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicArea fid="osgb1000000347738429">
             <featureCode>10056</featureCode>
             <version>9</version>
@@ -310,13 +302,9 @@
                     </innerBoundaryIs>
                 </Polygon>
             </polygon>
-            <fid>osgb1000000347738429</fid>
-            <filename>stetl</filename>
-            <themes>Land</themes>
-            <descriptiveGroups>General Surface</descriptiveGroups>
-        </TopographicArea>
+        <fid>osgb1000000347738429</fid><filename>stetl</filename><themes>Land</themes><descriptiveGroups>General Surface</descriptiveGroups></TopographicArea>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicLine fid="osgb1000000347735642">
             <featureCode>10046</featureCode>
             <version>3</version>
@@ -341,13 +329,9 @@
                     </coordinates>
                 </LineString>
             </polyline>
-            <fid>osgb1000000347735642</fid>
-            <filename>stetl</filename>
-            <themes>Land</themes>
-            <descriptiveGroups>General Feature</descriptiveGroups>
-        </TopographicLine>
+        <fid>osgb1000000347735642</fid><filename>stetl</filename><themes>Land</themes><descriptiveGroups>General Feature</descriptiveGroups></TopographicLine>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicLine fid="osgb1000000347735857">
             <featureCode>10046</featureCode>
             <version>2</version>
@@ -369,13 +353,9 @@
                     </coordinates>
                 </LineString>
             </polyline>
-            <fid>osgb1000000347735857</fid>
-            <filename>stetl</filename>
-            <themes>Land, Roads Tracks And Paths</themes>
-            <descriptiveGroups>General Feature</descriptiveGroups>
-        </TopographicLine>
+        <fid>osgb1000000347735857</fid><filename>stetl</filename><themes>Land, Roads Tracks And Paths</themes><descriptiveGroups>General Feature</descriptiveGroups></TopographicLine>
     </topographicMember>
-    <boundaryMember>
+  <boundaryMember>
         <BoundaryLine fid="osgb1000000738106555">
             <featureCode>10128</featureCode>
             <version>6</version>
@@ -417,14 +397,9 @@
                     </coordinates>
                 </LineString>
             </polyline>
-            <fid>osgb1000000738106555</fid>
-            <filename>stetl</filename>
-            <themes>Administrative Boundaries</themes>
-            <descriptiveGroups>Political Or Administrative</descriptiveGroups>
-            <descriptiveTerms>Electoral</descriptiveTerms>
-        </BoundaryLine>
+        <fid>osgb1000000738106555</fid><filename>stetl</filename><themes>Administrative Boundaries</themes><descriptiveGroups>Political Or Administrative</descriptiveGroups><descriptiveTerms>Electoral</descriptiveTerms></BoundaryLine>
     </boundaryMember>
-    <boundaryMember>
+  <boundaryMember>
         <BoundaryLine fid="osgb1000000738106597">
             <featureCode>10128</featureCode>
             <version>9</version>
@@ -538,14 +513,9 @@
                     </coordinates>
                 </LineString>
             </polyline>
-            <fid>osgb1000000738106597</fid>
-            <filename>stetl</filename>
-            <themes>Administrative Boundaries</themes>
-            <descriptiveGroups>Political Or Administrative</descriptiveGroups>
-            <descriptiveTerms>Electoral</descriptiveTerms>
-        </BoundaryLine>
+        <fid>osgb1000000738106597</fid><filename>stetl</filename><themes>Administrative Boundaries</themes><descriptiveGroups>Political Or Administrative</descriptiveGroups><descriptiveTerms>Electoral</descriptiveTerms></BoundaryLine>
     </boundaryMember>
-    <boundaryMember>
+  <boundaryMember>
         <BoundaryLine fid="osgb1000000738106616">
             <featureCode>10128</featureCode>
             <version>8</version>
@@ -639,14 +609,9 @@
                     </coordinates>
                 </LineString>
             </polyline>
-            <fid>osgb1000000738106616</fid>
-            <filename>stetl</filename>
-            <themes>Administrative Boundaries</themes>
-            <descriptiveGroups>Political Or Administrative</descriptiveGroups>
-            <descriptiveTerms>Electoral</descriptiveTerms>
-        </BoundaryLine>
+        <fid>osgb1000000738106616</fid><filename>stetl</filename><themes>Administrative Boundaries</themes><descriptiveGroups>Political Or Administrative</descriptiveGroups><descriptiveTerms>Electoral</descriptiveTerms></BoundaryLine>
     </boundaryMember>
-    <boundaryMember>
+  <boundaryMember>
         <BoundaryLine fid="osgb1000000738107869">
             <featureCode>10128</featureCode>
             <version>11</version>
@@ -737,14 +702,9 @@
                     </coordinates>
                 </LineString>
             </polyline>
-            <fid>osgb1000000738107869</fid>
-            <filename>stetl</filename>
-            <themes>Administrative Boundaries</themes>
-            <descriptiveGroups>Political Or Administrative</descriptiveGroups>
-            <descriptiveTerms>Electoral</descriptiveTerms>
-        </BoundaryLine>
+        <fid>osgb1000000738107869</fid><filename>stetl</filename><themes>Administrative Boundaries</themes><descriptiveGroups>Political Or Administrative</descriptiveGroups><descriptiveTerms>Electoral</descriptiveTerms></BoundaryLine>
     </boundaryMember>
-    <cartographicMember>
+  <cartographicMember>
         <CartographicSymbol fid="osgb1000000729439973">
             <featureCode>10165</featureCode>
             <version>1</version>
@@ -763,15 +723,9 @@
                     <coordinates>291781.470,92943.570</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000729439973</fid>
-            <filename>stetl</filename>
-            <orientDeg>300</orientDeg>
-            <themes>Rail</themes>
-            <descriptiveGroups>Rail</descriptiveGroups>
-            <descriptiveTerms>Switch</descriptiveTerms>
-        </CartographicSymbol>
+        <fid>osgb1000000729439973</fid><filename>stetl</filename><orientDeg>300</orientDeg><themes>Rail</themes><descriptiveGroups>Rail</descriptiveGroups><descriptiveTerms>Switch</descriptiveTerms></CartographicSymbol>
     </cartographicMember>
-    <cartographicMember>
+  <cartographicMember>
         <CartographicSymbol fid="osgb1000000729439974">
             <featureCode>10066</featureCode>
             <version>3</version>
@@ -794,15 +748,9 @@
                     <coordinates>291706.100,92740.500</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000729439974</fid>
-            <filename>stetl</filename>
-            <orientDeg>223</orientDeg>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Height Control</descriptiveGroups>
-            <descriptiveTerms>Bench Mark</descriptiveTerms>
-        </CartographicSymbol>
+        <fid>osgb1000000729439974</fid><filename>stetl</filename><orientDeg>223</orientDeg><themes>Terrain And Height</themes><descriptiveGroups>Height Control</descriptiveGroups><descriptiveTerms>Bench Mark</descriptiveTerms></CartographicSymbol>
     </cartographicMember>
-    <cartographicMember>
+  <cartographicMember>
         <CartographicSymbol fid="osgb1000000729439975">
             <featureCode>10066</featureCode>
             <version>3</version>
@@ -825,15 +773,9 @@
                     <coordinates>291976.100,92634.800</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000729439975</fid>
-            <filename>stetl</filename>
-            <orientDeg>303</orientDeg>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Height Control</descriptiveGroups>
-            <descriptiveTerms>Bench Mark</descriptiveTerms>
-        </CartographicSymbol>
+        <fid>osgb1000000729439975</fid><filename>stetl</filename><orientDeg>303</orientDeg><themes>Terrain And Height</themes><descriptiveGroups>Height Control</descriptiveGroups><descriptiveTerms>Bench Mark</descriptiveTerms></CartographicSymbol>
     </cartographicMember>
-    <cartographicMember>
+  <cartographicMember>
         <CartographicSymbol fid="osgb1000000729439976">
             <featureCode>10066</featureCode>
             <version>3</version>
@@ -856,15 +798,9 @@
                     <coordinates>291744.300,92717.000</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000729439976</fid>
-            <filename>stetl</filename>
-            <orientDeg>25</orientDeg>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Height Control</descriptiveGroups>
-            <descriptiveTerms>Bench Mark</descriptiveTerms>
-        </CartographicSymbol>
+        <fid>osgb1000000729439976</fid><filename>stetl</filename><orientDeg>25</orientDeg><themes>Terrain And Height</themes><descriptiveGroups>Height Control</descriptiveGroups><descriptiveTerms>Bench Mark</descriptiveTerms></CartographicSymbol>
     </cartographicMember>
-    <cartographicMember>
+  <cartographicMember>
         <CartographicSymbol fid="osgb1000000729439977">
             <featureCode>10066</featureCode>
             <version>3</version>
@@ -887,15 +823,9 @@
                     <coordinates>291530.200,92918.750</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000729439977</fid>
-            <filename>stetl</filename>
-            <orientDeg>40</orientDeg>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Height Control</descriptiveGroups>
-            <descriptiveTerms>Bench Mark</descriptiveTerms>
-        </CartographicSymbol>
+        <fid>osgb1000000729439977</fid><filename>stetl</filename><orientDeg>40</orientDeg><themes>Terrain And Height</themes><descriptiveGroups>Height Control</descriptiveGroups><descriptiveTerms>Bench Mark</descriptiveTerms></CartographicSymbol>
     </cartographicMember>
-    <cartographicMember>
+  <cartographicMember>
         <CartographicText fid="osgb1000000729439996">
             <featureCode>10026</featureCode>
             <version>1</version>
@@ -918,16 +848,11 @@
                 <font>2</font>
                 <height>1.500</height>
                 <orientation>545</orientation>
-                <orientDeg>54</orientDeg>
-            </textRendering>
+            <orientDeg>54</orientDeg></textRendering>
             <textString>44</textString>
-            <fid>osgb1000000729439996</fid>
-            <filename>stetl</filename>
-            <themes>Buildings</themes>
-            <descriptiveGroups>Buildings Or Structure</descriptiveGroups>
-        </CartographicText>
+        <fid>osgb1000000729439996</fid><filename>stetl</filename><themes>Buildings</themes><descriptiveGroups>Buildings Or Structure</descriptiveGroups></CartographicText>
     </cartographicMember>
-    <cartographicMember>
+  <cartographicMember>
         <CartographicText fid="osgb1000000729439997">
             <featureCode>10074</featureCode>
             <version>3</version>
@@ -957,16 +882,11 @@
                 <font>2</font>
                 <height>1.750</height>
                 <orientation>3230</orientation>
-                <orientDeg>323</orientDeg>
-            </textRendering>
+            <orientDeg>323</orientDeg></textRendering>
             <textString>North Gate</textString>
-            <fid>osgb1000000729439997</fid>
-            <filename>stetl</filename>
-            <themes>Heritage And Antiquities</themes>
-            <descriptiveGroups>Historic Interest</descriptiveGroups>
-        </CartographicText>
+        <fid>osgb1000000729439997</fid><filename>stetl</filename><themes>Heritage And Antiquities</themes><descriptiveGroups>Historic Interest</descriptiveGroups></CartographicText>
     </cartographicMember>
-    <cartographicMember>
+  <cartographicMember>
         <CartographicText fid="osgb1000000729439998">
             <featureCode>10026</featureCode>
             <version>1</version>
@@ -989,16 +909,11 @@
                 <font>2</font>
                 <height>1.500</height>
                 <orientation>1811</orientation>
-                <orientDeg>181</orientDeg>
-            </textRendering>
+            <orientDeg>181</orientDeg></textRendering>
             <textString>34</textString>
-            <fid>osgb1000000729439998</fid>
-            <filename>stetl</filename>
-            <themes>Buildings</themes>
-            <descriptiveGroups>Buildings Or Structure</descriptiveGroups>
-        </CartographicText>
+        <fid>osgb1000000729439998</fid><filename>stetl</filename><themes>Buildings</themes><descriptiveGroups>Buildings Or Structure</descriptiveGroups></CartographicText>
     </cartographicMember>
-    <cartographicMember>
+  <cartographicMember>
         <CartographicText fid="osgb1000000729439999">
             <featureCode>10026</featureCode>
             <version>1</version>
@@ -1021,16 +936,11 @@
                 <font>1</font>
                 <height>1.500</height>
                 <orientation>0</orientation>
-                <orientDeg>0</orientDeg>
-            </textRendering>
+            <orientDeg>0</orientDeg></textRendering>
             <textString>PH</textString>
-            <fid>osgb1000000729439999</fid>
-            <filename>stetl</filename>
-            <themes>Buildings</themes>
-            <descriptiveGroups>Buildings Or Structure</descriptiveGroups>
-        </CartographicText>
+        <fid>osgb1000000729439999</fid><filename>stetl</filename><themes>Buildings</themes><descriptiveGroups>Buildings Or Structure</descriptiveGroups></CartographicText>
     </cartographicMember>
-    <cartographicMember>
+  <cartographicMember>
         <CartographicText fid="osgb1000000729440000">
             <featureCode>10026</featureCode>
             <version>1</version>
@@ -1053,16 +963,11 @@
                 <font>2</font>
                 <height>1.500</height>
                 <orientation>2141</orientation>
-                <orientDeg>214</orientDeg>
-            </textRendering>
+            <orientDeg>214</orientDeg></textRendering>
             <textString>6</textString>
-            <fid>osgb1000000729440000</fid>
-            <filename>stetl</filename>
-            <themes>Buildings</themes>
-            <descriptiveGroups>Buildings Or Structure</descriptiveGroups>
-        </CartographicText>
+        <fid>osgb1000000729440000</fid><filename>stetl</filename><themes>Buildings</themes><descriptiveGroups>Buildings Or Structure</descriptiveGroups></CartographicText>
     </cartographicMember>
-    <cartographicMember>
+  <cartographicMember>
         <CartographicText fid="osgb1000000729440001">
             <featureCode>10184</featureCode>
             <version>3</version>
@@ -1084,16 +989,11 @@
                 <font>1</font>
                 <height>1.500</height>
                 <orientation>0</orientation>
-                <orientDeg>0</orientDeg>
-            </textRendering>
+            <orientDeg>0</orientDeg></textRendering>
             <textString>LBs</textString>
-            <fid>osgb1000000729440001</fid>
-            <filename>stetl</filename>
-            <themes>Structures</themes>
-            <descriptiveGroups>Structure</descriptiveGroups>
-        </CartographicText>
+        <fid>osgb1000000729440001</fid><filename>stetl</filename><themes>Structures</themes><descriptiveGroups>Structure</descriptiveGroups></CartographicText>
     </cartographicMember>
-    <cartographicMember>
+  <cartographicMember>
         <CartographicText fid="osgb1000000729440002">
             <featureCode>10169</featureCode>
             <version>2</version>
@@ -1120,17 +1020,11 @@
                 <font>1</font>
                 <height>1.750</height>
                 <orientation>473</orientation>
-                <orientDeg>47</orientDeg>
-            </textRendering>
+            <orientDeg>47</orientDeg></textRendering>
             <textString>HALDON ROAD</textString>
-            <fid>osgb1000000729440002</fid>
-            <filename>stetl</filename>
-            <themes>Roads Tracks And Paths</themes>
-            <descriptiveGroups>Road Or Track</descriptiveGroups>
-            <descriptiveTerms>Road Name Or Classification</descriptiveTerms>
-        </CartographicText>
+        <fid>osgb1000000729440002</fid><filename>stetl</filename><themes>Roads Tracks And Paths</themes><descriptiveGroups>Road Or Track</descriptiveGroups><descriptiveTerms>Road Name Or Classification</descriptiveTerms></CartographicText>
     </cartographicMember>
-    <cartographicMember>
+  <cartographicMember>
         <CartographicText fid="osgb1000000729440003">
             <featureCode>10026</featureCode>
             <version>2</version>
@@ -1153,16 +1047,11 @@
                 <font>1</font>
                 <height>1.750</height>
                 <orientation>605</orientation>
-                <orientDeg>60</orientDeg>
-            </textRendering>
+            <orientDeg>60</orientDeg></textRendering>
             <textString>St David's</textString>
-            <fid>osgb1000000729440003</fid>
-            <filename>stetl</filename>
-            <themes>Buildings</themes>
-            <descriptiveGroups>Buildings Or Structure</descriptiveGroups>
-        </CartographicText>
+        <fid>osgb1000000729440003</fid><filename>stetl</filename><themes>Buildings</themes><descriptiveGroups>Buildings Or Structure</descriptiveGroups></CartographicText>
     </cartographicMember>
-    <cartographicMember>
+  <cartographicMember>
         <CartographicText fid="osgb1000000729440004">
             <featureCode>10026</featureCode>
             <version>1</version>
@@ -1185,16 +1074,11 @@
                 <font>2</font>
                 <height>1.500</height>
                 <orientation>1298</orientation>
-                <orientDeg>129</orientDeg>
-            </textRendering>
+            <orientDeg>129</orientDeg></textRendering>
             <textString>29</textString>
-            <fid>osgb1000000729440004</fid>
-            <filename>stetl</filename>
-            <themes>Buildings</themes>
-            <descriptiveGroups>Buildings Or Structure</descriptiveGroups>
-        </CartographicText>
+        <fid>osgb1000000729440004</fid><filename>stetl</filename><themes>Buildings</themes><descriptiveGroups>Buildings Or Structure</descriptiveGroups></CartographicText>
     </cartographicMember>
-    <cartographicMember>
+  <cartographicMember>
         <CartographicText fid="osgb1000000729440005">
             <featureCode>10026</featureCode>
             <version>1</version>
@@ -1217,16 +1101,11 @@
                 <font>1</font>
                 <height>2.000</height>
                 <orientation>0</orientation>
-                <orientDeg>0</orientDeg>
-            </textRendering>
+            <orientDeg>0</orientDeg></textRendering>
             <textString>School</textString>
-            <fid>osgb1000000729440005</fid>
-            <filename>stetl</filename>
-            <themes>Buildings</themes>
-            <descriptiveGroups>Buildings Or Structure</descriptiveGroups>
-        </CartographicText>
+        <fid>osgb1000000729440005</fid><filename>stetl</filename><themes>Buildings</themes><descriptiveGroups>Buildings Or Structure</descriptiveGroups></CartographicText>
     </cartographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicPoint fid="osgb1000000732239646">
             <featureCode>10197</featureCode>
             <version>1</version>
@@ -1249,14 +1128,9 @@
                     <coordinates>291548.750,92569.850</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000732239646</fid>
-            <filename>stetl</filename>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Terrain And Height</descriptiveGroups>
-            <descriptiveTerms>Spot Height</descriptiveTerms>
-        </TopographicPoint>
+        <fid>osgb1000000732239646</fid><filename>stetl</filename><themes>Terrain And Height</themes><descriptiveGroups>Terrain And Height</descriptiveGroups><descriptiveTerms>Spot Height</descriptiveTerms></TopographicPoint>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicPoint fid="osgb1000000732239647">
             <featureCode>10197</featureCode>
             <version>1</version>
@@ -1279,14 +1153,9 @@
                     <coordinates>291574.550,92876.700</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000732239647</fid>
-            <filename>stetl</filename>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Terrain And Height</descriptiveGroups>
-            <descriptiveTerms>Spot Height</descriptiveTerms>
-        </TopographicPoint>
+        <fid>osgb1000000732239647</fid><filename>stetl</filename><themes>Terrain And Height</themes><descriptiveGroups>Terrain And Height</descriptiveGroups><descriptiveTerms>Spot Height</descriptiveTerms></TopographicPoint>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicPoint fid="osgb1000000732239649">
             <featureCode>10197</featureCode>
             <version>1</version>
@@ -1309,14 +1178,9 @@
                     <coordinates>291698.500,92598.250</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000732239649</fid>
-            <filename>stetl</filename>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Terrain And Height</descriptiveGroups>
-            <descriptiveTerms>Spot Height</descriptiveTerms>
-        </TopographicPoint>
+        <fid>osgb1000000732239649</fid><filename>stetl</filename><themes>Terrain And Height</themes><descriptiveGroups>Terrain And Height</descriptiveGroups><descriptiveTerms>Spot Height</descriptiveTerms></TopographicPoint>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicPoint fid="osgb1000000732239650">
             <featureCode>10197</featureCode>
             <version>1</version>
@@ -1339,14 +1203,9 @@
                     <coordinates>291700.450,92751.650</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000732239650</fid>
-            <filename>stetl</filename>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Terrain And Height</descriptiveGroups>
-            <descriptiveTerms>Spot Height</descriptiveTerms>
-        </TopographicPoint>
+        <fid>osgb1000000732239650</fid><filename>stetl</filename><themes>Terrain And Height</themes><descriptiveGroups>Terrain And Height</descriptiveGroups><descriptiveTerms>Spot Height</descriptiveTerms></TopographicPoint>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicPoint fid="osgb1000000732239652">
             <featureCode>10197</featureCode>
             <version>1</version>
@@ -1369,14 +1228,9 @@
                     <coordinates>291596.050,92720.150</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000732239652</fid>
-            <filename>stetl</filename>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Terrain And Height</descriptiveGroups>
-            <descriptiveTerms>Spot Height</descriptiveTerms>
-        </TopographicPoint>
+        <fid>osgb1000000732239652</fid><filename>stetl</filename><themes>Terrain And Height</themes><descriptiveGroups>Terrain And Height</descriptiveGroups><descriptiveTerms>Spot Height</descriptiveTerms></TopographicPoint>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicPoint fid="osgb1000000732239653">
             <featureCode>10197</featureCode>
             <version>1</version>
@@ -1399,14 +1253,9 @@
                     <coordinates>291875.050,92591.750</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000732239653</fid>
-            <filename>stetl</filename>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Terrain And Height</descriptiveGroups>
-            <descriptiveTerms>Spot Height</descriptiveTerms>
-        </TopographicPoint>
+        <fid>osgb1000000732239653</fid><filename>stetl</filename><themes>Terrain And Height</themes><descriptiveGroups>Terrain And Height</descriptiveGroups><descriptiveTerms>Spot Height</descriptiveTerms></TopographicPoint>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicPoint fid="osgb1000000732239659">
             <featureCode>10197</featureCode>
             <version>1</version>
@@ -1429,14 +1278,9 @@
                     <coordinates>291676.700,92535.000</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000732239659</fid>
-            <filename>stetl</filename>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Terrain And Height</descriptiveGroups>
-            <descriptiveTerms>Spot Height</descriptiveTerms>
-        </TopographicPoint>
+        <fid>osgb1000000732239659</fid><filename>stetl</filename><themes>Terrain And Height</themes><descriptiveGroups>Terrain And Height</descriptiveGroups><descriptiveTerms>Spot Height</descriptiveTerms></TopographicPoint>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicPoint fid="osgb1000000732239660">
             <featureCode>10197</featureCode>
             <version>1</version>
@@ -1459,14 +1303,9 @@
                     <coordinates>291798.950,92670.350</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000732239660</fid>
-            <filename>stetl</filename>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Terrain And Height</descriptiveGroups>
-            <descriptiveTerms>Spot Height</descriptiveTerms>
-        </TopographicPoint>
+        <fid>osgb1000000732239660</fid><filename>stetl</filename><themes>Terrain And Height</themes><descriptiveGroups>Terrain And Height</descriptiveGroups><descriptiveTerms>Spot Height</descriptiveTerms></TopographicPoint>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicPoint fid="osgb1000000732239661">
             <featureCode>10197</featureCode>
             <version>1</version>
@@ -1489,14 +1328,9 @@
                     <coordinates>291858.950,92921.850</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000732239661</fid>
-            <filename>stetl</filename>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Terrain And Height</descriptiveGroups>
-            <descriptiveTerms>Spot Height</descriptiveTerms>
-        </TopographicPoint>
+        <fid>osgb1000000732239661</fid><filename>stetl</filename><themes>Terrain And Height</themes><descriptiveGroups>Terrain And Height</descriptiveGroups><descriptiveTerms>Spot Height</descriptiveTerms></TopographicPoint>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicPoint fid="osgb1000000732239663">
             <featureCode>10197</featureCode>
             <version>1</version>
@@ -1519,14 +1353,9 @@
                     <coordinates>291619.800,92634.500</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000732239663</fid>
-            <filename>stetl</filename>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Terrain And Height</descriptiveGroups>
-            <descriptiveTerms>Spot Height</descriptiveTerms>
-        </TopographicPoint>
+        <fid>osgb1000000732239663</fid><filename>stetl</filename><themes>Terrain And Height</themes><descriptiveGroups>Terrain And Height</descriptiveGroups><descriptiveTerms>Spot Height</descriptiveTerms></TopographicPoint>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicPoint fid="osgb1000000732239664">
             <featureCode>10197</featureCode>
             <version>1</version>
@@ -1549,14 +1378,9 @@
                     <coordinates>291809.550,92778.550</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000732239664</fid>
-            <filename>stetl</filename>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Terrain And Height</descriptiveGroups>
-            <descriptiveTerms>Spot Height</descriptiveTerms>
-        </TopographicPoint>
+        <fid>osgb1000000732239664</fid><filename>stetl</filename><themes>Terrain And Height</themes><descriptiveGroups>Terrain And Height</descriptiveGroups><descriptiveTerms>Spot Height</descriptiveTerms></TopographicPoint>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicPoint fid="osgb1000000732239666">
             <featureCode>10197</featureCode>
             <version>1</version>
@@ -1579,14 +1403,9 @@
                     <coordinates>291998.000,92813.400</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000732239666</fid>
-            <filename>stetl</filename>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Terrain And Height</descriptiveGroups>
-            <descriptiveTerms>Spot Height</descriptiveTerms>
-        </TopographicPoint>
+        <fid>osgb1000000732239666</fid><filename>stetl</filename><themes>Terrain And Height</themes><descriptiveGroups>Terrain And Height</descriptiveGroups><descriptiveTerms>Spot Height</descriptiveTerms></TopographicPoint>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicPoint fid="osgb1000000732239667">
             <featureCode>10197</featureCode>
             <version>1</version>
@@ -1609,14 +1428,9 @@
                     <coordinates>291761.800,92705.050</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000732239667</fid>
-            <filename>stetl</filename>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Terrain And Height</descriptiveGroups>
-            <descriptiveTerms>Spot Height</descriptiveTerms>
-        </TopographicPoint>
+        <fid>osgb1000000732239667</fid><filename>stetl</filename><themes>Terrain And Height</themes><descriptiveGroups>Terrain And Height</descriptiveGroups><descriptiveTerms>Spot Height</descriptiveTerms></TopographicPoint>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicPoint fid="osgb1000000732239669">
             <featureCode>10197</featureCode>
             <version>1</version>
@@ -1639,14 +1453,9 @@
                     <coordinates>291893.950,92881.850</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000732239669</fid>
-            <filename>stetl</filename>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Terrain And Height</descriptiveGroups>
-            <descriptiveTerms>Spot Height</descriptiveTerms>
-        </TopographicPoint>
+        <fid>osgb1000000732239669</fid><filename>stetl</filename><themes>Terrain And Height</themes><descriptiveGroups>Terrain And Height</descriptiveGroups><descriptiveTerms>Spot Height</descriptiveTerms></TopographicPoint>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicPoint fid="osgb1000000732239670">
             <featureCode>10197</featureCode>
             <version>1</version>
@@ -1669,14 +1478,9 @@
                     <coordinates>291650.200,92797.300</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000732239670</fid>
-            <filename>stetl</filename>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Terrain And Height</descriptiveGroups>
-            <descriptiveTerms>Spot Height</descriptiveTerms>
-        </TopographicPoint>
+        <fid>osgb1000000732239670</fid><filename>stetl</filename><themes>Terrain And Height</themes><descriptiveGroups>Terrain And Height</descriptiveGroups><descriptiveTerms>Spot Height</descriptiveTerms></TopographicPoint>
     </topographicMember>
-    <topographicMember>
+  <topographicMember>
         <TopographicPoint fid="osgb1000000732239671">
             <featureCode>10197</featureCode>
             <version>1</version>
@@ -1699,11 +1503,6 @@
                     <coordinates>291927.550,92988.750</coordinates>
                 </Point>
             </point>
-            <fid>osgb1000000732239671</fid>
-            <filename>stetl</filename>
-            <themes>Terrain And Height</themes>
-            <descriptiveGroups>Terrain And Height</descriptiveGroups>
-            <descriptiveTerms>Spot Height</descriptiveTerms>
-        </TopographicPoint>
+        <fid>osgb1000000732239671</fid><filename>stetl</filename><themes>Terrain And Height</themes><descriptiveGroups>Terrain And Height</descriptiveGroups><descriptiveTerms>Spot Height</descriptiveTerms></TopographicPoint>
     </topographicMember>
 </osgb:FeatureCollection>

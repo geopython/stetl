@@ -59,7 +59,8 @@ Configuring Components
 ----------------------
 Most Stetl Components, i.e. inputs, filters, outputs, have properties that can be configured within their
 respective [section] in the config file. But what are the possible properties, values and defaults?
-This is documented within each Component class using the `@Config` decorator much similar to `@property`, only with
+This is documented within each Component class using the ``@Config`` decorator much similar to the standard Python
+``@property``, only with
 some more intelligence for type conversions, defaults, required presence and documentation.
 It is loosely based on https://wiki.python.org/moin/PythonDecoratorLibrary#Cached_Properties and Bruce Eckel's
 http://www.artima.com/weblogs/viewpost.jsp?thread=240845 with a fix/hack for Sphinx documentation.
@@ -67,7 +68,7 @@ http://www.artima.com/weblogs/viewpost.jsp?thread=240845 with a fix/hack for Sph
 See for example the :class:`stetl.inputs.fileinput.FileInput` documentation.
 
 For class authors: this information is added
-via the Python Decorators much similar to `@property`. The :class:`stetl.component.Config`
+via the Python Decorators much similar to ``@property``. The :class:`stetl.component.Config`
 is used to define read-only properties for each Component instance. For example, ::
 
     class FileInput(Input):
@@ -112,8 +113,8 @@ is used to define read-only properties for each Component instance. For example,
             self.file_list = Util.make_file_list(self.file_path, None, self.filename_pattern, self.depth_search)
 
 This defines two configurable properties for the class FileInput.
-Each ``@Config`` has three parameters: ``p_type``, the Python type (``str``, ``list``, ``dict``, ``bool``,``int``),
-`default` (default value if not present) and `required` (if property in mandatory or optional).
+Each ``@Config`` has three parameters: ``p_type``, the Python type (``str``, ``list``, ``dict``, ``bool``, ``int``),
+``default`` (default value if not present) and ``required`` (if property in mandatory or optional).
 
 Within the config one can set specific
 config values like, ::
@@ -122,23 +123,23 @@ config values like, ::
     class = inputs.fileinput.XmlFileInput
     file_path = input/cities.xml
 
-This automagically assigns `file_path` to `self.file_path` without any custom code and assigns the
-default value to `filename_pattern`. Automatic checks are performed: if `file_path` (``required=True``) is present, if its type is string.
-In some cases type conversions may be applied e.g. when type is `dict` or `list`. It is guarded that the value is not
-overwritten and the docstrings will appear in the auto-generated documentation each property with a ``CONFIG`` tag.
+This automagically assigns ``file_path`` to ``self.file_path`` without any custom code and assigns the
+default value to ``filename_pattern``. Automatic checks are performed: if ``file_path`` (``required=True``) is present, if its type is string.
+In some cases type conversions may be applied e.g. when type is ``dict`` or ``list``. It is guarded that the value is not
+overwritten and the docstrings will appear in the auto-generated documentation, each entry prepended with a ``CONFIG`` tag.
 
 Running Stetl
 -------------
 
-The above ETL spec can be found in the file `etl.cfg`. Now Stetl can be run, simply by typing ::
+The above ETL spec can be found in the file ``etl.cfg``. Now Stetl can be run, simply by typing ::
 
 	stetl -c etl.cfg
 
-Stetl will parse `etl.cfg`, create all Components by their class name and link them in a Chain and execute
+Stetl will parse ``etl.cfg``, create all Components by their class name and link them in a Chain and execute
 that Chain. Of course this example is very trivial, as we could just call XSLT without Stetl. But it becomes interesting
 with more complex transformations.
 
-Suppose we want to convert the resulting GML to an ESRI Shapefile. As we cannot use GDAL `ogr2ogr` on the input
+Suppose we want to convert the resulting GML to an `ESRI Shapefile`. As we cannot use GDAL ``ogr2ogr`` on the input
 file, we need to combine XSLT and `ogr2ogr`. See example
 `3_shape <https://github.com/justb4/stetl/tree/master/examples/basics/3_shape>`_. Now we replace the output
 by using `outputs.ogroutput.Ogr2OgrOutput`, which can execute any `ogr2ogr` command, converting
