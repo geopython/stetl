@@ -12,6 +12,7 @@ import os
 
 log = Util.get_log('fileoutput')
 
+
 class FileOutput(Output):
     """
     Pretty print input to file. Input may be an etree doc or any other stringify-able input.
@@ -34,10 +35,7 @@ class FileOutput(Output):
         log.info('writing to file %s' % file_path)
         out_file = open(file_path, 'w')
 
-        if packet.format == FORMAT.etree_doc:
-            out_file.writelines(self.to_string(packet.data))
-        else:
-            out_file.writelines(str(packet.data))
+        out_file.write(packet.to_string())
 
         out_file.close()
         log.info("written to %s" % file_path)

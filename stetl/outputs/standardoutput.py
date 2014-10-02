@@ -25,12 +25,12 @@ class StandardOutput(Output):
             return packet
 
         # Default: print to stdout
-        print(str(packet.data))
+        print(packet.to_string())
         return packet
 
 class StandardXmlOutput(Output):
     """
-    Pretty print XML from etree doc to standard output.
+    Pretty print XML from etree doc to standard output. OBSOLETE, can be done with  StandardOutput
 
     consumes=FORMAT.etree_doc
     """
@@ -42,6 +42,6 @@ class StandardXmlOutput(Output):
             return packet
 
         # Default: print to stdout
-        print(self.to_string(packet.data))
+        print(packet.to_string())
         return packet
 

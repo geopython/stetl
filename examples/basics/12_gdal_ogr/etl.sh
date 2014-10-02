@@ -5,6 +5,6 @@
 # Shortcut to call Stetl main.py with etl config.
 #
 
-# stetl=stetl
-stetl=../../../stetl/main.py
-$stetl  -c etl.cfg
+# stetl  -c etl.cfg
+../../../stetl/main.py -c etl.cfg
+

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Input classes for ETL via HTTP.
+# Input classes for fetching data via HTTP.
 #
 # Author: Just van den Broecke
 #
@@ -8,6 +8,7 @@ import re
 from urllib2 import Request, urlopen, URLError, HTTPError
 import urllib
 
+from stetl.component import Config
 from stetl.input import Input
 from stetl.util import Util
 from stetl.packet import FORMAT
@@ -17,39 +18,74 @@ log = Util.get_log('httpinput')
 
 class HttpInput(Input):
     """
-     Input via HTTP protocol.
+    Fetch data from remote services like WFS via HTTP protocol.
+    Base class: subclasses will do datatype-specific formatting of
+    the returned data.
 
      produces=FORMAT.any
     """
 
+    # Start attribute config meta
+    # Applying Decorator pattern with the Config class to provide
+    # read-only config values from the configured properties.
+
+    @Config(ptype=str, default=None, required=True)
+    def url(self):
+        """
+        The HTTP URL string.
+
+        Required: True
+
+        Default: None
+        """
+        pass
+
+
+    @Config(ptype=dict, default=None, required=False)
+    def parameters(self):
+        """
+        Flat JSON-like struct of the parameters to be appended to the url.
+
+        Example:
+              url = http://geodata.nationaalgeoregister.nl/natura2000/wfs
+              parameters = {
+        		'service' : 'WFS',
+        		'version' : '1.1.0',
+        		'request' : 'GetFeature',
+                'srsName' : 'EPSG:28992',
+                'outputFormat' : 'text/xml; subtype=gml/2.1.2',
+        		'typename' : 'natura2000'
+               }
+
+        Required: False
+
+        Default: None
+        """
+        pass
+
+    # End attribute config meta
+
     def __init__(self, configdict, section, produces=FORMAT.any):
         Input.__init__(self, configdict, section, produces)
 
-        # url and optional parameters
-        self.url = self.cfg.get('url')
-        self.parameters = self.cfg.get('parameters')
+        log.info("url=%s parameters=%s" % (self.url, self.parameters))
 
-        # http://docs.python.org/2/howto/urllib2.html
-        self.query_string = None
-        if self.parameters:
-            # http://stackoverflow.com/questions/988228/converting-a-string-to-dictionary
-            import ast
-            self.parameters = ast.literal_eval(self.parameters)
-            self.query_string = urllib.urlencode(self.parameters)
-
-        log.info("url=%s" % self.url)
-
-
-    def read_from_url(self, url, query_string=None):
+    def read_from_url(self, url, parameters=None):
         """
         Read the data from the URL.
-        :param url:
-        :param query_string:
+        :param url: the url to fetch
+        :param parameters: optional dict of query parameters
         :return:
         """
         # log.info('Fetch data from URL: %s ...' % url)
+
         req = Request(url)
         try:
+            # Urlencode optional parameters
+            query_string = None
+            if parameters:
+                 query_string = urllib.urlencode(parameters)
+
             response = urlopen(req, query_string)
         except HTTPError as e:
             log.error('HTTPError fetching from URL %s: code=%d e=%s' % (url, e.code, e))
@@ -73,13 +109,13 @@ class HttpInput(Input):
             log.info("EOF URL reading done")
             return packet
 
-        packet.data = self.format_data(self.read_from_url(self.url, self.query_string))
+        packet.data = self.format_data(self.read_from_url(self.url, self.parameters))
         self.url = None
         return packet
 
     def format_data(self, data):
         """
-        Format response data, default do nothing.
+        Format response data, override in subclasses, defaults to returning original data.
         :param packet:
         :return:
         """

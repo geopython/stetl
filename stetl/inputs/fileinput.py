@@ -399,15 +399,15 @@ class JsonFileInput(FileInput):
     """
     Parse JSON file from file system or URL into hierarchical data struct.
     The struct format may also be a GeoJSON structure. In that case the
-    output_format needs to be explicitly set to geojson_struct in the component
+    output_format needs to be explicitly set to geojson_collection in the component
     config.
 
-    produces=FORMAT.struct or FORMAT.geojson_struct
+    produces=FORMAT.struct or FORMAT.geojson_collection
     """
 
     # Constructor
     def __init__(self, configdict, section):
-        FileInput.__init__(self, configdict, section, produces=[FORMAT.struct, FORMAT.geojson_struct])
+        FileInput.__init__(self, configdict, section, produces=[FORMAT.struct, FORMAT.geojson_collection])
 
     def read_file(self, file_path):
         # One-time read/parse only

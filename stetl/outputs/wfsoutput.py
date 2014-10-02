@@ -45,7 +45,7 @@ class WFSTOutput(Output):
 
         conn = httplib.HTTPConnection(self.wfs_host, self.wfs_port)
         conn.request("POST", self.wfs_path,
-                     WFSTOutput.wfst_req % (self.idgen, self.to_string(packet.data, False, False)), WFSTOutput.headers)
+                     WFSTOutput.wfst_req % (self.idgen, packet.to_string()), WFSTOutput.headers)
 
         response = conn.getresponse()
         log.info('status=%s msg=%s' % (response.status, response.msg))

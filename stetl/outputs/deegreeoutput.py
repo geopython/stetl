@@ -168,7 +168,7 @@ class DeegreeFSLoaderOutput(Output):
 
         p = Popen(cmd, stdin=PIPE)
 
-        p.stdin.write(self.to_string(gml_doc))
+        p.stdin.write(packet.to_string())
 
         result = p.communicate()[0]
         return packet

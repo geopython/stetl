@@ -4,6 +4,8 @@
 #
 # Author: Just van den Broecke
 #
+from util import etree
+import json
 
 class Packet:
     """
@@ -38,6 +40,21 @@ class Packet:
     def set_end_of_doc(self, val=True):
         self.end_of_doc = val
 
+    def to_string(self, args=dict):
+        if self.data is None:
+            return ''
+
+        # TODO: jumptable
+        if self.format == FORMAT.etree_doc:
+            s = etree.tostring(self.data, pretty_print=True, xml_declaration=True, encoding='utf-8')
+        elif self.format == FORMAT.struct or self.format == FORMAT.geojson_collection or self.format == FORMAT.geojson_feature:
+            s = json.dumps(self.data)
+        elif self.format == FORMAT.ogr_feature:
+            s = self.data.ExportToJson()
+        else:
+            s = str(self.data)
+        return s
+
 # Simple enum emulation NOT ANY MORE: TOO INVOLVED AND INFLEXIBLE: use Strings with predefined ones in FORMAT.*
 # See http://stackoverflow.com/questions/1969005/enumerations-in-python
 # class Enum(object):
@@ -46,7 +63,7 @@ class Packet:
 
 # The data types allowed to pass in Packets, "any" can be used as wildcard
 # FORMAT = Enum('xml_line_stream', 'etree_doc', 'etree_element_stream', 'etree_feature_array', 'xml_doc_as_string',
-#              'string', 'record', 'geojson_struct', 'struct', 'any')
+#              'string', 'record', 'geojson_collection', 'struct', 'any')
 
 
 class FORMAT:
@@ -60,7 +77,10 @@ class FORMAT:
     record = 'record'
     record_array = 'record_array'
     struct = 'struct'
-    geojson_struct = 'geojson_struct'
+    geojson_feature = 'geojson_feature'
+    geojson_collection = 'geojson_collection'
+    ogr_feature = 'ogr_feature'
+    ogr_feature_array = 'ogr_feature_array'
     any = 'any'
 
     @staticmethod

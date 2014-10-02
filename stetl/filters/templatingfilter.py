@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+  #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 # Transformation of any input using Python Templating as
@@ -162,7 +162,7 @@ class Jinja2TemplatingFilter(TemplatingFilter):
     ogr_package = None
 
     def __init__(self, configdict, section):
-        TemplatingFilter.__init__(self, configdict, section, consumes=[FORMAT.struct,FORMAT.geojson_struct])
+        TemplatingFilter.__init__(self, configdict, section, consumes=[FORMAT.struct,FORMAT.geojson_collection])
 
     def create_template(self):
         try:

@@ -100,6 +100,159 @@ class Util:
 
         return dict(dict_arr)
 
+    @staticmethod
+    def elem_to_dict(elem, strip_space=True, strip_ns=True, sub=False, attr_prefix='', gml2ogr=True, ogr2json=True):
+        """Convert an Element into an internal dictionary (not JSON!)."""
+
+        def splitNameSpace(tag):
+            if tag[0] == "{":
+                return tag[1:].split("}")
+            else:
+                return None, tag
+
+        def parseAttributes(attribs):
+            ns = set()
+            for attrib in attribs.keys():
+                if ':' in attrib:
+                    ns.add(attrib.split(':')[0])
+            if len(ns) == 0:
+                return attribs
+            else:
+                result = {}
+                for x in ns:
+                    result[x] = {}
+                for attrib, value in attribs.items():
+                    if ':' in attrib:
+                        this_ns, tag = attrib.split(':')
+                        result[this_ns][attr_prefix + tag] = value
+                    else:
+                        result[attrib] = value
+                return result
+
+        def parseChildren(tags):
+            final = {}
+
+            for x in tags:
+                prepend = {}
+                result = ""
+                uri, tag = splitNameSpace(x.tag)
+
+                # if uri is not None:
+                #     prepend['$$'] = uri
+
+                if len(x.attrib) > 0:
+                    prepend = dict(prepend.items() + parseAttributes(x.attrib).items())
+
+                if len(x) == 0:
+                    if x.text is not None:
+                        if len(prepend) == 0:
+                            result = x.text
+                        else:
+                            result = dict(prepend.items() + {"$": x.text}.items())
+                    else:
+                        if len(prepend) > 0:
+                            result = prepend
+
+                else:
+                    if len(prepend) == 0:
+                        result = {"$": parseChildren(x.getchildren())}
+                    else:
+                        result = dict(prepend.items() + {"$": parseChildren(x.getchildren())}.items())
+
+                if tag in final:
+                    if type(final[tag]) is not types.ListType:
+                        final[tag] = [final[tag]]
+
+                    final[tag].append(result)
+                else:
+                    final[tag] = result
+
+            return final
+
+        # Build-up structure
+
+        # First the attributes in dict, optionally split-off NS
+        d = {}
+        for key, value in elem.attrib.items():
+            if strip_ns is True:
+                uri, key = splitNameSpace(key)
+
+            d[attr_prefix + key] = value
+
+        # Loop over sub-elements to merge them
+        is_geom = False
+        value = None
+        for subelem in elem:
+            tag = subelem.tag
+            uri, bare_tag = splitNameSpace(tag)
+            is_geom = False
+
+            # What to do if GML Geometry found...
+            if gml2ogr and bare_tag in ['Point', 'Polygon', 'MultiPolygon', 'LineString', 'MultiLineString']:
+                is_geom = True
+
+                # Create OGR Geometry object from GML string
+                value = etree.tostring(subelem)
+                from osgeo import ogr
+                geom = ogr.CreateGeometryFromGML(value)
+
+                value = geom
+                if ogr2json:
+                    # Make OGR Geometry object a GeoJSON internal structure like
+                    #  { "type": "Point",
+                    #    "coordinates": [4.894836363636363, 52.373045454545455] }
+                    import ast
+                    # http://stackoverflow.com/questions/988228/converting-a-string-to-dictionary
+                    # ast.literal_eval("{'muffin' : 'lolz', 'foo' : 'kitty'}")
+                    value = ast.literal_eval(geom.ExportToJson())
+
+            else:
+                v = Util.elem_to_dict(subelem, strip_space=strip_space, strip_ns=strip_ns, sub=True,
+                                      attr_prefix=attr_prefix, ogr2json=ogr2json, gml2ogr=gml2ogr)
+                value = v[subelem.tag]
+
+            if strip_ns is True:
+                tag = bare_tag
+
+            try:
+                # add to existing list for this tag
+                d[tag].append(value)
+            except AttributeError:
+                # turn existing entry into a list
+                d[tag] = [d[tag], value]
+            except KeyError:
+                # add a new non-list entry
+                d[tag] = value
+
+        text = elem.text
+        tail = elem.tail
+        if strip_space is True:
+            # ignore leading and trailing whitespace
+            if text:
+                text = text.strip()
+            if tail:
+                tail = tail.strip()
+
+        if tail:
+            d['#tail'] = tail
+
+        if d:
+            # use #text element if other attributes exist
+            if text:
+                d["#text"] = text
+
+            # We replace the tag like 'Polygon' when we have a geometry
+            if is_geom:
+                d = value
+        else:
+            # text is the value if no attributes
+            d = text or None
+
+        elem_tag = elem.tag
+        if strip_ns is True and sub is False:
+            uri, elem_tag = splitNameSpace(elem_tag)
+
+        return {elem_tag: d}
 
     # Remove all Namespaces from an etree Node
     # Handy for e.g. XPath expressions

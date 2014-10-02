@@ -231,7 +231,7 @@ when constructing a Chain.
 
 The following data types are currently symbolically defined in the :class:`stetl.packet.FORMAT` class:
 
-- ``xml_line_stream`` - each Packet contains a line (string) from an XML file or string representation (DEPRECATED)
+- ``any`` - 'catch-all' type, may be any of the types below.
 
 - ``etree_doc`` - a complete in-memory XML DOM structure using the ``lxml`` etree
 
@@ -239,19 +239,26 @@ The following data types are currently symbolically defined in the :class:`stetl
 
 - ``etree_feature_array`` - each Packet contains an array of DOM Elements (usually Features) in ``lxml`` etree format
 
-- ``xml_doc_as_string`` - a string representation of a complete XML document
+- ``geojson_feature`` - as ``struct`` but following naming conventions for a single Feature according to the GeoJSON spec: http://geojson.org
 
-- ``string``- a general string
+- ``geojson_collection`` - as ``struct`` but following naming conventions for a FeatureCollection according to the GeoJSON spec: http://geojson.org
+
+- ``ogr_feature`` - a single Feature object from an OGR source (via Python SWIG wrapper)
+
+- ``ogr_feature_array`` - a Python list (array) of a single Feature objects from an OGR source
 
 - ``record`` - a Python ``dict`` (hashmap)
 
 - ``record_array`` - a Python list (array) of ``dict``
 
+- ``string``- a general string
+
 - ``struct`` - a JSON-like generic tree structure
 
-- ``geojson_struct`` - as ``struct`` but following naming conventions according to the GeoJSON spec: http://geojson.org
+- ``xml_doc_as_string`` - a string representation of a complete XML document
 
-- ``any`` - 'catch-all' type, may be any of the above.
+- ``xml_line_stream`` - each Packet contains a line (string) from an XML file or string representation (DEPRECATED)
+
 
 Many components, in particular Filters, are able to transform data formats.
 For example the `XmlElementStreamerFileInput` can produce an

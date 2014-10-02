@@ -101,7 +101,7 @@ class PostgresDbInput(Input):
     # End attribute config meta
 
     def __init__(self, configdict, section):
-        Input.__init__(self, configdict, section, produces=[FORMAT.record_array,FORMAT.record])
+        Input.__init__(self, configdict, section, produces=[FORMAT.record_array, FORMAT.record])
         self.db = None
 
     def init(self):
