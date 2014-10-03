@@ -267,18 +267,20 @@ class Util:
 
 log = Util.get_log("util")
 
-# GDAL/OGR Python Bindings not needed for now...
-#import sys
-#try:
-#    from osgeo import ogr #apt-get install python-gdal
-#except ImportError:
-#    print("FATAAL: GDAL Python bindings not available, install e.g. with  'apt-get install python-gdal'")
-#    sys.exit(-1)
+# Try several imports, centralized to give warnings once
+try:
+    from cStringIO import StringIO
+
+    log.info("Found cStringIO, good!")
+except:
+    from StringIO import StringIO
+
+    log.warning("Found StringIO (this is suboptimal, try cStringIO")
 
 try:
     from lxml import etree
 
-    log.info("running with lxml.etree, good!")
+    log.info("Found lxml.etree, native XML parsing, fabulous!")
 except ImportError:
     try:
         # Python 2.5
@@ -307,14 +309,19 @@ except ImportError:
                     log.warning("Failed to import ElementTree from any known place")
 
 try:
-    from cStringIO import StringIO
+    from osgeo import gdal
+    from osgeo import ogr
+    from osgeo import osr
+except ImportError:
+    try:
+        import gdal
+        import ogr
+        import osr
+    except ImportError:
+        log.warn("No GDAL/OGR Python bindings. Ok if not using GDAL/OGR functions. See https://pypi.python.org/pypi/GDAL")
 
-    log.info("running with cStringIO, fabulous!")
-except:
-    from StringIO import StringIO
-
-    log.warning("running with StringIO (this is suboptimal, try cStringIO")
-
+if ogr and gdal and osr:
+    log.info("Found GDAL Python bindings, super!!")
 
 class ConfigSection():
     def __init__(self, config_section):

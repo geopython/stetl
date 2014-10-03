@@ -7,7 +7,7 @@
 #
 import subprocess
 from stetl.component import Config
-from stetl.util import Util
+from stetl.util import Util, gdal, ogr
 from stetl.input import Input
 from stetl.packet import FORMAT
 
@@ -21,7 +21,7 @@ class OgrInput(Input):
     Each Layer corresponds to a "doc", so for multi-layer sources the 'end-of-doc' flag is
     set after a Layer has been read.
 
-    This input can read almost any geospatial dataformat. Once can use the features directly
+    This input can read almost any geospatial dataformat. One can use the features directly
     in a Stetl Filter or use a converter to e.g. convert to GeoJSON structures.
 
     produces=FORMAT.ogr_feature or FORMAT.ogr_feature_array (all features)
@@ -88,12 +88,6 @@ class OgrInput(Input):
         Input.__init__(self, configdict, section, produces=[FORMAT.ogr_feature, FORMAT.ogr_feature_array])
 
     def init(self):
-        try:
-            from osgeo import gdal
-            from osgeo import ogr
-        except ImportError:
-            import gdal
-            import ogr
 
         self.ogr = ogr
         # http://trac.osgeo.org/gdal/wiki/PythonGotchas
@@ -206,6 +200,7 @@ class OgrInput(Input):
 class OgrPostgisInput(Input):
     """
      Input from PostGIS via ogr2ogr command. For now hardcoded to produce an ogr GML line stream.
+     OgrInput may be a better alternative.
 
      TODO: look to use Fiona or direct OGR via Python.
 

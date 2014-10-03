@@ -1,4 +1,4 @@
-  #!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 # Transformation of any input using Python Templating as
@@ -9,7 +9,7 @@
 #
 # Author:Just van den Broecke
 
-from stetl.util import Util
+from stetl.util import Util, ogr, osr
 from stetl.component import Config
 from stetl.filter import Filter
 from stetl.packet import FORMAT
@@ -87,6 +87,7 @@ class TemplatingFilter(Filter):
     def render_template(self, packet):
         pass
 
+
 class StringTemplatingFilter(TemplatingFilter):
     """
     Implements Templating using Python's internal string.Template.
@@ -116,6 +117,7 @@ class StringTemplatingFilter(TemplatingFilter):
     def render_template(self, packet):
         packet.data = self.template.substitute(packet.data)
         return packet
+
 
 class Jinja2TemplatingFilter(TemplatingFilter):
     """
@@ -159,19 +161,23 @@ class Jinja2TemplatingFilter(TemplatingFilter):
     # End attribute config meta
 
     json_package = None
-    ogr_package = None
+    ogr_package = ogr
+    osr_package = osr
 
     def __init__(self, configdict, section):
-        TemplatingFilter.__init__(self, configdict, section, consumes=[FORMAT.struct,FORMAT.geojson_collection])
+        TemplatingFilter.__init__(self, configdict, section, consumes=[FORMAT.struct, FORMAT.geojson_collection])
 
     def create_template(self):
         try:
             from jinja2 import Environment, FileSystemLoader
         except Exception, e:
-            log.error('Cannot import modules from Jinja2, err= %s; You probably need to install Jinja2 first, see http://jinja.pocoo.org', str(e))
+            log.error(
+                'Cannot import modules from Jinja2, err= %s; You probably need to install Jinja2 first, see http://jinja.pocoo.org',
+                str(e))
             raise e
 
         import json
+
         Jinja2TemplatingFilter.json_package = json
 
         # Check for a file with global variables configured in json format
@@ -187,6 +193,7 @@ class Jinja2TemplatingFilter(TemplatingFilter):
                     # Globals can come from local file or remote URL
                     if file_path.startswith('http'):
                         import urllib2
+
                         fp = urllib2.urlopen(file_path)
                         globals_struct = json.loads(fp.read())
                     else:
@@ -232,16 +239,10 @@ class Jinja2TemplatingFilter(TemplatingFilter):
 
     @staticmethod
     def import_ogr():
-        if Jinja2TemplatingFilter.ogr_package is not None:
-            return
-
-        try:
-            from osgeo import ogr, osr
-            Jinja2TemplatingFilter.ogr_package = ogr
-            Jinja2TemplatingFilter.osr_package = osr
-        except Exception, e:
-            log.error('Cannot import Python ogr package, err= %s; You probably need to install GDAL/OGR Python bindings, see https://pypi.python.org/pypi/GDAL' % str(e))
-            raise e
+        if Jinja2TemplatingFilter.ogr_package is None:
+            log.error(
+                'Cannot import Python ogr package; You probably need to install GDAL/OGR Python bindings, see https://pypi.python.org/pypi/GDAL')
+            raise ImportError
 
     @staticmethod
     def create_spatial_ref(crs):
@@ -286,7 +287,8 @@ class Jinja2TemplatingFilter(TemplatingFilter):
             # Optional: reproject Geometry from source CRS to target CRS
             if target_crs is not None:
                 target_spatial_ref = Jinja2TemplatingFilter.create_spatial_ref(target_crs)
-                transform = Jinja2TemplatingFilter.osr_package.CoordinateTransformation(source_spatial_ref, target_spatial_ref)
+                transform = Jinja2TemplatingFilter.osr_package.CoordinateTransformation(source_spatial_ref,
+                                                                                        target_spatial_ref)
                 geom.Transform(transform)
 
             # Generate the GML Geometry elements as string, GMLID is optional
@@ -296,7 +298,8 @@ class Jinja2TemplatingFilter(TemplatingFilter):
 
             gml_str = geom.ExportToGML(options=options)
         except Exception, e:
-            gml_str = 'Failure in CreateGeometryFromJson or ExportToGML, err= %s; check your data and Stetl log' % str(e)
+            gml_str = 'Failure in CreateGeometryFromJson or ExportToGML, err= %s; check your data and Stetl log' % str(
+                e)
             log.error(gml_str)
 
         return gml_str

@@ -21,6 +21,8 @@ class ETL:
 
     """
 
+    CONFIG_DIR = None
+
     def __init__(self, options_dict, args_dict=None):
         """
         :param options_dict: dictionary with options, now only config_file files with path to config file
@@ -37,20 +39,24 @@ class ETL:
         config_file = self.options_dict.get('config_file')
 
         if config_file is None or not os.path.isfile(config_file):
-            print 'No config file found at: %s' % config_file
+            log.error('No config file found at: %s' % config_file)
             sys.exit(1)
 
-        log.info("Reading config_file = %s" % config_file)
+        ETL.CONFIG_DIR = os.path.dirname(os.path.abspath(config_file))
+        log.info("Config/working dir =%s" % ETL.CONFIG_DIR)
 
         self.configdict = ConfigParser()
 
+        sys.path.append(ETL.CONFIG_DIR)
+
         try:
+            log.info("Reading config_file = %s" % config_file)
             if args_dict:
                 log.info("Substituting %d args in config file from args_dict: %s" % (len(args_dict), str(args_dict)))
                 # Get config file as string
-                file = open(config_file, 'r')
-                config_str = file.read()
-                file.close()
+                f = open(config_file, 'r')
+                config_str = f.read()
+                f.close()
 
                 # Do replacements  see http://docs.python.org/2/library/string.html#formatstrings
                 config_str = config_str.format(**args_dict)

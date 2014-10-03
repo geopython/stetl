@@ -1,1 +1,130 @@
-{"type": "FeatureCollection", "features": [{"geometry": {"type": "Point", "coordinates": [4.632, 52.387]}, "type": "Feature", "properties": {"STATUS": "Provincial capital", "ObjectID": 12386304, "POP_RANK": 5, "CNTRY_NAME": "Netherlands", "GMI_ADMIN": "NLD-NHL", "gml_id": "cities.1358", "ADMIN_NAME": "Noord-Holland", "LABEL_FLAG": 0, "CITY_NAME": "Haarlem", "POP_CLASS": "100,000 to 250,000", "PORT_ID": 0, "FIPS_CNTRY": "NL"}, "id": 1358}, {"geometry": {"type": "Point", "coordinates": [4.89483636, 52.37304545]}, "type": "Feature", "properties": {"STATUS": "National capital", "ObjectID": 12386305, "POP_RANK": 3, "CNTRY_NAME": "Netherlands", "GMI_ADMIN": "NLD-NHL", "gml_id": "cities.1359", "ADMIN_NAME": "Noord-Holland", "LABEL_FLAG": 0, "CITY_NAME": "Amsterdam", "POP_CLASS": "500,000 to 1,000,000", "PORT_ID": 31060, "FIPS_CNTRY": "NL"}, "id": 1359}, {"geometry": {"type": "Point", "coordinates": [5.112, 52.1]}, "type": "Feature", "properties": {"STATUS": "Provincial capital", "ObjectID": 12386306, "POP_RANK": 5, "CNTRY_NAME": "Netherlands", "GMI_ADMIN": "NLD-UTR", "gml_id": "cities.1360", "ADMIN_NAME": "Utrecht", "LABEL_FLAG": 1, "CITY_NAME": "Utrecht", "POP_CLASS": "100,000 to 250,000", "PORT_ID": 0, "FIPS_CNTRY": "NL"}, "id": 1360}, {"geometry": {"type": "Point", "coordinates": [4.281, 52.076]}, "type": "Feature", "properties": {"STATUS": "Provincial capital", "ObjectID": 12386307, "POP_RANK": 4, "CNTRY_NAME": "Netherlands", "GMI_ADMIN": "NLD-ZHL", "gml_id": "cities.1361", "ADMIN_NAME": "Zuid-Holland", "LABEL_FLAG": 0, "CITY_NAME": "The Hague", "POP_CLASS": "250,000 to 500,000", "PORT_ID": 0, "FIPS_CNTRY": "NL"}, "id": 1361}, {"geometry": {"type": "Point", "coordinates": [4.48515455, 51.92559091]}, "type": "Feature", "properties": {"STATUS": "Other", "ObjectID": 12386308, "POP_RANK": 2, "CNTRY_NAME": "Netherlands", "GMI_ADMIN": "NLD-ZHL", "gml_id": "cities.1362", "ADMIN_NAME": "Zuid-Holland", "LABEL_FLAG": 0, "CITY_NAME": "Rotterdam", "POP_CLASS": "1,000,000 to 5,000,000", "PORT_ID": 31140, "FIPS_CNTRY": "NL"}, "id": 1362}]}
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.632,
+                    52.387
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "status": "Provincial capital",
+                "objectid": 12386304,
+                "pop_rank": 5,
+                "cntry_name": "Netherlands",
+                "gmi_admin": "NLD-NHL",
+                "gml_id": "cities.1358",
+                "admin_name": "Noord-Holland",
+                "label_flag": 0,
+                "city_name": "Haarlem",
+                "pop_class": "100,000 to 250,000",
+                "port_id": 0,
+                "fips_cntry": "NL"
+            },
+            "id": 1358
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.89483636,
+                    52.37304545
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "status": "National capital",
+                "objectid": 12386305,
+                "pop_rank": 3,
+                "cntry_name": "Netherlands",
+                "gmi_admin": "NLD-NHL",
+                "gml_id": "cities.1359",
+                "admin_name": "Noord-Holland",
+                "label_flag": 0,
+                "city_name": "Amsterdam",
+                "pop_class": "500,000 to 1,000,000",
+                "port_id": 31060,
+                "fips_cntry": "NL"
+            },
+            "id": 1359
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.112,
+                    52.1
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "status": "Provincial capital",
+                "objectid": 12386306,
+                "pop_rank": 5,
+                "cntry_name": "Netherlands",
+                "gmi_admin": "NLD-UTR",
+                "gml_id": "cities.1360",
+                "admin_name": "Utrecht",
+                "label_flag": 1,
+                "city_name": "Utrecht",
+                "pop_class": "100,000 to 250,000",
+                "port_id": 0,
+                "fips_cntry": "NL"
+            },
+            "id": 1360
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.281,
+                    52.076
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "status": "Provincial capital",
+                "objectid": 12386307,
+                "pop_rank": 4,
+                "cntry_name": "Netherlands",
+                "gmi_admin": "NLD-ZHL",
+                "gml_id": "cities.1361",
+                "admin_name": "Zuid-Holland",
+                "label_flag": 0,
+                "city_name": "The Hague",
+                "pop_class": "250,000 to 500,000",
+                "port_id": 0,
+                "fips_cntry": "NL"
+            },
+            "id": 1361
+        },
+        {
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    4.48515455,
+                    51.92559091
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "status": "Other",
+                "objectid": 12386308,
+                "pop_rank": 2,
+                "cntry_name": "Netherlands",
+                "gmi_admin": "NLD-ZHL",
+                "gml_id": "cities.1362",
+                "admin_name": "Zuid-Holland",
+                "label_flag": 0,
+                "city_name": "Rotterdam",
+                "pop_class": "1,000,000 to 5,000,000",
+                "port_id": 31140,
+                "fips_cntry": "NL"
+            },
+            "id": 1362
+        }
+    ]
+}

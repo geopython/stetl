@@ -6,7 +6,8 @@
 #
 
 # Usually requried in order to have Python find your package
-PYTHONPATH=.:$PYTHONPATH
+# PYTHONPATH=.:$PYTHONPATH
+# Not required: Stetl will find files in the same dir as the config file
 
 stetl -c etl.cfg
 
