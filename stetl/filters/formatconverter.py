@@ -83,6 +83,45 @@ class FormatConverter(Filter):
     def no_op(packet):
         return packet
 
+    # START etree_doc
+    @staticmethod
+    def etree_doc2geojson_collection(packet, converter_args=None):
+        """
+        Use converter_args to determine XML tagnames for features and GeoJSON feature id.
+        For example
+
+           converter_args = {
+            'root_tag': 'FeatureCollection',
+            'feature_tag': 'featureMember',
+            'feature_id_attr': 'fid'
+            }
+
+        :param packet:
+        :param converter_args:
+        :return:
+        """
+        if packet.data is None:
+            return packet
+
+        packet.data = packet.data.getroot()
+        packet = FormatConverter.etree_elem2struct(packet)
+        feature_coll = {'type': 'FeatureCollection', 'features': []}
+
+        root_tag = 'FeatureCollection'
+        feature_tag = 'featureMember'
+        if converter_args:
+            root_tag = converter_args['root_tag']
+            feature_tag = converter_args['feature_tag']
+
+        features = packet.data[root_tag][feature_tag]
+        for feature in features:
+            packet.data = feature
+            packet = FormatConverter.struct2geojson_feature(packet, converter_args)
+            feature_coll['features'].append(packet.data)
+
+        packet.data = feature_coll
+        return packet
+
     @staticmethod
     def etree_doc2string(packet):
         if packet.data is None:
@@ -109,6 +148,22 @@ class FormatConverter(Filter):
         packet.data = packet.data.getroot()
         return FormatConverter.etree_elem2struct(packet, strip_space, strip_ns, sub, attr_prefix, gml2ogr, ogr2json)
 
+    # END etree_doc
+
+    # START etree_elem
+    @staticmethod
+    def etree_elem2geojson_feature(packet, converter_args=None):
+        """
+
+        """
+        if packet.data is None:
+            return packet
+
+        packet = FormatConverter.etree_elem2struct(packet, converter_args)
+        packet = FormatConverter.struct2geojson_feature(packet, converter_args)
+
+        return packet
+
     @staticmethod
     def etree_elem2struct(packet, strip_space=True, strip_ns=True, sub=False, attr_prefix='', gml2ogr=True, ogr2json=True):
         """
@@ -125,6 +180,8 @@ class FormatConverter(Filter):
             return packet
         packet.data = Util.elem_to_dict(packet.data, strip_space, strip_ns, sub, attr_prefix, gml2ogr, ogr2json)
         return packet
+
+    # END etree_elem
 
     @staticmethod
     def ogr_feature2struct(packet, converter_args=None):
@@ -197,19 +254,44 @@ class FormatConverter(Filter):
         packet.data = packet.to_string()
         return packet
 
+    @staticmethod
+    def struct2geojson_feature(packet, converter_args=None):
+        if packet.data is None:
+            return packet
+
+        key, feature_struct = packet.data.popitem()
+        feature = {'type': 'feature', 'properties': {}}
+
+        id_field = None
+        if converter_args:
+            id_field = converter_args['feature_id_attr']
+
+        for attr_name in feature_struct:
+            val = feature_struct[attr_name]
+            if attr_name == 'geometry':
+                feature['geometry'] = val
+            elif attr_name == id_field:
+                feature['id'] = val
+            else:
+                feature['properties'][attr_name] = val
+
+        packet.data = feature
+        return packet
 
 # 'xml_line_stream', 'etree_doc', 'etree_element_stream', 'etree_feature_array', 'xml_doc_as_string',
 #  'string', 'record', 'geojson_collection', geojson_feature', 'struct', 'ogr_feature', 'ogr_feature_array', 'any'
 FORMAT_CONVERTERS = {
     FORMAT.etree_doc: {
+        FORMAT.geojson_collection: FormatConverter.etree_doc2geojson_collection,
         FORMAT.string: FormatConverter.etree_doc2string,
-        FORMAT.xml_doc_as_string: FormatConverter.etree_doc2string,
-        FORMAT.struct: FormatConverter.etree_doc2struct
+        FORMAT.struct: FormatConverter.etree_doc2struct,
+        FORMAT.xml_doc_as_string: FormatConverter.etree_doc2string
     },
     FORMAT.etree_element_stream: {
+        FORMAT.geojson_feature: FormatConverter.etree_elem2geojson_feature,
         FORMAT.string: FormatConverter.etree_doc2string,
-        FORMAT.xml_doc_as_string: FormatConverter.etree_doc2string,
-        FORMAT.struct: FormatConverter.etree_elem2struct
+        FORMAT.struct: FormatConverter.etree_elem2struct,
+        FORMAT.xml_doc_as_string: FormatConverter.etree_doc2string
     },
     FORMAT.ogr_feature: {
         FORMAT.struct: FormatConverter.ogr_feature2struct,
@@ -230,7 +312,8 @@ FORMAT_CONVERTERS = {
         FORMAT.xml_doc_as_string: FormatConverter.no_op
     },
     FORMAT.struct: {
-        FORMAT.string: FormatConverter.struct2string
+        FORMAT.string: FormatConverter.struct2string,
+        FORMAT.geojson_feature: FormatConverter.struct2geojson_feature
     },
     FORMAT.xml_doc_as_string: {
         FORMAT.etree_doc: FormatConverter.string2etree_doc,
