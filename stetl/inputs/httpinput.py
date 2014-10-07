@@ -22,7 +22,7 @@ class HttpInput(Input):
     Base class: subclasses will do datatype-specific formatting of
     the returned data.
 
-     produces=FORMAT.any
+    produces=FORMAT.any
     """
 
     # Start attribute config meta
@@ -46,15 +46,16 @@ class HttpInput(Input):
         """
         Flat JSON-like struct of the parameters to be appended to the url.
 
-        Example:
+        Example: ::
+
               url = http://geodata.nationaalgeoregister.nl/natura2000/wfs
               parameters = {
-        		'service' : 'WFS',
-        		'version' : '1.1.0',
-        		'request' : 'GetFeature',
-                'srsName' : 'EPSG:28992',
-                'outputFormat' : 'text/xml; subtype=gml/2.1.2',
-        		'typename' : 'natura2000'
+        		service : WFS,
+        		version : 1.1.0,
+        		request : GetFeature,
+                srsName : EPSG:28992,
+                outputFormat : text/xml; subtype=gml/2.1.2,
+        		typename : natura2000
                }
 
         Required: False
@@ -84,7 +85,7 @@ class HttpInput(Input):
             # Urlencode optional parameters
             query_string = None
             if parameters:
-                 query_string = urllib.urlencode(parameters)
+                query_string = urllib.urlencode(parameters)
 
             response = urlopen(req, query_string)
         except HTTPError as e:
@@ -94,7 +95,7 @@ class HttpInput(Input):
             log.error('URLError fetching from URL %s: reason=%s e=%s' % (url, e.reason, e))
             raise e
 
-         # everything is fine
+            # everything is fine
         return response.read()
 
     def read(self, packet):
@@ -121,6 +122,7 @@ class HttpInput(Input):
         """
         return data
 
+
 class ApacheDirInput(HttpInput):
     """
      Read file data from an Apache directory "index" HTML page.
@@ -128,6 +130,7 @@ class ApacheDirInput(HttpInput):
      produces=FORMAT.record. Each record contains file_name and file_data (other meta data like
      date time is too fragile over different Apache servers).
     """
+
     def __init__(self, configdict, section, produces=FORMAT.record):
         HttpInput.__init__(self, configdict, section, produces)
         # look for a link + a timestamp + a size ('-' for dir)
