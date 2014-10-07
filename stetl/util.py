@@ -264,6 +264,46 @@ class Util:
         transform = etree.XSLT(Util.xslt_strip_ns_doc)
         return transform(node)
 
+    @staticmethod
+    def xpath_get(mydict, path):
+        """
+        XPath-like query for nested dicts/JSON-type structures.
+        See: http://stackoverflow.com/questions/7320319/xpath-like-query-for-nested-python-dictionaries
+        Example::
+
+            foo = {
+              'spam':'eggs',
+              'morefoo': [{
+                           'bar':'soap',
+                           'morebar': {
+                                       'bacon' : {
+                                                   'bla':'balbla'
+                                                 }
+                                       }
+                          },
+                          'bla'
+                          ]
+               }
+
+            print xpath_get(foo, "/morefoo/0/morebar/bacon")
+
+        :param mydict: a nested dict
+        :param path: path to member
+        :return: found member or none
+        """
+        elem = mydict
+        try:
+            for x in path.strip("/").split("/"):
+                try:
+                    x = int(x)
+                    elem = elem[x]
+                except ValueError:
+                    elem = elem.get(x)
+        except:
+            pass
+
+        return elem
+
 
 log = Util.get_log("util")
 

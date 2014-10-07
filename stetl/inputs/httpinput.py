@@ -46,17 +46,17 @@ class HttpInput(Input):
         """
         Flat JSON-like struct of the parameters to be appended to the url.
 
-        Example: ::
+        Example: (parameters require quotes)::
 
-              url = http://geodata.nationaalgeoregister.nl/natura2000/wfs
-              parameters = {
-        		service : WFS,
-        		version : 1.1.0,
-        		request : GetFeature,
+            url = http://geodata.nationaalgeoregister.nl/natura2000/wfs
+            parameters = {
+                service : WFS,
+                version : 1.1.0,
+                request : GetFeature,
                 srsName : EPSG:28992,
                 outputFormat : text/xml; subtype=gml/2.1.2,
-        		typename : natura2000
-               }
+                typename : natura2000
+            }
 
         Required: False
 

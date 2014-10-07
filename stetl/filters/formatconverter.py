@@ -16,11 +16,11 @@ log = Util.get_log("formatconverter")
 
 class FormatConverter(Filter):
     """
-    Converts any packet format (if converter available).
+    Converts (almost) any packet format (if converter available).
 
     consumes=FORMAT.any, produces=FORMAT.any but actual formats
     are changed at initialization based on the input to output format to
-    be converted.
+    be converted via the input_format and output_format config parameters.
     """
 
     # Start attribute config meta
@@ -31,8 +31,11 @@ class FormatConverter(Filter):
     def converter_args(self):
         """
         Custom converter-specific arguments.
+
         Type: dictionary
+
         Required: False
+
         Default: None
         """
         pass
@@ -42,32 +45,39 @@ class FormatConverter(Filter):
     # Constructor
     def __init__(self, configdict, section):
         Filter.__init__(self, configdict, section, consumes=FORMAT.any, produces=FORMAT.any)
-        self._output_format = self.output_format
-        self._input_format = self._input_format
+        self.converter = None
 
-    def invoke(self, packet):
-        # if packet.data is None:
-        #     return packet
-
-        # Any as output is always valid, just return
+    def init(self):
         if self.output_format == FORMAT.any:
-            return packet
+            # Any as output is always valid, do nothing
+            self.converter = FormatConverter.no_op
+            return
 
         # generate runtime error as we may have registered converters at init time...
         if self.input_format not in FORMAT_CONVERTERS.keys():
             raise NotImplementedError('No format converters found for input format %s' % self.input_format)
 
-        # ASSERT converters present for input_format
+        # ASSERTION: converters present for input_format
 
         if self.output_format not in FORMAT_CONVERTERS[self.input_format].keys():
             raise NotImplementedError('No format converters found for input format %s to output format %s' % (
                 self.input_format, self.output_format))
 
+        # ASSERTION: converters present for input_format and output_format
+
+        # Lookup and assign the active converter
+        self.converter = FORMAT_CONVERTERS[self.input_format][self.output_format]
+
+    def invoke(self, packet):
         packet.format = self.output_format
+
+        if packet.data is None:
+            return packet
+
         if self.converter_args is not None:
-            FORMAT_CONVERTERS[self.input_format][self.output_format](packet, self.converter_args)
+            self.converter(packet, self.converter_args)
         else:
-            FORMAT_CONVERTERS[self.input_format][self.output_format](packet)
+            self.converter(packet)
 
         return packet
 
@@ -100,9 +110,6 @@ class FormatConverter(Filter):
         :param converter_args:
         :return:
         """
-        if packet.data is None:
-            return packet
-
         packet.data = packet.data.getroot()
         packet = FormatConverter.etree_elem2struct(packet)
         feature_coll = {'type': 'FeatureCollection', 'features': []}
@@ -124,9 +131,6 @@ class FormatConverter(Filter):
 
     @staticmethod
     def etree_doc2string(packet):
-        if packet.data is None:
-            return packet
-
         packet.data = etree.tostring(packet.data, pretty_print=True, xml_declaration=True)
         return packet
 
@@ -142,9 +146,6 @@ class FormatConverter(Filter):
         :param ogr2json:
         :return:
         """
-        if packet.data is None:
-            return packet
-
         packet.data = packet.data.getroot()
         return FormatConverter.etree_elem2struct(packet, strip_space, strip_ns, sub, attr_prefix, gml2ogr, ogr2json)
 
@@ -156,9 +157,6 @@ class FormatConverter(Filter):
         """
 
         """
-        if packet.data is None:
-            return packet
-
         packet = FormatConverter.etree_elem2struct(packet, converter_args)
         packet = FormatConverter.struct2geojson_feature(packet, converter_args)
 
@@ -176,8 +174,6 @@ class FormatConverter(Filter):
         :param ogr2json:
         :return:
         """
-        if packet.data is None:
-            return packet
         packet.data = Util.elem_to_dict(packet.data, strip_space, strip_ns, sub, attr_prefix, gml2ogr, ogr2json)
         return packet
 
@@ -185,8 +181,6 @@ class FormatConverter(Filter):
 
     @staticmethod
     def ogr_feature2struct(packet, converter_args=None):
-        if packet.data is None:
-            return packet
         s = packet.data.ExportToJson()
         import ast
         # http://stackoverflow.com/questions/988228/converting-a-string-to-dictionary
@@ -197,11 +191,8 @@ class FormatConverter(Filter):
 
     @staticmethod
     def ogr_feature_arr2geojson_coll(packet, converter_args=None):
-        if packet.data is None:
-            return packet
-
         # See http://geojson.org/geojson-spec.html
-        geojson_coll = {'type' : 'FeatureCollection', 'features': []}
+        geojson_coll = {'type': 'FeatureCollection', 'features': []}
         import ast
         for feature in packet.data:
             geojson_coll['features'].append(ast.literal_eval(feature.ExportToJson()))
@@ -212,8 +203,6 @@ class FormatConverter(Filter):
 
     @staticmethod
     def record2struct(packet, converter_args=None):
-        if packet.data is None:
-            return packet
         if converter_args is not None:
             struct = dict()
             struct[converter_args['top_name']] = packet.data
@@ -226,12 +215,15 @@ class FormatConverter(Filter):
         if not hasattr(packet, 'arr'):
             packet.arr = list()
 
-        if packet.is_end_of_stream() is True:
-            packet.data = packet.arr
-            return packet
+        if packet.data is not None:
+            packet.arr.append(packet.data)
+            packet.consume()
 
-        packet.arr.append(packet.data)
-        packet.consume()
+        if packet.is_end_of_stream() is True:
+            # End of stream reached: assembled record array
+            packet.data = packet.arr
+            packet.arr = list()
+
         return packet
 
     @staticmethod
@@ -240,25 +232,16 @@ class FormatConverter(Filter):
 
     @staticmethod
     def string2etree_doc(packet):
-        if packet.data is None:
-            return packet
-
         packet.data = etree.fromstring(packet.data)
         return packet
 
     @staticmethod
     def struct2string(packet):
-        if packet.data is None:
-            return packet
-
         packet.data = packet.to_string()
         return packet
 
     @staticmethod
     def struct2geojson_feature(packet, converter_args=None):
-        if packet.data is None:
-            return packet
-
         key, feature_struct = packet.data.popitem()
         feature = {'type': 'feature', 'properties': {}}
 
@@ -278,8 +261,9 @@ class FormatConverter(Filter):
         packet.data = feature
         return packet
 
-# 'xml_line_stream', 'etree_doc', 'etree_element_stream', 'etree_feature_array', 'xml_doc_as_string',
-#  'string', 'record', 'geojson_collection', geojson_feature', 'struct', 'ogr_feature', 'ogr_feature_array', 'any'
+# 'xml_line_stream', 'etree_doc', 'etree_element', 'etree_feature_array', 'xml_doc_as_string',
+#  'string', 'record', 'record_array', 'geojson_collection', geojson_feature', 'struct',
+# 'ogr_feature', 'ogr_feature_array', 'any'
 FORMAT_CONVERTERS = {
     FORMAT.etree_doc: {
         FORMAT.geojson_collection: FormatConverter.etree_doc2geojson_collection,
@@ -287,15 +271,15 @@ FORMAT_CONVERTERS = {
         FORMAT.struct: FormatConverter.etree_doc2struct,
         FORMAT.xml_doc_as_string: FormatConverter.etree_doc2string
     },
-    FORMAT.etree_element_stream: {
+    FORMAT.etree_element: {
         FORMAT.geojson_feature: FormatConverter.etree_elem2geojson_feature,
         FORMAT.string: FormatConverter.etree_doc2string,
         FORMAT.struct: FormatConverter.etree_elem2struct,
         FORMAT.xml_doc_as_string: FormatConverter.etree_doc2string
     },
     FORMAT.ogr_feature: {
-        FORMAT.struct: FormatConverter.ogr_feature2struct,
-        FORMAT.geojson_feature: FormatConverter.ogr_feature2struct
+        FORMAT.geojson_feature: FormatConverter.ogr_feature2struct,
+        FORMAT.struct: FormatConverter.ogr_feature2struct
     },
     FORMAT.ogr_feature_array: {
         FORMAT.geojson_collection: FormatConverter.ogr_feature_arr2geojson_coll

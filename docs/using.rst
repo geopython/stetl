@@ -235,7 +235,7 @@ The following data types are currently symbolically defined in the :class:`stetl
 
 - ``etree_doc`` - a complete in-memory XML DOM structure using the ``lxml`` etree
 
-- ``etree_element_stream`` - each Packet contains a single DOM Element (usually a Feature) in ``lxml`` etree format
+- ``etree_element`` - each Packet contains a single DOM Element (usually a Feature) in ``lxml`` etree format
 
 - ``etree_feature_array`` - each Packet contains an array of DOM Elements (usually Features) in ``lxml`` etree format
 
@@ -262,10 +262,10 @@ The following data types are currently symbolically defined in the :class:`stetl
 
 Many components, in particular Filters, are able to transform data formats.
 For example the `XmlElementStreamerFileInput` can produce an
-`etree_element_stream`, a subsequent `XmlAssembler` can create small in-memory `etree_doc` s that
+`etree_element`, a subsequent `XmlAssembler` can create small in-memory `etree_doc` s that
 can be fed into an `XsltFilter`, which outputs a transformed `etree_doc`. The type `any` is a catch-all,
 for example used for printing any object to standard output in the :class:`stetl.packet.Component`.
-An `etree_element_stream` may also be interesting to be able to process single features.
+An `etree_element` may also be interesting to be able to process single features.
 
 Starting with Stetl 1.0.7 a new :class:`stetl.filters.formatconverter.FormatConverterFilter` class provides a Stetl Filter
 to allow almost any conversion between otherwise incompatible Components.

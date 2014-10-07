@@ -16,13 +16,13 @@ class XmlAssembler(Filter):
     Split a stream of etree DOM XML elements (usually Features) into etree DOM docs.
     Consumes and buffers elements until max_elements reached, will then produce an etree doc.
 
-    consumes=FORMAT.etree_element_stream, produces=FORMAT.etree_doc
+    consumes=FORMAT.etree_element, produces=FORMAT.etree_doc
     """
     xpath_base = "//*[local-name() = '%s']"
 
     # Constructor
     def __init__(self, configdict, section):
-        Filter.__init__(self, configdict, section, consumes=FORMAT.etree_element_stream, produces=FORMAT.etree_doc)
+        Filter.__init__(self, configdict, section, consumes=FORMAT.etree_element, produces=FORMAT.etree_doc)
 
         log.info("cfg = %s" % self.cfg.to_string())
         self.max_elements = self.cfg.get_int('max_elements', 10000)

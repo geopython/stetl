@@ -62,7 +62,7 @@ class Packet:
 #         self.__dict__.update(zip(keys, range(len(keys))))
 
 # The data types allowed to pass in Packets, "any" can be used as wildcard
-# FORMAT = Enum('xml_line_stream', 'etree_doc', 'etree_element_stream', 'etree_feature_array', 'xml_doc_as_string',
+# FORMAT = Enum('xml_line_stream', 'etree_doc', 'etree_element', 'etree_feature_array', 'xml_doc_as_string',
 #              'string', 'record', 'geojson_collection', 'struct', 'any')
 
 
@@ -70,7 +70,7 @@ class FORMAT:
     none = 'none'
     xml_line_stream = 'xml_line_stream'
     etree_doc = 'etree_doc'
-    etree_element_stream = 'etree_element_stream'
+    etree_element = 'etree_element'
     etree_feature_array = 'etree_feature_array'
     xml_doc_as_string = 'xml_doc_as_string'
     string = 'string'

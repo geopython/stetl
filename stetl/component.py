@@ -111,35 +111,36 @@ class Component:
         self.cfg_vals = dict()
         self.next = None
 
-        # Some components may have multiple output formats: in that case either a
-        # specific output_format needs to be configured or the first format is taken as default
+        # First assume single output provided by derived class
         self._output_format = produces
-        if type(produces) is list:
-            if self.cfg.has('output_format'):
-                self._output_format = self.cfg.get('output_format')
-                if self._output_format not in produces:
-                    raise ValueError(
-                        'Configured output format %s not in list: %s' % (self._output_format, str(produces)))
-            else:
-                self._output_format = produces[0]
 
-        # Some components may have multiple input formats: in that case either a
-        # specific output_format needs to be configured or the first format is taken as default
+        # We may have a configured output_format: use that value, when multiple formats it should be in that list
+        if self.output_format is not None:
+            self._output_format = self.output_format
+            if type(produces) is list and self._output_format not in produces:
+                raise ValueError('Configured output_format %s not in list: %s' % (self._output_format, str(produces)))
+        elif type(produces) is list:
+            # No output_format configured and a list: use the first as default
+            self._output_format = produces[0]
+
+        # First assume single input provided by derived class
         self._input_format = consumes
-        if type(consumes) is list:
-            if self.cfg.has('input_format'):
-                self._input_format = self.cfg.get('input_format')
-                if self._input_format not in consumes:
-                    raise ValueError('Configured input format %s not in list: %s' % (self._input_format, str(consumes)))
-            else:
-                self._input_format = consumes[0]
+
+        # We may have a configured input_format: use that value, when multiple formats it should be in that list
+        if self.input_format is not None:
+            self._input_format = self.input_format
+            if type(consumes) is list and self._input_format not in consumes:
+                raise ValueError('Configured input_format %s not in list: %s' % (self._input_format, str(consumes)))
+        elif type(consumes) is list:
+            # No input_format configured and a list: use the first as default
+            self._input_format = consumes[0]
 
     def add_next(self, next_component):
         self.next = next_component
 
         if not self.is_compatible():
             raise ValueError(
-                'Incompatible components linked: %s and %s' % (str(self), str(self.next)))
+                'Incompatible components are linked: %s and %s' % (str(self), str(self.next)))
 
     # Check our compatibility with the next Component in the Chain
     def is_compatible(self):

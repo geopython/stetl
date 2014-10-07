@@ -192,7 +192,7 @@ class XmlElementStreamerFileInput(FileInput):
     Parsing is streaming (no internal DOM buildup) so any file size can be handled.
     Use this class for your big GML files!
 
-    produces=FORMAT.etree_element_stream
+    produces=FORMAT.etree_element
     """
 
     # Start attribute config meta
@@ -223,7 +223,7 @@ class XmlElementStreamerFileInput(FileInput):
 
     # Constructor
     def __init__(self, configdict, section):
-        FileInput.__init__(self, configdict, section, produces=FORMAT.etree_element_stream)
+        FileInput.__init__(self, configdict, section, produces=FORMAT.etree_element)
         self.file_list_done = []
         self.context = None
         self.root = None
@@ -361,6 +361,29 @@ class CsvFileInput(FileInput):
     produces=FORMAT.record or FORMAT.record_array
     """
 
+    @Config(ptype=str, default=',', required=False)
+    def delimiter(self):
+        """
+        A one-character string used to separate fields. It defaults to ','.
+
+        Required: False
+
+        Default: ',' (comma)
+        """
+        pass
+
+
+    @Config(ptype=str, default='"', required=False)
+    def quote_char(self):
+        """
+        A one-character string used to quote fields containing special characters, such as the delimiter or quotechar, or which contain new-line characters. It defaults to '"'
+
+        Required: False
+
+        Default: "
+        """
+        pass
+
     # Constructor
     def __init__(self, configdict, section):
         FileInput.__init__(self, configdict, section, produces=[FORMAT.record_array, FORMAT.record])
@@ -371,7 +394,7 @@ class CsvFileInput(FileInput):
         log.info('Open CSV file: %s', self.file_path)
         self.file = open(self.file_path)
 
-        self.csv_reader = csv.DictReader(self.file)
+        self.csv_reader = csv.DictReader(self.file, delimiter=self.delimiter, quotechar=self.quote_char)
 
         if self._output_format == FORMAT.record_array:
             self.arr = list()

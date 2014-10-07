@@ -14,7 +14,7 @@ log = Util.get_log("osfilter")
 class OrdSurveyGmlFilter(Filter):
     # Constructor
     def __init__(self, configdict, section):
-        Filter.__init__(self, configdict, section, consumes=FORMAT.etree_element_stream, produces=FORMAT.etree_element_stream)
+        Filter.__init__(self, configdict, section, consumes=FORMAT.etree_element, produces=FORMAT.etree_element)
 
         # Create specific preparer object from given class name string
         self.prep_class = self.cfg.get('prep_class')
