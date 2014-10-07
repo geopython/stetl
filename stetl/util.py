@@ -308,6 +308,9 @@ except ImportError:
                 except ImportError:
                     log.warning("Failed to import ElementTree from any known place")
 
+gdal = None
+ogr = None
+osr = None
 try:
     from osgeo import gdal
     from osgeo import ogr
@@ -321,7 +324,7 @@ except ImportError:
         log.warn("No GDAL/OGR Python bindings. Ok if not using GDAL/OGR functions. See https://pypi.python.org/pypi/GDAL")
 
 if ogr and gdal and osr:
-    log.info("Found GDAL Python bindings, super!!")
+    log.info("Found GDAL/OGR Python bindings, super!!")
 
 class ConfigSection():
     def __init__(self, config_section):
