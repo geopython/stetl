@@ -1,0 +1,19 @@
+{
+    "cities": [
+        {
+            "lat": 52.4,
+            "lon": 4.9,
+            "name": "Amsterdam"
+        },
+        {
+            "lat": 50.7,
+            "lon": 7.1,
+            "name": "Bonn"
+        },
+        {
+            "lat": 41.9,
+            "lon": 12.5,
+            "name": "Rome"
+        }
+    ]
+}
