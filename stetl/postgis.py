@@ -37,9 +37,10 @@ class PostGIS:
     def connect(self, initdb=False):
         try:
             self.connection = psycopg2.connect(
-                "dbname='%s' user='%s' host='%s' password='%s'" % (self.config['database'],
+                "dbname='%s' user='%s' host='%s' port=%d password='%s'" % (self.config['database'],
                                                                    self.config['user'],
-                                                                   self.config['host'],
+                                                                   self.config.get('host', 'localhost'),
+                                                                   self.config.get('port', 0),
                                                                    self.config['password']))
             self.cursor = self.connection.cursor()
 
