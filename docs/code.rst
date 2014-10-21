@@ -64,6 +64,10 @@ the subpackages inputs, filters, and outputs.
 Components: Inputs
 ------------------
 
+.. automodule:: stetl.inputs.dbinput
+   :members:
+   :show-inheritance:
+
 .. automodule:: stetl.inputs.fileinput
    :members:
    :show-inheritance:
@@ -123,6 +127,10 @@ Components: Outputs
    :show-inheritance:
 
 .. automodule:: stetl.outputs.standardoutput
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.outputs.httpoutput
    :members:
    :show-inheritance:
 
