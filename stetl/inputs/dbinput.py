@@ -34,7 +34,7 @@ class SqlDbInput(DbInput):
     @Config(ptype=str, required=True, default=None)
     def database_name(self):
         """
-        database name
+        Database name
         """
         pass
 
@@ -72,7 +72,11 @@ class SqlDbInput(DbInput):
         self.columns = self.column_names
         self.select_all = "select * from %s" % self.table
 
-    def result_to_record_array(self, db_records):
+    def result_to_output(self, db_records):
+        """
+        Convert DB-specific record iterator to single Python record (dict) or record array (list of dict).
+
+        """
 
         # record is Python list of Python dict (multiple records)
         records = list()
@@ -81,21 +85,36 @@ class SqlDbInput(DbInput):
         for db_record in db_records:
             records.append(dict(zip(self.columns, db_record)))
 
-        return records
+        # We may have specified a single record output_format in rare cases
+        if self.output_format == FORMAT.record:
+            if len(records) > 0:
+                return records[0]
+            else:
+                return None
+        else:
+            return records
 
     def do_query(self, query_str):
         """
-        Performs DB-specific  query and returns records iter.
+        DB-neutral query returning Python record list.
+        """
+
+        # Perform DB-specific query
+        db_records = self.raw_query(self.query)
+
+        # Convert query result to record_array
+        return self.result_to_output(db_records)
+
+    def raw_query(self, query_str):
+        """
+        Performs DB-specific  query and returns raw records iterator.
         """
         pass
 
     def read(self, packet):
 
         # Perform DB-specific query
-        db_records = self.do_query(self.query)
-
-        # Convert query result to record_array
-        packet.data = self.result_to_record_array(db_records)
+        packet.data = self.do_query(self.query)
 
         # No more records to process?
         if len(packet.data) == 0 or self.read_once is True:
@@ -166,7 +185,7 @@ class PostgresDbInput(SqlDbInput):
 
         self.db.disconnect()
 
-    def do_query(self, query_str):
+    def raw_query(self, query_str):
 
         self.db.execute(query_str)
 
@@ -183,7 +202,6 @@ class SqliteDbInput(SqlDbInput):
 
     produces=FORMAT.record_array (default) or FORMAT.record
     """
-
 
     def __init__(self, configdict, section):
         SqlDbInput.__init__(self, configdict, section, produces=[FORMAT.record_array, FORMAT.record])
@@ -207,7 +225,7 @@ class SqliteDbInput(SqlDbInput):
             self.columns = [f[0] for f in cursor.description]
             conn.close()
 
-    def do_query(self, query_str):
+    def raw_query(self, query_str):
         # We open and close immediately. TODO: maybe this is not necessary i.e. once in init/exit.
         conn = self.get_conn()
         cursor = conn.cursor()
