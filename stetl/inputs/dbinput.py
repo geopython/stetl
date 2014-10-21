@@ -100,7 +100,7 @@ class SqlDbInput(DbInput):
         """
 
         # Perform DB-specific query
-        db_records = self.raw_query(self.query)
+        db_records = self.raw_query(query_str)
 
         # Convert query result to record_array
         return self.result_to_output(db_records)

@@ -90,7 +90,7 @@ class PostgresInsertOutput(PostgresDbOutput):
             # We assume that all records do the same INSERT key/values
             # See http://grokbase.com/t/postgresql/psycopg/12735bvkmv/insert-into-with-a-dictionary-or-generally-with-a-variable-number-of-columns
             # e.g. INSERT INTO lml_files ("file_name", "file_data") VALUES (%s,%s)
-            self.query = "INSERT INTO %s (%s) VALUES (%s)" % (self.cfg.get('table'), ",".join(['"%s"' % k for k in first_record]), ",".join(["%s",]*len(first_record.keys())))
+            self.query = "INSERT INTO %s (%s) VALUES (%s)" % (self.cfg.get('table'), ",".join(['%s' % k for k in first_record]), ",".join(["%s",]*len(first_record.keys())))
             log.info('query is %s', self.query)
 
         # Check if record is single (dict) or array (list of dict)

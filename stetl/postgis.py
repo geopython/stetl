@@ -4,7 +4,6 @@
 #
 # Author: Just van den Broecke
 #
-import sys
 from util import Util
 
 log = Util.get_log("postgis")
@@ -13,8 +12,8 @@ try:
     import psycopg2
     import psycopg2.extensions
 except ImportError:
-    log.error("cannot find packages psycopg2 for Postgres client support")
-    sys.exit(-1)
+    log.error("cannot find package psycopg2 for Postgres client support, please install psycopg2 first!")
+    # sys.exit(-1)
 
 
 class PostGIS:
