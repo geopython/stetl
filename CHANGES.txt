@@ -1,6 +1,15 @@
 Changes
 =======
 
+v1.0.7 - 24 nov 2014
+--------------------
+
+- start of Stetl Format conversion Filter
+- generic OgrInput component
+- SQLite Input component
+- BAG to INSPIRE Addresses example with Jinja2 Templating Filter
+- Jinja2 Filter refinements
+
 v1.0.6 - 5 sept 2014
 --------------------
 
@@ -15,7 +24,7 @@ v1.0.6 - 5 sept 2014
 - input: CSV file input
 - new examples: 9_string_templating and 10_jinja2_templating
 - start stetl --doc option to print class configuration info
-- config: start of add ing meta attribute config info via class vars of type Attr
+- config: start of adding meta attribute config info via class vars of type Attr
 
 v1.0.5 - 19 feb 2014
 --------------------

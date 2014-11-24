@@ -1,91 +1,91 @@
 ==== running etl.sh for 10_jinja2_templating ====
-2014-10-07 16:06:59,549 util INFO Found cStringIO, good!
-2014-10-07 16:06:59,577 util INFO Found lxml.etree, native XML parsing, fabulous!
-2014-10-07 16:06:59,603 util INFO Found GDAL/OGR Python bindings, super!!
-2014-10-07 16:06:59,615 main INFO Stetl version = 1.0.7rc11
-2014-10-07 16:06:59,617 ETL INFO INIT - Stetl version is 1.0.7rc11
-2014-10-07 16:06:59,617 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/10_jinja2_templating
-2014-10-07 16:06:59,617 ETL INFO Reading config_file = etl.cfg
-2014-10-07 16:06:59,640 ETL INFO START
-2014-10-07 16:06:59,640 util INFO Timer start: total ETL
-2014-10-07 16:06:59,640 chain INFO Assembling Chain: input_json|filter_template_xml|output_xml_file...
-2014-10-07 16:06:59,643 input INFO cfg = {'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'input/cities.json'}
-2014-10-07 16:06:59,643 fileinput INFO file_list=['input/cities.json']
-2014-10-07 16:06:59,644 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.xml'}
-2014-10-07 16:06:59,644 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
-2014-10-07 16:06:59,644 chain INFO Running Chain: input_json|filter_template_xml|output_xml_file
-2014-10-07 16:06:59,644 templatingfilter INFO Init: templating
-2014-10-07 16:06:59,718 templatingfilter INFO template file read and template created OK: templates/cities-json2xml.jinja2
-2014-10-07 16:06:59,718 fileinput INFO Read/parse for start for file=input/cities.json....
-2014-10-07 16:06:59,745 fileinput INFO Read/parse ok for file=input/cities.json
-2014-10-07 16:06:59,746 fileinput INFO all files done
-2014-10-07 16:06:59,746 fileoutput INFO writing to file output/cities.xml
-2014-10-07 16:06:59,747 fileoutput INFO written to output/cities.xml
-2014-10-07 16:06:59,747 templatingfilter INFO Exit: templating
-2014-10-07 16:06:59,747 chain INFO DONE - 1 rounds - chain=input_json|filter_template_xml|output_xml_file 
-2014-10-07 16:06:59,747 chain INFO Assembling Chain: input_json|filter_template_gml|output_gml_file...
-2014-10-07 16:06:59,747 input INFO cfg = {'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'input/cities.json'}
-2014-10-07 16:06:59,748 fileinput INFO file_list=['input/cities.json']
-2014-10-07 16:06:59,748 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.gml'}
-2014-10-07 16:06:59,748 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
-2014-10-07 16:06:59,748 chain INFO Running Chain: input_json|filter_template_gml|output_gml_file
-2014-10-07 16:06:59,748 templatingfilter INFO Init: templating
-2014-10-07 16:06:59,748 templatingfilter INFO Read JSON file with globals from: input/globals.json
-2014-10-07 16:06:59,790 templatingfilter INFO template file read and template created OK: templates/cities-json2gml.jinja2
-2014-10-07 16:06:59,791 fileinput INFO Read/parse for start for file=input/cities.json....
-2014-10-07 16:06:59,791 fileinput INFO Read/parse ok for file=input/cities.json
-2014-10-07 16:06:59,791 fileinput INFO all files done
-2014-10-07 16:06:59,815 fileoutput INFO writing to file output/cities.gml
-2014-10-07 16:06:59,815 fileoutput INFO written to output/cities.gml
-2014-10-07 16:06:59,815 templatingfilter INFO Exit: templating
-2014-10-07 16:06:59,815 chain INFO DONE - 1 rounds - chain=input_json|filter_template_gml|output_gml_file 
-2014-10-07 16:06:59,815 chain INFO Assembling Chain: input_geojson|filter_template_geojson2gml|output_gml_file2...
-2014-10-07 16:06:59,815 input INFO cfg = {'output_format': 'geojson_collection', 'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json'}
-2014-10-07 16:06:59,816 fileinput INFO file_list=['https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json']
-2014-10-07 16:06:59,816 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities-gjson.gml'}
-2014-10-07 16:06:59,816 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
-2014-10-07 16:06:59,816 chain INFO Running Chain: input_geojson|filter_template_geojson2gml|output_gml_file2
-2014-10-07 16:06:59,816 templatingfilter INFO Init: templating
-2014-10-07 16:06:59,816 templatingfilter INFO Read JSON file with globals from: input/globals.json
-2014-10-07 16:06:59,816 templatingfilter INFO Read JSON file with globals from: https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/more-globals.json
-2014-10-07 16:07:00,507 templatingfilter INFO template file read and template created OK: templates/cities-gjson2gml.jinja2
-2014-10-07 16:07:00,507 fileinput INFO Read/parse for start for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json....
-2014-10-07 16:07:00,651 fileinput INFO Read/parse ok for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json
-2014-10-07 16:07:00,651 fileinput INFO all files done
-2014-10-07 16:07:00,709 fileoutput INFO writing to file output/cities-gjson.gml
-2014-10-07 16:07:00,709 fileoutput INFO written to output/cities-gjson.gml
-2014-10-07 16:07:00,709 templatingfilter INFO Exit: templating
-2014-10-07 16:07:00,709 chain INFO DONE - 1 rounds - chain=input_geojson|filter_template_geojson2gml|output_gml_file2 
-2014-10-07 16:07:00,710 chain INFO Assembling Chain: input_geojson|filter_template_geojson2gml|output_std...
-2014-10-07 16:07:00,710 input INFO cfg = {'output_format': 'geojson_collection', 'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json'}
-2014-10-07 16:07:00,710 fileinput INFO file_list=['https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json']
-2014-10-07 16:07:00,711 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
-2014-10-07 16:07:00,711 chain INFO Running Chain: input_geojson|filter_template_geojson2gml|output_std
-2014-10-07 16:07:00,711 templatingfilter INFO Init: templating
-2014-10-07 16:07:00,711 templatingfilter INFO Read JSON file with globals from: input/globals.json
-2014-10-07 16:07:00,711 templatingfilter INFO Read JSON file with globals from: https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/more-globals.json
-2014-10-07 16:07:00,787 templatingfilter INFO template file read and template created OK: templates/cities-gjson2gml.jinja2
-2014-10-07 16:07:00,788 fileinput INFO Read/parse for start for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json....
-2014-10-07 16:07:00,836 fileinput INFO Read/parse ok for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json
-2014-10-07 16:07:00,836 fileinput INFO all files done
-2014-10-07 16:07:00,848 templatingfilter INFO Exit: templating
-2014-10-07 16:07:00,848 chain INFO DONE - 1 rounds - chain=input_geojson|filter_template_geojson2gml|output_std 
-2014-10-07 16:07:00,848 chain INFO Assembling Chain: input_addresses_csv|convert_record_array_to_struct|filter_template_addresses2inspire|output_inspire_addresses...
-2014-10-07 16:07:00,848 input INFO cfg = {'class': 'inputs.fileinput.CsvFileInput', 'file_path': 'input/addresses.csv'}
-2014-10-07 16:07:00,848 fileinput INFO file_list=['input/addresses.csv']
-2014-10-07 16:07:00,849 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/inspire-addresses.gml'}
-2014-10-07 16:07:00,849 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
-2014-10-07 16:07:00,849 chain INFO Running Chain: input_addresses_csv|convert_record_array_to_struct|filter_template_addresses2inspire|output_inspire_addresses
-2014-10-07 16:07:00,849 fileinput INFO Open CSV file: input/addresses.csv
-2014-10-07 16:07:00,849 templatingfilter INFO Init: templating
-2014-10-07 16:07:00,849 templatingfilter INFO Read JSON file with globals from: input/addresses-globals.json
-2014-10-07 16:07:00,959 templatingfilter INFO template file read and template created OK: templates/addresses2inspire-ad.jinja2
-2014-10-07 16:07:00,991 fileoutput INFO writing to file output/inspire-addresses.gml
-2014-10-07 16:07:00,991 fileoutput INFO written to output/inspire-addresses.gml
-2014-10-07 16:07:00,991 templatingfilter INFO Exit: templating
-2014-10-07 16:07:00,991 chain INFO DONE - 1 rounds - chain=input_addresses_csv|convert_record_array_to_struct|filter_template_addresses2inspire|output_inspire_addresses 
-2014-10-07 16:07:00,991 util INFO Timer end: total ETL time=1.0 sec
-2014-10-07 16:07:00,991 ETL INFO ALL DONE
+2014-11-24 11:04:13,862 util INFO Found cStringIO, good!
+2014-11-24 11:04:14,180 util INFO Found lxml.etree, native XML parsing, fabulous!
+2014-11-24 11:04:15,984 util INFO Found GDAL/OGR Python bindings, super!!
+2014-11-24 11:04:16,106 main INFO Stetl version = 1.0.7
+2014-11-24 11:04:16,108 ETL INFO INIT - Stetl version is 1.0.7
+2014-11-24 11:04:16,108 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/10_jinja2_templating
+2014-11-24 11:04:16,108 ETL INFO Reading config_file = etl.cfg
+2014-11-24 11:04:16,126 ETL INFO START
+2014-11-24 11:04:16,127 util INFO Timer start: total ETL
+2014-11-24 11:04:16,127 chain INFO Assembling Chain: input_json|filter_template_xml|output_xml_file...
+2014-11-24 11:04:16,387 input INFO cfg = {'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'input/cities.json'}
+2014-11-24 11:04:16,449 fileinput INFO file_list=['input/cities.json']
+2014-11-24 11:04:16,451 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.xml'}
+2014-11-24 11:04:16,451 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
+2014-11-24 11:04:16,452 chain INFO Running Chain: input_json|filter_template_xml|output_xml_file
+2014-11-24 11:04:16,452 templatingfilter INFO Init: templating
+2014-11-24 11:04:17,283 templatingfilter INFO template file read and template created OK: templates/cities-json2xml.jinja2
+2014-11-24 11:04:17,284 fileinput INFO Read/parse for start for file=input/cities.json....
+2014-11-24 11:04:17,297 fileinput INFO Read/parse ok for file=input/cities.json
+2014-11-24 11:04:17,297 fileinput INFO all files done
+2014-11-24 11:04:17,298 fileoutput INFO writing to file output/cities.xml
+2014-11-24 11:04:17,298 fileoutput INFO written to output/cities.xml
+2014-11-24 11:04:17,298 templatingfilter INFO Exit: templating
+2014-11-24 11:04:17,298 chain INFO DONE - 1 rounds - chain=input_json|filter_template_xml|output_xml_file 
+2014-11-24 11:04:17,298 chain INFO Assembling Chain: input_json|filter_template_gml|output_gml_file...
+2014-11-24 11:04:17,298 input INFO cfg = {'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'input/cities.json'}
+2014-11-24 11:04:17,298 fileinput INFO file_list=['input/cities.json']
+2014-11-24 11:04:17,299 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.gml'}
+2014-11-24 11:04:17,299 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
+2014-11-24 11:04:17,299 chain INFO Running Chain: input_json|filter_template_gml|output_gml_file
+2014-11-24 11:04:17,299 templatingfilter INFO Init: templating
+2014-11-24 11:04:17,299 templatingfilter INFO Read JSON file with globals from: input/globals.json
+2014-11-24 11:04:17,395 templatingfilter INFO template file read and template created OK: templates/cities-json2gml.jinja2
+2014-11-24 11:04:17,396 fileinput INFO Read/parse for start for file=input/cities.json....
+2014-11-24 11:04:17,396 fileinput INFO Read/parse ok for file=input/cities.json
+2014-11-24 11:04:17,396 fileinput INFO all files done
+2014-11-24 11:04:17,422 fileoutput INFO writing to file output/cities.gml
+2014-11-24 11:04:17,423 fileoutput INFO written to output/cities.gml
+2014-11-24 11:04:17,423 templatingfilter INFO Exit: templating
+2014-11-24 11:04:17,423 chain INFO DONE - 1 rounds - chain=input_json|filter_template_gml|output_gml_file 
+2014-11-24 11:04:17,423 chain INFO Assembling Chain: input_geojson|filter_template_geojson2gml|output_gml_file2...
+2014-11-24 11:04:17,423 input INFO cfg = {'output_format': 'geojson_collection', 'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json'}
+2014-11-24 11:04:17,423 fileinput INFO file_list=['https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json']
+2014-11-24 11:04:17,423 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities-gjson.gml'}
+2014-11-24 11:04:17,424 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
+2014-11-24 11:04:17,424 chain INFO Running Chain: input_geojson|filter_template_geojson2gml|output_gml_file2
+2014-11-24 11:04:17,424 templatingfilter INFO Init: templating
+2014-11-24 11:04:17,424 templatingfilter INFO Read JSON file with globals from: input/globals.json
+2014-11-24 11:04:17,424 templatingfilter INFO Read JSON file with globals from: https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/more-globals.json
+2014-11-24 11:04:18,374 templatingfilter INFO template file read and template created OK: templates/cities-gjson2gml.jinja2
+2014-11-24 11:04:18,374 fileinput INFO Read/parse for start for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json....
+2014-11-24 11:04:18,768 fileinput INFO Read/parse ok for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json
+2014-11-24 11:04:18,768 fileinput INFO all files done
+2014-11-24 11:04:18,997 fileoutput INFO writing to file output/cities-gjson.gml
+2014-11-24 11:04:18,998 fileoutput INFO written to output/cities-gjson.gml
+2014-11-24 11:04:18,998 templatingfilter INFO Exit: templating
+2014-11-24 11:04:18,998 chain INFO DONE - 1 rounds - chain=input_geojson|filter_template_geojson2gml|output_gml_file2 
+2014-11-24 11:04:18,998 chain INFO Assembling Chain: input_geojson|filter_template_geojson2gml|output_std...
+2014-11-24 11:04:18,998 input INFO cfg = {'output_format': 'geojson_collection', 'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json'}
+2014-11-24 11:04:18,998 fileinput INFO file_list=['https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json']
+2014-11-24 11:04:18,999 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
+2014-11-24 11:04:19,000 chain INFO Running Chain: input_geojson|filter_template_geojson2gml|output_std
+2014-11-24 11:04:19,000 templatingfilter INFO Init: templating
+2014-11-24 11:04:19,000 templatingfilter INFO Read JSON file with globals from: input/globals.json
+2014-11-24 11:04:19,000 templatingfilter INFO Read JSON file with globals from: https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/more-globals.json
+2014-11-24 11:04:19,061 templatingfilter INFO template file read and template created OK: templates/cities-gjson2gml.jinja2
+2014-11-24 11:04:19,061 fileinput INFO Read/parse for start for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json....
+2014-11-24 11:04:19,109 fileinput INFO Read/parse ok for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json
+2014-11-24 11:04:19,109 fileinput INFO all files done
+2014-11-24 11:04:19,121 templatingfilter INFO Exit: templating
+2014-11-24 11:04:19,121 chain INFO DONE - 1 rounds - chain=input_geojson|filter_template_geojson2gml|output_std 
+2014-11-24 11:04:19,121 chain INFO Assembling Chain: input_addresses_csv|convert_record_array_to_struct|filter_template_addresses2inspire|output_inspire_addresses...
+2014-11-24 11:04:19,121 input INFO cfg = {'class': 'inputs.fileinput.CsvFileInput', 'file_path': 'input/addresses.csv'}
+2014-11-24 11:04:19,122 fileinput INFO file_list=['input/addresses.csv']
+2014-11-24 11:04:19,138 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/inspire-addresses.gml'}
+2014-11-24 11:04:19,138 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
+2014-11-24 11:04:19,138 chain INFO Running Chain: input_addresses_csv|convert_record_array_to_struct|filter_template_addresses2inspire|output_inspire_addresses
+2014-11-24 11:04:19,139 fileinput INFO Open CSV file: input/addresses.csv
+2014-11-24 11:04:19,139 templatingfilter INFO Init: templating
+2014-11-24 11:04:19,139 templatingfilter INFO Read JSON file with globals from: input/addresses-globals.json
+2014-11-24 11:04:19,231 templatingfilter INFO template file read and template created OK: templates/addresses2inspire-ad.jinja2
+2014-11-24 11:04:19,290 fileoutput INFO writing to file output/inspire-addresses.gml
+2014-11-24 11:04:19,291 fileoutput INFO written to output/inspire-addresses.gml
+2014-11-24 11:04:19,291 templatingfilter INFO Exit: templating
+2014-11-24 11:04:19,291 chain INFO DONE - 1 rounds - chain=input_addresses_csv|convert_record_array_to_struct|filter_template_addresses2inspire|output_inspire_addresses 
+2014-11-24 11:04:19,291 util INFO Timer end: total ETL time=3.0 sec
+2014-11-24 11:04:19,291 ETL INFO ALL DONE
 <?xml version='1.0' encoding='utf-8'?>
 <cities:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                        xmlns:cities="http://cities.maptools.org/"
@@ -155,91 +155,91 @@
 
 </cities:FeatureCollection>
 ==== running etl.sh for 11_formatconvert ====
-2014-10-07 16:07:01,122 util INFO Found cStringIO, good!
-2014-10-07 16:07:01,151 util INFO Found lxml.etree, native XML parsing, fabulous!
-2014-10-07 16:07:01,178 util INFO Found GDAL/OGR Python bindings, super!!
-2014-10-07 16:07:01,190 main INFO Stetl version = 1.0.7rc11
-2014-10-07 16:07:01,191 ETL INFO INIT - Stetl version is 1.0.7rc11
-2014-10-07 16:07:01,192 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/11_formatconvert
-2014-10-07 16:07:01,192 ETL INFO Reading config_file = etl.cfg
-2014-10-07 16:07:01,193 ETL INFO START
-2014-10-07 16:07:01,193 util INFO Timer start: total ETL
-2014-10-07 16:07:01,193 chain INFO Assembling Chain: input_xml_file|convert_xml_to_string|convert_string_to_xml|output_xml_file...
-2014-10-07 16:07:01,195 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
-2014-10-07 16:07:01,195 fileinput INFO file_list=['input/cities.xml']
-2014-10-07 16:07:01,196 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.xml'}
-2014-10-07 16:07:01,196 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/11_formatconvert
-2014-10-07 16:07:01,196 chain INFO Running Chain: input_xml_file|convert_xml_to_string|convert_string_to_xml|output_xml_file
-2014-10-07 16:07:01,197 fileinput INFO Read/parse for start for file=input/cities.xml....
-2014-10-07 16:07:01,197 fileinput INFO Read/parse ok for file=input/cities.xml
-2014-10-07 16:07:01,197 fileinput INFO all files done
-2014-10-07 16:07:01,197 fileoutput INFO writing to file output/cities.xml
-2014-10-07 16:07:01,197 fileoutput INFO written to output/cities.xml
-2014-10-07 16:07:01,197 chain INFO DONE - 1 rounds - chain=input_xml_file|convert_xml_to_string|convert_string_to_xml|output_xml_file 
-2014-10-07 16:07:01,197 chain INFO Assembling Chain: input_complex_xml_file|convert_to_json|output_json_file...
-2014-10-07 16:07:01,198 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/building-dutch-bag.xml'}
-2014-10-07 16:07:01,198 fileinput INFO file_list=['input/building-dutch-bag.xml']
-2014-10-07 16:07:01,198 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/building-dutch.json'}
-2014-10-07 16:07:01,198 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/11_formatconvert
-2014-10-07 16:07:01,198 chain INFO Running Chain: input_complex_xml_file|convert_to_json|output_json_file
-2014-10-07 16:07:01,198 fileinput INFO Read/parse for start for file=input/building-dutch-bag.xml....
-2014-10-07 16:07:01,199 fileinput INFO Read/parse ok for file=input/building-dutch-bag.xml
-2014-10-07 16:07:01,199 fileinput INFO all files done
-2014-10-07 16:07:01,214 fileoutput INFO writing to file output/building-dutch.json
-2014-10-07 16:07:01,220 fileoutput INFO written to output/building-dutch.json
-2014-10-07 16:07:01,220 chain INFO DONE - 1 rounds - chain=input_complex_xml_file|convert_to_json|output_json_file 
-2014-10-07 16:07:01,220 chain INFO Assembling Chain: input_gml_sf_file|convert_to_geojson|output_geojson_file...
-2014-10-07 16:07:01,220 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.gml'}
-2014-10-07 16:07:01,220 fileinput INFO file_list=['input/cities.gml']
-2014-10-07 16:07:01,220 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities-gjson.json'}
-2014-10-07 16:07:01,220 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/11_formatconvert
-2014-10-07 16:07:01,221 chain INFO Running Chain: input_gml_sf_file|convert_to_geojson|output_geojson_file
-2014-10-07 16:07:01,221 fileinput INFO Read/parse for start for file=input/cities.gml....
-2014-10-07 16:07:01,221 fileinput INFO Read/parse ok for file=input/cities.gml
-2014-10-07 16:07:01,221 fileinput INFO all files done
-2014-10-07 16:07:01,223 fileoutput INFO writing to file output/cities-gjson.json
-2014-10-07 16:07:01,224 fileoutput INFO written to output/cities-gjson.json
-2014-10-07 16:07:01,224 chain INFO DONE - 1 rounds - chain=input_gml_sf_file|convert_to_geojson|output_geojson_file 
-2014-10-07 16:07:01,224 util INFO Timer end: total ETL time=0.0 sec
-2014-10-07 16:07:01,224 ETL INFO ALL DONE
+2014-11-24 11:04:19,609 util INFO Found cStringIO, good!
+2014-11-24 11:04:19,639 util INFO Found lxml.etree, native XML parsing, fabulous!
+2014-11-24 11:04:19,666 util INFO Found GDAL/OGR Python bindings, super!!
+2014-11-24 11:04:19,680 main INFO Stetl version = 1.0.7
+2014-11-24 11:04:19,681 ETL INFO INIT - Stetl version is 1.0.7
+2014-11-24 11:04:19,681 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/11_formatconvert
+2014-11-24 11:04:19,682 ETL INFO Reading config_file = etl.cfg
+2014-11-24 11:04:19,693 ETL INFO START
+2014-11-24 11:04:19,693 util INFO Timer start: total ETL
+2014-11-24 11:04:19,693 chain INFO Assembling Chain: input_xml_file|convert_xml_to_string|convert_string_to_xml|output_xml_file...
+2014-11-24 11:04:19,695 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2014-11-24 11:04:19,696 fileinput INFO file_list=['input/cities.xml']
+2014-11-24 11:04:19,697 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.xml'}
+2014-11-24 11:04:19,698 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/11_formatconvert
+2014-11-24 11:04:19,698 chain INFO Running Chain: input_xml_file|convert_xml_to_string|convert_string_to_xml|output_xml_file
+2014-11-24 11:04:19,698 fileinput INFO Read/parse for start for file=input/cities.xml....
+2014-11-24 11:04:19,796 fileinput INFO Read/parse ok for file=input/cities.xml
+2014-11-24 11:04:19,796 fileinput INFO all files done
+2014-11-24 11:04:19,797 fileoutput INFO writing to file output/cities.xml
+2014-11-24 11:04:19,797 fileoutput INFO written to output/cities.xml
+2014-11-24 11:04:19,797 chain INFO DONE - 1 rounds - chain=input_xml_file|convert_xml_to_string|convert_string_to_xml|output_xml_file 
+2014-11-24 11:04:19,797 chain INFO Assembling Chain: input_complex_xml_file|convert_to_json|output_json_file...
+2014-11-24 11:04:19,797 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/building-dutch-bag.xml'}
+2014-11-24 11:04:19,798 fileinput INFO file_list=['input/building-dutch-bag.xml']
+2014-11-24 11:04:19,798 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/building-dutch.json'}
+2014-11-24 11:04:19,798 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/11_formatconvert
+2014-11-24 11:04:19,798 chain INFO Running Chain: input_complex_xml_file|convert_to_json|output_json_file
+2014-11-24 11:04:19,798 fileinput INFO Read/parse for start for file=input/building-dutch-bag.xml....
+2014-11-24 11:04:19,885 fileinput INFO Read/parse ok for file=input/building-dutch-bag.xml
+2014-11-24 11:04:19,885 fileinput INFO all files done
+2014-11-24 11:04:19,926 fileoutput INFO writing to file output/building-dutch.json
+2014-11-24 11:04:19,938 fileoutput INFO written to output/building-dutch.json
+2014-11-24 11:04:19,945 chain INFO DONE - 1 rounds - chain=input_complex_xml_file|convert_to_json|output_json_file 
+2014-11-24 11:04:19,945 chain INFO Assembling Chain: input_gml_sf_file|convert_to_geojson|output_geojson_file...
+2014-11-24 11:04:19,945 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.gml'}
+2014-11-24 11:04:19,946 fileinput INFO file_list=['input/cities.gml']
+2014-11-24 11:04:19,946 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities-gjson.json'}
+2014-11-24 11:04:19,946 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/11_formatconvert
+2014-11-24 11:04:19,946 chain INFO Running Chain: input_gml_sf_file|convert_to_geojson|output_geojson_file
+2014-11-24 11:04:19,946 fileinput INFO Read/parse for start for file=input/cities.gml....
+2014-11-24 11:04:19,999 fileinput INFO Read/parse ok for file=input/cities.gml
+2014-11-24 11:04:20,000 fileinput INFO all files done
+2014-11-24 11:04:20,002 fileoutput INFO writing to file output/cities-gjson.json
+2014-11-24 11:04:20,002 fileoutput INFO written to output/cities-gjson.json
+2014-11-24 11:04:20,002 chain INFO DONE - 1 rounds - chain=input_gml_sf_file|convert_to_geojson|output_geojson_file 
+2014-11-24 11:04:20,002 util INFO Timer end: total ETL time=0.0 sec
+2014-11-24 11:04:20,003 ETL INFO ALL DONE
 ==== running etl.sh for 12_gdal_ogr ====
-2014-10-07 16:07:01,355 util INFO Found cStringIO, good!
-2014-10-07 16:07:01,392 util INFO Found lxml.etree, native XML parsing, fabulous!
-2014-10-07 16:07:01,417 util INFO Found GDAL/OGR Python bindings, super!!
-2014-10-07 16:07:01,433 main INFO Stetl version = 1.0.7rc11
-2014-10-07 16:07:01,434 ETL INFO INIT - Stetl version is 1.0.7rc11
-2014-10-07 16:07:01,434 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/12_gdal_ogr
-2014-10-07 16:07:01,434 ETL INFO Reading config_file = etl.cfg
-2014-10-07 16:07:01,464 ETL INFO START
-2014-10-07 16:07:01,464 util INFO Timer start: total ETL
-2014-10-07 16:07:01,464 chain INFO Assembling Chain: input_gml_file|convert_to_geojson_feature|output_std...
-2014-10-07 16:07:01,529 util INFO Found cStringIO, good!
-2014-10-07 16:07:01,529 util INFO Found lxml.etree, native XML parsing, fabulous!
-2014-10-07 16:07:01,529 util INFO Found GDAL/OGR Python bindings, super!!
-2014-10-07 16:07:01,530 input INFO cfg = {'source_format': 'GML', 'data_source': 'input/cities.gml', 'output_format': 'ogr_feature', 'class': 'inputs.ogrinput.OgrInput', 'source_options': "{'GDAL_CACHEMAX': '64', 'CPL_DEBUG': 'OFF'}"}
-2014-10-07 16:07:01,531 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
-2014-10-07 16:07:01,531 chain INFO Running Chain: input_gml_file|convert_to_geojson_feature|output_std
-2014-10-07 16:07:01,531 ogrinput INFO Using GDAL/OGR version: 1100100
-2014-10-07 16:07:01,586 ogrinput INFO Opened OGR source ok: input/cities.gml layer count=1
-2014-10-07 16:07:01,587 ogrinput INFO Start reading from OGR Source: input/cities.gml, Layer: heronfeat
-2014-10-07 16:07:01,617 ogrinput INFO End reading from Layer: heronfeat
-2014-10-07 16:07:01,617 ogrinput INFO Closing OGR source: input/cities.gml
-2014-10-07 16:07:01,618 chain INFO DONE - 7 rounds - chain=input_gml_file|convert_to_geojson_feature|output_std 
-2014-10-07 16:07:01,618 chain INFO Assembling Chain: input_gml_file_to_array|convert_to_geojson_collection|tolowercase_filter|output_file...
-2014-10-07 16:07:01,618 input INFO cfg = {'source_format': 'GML', 'data_source': 'input/cities.gml', 'output_format': 'ogr_feature_array', 'class': 'inputs.ogrinput.OgrInput'}
-2014-10-07 16:07:01,638 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.geojson'}
-2014-10-07 16:07:01,638 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/12_gdal_ogr
-2014-10-07 16:07:01,638 chain INFO Running Chain: input_gml_file_to_array|convert_to_geojson_collection|tolowercase_filter|output_file
-2014-10-07 16:07:01,639 ogrinput INFO Using GDAL/OGR version: 1100100
-2014-10-07 16:07:01,639 ogrinput INFO Opened OGR source ok: input/cities.gml layer count=1
-2014-10-07 16:07:01,640 ogrinput INFO Start reading from OGR Source: input/cities.gml, Layer: heronfeat
-2014-10-07 16:07:01,640 ogrinput INFO End reading all features from Layer: heronfeat count=5
-2014-10-07 16:07:01,645 fileoutput INFO writing to file output/cities.geojson
-2014-10-07 16:07:01,645 fileoutput INFO written to output/cities.geojson
-2014-10-07 16:07:01,646 ogrinput INFO Closing OGR source: input/cities.gml
-2014-10-07 16:07:01,646 chain INFO DONE - 2 rounds - chain=input_gml_file_to_array|convert_to_geojson_collection|tolowercase_filter|output_file 
-2014-10-07 16:07:01,646 util INFO Timer end: total ETL time=0.0 sec
-2014-10-07 16:07:01,646 ETL INFO ALL DONE
+2014-11-24 11:04:20,561 util INFO Found cStringIO, good!
+2014-11-24 11:04:20,642 util INFO Found lxml.etree, native XML parsing, fabulous!
+2014-11-24 11:04:20,667 util INFO Found GDAL/OGR Python bindings, super!!
+2014-11-24 11:04:20,725 main INFO Stetl version = 1.0.7
+2014-11-24 11:04:20,727 ETL INFO INIT - Stetl version is 1.0.7
+2014-11-24 11:04:20,727 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/12_gdal_ogr
+2014-11-24 11:04:20,727 ETL INFO Reading config_file = etl.cfg
+2014-11-24 11:04:20,749 ETL INFO START
+2014-11-24 11:04:20,749 util INFO Timer start: total ETL
+2014-11-24 11:04:20,749 chain INFO Assembling Chain: input_gml_file|convert_to_geojson_feature|output_std...
+2014-11-24 11:04:20,937 util INFO Found cStringIO, good!
+2014-11-24 11:04:20,937 util INFO Found lxml.etree, native XML parsing, fabulous!
+2014-11-24 11:04:20,937 util INFO Found GDAL/OGR Python bindings, super!!
+2014-11-24 11:04:20,938 input INFO cfg = {'source_format': 'GML', 'data_source': 'input/cities.gml', 'output_format': 'ogr_feature', 'class': 'inputs.ogrinput.OgrInput', 'source_options': "{'GDAL_CACHEMAX': '64', 'CPL_DEBUG': 'OFF'}"}
+2014-11-24 11:04:21,011 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
+2014-11-24 11:04:21,011 chain INFO Running Chain: input_gml_file|convert_to_geojson_feature|output_std
+2014-11-24 11:04:21,011 ogrinput INFO Using GDAL/OGR version: 1100100
+2014-11-24 11:04:21,093 ogrinput INFO Opened OGR source ok: input/cities.gml layer count=1
+2014-11-24 11:04:21,094 ogrinput INFO Start reading from OGR Source: input/cities.gml, Layer: heronfeat
+2014-11-24 11:04:21,121 ogrinput INFO End reading from Layer: heronfeat
+2014-11-24 11:04:21,121 ogrinput INFO Closing OGR source: input/cities.gml
+2014-11-24 11:04:21,121 chain INFO DONE - 7 rounds - chain=input_gml_file|convert_to_geojson_feature|output_std 
+2014-11-24 11:04:21,121 chain INFO Assembling Chain: input_gml_file_to_array|convert_to_geojson_collection|tolowercase_filter|output_file...
+2014-11-24 11:04:21,121 input INFO cfg = {'source_format': 'GML', 'data_source': 'input/cities.gml', 'output_format': 'ogr_feature_array', 'class': 'inputs.ogrinput.OgrInput'}
+2014-11-24 11:04:21,172 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.geojson'}
+2014-11-24 11:04:21,172 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/12_gdal_ogr
+2014-11-24 11:04:21,172 chain INFO Running Chain: input_gml_file_to_array|convert_to_geojson_collection|tolowercase_filter|output_file
+2014-11-24 11:04:21,173 ogrinput INFO Using GDAL/OGR version: 1100100
+2014-11-24 11:04:21,173 ogrinput INFO Opened OGR source ok: input/cities.gml layer count=1
+2014-11-24 11:04:21,174 ogrinput INFO Start reading from OGR Source: input/cities.gml, Layer: heronfeat
+2014-11-24 11:04:21,174 ogrinput INFO End reading all features from Layer: heronfeat count=5
+2014-11-24 11:04:21,178 fileoutput INFO writing to file output/cities.geojson
+2014-11-24 11:04:21,179 fileoutput INFO written to output/cities.geojson
+2014-11-24 11:04:21,179 ogrinput INFO Closing OGR source: input/cities.gml
+2014-11-24 11:04:21,179 chain INFO DONE - 2 rounds - chain=input_gml_file_to_array|convert_to_geojson_collection|tolowercase_filter|output_file 
+2014-11-24 11:04:21,179 util INFO Timer end: total ETL time=0.0 sec
+2014-11-24 11:04:21,179 ETL INFO ALL DONE
 {
     "geometry": {
         "type": "Point",
@@ -365,27 +365,63 @@
     },
     "id": 1362
 }
+==== running etl.sh for 13_dbinput ====
+2014-11-24 11:04:21,344 util INFO Found cStringIO, good!
+2014-11-24 11:04:21,373 util INFO Found lxml.etree, native XML parsing, fabulous!
+2014-11-24 11:04:21,409 util INFO Found GDAL/OGR Python bindings, super!!
+2014-11-24 11:04:21,422 main INFO Stetl version = 1.0.7
+2014-11-24 11:04:21,423 ETL INFO INIT - Stetl version is 1.0.7
+2014-11-24 11:04:21,423 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/13_dbinput
+2014-11-24 11:04:21,423 ETL INFO Reading config_file = etl.cfg
+2014-11-24 11:04:21,458 ETL INFO START
+2014-11-24 11:04:21,458 util INFO Timer start: total ETL
+2014-11-24 11:04:21,458 chain INFO Assembling Chain: input_sqlite_all|convert_records_to_json|output_cities_file...
+2014-11-24 11:04:21,796 input INFO cfg = {'database_name': 'input/cities.sdb', 'class': 'inputs.dbinput.SqliteDbInput', 'read_once': 'True', 'table': 'cities', 'query': 'select * from cities', 'output_format': 'record_array'}
+2014-11-24 11:04:22,462 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.json'}
+2014-11-24 11:04:22,462 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/13_dbinput
+2014-11-24 11:04:22,462 chain INFO Running Chain: input_sqlite_all|convert_records_to_json|output_cities_file
+2014-11-24 11:04:22,462 dbinput INFO Connect to SQLite DB: input/cities.sdb
+2014-11-24 11:04:22,791 dbinput INFO Connect to SQLite DB: input/cities.sdb
+2014-11-24 11:04:22,792 dbinput INFO 3 records read
+2014-11-24 11:04:22,792 dbinput INFO Nothing to do. All file_records done
+2014-11-24 11:04:22,799 fileoutput INFO writing to file output/cities.json
+2014-11-24 11:04:22,800 fileoutput INFO written to output/cities.json
+2014-11-24 11:04:22,800 chain INFO DONE - 1 rounds - chain=input_sqlite_all|convert_records_to_json|output_cities_file 
+2014-11-24 11:04:22,800 chain INFO Assembling Chain: input_sqlite_single|convert_record_to_json|output_city_file...
+2014-11-24 11:04:22,800 input INFO cfg = {'database_name': 'input/cities.sdb', 'class': 'inputs.dbinput.SqliteDbInput', 'read_once': 'True', 'table': 'cities', 'query': "select * from cities where name = 'Rome'", 'output_format': 'record'}
+2014-11-24 11:04:22,801 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/city.json'}
+2014-11-24 11:04:22,801 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/13_dbinput
+2014-11-24 11:04:22,801 chain INFO Running Chain: input_sqlite_single|convert_record_to_json|output_city_file
+2014-11-24 11:04:22,801 dbinput INFO Connect to SQLite DB: input/cities.sdb
+2014-11-24 11:04:22,802 dbinput INFO Connect to SQLite DB: input/cities.sdb
+2014-11-24 11:04:22,802 dbinput INFO 1 records read
+2014-11-24 11:04:22,802 dbinput INFO Nothing to do. All file_records done
+2014-11-24 11:04:22,803 fileoutput INFO writing to file output/city.json
+2014-11-24 11:04:22,803 fileoutput INFO written to output/city.json
+2014-11-24 11:04:22,803 chain INFO DONE - 1 rounds - chain=input_sqlite_single|convert_record_to_json|output_city_file 
+2014-11-24 11:04:22,803 util INFO Timer end: total ETL time=1.0 sec
+2014-11-24 11:04:22,803 ETL INFO ALL DONE
 ==== running etl.sh for 1_copystd ====
-2014-10-07 16:07:01,812 util INFO Found cStringIO, good!
-2014-10-07 16:07:01,841 util INFO Found lxml.etree, native XML parsing, fabulous!
-2014-10-07 16:07:01,867 util INFO Found GDAL/OGR Python bindings, super!!
-2014-10-07 16:07:01,880 main INFO Stetl version = 1.0.7rc11
-2014-10-07 16:07:01,882 ETL INFO INIT - Stetl version is 1.0.7rc11
-2014-10-07 16:07:01,882 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/1_copystd
-2014-10-07 16:07:01,882 ETL INFO Reading config_file = etl.cfg
-2014-10-07 16:07:01,900 ETL INFO START
-2014-10-07 16:07:01,900 util INFO Timer start: total ETL
-2014-10-07 16:07:01,900 chain INFO Assembling Chain: input_xml_file|output_std...
-2014-10-07 16:07:01,903 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
-2014-10-07 16:07:01,903 fileinput INFO file_list=['input/cities.xml']
-2014-10-07 16:07:01,904 output INFO cfg = {'class': 'outputs.standardoutput.StandardXmlOutput'}
-2014-10-07 16:07:01,904 chain INFO Running Chain: input_xml_file|output_std
-2014-10-07 16:07:01,904 fileinput INFO Read/parse for start for file=input/cities.xml....
-2014-10-07 16:07:01,921 fileinput INFO Read/parse ok for file=input/cities.xml
-2014-10-07 16:07:01,921 fileinput INFO all files done
-2014-10-07 16:07:01,922 chain INFO DONE - 1 rounds - chain=input_xml_file|output_std 
-2014-10-07 16:07:01,922 util INFO Timer end: total ETL time=0.0 sec
-2014-10-07 16:07:01,922 ETL INFO ALL DONE
+2014-11-24 11:04:23,717 util INFO Found cStringIO, good!
+2014-11-24 11:04:23,765 util INFO Found lxml.etree, native XML parsing, fabulous!
+2014-11-24 11:04:25,344 util INFO Found GDAL/OGR Python bindings, super!!
+2014-11-24 11:04:25,357 main INFO Stetl version = 1.0.7
+2014-11-24 11:04:25,359 ETL INFO INIT - Stetl version is 1.0.7
+2014-11-24 11:04:25,359 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/1_copystd
+2014-11-24 11:04:25,360 ETL INFO Reading config_file = etl.cfg
+2014-11-24 11:04:25,377 ETL INFO START
+2014-11-24 11:04:25,377 util INFO Timer start: total ETL
+2014-11-24 11:04:25,377 chain INFO Assembling Chain: input_xml_file|output_std...
+2014-11-24 11:04:25,380 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2014-11-24 11:04:25,381 fileinput INFO file_list=['input/cities.xml']
+2014-11-24 11:04:25,381 output INFO cfg = {'class': 'outputs.standardoutput.StandardXmlOutput'}
+2014-11-24 11:04:25,381 chain INFO Running Chain: input_xml_file|output_std
+2014-11-24 11:04:25,382 fileinput INFO Read/parse for start for file=input/cities.xml....
+2014-11-24 11:04:25,424 fileinput INFO Read/parse ok for file=input/cities.xml
+2014-11-24 11:04:25,424 fileinput INFO all files done
+2014-11-24 11:04:25,424 chain INFO DONE - 1 rounds - chain=input_xml_file|output_std 
+2014-11-24 11:04:25,424 util INFO Timer end: total ETL time=0.0 sec
+2014-11-24 11:04:25,424 ETL INFO ALL DONE
 <?xml version='1.0' encoding='utf-8'?>
 <cities>
     <city>
@@ -406,130 +442,130 @@
 </cities>
 
 ==== running etl.sh for 2_xslt ====
-2014-10-07 16:07:02,107 util INFO Found cStringIO, good!
-2014-10-07 16:07:02,136 util INFO Found lxml.etree, native XML parsing, fabulous!
-2014-10-07 16:07:02,162 util INFO Found GDAL/OGR Python bindings, super!!
-2014-10-07 16:07:02,175 main INFO Stetl version = 1.0.7rc11
-2014-10-07 16:07:02,176 ETL INFO INIT - Stetl version is 1.0.7rc11
-2014-10-07 16:07:02,176 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/2_xslt
-2014-10-07 16:07:02,177 ETL INFO Reading config_file = etl.cfg
-2014-10-07 16:07:02,193 ETL INFO START
-2014-10-07 16:07:02,194 util INFO Timer start: total ETL
-2014-10-07 16:07:02,194 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_file...
-2014-10-07 16:07:02,196 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
-2014-10-07 16:07:02,196 fileinput INFO file_list=['input/cities.xml']
-2014-10-07 16:07:02,198 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
-2014-10-07 16:07:02,199 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/2_xslt
-2014-10-07 16:07:02,199 chain INFO Running Chain: input_xml_file|transformer_xslt|output_file
-2014-10-07 16:07:02,199 fileinput INFO Read/parse for start for file=input/cities.xml....
-2014-10-07 16:07:02,199 fileinput INFO Read/parse ok for file=input/cities.xml
-2014-10-07 16:07:02,199 fileinput INFO all files done
-2014-10-07 16:07:02,199 xsltfilter INFO XSLT Transform OK
-2014-10-07 16:07:02,200 fileoutput INFO writing to file output/gmlcities.gml
-2014-10-07 16:07:02,200 fileoutput INFO written to output/gmlcities.gml
-2014-10-07 16:07:02,200 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_file 
-2014-10-07 16:07:02,200 util INFO Timer end: total ETL time=0.0 sec
-2014-10-07 16:07:02,200 ETL INFO ALL DONE
+2014-11-24 11:04:25,650 util INFO Found cStringIO, good!
+2014-11-24 11:04:25,682 util INFO Found lxml.etree, native XML parsing, fabulous!
+2014-11-24 11:04:25,738 util INFO Found GDAL/OGR Python bindings, super!!
+2014-11-24 11:04:25,761 main INFO Stetl version = 1.0.7
+2014-11-24 11:04:25,762 ETL INFO INIT - Stetl version is 1.0.7
+2014-11-24 11:04:25,762 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/2_xslt
+2014-11-24 11:04:25,763 ETL INFO Reading config_file = etl.cfg
+2014-11-24 11:04:25,763 ETL INFO START
+2014-11-24 11:04:25,764 util INFO Timer start: total ETL
+2014-11-24 11:04:25,764 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_file...
+2014-11-24 11:04:25,766 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2014-11-24 11:04:25,767 fileinput INFO file_list=['input/cities.xml']
+2014-11-24 11:04:26,028 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2014-11-24 11:04:26,028 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/2_xslt
+2014-11-24 11:04:26,029 chain INFO Running Chain: input_xml_file|transformer_xslt|output_file
+2014-11-24 11:04:26,029 fileinput INFO Read/parse for start for file=input/cities.xml....
+2014-11-24 11:04:26,049 fileinput INFO Read/parse ok for file=input/cities.xml
+2014-11-24 11:04:26,049 fileinput INFO all files done
+2014-11-24 11:04:26,149 xsltfilter INFO XSLT Transform OK
+2014-11-24 11:04:26,149 fileoutput INFO writing to file output/gmlcities.gml
+2014-11-24 11:04:26,150 fileoutput INFO written to output/gmlcities.gml
+2014-11-24 11:04:26,150 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_file 
+2014-11-24 11:04:26,150 util INFO Timer end: total ETL time=0.0 sec
+2014-11-24 11:04:26,150 ETL INFO ALL DONE
 ==== running etl.sh for 3_shape ====
-2014-10-07 16:07:02,332 util INFO Found cStringIO, good!
-2014-10-07 16:07:02,397 util INFO Found lxml.etree, native XML parsing, fabulous!
-2014-10-07 16:07:02,425 util INFO Found GDAL/OGR Python bindings, super!!
-2014-10-07 16:07:02,437 main INFO Stetl version = 1.0.7rc11
-2014-10-07 16:07:02,438 ETL INFO INIT - Stetl version is 1.0.7rc11
-2014-10-07 16:07:02,438 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/3_shape
-2014-10-07 16:07:02,439 ETL INFO Reading config_file = etl.cfg
-2014-10-07 16:07:02,462 ETL INFO START
-2014-10-07 16:07:02,462 util INFO Timer start: total ETL
-2014-10-07 16:07:02,462 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_ogr_shape...
-2014-10-07 16:07:02,466 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
-2014-10-07 16:07:02,466 fileinput INFO file_list=['input/cities.xml']
-2014-10-07 16:07:02,474 output INFO cfg = {'ogr2ogr_cmd': 'ogr2ogr\n-overwrite\n-f "ESRI Shapefile"\n-a_srs epsg:4326\noutput/gmlcities.shp\ntemp/gmlcities.gml', 'class': 'outputs.ogroutput.Ogr2OgrOutput', 'temp_file': 'temp/gmlcities.gml'}
-2014-10-07 16:07:02,474 chain INFO Running Chain: input_xml_file|transformer_xslt|output_ogr_shape
-2014-10-07 16:07:02,474 fileinput INFO Read/parse for start for file=input/cities.xml....
-2014-10-07 16:07:02,475 fileinput INFO Read/parse ok for file=input/cities.xml
-2014-10-07 16:07:02,475 fileinput INFO all files done
-2014-10-07 16:07:02,475 xsltfilter INFO XSLT Transform OK
-2014-10-07 16:07:02,475 ogroutput INFO writing to file temp/gmlcities.gml
-2014-10-07 16:07:02,476 ogroutput INFO written to temp/gmlcities.gml
-2014-10-07 16:07:02,476 ogroutput INFO executing cmd=ogr2ogr -overwrite -f "ESRI Shapefile" -a_srs epsg:4326 output/gmlcities.shp temp/gmlcities.gml
-2014-10-07 16:07:03,780 ogroutput INFO execute done
-2014-10-07 16:07:03,781 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_ogr_shape 
-2014-10-07 16:07:03,781 util INFO Timer end: total ETL time=1.0 sec
-2014-10-07 16:07:03,781 ETL INFO ALL DONE
+2014-11-24 11:04:27,238 util INFO Found cStringIO, good!
+2014-11-24 11:04:27,402 util INFO Found lxml.etree, native XML parsing, fabulous!
+2014-11-24 11:04:27,510 util INFO Found GDAL/OGR Python bindings, super!!
+2014-11-24 11:04:27,547 main INFO Stetl version = 1.0.7
+2014-11-24 11:04:27,557 ETL INFO INIT - Stetl version is 1.0.7
+2014-11-24 11:04:27,557 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/3_shape
+2014-11-24 11:04:27,557 ETL INFO Reading config_file = etl.cfg
+2014-11-24 11:04:27,594 ETL INFO START
+2014-11-24 11:04:27,595 util INFO Timer start: total ETL
+2014-11-24 11:04:27,595 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_ogr_shape...
+2014-11-24 11:04:27,598 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2014-11-24 11:04:27,598 fileinput INFO file_list=['input/cities.xml']
+2014-11-24 11:04:27,630 output INFO cfg = {'ogr2ogr_cmd': 'ogr2ogr\n-overwrite\n-f "ESRI Shapefile"\n-a_srs epsg:4326\noutput/gmlcities.shp\ntemp/gmlcities.gml', 'class': 'outputs.ogroutput.Ogr2OgrOutput', 'temp_file': 'temp/gmlcities.gml'}
+2014-11-24 11:04:27,630 chain INFO Running Chain: input_xml_file|transformer_xslt|output_ogr_shape
+2014-11-24 11:04:27,630 fileinput INFO Read/parse for start for file=input/cities.xml....
+2014-11-24 11:04:27,631 fileinput INFO Read/parse ok for file=input/cities.xml
+2014-11-24 11:04:27,631 fileinput INFO all files done
+2014-11-24 11:04:27,631 xsltfilter INFO XSLT Transform OK
+2014-11-24 11:04:27,631 ogroutput INFO writing to file temp/gmlcities.gml
+2014-11-24 11:04:27,632 ogroutput INFO written to temp/gmlcities.gml
+2014-11-24 11:04:27,632 ogroutput INFO executing cmd=ogr2ogr -overwrite -f "ESRI Shapefile" -a_srs epsg:4326 output/gmlcities.shp temp/gmlcities.gml
+2014-11-24 11:04:32,400 ogroutput INFO execute done
+2014-11-24 11:04:32,401 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_ogr_shape 
+2014-11-24 11:04:32,401 util INFO Timer end: total ETL time=5.0 sec
+2014-11-24 11:04:32,401 ETL INFO ALL DONE
 ==== running etl.sh for 4_validate ====
-2014-10-07 16:07:03,953 util INFO Found cStringIO, good!
-2014-10-07 16:07:03,981 util INFO Found lxml.etree, native XML parsing, fabulous!
-2014-10-07 16:07:04,045 util INFO Found GDAL/OGR Python bindings, super!!
-2014-10-07 16:07:04,074 main INFO Stetl version = 1.0.7rc11
-2014-10-07 16:07:04,076 ETL INFO INIT - Stetl version is 1.0.7rc11
-2014-10-07 16:07:04,076 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/4_validate
-2014-10-07 16:07:04,076 ETL INFO Reading config_file = etl.cfg
-2014-10-07 16:07:04,112 ETL INFO START
-2014-10-07 16:07:04,113 util INFO Timer start: total ETL
-2014-10-07 16:07:04,113 chain INFO Assembling Chain: input_xml_file|transformer_xslt|xml_schema_validator|output_file...
-2014-10-07 16:07:04,116 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
-2014-10-07 16:07:04,116 fileinput INFO file_list=['input/cities.xml']
-2014-10-07 16:07:04,157 xmlvalidator INFO Building the Schema once with (GML XSD) dependencies for schema=gmlcities.xsd (be patient...)
-2014-10-07 16:07:21,024 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
-2014-10-07 16:07:21,024 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/4_validate
-2014-10-07 16:07:21,025 chain INFO Running Chain: input_xml_file|transformer_xslt|xml_schema_validator|output_file
-2014-10-07 16:07:21,025 fileinput INFO Read/parse for start for file=input/cities.xml....
-2014-10-07 16:07:21,048 fileinput INFO Read/parse ok for file=input/cities.xml
-2014-10-07 16:07:21,049 fileinput INFO all files done
-2014-10-07 16:07:21,049 xsltfilter INFO XSLT Transform OK
-2014-10-07 16:07:21,049 xmlvalidator INFO Validating doc against schema=gmlcities.xsd ...
-2014-10-07 16:07:21,049 xmlvalidator INFO Validation result: True
-2014-10-07 16:07:21,049 fileoutput INFO writing to file output/gmlcities.gml
-2014-10-07 16:07:21,050 fileoutput INFO written to output/gmlcities.gml
-2014-10-07 16:07:21,050 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|xml_schema_validator|output_file 
-2014-10-07 16:07:21,050 util INFO Timer end: total ETL time=17.0 sec
-2014-10-07 16:07:21,050 ETL INFO ALL DONE
+2014-11-24 11:04:32,819 util INFO Found cStringIO, good!
+2014-11-24 11:04:32,969 util INFO Found lxml.etree, native XML parsing, fabulous!
+2014-11-24 11:04:34,348 util INFO Found GDAL/OGR Python bindings, super!!
+2014-11-24 11:04:34,445 main INFO Stetl version = 1.0.7
+2014-11-24 11:04:34,447 ETL INFO INIT - Stetl version is 1.0.7
+2014-11-24 11:04:34,447 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/4_validate
+2014-11-24 11:04:34,447 ETL INFO Reading config_file = etl.cfg
+2014-11-24 11:04:34,476 ETL INFO START
+2014-11-24 11:04:34,476 util INFO Timer start: total ETL
+2014-11-24 11:04:34,476 chain INFO Assembling Chain: input_xml_file|transformer_xslt|xml_schema_validator|output_file...
+2014-11-24 11:04:34,733 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2014-11-24 11:04:34,733 fileinput INFO file_list=['input/cities.xml']
+2014-11-24 11:04:34,915 xmlvalidator INFO Building the Schema once with (GML XSD) dependencies for schema=gmlcities.xsd (be patient...)
+2014-11-24 11:04:51,992 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2014-11-24 11:04:51,993 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/4_validate
+2014-11-24 11:04:51,993 chain INFO Running Chain: input_xml_file|transformer_xslt|xml_schema_validator|output_file
+2014-11-24 11:04:51,993 fileinput INFO Read/parse for start for file=input/cities.xml....
+2014-11-24 11:04:52,001 fileinput INFO Read/parse ok for file=input/cities.xml
+2014-11-24 11:04:52,002 fileinput INFO all files done
+2014-11-24 11:04:52,002 xsltfilter INFO XSLT Transform OK
+2014-11-24 11:04:52,002 xmlvalidator INFO Validating doc against schema=gmlcities.xsd ...
+2014-11-24 11:04:52,003 xmlvalidator INFO Validation result: True
+2014-11-24 11:04:52,003 fileoutput INFO writing to file output/gmlcities.gml
+2014-11-24 11:04:52,017 fileoutput INFO written to output/gmlcities.gml
+2014-11-24 11:04:52,017 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|xml_schema_validator|output_file 
+2014-11-24 11:04:52,018 util INFO Timer end: total ETL time=18.0 sec
+2014-11-24 11:04:52,018 ETL INFO ALL DONE
 ==== running etl.sh for 5_split ====
-2014-10-07 16:07:21,254 util INFO Found cStringIO, good!
-2014-10-07 16:07:21,299 util INFO Found lxml.etree, native XML parsing, fabulous!
-2014-10-07 16:07:21,395 util INFO Found GDAL/OGR Python bindings, super!!
-2014-10-07 16:07:21,433 main INFO Stetl version = 1.0.7rc11
-2014-10-07 16:07:21,435 ETL INFO INIT - Stetl version is 1.0.7rc11
-2014-10-07 16:07:21,435 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/5_split
-2014-10-07 16:07:21,435 ETL INFO Reading config_file = etl.cfg
-2014-10-07 16:07:21,457 ETL INFO START
-2014-10-07 16:07:21,458 util INFO Timer start: total ETL
-2014-10-07 16:07:21,458 chain INFO Assembling Chain: input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file...
-2014-10-07 16:07:21,461 input INFO cfg = {'element_tags': 'city', 'class': 'inputs.fileinput.XmlElementStreamerFileInput', 'file_path': 'input'}
-2014-10-07 16:07:21,462 fileinput INFO file_list=['input/cities.xml']
-2014-10-07 16:07:21,462 fileinput INFO Element tags to be matched: ['city']
-2014-10-07 16:07:21,463 xmlassembler INFO cfg = {'max_elements': '2', 'element_container_tag': 'cities', 'class': 'filters.xmlassembler.XmlAssembler', 'container_doc': "<?xml version='1.0' encoding='utf-8'?>\n<cities>\n</cities>"}
-2014-10-07 16:07:21,464 output INFO cfg = {'class': 'outputs.fileoutput.MultiFileOutput', 'file_path': 'output/gmlcities-%03d.gml'}
-2014-10-07 16:07:21,465 chain INFO Running Chain: input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file
-2014-10-07 16:07:21,465 fileinput INFO file opened : input/cities.xml
-2014-10-07 16:07:21,466 xmlassembler INFO xmldoc ready: elms=2 total_elms=2
-2014-10-07 16:07:21,466 xsltfilter INFO XSLT Transform OK
-2014-10-07 16:07:21,466 fileoutput INFO writing to file output/gmlcities-001.gml
-2014-10-07 16:07:21,468 fileoutput INFO written to output/gmlcities-001.gml
-2014-10-07 16:07:21,469 fileinput INFO End of doc: input/cities.xml elem_count=3
-2014-10-07 16:07:21,469 fileinput INFO End of stream
-2014-10-07 16:07:21,469 xmlassembler INFO xmldoc ready: elms=1 total_elms=3
-2014-10-07 16:07:21,469 xsltfilter INFO XSLT Transform OK
-2014-10-07 16:07:21,469 fileoutput INFO writing to file output/gmlcities-002.gml
-2014-10-07 16:07:21,470 fileoutput INFO written to output/gmlcities-002.gml
-2014-10-07 16:07:21,470 chain INFO DONE - 26 rounds - chain=input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file 
-2014-10-07 16:07:21,470 chain INFO Assembling Chain: input_big_xml_file|xml_assembler|transformer_xslt|output_std...
-2014-10-07 16:07:21,470 input INFO cfg = {'element_tags': 'city', 'class': 'inputs.fileinput.XmlElementStreamerFileInput', 'file_path': 'input'}
-2014-10-07 16:07:21,470 fileinput INFO file_list=['input/cities.xml']
-2014-10-07 16:07:21,470 fileinput INFO Element tags to be matched: ['city']
-2014-10-07 16:07:21,471 xmlassembler INFO cfg = {'max_elements': '2', 'element_container_tag': 'cities', 'class': 'filters.xmlassembler.XmlAssembler', 'container_doc': "<?xml version='1.0' encoding='utf-8'?>\n<cities>\n</cities>"}
-2014-10-07 16:07:21,471 output INFO cfg = {'class': 'outputs.standardoutput.StandardXmlOutput'}
-2014-10-07 16:07:21,472 chain INFO Running Chain: input_big_xml_file|xml_assembler|transformer_xslt|output_std
-2014-10-07 16:07:21,472 fileinput INFO file opened : input/cities.xml
-2014-10-07 16:07:21,472 xmlassembler INFO xmldoc ready: elms=2 total_elms=2
-2014-10-07 16:07:21,473 xsltfilter INFO XSLT Transform OK
-2014-10-07 16:07:21,473 fileinput INFO End of doc: input/cities.xml elem_count=3
-2014-10-07 16:07:21,473 fileinput INFO End of stream
-2014-10-07 16:07:21,473 xmlassembler INFO xmldoc ready: elms=1 total_elms=3
-2014-10-07 16:07:21,473 xsltfilter INFO XSLT Transform OK
-2014-10-07 16:07:21,473 chain INFO DONE - 26 rounds - chain=input_big_xml_file|xml_assembler|transformer_xslt|output_std 
-2014-10-07 16:07:21,473 util INFO Timer end: total ETL time=0.0 sec
-2014-10-07 16:07:21,474 ETL INFO ALL DONE
+2014-11-24 11:04:52,234 util INFO Found cStringIO, good!
+2014-11-24 11:04:52,302 util INFO Found lxml.etree, native XML parsing, fabulous!
+2014-11-24 11:04:52,668 util INFO Found GDAL/OGR Python bindings, super!!
+2014-11-24 11:04:52,683 main INFO Stetl version = 1.0.7
+2014-11-24 11:04:52,685 ETL INFO INIT - Stetl version is 1.0.7
+2014-11-24 11:04:52,685 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/5_split
+2014-11-24 11:04:52,685 ETL INFO Reading config_file = etl.cfg
+2014-11-24 11:04:52,698 ETL INFO START
+2014-11-24 11:04:52,698 util INFO Timer start: total ETL
+2014-11-24 11:04:52,698 chain INFO Assembling Chain: input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file...
+2014-11-24 11:04:52,700 input INFO cfg = {'element_tags': 'city', 'class': 'inputs.fileinput.XmlElementStreamerFileInput', 'file_path': 'input'}
+2014-11-24 11:04:52,701 fileinput INFO file_list=['input/cities.xml']
+2014-11-24 11:04:52,701 fileinput INFO Element tags to be matched: ['city']
+2014-11-24 11:04:52,716 xmlassembler INFO cfg = {'max_elements': '2', 'element_container_tag': 'cities', 'class': 'filters.xmlassembler.XmlAssembler', 'container_doc': "<?xml version='1.0' encoding='utf-8'?>\n<cities>\n</cities>"}
+2014-11-24 11:04:52,736 output INFO cfg = {'class': 'outputs.fileoutput.MultiFileOutput', 'file_path': 'output/gmlcities-%03d.gml'}
+2014-11-24 11:04:52,736 chain INFO Running Chain: input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file
+2014-11-24 11:04:52,736 fileinput INFO file opened : input/cities.xml
+2014-11-24 11:04:52,792 xmlassembler INFO xmldoc ready: elms=2 total_elms=2
+2014-11-24 11:04:52,793 xsltfilter INFO XSLT Transform OK
+2014-11-24 11:04:52,793 fileoutput INFO writing to file output/gmlcities-001.gml
+2014-11-24 11:04:52,793 fileoutput INFO written to output/gmlcities-001.gml
+2014-11-24 11:04:52,793 fileinput INFO End of doc: input/cities.xml elem_count=3
+2014-11-24 11:04:52,794 fileinput INFO End of stream
+2014-11-24 11:04:52,794 xmlassembler INFO xmldoc ready: elms=1 total_elms=3
+2014-11-24 11:04:52,794 xsltfilter INFO XSLT Transform OK
+2014-11-24 11:04:52,794 fileoutput INFO writing to file output/gmlcities-002.gml
+2014-11-24 11:04:52,794 fileoutput INFO written to output/gmlcities-002.gml
+2014-11-24 11:04:52,794 chain INFO DONE - 26 rounds - chain=input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file 
+2014-11-24 11:04:52,795 chain INFO Assembling Chain: input_big_xml_file|xml_assembler|transformer_xslt|output_std...
+2014-11-24 11:04:52,795 input INFO cfg = {'element_tags': 'city', 'class': 'inputs.fileinput.XmlElementStreamerFileInput', 'file_path': 'input'}
+2014-11-24 11:04:52,795 fileinput INFO file_list=['input/cities.xml']
+2014-11-24 11:04:52,795 fileinput INFO Element tags to be matched: ['city']
+2014-11-24 11:04:52,795 xmlassembler INFO cfg = {'max_elements': '2', 'element_container_tag': 'cities', 'class': 'filters.xmlassembler.XmlAssembler', 'container_doc': "<?xml version='1.0' encoding='utf-8'?>\n<cities>\n</cities>"}
+2014-11-24 11:04:52,796 output INFO cfg = {'class': 'outputs.standardoutput.StandardXmlOutput'}
+2014-11-24 11:04:52,797 chain INFO Running Chain: input_big_xml_file|xml_assembler|transformer_xslt|output_std
+2014-11-24 11:04:52,797 fileinput INFO file opened : input/cities.xml
+2014-11-24 11:04:52,797 xmlassembler INFO xmldoc ready: elms=2 total_elms=2
+2014-11-24 11:04:52,798 xsltfilter INFO XSLT Transform OK
+2014-11-24 11:04:52,798 fileinput INFO End of doc: input/cities.xml elem_count=3
+2014-11-24 11:04:52,798 fileinput INFO End of stream
+2014-11-24 11:04:52,798 xmlassembler INFO xmldoc ready: elms=1 total_elms=3
+2014-11-24 11:04:52,798 xsltfilter INFO XSLT Transform OK
+2014-11-24 11:04:52,798 chain INFO DONE - 26 rounds - chain=input_big_xml_file|xml_assembler|transformer_xslt|output_std 
+2014-11-24 11:04:52,798 util INFO Timer end: total ETL time=0.0 sec
+2014-11-24 11:04:52,799 ETL INFO ALL DONE
 <?xml version='1.0' encoding='utf-8'?>
 <ogr:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://ogr.maptools.org/" xmlns:gml="http://www.opengis.net/gml" xsi:schemaLocation="http://ogr.maptools.org/ ../gmlcities.xsd  http://www.opengis.net/gml http://schemas.opengis.net/gml/2.1.2/feature.xsd">
   <gml:boundedBy>
@@ -593,54 +629,54 @@
 </ogr:FeatureCollection>
 
 ==== running etl.sh for 6_cmdargs ====
-2014-10-07 16:07:21,651 util INFO Found cStringIO, good!
-2014-10-07 16:07:21,681 util INFO Found lxml.etree, native XML parsing, fabulous!
-2014-10-07 16:07:21,710 util INFO Found GDAL/OGR Python bindings, super!!
-2014-10-07 16:07:21,724 main INFO Stetl version = 1.0.7rc11
-2014-10-07 16:07:21,726 ETL INFO INIT - Stetl version is 1.0.7rc11
-2014-10-07 16:07:21,726 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/6_cmdargs
-2014-10-07 16:07:21,726 ETL INFO Reading config_file = etl.cfg
-2014-10-07 16:07:21,726 ETL INFO Substituting 3 args in config file from args_dict: {'out_xml': 'output/gmlcities.gml', 'in_xsl': 'cities2gml.xsl', 'in_xml': 'input/cities.xml'}
-2014-10-07 16:07:21,751 ETL INFO Substituting args OK
-2014-10-07 16:07:21,752 ETL INFO START
-2014-10-07 16:07:21,752 util INFO Timer start: total ETL
-2014-10-07 16:07:21,752 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_file...
-2014-10-07 16:07:21,755 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
-2014-10-07 16:07:21,755 fileinput INFO file_list=['input/cities.xml']
-2014-10-07 16:07:21,770 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
-2014-10-07 16:07:21,770 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/6_cmdargs
-2014-10-07 16:07:21,770 chain INFO Running Chain: input_xml_file|transformer_xslt|output_file
-2014-10-07 16:07:21,770 fileinput INFO Read/parse for start for file=input/cities.xml....
-2014-10-07 16:07:21,771 fileinput INFO Read/parse ok for file=input/cities.xml
-2014-10-07 16:07:21,771 fileinput INFO all files done
-2014-10-07 16:07:21,771 xsltfilter INFO XSLT Transform OK
-2014-10-07 16:07:21,771 fileoutput INFO writing to file output/gmlcities.gml
-2014-10-07 16:07:21,772 fileoutput INFO written to output/gmlcities.gml
-2014-10-07 16:07:21,772 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_file 
-2014-10-07 16:07:21,772 util INFO Timer end: total ETL time=0.0 sec
-2014-10-07 16:07:21,772 ETL INFO ALL DONE
+2014-11-24 11:04:52,990 util INFO Found cStringIO, good!
+2014-11-24 11:04:53,018 util INFO Found lxml.etree, native XML parsing, fabulous!
+2014-11-24 11:04:53,044 util INFO Found GDAL/OGR Python bindings, super!!
+2014-11-24 11:04:53,057 main INFO Stetl version = 1.0.7
+2014-11-24 11:04:53,059 ETL INFO INIT - Stetl version is 1.0.7
+2014-11-24 11:04:53,059 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/6_cmdargs
+2014-11-24 11:04:53,059 ETL INFO Reading config_file = etl.cfg
+2014-11-24 11:04:53,059 ETL INFO Substituting 3 args in config file from args_dict: {'out_xml': 'output/gmlcities.gml', 'in_xsl': 'cities2gml.xsl', 'in_xml': 'input/cities.xml'}
+2014-11-24 11:04:53,097 ETL INFO Substituting args OK
+2014-11-24 11:04:53,098 ETL INFO START
+2014-11-24 11:04:53,098 util INFO Timer start: total ETL
+2014-11-24 11:04:53,098 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_file...
+2014-11-24 11:04:53,103 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2014-11-24 11:04:53,103 fileinput INFO file_list=['input/cities.xml']
+2014-11-24 11:04:53,123 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2014-11-24 11:04:53,123 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/6_cmdargs
+2014-11-24 11:04:53,123 chain INFO Running Chain: input_xml_file|transformer_xslt|output_file
+2014-11-24 11:04:53,123 fileinput INFO Read/parse for start for file=input/cities.xml....
+2014-11-24 11:04:53,124 fileinput INFO Read/parse ok for file=input/cities.xml
+2014-11-24 11:04:53,124 fileinput INFO all files done
+2014-11-24 11:04:53,124 xsltfilter INFO XSLT Transform OK
+2014-11-24 11:04:53,124 fileoutput INFO writing to file output/gmlcities.gml
+2014-11-24 11:04:53,141 fileoutput INFO written to output/gmlcities.gml
+2014-11-24 11:04:53,142 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_file 
+2014-11-24 11:04:53,142 util INFO Timer end: total ETL time=0.0 sec
+2014-11-24 11:04:53,142 ETL INFO ALL DONE
 ==== running etl.sh for 7_mycomponent ====
-2014-10-07 16:07:21,958 util INFO Found cStringIO, good!
-2014-10-07 16:07:21,986 util INFO Found lxml.etree, native XML parsing, fabulous!
-2014-10-07 16:07:22,013 util INFO Found GDAL/OGR Python bindings, super!!
-2014-10-07 16:07:22,034 main INFO Stetl version = 1.0.7rc11
-2014-10-07 16:07:22,036 ETL INFO INIT - Stetl version is 1.0.7rc11
-2014-10-07 16:07:22,036 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/7_mycomponent
-2014-10-07 16:07:22,036 ETL INFO Reading config_file = etl.cfg
-2014-10-07 16:07:22,063 ETL INFO START
-2014-10-07 16:07:22,063 util INFO Timer start: total ETL
-2014-10-07 16:07:22,063 chain INFO Assembling Chain: input_xml_file|my_filter|output_std...
-2014-10-07 16:07:22,067 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
-2014-10-07 16:07:22,068 fileinput INFO file_list=['input/cities.xml']
-2014-10-07 16:07:22,069 output INFO cfg = {'class': 'outputs.standardoutput.StandardXmlOutput'}
-2014-10-07 16:07:22,069 chain INFO Running Chain: input_xml_file|my_filter|output_std
-2014-10-07 16:07:22,069 fileinput INFO Read/parse for start for file=input/cities.xml....
-2014-10-07 16:07:22,096 fileinput INFO Read/parse ok for file=input/cities.xml
-2014-10-07 16:07:22,096 fileinput INFO all files done
-2014-10-07 16:07:22,096 myfilter INFO CALLING MyFilter OK!!!!
-2014-10-07 16:07:22,096 chain INFO DONE - 1 rounds - chain=input_xml_file|my_filter|output_std 
-2014-10-07 16:07:22,096 util INFO Timer end: total ETL time=0.0 sec
-2014-10-07 16:07:22,096 ETL INFO ALL DONE
+2014-11-24 11:04:53,303 util INFO Found cStringIO, good!
+2014-11-24 11:04:53,333 util INFO Found lxml.etree, native XML parsing, fabulous!
+2014-11-24 11:04:53,359 util INFO Found GDAL/OGR Python bindings, super!!
+2014-11-24 11:04:53,372 main INFO Stetl version = 1.0.7
+2014-11-24 11:04:53,373 ETL INFO INIT - Stetl version is 1.0.7
+2014-11-24 11:04:53,374 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/7_mycomponent
+2014-11-24 11:04:53,374 ETL INFO Reading config_file = etl.cfg
+2014-11-24 11:04:53,417 ETL INFO START
+2014-11-24 11:04:53,417 util INFO Timer start: total ETL
+2014-11-24 11:04:53,417 chain INFO Assembling Chain: input_xml_file|my_filter|output_std...
+2014-11-24 11:04:53,420 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2014-11-24 11:04:53,490 fileinput INFO file_list=['input/cities.xml']
+2014-11-24 11:04:53,608 output INFO cfg = {'class': 'outputs.standardoutput.StandardXmlOutput'}
+2014-11-24 11:04:53,608 chain INFO Running Chain: input_xml_file|my_filter|output_std
+2014-11-24 11:04:53,608 fileinput INFO Read/parse for start for file=input/cities.xml....
+2014-11-24 11:04:53,624 fileinput INFO Read/parse ok for file=input/cities.xml
+2014-11-24 11:04:53,624 fileinput INFO all files done
+2014-11-24 11:04:53,625 myfilter INFO CALLING MyFilter OK!!!!
+2014-11-24 11:04:53,625 chain INFO DONE - 1 rounds - chain=input_xml_file|my_filter|output_std 
+2014-11-24 11:04:53,625 util INFO Timer end: total ETL time=0.0 sec
+2014-11-24 11:04:53,625 ETL INFO ALL DONE
 <?xml version='1.0' encoding='utf-8'?>
 <cities>
     <city>
@@ -661,49 +697,49 @@
 </cities>
 
 ==== running etl.sh for 8_wfs ====
-2014-10-07 16:07:22,244 util INFO Found cStringIO, good!
-2014-10-07 16:07:22,279 util INFO Found lxml.etree, native XML parsing, fabulous!
-2014-10-07 16:07:22,309 util INFO Found GDAL/OGR Python bindings, super!!
-2014-10-07 16:07:22,325 main INFO Stetl version = 1.0.7rc11
-2014-10-07 16:07:22,326 ETL INFO INIT - Stetl version is 1.0.7rc11
-2014-10-07 16:07:22,327 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/8_wfs
-2014-10-07 16:07:22,327 ETL INFO Reading config_file = etl.cfg
-2014-10-07 16:07:22,365 ETL INFO START
-2014-10-07 16:07:22,365 util INFO Timer start: total ETL
-2014-10-07 16:07:22,365 chain INFO Assembling Chain: input_wfs|output_std...
-2014-10-07 16:07:22,393 input INFO cfg = {'url': 'http://suite.opengeo.org/geoserver/ows', 'class': 'inputs.httpinput.HttpInput', 'parameters': '{\n\'service\' : \'WFS\',\n\'version\' : \'1.1.0\',\n\'request\' : \'GetFeature\',\n\'srsName\' : \'EPSG:4326\',\n\'outputFormat\' : \'text/xml; subtype=gml/2.1.2\',\n\'typename\' : \'states\',\n\'filter\' :\'<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc"><ogc:Intersects><ogc:PropertyName/><gml:Polygon xmlns:gml="http://www.opengis.net/gml" srsName="EPSG:4326"><gml:exterior><gml:LinearRing><gml:posList>-101.8671875 32.177734375 -101.8671875 39.6923828125 -91.935546875 39.6923828125 -91.935546875 32.177734375 -101.8671875 32.177734375</gml:posList></gml:LinearRing></gml:exterior></gml:Polygon></ogc:Intersects></ogc:Filter>\'\n}'}
-2014-10-07 16:07:22,399 httpinput INFO url=http://suite.opengeo.org/geoserver/ows parameters={'srsName': 'EPSG:4326', 'outputFormat': 'text/xml; subtype=gml/2.1.2', 'service': 'WFS', 'request': 'GetFeature', 'filter': '<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc"><ogc:Intersects><ogc:PropertyName/><gml:Polygon xmlns:gml="http://www.opengis.net/gml" srsName="EPSG:4326"><gml:exterior><gml:LinearRing><gml:posList>-101.8671875 32.177734375 -101.8671875 39.6923828125 -91.935546875 39.6923828125 -91.935546875 32.177734375 -101.8671875 32.177734375</gml:posList></gml:LinearRing></gml:exterior></gml:Polygon></ogc:Intersects></ogc:Filter>', 'typename': 'states', 'version': '1.1.0'}
-2014-10-07 16:07:22,400 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
-2014-10-07 16:07:22,400 chain INFO Running Chain: input_wfs|output_std
-<?xml version="1.0" encoding="UTF-8"?><wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs" xmlns:usa="http://census.gov" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://census.gov http://suite.opengeo.org/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=usa%3Astates http://www.opengis.net/wfs http://suite.opengeo.org/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd"><gml:boundedBy><gml:null>unknown</gml:null></gml:boundedBy><gml:featureMember><usa:states fid="states.14"><usa:the_geom><gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:polygonMember><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-94.55218,36.102236 -94.617756,36.499461 -90.15228,36.49795 -90.159627,36.480302 -90.142413,36.471501 -90.155804,36.463554 -90.133939,36.453597 -90.138574,36.413817 -90.063397,36.383957 -90.082407,36.321949 -90.064169,36.302526 -90.083529,36.272122 -90.116801,36.263771 -90.126336,36.229123 -90.220487,36.184437 -90.235372,36.13948 -90.318877,36.090309 -90.37789,35.995683 -89.733095,36.000608 -89.714565,35.963034 -89.65314,35.922618 -89.644395,35.894782 -89.666101,35.882866 -89.742606,35.906653 -89.772467,35.865098 -89.706352,35.837202 -89.704387,35.819607 -89.781176,35.805296 -89.820876,35.756868 -89.876462,35.738026 -89.909825,35.759387 -89.956252,35.733388 -89.955753,35.690621 -89.931036,35.660044 -89.894567,35.651514 -89.864739,35.670388 -89.851158,35.657424 -89.857065,35.634152 -89.957495,35.58853 -89.941875,35.556859 -89.908871,35.547378 -89.909022,35.520548 -89.94801,35.52009 -89.989499,35.560136 -90.032734,35.553696 -90.04981,35.510454 -90.018916,35.466231 -90.056782,35.403863 -90.044582,35.393073 -90.069434,35.408163 -90.068156,35.46678 -90.098734,35.478554 -90.168882,35.422206 -90.179265,35.385194 -90.13551,35.376668 -90.146191,35.399468 -90.129493,35.413759 -90.074992,35.384152 -90.110293,35.342788 -90.109093,35.304987 -90.158913,35.300637 -90.168924,35.28028 -90.152094,35.255989 -90.105093,35.254288 -90.079345,35.228838 -90.074392,35.210589 -90.117393,35.18789 -90.065392,35.137691 -90.096515,35.117131 -90.142794,35.135091 -90.165328,35.125228 -90.209397,35.026546 -90.295596,35.040093 -90.30779,34.991853 -90.250056,34.951196 -90.244731,34.921026 -90.313476,34.871698 -90.309183,34.844994 -90.34038,34.860357 -90.419485,34.832883 -90.438311,34.884583 -90.479864,34.883273 -90.483876,34.861333 -90.456783,34.822683 -90.47459,34.7932 -90.45397,34.736877 -90.488865,34.723731 -90.520181,34.731902 -90.524517,34.751368 -90.500989,34.771192 -90.522892,34.802265 -90.547612,34.784589 -90.536417,34.748299 -90.568081,34.724802 -90.535682,34.697879 -90.472495,34.699788 -90.466041,34.674312 -90.532113,34.627489 -90.554545,34.642213 -90.537885,34.673979 -90.549857,34.695478 -90.588419,34.670963 -90.587224,34.615732 -90.540736,34.548085 -90.588942,34.491097 -90.571145,34.420322 -90.65854,34.375705 -90.662961,34.314779 -90.693129,34.32257 -90.67666,34.371411 -90.764143,34.363396 -90.741253,34.305556 -90.765165,34.280524 -90.829663,34.272424 -90.847808,34.20653 -90.929523,34.244106 -90.935219,34.219043 -90.914153,34.195484 -90.887887,34.181982 -90.816572,34.183023 -90.808736,34.159416 -90.847168,34.136884 -90.910007,34.165502 -90.954299,34.138496 -90.943167,34.107165 -90.882623,34.096613 -90.870528,34.080516 -90.894151,34.025949 -90.987948,34.019038 -90.961551,33.979946 -90.967632,33.963324 -90.998368,33.965021 -91.01889,34.003151 -91.087921,33.975335 -91.084095,33.956179 -91.010318,33.929352 -91.07266,33.854943 -91.046849,33.815365 -90.988466,33.78453 -91.023285,33.762991 -91.132185,33.78342 -91.146351,33.730609 -91.117393,33.705265 -91.059891,33.714816 -91.032189,33.676593 -91.09404,33.658351 -91.161331,33.707201 -91.210373,33.699022 -91.229015,33.677543 -91.140725,33.626893 -91.130445,33.606034 -91.152148,33.582721 -91.231418,33.560593 -91.182565,33.501061 -91.2358,33.439738 -91.177293,33.443638 -91.167579,33.498309 -91.117975,33.453806 -91.131885,33.430062 -91.200049,33.418137 -91.208113,33.402006 -91.142692,33.37983 -91.096942,33.41099 -91.086498,33.451576 -91.057621,33.445341 -91.068168,33.414008 -91.142219,33.348989 -91.14144,33.298868 -91.106142,33.241799 -91.07853,33.283306 -91.04382,33.275606 -91.054126,33.246105 -91.091711,33.220813 -91.088633,33.142213 -91.12667,33.12905 -91.183662,33.141691 -91.20178,33.125121 -91.200167,33.10693 -91.121195,33.059165 -91.127113,33.035964 -91.166073,33.004106 -94.042964,33.019219 -94.04345,33.552253 -94.072947,33.55467 -94.05658,33.560932 -94.072939,33.584797 -94.072826,33.572298 -94.12086,33.567051 -94.129002,33.551036 -94.135144,33.571033 -94.151574,33.568406 -94.14216,33.58139 -94.183912,33.594685 -94.217114,33.580994 -94.194127,33.573469 -94.195432,33.555094 -94.205666,33.567219 -94.25013,33.556753 -94.242777,33.589709 -94.27826,33.557556 -94.290897,33.559906 -94.289215,33.582131 -94.31215,33.550666 -94.344023,33.567824 -94.353593,33.544005 -94.386136,33.54481 -94.401616,33.559378 -94.379674,33.580631 -94.412195,33.568708 -94.430041,33.591124 -94.472443,33.603469 -94.448224,33.642402 -94.485878,33.637865 -94.430662,35.392478 -94.55218,36.102236</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></gml:polygonMember></gml:MultiPolygon></usa:the_geom><usa:GEOID10>05</usa:GEOID10><usa:STUSPS10>AR</usa:STUSPS10><usa:NAME10>Arkansas</usa:NAME10><usa:ALAND10>1.34771261408E11</usa:ALAND10><usa:AWATER10>2.960539257E9</usa:AWATER10><usa:DP0010001>2915918</usa:DP0010001><usa:DP0010020>1431637</usa:DP0010020><usa:DP0010039>1484281</usa:DP0010039></usa:states></gml:featureMember><gml:featureMember><usa:states fid="states.15"><usa:the_geom><gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:polygonMember><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-99.541116,36.99961 -102.042089,36.993016 -102.051744,40.003078 -95.30829,39.999998 -95.250254,39.948644 -95.205266,39.93975 -95.202745,39.905076 -95.149657,39.905948 -95.133961,39.876497 -95.039403,39.864832 -95.015135,39.899643 -94.954155,39.901138 -94.927897,39.886112 -94.939854,39.852044 -94.877605,39.82497 -94.882289,39.795804 -94.935508,39.777006 -94.910949,39.759178 -94.867143,39.771694 -94.865048,39.738591 -94.901044,39.724058 -94.962662,39.741337 -94.971317,39.68641 -95.018318,39.672869 -95.049518,39.637876 -95.05059,39.587563 -95.103228,39.577783 -95.113557,39.553941 -95.052177,39.499996 -95.04078,39.466387 -94.984788,39.442703 -94.942039,39.389499 -94.885026,39.389801 -94.88136,39.370383 -94.910017,39.352543 -94.906126,39.314721 -94.884093,39.284512 -94.830553,39.255135 -94.831679,39.215938 -94.782951,39.207162 -94.740777,39.169987 -94.67824,39.184169 -94.655787,39.15568 -94.588658,39.151163 -94.608519,39.116244 -94.617964,36.998905 -99.541116,36.99961</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></gml:polygonMember></gml:MultiPolygon></usa:the_geom><usa:GEOID10>20</usa:GEOID10><usa:STUSPS10>KS</usa:STUSPS10><usa:NAME10>Kansas</usa:NAME10><usa:ALAND10>2.11754095913E11</usa:ALAND10><usa:AWATER10>1.34586893E9</usa:AWATER10><usa:DP0010001>2853118</usa:DP0010001><usa:DP0010020>1415408</usa:DP0010020><usa:DP0010039>1437710</usa:DP0010039></usa:states></gml:featureMember><gml:featureMember><usa:states fid="states.20"><usa:the_geom><gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:polygonMember><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-98.139072,34.14187 -98.170827,34.114171 -98.365621,34.156993 -98.384381,34.146317 -98.380093,34.130831 -98.398441,34.128456 -98.414426,34.085074 -98.483551,34.062277 -98.560977,34.123922 -98.55088,34.132583 -98.599789,34.160571 -98.648073,34.164441 -98.690072,34.133155 -98.757037,34.124633 -98.812954,34.158444 -98.868116,34.149635 -98.872922,34.166584 -98.951284,34.212189 -98.972609,34.202591 -98.988172,34.22131 -99.044463,34.198106 -99.079392,34.21155 -99.12664,34.203064 -99.130443,34.219478 -99.186817,34.213555 -99.195403,34.280849 -99.211448,34.292247 -99.206905,34.338277 -99.232632,34.338872 -99.236494,34.365805 -99.274415,34.384349 -99.261275,34.403508 -99.319602,34.408879 -99.35897,34.455807 -99.395187,34.44203 -99.387181,34.410842 -99.405286,34.372858 -99.424897,34.385823 -99.438269,34.371164 -99.51428,34.414035 -99.569696,34.418418 -99.600026,34.374688 -99.694528,34.378218 -99.923211,34.574552 -100.000277,34.56045 -100.000406,36.499702 -103.002434,36.500397 -103.002199,37.000104 -94.617964,36.998905 -94.617919,36.499414 -94.430662,35.392478 -94.489086,33.626778 -94.517468,33.633056 -94.52795,33.615964 -94.527491,33.641344 -94.568965,33.627453 -94.542627,33.653992 -94.590478,33.645075 -94.560339,33.666591 -94.580784,33.666392 -94.58793,33.686255 -94.596019,33.663863 -94.622043,33.682535 -94.639198,33.663737 -94.668646,33.663846 -94.645337,33.673644 -94.643715,33.701522 -94.651402,33.685843 -94.716188,33.687902 -94.70156,33.702878 -94.733965,33.715687 -94.715943,33.694913 -94.735117,33.691259 -94.753801,33.708663 -94.733413,33.725191 -94.751366,33.71354 -94.751825,33.734326 -94.788637,33.735669 -94.758948,33.748532 -94.763035,33.759764 -94.802833,33.732699 -94.820707,33.768964 -94.821989,33.732878 -94.867544,33.744904 -94.868144,33.768874 -94.876372,33.75733 -94.921526,33.790472 -94.91801,33.826783 -94.923289,33.808742 -94.947874,33.808356 -94.943888,33.830226 -94.964401,33.837021 -94.970205,33.861817 -94.988487,33.851 -95.046568,33.862565 -95.060105,33.901873 -95.075876,33.901846 -95.06676,33.917101 -95.089607,33.880857 -95.100378,33.895595 -95.08006,33.920989 -95.120893,33.904539 -95.1247,33.934675 -95.216947,33.962674 -95.250001,33.938861 -95.257724,33.890122 -95.268697,33.91109 -95.284629,33.905483 -95.288926,33.87307 -95.329936,33.886334 -95.362571,33.866902 -95.442746,33.866506 -95.463336,33.872396 -95.46144,33.887106 -95.504992,33.875918 -95.509526,33.897586 -95.544141,33.880603 -95.55421,33.926958 -95.594085,33.943057 -95.632774,33.904815 -95.665478,33.909004 -95.700635,33.885845 -95.752153,33.894577 -95.757959,33.849566 -95.815571,33.859853 -95.830406,33.834785 -95.925089,33.884936 -95.932209,33.883882 -95.941796,33.861651 -95.94414,33.859998 -95.948676,33.858041 -95.951382,33.857332 -95.984856,33.852492 -96.002925,33.87359 -95.996833,33.853898 -96.017055,33.841454 -96.026968,33.857474 -96.048834,33.836468 -96.100095,33.847971 -96.09936,33.83047 -96.149227,33.837091 -96.150765,33.816987 -96.179122,33.810224 -96.169592,33.800944 -96.163766,33.813051 -96.155538,33.81404 -96.186627,33.755021 -96.229023,33.748021 -96.293708,33.769409 -96.31223,33.706304 -96.346859,33.686216 -96.423532,33.776432 -96.500984,33.772801 -96.531966,33.823989 -96.572937,33.819098 -96.629274,33.8455 -96.587934,33.894784 -96.628294,33.894477 -96.667187,33.91694 -96.699574,33.839049 -96.761587,33.824407 -96.794276,33.868886 -96.832157,33.874835 -96.850593,33.847211 -96.875281,33.860505 -96.9163,33.957798 -96.97287,33.935698 -96.981337,33.956378 -96.996251,33.942664 -96.983835,33.890949 -97.021438,33.846379 -97.041832,33.837756 -97.06704,33.860514 -97.088498,33.851849 -97.048146,33.817456 -97.092646,33.804198 -97.087365,33.741139 -97.133915,33.718128 -97.192851,33.760362 -97.204995,33.81887 -97.166629,33.847311 -97.180845,33.895204 -97.210921,33.916064 -97.245049,33.903216 -97.255639,33.863702 -97.275607,33.858168 -97.309172,33.888698 -97.332063,33.855056 -97.33188,33.884483 -97.368731,33.821443 -97.426799,33.818641 -97.463242,33.842004 -97.450807,33.886608 -97.46142,33.90523 -97.500271,33.919635 -97.581078,33.899679 -97.59695,33.916311 -97.589597,33.953554 -97.671277,33.991553 -97.732261,33.936519 -97.762768,33.934396 -97.76377,33.914241 -97.783522,33.918302 -97.780839,33.894447 -97.79891,33.898537 -97.83432,33.857634 -97.875311,33.849721 -97.96668,33.881746 -97.98454,33.900703 -97.957155,33.914454 -97.953395,33.936445 -97.974173,33.942832 -97.946005,33.990297 -97.974173,34.006716 -98.027672,33.993357 -98.086828,34.004244 -98.106179,34.034887 -98.082463,34.039428 -98.121039,34.080327 -98.089893,34.12931 -98.109462,34.154111 -98.139072,34.14187</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></gml:polygonMember></gml:MultiPolygon></usa:the_geom><usa:GEOID10>40</usa:GEOID10><usa:STUSPS10>OK</usa:STUSPS10><usa:NAME10>Oklahoma</usa:NAME10><usa:ALAND10>1.77660021556E11</usa:ALAND10><usa:AWATER10>3.377212498E9</usa:AWATER10><usa:DP0010001>3751351</usa:DP0010001><usa:DP0010020>1856977</usa:DP0010020><usa:DP0010039>1894374</usa:DP0010039></usa:states></gml:featureMember><gml:featureMember><usa:states fid="states.34"><usa:the_geom><gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:polygonMember><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-90.220732,36.497859 -94.617919,36.499414 -94.608519,39.116244 -94.588658,39.151163 -94.655787,39.15568 -94.67824,39.184169 -94.740777,39.169987 -94.782951,39.207162 -94.831679,39.215938 -94.830553,39.255135 -94.884093,39.284512 -94.906126,39.314721 -94.910017,39.352543 -94.88136,39.370383 -94.885026,39.389801 -94.942039,39.389499 -94.982144,39.440552 -95.0375,39.463689 -95.054459,39.502653 -95.110368,39.544562 -95.104948,39.576604 -95.05059,39.587563 -95.054267,39.627745 -95.027644,39.665454 -94.970677,39.687239 -94.963958,39.740361 -94.899316,39.724042 -94.862735,39.742195 -94.869655,39.772899 -94.910949,39.759178 -94.934573,39.772961 -94.92823,39.788938 -94.884652,39.793997 -94.875944,39.813294 -94.884826,39.832418 -94.940599,39.853018 -94.93016,39.889934 -95.009936,39.900636 -95.039403,39.864832 -95.124529,39.872857 -95.149657,39.905948 -95.202745,39.905076 -95.205266,39.93975 -95.250254,39.948644 -95.305803,39.987899 -95.315271,40.01207 -95.410548,40.035628 -95.42134,40.060746 -95.393347,40.119212 -95.479193,40.185652 -95.476241,40.241257 -95.552473,40.261904 -95.562157,40.297359 -95.657328,40.310856 -95.622684,40.342323 -95.660602,40.412409 -95.656575,40.438701 -95.694651,40.471452 -95.699969,40.505275 -95.661681,40.517312 -95.655848,40.546609 -95.678715,40.562561 -95.708591,40.521551 -95.75711,40.52599 -95.773549,40.578205 -94.07214,40.573026 -91.729115,40.61364 -91.686357,40.580875 -91.6887,40.55739 -91.621902,40.542292 -91.621353,40.510072 -91.576013,40.466767 -91.523864,40.456331 -91.524612,40.410765 -91.488481,40.404317 -91.485255,40.384657 -91.463895,40.375659 -91.419422,40.378264 -91.46214,40.342414 -91.490971,40.283364 -91.510839,40.126137 -91.494878,40.036453 -91.41936,39.927717 -91.446922,39.883034 -91.436529,39.847078 -91.362388,39.790482 -91.369395,39.731163 -91.229317,39.620853 -91.181936,39.602677 -91.153628,39.548248 -91.100307,39.538695 -91.03827,39.448435 -90.940766,39.403984 -90.72996,39.255894 -90.707902,39.15086 -90.681086,39.10059 -90.713629,39.053977 -90.678193,38.991851 -90.663018,38.926283 -90.623356,38.887149 -90.561021,38.869476 -90.507451,38.902767 -90.467784,38.961809 -90.406367,38.962554 -90.309454,38.92412 -90.250248,38.919344 -90.109407,38.843548 -90.123107,38.798048 -90.20991,38.72605 -90.179309,38.65244 -90.185256,38.610815 -90.247187,38.548557 -90.291084,38.43089 -90.341446,38.388298 -90.370819,38.333554 -90.353414,38.213213 -90.274843,38.157559 -90.217019,38.093466 -90.1296,38.061436 -90.110521,38.026549 -90.059367,38.015543 -89.996848,37.963219 -89.940687,37.970874 -89.924597,37.959849 -89.974654,37.927074 -89.947758,37.879847 -89.902377,37.86974 -89.842638,37.905197 -89.799329,37.881516 -89.786326,37.851689 -89.739875,37.846921 -89.669644,37.799922 -89.663352,37.750052 -89.617278,37.74972 -89.583316,37.713261 -89.516685,37.692762 -89.517718,37.641217 -89.475932,37.592998 -89.519808,37.582747 -89.517051,37.537278 -89.439769,37.4372 -89.420542,37.388007 -89.432836,37.347056 -89.489005,37.333368 -89.51834,37.285497 -89.489915,37.251315 -89.458827,37.248661 -89.467631,37.2182 -89.456105,37.18812 -89.377113,37.090765 -89.383937,37.046441 -89.278628,36.98867 -89.260003,37.023288 -89.304752,37.047565 -89.30829,37.068371 -89.25493,37.072014 -89.200793,37.016164 -89.185491,36.973518 -89.125352,36.983529 -89.099803,36.964669 -89.131934,36.857596 -89.179201,36.829896 -89.170563,36.797538 -89.12438,36.785826 -89.117076,36.765769 -89.125967,36.751809 -89.169785,36.759641 -89.197856,36.739772 -89.199311,36.715624 -89.159118,36.666354 -89.197753,36.628971 -89.219035,36.575057 -89.26349,36.566269 -89.324637,36.631023 -89.365797,36.625126 -89.417275,36.499011 -89.464433,36.457747 -89.493947,36.473559 -89.465913,36.530015 -89.47993,36.569087 -89.530638,36.58171 -89.567004,36.565048 -89.560412,36.524406 -89.519922,36.477053 -89.545255,36.427079 -89.509722,36.373626 -89.531822,36.339246 -89.605668,36.342234 -89.620255,36.323006 -89.539487,36.277368 -89.534676,36.252771 -89.602374,36.238106 -89.701821,36.246004 -89.69263,36.224959 -89.607004,36.171179 -89.591632,36.142135 -89.601936,36.11947 -89.678821,36.084636 -89.706932,36.000981 -90.37789,35.995683 -90.318877,36.090309 -90.235372,36.13948 -90.220487,36.184437 -90.126336,36.229123 -90.116801,36.263771 -90.083529,36.272122 -90.064169,36.302526 -90.082407,36.321949 -90.063397,36.383957 -90.138574,36.413817 -90.133939,36.453597 -90.155804,36.463554 -90.142413,36.471501 -90.159627,36.480302 -90.15228,36.49795 -90.220732,36.497859</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></gml:polygonMember></gml:MultiPolygon></usa:the_geom><usa:GEOID10>29</usa:GEOID10><usa:STUSPS10>MO</usa:STUSPS10><usa:NAME10>Missouri</usa:NAME10><usa:ALAND10>1.78039716301E11</usa:ALAND10><usa:AWATER10>2.500563712E9</usa:AWATER10><usa:DP0010001>5988927</usa:DP0010001><usa:DP0010020>2933477</usa:DP0010020><usa:DP0010039>3055450</usa:DP0010039></usa:states></gml:featureMember><gml:featureMember><usa:states fid="states.46"><usa:the_geom><gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:polygonMember><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-90.40938,28.99534 -90.552547,29.036806 -90.757186,28.987691 -90.970287,29.005027 -91.008759,29.026902 -91.023238,29.059262 -91.006484,29.096143 -90.960372,29.111064 -90.974925,29.121509 -91.103303,29.138377 -91.159817,29.168422 -91.292681,29.196177 -91.421128,29.302828 -91.644044,29.375555 -91.712193,29.360626 -91.77749,29.396084 -91.832768,29.362562 -91.876912,29.362689 -91.906348,29.387404 -91.913207,29.420207 -92.022754,29.470636 -92.07805,29.531489 -92.146666,29.532037 -92.231657,29.491894 -92.29367,29.481496 -92.624974,29.528328 -93.029108,29.677855 -93.240815,29.727298 -93.287354,29.724331 -93.339294,29.695085 -93.387246,29.713771 -93.487754,29.717811 -93.722673,29.687867 -93.770147,29.670825 -93.77036,29.623924 -93.814351,29.596576 -93.837412,29.689885 -93.926504,29.78956 -93.927992,29.80964 -93.838374,29.882853 -93.788599,29.988836 -93.741078,30.021571 -93.717884,30.065554 -93.699516,30.058578 -93.734085,30.08613 -93.688205,30.141357 -93.709508,30.146672 -93.699953,30.175529 -93.721259,30.209611 -93.703099,30.238459 -93.704584,30.289949 -93.742424,30.301139 -93.765829,30.332745 -93.750979,30.359899 -93.757668,30.390441 -93.697578,30.442233 -93.717421,30.483822 -93.707683,30.521337 -93.740253,30.539569 -93.713782,30.587584 -93.678949,30.593637 -93.682972,30.641251 -93.629887,30.679935 -93.617229,30.71858 -93.605391,30.717159 -93.614346,30.760195 -93.592101,30.763675 -93.583775,30.801779 -93.554433,30.823524 -93.568717,30.844182 -93.558616,30.869424 -93.57408,30.884529 -93.526013,30.937535 -93.531758,30.958217 -93.573537,30.971206 -93.564299,30.9897 -93.578207,30.999995 -93.508039,31.031532 -93.531628,31.053627 -93.518912,31.061863 -93.527645,31.07451 -93.563746,31.094522 -93.539366,31.115207 -93.5487,31.155839 -93.532545,31.183314 -93.589119,31.165889 -93.607243,31.204806 -93.596273,31.22951 -93.618107,31.232685 -93.620343,31.271025 -93.642516,31.269508 -93.687278,31.306068 -93.668439,31.353012 -93.639222,31.37202 -93.670999,31.366221 -93.674117,31.397681 -93.704879,31.410881 -93.692526,31.438201 -93.709512,31.442025 -93.703934,31.455493 -93.749476,31.46869 -93.752387,31.48274 -93.711046,31.512161 -93.742693,31.515694 -93.747437,31.530682 -93.787687,31.527344 -93.834918,31.586212 -93.838057,31.606795 -93.818717,31.614556 -93.811516,31.647435 -93.826462,31.666919 -93.794462,31.70332 -93.816694,31.707917 -93.81493,31.728688 -93.836884,31.750171 -93.823443,31.775098 -93.873253,31.814886 -93.900616,31.896788 -93.93119,31.891495 -93.928651,31.912645 -93.97171,31.920386 -94.018514,31.992432 -94.042566,31.993502 -94.042964,33.019219 -91.166073,33.004106 -91.214027,32.93032 -91.170235,32.899391 -91.133269,32.919351 -91.135095,32.980108 -91.090887,32.981174 -91.064449,32.901063 -91.105631,32.858396 -91.145002,32.842869 -91.165696,32.753399 -91.054749,32.719229 -91.149753,32.644041 -91.152486,32.620319 -91.119854,32.584795 -91.049796,32.607186 -91.037182,32.637861 -91.0158,32.641644 -91.008245,32.604239 -91.080411,32.556468 -90.987202,32.495663 -91.000506,32.482239 -91.038106,32.49044 -91.093742,32.549127 -91.116008,32.48314 -91.051407,32.437842 -90.995487,32.450885 -90.969587,32.439492 -90.965987,32.420654 -90.99408,32.403861 -91.001406,32.379444 -90.993625,32.354047 -90.912363,32.339454 -90.890712,32.372246 -90.875638,32.371729 -90.922231,32.298639 -90.949781,32.283056 -90.979475,32.293702 -90.969403,32.25252 -90.994944,32.193141 -91.002906,32.22305 -91.039007,32.242348 -91.061408,32.21865 -91.083708,32.22645 -91.164171,32.196888 -91.174552,32.154978 -91.162822,32.132694 -91.053555,32.124412 -91.058307,32.180951 -91.002906,32.162052 -91.004106,32.146152 -91.035207,32.100453 -91.081108,32.078353 -91.080908,32.047855 -91.135709,32.080654 -91.15851,32.072854 -91.15381,32.050655 -91.091408,32.036054 -91.075908,32.016827 -91.102808,31.990957 -91.16441,31.982557 -91.18481,31.965557 -91.182277,31.915814 -91.267712,31.86266 -91.244995,31.832188 -91.254311,31.813662 -91.283212,31.815762 -91.294013,31.86046 -91.345214,31.843861 -91.365614,31.760763 -91.281212,31.772263 -91.263111,31.754764 -91.369375,31.746903 -91.397915,31.709364 -91.401015,31.620365 -91.436216,31.612465 -91.49613,31.64531 -91.515462,31.630372 -91.492918,31.589565 -91.418816,31.596565 -91.405415,31.576466 -91.447616,31.540666 -91.522536,31.522078 -91.51513,31.449206 -91.472067,31.397076 -91.474809,31.368646 -91.521836,31.37517 -91.543366,31.432608 -91.576265,31.410498 -91.568953,31.377629 -91.546059,31.382221 -91.548213,31.346084 -91.50866,31.315131 -91.515614,31.27821 -91.654027,31.255753 -91.588939,31.188959 -91.626862,31.118771 -91.559907,31.054119 -91.578413,31.02403 -91.636942,30.999416 -89.731673,31.004817 -89.727072,30.967395 -89.756513,30.942861 -89.744789,30.918933 -89.77341,30.897693 -89.771722,30.854677 -89.79247,30.850386 -89.781502,30.818945 -89.798654,30.820855 -89.815738,30.803353 -89.803466,30.791141 -89.819154,30.795233 -89.835124,30.771092 -89.828692,30.738089 -89.816075,30.738908 -89.836698,30.735063 -89.825634,30.727374 -89.842529,30.720418 -89.837835,30.671917 -89.852203,30.661684 -89.814002,30.638246 -89.830711,30.617221 -89.813919,30.607717 -89.807952,30.567653 -89.786865,30.569053 -89.803919,30.549349 -89.779159,30.544029 -89.757484,30.499553 -89.724822,30.492129 -89.683403,30.451536 -89.683837,30.40582 -89.657249,30.356632 -89.629592,30.33896 -89.62619,30.314291 -89.647514,30.290534 -89.614044,30.244773 -89.614234,30.221471 -89.571907,30.180721 -89.53334,30.194881 -89.506399,30.157969 -89.416711,30.177639 -89.260977,30.181998 -89.183669,30.212155 -89.074653,30.154294 -89.033967,30.184584 -88.971909,30.156954 -88.90033,30.16998 -88.875025,30.102495 -88.811647,30.06749 -88.764495,29.971944 -88.767255,29.840771 -88.82343,29.714992 -89.038874,29.492229 -89.119451,29.458065 -89.142073,29.429465 -89.137612,29.381429 -89.077228,29.301105 -88.942054,29.253742 -88.908812,29.210226 -88.921713,29.124971 -88.996902,29.085304 -89.012688,29.02768 -89.11485,28.926368 -89.185332,28.930478 -89.234903,28.987152 -89.279604,28.977783 -89.400993,28.860631 -89.462478,28.863649 -89.492858,28.90796 -89.465736,28.974437 -89.468673,29.107461 -89.520469,29.172187 -89.610427,29.198635 -90.032325,29.135044 -90.200696,29.036184 -90.40938,28.99534</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></gml:polygonMember></gml:MultiPolygon></usa:the_geom><usa:GEOID10>22</usa:GEOID10><usa:STUSPS10>LA</usa:STUSPS10><usa:NAME10>Louisiana</usa:NAME10><usa:ALAND10>1.11897594452E11</usa:ALAND10><usa:AWATER10>2.3761143266E10</usa:AWATER10><usa:DP0010001>4533372</usa:DP0010001><usa:DP0010020>2219292</usa:DP0010020><usa:DP0010039>2314080</usa:DP0010039></usa:states></gml:featureMember><gml:featureMember><usa:states fid="states.49"><usa:the_geom><gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:polygonMember><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-103.064657,32.959097 -103.043478,34.020439 -103.041923,36.50035 -100.000406,36.499702 -100.000277,34.56045 -99.923211,34.574552 -99.69497,34.378333 -99.600026,34.374688 -99.569696,34.418418 -99.51428,34.414035 -99.438269,34.371164 -99.424897,34.385823 -99.405286,34.372858 -99.387181,34.410842 -99.395187,34.44203 -99.368932,34.458461 -99.319602,34.408879 -99.261275,34.403508 -99.274415,34.384349 -99.236494,34.365805 -99.232632,34.338872 -99.206905,34.338277 -99.211448,34.292247 -99.195403,34.280849 -99.189776,34.214357 -99.153653,34.207328 -99.130443,34.219478 -99.12664,34.203064 -99.079392,34.21155 -99.044463,34.198106 -98.988172,34.22131 -98.972609,34.202591 -98.951284,34.212189 -98.872922,34.166584 -98.868116,34.149635 -98.812954,34.158444 -98.757037,34.124633 -98.690072,34.133155 -98.648073,34.164441 -98.599789,34.160571 -98.55088,34.132583 -98.560977,34.123922 -98.486328,34.062598 -98.414426,34.085074 -98.398441,34.128456 -98.380093,34.130831 -98.384381,34.146317 -98.365621,34.156993 -98.170827,34.114171 -98.109462,34.154111 -98.089755,34.128211 -98.120208,34.072127 -98.082463,34.039428 -98.106179,34.034887 -98.088203,34.005481 -98.027672,33.993357 -97.974173,34.006716 -97.94573,33.989839 -97.974173,33.942832 -97.953395,33.936445 -97.957155,33.914454 -97.98454,33.900703 -97.967752,33.882214 -97.875311,33.849721 -97.83432,33.857634 -97.79891,33.898537 -97.780839,33.894447 -97.783522,33.918302 -97.76377,33.914241 -97.762768,33.934396 -97.732261,33.936519 -97.671277,33.991553 -97.589597,33.953554 -97.59695,33.916311 -97.581078,33.899679 -97.500271,33.919635 -97.46142,33.90523 -97.450807,33.886608 -97.463242,33.842004 -97.426799,33.818641 -97.368731,33.821443 -97.33188,33.884483 -97.332063,33.855056 -97.309172,33.888698 -97.275607,33.858168 -97.255639,33.863702 -97.245049,33.903216 -97.210921,33.916064 -97.180845,33.895204 -97.166629,33.847311 -97.204995,33.81887 -97.192851,33.760362 -97.133915,33.718128 -97.087365,33.741139 -97.092646,33.804198 -97.048146,33.817456 -97.088498,33.851849 -97.06704,33.860514 -97.041832,33.837756 -97.021438,33.846379 -96.983835,33.890949 -96.996251,33.942664 -96.981337,33.956378 -96.97287,33.935698 -96.9163,33.957798 -96.875281,33.860505 -96.850593,33.847211 -96.832157,33.874835 -96.794276,33.868886 -96.761587,33.824407 -96.699574,33.839049 -96.667187,33.91694 -96.628294,33.894477 -96.587934,33.894784 -96.629274,33.8455 -96.572937,33.819098 -96.531966,33.823989 -96.500984,33.772801 -96.423532,33.776432 -96.346859,33.686216 -96.31223,33.706304 -96.293708,33.769409 -96.229023,33.748021 -96.186627,33.755021 -96.155538,33.81404 -96.169592,33.800944 -96.179122,33.810224 -96.150765,33.816987 -96.149227,33.837091 -96.09936,33.83047 -96.100095,33.847971 -96.048834,33.836468 -96.026968,33.857474 -96.017055,33.841454 -95.996833,33.853898 -96.002925,33.87359 -95.984856,33.852492 -95.951382,33.857332 -95.925089,33.884936 -95.830406,33.834785 -95.815571,33.859853 -95.757959,33.849566 -95.752153,33.894577 -95.700635,33.885845 -95.665478,33.909004 -95.632774,33.904815 -95.594085,33.943057 -95.55421,33.926958 -95.544141,33.880603 -95.509526,33.897586 -95.504992,33.875918 -95.46144,33.887106 -95.463336,33.872396 -95.442746,33.866506 -95.362571,33.866902 -95.329936,33.886334 -95.288926,33.87307 -95.284629,33.905483 -95.268697,33.91109 -95.257724,33.890122 -95.250001,33.938861 -95.216947,33.962674 -95.1247,33.934675 -95.120893,33.904539 -95.08006,33.920989 -95.100378,33.895595 -95.089607,33.880857 -95.082408,33.879882 -95.078696,33.90504 -95.06676,33.917101 -95.075876,33.901846 -95.060105,33.901873 -95.046568,33.862565 -94.988487,33.851 -94.970205,33.861817 -94.964401,33.837021 -94.943888,33.830226 -94.947874,33.808356 -94.923289,33.808742 -94.91801,33.826783 -94.921526,33.790472 -94.876372,33.75733 -94.868144,33.768874 -94.877083,33.75222 -94.860687,33.741945 -94.820429,33.733807 -94.823385,33.769179 -94.803433,33.732739 -94.763035,33.759764 -94.758948,33.748532 -94.788637,33.735669 -94.751825,33.734326 -94.751366,33.71354 -94.733413,33.725191 -94.753801,33.708663 -94.735856,33.691625 -94.715943,33.694913 -94.733965,33.715687 -94.70156,33.702878 -94.716188,33.687902 -94.651402,33.685843 -94.643715,33.701522 -94.645337,33.673644 -94.671048,33.668388 -94.654919,33.659925 -94.622043,33.682535 -94.596019,33.663863 -94.58793,33.686255 -94.580784,33.666392 -94.560339,33.666591 -94.590478,33.645075 -94.548111,33.66033 -94.543033,33.649322 -94.569975,33.62847 -94.521837,33.640728 -94.52774,33.615898 -94.517468,33.633056 -94.504525,33.620728 -94.448637,33.642766 -94.472443,33.603469 -94.430041,33.591124 -94.410926,33.568344 -94.382898,33.583277 -94.38008,33.568947 -94.401616,33.559378 -94.386768,33.545009 -94.353593,33.544005 -94.344023,33.567824 -94.31215,33.550666 -94.289215,33.582131 -94.290897,33.559906 -94.27826,33.557556 -94.242777,33.589709 -94.25013,33.556753 -94.205666,33.567219 -94.195432,33.555094 -94.194127,33.573469 -94.217114,33.580994 -94.183912,33.594685 -94.14216,33.58139 -94.151574,33.568406 -94.135144,33.571033 -94.127612,33.550721 -94.12086,33.567051 -94.072826,33.572298 -94.073635,33.584773 -94.057086,33.568003 -94.073893,33.55743 -94.04343,33.551479 -94.042566,31.993502 -94.018514,31.992432 -93.97171,31.920386 -93.928651,31.912645 -93.93119,31.891495 -93.900616,31.896788 -93.873253,31.814886 -93.823443,31.775098 -93.836884,31.750171 -93.81493,31.728688 -93.816694,31.707917 -93.794462,31.70332 -93.826462,31.666919 -93.811516,31.647435 -93.818717,31.614556 -93.838057,31.606795 -93.834918,31.586212 -93.787687,31.527344 -93.747437,31.530682 -93.742693,31.515694 -93.711046,31.512161 -93.752387,31.48274 -93.749476,31.46869 -93.703934,31.455493 -93.709512,31.442025 -93.692526,31.438201 -93.704879,31.410881 -93.674117,31.397681 -93.670999,31.366221 -93.639222,31.37202 -93.668439,31.353012 -93.687278,31.306068 -93.642516,31.269508 -93.620343,31.271025 -93.618107,31.232685 -93.596273,31.22951 -93.607243,31.204806 -93.589119,31.165889 -93.532545,31.183314 -93.5487,31.155839 -93.539366,31.115207 -93.563746,31.094522 -93.527645,31.07451 -93.518912,31.061863 -93.531628,31.053627 -93.508039,31.031532 -93.578207,30.999995 -93.564299,30.9897 -93.573537,30.971206 -93.531758,30.958217 -93.526013,30.937535 -93.57408,30.884529 -93.558616,30.869424 -93.568717,30.844182 -93.554433,30.823524 -93.583775,30.801779 -93.592101,30.763675 -93.614346,30.760195 -93.605391,30.717159 -93.617229,30.71858 -93.629887,30.679935 -93.682972,30.641251 -93.678949,30.593637 -93.713782,30.587584 -93.740253,30.539569 -93.707683,30.521337 -93.717421,30.483822 -93.697578,30.442233 -93.757668,30.390441 -93.750979,30.359899 -93.765829,30.332745 -93.742424,30.301139 -93.704584,30.289949 -93.703099,30.238459 -93.721259,30.209611 -93.699953,30.175529 -93.709508,30.146672 -93.688205,30.141357 -93.734085,30.08613 -93.699516,30.058578 -93.717884,30.065554 -93.741078,30.021571 -93.788599,29.988836 -93.838374,29.882853 -93.927992,29.80964 -93.926504,29.78956 -93.837412,29.689885 -93.814351,29.596576 -93.875006,29.621426 -94.033565,29.625002 -94.625192,29.397662 -94.650311,29.38282 -94.623898,29.343143 -94.65036,29.29189 -94.713311,29.282521 -94.772686,29.231718 -95.086398,29.06824 -95.106528,29.014935 -95.329847,28.828699 -95.420071,28.805625 -95.777845,28.625266 -96.199375,28.442278 -96.258191,28.407872 -96.282307,28.375002 -96.320762,28.362868 -96.375252,28.29076 -96.531,28.221164 -96.730685,28.091268 -96.938546,27.901199 -96.984281,27.803783 -97.050221,27.750308 -97.199816,27.500319 -97.288337,27.277584 -97.319824,27.110023 -97.323219,27.010256 -97.300423,26.834613 -97.125248,26.248285 -97.108301,26.10451 -97.089989,26.07534 -97.091121,25.97384 -97.146654,25.970969 -97.156606,25.94902 -97.175584,25.965573 -97.248033,25.948097 -97.284446,25.959156 -97.276696,25.935339 -97.302541,25.93723 -97.326003,25.917689 -97.348274,25.931143 -97.368517,25.915326 -97.356629,25.887681 -97.37413,25.879039 -97.359497,25.879683 -97.356693,25.867354 -97.376575,25.854578 -97.3641,25.850034 -97.40525,25.837728 -97.408806,25.862109 -97.413055,25.840881 -97.453985,25.854088 -97.444653,25.86744 -97.455601,25.883949 -97.496687,25.87968 -97.498204,25.899039 -97.52175,25.886462 -97.537229,25.930526 -97.582865,25.937857 -97.566663,25.944714 -97.567957,25.95235 -97.578236,25.942049 -97.582373,25.962469 -97.602591,25.957735 -97.634436,25.990268 -97.620309,25.992357 -97.618282,26.002092 -97.649377,26.010862 -97.640578,26.024515 -97.66813,26.019429 -97.660699,26.031252 -97.662728,26.038078 -97.693333,26.032337 -97.691369,26.01899 -97.707296,26.037756 -97.737103,26.021493 -97.763425,26.026819 -97.768065,26.047321 -97.776816,26.029452 -97.792955,26.034536 -97.801317,26.060161 -97.813389,26.044199 -97.818054,26.056397 -97.860504,26.052918 -97.861776,26.069946 -97.869061,26.056955 -97.933924,26.064834 -97.934247,26.052826 -97.967335,26.051783 -97.981339,26.067227 -98.011978,26.056292 -98.027801,26.066849 -98.039239,26.041275 -98.07662,26.036415 -98.080495,26.070932 -98.094432,26.058625 -98.131829,26.07417 -98.146506,26.049303 -98.176296,26.075075 -98.192981,26.053268 -98.220673,26.076467 -98.248737,26.072042 -98.288535,26.105312 -98.265698,26.12037 -98.296195,26.120321 -98.305027,26.10309 -98.335204,26.137617 -98.334564,26.165136 -98.352341,26.15112 -98.360645,26.172544 -98.386694,26.157872 -98.444072,26.200895 -98.445222,26.224571 -98.481582,26.219379 -98.477961,26.203359 -98.482201,26.201375 -98.554577,26.24738 -98.545922,26.237097 -98.562959,26.224908 -98.587545,26.257816 -98.616487,26.246761 -98.623467,26.259666 -98.63418,26.242612 -98.669149,26.23653 -98.68109,26.262803 -98.719413,26.272304 -98.704267,26.287982 -98.750973,26.296321 -98.754216,26.307928 -98.736161,26.309199 -98.751127,26.331584 -98.788955,26.330433 -98.806618,26.369109 -98.896734,26.35333 -98.925879,26.394357 -98.946694,26.370003 -98.961886,26.398373 -99.01064,26.392135 -99.037058,26.413603 -99.082006,26.396667 -99.110854,26.426282 -99.091572,26.477054 -99.127782,26.525199 -99.17123,26.541965 -99.208907,26.724761 -99.240023,26.745851 -99.268613,26.843213 -99.316753,26.865831 -99.324684,26.915973 -99.379149,26.93449 -99.393748,26.96073 -99.376593,26.977717 -99.415476,27.01724 -99.446123,27.023048 -99.452316,27.062669 -99.429209,27.090982 -99.442125,27.106856 -99.426348,27.176262 -99.441545,27.249915 -99.461476,27.268175 -99.489059,27.261477 -99.49202,27.300666 -99.538035,27.316961 -99.504575,27.338741 -99.487521,27.411572 -99.495104,27.451518 -99.479251,27.478635 -99.496826,27.500106 -99.528392,27.49855 -99.512132,27.568288 -99.554945,27.614456 -99.584843,27.603903 -99.577636,27.618597 -99.596231,27.639858 -99.624311,27.644001 -99.638929,27.626758 -99.666108,27.636088 -99.668942,27.659974 -99.711511,27.658365 -99.77074,27.732134 -99.796342,27.735586 -99.813118,27.773997 -99.838791,27.764181 -99.850877,27.793974 -99.876761,27.797845 -99.8772,27.84218 -99.904385,27.875284 -99.893456,27.899208 -99.937142,27.940537 -99.931811,27.980968 -99.991447,27.99456 -100.017913,28.064788 -100.053122,28.084731 -100.084328,28.144819 -100.208058,28.190383 -100.220288,28.23221 -100.251636,28.23618 -100.291397,28.275397 -100.286476,28.312295 -100.344402,28.389662 -100.337798,28.44296 -100.368288,28.477196 -100.333814,28.499252 -100.388262,28.514863 -100.411269,28.550705 -100.398462,28.585169 -100.44732,28.609325 -100.447091,28.642197 -100.500354,28.66196 -100.507613,28.740599 -100.533408,28.759207 -100.535438,28.805195 -100.547324,28.825817 -100.574728,28.828788 -100.60109,28.901288 -100.640568,28.914212 -100.629706,28.921146 -100.651512,28.943432 -100.64604,28.987981 -100.6752,29.100741 -100.772604,29.168369 -100.767059,29.195287 -100.813959,29.263137 -100.876049,29.279585 -100.886842,29.307848 -101.009976,29.368267 -101.060151,29.458661 -101.146798,29.474187 -101.173824,29.514568 -101.254895,29.520341 -101.261176,29.536776 -101.24103,29.565028 -101.250383,29.624171 -101.269102,29.630128 -101.290962,29.571537 -101.305533,29.577925 -101.302516,29.650425 -101.346017,29.662241 -101.361312,29.650063 -101.372773,29.699428 -101.415584,29.746534 -101.402319,29.77119 -101.448881,29.750699 -101.460906,29.789663 -101.535998,29.75895 -101.544769,29.811868 -101.567749,29.798727 -101.575807,29.769319 -101.6269,29.770762 -101.644567,29.754233 -101.661724,29.770857 -101.708873,29.761642 -101.773825,29.788675 -101.805114,29.78035 -101.803613,29.803446 -101.817777,29.811635 -101.823656,29.787398 -101.85272,29.807791 -101.929323,29.782576 -101.935606,29.799561 -101.957515,29.795766 -101.976264,29.81604 -101.987305,29.796842 -102.035818,29.804063 -102.049652,29.785276 -102.073187,29.786524 -102.143566,29.80332 -102.179964,29.826375 -102.187027,29.848656 -102.223528,29.84053 -102.246458,29.864128 -102.261495,29.853241 -102.264842,29.867496 -102.31594,29.879993 -102.364557,29.845335 -102.387227,29.761392 -102.487252,29.786585 -102.517616,29.78358 -102.513503,29.765439 -102.547978,29.744644 -102.567663,29.771463 -102.573796,29.754896 -102.63041,29.734181 -102.673997,29.744574 -102.691373,29.721372 -102.693644,29.676685 -102.741949,29.633193 -102.740543,29.597499 -102.768302,29.595209 -102.771228,29.548397 -102.80832,29.52293 -102.800673,29.486235 -102.825637,29.457945 -102.833443,29.410498 -102.812381,29.400525 -102.845018,29.374441 -102.839375,29.358922 -102.884365,29.347946 -102.906384,29.260083 -102.871749,29.241776 -102.867474,29.223883 -102.895101,29.208521 -102.912324,29.219418 -102.917823,29.190887 -102.943378,29.19141 -102.950886,29.17362 -102.995618,29.179291 -103.033879,29.100972 -103.075824,29.091537 -103.0859,29.053736 -103.100626,29.060323 -103.116814,28.984416 -103.163935,28.972204 -103.227888,28.991857 -103.250416,28.98043 -103.267334,28.996072 -103.286986,28.978172 -103.286941,29.001273 -103.316162,29.010689 -103.307657,29.024537 -103.338751,29.020277 -103.330613,29.043219 -103.344334,29.04595 -103.359603,29.018644 -103.386505,29.021648 -103.388644,29.033974 -103.432095,29.043356 -103.44993,29.072714 -103.47135,29.066727 -103.469936,29.085317 -103.553692,29.157996 -103.650586,29.15648 -103.659619,29.170569 -103.718561,29.180826 -103.758549,29.232939 -103.777147,29.220509 -103.783626,29.265324 -103.799364,29.258437 -103.813517,29.274032 -103.975808,29.296249 -104.037497,29.319707 -104.106579,29.373313 -104.167443,29.394744 -104.217705,29.456559 -104.210044,29.482243 -104.230698,29.478669 -104.237134,29.497556 -104.315476,29.532754 -104.338201,29.520182 -104.475991,29.627979 -104.508462,29.632697 -104.544099,29.680693 -104.53021,29.690464 -104.560435,29.735188 -104.549848,29.740895 -104.569941,29.752597 -104.565929,29.771468 -104.683272,29.929107 -104.67318,29.954969 -104.685253,29.956731 -104.680152,29.977003 -104.693127,29.97553 -104.689549,30.015105 -104.707264,30.049867 -104.684965,30.085301 -104.696706,30.134457 -104.686332,30.173281 -104.706255,30.234812 -104.763176,30.274836 -104.76669,30.306 -104.811578,30.332811 -104.816423,30.375187 -104.859296,30.390253 -104.847831,30.419775 -104.868047,30.441407 -104.866632,30.494499 -104.922677,30.603693 -104.971664,30.610014 -105.006579,30.68606 -105.061762,30.685845 -105.118295,30.749726 -105.16139,30.752133 -105.156191,30.769773 -105.176601,30.767975 -105.195191,30.792304 -105.216744,30.783385 -105.215017,30.805893 -105.25716,30.794354 -105.291795,30.826193 -105.316869,30.810913 -105.339293,30.840475 -105.399837,30.852077 -105.400185,30.889382 -105.491654,30.942407 -105.501968,30.967737 -105.557226,30.989673 -105.604467,31.083744 -105.741929,31.164602 -105.77299,31.166702 -105.782798,31.197459 -105.869294,31.288955 -105.937894,31.318223 -105.953786,31.364749 -106.004921,31.392456 -106.081665,31.399223 -106.207631,31.467104 -106.380321,31.2014-10-07 16:07:22,981 httpinput INFO EOF URL reading done
-2014-10-07 16:07:22,981 chain INFO DONE - 2 rounds - chain=input_wfs|output_std 
-2014-10-07 16:07:22,981 util INFO Timer end: total ETL time=1.0 sec
-2014-10-07 16:07:22,981 ETL INFO ALL DONE
+2014-11-24 11:04:53,819 util INFO Found cStringIO, good!
+2014-11-24 11:04:53,847 util INFO Found lxml.etree, native XML parsing, fabulous!
+2014-11-24 11:04:53,873 util INFO Found GDAL/OGR Python bindings, super!!
+2014-11-24 11:04:53,887 main INFO Stetl version = 1.0.7
+2014-11-24 11:04:53,888 ETL INFO INIT - Stetl version is 1.0.7
+2014-11-24 11:04:53,888 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/8_wfs
+2014-11-24 11:04:53,889 ETL INFO Reading config_file = etl.cfg
+2014-11-24 11:04:53,935 ETL INFO START
+2014-11-24 11:04:53,935 util INFO Timer start: total ETL
+2014-11-24 11:04:53,935 chain INFO Assembling Chain: input_wfs|output_std...
+2014-11-24 11:04:55,186 input INFO cfg = {'url': 'http://suite.opengeo.org/geoserver/ows', 'class': 'inputs.httpinput.HttpInput', 'parameters': '{\n\'service\' : \'WFS\',\n\'version\' : \'1.1.0\',\n\'request\' : \'GetFeature\',\n\'srsName\' : \'EPSG:4326\',\n\'outputFormat\' : \'text/xml; subtype=gml/2.1.2\',\n\'typename\' : \'states\',\n\'filter\' :\'<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc"><ogc:Intersects><ogc:PropertyName/><gml:Polygon xmlns:gml="http://www.opengis.net/gml" srsName="EPSG:4326"><gml:exterior><gml:LinearRing><gml:posList>-101.8671875 32.177734375 -101.8671875 39.6923828125 -91.935546875 39.6923828125 -91.935546875 32.177734375 -101.8671875 32.177734375</gml:posList></gml:LinearRing></gml:exterior></gml:Polygon></ogc:Intersects></ogc:Filter>\'\n}'}
+2014-11-24 11:04:55,201 httpinput INFO url=http://suite.opengeo.org/geoserver/ows parameters={'srsName': 'EPSG:4326', 'outputFormat': 'text/xml; subtype=gml/2.1.2', 'service': 'WFS', 'request': 'GetFeature', 'filter': '<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc"><ogc:Intersects><ogc:PropertyName/><gml:Polygon xmlns:gml="http://www.opengis.net/gml" srsName="EPSG:4326"><gml:exterior><gml:LinearRing><gml:posList>-101.8671875 32.177734375 -101.8671875 39.6923828125 -91.935546875 39.6923828125 -91.935546875 32.177734375 -101.8671875 32.177734375</gml:posList></gml:LinearRing></gml:exterior></gml:Polygon></ogc:Intersects></ogc:Filter>', 'typename': 'states', 'version': '1.1.0'}
+2014-11-24 11:04:55,201 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
+2014-11-24 11:04:55,202 chain INFO Running Chain: input_wfs|output_std
+<?xml version="1.0" encoding="UTF-8"?><wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs" xmlns:usa="http://census.gov" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://census.gov http://suite.opengeo.org/geoserver/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=usa%3Astates http://www.opengis.net/wfs http://suite.opengeo.org/geoserver/schemas/wfs/1.0.0/WFS-basic.xsd"><gml:boundedBy><gml:null>unknown</gml:null></gml:boundedBy><gml:featureMember><usa:states fid="states.14"><usa:the_geom><gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:polygonMember><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-94.55218,36.102236 -94.617756,36.499461 -90.15228,36.49795 -90.159627,36.480302 -90.142413,36.471501 -90.155804,36.463554 -90.133939,36.453597 -90.138574,36.413817 -90.063397,36.383957 -90.082407,36.321949 -90.064169,36.302526 -90.083529,36.272122 -90.116801,36.263771 -90.126336,36.229123 -90.220487,36.184437 -90.235372,36.13948 -90.318877,36.090309 -90.37789,35.995683 -89.733095,36.000608 -89.714565,35.963034 -89.65314,35.922618 -89.644395,35.894782 -89.666101,35.882866 -89.742606,35.906653 -89.772467,35.865098 -89.706352,35.837202 -89.704387,35.819607 -89.781176,35.805296 -89.820876,35.756868 -89.876462,35.738026 -89.909825,35.759387 -89.956252,35.733388 -89.955753,35.690621 -89.931036,35.660044 -89.894567,35.651514 -89.864739,35.670388 -89.851158,35.657424 -89.857065,35.634152 -89.957495,35.58853 -89.941875,35.556859 -89.908871,35.547378 -89.909022,35.520548 -89.94801,35.52009 -89.989499,35.560136 -90.032734,35.553696 -90.04981,35.510454 -90.018916,35.466231 -90.056782,35.403863 -90.044582,35.393073 -90.069434,35.408163 -90.068156,35.46678 -90.098734,35.478554 -90.168882,35.422206 -90.179265,35.385194 -90.13551,35.376668 -90.146191,35.399468 -90.129493,35.413759 -90.074992,35.384152 -90.110293,35.342788 -90.109093,35.304987 -90.158913,35.300637 -90.168924,35.28028 -90.152094,35.255989 -90.105093,35.254288 -90.079345,35.228838 -90.074392,35.210589 -90.117393,35.18789 -90.065392,35.137691 -90.096515,35.117131 -90.142794,35.135091 -90.165328,35.125228 -90.209397,35.026546 -90.295596,35.040093 -90.30779,34.991853 -90.250056,34.951196 -90.244731,34.921026 -90.313476,34.871698 -90.309183,34.844994 -90.34038,34.860357 -90.419485,34.832883 -90.438311,34.884583 -90.479864,34.883273 -90.483876,34.861333 -90.456783,34.822683 -90.47459,34.7932 -90.45397,34.736877 -90.488865,34.723731 -90.520181,34.731902 -90.524517,34.751368 -90.500989,34.771192 -90.522892,34.802265 -90.547612,34.784589 -90.536417,34.748299 -90.568081,34.724802 -90.535682,34.697879 -90.472495,34.699788 -90.466041,34.674312 -90.532113,34.627489 -90.554545,34.642213 -90.537885,34.673979 -90.549857,34.695478 -90.588419,34.670963 -90.587224,34.615732 -90.540736,34.548085 -90.588942,34.491097 -90.571145,34.420322 -90.65854,34.375705 -90.662961,34.314779 -90.693129,34.32257 -90.67666,34.371411 -90.764143,34.363396 -90.741253,34.305556 -90.765165,34.280524 -90.829663,34.272424 -90.847808,34.20653 -90.929523,34.244106 -90.935219,34.219043 -90.914153,34.195484 -90.887887,34.181982 -90.816572,34.183023 -90.808736,34.159416 -90.847168,34.136884 -90.910007,34.165502 -90.954299,34.138496 -90.943167,34.107165 -90.882623,34.096613 -90.870528,34.080516 -90.894151,34.025949 -90.987948,34.019038 -90.961551,33.979946 -90.967632,33.963324 -90.998368,33.965021 -91.01889,34.003151 -91.087921,33.975335 -91.084095,33.956179 -91.010318,33.929352 -91.07266,33.854943 -91.046849,33.815365 -90.988466,33.78453 -91.023285,33.762991 -91.132185,33.78342 -91.146351,33.730609 -91.117393,33.705265 -91.059891,33.714816 -91.032189,33.676593 -91.09404,33.658351 -91.161331,33.707201 -91.210373,33.699022 -91.229015,33.677543 -91.140725,33.626893 -91.130445,33.606034 -91.152148,33.582721 -91.231418,33.560593 -91.182565,33.501061 -91.2358,33.439738 -91.177293,33.443638 -91.167579,33.498309 -91.117975,33.453806 -91.131885,33.430062 -91.200049,33.418137 -91.208113,33.402006 -91.142692,33.37983 -91.096942,33.41099 -91.086498,33.451576 -91.057621,33.445341 -91.068168,33.414008 -91.142219,33.348989 -91.14144,33.298868 -91.106142,33.241799 -91.07853,33.283306 -91.04382,33.275606 -91.054126,33.246105 -91.091711,33.220813 -91.088633,33.142213 -91.12667,33.12905 -91.183662,33.141691 -91.20178,33.125121 -91.200167,33.10693 -91.121195,33.059165 -91.127113,33.035964 -91.166073,33.004106 -94.042964,33.019219 -94.04345,33.552253 -94.072947,33.55467 -94.05658,33.560932 -94.072939,33.584797 -94.072826,33.572298 -94.12086,33.567051 -94.129002,33.551036 -94.135144,33.571033 -94.151574,33.568406 -94.14216,33.58139 -94.183912,33.594685 -94.217114,33.580994 -94.194127,33.573469 -94.195432,33.555094 -94.205666,33.567219 -94.25013,33.556753 -94.242777,33.589709 -94.27826,33.557556 -94.290897,33.559906 -94.289215,33.582131 -94.31215,33.550666 -94.344023,33.567824 -94.353593,33.544005 -94.386136,33.54481 -94.401616,33.559378 -94.379674,33.580631 -94.412195,33.568708 -94.430041,33.591124 -94.472443,33.603469 -94.448224,33.642402 -94.485878,33.637865 -94.430662,35.392478 -94.55218,36.102236</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></gml:polygonMember></gml:MultiPolygon></usa:the_geom><usa:GEOID10>05</usa:GEOID10><usa:STUSPS10>AR</usa:STUSPS10><usa:NAME10>Arkansas</usa:NAME10><usa:ALAND10>1.34771261408E11</usa:ALAND10><usa:AWATER10>2.960539257E9</usa:AWATER10><usa:DP0010001>2915918</usa:DP0010001><usa:DP0010020>1431637</usa:DP0010020><usa:DP0010039>1484281</usa:DP0010039></usa:states></gml:featureMember><gml:featureMember><usa:states fid="states.15"><usa:the_geom><gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:polygonMember><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-99.541116,36.99961 -102.042089,36.993016 -102.051744,40.003078 -95.30829,39.999998 -95.250254,39.948644 -95.205266,39.93975 -95.202745,39.905076 -95.149657,39.905948 -95.133961,39.876497 -95.039403,39.864832 -95.015135,39.899643 -94.954155,39.901138 -94.927897,39.886112 -94.939854,39.852044 -94.877605,39.82497 -94.882289,39.795804 -94.935508,39.777006 -94.910949,39.759178 -94.867143,39.771694 -94.865048,39.738591 -94.901044,39.724058 -94.962662,39.741337 -94.971317,39.68641 -95.018318,39.672869 -95.049518,39.637876 -95.05059,39.587563 -95.103228,39.577783 -95.113557,39.553941 -95.052177,39.499996 -95.04078,39.466387 -94.984788,39.442703 -94.942039,39.389499 -94.885026,39.389801 -94.88136,39.370383 -94.910017,39.352543 -94.906126,39.314721 -94.884093,39.284512 -94.830553,39.255135 -94.831679,39.215938 -94.782951,39.207162 -94.740777,39.169987 -94.67824,39.184169 -94.655787,39.15568 -94.588658,39.151163 -94.608519,39.116244 -94.617964,36.998905 -99.541116,36.99961</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></gml:polygonMember></gml:MultiPolygon></usa:the_geom><usa:GEOID10>20</usa:GEOID10><usa:STUSPS10>KS</usa:STUSPS10><usa:NAME10>Kansas</usa:NAME10><usa:ALAND10>2.11754095913E11</usa:ALAND10><usa:AWATER10>1.34586893E9</usa:AWATER10><usa:DP0010001>2853118</usa:DP0010001><usa:DP0010020>1415408</usa:DP0010020><usa:DP0010039>1437710</usa:DP0010039></usa:states></gml:featureMember><gml:featureMember><usa:states fid="states.20"><usa:the_geom><gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:polygonMember><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-98.139072,34.14187 -98.170827,34.114171 -98.365621,34.156993 -98.384381,34.146317 -98.380093,34.130831 -98.398441,34.128456 -98.414426,34.085074 -98.483551,34.062277 -98.560977,34.123922 -98.55088,34.132583 -98.599789,34.160571 -98.648073,34.164441 -98.690072,34.133155 -98.757037,34.124633 -98.812954,34.158444 -98.868116,34.149635 -98.872922,34.166584 -98.951284,34.212189 -98.972609,34.202591 -98.988172,34.22131 -99.044463,34.198106 -99.079392,34.21155 -99.12664,34.203064 -99.130443,34.219478 -99.186817,34.213555 -99.195403,34.280849 -99.211448,34.292247 -99.206905,34.338277 -99.232632,34.338872 -99.236494,34.365805 -99.274415,34.384349 -99.261275,34.403508 -99.319602,34.408879 -99.35897,34.455807 -99.395187,34.44203 -99.387181,34.410842 -99.405286,34.372858 -99.424897,34.385823 -99.438269,34.371164 -99.51428,34.414035 -99.569696,34.418418 -99.600026,34.374688 -99.694528,34.378218 -99.923211,34.574552 -100.000277,34.56045 -100.000406,36.499702 -103.002434,36.500397 -103.002199,37.000104 -94.617964,36.998905 -94.617919,36.499414 -94.430662,35.392478 -94.489086,33.626778 -94.517468,33.633056 -94.52795,33.615964 -94.527491,33.641344 -94.568965,33.627453 -94.542627,33.653992 -94.590478,33.645075 -94.560339,33.666591 -94.580784,33.666392 -94.58793,33.686255 -94.596019,33.663863 -94.622043,33.682535 -94.639198,33.663737 -94.668646,33.663846 -94.645337,33.673644 -94.643715,33.701522 -94.651402,33.685843 -94.716188,33.687902 -94.70156,33.702878 -94.733965,33.715687 -94.715943,33.694913 -94.735117,33.691259 -94.753801,33.708663 -94.733413,33.725191 -94.751366,33.71354 -94.751825,33.734326 -94.788637,33.735669 -94.758948,33.748532 -94.763035,33.759764 -94.802833,33.732699 -94.820707,33.768964 -94.821989,33.732878 -94.867544,33.744904 -94.868144,33.768874 -94.876372,33.75733 -94.921526,33.790472 -94.91801,33.826783 -94.923289,33.808742 -94.947874,33.808356 -94.943888,33.830226 -94.964401,33.837021 -94.970205,33.861817 -94.988487,33.851 -95.046568,33.862565 -95.060105,33.901873 -95.075876,33.901846 -95.06676,33.917101 -95.089607,33.880857 -95.100378,33.895595 -95.08006,33.920989 -95.120893,33.904539 -95.1247,33.934675 -95.216947,33.962674 -95.250001,33.938861 -95.257724,33.890122 -95.268697,33.91109 -95.284629,33.905483 -95.288926,33.87307 -95.329936,33.886334 -95.362571,33.866902 -95.442746,33.866506 -95.463336,33.872396 -95.46144,33.887106 -95.504992,33.875918 -95.509526,33.897586 -95.544141,33.880603 -95.55421,33.926958 -95.594085,33.943057 -95.632774,33.904815 -95.665478,33.909004 -95.700635,33.885845 -95.752153,33.894577 -95.757959,33.849566 -95.815571,33.859853 -95.830406,33.834785 -95.925089,33.884936 -95.932209,33.883882 -95.941796,33.861651 -95.94414,33.859998 -95.948676,33.858041 -95.951382,33.857332 -95.984856,33.852492 -96.002925,33.87359 -95.996833,33.853898 -96.017055,33.841454 -96.026968,33.857474 -96.048834,33.836468 -96.100095,33.847971 -96.09936,33.83047 -96.149227,33.837091 -96.150765,33.816987 -96.179122,33.810224 -96.169592,33.800944 -96.163766,33.813051 -96.155538,33.81404 -96.186627,33.755021 -96.229023,33.748021 -96.293708,33.769409 -96.31223,33.706304 -96.346859,33.686216 -96.423532,33.776432 -96.500984,33.772801 -96.531966,33.823989 -96.572937,33.819098 -96.629274,33.8455 -96.587934,33.894784 -96.628294,33.894477 -96.667187,33.91694 -96.699574,33.839049 -96.761587,33.824407 -96.794276,33.868886 -96.832157,33.874835 -96.850593,33.847211 -96.875281,33.860505 -96.9163,33.957798 -96.97287,33.935698 -96.981337,33.956378 -96.996251,33.942664 -96.983835,33.890949 -97.021438,33.846379 -97.041832,33.837756 -97.06704,33.860514 -97.088498,33.851849 -97.048146,33.817456 -97.092646,33.804198 -97.087365,33.741139 -97.133915,33.718128 -97.192851,33.760362 -97.204995,33.81887 -97.166629,33.847311 -97.180845,33.895204 -97.210921,33.916064 -97.245049,33.903216 -97.255639,33.863702 -97.275607,33.858168 -97.309172,33.888698 -97.332063,33.855056 -97.33188,33.884483 -97.368731,33.821443 -97.426799,33.818641 -97.463242,33.842004 -97.450807,33.886608 -97.46142,33.90523 -97.500271,33.919635 -97.581078,33.899679 -97.59695,33.916311 -97.589597,33.953554 -97.671277,33.991553 -97.732261,33.936519 -97.762768,33.934396 -97.76377,33.914241 -97.783522,33.918302 -97.780839,33.894447 -97.79891,33.898537 -97.83432,33.857634 -97.875311,33.849721 -97.96668,33.881746 -97.98454,33.900703 -97.957155,33.914454 -97.953395,33.936445 -97.974173,33.942832 -97.946005,33.990297 -97.974173,34.006716 -98.027672,33.993357 -98.086828,34.004244 -98.106179,34.034887 -98.082463,34.039428 -98.121039,34.080327 -98.089893,34.12931 -98.109462,34.154111 -98.139072,34.14187</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></gml:polygonMember></gml:MultiPolygon></usa:the_geom><usa:GEOID10>40</usa:GEOID10><usa:STUSPS10>OK</usa:STUSPS10><usa:NAME10>Oklahoma</usa:NAME10><usa:ALAND10>1.77660021556E11</usa:ALAND10><usa:AWATER10>3.377212498E9</usa:AWATER10><usa:DP0010001>3751351</usa:DP0010001><usa:DP0010020>1856977</usa:DP0010020><usa:DP0010039>1894374</usa:DP0010039></usa:states></gml:featureMember><gml:featureMember><usa:states fid="states.34"><usa:the_geom><gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:polygonMember><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-90.220732,36.497859 -94.617919,36.499414 -94.608519,39.116244 -94.588658,39.151163 -94.655787,39.15568 -94.67824,39.184169 -94.740777,39.169987 -94.782951,39.207162 -94.831679,39.215938 -94.830553,39.255135 -94.884093,39.284512 -94.906126,39.314721 -94.910017,39.352543 -94.88136,39.370383 -94.885026,39.389801 -94.942039,39.389499 -94.982144,39.440552 -95.0375,39.463689 -95.054459,39.502653 -95.110368,39.544562 -95.104948,39.576604 -95.05059,39.587563 -95.054267,39.627745 -95.027644,39.665454 -94.970677,39.687239 -94.963958,39.740361 -94.899316,39.724042 -94.862735,39.742195 -94.869655,39.772899 -94.910949,39.759178 -94.934573,39.772961 -94.92823,39.788938 -94.884652,39.793997 -94.875944,39.813294 -94.884826,39.832418 -94.940599,39.853018 -94.93016,39.889934 -95.009936,39.900636 -95.039403,39.864832 -95.124529,39.872857 -95.149657,39.905948 -95.202745,39.905076 -95.205266,39.93975 -95.250254,39.948644 -95.305803,39.987899 -95.315271,40.01207 -95.410548,40.035628 -95.42134,40.060746 -95.393347,40.119212 -95.479193,40.185652 -95.476241,40.241257 -95.552473,40.261904 -95.562157,40.297359 -95.657328,40.310856 -95.622684,40.342323 -95.660602,40.412409 -95.656575,40.438701 -95.694651,40.471452 -95.699969,40.505275 -95.661681,40.517312 -95.655848,40.546609 -95.678715,40.562561 -95.708591,40.521551 -95.75711,40.52599 -95.773549,40.578205 -94.07214,40.573026 -91.729115,40.61364 -91.686357,40.580875 -91.6887,40.55739 -91.621902,40.542292 -91.621353,40.510072 -91.576013,40.466767 -91.523864,40.456331 -91.524612,40.410765 -91.488481,40.404317 -91.485255,40.384657 -91.463895,40.375659 -91.419422,40.378264 -91.46214,40.342414 -91.490971,40.283364 -91.510839,40.126137 -91.494878,40.036453 -91.41936,39.927717 -91.446922,39.883034 -91.436529,39.847078 -91.362388,39.790482 -91.369395,39.731163 -91.229317,39.620853 -91.181936,39.602677 -91.153628,39.548248 -91.100307,39.538695 -91.03827,39.448435 -90.940766,39.403984 -90.72996,39.255894 -90.707902,39.15086 -90.681086,39.10059 -90.713629,39.053977 -90.678193,38.991851 -90.663018,38.926283 -90.623356,38.887149 -90.561021,38.869476 -90.507451,38.902767 -90.467784,38.961809 -90.406367,38.962554 -90.309454,38.92412 -90.250248,38.919344 -90.109407,38.843548 -90.123107,38.798048 -90.20991,38.72605 -90.179309,38.65244 -90.185256,38.610815 -90.247187,38.548557 -90.291084,38.43089 -90.341446,38.388298 -90.370819,38.333554 -90.353414,38.213213 -90.274843,38.157559 -90.217019,38.093466 -90.1296,38.061436 -90.110521,38.026549 -90.059367,38.015543 -89.996848,37.963219 -89.940687,37.970874 -89.924597,37.959849 -89.974654,37.927074 -89.947758,37.879847 -89.902377,37.86974 -89.842638,37.905197 -89.799329,37.881516 -89.786326,37.851689 -89.739875,37.846921 -89.669644,37.799922 -89.663352,37.750052 -89.617278,37.74972 -89.583316,37.713261 -89.516685,37.692762 -89.517718,37.641217 -89.475932,37.592998 -89.519808,37.582747 -89.517051,37.537278 -89.439769,37.4372 -89.420542,37.388007 -89.432836,37.347056 -89.489005,37.333368 -89.51834,37.285497 -89.489915,37.251315 -89.458827,37.248661 -89.467631,37.2182 -89.456105,37.18812 -89.377113,37.090765 -89.383937,37.046441 -89.278628,36.98867 -89.260003,37.023288 -89.304752,37.047565 -89.30829,37.068371 -89.25493,37.072014 -89.200793,37.016164 -89.185491,36.973518 -89.125352,36.983529 -89.099803,36.964669 -89.131934,36.857596 -89.179201,36.829896 -89.170563,36.797538 -89.12438,36.785826 -89.117076,36.765769 -89.125967,36.751809 -89.169785,36.759641 -89.197856,36.739772 -89.199311,36.715624 -89.159118,36.666354 -89.197753,36.628971 -89.219035,36.575057 -89.26349,36.566269 -89.324637,36.631023 -89.365797,36.625126 -89.417275,36.499011 -89.464433,36.457747 -89.493947,36.473559 -89.465913,36.530015 -89.47993,36.569087 -89.530638,36.58171 -89.567004,36.565048 -89.560412,36.524406 -89.519922,36.477053 -89.545255,36.427079 -89.509722,36.373626 -89.531822,36.339246 -89.605668,36.342234 -89.620255,36.323006 -89.539487,36.277368 -89.534676,36.252771 -89.602374,36.238106 -89.701821,36.246004 -89.69263,36.224959 -89.607004,36.171179 -89.591632,36.142135 -89.601936,36.11947 -89.678821,36.084636 -89.706932,36.000981 -90.37789,35.995683 -90.318877,36.090309 -90.235372,36.13948 -90.220487,36.184437 -90.126336,36.229123 -90.116801,36.263771 -90.083529,36.272122 -90.064169,36.302526 -90.082407,36.321949 -90.063397,36.383957 -90.138574,36.413817 -90.133939,36.453597 -90.155804,36.463554 -90.142413,36.471501 -90.159627,36.480302 -90.15228,36.49795 -90.220732,36.497859</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></gml:polygonMember></gml:MultiPolygon></usa:the_geom><usa:GEOID10>29</usa:GEOID10><usa:STUSPS10>MO</usa:STUSPS10><usa:NAME10>Missouri</usa:NAME10><usa:ALAND10>1.78039716301E11</usa:ALAND10><usa:AWATER10>2.500563712E9</usa:AWATER10><usa:DP0010001>5988927</usa:DP0010001><usa:DP0010020>2933477</usa:DP0010020><usa:DP0010039>3055450</usa:DP0010039></usa:states></gml:featureMember><gml:featureMember><usa:states fid="states.46"><usa:the_geom><gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:polygonMember><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-90.40938,28.99534 -90.552547,29.036806 -90.757186,28.987691 -90.970287,29.005027 -91.008759,29.026902 -91.023238,29.059262 -91.006484,29.096143 -90.960372,29.111064 -90.974925,29.121509 -91.103303,29.138377 -91.159817,29.168422 -91.292681,29.196177 -91.421128,29.302828 -91.644044,29.375555 -91.712193,29.360626 -91.77749,29.396084 -91.832768,29.362562 -91.876912,29.362689 -91.906348,29.387404 -91.913207,29.420207 -92.022754,29.470636 -92.07805,29.531489 -92.146666,29.532037 -92.231657,29.491894 -92.29367,29.481496 -92.624974,29.528328 -93.029108,29.677855 -93.240815,29.727298 -93.287354,29.724331 -93.339294,29.695085 -93.387246,29.713771 -93.487754,29.717811 -93.722673,29.687867 -93.770147,29.670825 -93.77036,29.623924 -93.814351,29.596576 -93.837412,29.689885 -93.926504,29.78956 -93.927992,29.80964 -93.838374,29.882853 -93.788599,29.988836 -93.741078,30.021571 -93.717884,30.065554 -93.699516,30.058578 -93.734085,30.08613 -93.688205,30.141357 -93.709508,30.146672 -93.699953,30.175529 -93.721259,30.209611 -93.703099,30.238459 -93.704584,30.289949 -93.742424,30.301139 -93.765829,30.332745 -93.750979,30.359899 -93.757668,30.390441 -93.697578,30.442233 -93.717421,30.483822 -93.707683,30.521337 -93.740253,30.539569 -93.713782,30.587584 -93.678949,30.593637 -93.682972,30.641251 -93.629887,30.679935 -93.617229,30.71858 -93.605391,30.717159 -93.614346,30.760195 -93.592101,30.763675 -93.583775,30.801779 -93.554433,30.823524 -93.568717,30.844182 -93.558616,30.869424 -93.57408,30.884529 -93.526013,30.937535 -93.531758,30.958217 -93.573537,30.971206 -93.564299,30.9897 -93.578207,30.999995 -93.508039,31.031532 -93.531628,31.053627 -93.518912,31.061863 -93.527645,31.07451 -93.563746,31.094522 -93.539366,31.115207 -93.5487,31.155839 -93.532545,31.183314 -93.589119,31.165889 -93.607243,31.204806 -93.596273,31.22951 -93.618107,31.232685 -93.620343,31.271025 -93.642516,31.269508 -93.687278,31.306068 -93.668439,31.353012 -93.639222,31.37202 -93.670999,31.366221 -93.674117,31.397681 -93.704879,31.410881 -93.692526,31.438201 -93.709512,31.442025 -93.703934,31.455493 -93.749476,31.46869 -93.752387,31.48274 -93.711046,31.512161 -93.742693,31.515694 -93.747437,31.530682 -93.787687,31.527344 -93.834918,31.586212 -93.838057,31.606795 -93.818717,31.614556 -93.811516,31.647435 -93.826462,31.666919 -93.794462,31.70332 -93.816694,31.707917 -93.81493,31.728688 -93.836884,31.750171 -93.823443,31.775098 -93.873253,31.814886 -93.900616,31.896788 -93.93119,31.891495 -93.928651,31.912645 -93.97171,31.920386 -94.018514,31.992432 -94.042566,31.993502 -94.042964,33.019219 -91.166073,33.004106 -91.214027,32.93032 -91.170235,32.899391 -91.133269,32.919351 -91.135095,32.980108 -91.090887,32.981174 -91.064449,32.901063 -91.105631,32.858396 -91.145002,32.842869 -91.165696,32.753399 -91.054749,32.719229 -91.149753,32.644041 -91.152486,32.620319 -91.119854,32.584795 -91.049796,32.607186 -91.037182,32.637861 -91.0158,32.641644 -91.008245,32.604239 -91.080411,32.556468 -90.987202,32.495663 -91.000506,32.482239 -91.038106,32.49044 -91.093742,32.549127 -91.116008,32.48314 -91.051407,32.437842 -90.995487,32.450885 -90.969587,32.439492 -90.965987,32.420654 -90.99408,32.403861 -91.001406,32.379444 -90.993625,32.354047 -90.912363,32.339454 -90.890712,32.372246 -90.875638,32.371729 -90.922231,32.298639 -90.949781,32.283056 -90.979475,32.293702 -90.969403,32.25252 -90.994944,32.193141 -91.002906,32.22305 -91.039007,32.242348 -91.061408,32.21865 -91.083708,32.22645 -91.164171,32.196888 -91.174552,32.154978 -91.162822,32.132694 -91.053555,32.124412 -91.058307,32.180951 -91.002906,32.162052 -91.004106,32.146152 -91.035207,32.100453 -91.081108,32.078353 -91.080908,32.047855 -91.135709,32.080654 -91.15851,32.072854 -91.15381,32.050655 -91.091408,32.036054 -91.075908,32.016827 -91.102808,31.990957 -91.16441,31.982557 -91.18481,31.965557 -91.182277,31.915814 -91.267712,31.86266 -91.244995,31.832188 -91.254311,31.813662 -91.283212,31.815762 -91.294013,31.86046 -91.345214,31.843861 -91.365614,31.760763 -91.281212,31.772263 -91.263111,31.754764 -91.369375,31.746903 -91.397915,31.709364 -91.401015,31.620365 -91.436216,31.612465 -91.49613,31.64531 -91.515462,31.630372 -91.492918,31.589565 -91.418816,31.596565 -91.405415,31.576466 -91.447616,31.540666 -91.522536,31.522078 -91.51513,31.449206 -91.472067,31.397076 -91.474809,31.368646 -91.521836,31.37517 -91.543366,31.432608 -91.576265,31.410498 -91.568953,31.377629 -91.546059,31.382221 -91.548213,31.346084 -91.50866,31.315131 -91.515614,31.27821 -91.654027,31.255753 -91.588939,31.188959 -91.626862,31.118771 -91.559907,31.054119 -91.578413,31.02403 -91.636942,30.999416 -89.731673,31.004817 -89.727072,30.967395 -89.756513,30.942861 -89.744789,30.918933 -89.77341,30.897693 -89.771722,30.854677 -89.79247,30.850386 -89.781502,30.818945 -89.798654,30.820855 -89.815738,30.803353 -89.803466,30.791141 -89.819154,30.795233 -89.835124,30.771092 -89.828692,30.738089 -89.816075,30.738908 -89.836698,30.735063 -89.825634,30.727374 -89.842529,30.720418 -89.837835,30.671917 -89.852203,30.661684 -89.814002,30.638246 -89.830711,30.617221 -89.813919,30.607717 -89.807952,30.567653 -89.786865,30.569053 -89.803919,30.549349 -89.779159,30.544029 -89.757484,30.499553 -89.724822,30.492129 -89.683403,30.451536 -89.683837,30.40582 -89.657249,30.356632 -89.629592,30.33896 -89.62619,30.314291 -89.647514,30.290534 -89.614044,30.244773 -89.614234,30.221471 -89.571907,30.180721 -89.53334,30.194881 -89.506399,30.157969 -89.416711,30.177639 -89.260977,30.181998 -89.183669,30.212155 -89.074653,30.154294 -89.033967,30.184584 -88.971909,30.156954 -88.90033,30.16998 -88.875025,30.102495 -88.811647,30.06749 -88.764495,29.971944 -88.767255,29.840771 -88.82343,29.714992 -89.038874,29.492229 -89.119451,29.458065 -89.142073,29.429465 -89.137612,29.381429 -89.077228,29.301105 -88.942054,29.253742 -88.908812,29.210226 -88.921713,29.124971 -88.996902,29.085304 -89.012688,29.02768 -89.11485,28.926368 -89.185332,28.930478 -89.234903,28.987152 -89.279604,28.977783 -89.400993,28.860631 -89.462478,28.863649 -89.492858,28.90796 -89.465736,28.974437 -89.468673,29.107461 -89.520469,29.172187 -89.610427,29.198635 -90.032325,29.135044 -90.200696,29.036184 -90.40938,28.99534</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></gml:polygonMember></gml:MultiPolygon></usa:the_geom><usa:GEOID10>22</usa:GEOID10><usa:STUSPS10>LA</usa:STUSPS10><usa:NAME10>Louisiana</usa:NAME10><usa:ALAND10>1.11897594452E11</usa:ALAND10><usa:AWATER10>2.3761143266E10</usa:AWATER10><usa:DP0010001>4533372</usa:DP0010001><usa:DP0010020>2219292</usa:DP0010020><usa:DP0010039>2314080</usa:DP0010039></usa:states></gml:featureMember><gml:featureMember><usa:states fid="states.49"><usa:the_geom><gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#4326"><gml:polygonMember><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">-103.064657,32.959097 -103.043478,34.020439 -103.041923,36.50035 -100.000406,36.499702 -100.000277,34.56045 -99.923211,34.574552 -99.69497,34.378333 -99.600026,34.374688 -99.569696,34.418418 -99.51428,34.414035 -99.438269,34.371164 -99.424897,34.385823 -99.405286,34.372858 -99.387181,34.410842 -99.395187,34.44203 -99.368932,34.458461 -99.319602,34.408879 -99.261275,34.403508 -99.274415,34.384349 -99.236494,34.365805 -99.232632,34.338872 -99.206905,34.338277 -99.211448,34.292247 -99.195403,34.280849 -99.189776,34.214357 -99.153653,34.207328 -99.130443,34.219478 -99.12664,34.203064 -99.079392,34.21155 -99.044463,34.198106 -98.988172,34.22131 -98.972609,34.202591 -98.951284,34.212189 -98.872922,34.166584 -98.868116,34.149635 -98.812954,34.158444 -98.757037,34.124633 -98.690072,34.133155 -98.648073,34.164441 -98.599789,34.160571 -98.55088,34.132583 -98.560977,34.123922 -98.486328,34.062598 -98.414426,34.085074 -98.398441,34.128456 -98.380093,34.130831 -98.384381,34.146317 -98.365621,34.156993 -98.170827,34.114171 -98.109462,34.154111 -98.089755,34.128211 -98.120208,34.072127 -98.082463,34.039428 -98.106179,34.034887 -98.088203,34.005481 -98.027672,33.993357 -97.974173,34.006716 -97.94573,33.989839 -97.974173,33.942832 -97.953395,33.936445 -97.957155,33.914454 -97.98454,33.900703 -97.967752,33.882214 -97.875311,33.849721 -97.83432,33.857634 -97.79891,33.898537 -97.780839,33.894447 -97.783522,33.918302 -97.76377,33.914241 -97.762768,33.934396 -97.732261,33.936519 -97.671277,33.991553 -97.589597,33.953554 -97.59695,33.916311 -97.581078,33.899679 -97.500271,33.919635 -97.46142,33.90523 -97.450807,33.886608 -97.463242,33.842004 -97.426799,33.818641 -97.368731,33.821443 -97.33188,33.884483 -97.332063,33.855056 -97.309172,33.888698 -97.275607,33.858168 -97.255639,33.863702 -97.245049,33.903216 -97.210921,33.916064 -97.180845,33.895204 -97.166629,33.847311 -97.204995,33.81887 -97.192851,33.760362 -97.133915,33.718128 -97.087365,33.741139 -97.092646,33.804198 -97.048146,33.817456 -97.088498,33.851849 -97.06704,33.860514 -97.041832,33.837756 -97.021438,33.846379 -96.983835,33.890949 -96.996251,33.942664 -96.981337,33.956378 -96.97287,33.935698 -96.9163,33.957798 -96.875281,33.860505 -96.850593,33.847211 -96.832157,33.874835 -96.794276,33.868886 -96.761587,33.824407 -96.699574,33.839049 -96.667187,33.91694 -96.628294,33.894477 -96.587934,33.894784 -96.629274,33.8455 -96.572937,33.819098 -96.531966,33.823989 -96.500984,33.772801 -96.423532,33.776432 -96.346859,33.686216 -96.31223,33.706304 -96.293708,33.769409 -96.229023,33.748021 -96.186627,33.755021 -96.155538,33.81404 -96.169592,33.800944 -96.179122,33.810224 -96.150765,33.816987 -96.149227,33.837091 -96.09936,33.83047 -96.100095,33.847971 -96.048834,33.836468 -96.026968,33.857474 -96.017055,33.841454 -95.996833,33.853898 -96.002925,33.87359 -95.984856,33.852492 -95.951382,33.857332 -95.925089,33.884936 -95.830406,33.834785 -95.815571,33.859853 -95.757959,33.849566 -95.752153,33.894577 -95.700635,33.885845 -95.665478,33.909004 -95.632774,33.904815 -95.594085,33.943057 -95.55421,33.926958 -95.544141,33.880603 -95.509526,33.897586 -95.504992,33.875918 -95.46144,33.887106 -95.463336,33.872396 -95.442746,33.866506 -95.362571,33.866902 -95.329936,33.886334 -95.288926,33.87307 -95.284629,33.905483 -95.268697,33.91109 -95.257724,33.890122 -95.250001,33.938861 -95.216947,33.962674 -95.1247,33.934675 -95.120893,33.904539 -95.08006,33.920989 -95.100378,33.895595 -95.089607,33.880857 -95.082408,33.879882 -95.078696,33.90504 -95.06676,33.917101 -95.075876,33.901846 -95.060105,33.901873 -95.046568,33.862565 -94.988487,33.851 -94.970205,33.861817 -94.964401,33.837021 -94.943888,33.830226 -94.947874,33.808356 -94.923289,33.808742 -94.91801,33.826783 -94.921526,33.790472 -94.876372,33.75733 -94.868144,33.768874 -94.877083,33.75222 -94.860687,33.741945 -94.820429,33.733807 -94.823385,33.769179 -94.803433,33.732739 -94.763035,33.759764 -94.758948,33.748532 -94.788637,33.735669 -94.751825,33.734326 -94.751366,33.71354 -94.733413,33.725191 -94.753801,33.708663 -94.735856,33.691625 -94.715943,33.694913 -94.733965,33.715687 -94.70156,33.702878 -94.716188,33.687902 -94.651402,33.685843 -94.643715,33.701522 -94.645337,33.673644 -94.671048,33.668388 -94.654919,33.659925 -94.622043,33.682535 -94.596019,33.663863 -94.58793,33.686255 -94.580784,33.666392 -94.560339,33.666591 -94.590478,33.645075 -94.548111,33.66033 -94.543033,33.649322 -94.569975,33.62847 -94.521837,33.640728 -94.52774,33.615898 -94.517468,33.633056 -94.504525,33.620728 -94.448637,33.642766 -94.472443,33.603469 -94.430041,33.591124 -94.410926,33.568344 -94.382898,33.583277 -94.38008,33.568947 -94.401616,33.559378 -94.386768,33.545009 -94.353593,33.544005 -94.344023,33.567824 -94.31215,33.550666 -94.289215,33.582131 -94.290897,33.559906 -94.27826,33.557556 -94.242777,33.589709 -94.25013,33.556753 -94.205666,33.567219 -94.195432,33.555094 -94.194127,33.573469 -94.217114,33.580994 -94.183912,33.594685 -94.14216,33.58139 -94.151574,33.568406 -94.135144,33.571033 -94.127612,33.550721 -94.12086,33.567051 -94.072826,33.572298 -94.073635,33.584773 -94.057086,33.568003 -94.073893,33.55743 -94.04343,33.551479 -94.042566,31.993502 -94.018514,31.992432 -93.97171,31.920386 -93.928651,31.912645 -93.93119,31.891495 -93.900616,31.896788 -93.873253,31.814886 -93.823443,31.775098 -93.836884,31.750171 -93.81493,31.728688 -93.816694,31.707917 -93.794462,31.70332 -93.826462,31.666919 -93.811516,31.647435 -93.818717,31.614556 -93.838057,31.606795 -93.834918,31.586212 -93.787687,31.527344 -93.747437,31.530682 -93.742693,31.515694 -93.711046,31.512161 -93.752387,31.48274 -93.749476,31.46869 -93.703934,31.455493 -93.709512,31.442025 -93.692526,31.438201 -93.704879,31.410881 -93.674117,31.397681 -93.670999,31.366221 -93.639222,31.37202 -93.668439,31.353012 -93.687278,31.306068 -93.642516,31.269508 -93.620343,31.271025 -93.618107,31.232685 -93.596273,31.22951 -93.607243,31.204806 -93.589119,31.165889 -93.532545,31.183314 -93.5487,31.155839 -93.539366,31.115207 -93.563746,31.094522 -93.527645,31.07451 -93.518912,31.061863 -93.531628,31.053627 -93.508039,31.031532 -93.578207,30.999995 -93.564299,30.9897 -93.573537,30.971206 -93.531758,30.958217 -93.526013,30.937535 -93.57408,30.884529 -93.558616,30.869424 -93.568717,30.844182 -93.554433,30.823524 -93.583775,30.801779 -93.592101,30.763675 -93.614346,30.760195 -93.605391,30.717159 -93.617229,30.71858 -93.629887,30.679935 -93.682972,30.641251 -93.678949,30.593637 -93.713782,30.587584 -93.740253,30.539569 -93.707683,30.521337 -93.717421,30.483822 -93.697578,30.442233 -93.757668,30.390441 -93.750979,30.359899 -93.765829,30.332745 -93.742424,30.301139 -93.704584,30.289949 -93.703099,30.238459 -93.721259,30.209611 -93.699953,30.175529 -93.709508,30.146672 -93.688205,30.141357 -93.734085,30.08613 -93.699516,30.058578 -93.717884,30.065554 -93.741078,30.021571 -93.788599,29.988836 -93.838374,29.882853 -93.927992,29.80964 -93.926504,29.78956 -93.837412,29.689885 -93.814351,29.596576 -93.875006,29.621426 -94.033565,29.625002 -94.625192,29.397662 -94.650311,29.38282 -94.623898,29.343143 -94.65036,29.29189 -94.713311,29.282521 -94.772686,29.231718 -95.086398,29.06824 -95.106528,29.014935 -95.329847,28.828699 -95.420071,28.805625 -95.777845,28.625266 -96.199375,28.442278 -96.258191,28.407872 -96.282307,28.375002 -96.320762,28.362868 -96.375252,28.29076 -96.531,28.221164 -96.730685,28.091268 -96.938546,27.901199 -96.984281,27.803783 -97.050221,27.750308 -97.199816,27.500319 -97.288337,27.277584 -97.319824,27.110023 -97.323219,27.010256 -97.300423,26.834613 -97.125248,26.248285 -97.108301,26.10451 -97.089989,26.07534 -97.091121,25.97384 -97.146654,25.970969 -97.156606,25.94902 -97.175584,25.965573 -97.248033,25.948097 -97.284446,25.959156 -97.276696,25.935339 -97.302541,25.93723 -97.326003,25.917689 -97.348274,25.931143 -97.368517,25.915326 -97.356629,25.887681 -97.37413,25.879039 -97.359497,25.879683 -97.356693,25.867354 -97.376575,25.854578 -97.3641,25.850034 -97.40525,25.837728 -97.408806,25.862109 -97.413055,25.840881 -97.453985,25.854088 -97.444653,25.86744 -97.455601,25.883949 -97.496687,25.87968 -97.498204,25.899039 -97.52175,25.886462 -97.537229,25.930526 -97.582865,25.937857 -97.566663,25.944714 -97.567957,25.95235 -97.578236,25.942049 -97.582373,25.962469 -97.602591,25.957735 -97.634436,25.990268 -97.620309,25.992357 -97.618282,26.002092 -97.649377,26.010862 -97.640578,26.024515 -97.66813,26.019429 -97.660699,26.031252 -97.662728,26.038078 -97.693333,26.032337 -97.691369,26.01899 -97.707296,26.037756 -97.737103,26.021493 -97.763425,26.026819 -97.768065,26.047321 -97.776816,26.029452 -97.792955,26.034536 -97.801317,26.060161 -97.813389,26.044199 -97.818054,26.056397 -97.860504,26.052918 -97.861776,26.069946 -97.869061,26.056955 -97.933924,26.064834 -97.934247,26.052826 -97.967335,26.051783 -97.981339,26.067227 -98.011978,26.056292 -98.027801,26.066849 -98.039239,26.041275 -98.07662,26.036415 -98.080495,26.070932 -98.094432,26.058625 -98.131829,26.07417 -98.146506,26.049303 -98.176296,26.075075 -98.192981,26.053268 -98.220673,26.076467 -98.248737,26.072042 -98.288535,26.105312 -98.265698,26.12037 -98.296195,26.120321 -98.305027,26.10309 -98.335204,26.137617 -98.334564,26.165136 -98.352341,26.15112 -98.360645,26.172544 -98.386694,26.157872 -98.444072,26.200895 -98.445222,26.224571 -98.481582,26.219379 -98.477961,26.203359 -98.482201,26.201375 -98.554577,26.24738 -98.545922,26.237097 -98.562959,26.224908 -98.587545,26.257816 -98.616487,26.246761 -98.623467,26.259666 -98.63418,26.242612 -98.669149,26.23653 -98.68109,26.262803 -98.719413,26.272304 -98.704267,26.287982 -98.750973,26.296321 -98.754216,26.307928 -98.736161,26.309199 -98.751127,26.331584 -98.788955,26.330433 -98.806618,26.369109 -98.896734,26.35333 -98.925879,26.394357 -98.946694,26.370003 -98.961886,26.398373 -99.01064,26.392135 -99.037058,26.413603 -99.082006,26.396667 -99.110854,26.426282 -99.091572,26.477054 -99.127782,26.525199 -99.17123,26.541965 -99.208907,26.724761 -99.240023,26.745851 -99.268613,26.843213 -99.316753,26.865831 -99.324684,26.915973 -99.379149,26.93449 -99.393748,26.96073 -99.376593,26.977717 -99.415476,27.01724 -99.446123,27.023048 -99.452316,27.062669 -99.429209,27.090982 -99.442125,27.106856 -99.426348,27.176262 -99.441545,27.249915 -99.461476,27.268175 -99.489059,27.261477 -99.49202,27.300666 -99.538035,27.316961 -99.504575,27.338741 -99.487521,27.411572 -99.495104,27.451518 -99.479251,27.478635 -99.496826,27.500106 -99.528392,27.49855 -99.512132,27.568288 -99.554945,27.614456 -99.584843,27.603903 -99.577636,27.618597 -99.596231,27.639858 -99.624311,27.644001 -99.638929,27.626758 -99.666108,27.636088 -99.668942,27.659974 -99.711511,27.658365 -99.77074,27.732134 -99.796342,27.735586 -99.813118,27.773997 -99.838791,27.764181 -99.850877,27.793974 -99.876761,27.797845 -99.8772,27.84218 -99.904385,27.875284 -99.893456,27.899208 -99.937142,27.940537 -99.931811,27.980968 -99.991447,27.99456 -100.017913,28.064788 -100.053122,28.084731 -100.084328,28.144819 -100.208058,28.190383 -100.220288,28.23221 -100.251636,28.23618 -100.291397,28.275397 -100.286476,28.312295 -100.344402,28.389662 -100.337798,28.44296 -100.368288,28.477196 -100.333814,28.499252 -100.388262,28.514863 -100.411269,28.550705 -100.398462,28.585169 -100.44732,28.609325 -100.447091,28.642197 -100.500354,28.66196 -100.507613,28.740599 -100.533408,28.759207 -100.535438,28.805195 -100.547324,28.825817 -100.574728,28.828788 -100.60109,28.901288 -100.640568,28.914212 -100.629706,28.921146 -100.651512,28.943432 -100.64604,28.987981 -100.6752,29.100741 -100.772604,29.168369 -100.767059,29.195287 -100.813959,29.263137 -100.876049,29.279585 -100.886842,29.307848 -101.009976,29.368267 -101.060151,29.458661 -101.146798,29.474187 -101.173824,29.514568 -101.254895,29.520341 -101.261176,29.536776 -101.24103,29.565028 -101.250383,29.624171 -101.269102,29.630128 -101.290962,29.571537 -101.305533,29.577925 -101.302516,29.650425 -101.346017,29.662241 -101.361312,29.650063 -101.372773,29.699428 -101.415584,29.746534 -101.402319,29.77119 -101.448881,29.750699 -101.460906,29.789663 -101.535998,29.75895 -101.544769,29.811868 -101.567749,29.798727 -101.575807,29.769319 -101.6269,29.770762 -101.644567,29.754233 -101.661724,29.770857 -101.708873,29.761642 -101.773825,29.788675 -101.805114,29.78035 -101.803613,29.803446 -101.817777,29.811635 -101.823656,29.787398 -101.85272,29.807791 -101.929323,29.782576 -101.935606,29.799561 -101.957515,29.795766 -101.976264,29.81604 -101.987305,29.796842 -102.035818,29.804063 -102.049652,29.785276 -102.073187,29.786524 -102.143566,29.80332 -102.179964,29.826375 -102.187027,29.848656 -102.223528,29.84053 -102.246458,29.864128 -102.261495,29.853241 -102.264842,29.867496 -102.31594,29.879993 -102.364557,29.845335 -102.387227,29.761392 -102.487252,29.786585 -102.517616,29.78358 -102.513503,29.765439 -102.547978,29.744644 -102.567663,29.771463 -102.573796,29.754896 -102.63041,29.734181 -102.673997,29.744574 -102.691373,29.721372 -102.693644,29.676685 -102.741949,29.633193 -102.740543,29.597499 -102.768302,29.595209 -102.771228,29.548397 -102.80832,29.52293 -102.800673,29.486235 -102.825637,29.457945 -102.833443,29.410498 -102.812381,29.400525 -102.845018,29.374441 -102.839375,29.358922 -102.884365,29.347946 -102.906384,29.260083 -102.871749,29.241776 -102.867474,29.223883 -102.895101,29.208521 -102.912324,29.219418 -102.917823,29.190887 -102.943378,29.19141 -102.950886,29.17362 -102.995618,29.179291 -103.033879,29.100972 -103.075824,29.091537 -103.0859,29.053736 -103.100626,29.060323 -103.116814,28.984416 -103.163935,28.972204 -103.227888,28.991857 -103.250416,28.98043 -103.267334,28.996072 -103.286986,28.978172 -103.286941,29.001273 -103.316162,29.010689 -103.307657,29.024537 -103.338751,29.020277 -103.330613,29.043219 -103.344334,29.04595 -103.359603,29.018644 -103.386505,29.021648 -103.388644,29.033974 -103.432095,29.043356 -103.44993,29.072714 -103.47135,29.066727 -103.469936,29.085317 -103.553692,29.157996 -103.650586,29.15648 -103.659619,29.170569 -103.718561,29.180826 -103.758549,29.232939 -103.777147,29.220509 -103.783626,29.265324 -103.799364,29.258437 -103.813517,29.274032 -103.975808,29.296249 -104.037497,29.319707 -104.106579,29.373313 -104.167443,29.394744 -104.217705,29.456559 -104.210044,29.482243 -104.230698,29.478669 -104.237134,29.497556 -104.315476,29.532754 -104.338201,29.520182 -104.475991,29.627979 -104.508462,29.632697 -104.544099,29.680693 -104.53021,29.690464 -104.560435,29.735188 -104.549848,29.740895 -104.569941,29.752597 -104.565929,29.771468 -104.683272,29.929107 -104.67318,29.954969 -104.685253,29.956731 -104.680152,29.977003 -104.693127,29.97553 -104.689549,30.015105 -104.707264,30.049867 -104.684965,30.085301 -104.696706,30.134457 -104.686332,30.173281 -104.706255,30.234812 -104.763176,30.274836 -104.76669,30.306 -104.811578,30.332811 -104.816423,30.375187 -104.859296,30.390253 -104.847831,30.419775 -104.868047,30.441407 -104.866632,30.494499 -104.922677,30.603693 -104.971664,30.610014 -105.006579,30.68606 -105.061762,30.685845 -105.118295,30.749726 -105.16139,30.752133 -105.156191,30.769773 -105.176601,30.767975 -105.195191,30.792304 -105.216744,30.783385 -105.215017,30.805893 -105.25716,30.794354 -105.291795,30.826193 -105.316869,30.810913 -105.339293,30.840475 -105.399837,30.852077 -105.400185,30.889382 -105.491654,30.942407 -105.501968,30.967737 -105.557226,30.989673 -105.604467,31.083744 -105.741929,31.164602 -105.77299,31.166702 -105.782798,31.197459 -105.869294,31.288955 -105.937894,31.318223 -105.953786,31.364749 -106.004921,31.392456 -106.081665,31.399223 -106.207631,31.467104 -106.380321,31.2014-11-24 11:04:55,842 httpinput INFO EOF URL reading done
+2014-11-24 11:04:55,843 chain INFO DONE - 2 rounds - chain=input_wfs|output_std 
+2014-11-24 11:04:55,843 util INFO Timer end: total ETL time=2.0 sec
+2014-11-24 11:04:55,843 ETL INFO ALL DONE
 731378 -106.45143,31.764427 -106.490549,31.748924 -106.54714,31.807299 -106.602806,31.825018 -106.602043,31.844406 -106.635922,31.866237 -106.629191,31.883699 -106.645584,31.895328 -106.611847,31.920003 -106.629742,31.926567 -106.619569,31.971577 -106.639536,31.980343 -106.618486,32.000495 -103.064422,32.000517 -103.064657,32.959097</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></gml:polygonMember></gml:MultiPolygon></usa:the_geom><usa:GEOID10>48</usa:GEOID10><usa:STUSPS10>TX</usa:STUSPS10><usa:NAME10>Texas</usa:NAME10><usa:ALAND10>6.76586997978E11</usa:ALAND10><usa:AWATER10>1.9074619314E10</usa:AWATER10><usa:DP0010001>25145561</usa:DP0010001><usa:DP0010020>12472280</usa:DP0010020><usa:DP0010039>12673281</usa:DP0010039></usa:states></gml:featureMember></wfs:FeatureCollection>
 ==== running etl.sh for 9_string_templating ====
-2014-10-07 16:07:23,170 util INFO Found cStringIO, good!
-2014-10-07 16:07:23,210 util INFO Found lxml.etree, native XML parsing, fabulous!
-2014-10-07 16:07:23,238 util INFO Found GDAL/OGR Python bindings, super!!
-2014-10-07 16:07:23,250 main INFO Stetl version = 1.0.7rc11
-2014-10-07 16:07:23,251 ETL INFO INIT - Stetl version is 1.0.7rc11
-2014-10-07 16:07:23,251 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/9_string_templating
-2014-10-07 16:07:23,252 ETL INFO Reading config_file = etl.cfg
-2014-10-07 16:07:23,265 ETL INFO START
-2014-10-07 16:07:23,266 util INFO Timer start: total ETL
-2014-10-07 16:07:23,266 chain INFO Assembling Chain: input_csv|filter_template|output_file...
-2014-10-07 16:07:23,269 input INFO cfg = {'output_format': 'record', 'class': 'inputs.fileinput.CsvFileInput', 'file_path': 'input/city.csv'}
-2014-10-07 16:07:23,270 fileinput INFO file_list=['input/city.csv']
-2014-10-07 16:07:23,272 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/city.xml'}
-2014-10-07 16:07:23,272 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/9_string_templating
-2014-10-07 16:07:23,272 chain INFO Running Chain: input_csv|filter_template|output_file
-2014-10-07 16:07:23,272 fileinput INFO Open CSV file: input/city.csv
-2014-10-07 16:07:23,272 templatingfilter INFO Init: templating
-2014-10-07 16:07:23,273 templatingfilter INFO Init: reading template file %s ..." % self.template_file
-2014-10-07 16:07:23,310 templatingfilter INFO template file read OK: city_template.xml
-2014-10-07 16:07:23,331 fileinput INFO CSV row nr 1 read: {'lat': '52.4', 'city': 'amsterdam', 'lon': '4.9'}
-2014-10-07 16:07:23,332 fileoutput INFO writing to file output/city.xml
-2014-10-07 16:07:23,332 fileoutput INFO written to output/city.xml
-2014-10-07 16:07:23,333 templatingfilter INFO Exit: templating
-2014-10-07 16:07:23,333 chain INFO DONE - 2 rounds - chain=input_csv|filter_template|output_file 
-2014-10-07 16:07:23,333 util INFO Timer end: total ETL time=0.0 sec
-2014-10-07 16:07:23,333 ETL INFO ALL DONE
+2014-11-24 11:04:56,006 util INFO Found cStringIO, good!
+2014-11-24 11:04:56,035 util INFO Found lxml.etree, native XML parsing, fabulous!
+2014-11-24 11:04:56,064 util INFO Found GDAL/OGR Python bindings, super!!
+2014-11-24 11:04:56,076 main INFO Stetl version = 1.0.7
+2014-11-24 11:04:56,077 ETL INFO INIT - Stetl version is 1.0.7
+2014-11-24 11:04:56,077 ETL INFO Config/working dir =/Users/just/project/stetl/git/examples/basics/9_string_templating
+2014-11-24 11:04:56,078 ETL INFO Reading config_file = etl.cfg
+2014-11-24 11:04:56,126 ETL INFO START
+2014-11-24 11:04:56,127 util INFO Timer start: total ETL
+2014-11-24 11:04:56,127 chain INFO Assembling Chain: input_csv|filter_template|output_file...
+2014-11-24 11:04:56,130 input INFO cfg = {'output_format': 'record', 'class': 'inputs.fileinput.CsvFileInput', 'file_path': 'input/city.csv'}
+2014-11-24 11:04:56,130 fileinput INFO file_list=['input/city.csv']
+2014-11-24 11:04:56,152 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/city.xml'}
+2014-11-24 11:04:56,152 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/9_string_templating
+2014-11-24 11:04:56,152 chain INFO Running Chain: input_csv|filter_template|output_file
+2014-11-24 11:04:56,152 fileinput INFO Open CSV file: input/city.csv
+2014-11-24 11:04:56,152 templatingfilter INFO Init: templating
+2014-11-24 11:04:56,152 templatingfilter INFO Init: reading template file %s ..." % self.template_file
+2014-11-24 11:04:56,197 templatingfilter INFO template file read OK: city_template.xml
+2014-11-24 11:04:56,218 fileinput INFO CSV row nr 1 read: {'lat': '52.4', 'city': 'amsterdam', 'lon': '4.9'}
+2014-11-24 11:04:56,218 fileoutput INFO writing to file output/city.xml
+2014-11-24 11:04:56,251 fileoutput INFO written to output/city.xml
+2014-11-24 11:04:56,251 templatingfilter INFO Exit: templating
+2014-11-24 11:04:56,251 chain INFO DONE - 2 rounds - chain=input_csv|filter_template|output_file 
+2014-11-24 11:04:56,251 util INFO Timer end: total ETL time=0.0 sec
+2014-11-24 11:04:56,251 ETL INFO ALL DONE

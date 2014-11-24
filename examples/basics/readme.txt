@@ -14,6 +14,9 @@ As a general health test you may run all examples using ./runall.sh
 9_string_templating - transform using standard Python string template with CSV input vars
 10_jinja2_templating - transform using standard Jinja2 http://jinja.pocoo.org Templating
 11_formatconvert - adapt incompatible inputs to outputs via the FormatConvertFilter
+12_gdal_ogr - direct OgrInput (and later output)
+13_dbinput - input from SQL sources, here SLQLite Input
+
 
 
 
