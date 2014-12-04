@@ -14,12 +14,15 @@ Topo map (Top10NL) ETL in the `examples/top10nl directory <https://github.com/ju
 
 The core concepts of Stetl remain pretty simple: an input resource like a file or a database table is
 mapped to an output resource (also a file, a database, etc) via one or more filters.
-The input, filters  and output are connected as a `processing chain`. A bit like in electrical engineering: an input flows
-through several filters, that each modify the current. In our case the current is (geospatial) information.
+The input, filters  and output are connected in a pipeline called a `processing chain` or Chain.
+This is a bit similar to a current in electrical engineering: an input flows
+through several filters, that each modify the current. In our case the current is (geospatial) data.
+Stetl design follows the so-called `Pipes and Filters Architectural Pattern <http://webcem01.cem.itesm.mx:8005/apps/s200911/tc3003/notes_pipes_and_filters/>`_.
 
 Stetl Config
 ------------
-The particular components (inputs, filters, outputs) and their interconnection
+
+Stetl components (inputs, filters, outputs) and their interconnection (the Pipeline/Chain)
 are specified in a Stetl config file. The file format follows the Python ``.ini`` file-format.
 
 To illustrate, let's look at the example `2_xslt <https://github.com/justb4/stetl/tree/master/examples/basics/2_xslt>`_.
