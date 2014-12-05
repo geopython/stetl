@@ -138,28 +138,35 @@ class PostgresDbInput(SqlDbInput):
     @Config(ptype=str, required=False, default='localhost')
     def host(self):
         """
-        host name or host IP-address
+        host name or host IP-address, defaults to 'localhost'
+        """
+        pass
+
+    @Config(ptype=str, required=False, default='5432')
+    def port(self):
+        """
+        port for host, defaults to `'5432'
         """
         pass
 
     @Config(ptype=str, required=False, default='postgres')
     def user(self):
         """
-        User name
+        User name, defaults to 'postgres'
         """
         pass
 
     @Config(ptype=str, required=False, default='postgres')
     def password(self):
         """
-        User password
+        User password, defaults to 'postgres'
         """
         pass
 
     @Config(ptype=str, required=False, default='public')
     def schema(self):
         """
-        Schema (postgres schema) name
+        The postgres schema name, defaults to 'public'
         """
         pass
     # End attribute config meta

@@ -202,7 +202,7 @@ class OgrPostgisInput(Input):
      Input from PostGIS via ogr2ogr command. For now hardcoded to produce an ogr GML line stream.
      OgrInput may be a better alternative.
 
-     TODO: look to use Fiona or direct OGR via Python.
+     Alternatives: either stetl.input.PostgresqlInput or stetl.input.OgrInput.
 
      produces=FORMAT.xml_line_stream
     """
