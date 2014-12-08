@@ -5,7 +5,7 @@
 #
 # Author: Just van den Broecke
 #
-from stetl.main import print_doc, parse_args
+from stetl.main import parse_args
 from stetl.etl import ETL
 from stetl.util import Util
 
