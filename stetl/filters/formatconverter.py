@@ -10,6 +10,7 @@ from stetl.component import Config
 from stetl.util import Util, etree
 from stetl.filter import Filter
 from stetl.packet import FORMAT
+import json
 
 log = Util.get_log("formatconverter")
 
@@ -68,10 +69,13 @@ class FormatConverter(Filter):
         # Lookup and assign the active converter
         self.converter = FORMAT_CONVERTERS[self.input_format][self.output_format]
 
+        # OGR feature def
+        self.feat_def = None
+        
     def invoke(self, packet):
-        packet.format = self.output_format
 
         if packet.data is None:
+            packet.format = self.output_format
             return packet
 
         if self.converter_args is not None:
@@ -79,6 +83,7 @@ class FormatConverter(Filter):
         else:
             self.converter(packet)
 
+        packet.format = self.output_format
         return packet
 
     @staticmethod
@@ -97,7 +102,7 @@ class FormatConverter(Filter):
     @staticmethod
     def etree_doc2geojson_collection(packet, converter_args=None):
         """
-        Use converter_args to determine XML tagnames for features and GeoJSON feature id.
+        Use converter_args to determine XML tag names for features and GeoJSON feature id.
         For example
 
            converter_args = {
@@ -179,6 +184,93 @@ class FormatConverter(Filter):
 
     # END etree_elem
 
+    # START geojson_feature
+    @staticmethod
+    def geojson_feature2ogr_feature(packet, converter_args=None):
+        from stetl.util import ogr
+
+        # str = json.dumps(packet.data)
+        json_feat = packet.data
+        json_geom = json_feat["geometry"]
+        json_props = json_feat["properties"]
+
+        # Create OGR Geometry from GeoJSON geom-fields
+        geom_dict = dict()
+        geom_dict["type"] = json_geom["type"]
+        geom_dict["coordinates"] = json_geom["coordinates"]
+        geom_str = json.dumps(geom_dict)
+        ogr_geom = ogr.CreateGeometryFromJson(geom_str)
+
+        # Once: create OGR Feature definition
+        # TODO: assume all string-fields for now, may use type-mapping definition in converter_args
+        comp = packet.component
+        if comp.feat_def is None:
+            comp.feat_def = ogr.FeatureDefn()
+
+            field_def = ogr.FieldDefn("id", ogr.OFTString)
+            comp.feat_def.AddFieldDefn(field_def)
+
+            for field_name in json_props:
+
+                # OGR needs UTF-8 internally
+                if isinstance(field_name, unicode):
+                    field_name = field_name.encode('utf8')
+
+                field_def = ogr.FieldDefn(field_name, ogr.OFTString)
+                comp.feat_def.AddFieldDefn(field_def)
+
+            ogr_geom_type = ogr_geom.GetGeometryType()
+            comp.feat_def.SetGeomType(ogr_geom_type)
+
+        # Create and populate Feature with id, geom and attributes
+        feature = ogr.Feature(comp.feat_def)
+        json_id = json_feat["id"]
+        if isinstance(json_id, unicode):
+            json_id = json_id.encode('utf8')
+
+        feature.SetField("id", json_id)
+        feature.SetGeometry(ogr_geom)
+        for field_name in json_props:
+
+            # OGR needs UTF-8 internally
+            field_value = json_props[field_name]
+            if isinstance(field_value, unicode):
+                field_value = field_value.encode('utf8')
+
+            if not isinstance(field_value, basestring):
+                field_value = str(field_value)
+
+            # OGR needs UTF-8 internally
+            if isinstance(field_name, unicode):
+                field_name = field_name.encode('utf8')
+
+            # print("id=%s k=%s v=%s" % (json_id, field_name, field_value))
+            feature.SetField(field_name, field_value)
+
+        packet.data = feature
+        return packet
+
+    # END geojson_feature
+
+    # START geojson_collection
+
+    @staticmethod
+    def geojson_coll2ogr_feature_arr(packet, converter_args=None):
+        json_feat_arr = packet.data["features"]
+        ogr_feat_arr = list()
+
+        for feat in json_feat_arr:
+            packet.data = feat
+            packet = FormatConverter.geojson_feature2ogr_feature(packet)
+            ogr_feat_arr.append(packet.data)
+
+        packet.data = ogr_feat_arr
+        return packet
+
+    # END geojson_collection
+
+    # START ogr_feature
+
     @staticmethod
     def ogr_feature2struct(packet, converter_args=None):
         s = packet.data.ExportToJson()
@@ -188,6 +280,8 @@ class FormatConverter(Filter):
         packet.data = ast.literal_eval(s)
 
         return packet
+
+    # END ogr_feature
 
     @staticmethod
     def ogr_feature_arr2geojson_coll(packet, converter_args=None):
@@ -276,6 +370,12 @@ FORMAT_CONVERTERS = {
         FORMAT.string: FormatConverter.etree_doc2string,
         FORMAT.struct: FormatConverter.etree_elem2struct,
         FORMAT.xml_doc_as_string: FormatConverter.etree_doc2string
+    },
+    FORMAT.geojson_feature: {
+        FORMAT.ogr_feature: FormatConverter.geojson_feature2ogr_feature
+    },
+    FORMAT.geojson_collection: {
+        FORMAT.ogr_feature_array: FormatConverter.geojson_coll2ogr_feature_arr
     },
     FORMAT.ogr_feature: {
         FORMAT.geojson_feature: FormatConverter.ogr_feature2struct,

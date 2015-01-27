@@ -41,6 +41,7 @@ class FileOutput(Output):
         log.info("written to %s" % file_path)
         return packet
 
+
 class MultiFileOutput(FileOutput):
     """
     Print to multiple files from subsequent packets like strings or etree docs.

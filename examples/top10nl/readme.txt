@@ -1,6 +1,10 @@
 This example shows how to convert the Dutch national topographic dataset Top10NL (v1.1.1) GML to
 PostGIS.
 
+NB this is an example. The official and actively maintained
+Top10NL extract prog is now part of the NLExtract project and located at:
+https://github.com/opengeogroep/NLExtract/tree/master/top10nl/etl !!
+
 The entire ETL is driven through the file etl-top10nl.cfg without any
 programming (except for the XSLT step). The script etl-top10nl.sh is a shortcut to
 call Stetl main.py.

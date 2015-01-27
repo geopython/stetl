@@ -19,6 +19,7 @@ class Packet:
     def init(self, data=None):
         self.data = None
         self.meta = {}
+        self.component = None
         self.end_of_stream = False
         self.end_of_doc = False
         self.format = FORMAT.any

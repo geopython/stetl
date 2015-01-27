@@ -23,7 +23,7 @@ class OgrOutput(Output):
 
     This output can write almost any geospatial, OGR-defined, dataformat.
 
-    consumes=FORMAT.ogr_feature or FORMAT.ogr_feature_array (all features)
+    consumes=FORMAT.ogr_feature or FORMAT.ogr_feature_array
     """
 
     # Start attribute config meta
@@ -42,7 +42,7 @@ class OgrOutput(Output):
         Default: False
         """
 
-    pass
+        pass
 
     @Config(ptype=str, default=None, required=True)
     def dest_data_source(self):
@@ -109,7 +109,7 @@ class OgrOutput(Output):
         Default: []
         """
 
-    pass
+        pass
 
     @Config(ptype=str, default=None, required=True)
     def new_layer_name(self):
@@ -122,7 +122,7 @@ class OgrOutput(Output):
 
         """
 
-    pass
+        pass
 
     @Config(ptype=bool, default=False, required=False)
     def overwrite(self):
@@ -136,7 +136,7 @@ class OgrOutput(Output):
         Default: False
         """
 
-    pass
+        pass
 
     @Config(ptype=str, default=None, required=False)
     def target_srs(self):
@@ -167,6 +167,7 @@ class OgrOutput(Output):
     # Constructor
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=[FORMAT.ogr_feature, FORMAT.ogr_feature_array])
+
 
     def init(self):
 
@@ -201,21 +202,18 @@ class OgrOutput(Output):
         if self.dest_options:
             for k in self.dest_options:
                 self.gdal.SetConfigOption(k, self.dest_options[k])
-                
+
         self.dest_driver = None
         self.dest_fd = None
 
         # Loosely based on https://github.com/OSGeo/gdal/blob/trunk/gdal/swig/python/samples/ogr2ogr.py
 
         #/* -------------------------------------------------------------------- */
-        #/*      Try opening the output datasource as an existing, writable      */
+        #/*      Try opening the output data source as an existing, writable      */
         #/* -------------------------------------------------------------------- */
         if self.update:
             # Try opening in update mode
             self.dest_fd = ogr.Open(self.dest_data_source, True)
-
-            if self.dest_fd and len(self.dest_create_options) > 0:
-                log.warn("Datasource creation options ignored since an existing datasource being updated.")
 
             if self.dest_fd is not None:
                 if len(self.dest_create_options) > 0:
@@ -275,21 +273,35 @@ class OgrOutput(Output):
         log.info("Opened OGR dest ok: %s " % self.dest_data_source)
 
     def write(self, packet):
-        if packet.data is None or packet.end_of_stream or packet.end_of_doc:
-            # self.dest_driver.Destroy()
-            self.dest_driver = None
-            self.layer = None
-            return packet
 
-        if self.dest_driver is None:
-            log.info("End writing to: %s" % self.dest_data_source)
+        # Are we all done?
+        if packet.data is None or self.dest_fd is None:
+            self.write_end(packet)
             return packet
 
         if self.layer is None:
             log.info("No Layer, end writing to: %s" % self.dest_data_source)
             return packet
 
-        feature = packet.data
+        # Assume ogr_feature_array input, otherwise convert ogr_feature to list
+        if type(packet.data) is list:
+            # Write feature collection to OGR Layer output
+            for feature in packet.data:
+                self.write_feature(feature)
+
+            self.write_end(packet)
+
+        else:
+            # Write single feature to OGR Layer output
+            if packet.end_of_stream or packet.end_of_doc:
+                self.write_end(packet)
+                return packet
+
+            self.write_feature(packet.data)
+
+        return packet
+
+    def write_feature(self, feature):
 
         # Set the Layer Feature Definition once, using the first feature received
         if self.feature_def is None:
@@ -305,6 +317,12 @@ class OgrOutput(Output):
         # Dispose memory
         feature.Destroy()
 
+    def write_end(self, packet):
+        # Destroy not required anymore: http://trac.osgeo.org/gdal/wiki/PythonGotchas
+        # self.dest_fd.Destroy()
+        log.info("End writing to: %s" % self.dest_data_source)
+        self.dest_fd = None
+        self.layer = None
         return packet
 
 

@@ -155,6 +155,8 @@ class Component:
         return "%s: in=%s out=%s" % (str(self.__class__), self._input_format, self._output_format)
 
     def process(self, packet):
+        # Current processor of packet
+        packet.component = self
 
         # Do something with the data
         result = self.before_invoke(packet)
