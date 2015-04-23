@@ -305,7 +305,7 @@ class FormatConverter(Filter):
         return packet
 
     @staticmethod
-    def record2record_array(packet):
+    def record2record_array(packet, converter_args=None):
         if not hasattr(packet, 'arr'):
             packet.arr = list()
 
@@ -313,7 +313,9 @@ class FormatConverter(Filter):
             packet.arr.append(packet.data)
             packet.consume()
 
-        if packet.is_end_of_stream() is True:
+        # At end of stream or when max array size reached: close the array
+        if packet.is_end_of_stream() is True or \
+                (converter_args is not None and len(packet.arr) >= converter_args['max_len']):
             # End of stream reached: assembled record array
             packet.data = packet.arr
             packet.arr = list()

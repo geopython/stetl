@@ -203,6 +203,8 @@ class parser:
                             v = int(parse_date(v)[0])
                         except:
                             v = 0
+                    elif v == '-':
+                        v = None
 
                 # JvdB: elaborate request '%r' string
                 if k == '%r':
