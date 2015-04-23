@@ -1,3 +1,9 @@
+Note: this example was the base for the full implementation in the NLExtract project where
+it will be maintained more actively.
+See: https://github.com/opengeogroep/NLExtract/tree/master/top10nl/etl
+
+=============================
+
 This example shows how to convert the Dutch national topographic dataset Top10NL (v1.1.1) GML to
 PostGIS.
 

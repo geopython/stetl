@@ -7,6 +7,7 @@
 from stetl.component import Config
 from stetl.input import Input
 from stetl.util import Util, etree
+from stetl.utils.apachelog import formats, parser
 from stetl.packet import FORMAT
 import csv
 
@@ -451,3 +452,90 @@ class JsonFileInput(FileInput):
             raise e
 
         return file_data
+
+class ApacheLogFileInput(FileInput):
+    """
+    Parses Apache log files. Lines are converted into records based on the log format.
+    Log format should follow Apache Log Format. See ApacheLogParser for details.
+
+    produces=FORMAT.record
+
+    """
+
+    @Config(ptype=dict, default=
+    {'%l': 'logname', '%>s': 'status', '%D': 'deltat', '%{User-agent}i': 'agent', '%b': 'bytes', '%{Referer}i': 'referer', '%u': 'user', '%t': 'time', "'%h": 'host', '%r': 'request'}
+    , required=False)
+    def key_map(self):
+        """
+        Map of cryptic %-field names to readable keys in record.
+
+        Type: dictionary
+
+        Required: False
+
+        Default:  {'%l': 'logname', '%>s': 'status', '%D': 'deltat', '%{User-agent}i': 'agent', '%b': 'bytes', '%{Referer}i': 'referer', '%u': 'user', '%t': 'time', "'%h": 'host', '%r': 'request'}
+
+        """
+        pass
+
+    @Config(ptype=str, default=formats['extended'], required=False)
+    def log_format(self):
+        """
+        Log format according to Apache CLF
+
+        Required: False
+
+        Default: '%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\"'
+        """
+        pass
+
+    # Constructor
+    def __init__(self, configdict, section):
+        FileInput.__init__(self, configdict, section, produces=FORMAT.record)
+        self.file_list_done = []
+        self.file = None
+        self.parser = parser(self.log_format, self.key_map, options={'methods': ['GET','POST'],
+                                                                     'use_native_types': True, 'request_path_only': True})
+
+    def read(self, packet):
+        # No more files left and done with current file ?
+        if not len(self.file_list) and self.file is None:
+            packet.set_end_of_stream()
+            log.info("EOF file list")
+            return packet
+
+        # Done with current file or first file ?
+        if self.file is None:
+            self.cur_file_path = self.file_list.pop(0)
+            self.file = open(self.cur_file_path, 'r')
+            log.info("file opened : %s" % self.cur_file_path)
+
+        if packet.is_end_of_stream():
+            return packet
+
+        # Assume valid line
+        line = self.file.readline()
+
+        # EOF reached ?
+        if not line or line == '':
+            packet.data = None
+
+            packet.set_end_of_doc()
+            log.info("EOF file")
+            if self.cur_file_path is not None:
+                self.file_list_done.append(self.cur_file_path)
+                self.cur_file_path = None
+                if not len(self.file_list):
+                    # No more files left: end of stream reached
+                    packet.set_end_of_stream()
+                    log.info("EOF file list")
+
+            self.file = None
+
+            return packet
+
+        # Parse logfile line into record (dict)
+        packet.data = self.parser.parse(line)
+        return packet
+
+
