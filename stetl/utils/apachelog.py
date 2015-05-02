@@ -97,16 +97,21 @@ __author__ = "Harry Fuecks <hfuecks@gmail.com>"
 __contributors__ = [
     "Peter Hickman <peterhi@ntlworld.com>",
     "Loic Dachary <loic@dachary.org>"
-    ]
+]
 
 import re
+import hashlib
+
 
 class ApacheLogParserError(Exception):
     pass
 
-class parser:
 
-    default_options = {'methods': ['GET', 'HEAD', 'POST'], 'use_native_types': True, 'request_path_only': True}
+class parser:
+    default_options = {'methods': ['GET', 'HEAD', 'POST'],
+                       'use_native_types': True,
+                       'request_path_only': True,
+                       'gen_key': False}
 
     def __init__(self, format, key_map=None, options=default_options):
         """
@@ -134,7 +139,7 @@ class parser:
         the generated regex.
         """
         format = format.strip()
-        format = re.sub('[ \t]+',' ',format)
+        format = re.sub('[ \t]+', ' ', format)
 
         subpatterns = []
 
@@ -229,9 +234,14 @@ class parser:
                 else:
                     data[k] = v
 
+            # JvdB option to generate unique key, e.g. for database insert
+            if self._options['gen_key']:
+                # Generate  unique key as md5-string from all values
+                data['key'] = hashlib.md5(str(data.values())).hexdigest()
+
             return data
 
-        raise ApacheLogParserError("Unable to parse: %s with the %s regular expression" % ( line, self._pattern ) )
+        raise ApacheLogParserError("Unable to parse: %s with the %s regular expression" % (line, self._pattern))
 
     def alias(self, name):
         """
@@ -258,20 +268,22 @@ class parser:
         """
         return self._names
 
+
 months = {
-    'Jan':'01',
-    'Feb':'02',
-    'Mar':'03',
-    'Apr':'04',
-    'May':'05',
-    'Jun':'06',
-    'Jul':'07',
-    'Aug':'08',
-    'Sep':'09',
-    'Oct':'10',
-    'Nov':'11',
-    'Dec':'12'
-    }
+    'Jan': '01',
+    'Feb': '02',
+    'Mar': '03',
+    'Apr': '04',
+    'May': '05',
+    'Jun': '06',
+    'Jul': '07',
+    'Aug': '08',
+    'Sep': '09',
+    'Oct': '10',
+    'Nov': '11',
+    'Dec': '12'
+}
+
 
 def parse_date(date):
     """
@@ -295,8 +307,8 @@ def parse_date(date):
         date[12:14],
         date[15:17],
         date[18:20],
-        ]
-    return (''.join(elems),date[21:])
+    ]
+    return (''.join(elems), date[21:])
 
 
 """
@@ -304,49 +316,48 @@ Frequenty used log formats stored here
 """
 formats = {
     # Common Log Format (CLF)
-    'common':r'%h %l %u %t \"%r\" %>s %b',
+    'common': r'%h %l %u %t \"%r\" %>s %b',
 
     # Common Log Format with Virtual Host
-    'vhcommon':r'%v %h %l %u %t \"%r\" %>s %b',
+    'vhcommon': r'%v %h %l %u %t \"%r\" %>s %b',
 
     # NCSA extended/combined log format
-    'extended':r'%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\"',
+    'extended': r'%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\"',
 
     # JvdB: extended with timing in nanosecs %D as last
-    'extended_timed':r'%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\" %D'
-    }
+    'extended_timed': r'%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\" %D'
+}
 
 if __name__ == '__main__':
     import unittest
 
     class TestApacheLogParser(unittest.TestCase):
-
         def setUp(self):
-            self.format = r'%h %l %u %t \"%r\" %>s '\
+            self.format = r'%h %l %u %t \"%r\" %>s ' \
                           r'%b \"%{Referer}i\" \"%{User-Agent}i\"'
-            self.fields = '%h %l %u %t %r %>s %b %{Referer}i '\
+            self.fields = '%h %l %u %t %r %>s %b %{Referer}i ' \
                           '%{User-Agent}i'.split(' ')
-            self.pattern = '^(\\S*) (\\S*) (\\S*) (\\[[^\\]]+\\]) '\
-                           '\\\"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)\\\" '\
-                           '(\\S*) (\\S*) \\\"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)\\\" '\
+            self.pattern = '^(\\S*) (\\S*) (\\S*) (\\[[^\\]]+\\]) ' \
+                           '\\\"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)\\\" ' \
+                           '(\\S*) (\\S*) \\\"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)\\\" ' \
                            '\\\"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)\\\"$'
-            self.line1  = r'212.74.15.68 - - [23/Jan/2004:11:36:20 +0000] '\
-                          r'"GET /images/previous.png HTTP/1.1" 200 2607 '\
-                          r'"http://peterhi.dyndns.org/bandwidth/index.html" '\
-                          r'"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.2) '\
-                          r'Gecko/20021202"'
-            self.line2  = r'212.74.15.68 - - [23/Jan/2004:11:36:20 +0000] '\
-                          r'"GET /images/previous.png=\" HTTP/1.1" 200 2607 '\
-                          r'"http://peterhi.dyndns.org/bandwidth/index.html" '\
-                          r'"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.2) '\
-                          r'Gecko/20021202"'
-            self.line3  = r'4.224.234.46 - - [20/Jul/2004:13:18:55 -0700] '\
-                          r'"GET /core/listing/pl_boat_detail.jsp?&units=Feet&checked'\
-                          r'_boats=1176818&slim=broker&&hosturl=giffordmarine&&ywo='\
-                          r'giffordmarine& HTTP/1.1" 200 2888 "http://search.yahoo.com/'\
-                          r'bin/search?p=\"grady%20white%20306%20bimini\"" '\
-                          r'"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; '\
-                          r'YPC 3.0.3; yplus 4.0.00d)"'
+            self.line1 = r'212.74.15.68 - - [23/Jan/2004:11:36:20 +0000] ' \
+                         r'"GET /images/previous.png HTTP/1.1" 200 2607 ' \
+                         r'"http://peterhi.dyndns.org/bandwidth/index.html" ' \
+                         r'"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.2) ' \
+                         r'Gecko/20021202"'
+            self.line2 = r'212.74.15.68 - - [23/Jan/2004:11:36:20 +0000] ' \
+                         r'"GET /images/previous.png=\" HTTP/1.1" 200 2607 ' \
+                         r'"http://peterhi.dyndns.org/bandwidth/index.html" ' \
+                         r'"Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.2) ' \
+                         r'Gecko/20021202"'
+            self.line3 = r'4.224.234.46 - - [20/Jul/2004:13:18:55 -0700] ' \
+                         r'"GET /core/listing/pl_boat_detail.jsp?&units=Feet&checked' \
+                         r'_boats=1176818&slim=broker&&hosturl=giffordmarine&&ywo=' \
+                         r'giffordmarine& HTTP/1.1" 200 2888 "http://search.yahoo.com/' \
+                         r'bin/search?p=\"grady%20white%20306%20bimini\"" ' \
+                         r'"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; ' \
+                         r'YPC 3.0.3; yplus 4.0.00d)"'
             self.p = parser(self.format)
 
         def testpattern(self):
@@ -357,103 +368,103 @@ if __name__ == '__main__':
 
         def testline1(self):
             data = self.p.parse(self.line1)
-            self.assertEqual(data['%h'], '212.74.15.68', msg = 'Line 1 %h')
-            self.assertEqual(data['%l'], '-', msg = 'Line 1 %l')
-            self.assertEqual(data['%u'], '-', msg = 'Line 1 %u')
-            self.assertEqual(data['%t'], '[23/Jan/2004:11:36:20 +0000]', msg = 'Line 1 %t')
+            self.assertEqual(data['%h'], '212.74.15.68', msg='Line 1 %h')
+            self.assertEqual(data['%l'], '-', msg='Line 1 %l')
+            self.assertEqual(data['%u'], '-', msg='Line 1 %u')
+            self.assertEqual(data['%t'], '[23/Jan/2004:11:36:20 +0000]', msg='Line 1 %t')
             self.assertEqual(
                 data['%r'],
                 'GET /images/previous.png HTTP/1.1',
-                msg = 'Line 1 %r'
-                )
-            self.assertEqual(data['%>s'], '200', msg = 'Line 1 %>s')
-            self.assertEqual(data['%b'], '2607', msg = 'Line 1 %b')
+                msg='Line 1 %r'
+            )
+            self.assertEqual(data['%>s'], '200', msg='Line 1 %>s')
+            self.assertEqual(data['%b'], '2607', msg='Line 1 %b')
             self.assertEqual(
                 data['%{Referer}i'],
                 'http://peterhi.dyndns.org/bandwidth/index.html',
-                msg = 'Line 1 %{Referer}i'
-                )
+                msg='Line 1 %{Referer}i'
+            )
             self.assertEqual(
                 data['%{User-Agent}i'],
                 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.2) Gecko/20021202',
-                msg = 'Line 1 %{User-Agent}i'
-                )
+                msg='Line 1 %{User-Agent}i'
+            )
 
 
         def testline2(self):
             data = self.p.parse(self.line2)
-            self.assertEqual(data['%h'], '212.74.15.68', msg = 'Line 2 %h')
-            self.assertEqual(data['%l'], '-', msg = 'Line 2 %l')
-            self.assertEqual(data['%u'], '-', msg = 'Line 2 %u')
+            self.assertEqual(data['%h'], '212.74.15.68', msg='Line 2 %h')
+            self.assertEqual(data['%l'], '-', msg='Line 2 %l')
+            self.assertEqual(data['%u'], '-', msg='Line 2 %u')
             self.assertEqual(
                 data['%t'],
                 '[23/Jan/2004:11:36:20 +0000]',
-                msg = 'Line 2 %t'
-                )
+                msg='Line 2 %t'
+            )
             self.assertEqual(
                 data['%r'],
                 r'GET /images/previous.png=\" HTTP/1.1',
-                msg = 'Line 2 %r'
-                )
-            self.assertEqual(data['%>s'], '200', msg = 'Line 2 %>s')
-            self.assertEqual(data['%b'], '2607', msg = 'Line 2 %b')
+                msg='Line 2 %r'
+            )
+            self.assertEqual(data['%>s'], '200', msg='Line 2 %>s')
+            self.assertEqual(data['%b'], '2607', msg='Line 2 %b')
             self.assertEqual(
                 data['%{Referer}i'],
                 'http://peterhi.dyndns.org/bandwidth/index.html',
-                msg = 'Line 2 %{Referer}i'
-                )
+                msg='Line 2 %{Referer}i'
+            )
             self.assertEqual(
                 data['%{User-Agent}i'],
                 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.2) Gecko/20021202',
-                msg = 'Line 2 %{User-Agent}i'
-                )
+                msg='Line 2 %{User-Agent}i'
+            )
 
         def testline3(self):
             data = self.p.parse(self.line3)
-            self.assertEqual(data['%h'], '4.224.234.46', msg = 'Line 3 %h')
-            self.assertEqual(data['%l'], '-', msg = 'Line 3 %l')
-            self.assertEqual(data['%u'], '-', msg = 'Line 3 %u')
+            self.assertEqual(data['%h'], '4.224.234.46', msg='Line 3 %h')
+            self.assertEqual(data['%l'], '-', msg='Line 3 %l')
+            self.assertEqual(data['%u'], '-', msg='Line 3 %u')
             self.assertEqual(
                 data['%t'],
                 '[20/Jul/2004:13:18:55 -0700]',
-                msg = 'Line 3 %t'
-                )
+                msg='Line 3 %t'
+            )
             self.assertEqual(
                 data['%r'],
-                r'GET /core/listing/pl_boat_detail.jsp?&units=Feet&checked_boats='\
-                r'1176818&slim=broker&&hosturl=giffordmarine&&ywo=giffordmarine& '\
+                r'GET /core/listing/pl_boat_detail.jsp?&units=Feet&checked_boats=' \
+                r'1176818&slim=broker&&hosturl=giffordmarine&&ywo=giffordmarine& ' \
                 r'HTTP/1.1',
-                msg = 'Line 3 %r'
-                )
-            self.assertEqual(data['%>s'], '200', msg = 'Line 3 %>s')
-            self.assertEqual(data['%b'], '2888', msg = 'Line 3 %b')
+                msg='Line 3 %r'
+            )
+            self.assertEqual(data['%>s'], '200', msg='Line 3 %>s')
+            self.assertEqual(data['%b'], '2888', msg='Line 3 %b')
             self.assertEqual(
                 data['%{Referer}i'],
-                r'http://search.yahoo.com/bin/search?p=\"grady%20white%20306'\
+                r'http://search.yahoo.com/bin/search?p=\"grady%20white%20306' \
                 r'%20bimini\"',
-                msg = 'Line 3 %{Referer}i'
-                )
+                msg='Line 3 %{Referer}i'
+            )
             self.assertEqual(
                 data['%{User-Agent}i'],
-                'Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; YPC 3.0.3; '\
+                'Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; YPC 3.0.3; ' \
                 'yplus 4.0.00d)',
-                msg = 'Line 3 %{User-Agent}i'
-                )
+                msg='Line 3 %{User-Agent}i'
+            )
 
 
         def testjunkline(self):
-            self.assertRaises(ApacheLogParserError,self.p.parse,'foobar')
+            self.assertRaises(ApacheLogParserError, self.p.parse, 'foobar')
 
         def testhasquotesaltn(self):
             p = parser(r'%a \"%b\" %c')
             line = r'foo "xyz" bar'
             data = p.parse(line)
-            self.assertEqual(data['%a'],'foo', '%a')
-            self.assertEqual(data['%b'],'xyz', '%c')
-            self.assertEqual(data['%c'],'bar', '%c')
+            self.assertEqual(data['%a'], 'foo', '%a')
+            self.assertEqual(data['%b'], 'xyz', '%c')
+            self.assertEqual(data['%c'], 'bar', '%c')
 
         def testparsedate(self):
             date = '[05/Dec/2006:10:51:44 +0000]'
-            self.assertEqual(('20061205105144','+0000'),parse_date(date))
+            self.assertEqual(('20061205105144', '+0000'), parse_date(date))
 
     unittest.main()

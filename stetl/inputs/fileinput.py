@@ -495,7 +495,9 @@ class ApacheLogFileInput(FileInput):
         self.file_list_done = []
         self.file = None
         self.parser = parser(self.log_format, self.key_map, options={'methods': ['GET','POST'],
-                                                                     'use_native_types': True, 'request_path_only': True})
+                                                                     'use_native_types': True,
+                                                                     'request_path_only': True,
+                                                                     'gen_key': True})
 
     def read(self, packet):
         # No more files left and done with current file ?

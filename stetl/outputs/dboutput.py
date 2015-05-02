@@ -54,7 +54,7 @@ class PostgresInsertOutput(PostgresDbOutput):
     consumes=FORMAT.record
     """
 
-    def __init__(self, configdict, section):
+    def __init__(self, configdict, section, consumes=FORMAT.record):
         DbOutput.__init__(self, configdict, section, consumes=[FORMAT.record_array, FORMAT.record])
         self.query = None
         self.db = None
@@ -71,6 +71,14 @@ class PostgresInsertOutput(PostgresDbOutput):
         log.info('Exit: disconnect from DB')
         self.db.disconnect()
 
+    def create_query(self, record):
+        # We assume that all records do the same INSERT key/values
+        # See http://grokbase.com/t/postgresql/psycopg/12735bvkmv/insert-into-with-a-dictionary-or-generally-with-a-variable-number-of-columns
+        # e.g. INSERT INTO lml_files ("file_name", "file_data") VALUES (%s,%s)
+        query = "INSERT INTO %s (%s) VALUES (%s)" % (self.cfg.get('table'), ",".join(['%s' % k for k in record]), ",".join(["%s",]*len(record.keys())))
+        log.info('query is %s', query)
+        return query
+
     def write(self, packet):
         # Deal with empty or zero-length data structures (list or dict)
         if packet.data is None or len(packet.data) == 0:
@@ -86,12 +94,9 @@ class PostgresInsertOutput(PostgresDbOutput):
         if type(record) is list and len(record) > 0:
             first_record = record[0]
 
+        # Create query once
         if self.query is None:
-            # We assume that all records do the same INSERT key/values
-            # See http://grokbase.com/t/postgresql/psycopg/12735bvkmv/insert-into-with-a-dictionary-or-generally-with-a-variable-number-of-columns
-            # e.g. INSERT INTO lml_files ("file_name", "file_data") VALUES (%s,%s)
-            self.query = "INSERT INTO %s (%s) VALUES (%s)" % (self.cfg.get('table'), ",".join(['%s' % k for k in first_record]), ",".join(["%s",]*len(first_record.keys())))
-            log.info('query is %s', self.query)
+            self.query = self.create_query(first_record)
 
         # Check if record is single (dict) or array (list of dict)
         if type(record) is dict:
@@ -99,7 +104,7 @@ class PostgresInsertOutput(PostgresDbOutput):
             self.db.execute(self.query, record.values())
             self.db.commit(close=False)
 
-            log.info('committed record key=%s' % record[self.key])
+            # log.info('committed record key=%s' % record[self.key])
 
         elif type(record) is list:
                 # Multiple records in list
