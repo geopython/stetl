@@ -1,6 +1,14 @@
 Changes
 =======
 
+v1.0.8 - 2 july 2015
+--------------------
+
+See https://github.com/justb4/stetl/issues?q=milestone%3A%22Version+1.0.8%22
+
+- generic OgrOutput component
+- Apache Log File Input
+
 v1.0.7 - 24 nov 2014
 --------------------
 
