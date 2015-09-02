@@ -1,7 +1,7 @@
 exclude *.txt *.py *.md
 include CHANGES.txt CREDITS.txt LICENSE.txt VERSION.txt README.md setup.py
-recursive-include docs *.*
+recursive-include docs *
 recursive-exclude docs/_build *
-recursive-include examples  *.*
-recursive-include tests *.py *.txt
+recursive-include examples  *
+recursive-include tests *
 exclude MANIFEST.in
