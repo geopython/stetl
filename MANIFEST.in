@@ -1,4 +1,4 @@
-exclude *.txt *.py *.md
+exclude *.txt *.py *.md .DS_Store
 include CHANGES.txt CREDITS.txt LICENSE.txt VERSION.txt README.md setup.py
 recursive-include docs *
 recursive-exclude docs/_build *
