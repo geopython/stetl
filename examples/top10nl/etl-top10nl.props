@@ -1,0 +1,28 @@
+# Properties to be substituted in etl.cfg
+
+# Input dir or files
+# gml_files=/Users/just/geodata/top10nl/TOP10NL_GML_50D_Blokken_september_2012/GML_50D_Blokken/Top10NL_05Oost.gml
+gml_files=input
+
+# Misc
+temp_dir=temp
+max_features=20
+
+# How to treat multiple occurences of elems
+# May use: these options
+# Note: ' ' is used a s space separator
+# multi_opts=-splitlistfields -maxsubfields 1
+# multi_opts=-splitlistfields
+# multi_opts=-fieldTypeToString StringList
+# multi_opts= 
+multi_opts=-fieldTypeToString StringList
+
+spatial_extent=120000 450000 160000 500000
+
+# Output
+database=top10nl
+host=localhost
+port=5432
+user=postgres
+password=postgres
+schema=test

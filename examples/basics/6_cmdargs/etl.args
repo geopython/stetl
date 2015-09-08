@@ -1,0 +1,4 @@
+# Arguments in properties file
+in_xml=input/cities.xml
+in_xsl=cities2gml.xsl
+out_xml=output/gmlcities.gml

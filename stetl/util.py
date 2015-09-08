@@ -6,6 +6,7 @@
 
 import logging, os, glob, sys, types
 from time import *
+from ConfigParser import ConfigParser
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(name)s %(levelname)s %(message)s')
@@ -99,6 +100,35 @@ class Util:
             x[1] = x[1].replace(space, ' ')
 
         return dict(dict_arr)
+
+    # Convert a dict to a string
+    @staticmethod
+    def dict_to_string(dict_v):
+        # Convert/flatten dict to string http://codereview.stackexchange.com/questions/7953/how-do-i-flatten-a-dictionary-into-a-string
+        return ' '.join("%s=%r" % (key, val) for (key, val) in dict_v.iteritems())
+
+    # Convert a properties file to a dict
+    @staticmethod
+    def propsfile_to_dict(file_path):
+        # See http://stackoverflow.com/questions/2819696/parsing-properties-file-in-python
+        # Need a [section] header to parse .ini files, so fake it!
+        class FakeSecHead(object):
+            def __init__(self, fp):
+                self.fp = fp
+                self.sechead = '[asection]\n'
+
+            def readline(self):
+                if self.sechead:
+                    try:
+                        return self.sechead
+                    finally:
+                        self.sechead = None
+                else:
+                    return self.fp.readline()
+
+        cp = ConfigParser()
+        cp.readfp(FakeSecHead(open(file_path)))
+        return cp._sections['asection']
 
     @staticmethod
     def elem_to_dict(elem, strip_space=True, strip_ns=True, sub=False, attr_prefix='', gml2ogr=True, ogr2json=True):

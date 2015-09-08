@@ -11,7 +11,7 @@ from util import Util
 from version import __version__
 import argparse #apt-get install python-argparse
 import inspect
-
+import os
 log = Util.get_log('main')
 
 def parse_args():
@@ -25,7 +25,7 @@ def parse_args():
                            dest='config_section', required=False)
 
     argparser.add_argument('-a ', '--args', type=str,
-                           help='Arguments to be substituted for {argN}s in config file, as "arg1=foo arg2=bar" etc',
+                           help='Arguments or .properties file to be substituted for {argN}s in config file, as -a "arg1=foo arg2=bar" or -a args.properties',
                            dest='config_args', required=False)
 
     argparser.add_argument('-d ', '--doc', type=str,
@@ -35,8 +35,12 @@ def parse_args():
     args = argparser.parse_args()
 
     if args.config_args:
-        # Convert string to dict: http://stackoverflow.com/a/1248990
-        args.config_args = Util.string_to_dict(args.config_args)
+        if os.path.isfile(args.config_args):
+            log.info('Found args file at: %s' % args.config_args)
+            args.config_args = Util.propsfile_to_dict(args.config_args)
+        else:
+            # Convert string to dict: http://stackoverflow.com/a/1248990
+            args.config_args = Util.string_to_dict(args.config_args)
 
     return args
 

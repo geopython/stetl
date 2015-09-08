@@ -1,6 +1,8 @@
 Note: this example was the base for the full implementation in the NLExtract project where
 it will be maintained more actively.
+
 See: https://github.com/opengeogroep/NLExtract/tree/master/top10nl/etl
+USE NLExtract FOR REAL TOP10NL EXTRACT!!!
 
 =============================
 

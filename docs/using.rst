@@ -200,9 +200,21 @@ example `6_cmdargs <https://github.com/justb4/stetl/tree/master/examples/basics/
 	class = outputs.fileoutput.FileOutput
 	file_path = {out_xml}
 
-Note the symbolic input, xsl and output files. We can now perform this ETL using the `stetl -a option`. ::
+Note the symbolic input, xsl and output files. We can now perform this ETL using the `stetl -a option` in two ways.
+One, passing the arguments on the commandline, like ::
 
-	stetl -c etl.cfg -a "in_xml=input/cities.xml in_xsl=cities2gml.xsl out_xml=output/gmlcities.gml".
+	stetl -c etl.cfg -a "in_xml=input/cities.xml in_xsl=cities2gml.xsl out_xml=output/gmlcities.gml"
+
+Two, passing the arguments in a properties file, here called `etl.args` (the name of the suffix .args is not significant). ::
+
+	stetl -c etl.cfg -a etl.args
+
+Where the content of the `etl.args` properties file is: ::
+
+	# Arguments in properties file
+	in_xml=input/cities.xml
+	in_xsl=cities2gml.xsl
+	out_xml=output/gmlcities.gml
 
 This makes an ETL chain highly reusable. A very elaborate Stetl config with parameter substitution can be seen in the
 `Top10NL ETL <https://github.com/justb4/stetl/blob/master/examples/top10nl/etl-top10nl.cfg>`_.
