@@ -70,6 +70,7 @@ class Packet:
 class FORMAT:
     none = 'none'
     xml_line_stream = 'xml_line_stream'
+    line_stream = 'line_stream'
     etree_doc = 'etree_doc'
     etree_element = 'etree_element'
     etree_feature_array = 'etree_feature_array'

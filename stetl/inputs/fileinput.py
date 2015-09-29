@@ -298,18 +298,15 @@ class XmlElementStreamerFileInput(FileInput):
 
         return packet
 
-class XmlLineStreamerFileInput(FileInput):
+
+class LineStreamerFileInput(FileInput):
     """
-    DEPRECATED Streams lines from an XML file(s)
+    Reads text-files, producing a stream of lines, one line per Packet.
     NB assumed is that lines in the file have newlines !!
-    DEPRECATED better is to use XmlElementStreamerFileInput for GML features.
-
-    produces=FORMAT.xml_line_stream
     """
 
-    # Constructor
-    def __init__(self, configdict, section):
-        FileInput.__init__(self, configdict, section, produces=FORMAT.xml_line_stream)
+    def __init__(self, configdict, section, produces=FORMAT.line_stream):
+        FileInput.__init__(self, configdict, section, produces)
         self.file_list_done = []
         self.file = None
 
@@ -350,8 +347,30 @@ class XmlLineStreamerFileInput(FileInput):
 
             return packet
 
-        packet.data = line.decode('utf-8')
+        line = line.decode('utf-8')
+        packet.data = self.process_line(line)
+
         return packet
+
+    def process_line(self, line):
+        """
+        Override in subclass.
+        """
+        return line
+
+
+class XmlLineStreamerFileInput(LineStreamerFileInput):
+    """
+    DEPRECATED Streams lines from an XML file(s)
+    NB assumed is that lines in the file have newlines !!
+    DEPRECATED better is to use XmlElementStreamerFileInput for GML features.
+
+    produces=FORMAT.xml_line_stream
+    """
+
+    # Constructor
+    def __init__(self, configdict, section):
+        LineStreamerFileInput.__init__(self, configdict, section, produces=FORMAT.xml_line_stream)
 
 
 class CsvFileInput(FileInput):

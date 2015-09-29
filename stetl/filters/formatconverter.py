@@ -405,6 +405,9 @@ FORMAT_CONVERTERS = {
         FORMAT.etree_doc: FormatConverter.string2etree_doc,
         FORMAT.string: FormatConverter.no_op
     },
+    FORMAT.line_stream: {
+        FORMAT.string: FormatConverter.no_op
+    },
     FORMAT.xml_line_stream: {
         FORMAT.string: FormatConverter.no_op
     }
