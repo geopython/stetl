@@ -1,4 +1,4 @@
-The directories below each show basic examples for Setl.
+The directories below each show basic examples for Stetl.
 The examples build up from simple to more complex by directory number prefix.
 
 As a general health test you may run all examples using ./runall.sh
