@@ -5,10 +5,23 @@
 #
 # Author: Just van den Broecke
 #
-from etl import ETL
-from factory import factory
-from util import Util
-from version import __version__
+
+try:
+    from etl import ETL
+except ImportError:
+    from .etl import ETL
+try:
+    from factory import factory
+except ImportError:
+    from .factory import factory
+try:
+    from util import Util
+except ImportError:
+    from .util import Util
+try:
+    from version import __version__
+except ImportError:
+    from .version import __version__
 import argparse #apt-get install python-argparse
 import inspect
 import os
@@ -85,7 +98,7 @@ def print_classes(package):
         for name, data in inspect.getmembers(modname, inspect.isclass):
             if name == '__builtins__':
                 continue
-            print name, data
+            print (name, data)
 
 
 # DEPRECATED, now using @Config which also documents with Sphinx
@@ -103,7 +116,7 @@ def print_doc(class_name):
         # print ('\nConfiguration attributes: \n')
         # print_config_attrs(class_obj)
 
-    except Exception, e:
+    except (Exception) as e:
         log.error("cannot print info class named '%s' e=%s - you made a typo?" % (class_name, str(e)))
         raise e
 

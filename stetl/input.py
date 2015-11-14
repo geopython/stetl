@@ -4,8 +4,15 @@
 #
 # Author: Just van den Broecke
 #
-from util import Util
-from component import Component
+
+try:
+    from util import Util
+except ImportError:
+    from .util import Util
+try:
+    from component import Component
+except ImportError:
+    from .component import Component
 
 log = Util.get_log('input')
 

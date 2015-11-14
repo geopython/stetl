@@ -5,8 +5,14 @@
 # Author: Just van den Broecke
 #
 import os
-from util import Util, ConfigSection
-from packet import FORMAT
+try:
+    from util import Util, ConfigSection
+except ImportError:
+    from .util import Util, ConfigSection
+try:
+    from packet import FORMAT
+except ImportError:
+    from .packet import FORMAT
 
 log = Util.get_log('component')
 

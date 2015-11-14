@@ -342,10 +342,13 @@ try:
     from cStringIO import StringIO
 
     log.info("Found cStringIO, good!")
-except:
-    from StringIO import StringIO
+except ImportError:
+    try:
+        from StringIO import StringIO
 
-    log.warning("Found StringIO (this is suboptimal, try cStringIO")
+        log.warning("Found StringIO (this is suboptimal, try cStringIO")
+    except ImportError:
+        from io import StringIO
 
 try:
     from lxml import etree

@@ -4,8 +4,15 @@
 #
 # Author: Just van den Broecke
 #
-from component import Component
-from util import Util, etree
+
+try:
+    from component import Component
+except ImportError:
+    from .component import Component
+try:
+    from util import Util, etree
+except ImportError:
+    from .util import Util, etree
 
 log = Util.get_log('output')
 

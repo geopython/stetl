@@ -4,7 +4,11 @@
 #
 # Author: Just van den Broecke
 #
-from util import etree
+
+try:
+    from util import etree
+except ImportError:
+    from .util import etree
 import json
 
 class Packet:

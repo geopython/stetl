@@ -180,7 +180,7 @@ class XmlFileInput(FileInput):
         data = None
         try:
             data = etree.parse(file_path)
-        except Exception, e:
+        except (Exception) as e:
             log.info("file read and parsed NOT OK : %s" % file_path)
 
         return data
@@ -428,7 +428,7 @@ class CsvFileInput(FileInput):
                     packet.data = self.csv_reader.next()
 
             log.info("CSV row nr %d read: %s" % (self.csv_reader.line_num - 1, packet.data))
-        except Exception, e:
+        except (Exception) as e:
             if self._output_format == FORMAT.record_array:
                 packet.data = self.arr
 
@@ -466,7 +466,7 @@ class JsonFileInput(FileInput):
                 with open(file_path) as data_file:
                     file_data = json.load(data_file)
 
-        except Exception, e:
+        except (Exception) as e:
             log.error('Cannot read JSON from %s, err= %s' % (file_path, str(e)))
             raise e
 

@@ -88,10 +88,10 @@ class HttpInput(Input):
                 query_string = urllib.urlencode(parameters)
 
             response = urlopen(req, query_string)
-        except HTTPError as e:
+        except (HTTPError) as e:
             log.error('HTTPError fetching from URL %s: code=%d e=%s' % (url, e.code, e))
             raise e
-        except URLError as e:
+        except (URLError) as e:
             log.error('URLError fetching from URL %s: reason=%s e=%s' % (url, e.reason, e))
             raise e
 

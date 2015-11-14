@@ -6,11 +6,26 @@
 #
 import os
 import sys
-from ConfigParser import ConfigParser
-import version
-from util import Util
-from chain import Chain
-import StringIO
+try:
+    from ConfigParser import ConfigParser
+except ImportError:
+    from configparser import ConfigParser
+try:
+    from version import __version__
+except ImportError:
+    from .version import __version__
+try:
+    from util import Util
+except ImportError:
+    from .util import Util
+try:
+    from chain import Chain
+except ImportError:
+    from .chain import Chain
+try:
+    import StringIO
+except ImportError:
+    from io import StringIO
 
 log = Util.get_log('ETL')
 
@@ -33,7 +48,7 @@ class ETL:
         """
         # args_dict is optional and is used to do string substitutions in options_dict.config file
 
-        log.info("INIT - Stetl version is %s" % str(version.__version__))
+        log.info("INIT - Stetl version is %s" % __version__)
 
         self.options_dict = options_dict
         config_file = self.options_dict.get('config_file')
@@ -70,7 +85,7 @@ class ETL:
             else:
                 # Parse config file directly
                 self.configdict.read(config_file)
-        except Exception, e:
+        except (Exception) as e:
             log.error("Fatal Error reading config file: err=%s" % str(e))
 
 

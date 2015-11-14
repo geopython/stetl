@@ -5,9 +5,18 @@
 # Author: Just van den Broecke
 #
 
-from factory import factory
-from packet import Packet
-from util import Util
+try:
+    from factory import factory
+except ImportError:
+    from .factory import factory
+try:
+    from packet import Packet
+except ImportError:
+    from .packet import Packet
+try:
+    from util import Util
+except ImportError:
+    from .util import Util
 
 log = Util.get_log('chain')
 
@@ -79,7 +88,7 @@ class Chain:
                 packet.init()
                 packet = self.first_comp.process(packet)
                 rounds += 1
-                #            except (Exception), e:
+                #            except (Exception) as e:
             #                log.error("Fatal Error in ETL: %s"% str(e))
             #                break
         finally:

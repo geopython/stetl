@@ -65,7 +65,7 @@ class XmlAssembler(Filter):
         # Start new doc (TODO clone)
         try:
             etree_doc = etree.fromstring(self.container_doc, self.xml_parser)
-        except Exception, e:
+        except (Exception) as e:
             log.error("new container doc not OK")
             return packet
 

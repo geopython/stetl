@@ -170,7 +170,7 @@ class Jinja2TemplatingFilter(TemplatingFilter):
     def create_template(self):
         try:
             from jinja2 import Environment, FileSystemLoader
-        except Exception, e:
+        except (Exception) as e:
             log.error(
                 'Cannot import modules from Jinja2, err= %s; You probably need to install Jinja2 first, see http://jinja.pocoo.org',
                 str(e))
@@ -206,7 +206,7 @@ class Jinja2TemplatingFilter(TemplatingFilter):
                     else:
                         template_globals.update(globals_struct)
 
-                except Exception, e:
+                except (Exception) as e:
                     log.error('Cannot read JSON file, err= %s', str(e))
                     raise e
 
@@ -297,7 +297,7 @@ class Jinja2TemplatingFilter(TemplatingFilter):
                 options.append('GMLID=%s' % gml_id)
 
             gml_str = geom.ExportToGML(options=options)
-        except Exception, e:
+        except (Exception) as e:
             gml_str = 'Failure in CreateGeometryFromJson or ExportToGML, err= %s; check your data and Stetl log' % str(
                 e)
             log.error(gml_str)

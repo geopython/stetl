@@ -155,13 +155,13 @@ class DeegreeBlobstoreInput(Input):
             # print '[' + self.buffer.getvalue() + ']'
             packet.data = etree.parse(self.buffer, self.xml_parser)
         #            print buffer.getvalue()
-        except Exception, e:
+        except (Exception) as e:
             bufStr = self.buffer.getvalue()
             if not bufStr:
                 log.info("parse buffer empty: content=[%s]" % bufStr)
             else:
                 log.error("error in buffer parsing %s" % str(e))
-                print bufStr
+                print (bufStr)
                 raise
         self.buffer.close()
         self.buffer = None

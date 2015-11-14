@@ -4,7 +4,11 @@
 #
 # Author: Just van den Broecke
 #
-from util import Util
+
+try:
+    from util import Util
+except ImportError:
+    from .util import Util
 
 log = Util.get_log("postgis")
 
@@ -31,7 +35,7 @@ class PostGIS:
             self.cursor.execute(script)
             self.connection.commit()
             log.info('script executed')
-        except psycopg2.DatabaseError, e:
+        except (psycopg2.DatabaseError) as e:
             log.warn("error '%s' from script '%s'" % (str(e), str(bestand)))
 
     def connect(self, initdb=False):
@@ -47,14 +51,14 @@ class PostGIS:
 
             self.set_schema()
             log.debug("Connected to database %s" % (self.config['database']))
-        except Exception, e:
+        except (Exception) as e:
             log.error("Cannot connect to database '%s'" % (self.config['database']))
 
     def disconnect(self):
         self.e = None
         try:
             self.connection.close()
-        except (Exception), e:
+        except (Exception) as e:
             self.e = e
             log.error("error %s in close" % (str(e)))
 
@@ -66,7 +70,7 @@ class PostGIS:
             self.connection.commit()
             if close is True:
                 self.connection.close()
-        except (Exception), e:
+        except (Exception) as e:
             self.e = e
             log.error("error %s in commit" % (str(e)))
 
@@ -120,7 +124,7 @@ class PostGIS:
                 self.cursor.execute(sql)
 
                 # log.debug(self.cursor.statusmessage)
-        except (Exception), e:
+        except (Exception) as e:
             log.error("error %s in query: %s with params: %s" % (str(e), str(sql), str(parameters)))
             #            self.log_actie("uitvoeren_db", "n.v.t", "fout=%s" % str(e), True)
             return -1
@@ -139,7 +143,7 @@ class PostGIS:
             self.connection.commit()
             f.close()
             log.info("SQL executed OK")
-        except (Exception), e:
+        except (Exception) as e:
             self.e = e
             self.log_action("file_execute", "n.v.t", "fout=%s" % str(e), True)
             log.warn("can't execute SQL script, error: %s" % (str(e)))
@@ -154,7 +158,7 @@ class PostGIS:
             self.connection.close()
 
             # log.debug(self.cursor.statusmessage)
-        except (Exception), e:
+        except (Exception) as e:
             self.e = e
             log.error("error %s in transaction: %s with parms: %s" % (str(e), str(sql), str(parameters)))
 
