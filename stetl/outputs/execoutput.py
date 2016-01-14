@@ -7,6 +7,7 @@
 import subprocess
 import os
 import shutil
+from stetl.component import Config
 from stetl.output import Output
 from stetl.util import Util
 from stetl.packet import FORMAT
@@ -44,6 +45,88 @@ class Ogr2OgrExecOutput(ExecOutput):
     consumes=FORMAT.string
     """
 
+    # Start attribute config meta
+    # Applying Decorator pattern with the Config class to provide
+    # read-only config values from the configured properties.
+
+    @Config(ptype=str, default=None, required=True)
+    def dest_data_source(self):
+        """
+        String denoting the OGR data destination. Usually a path to a file like "path/rivers.shp" or connection string
+        to PostgreSQL like "PG: host=localhost dbname='rivers' user='postgres'".
+
+        Required: True
+
+        Default: None
+        """
+        pass
+
+    @Config(ptype=str, default=None, required=False)
+    def dest_format(self):
+        """
+        Instructs GDAL to use driver by that name to open data destination. Not required for
+        many standard formats that are self-describing like ESRI Shapefile.
+
+        Examples: 'PostgreSQL', 'GeoJSON' etc
+
+        Required: False
+
+        Default: None
+        """
+        pass
+
+    @Config(ptype=list, default=[], required=False)
+    def lco(self):
+        """
+        Options for newly created layer (-lco).
+
+        Type: list
+
+        Required: False
+
+        Default: []
+        """
+
+        pass
+
+    @Config(ptype=list, default=None, required=False)
+    def spatial_extent(self):
+        """
+        Spatial extent (-spat), to pass as xmin ymin xmax ymax
+
+        Type: list
+
+        Required: False
+
+        Default: []
+        """
+        pass
+
+    @Config(ptype=str, default=None, required=False)
+    def gfs_template(self):
+        """
+        Name of GFS template file to use during loading. Passed to ogr2ogr as
+        --config GML_GFS_TEMPLATE <name>
+
+        Required: False
+
+        Default: None
+        """
+        pass
+
+    @Config(ptype=list, default=None, required=False)
+    def options(self):
+        """
+        Miscellaneous options to pass to ogr2ogr.
+
+        Required: False
+
+        Default: None
+        """
+        pass
+
+    # End attribute config meta
+
     def __init__(self, configdict, section):
         ExecOutput.__init__(self, configdict, section, consumes=FORMAT.string)
 
@@ -52,7 +135,8 @@ class Ogr2OgrExecOutput(ExecOutput):
         # so we copy the .gfs file each time with the .gml file with
         # the same base name
         self.lco = self.cfg.get('lco')
-        self.spatial_extent = self.cfg.get('spatial_extent')
+        spatial_extent = self.cfg.get('spatial_extent')
+        gfs_template = self.cfg.get('gfs_template')
         options = self.cfg.get('options')
         
         dest_format = self.cfg.get('dest_format')
@@ -65,8 +149,10 @@ class Ogr2OgrExecOutput(ExecOutput):
                 
         self.ogr2ogr_cmd = 'ogr2ogr -f ' + dest_format + ' ' + dest_data_source
         
-        if self.spatial_extent:
-            self.ogr2ogr_cmd += ' -spat ' + self.spatial_extent
+        if spatial_extent:
+            self.ogr2ogr_cmd += ' -spat ' + spatial_extent
+        if gfs_template:
+            self.ogr2ogr_cmd += ' --config GML_GFS_TEMPLATE ' + gfs_template
         if options:
             self.ogr2ogr_cmd += ' ' + options
             
@@ -82,7 +168,12 @@ class Ogr2OgrExecOutput(ExecOutput):
             ogr2ogr_cmd += ' ' + self.lco
             self.first_run = False
 
-        for item in packet.data:
+        if type(packet.data) is list:
+            for item in packet.data:
+                # Append file name to command as last argument
+                self.execute_cmd(ogr2ogr_cmd + ' ' + item)
+        else:
             # Append file name to command as last argument
-            self.execute_cmd(ogr2ogr_cmd + ' ' + item)
+            self.execute_cmd(ogr2ogr_cmd + ' ' + packet.data)
+
         return packet
