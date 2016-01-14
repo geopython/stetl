@@ -125,6 +125,20 @@ class Ogr2OgrExecOutput(ExecOutput):
         """
         pass
 
+    @Config(ptype=bool, default=False, required=False)
+    def cleanup_input(self):
+        """
+        Flag to indicate whether the input file to ogr2ogr should be cleaned up.
+
+        Type: boolean
+
+        Required: False
+
+        Default: False
+        """
+
+        pass
+
     # End attribute config meta
 
     def __init__(self, configdict, section):
@@ -155,6 +169,7 @@ class Ogr2OgrExecOutput(ExecOutput):
             self.ogr2ogr_cmd += ' --config GML_GFS_TEMPLATE ' + gfs_template
         if options:
             self.ogr2ogr_cmd += ' ' + options
+        self.cleanup_input = self.cfg.get('cleanup_input')
             
         self.first_run = True
 
@@ -167,13 +182,21 @@ class Ogr2OgrExecOutput(ExecOutput):
         if self.lco and self.first_run is True:
             ogr2ogr_cmd += ' ' + self.lco
             self.first_run = False
+            
+        import os.path
 
         if type(packet.data) is list:
             for item in packet.data:
-                # Append file name to command as last argument
-                self.execute_cmd(ogr2ogr_cmd + ' ' + item)
+                self.execute(ogr2ogr_cmd, item)
         else:
-            # Append file name to command as last argument
-            self.execute_cmd(ogr2ogr_cmd + ' ' + packet.data)
+            self.execute(ogr2ogr_cmd, packet.data)
 
         return packet
+        
+    def execute(self, ogr2ogr_cmd, file_path):
+        # Append file name to command as last argument
+        self.execute_cmd(ogr2ogr_cmd + ' ' + file_path)
+            
+        if self.cleanup_input:
+            os.remove(file_path)
+    
