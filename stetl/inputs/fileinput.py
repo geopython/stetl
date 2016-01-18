@@ -472,6 +472,7 @@ class JsonFileInput(FileInput):
 
         return file_data
 
+
 class ApacheLogFileInput(FileInput):
     """
     Parses Apache log files. Lines are converted into records based on the log format.
@@ -560,3 +561,39 @@ class ApacheLogFileInput(FileInput):
         return packet
 
 
+class ZipFileInput(FileInput):
+    """
+    Parse ZIP file from file system or URL into a stream of records containing file names.
+
+    produces=FORMAT.record
+    """
+
+    def __init__(self, configdict, section):
+        FileInput.__init__(self, configdict, section, produces=FORMAT.record)
+        self.file_content = None
+        
+    def read(self, packet):
+        # No more files left and done with current file ?
+        if not(self.file_content) and not len(self.file_list):
+            packet.set_end_of_stream()
+            log.info("EOF file list, all files done")
+            return packet
+
+        # Done with current file or first file ?
+        if self.file_content is None:
+            self.cur_file_path = self.file_list.pop(0)
+
+            # Read file names
+            import zipfile
+            
+            zf = zipfile.ZipFile(self.cur_file_path, 'r')
+            self.file_content = [{'file_path': self.cur_file_path, 'name': name} for name in zf.namelist()]
+
+            log.info("zip file read : %s size=%d" % (self.cur_file_path, len(self.file_content)))
+
+        packet.data = self.file_content.pop(0)
+        
+        if not len(self.file_content):
+            self.file_content = None
+        
+        return packet

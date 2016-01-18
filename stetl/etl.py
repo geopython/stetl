@@ -43,7 +43,7 @@ class ETL:
             sys.exit(1)
 
         ETL.CONFIG_DIR = os.path.dirname(os.path.abspath(config_file))
-        log.info("Config/working dir =%s" % ETL.CONFIG_DIR)
+        log.info("Config/working dir = %s" % ETL.CONFIG_DIR)
 
         self.configdict = ConfigParser()
 

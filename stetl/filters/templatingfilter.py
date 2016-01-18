@@ -95,11 +95,11 @@ class StringTemplatingFilter(TemplatingFilter):
     contains the actual values to be substituted in the template string as a record (key/value pairs).
     Output is a regular string.
 
-    consumes=FORMAT.record, produces=FORMAT.string
+    consumes=FORMAT.record or FORMAT.record_array, produces=FORMAT.string
     """
 
     def __init__(self, configdict, section):
-        TemplatingFilter.__init__(self, configdict, section, consumes=FORMAT.record)
+        TemplatingFilter.__init__(self, configdict, section, consumes=[FORMAT.record, FORMAT.record_array])
 
     def create_template(self):
         # Init once
@@ -115,7 +115,11 @@ class StringTemplatingFilter(TemplatingFilter):
         self.template = Template(self.template_string)
 
     def render_template(self, packet):
-        packet.data = self.template.substitute(packet.data)
+        if type(packet.data) is list:
+            packet.data = [self.template.substitute(item) for item in packet.data]
+        else:
+            packet.data = self.template.substitute(packet.data)
+            
         return packet
 
 
