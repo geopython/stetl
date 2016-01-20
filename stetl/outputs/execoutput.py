@@ -149,8 +149,8 @@ class Ogr2OgrExecOutput(ExecOutput):
         # so we copy the .gfs file each time with the .gml file with
         # the same base name
         self.lco = self.cfg.get('lco')
+        self.gfs_template = self.cfg.get('gfs_template')
         spatial_extent = self.cfg.get('spatial_extent')
-        gfs_template = self.cfg.get('gfs_template')
         options = self.cfg.get('options')
         
         dest_format = self.cfg.get('dest_format')
@@ -165,8 +165,6 @@ class Ogr2OgrExecOutput(ExecOutput):
         
         if spatial_extent:
             self.ogr2ogr_cmd += ' -spat ' + spatial_extent
-        if gfs_template:
-            self.ogr2ogr_cmd += ' --config GML_GFS_TEMPLATE ' + gfs_template
         if options:
             self.ogr2ogr_cmd += ' ' + options
         self.cleanup_input = self.cfg.get('cleanup_input')
@@ -194,9 +192,18 @@ class Ogr2OgrExecOutput(ExecOutput):
         return packet
         
     def execute(self, ogr2ogr_cmd, file_path):
+        # Copy the .gfs file if required, use the same base name
+        # so ogr2ogr will pick it up.
+        if self.gfs_template:
+            file_ext = os.path.splitext(file_path)
+            gfs_path = file_ext[0] + '.gfs'
+            shutil.copy(self.gfs_template, gfs_path)
+            
         # Append file name to command as last argument
         self.execute_cmd(ogr2ogr_cmd + ' ' + file_path)
             
         if self.cleanup_input:
             os.remove(file_path)
+            if self.gfs_template:
+                os.remove(gfs_path)
     
