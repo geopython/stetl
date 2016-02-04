@@ -10,6 +10,7 @@ from stetl.util import Util, etree
 from stetl.utils.apachelog import formats, parser
 from stetl.packet import FORMAT
 import csv
+import re
 
 log = Util.get_log('fileinput')
 
@@ -568,6 +569,17 @@ class ZipFileInput(FileInput):
     produces=FORMAT.record
     """
 
+    @Config(ptype=str, default=None, required=False)
+    def name_filter(self):
+        """
+        Regular expression which is used as a filter to the ZIP file names.
+
+        Required: False
+
+        Default: None
+        """
+        pass
+
     def __init__(self, configdict, section):
         FileInput.__init__(self, configdict, section, produces=FORMAT.record)
         self.file_content = None
@@ -588,6 +600,10 @@ class ZipFileInput(FileInput):
             
             zf = zipfile.ZipFile(self.cur_file_path, 'r')
             self.file_content = [{'file_path': self.cur_file_path, 'name': name} for name in zf.namelist()]
+
+            # Apply name filter
+            if self.name_filter:
+                self.file_content = [item for item in self.file_content if re.match(self.name_filter, item["name"])]
 
             log.info("zip file read : %s size=%d" % (self.cur_file_path, len(self.file_content)))
 
