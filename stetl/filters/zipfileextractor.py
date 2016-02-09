@@ -11,6 +11,8 @@ from stetl.packet import FORMAT
 
 log = Util.get_log('zipfileextractor')
 
+BUFFER_SIZE = 1024 * 1024 * 1024
+
 
 class ZipFileExtractor(Filter):
     """
@@ -50,7 +52,12 @@ class ZipFileExtractor(Filter):
 
         with zipfile.ZipFile(packet.data['file_path']) as z:
             with open(self.cur_file_path, 'wb') as f:
-                f.write(z.read(packet.data['name']))
+                with z.open(packet.data['name']) as zf:
+                    while True:
+                        buffer = zf.read(BUFFER_SIZE)
+                        if not buffer:
+                            break
+                        f.write(buffer)
 
         packet.data = self.cur_file_path
         return packet
