@@ -26,6 +26,7 @@ Contents:
    install.rst
    background.rst
    using.rst
+   cases.rst
    code.rst
    contact.rst
    links.rst
