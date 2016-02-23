@@ -51,7 +51,7 @@ See https://github.com/justb4/inspire-foss/blob/master/etl/NL.Kadaster/Addresses
 Ordnance Survey
 ---------------
 
-A successful Proof-of-Concept to convert Ordnance Survey Mastermap to PostGIS:
+A successful Proof-of-Concept to convert Ordnance Survey Mastermap GML to PostGIS:
 
 https://github.com/justb4/stetl/tree/master/examples/ordnancesurvey
 
@@ -81,7 +81,7 @@ This involved the first use of Jinja2 templating for complex XML/GML generation.
 Smart Emission
 --------------
 
-Sensors at civilians. Project by University of Nijmegen/Gemeente Nijmegen with participation
+Sensors for air quality, meteo and audio  at civilians. Project by University of Nijmegen/Gemeente Nijmegen with participation
 by Geonovum. Stetl used to transform a low-level sensor API to PostGIS and later on WMS/WFS/SOS.
 
 See https://github.com/Geonovum/smartemission/tree/master/etl
