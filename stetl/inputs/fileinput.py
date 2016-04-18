@@ -11,6 +11,7 @@ from stetl.utils.apachelog import formats, parser
 from stetl.packet import FORMAT
 import csv
 import re
+import fnmatch
 
 log = Util.get_log('fileinput')
 
@@ -23,7 +24,7 @@ class FileInput(Input):
     # Start attribute config meta
     # Applying Decorator pattern with the Config class to provide
     # read-only config values from the configured properties.
-    
+
     @Config(ptype=str, default=None, required=False)
     def file_path(self):
         """
@@ -35,7 +36,6 @@ class FileInput(Input):
         Default: None
         """
         pass
-
 
     @Config(ptype=str, default='*.[gxGX][mM][lL]', required=False)
     def filename_pattern(self):
@@ -71,6 +71,7 @@ class FileInput(Input):
         if not len(self.file_list):
             raise Exception('File list is empty!!')
 
+        self.cur_file_path = None
         self.file_list_done = []
 
     def read(self, packet):
@@ -187,7 +188,6 @@ class XmlFileInput(FileInput):
         return data
 
 
-
 class XmlElementStreamerFileInput(FileInput):
     """
     Extracts XML elements from a file, outputs each feature element in Packet.
@@ -229,7 +229,6 @@ class XmlElementStreamerFileInput(FileInput):
         self.file_list_done = []
         self.context = None
         self.root = None
-        self.cur_file_path = None
         self.elem_count = 0
         log.info("Element tags to be matched: %s" % self.element_tags)
 
@@ -393,7 +392,6 @@ class CsvFileInput(FileInput):
         """
         pass
 
-
     @Config(ptype=str, default='"', required=False)
     def quote_char(self):
         """
@@ -484,8 +482,9 @@ class ApacheLogFileInput(FileInput):
     """
 
     @Config(ptype=dict, default=
-    {'%l': 'logname', '%>s': 'status', '%D': 'deltat', '%{User-agent}i': 'agent', '%b': 'bytes', '%{Referer}i': 'referer', '%u': 'user', '%t': 'time', "'%h": 'host', '%r': 'request'}
-    , required=False)
+    {'%l': 'logname', '%>s': 'status', '%D': 'deltat', '%{User-agent}i': 'agent', '%b': 'bytes',
+     '%{Referer}i': 'referer', '%u': 'user', '%t': 'time', "'%h": 'host', '%r': 'request'}
+            , required=False)
     def key_map(self):
         """
         Map of cryptic %-field names to readable keys in record.
@@ -515,7 +514,7 @@ class ApacheLogFileInput(FileInput):
         FileInput.__init__(self, configdict, section, produces=FORMAT.record)
         self.file_list_done = []
         self.file = None
-        self.parser = parser(self.log_format, self.key_map, options={'methods': ['GET','POST'],
+        self.parser = parser(self.log_format, self.key_map, options={'methods': ['GET', 'POST'],
                                                                      'use_native_types': True,
                                                                      'request_path_only': True,
                                                                      'gen_key': True})
@@ -564,29 +563,33 @@ class ApacheLogFileInput(FileInput):
 
 class ZipFileInput(FileInput):
     """
-    Parse ZIP file from file system or URL into a stream of records containing file names.
+    Parse ZIP file from file system or URL into a stream of records containing zipfile-path and file names.
 
     produces=FORMAT.record
     """
 
-    @Config(ptype=str, default=None, required=False)
+    @Config(ptype=str, default='*', required=False)
     def name_filter(self):
         """
-        Regular expression which is used as a filter to the ZIP file names.
+        Regular "glob.glob" expression for filtering out filenames from the ZIP archive.
 
         Required: False
 
-        Default: None
+        Default: * (all files in zip-archive)
         """
         pass
 
     def __init__(self, configdict, section):
         FileInput.__init__(self, configdict, section, produces=FORMAT.record)
         self.file_content = None
-        
+
+        # Pre-compile name filter into regex object to match filenames in zip-archive(s) later
+        # See default (*) above, so we alo have a name_filter.
+        self.fname_matcher = re.compile(fnmatch.translate(self.name_filter))
+
     def read(self, packet):
         # No more files left and done with current file ?
-        if not(self.file_content) and not len(self.file_list):
+        if not self.file_content and not len(self.file_list):
             packet.set_end_of_stream()
             log.info("EOF file list, all files done")
             return packet
@@ -595,21 +598,21 @@ class ZipFileInput(FileInput):
         if self.file_content is None:
             self.cur_file_path = self.file_list.pop(0)
 
-            # Read file names
+            # Assemble list of file names in archive
             import zipfile
-            
             zf = zipfile.ZipFile(self.cur_file_path, 'r')
-            self.file_content = [{'file_path': self.cur_file_path, 'name': name} for name in zf.namelist()]
+            namelist = [{'file_path': self.cur_file_path, 'name': name} for name in zf.namelist()]
 
-            # Apply name filter
-            if self.name_filter:
-                self.file_content = [item for item in self.file_content if re.match(self.name_filter, item["name"])]
+            # Apply filename filter to namelist (TODO could be done in single step with previous step)
+            self.file_content = [item for item in namelist if self.fname_matcher.match(item["name"])]
 
-            log.info("zip file read : %s size=%d" % (self.cur_file_path, len(self.file_content)))
+            log.info("zip file read : %s filecount=%d" % (self.cur_file_path, len(self.file_content)))
 
-        packet.data = self.file_content.pop(0)
-        
+        if len(self.file_content):
+            packet.data = self.file_content.pop(0)
+            log.info("Pop file record: %s" % str(packet.data))
+
         if not len(self.file_content):
             self.file_content = None
-        
+
         return packet
