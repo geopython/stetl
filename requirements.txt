@@ -1,4 +1,4 @@
 psycopg2
 lxml
-GDAL
+GDAL<2.0
 argparse ; python_version < '2.7'
