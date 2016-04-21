@@ -33,7 +33,8 @@ with open('CHANGES.txt', 'r') as f:
 requirements = [
     'psycopg2',
     'lxml',
-    'GDAL<2.0'
+    'GDAL<2.0',
+    'Jinja2'
 ]
 
 if sys.version_info < (2, 7):
