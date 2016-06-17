@@ -130,5 +130,4 @@ class XmlElementReader(Filter):
                 packet.format = self._output_format
                 packet = self.next.process(packet)
 
-        return packet;
-        
+        return packet
