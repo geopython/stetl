@@ -171,6 +171,40 @@ whatever it gets as input from the previous Filter in the Chain. ::
 		output/gmlcities.shp
 		temp/gmlcities.gml
 
+Using Docker
+~~~~~~~~~~~~
+
+A convenient way to run Stetl is via a Docker image. See the installation instructions at
+:ref:`install_docker`. A full example can be viewed in the Smart Emission project:
+https://github.com/Geonovum/smartemission/tree/master/etl.
+
+In the simplest case you run a Stetl Docker container from your own built image or the Dockerhub-provided
+one, `justb4/stetl:latest <https://hub.docker.com/r/justb4/stetl>`_ basically as follows:  ::
+
+
+	sudo docker run -v <host dir>:<container dir> -w <work dir> justb4/stetl:latest <any Stetl arguments>
+
+For example within the current directory you may have an ``etl.cfg`` Stetl file: ::
+
+	WORK_DIR=`pwd`
+	sudo docker run -v ${WORK_DIR}:${WORK_DIR} -w ${WORK_DIR} justb4/stetl:latest -c etl.cfg
+
+A more advanced setup would be (network-)linking to a PostGIS Docker image
+like `kartoza/postgis <https://hub.docker.com/r/kartoza/postgis/>`_: ::
+
+	# First run Postgis, remains running,
+	sudo docker run --name postgis -d -t kartoza/postgis:9.4-2.1
+
+	# Then later run Stetl
+	STETL_ARGS="-c etl.cfg -a local.args"
+	WORK_DIR="`pwd`"
+
+	sudo docker run --name stetl --link postgis:postgis -v ${WORK_DIR}:${WORK_DIR} -w ${WORK_DIR} justb4/stetl:latest  ${STETL_ARGS}
+
+The last example is used within the SmartEmission project. Also with more detail and keeping
+all dynamic data (like PostGIS DB), your Stetl config and results, and logs within the host.  For PostGIS see: https://github.com/Geonovum/smartemission/tree/master/services/postgis
+and Stetl see: https://github.com/Geonovum/smartemission/tree/master/etl.
+
 Stetl Integration
 -----------------
 

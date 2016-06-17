@@ -23,6 +23,9 @@ installations below.
 You may also want to download the complete .tar.gz distro from PyPi:
 https://pypi.python.org/pypi/Stetl . This includes the examples and tests.
 
+**Docker:** Since version 1.0.9 Stetl also can be installed and run via `Docker <http://docker.com>`_. See
+:ref:`install_docker` below.
+
 Dependencies
 ------------
 
@@ -125,6 +128,23 @@ Try running the examples when running with a downloaded distro. ::
 	./runall.sh
 
 Look for any error messages in your output.
+
+.. _install_docker:
+
+Install with Docker
+-------------------
+
+One of the cleanest ways to use Stetl is via Docker. Offcourse your environment needs to be
+setup to use Docker and probably you need some tooling like Vagrant. The author uses
+a combination of VirtualBox with Ubuntu and Vagrant on Mac OSX to run Docker, but this
+is a bit out of the scope here.
+
+Assuming you have a Docker environment, there are two ways to use Stetl with Docker:
+
+* build a Docker image yourself using the Dockerfile in https://github.com/justb4/stetl/tree/master/docker
+* use a prebuilt public Stetl Docker image: https://hub.docker.com/r/justb4/stetl
+
+
 
 
 
