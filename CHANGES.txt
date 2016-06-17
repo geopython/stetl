@@ -1,6 +1,18 @@
 Changes
 =======
 
+
+v1.0.9 - 17 june 2016
+---------------------
+
+See https://github.com/justb4/stetl/issues?q=milestone%3A%22Version+1.0.9%22+is%3Aclosed
+
+Highlights:
+
+- Substitutable config  options in properties file (-a arg)
+- Docker support via Stetl Docker image
+- Generic ogr2ogr Input Component enhancement
+
 v1.0.8 - 2 july 2015
 --------------------
 
