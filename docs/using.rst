@@ -171,6 +171,8 @@ whatever it gets as input from the previous Filter in the Chain. ::
 		output/gmlcities.shp
 		temp/gmlcities.gml
 
+.. _run_docker:
+
 Using Docker
 ~~~~~~~~~~~~
 
@@ -180,7 +182,6 @@ https://github.com/Geonovum/smartemission/tree/master/etl.
 
 In the simplest case you run a Stetl Docker container from your own built image or the Dockerhub-provided
 one, `justb4/stetl:latest <https://hub.docker.com/r/justb4/stetl>`_ basically as follows:  ::
-
 
 	sudo docker run -v <host dir>:<container dir> -w <work dir> justb4/stetl:latest <any Stetl arguments>
 

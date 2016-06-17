@@ -134,20 +134,14 @@ Look for any error messages in your output.
 Install with Docker
 -------------------
 
-One of the cleanest ways to use Stetl is via Docker. Offcourse your environment needs to be
-setup to use Docker and probably you need some tooling like Vagrant. The author uses
+One of the cleanest ways to use Stetl is via `Docker <http://docker.com>`_. Your environment needs to be
+setup to use Docker and probably you want to use some tooling like `Vagrant <https://www.vagrantup.com/>`_. The author uses
 a combination of VirtualBox with Ubuntu and Vagrant on Mac OSX to run Docker, but this
-is a bit out of the scope here.
+is a bit out of scope here.
 
-Assuming you have a Docker environment, there are two ways to use Stetl with Docker:
+Assuming you have a working Docker environment, there are two ways to install Stetl with Docker:
 
 * build a Docker image yourself using the Dockerfile in https://github.com/justb4/stetl/tree/master/docker
 * use a prebuilt public Stetl Docker image: https://hub.docker.com/r/justb4/stetl
 
-
-
-
-
-
-
-
+For running Stetl using Docker see  :ref:`run_docker`.

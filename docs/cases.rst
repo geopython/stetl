@@ -82,6 +82,7 @@ Smart Emission
 --------------
 
 Sensors for air quality, meteo and audio  at civilians. Project by University of Nijmegen/Gemeente Nijmegen with participation
-by Geonovum. Stetl used to transform a low-level sensor API to PostGIS and later on WMS/WFS/SOS.
+by Geonovum. Stetl is used to transform a low-level sensor API to PostGIS and later on WMS/WFS/SOS.
+This is also an example how to use a Stetl Docker image:
 
 See https://github.com/Geonovum/smartemission/tree/master/etl

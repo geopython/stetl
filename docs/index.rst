@@ -16,6 +16,7 @@ The code is on GitHub: https://github.com/justb4/stetl.
 
 See an `introductory Stetl presentation at Slideshare <http://www.slideshare.net/justb4/stetl-foss4g20131024v1>`_.
 
+This is document version |release| generated on |today|.
 
 Contents:
 
