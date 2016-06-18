@@ -25,7 +25,6 @@ RUN apt-get update && \
 RUN apt-add-repository ppa:ubuntugis/ubuntugis-unstable
 RUN apt-get update && \
 	apt-get install -y git \
-    libproj0 \
     libgeos-dev \
     python-lxml \
     python-gdal \
