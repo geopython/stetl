@@ -3,6 +3,8 @@
 Installation
 ============
 
+Stetl currently only runs with Python 2 (2.7+). `Work is underway <https://github.com/justb4/stetl/pull/27>`_ for Python3 support.
+
 Easiest is to first install the Stetl-dependencies (see below) and then
 install and maintain Stetl on your system as a Python package (pip is preferred). ::
 
@@ -17,14 +19,24 @@ and then install locally  ::
 	(sudo) python setup.py install
 
 Try the examples first. This should work on Linuxes and Mac OSX.
+
 Windows installation may be more involved depending on your local Python setup. Platform-specific
 installations below.
 
 You may also want to download the complete .tar.gz distro from PyPi:
 https://pypi.python.org/pypi/Stetl . This includes the examples and tests.
 
-**Docker:** Since version 1.0.9 Stetl also can be installed and run via `Docker <http://docker.com>`_. See
+**Docker**
+
+Since version 1.0.9 Stetl also can be installed and run via `Docker <http://docker.com>`_. See
 :ref:`install_docker` below.
+
+**Debian/Ubuntu**
+
+Thanks to Bas Couwenberg, work is performed to provide Stetl as Debian packages on both Debian and Ubuntu, see details:
+https://packages.debian.org/search?keywords=stetl (Debian) and
+https://launchpad.net/ubuntu/+source/python-stetl (Ubuntu, Xenial and later).
+Stetl is split into 2 packages ``python-stetl``, the Python framework and ``stetl`` the command line utility.
 
 Dependencies
 ------------
@@ -46,46 +58,50 @@ When using the ``Jinja2`` templating filter, ``Jinja2TemplatingFilter``, see htt
 
 * Python Jinja2 package
 
+Platform-specific guidelines for dependencies follow next.
+
 Linux
------
+~~~~~
 
 Most packages should be able to be installed by apt-get or Python ``pip`` or ``easy_install``.
 
+Tip: to get latest versions of GDAL and other Open Source geospatial software, best is
+to add the `UbuntuGIS Repository <https://wiki.ubuntu.com/UbuntuGIS>`_.
 
-- Optional: Python package dependencies
-  ::
+
+- Optional: Python package dependencies: ::
 
    sudo apt-get install python-setuptools
    sudo apt-get install python-dev
    sudo apt-get install libpq-dev
 
 - ``libxml2/libxslt`` libs are usually already installed. Together with Python ``lxml``
-  the total install for ``lxml`` is.
-  ::
+  the total install for ``lxml`` is: ::
 
    apt-get of yum install libxml2
    apt-get of yum install libxslt1.1
    apt-get of yum install python-lxml
 
-- GDAL (http://gdal.org) with Python bindings
-  ::
+- GDAL (http://gdal.org) with Python bindings: ::
 
    apt-get of yum install gdal-bin
    apt-get of yum install python-gdal
 
-- the PostgreSQL client library for Python ``psycopg2``
-  ::
+- the PostgreSQL client library for Python ``psycopg2``: ::
 
    sudo easy_install psycopg2
 
-- Python package ``argparse`` if you have Python < 2.7
-  ::
+- Python package ``argparse`` if you have Python < 2.7: ::
 
    sudo easy_install argparse
 
+Mac OSX
+~~~~~~~
+
+Dependencies can best be installed via `Homebrew <http://brew.sh/>`_.
 
 Windows
--------
+~~~~~~~
 
 Best is to install GDAL and python using the OSGeo4W Installer from http://trac.osgeo.org/osgeo4w.
 

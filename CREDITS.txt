@@ -1,9 +1,14 @@
 Credits
 =======
 
-Stetl is written by:
+Stetl is developed by:
 
-* Just van den Broecke (http://www.justobjects.nl)
+* Just van den Broecke (initiator, http://www.justobjects.nl)
+* Frank Steggink
+* Thijs Brentjens
+* and more, see contributors: https://github.com/justb4/stetl/graphs/contributors
+
+Bas Couwenberg is providing Debian/Ubuntu packaging.
 
 This project would not be possible without the great work of Frank Warmerdam and other
 GDAL/OGR developers (http://gdal.org).
@@ -12,4 +17,3 @@ Plus the people that brought Python, PostGIS (like Paul Ramsey), lxml and the li
 like GEOS, Proj, libxml2 and libxslt.
 
 We are mainly standing on the shoulders of these giants.
-
