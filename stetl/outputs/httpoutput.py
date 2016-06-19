@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# Output classes for ETL.
+# Base classes for HTTP output like WFS-T and SOS-T or any other HTTP writing service.
 #
 # Author: Just van den Broecke
 #

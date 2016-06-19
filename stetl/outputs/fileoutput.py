@@ -7,6 +7,7 @@
 from stetl.output import Output
 from stetl.util import Util
 from stetl.packet import FORMAT
+from stetl.component import Config
 
 import os
 
@@ -20,6 +21,21 @@ class FileOutput(Output):
     consumes=FORMAT.any
     """
 
+    # Start attribute config meta
+
+    @Config(ptype=str, default=None, required=False)
+    def file_path(self):
+        """
+        Path to file, for MultiFileOutput can be of the form like: gmlcities-%03d.gml
+
+        Required: True
+
+        Default: None
+        """
+        pass
+
+    # End attribute config meta
+
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.any)
         log.info("working dir %s" % os.getcwd())
@@ -28,8 +44,7 @@ class FileOutput(Output):
         if packet.data is None:
             return packet
 
-        file_path = self.cfg.get('file_path')
-        return self.write_file(packet, file_path)
+        return self.write_file(packet, self.file_path)
 
     def write_file(self, packet, file_path):
         log.info('writing to file %s' % file_path)
@@ -44,7 +59,7 @@ class FileOutput(Output):
 
 class MultiFileOutput(FileOutput):
     """
-    Print to multiple files from subsequent packets like strings or etree docs.
+    Print to multiple files from subsequent packets like strings or etree docs, file_path must be of a form like: gmlcities-%03d.gml.
 
     consumes=FORMAT.any
     """
@@ -56,8 +71,7 @@ class MultiFileOutput(FileOutput):
         if packet.data is None:
             return packet
 
-        # file_path can be of the form: gmlcities-%03d.gml
-        file_path = self.cfg.get('file_path')
-        file_path %= self.file_num
+        # file_path must be of the form: gmlcities-%03d.gml
+        file_path = self.file_path % self.file_num
         self.file_num += 1
         return self.write_file(packet, file_path)

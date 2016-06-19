@@ -1,7 +1,7 @@
 # Stetl Docker
 
 Docker image to run ETL tool Stetl. See http://stetl.org.
-Public Docker images are available at: https://hub.docker.com/r/justb4/stetl/.
+Public, versioned, Docker images are available at: https://hub.docker.com/r/justb4/stetl/.
 
 ## Status
 
