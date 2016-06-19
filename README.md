@@ -5,7 +5,7 @@ Stetl, streaming ETL, pronounced "staedl", is a lightweight [FOSS](LICENSE.txt) 
 ## Documentation
 
 The Stetl website and documentation can be found via http://stetl.org.
-For a quick overview read the [5-minute Stetl-introduction](http://www.slideshare.net/justb4/5-minute-intro-to-setl),  
+For a quick overview read the [5-minute Stetl-introduction](http://www.slideshare.net/justb4/5-minute-intro-to-setl), 
 or a [more detailed presentation](http://www.slideshare.net/justb4/stetl-foss4g20131024v1).
 Stetl was presented at several events like the
 [FOSS4G 2013 in Nottingham](http://2013.foss4g.org) and (the upcoming) [GeoPython 2016](http://www.geopython.net).
@@ -58,7 +58,7 @@ review the [guidelines for contributing](CONTRIBUTING.md).
 
 ## Origins
 
-Stetl originated in the INSPIRE-FOSS project ([2009-2013 now archived](https://github.com/justb4/inspire-foss). 
+Stetl originated in the INSPIRE-FOSS project: [2009-2013 now archived](https://github.com/justb4/inspire-foss). 
 Since then Stetl evolved into a wider use like
 transforming [Dutch GML-based Open Datasets](https://github.com/opengeogroep/NLExtract) such as IMGEO/BGT (Large Scale Topography) 
 and IMKAD/BRK (Cadastral Data).
