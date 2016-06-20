@@ -3,7 +3,7 @@
 Stetl, streaming ETL, pronounced "staedl", is a lightweight ETL-framework for geospatial data conversion. 
 
 [![Documentation Status](https://img.shields.io/badge/docs-latest-brightgreen.svg)](http://stetl.readthedocs.org/en/latest)
-[![Gitter Chat](https://badges.gitter.im/justb4/stetl.svg)](https://gitter.im/justb4/stetl)
+[![Gitter Chat](http://img.shields.io/badge/chat-online-brightgreen.svg)](https://gitter.im/justb4/stetl)
 
 # License
 
