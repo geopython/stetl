@@ -1,4 +1,6 @@
+# Dutch large-scale topo-data (BGT) to GML
+
 In this example Dutch large-scale topo-data (BGT) to a flattened GML feature collection.
-Needs some finalization.
 
-
+**NB this example is outdated.**
+**For a production version see https://github.com/opengeogroep/NLExtract/tree/master/bgt/etl**

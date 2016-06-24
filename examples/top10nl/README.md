@@ -1,10 +1,13 @@
-Note: this example was the base for the full implementation in the NLExtract project where
+# Dutch topo-data (BRT/Top10NL) to PostGIS
+
+In this example Dutch topodata (BRT/Top10NL) is converted to PostGIS.
+This example was the base for the full implementation in the NLExtract project where
 it will be maintained more actively.
 
-See: https://github.com/opengeogroep/NLExtract/tree/master/top10nl/etl
-USE NLExtract FOR REAL TOP10NL EXTRACT!!!
+**This example is outdated.**
+**For a production version see https://github.com/opengeogroep/NLExtract/tree/master/top10nl/etl**
 
-=============================
+## Notes - kept for historic reasons
 
 This example shows how to convert the Dutch national topographic dataset Top10NL (v1.1.1) GML to
 PostGIS.
