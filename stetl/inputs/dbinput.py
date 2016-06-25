@@ -69,7 +69,9 @@ class SqlDbInput(DbInput):
 
     def __init__(self, configdict, section, produces):
         DbInput.__init__(self, configdict, section, produces=produces)
-        self.columns = self.column_names
+        self.columns = None
+        if self.column_names is not None:
+            self.columns = self.column_names.split(',')
         self.select_all = "select * from %s" % self.table
 
     def result_to_output(self, db_records):
@@ -175,16 +177,22 @@ class PostgresDbInput(SqlDbInput):
         SqlDbInput.__init__(self, configdict, section, produces=[FORMAT.record_array, FORMAT.record])
         self.db = None
 
+    def init_columns(self):
+        # If no explicit column names given, get from DB meta info
+        if self.columns is not None:
+            return
+
+        if self.column_names is None:
+            self.columns = self.db.get_column_names(self.cfg.get('table'), self.cfg.get('schema'))
+        else:
+            self.columns = self.column_names.split(',')
+
     def init(self):
         # Connect only once to DB
         log.info('Init: connect to DB')
         self.db = PostGIS(self.cfg.get_dict())
         self.db.connect()
-
-        # If no explicit column names given, get from DB meta info
-        self.columns = self.column_names
-        if self.column_names is None:
-            self.columns = self.db.get_column_names(self.cfg.get('table'), self.cfg.get('schema'))
+        self.init_columns()
 
     def exit(self):
         # Disconnect from DB when done
@@ -193,6 +201,7 @@ class PostgresDbInput(SqlDbInput):
         self.db.disconnect()
 
     def raw_query(self, query_str):
+        self.init_columns()
 
         self.db.execute(query_str)
 

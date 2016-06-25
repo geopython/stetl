@@ -7,7 +7,7 @@ Stetl, streaming ETL, pronounced "staedl", is a lightweight ETL-framework for ge
 
 # License
 
-Stetl is released under an [GNU GPL](https://en.wikipedia.org/wiki/GNU_General_Public_License) license
+Stetl is released under a [GNU GPL v3](https://en.wikipedia.org/wiki/GNU_General_Public_License) license
 (see [LICENSE.txt](LICENSE.txt)).
 
 ## Documentation
@@ -20,16 +20,16 @@ Stetl was presented at several events like the
 
 ## Concepts 
 
-Stetl basically glues together existing parsing and transformation tools like [GDAL/OGR](http://gdal.org), Jinja2 and XSLT.
-By using native tools like libxml and libxslt (via Python lxml) Stetl is speed-optimized.
+Stetl basically glues together existing parsing and transformation tools like [GDAL/OGR](http://gdal.org), Jinja2 and 
+XSLT with custom Python code. By using native libraries like `libxml2` and `libxslt` (via Python `lxml`) Stetl is speed-optimized.
 
 A configuration file, in Python config `.ini` format, specifies a chained sequence of transformation 
-steps: typically an `Input` connected to one or more `Filters`, and finally an `Output`.
-At runtime, this sequence is realized by a series of Python modules/objects. These are 
-symbolically specified and parameterized in the config file. 
+steps: typically an `Input` connected to one or more `Filters`, and finally to an `Output`.
+At runtime, this sequence is instantiated and run as a linked series of Python objects. These objects are 
+symbolically specified (by their module/class name) and parameterized in the config file. 
 Via the `stetl -c <config file>`  command, the transformation is executed.
 
-Stetl has been proven to handle 10's of millions of objects without any memory issues.
+Stetl has been proven to handle 10's of millions of GML objects without any memory issues.
 This is achieved through a technique called "streaming and splitting". 
 For example: using the `OgrPostgisInput` module an GML stream can be generated from the database.
 A component called the `GmlSplitter` can split this stream into manageable chunks (like 20000 features) 
