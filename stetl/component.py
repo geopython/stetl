@@ -79,7 +79,7 @@ class Config(object):
         return comp_inst.cfg_vals[self.property_name]
 
 
-class Component:
+class Component(object):
     """
     Abstract Base class for all Input, Filter and Output Components.
 
@@ -144,6 +144,7 @@ class Component:
 
     # Check our compatibility with the next Component in the Chain
     def is_compatible(self):
+
         # Ok, nothing next in Chain
         if self.next is None or self._output_format is FORMAT.none or self.next._input_format == FORMAT.any:
             return True

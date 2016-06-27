@@ -67,25 +67,38 @@ class SqlDbInput(DbInput):
         pass
     # End attribute config meta
 
-    def __init__(self, configdict, section, produces):
-        DbInput.__init__(self, configdict, section, produces=produces)
+    def __init__(self, configdict, section):
+        DbInput.__init__(self, configdict, section, produces=[FORMAT.record_array, FORMAT.record])
         self.columns = None
         if self.column_names is not None:
             self.columns = self.column_names.split(',')
         self.select_all = "select * from %s" % self.table
 
-    def result_to_output(self, db_records):
+    def tuples_to_records(self, db_tuples, columns=None):
         """
-        Convert DB-specific record iterator to single Python record (dict) or record array (list of dict).
+        Convert tuple array (list of tuple) to list of records (list of dict's) using list of column names.
 
         """
+
+        if columns is None:
+            columns = self.columns
 
         # record is Python list of Python dict (multiple records)
         records = list()
 
         # Convert list of lists to list of dict using column_names
-        for db_record in db_records:
-            records.append(dict(zip(self.columns, db_record)))
+        for db_tuple in db_tuples:
+            records.append(dict(zip(columns, db_tuple)))
+
+        return records
+
+    def result_to_output(self, db_tuples):
+        """
+        Convert DB-specific record tuples to single Python record (dict) or record array (list of dict).
+
+        """
+
+        records = self.tuples_to_records(db_tuples)
 
         # We may have specified a single record output_format in rare cases
         if self.output_format == FORMAT.record:
@@ -101,11 +114,11 @@ class SqlDbInput(DbInput):
         DB-neutral query returning Python record list.
         """
 
-        # Perform DB-specific query
-        db_records = self.raw_query(query_str)
+        # Perform DB-specific query (gets result as list of values as tuples)
+        db_tuples = self.raw_query(query_str)
 
         # Convert query result to record_array
-        return self.result_to_output(db_records)
+        return self.result_to_output(db_tuples)
 
     def raw_query(self, query_str):
         """
@@ -174,17 +187,19 @@ class PostgresDbInput(SqlDbInput):
     # End attribute config meta
 
     def __init__(self, configdict, section):
-        SqlDbInput.__init__(self, configdict, section, produces=[FORMAT.record_array, FORMAT.record])
+        SqlDbInput.__init__(self, configdict, section)
         self.db = None
 
     def init_columns(self):
-        # If no explicit column names given, get from DB meta info
         if self.columns is not None:
+            # Already initialized, reset columns_names to re-init
             return
 
         if self.column_names is None:
+            # If no explicit column names given, get all columns from DB meta info
             self.columns = self.db.get_column_names(self.cfg.get('table'), self.cfg.get('schema'))
         else:
+            # Columns provided: make list
             self.columns = self.column_names.split(',')
 
     def init(self):
@@ -220,7 +235,7 @@ class SqliteDbInput(SqlDbInput):
     """
 
     def __init__(self, configdict, section):
-        SqlDbInput.__init__(self, configdict, section, produces=[FORMAT.record_array, FORMAT.record])
+        SqlDbInput.__init__(self, configdict, section)
         self.db = None
 
         import sqlite3
