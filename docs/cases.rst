@@ -38,7 +38,7 @@ INSPIRE
 -------
 
 These were the origins of Stetl. This project was sponsored by Kadaster.
-See http://inspire-foss.org. The ETL involved the transformation of Dutch Key Registries (see above)
+See https://github.com/justb4/inspire-foss. The ETL involved the transformation of Dutch Key Registries (see above)
 to harmonized INSPIRE GML according to the Annexes.
 
 Addresses
