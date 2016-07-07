@@ -1,10 +1,8 @@
-Testing is dan with Python unittest and run with 'nose',
-see https://nose.readthedocs.org/en/latest/
+Testing is done with Python unittest and run with 'nose2',
+see http://nose2.readthedocs.io/en/latest/
 
-To install and run with nose:
-pip install nose
+To install and run with nose2:
+pip install nose2
 
 # from root dir (one above this dir) run
-nosetests [options] tests
-
-
+nose2 [options] tests
