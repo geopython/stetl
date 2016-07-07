@@ -16,7 +16,7 @@ The Stetl website and documentation can be found via http://stetl.org.
 For a quick overview read the [5-minute Stetl-introduction](http://www.slideshare.net/justb4/5-minute-intro-to-setl), 
 or a [more detailed presentation](http://www.slideshare.net/justb4/stetl-foss4g20131024v1).
 Stetl was presented at several events like the
-[FOSS4G 2013 in Nottingham](http://2013.foss4g.org) and (the upcoming) [GeoPython 2016](http://www.geopython.net).
+[FOSS4G 2013 in Nottingham](http://2013.foss4g.org) and [GeoPython 2016](http://www.geopython.net).
 
 ## Concepts 
 
