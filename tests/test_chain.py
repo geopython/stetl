@@ -1,6 +1,7 @@
 # testing: to be called by nosetests
 
 import logging
+import os
 import sys
 import unittest
 
@@ -8,12 +9,14 @@ from stetl.etl import ETL
 
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
+CURR_DIR = os.path.dirname(os.path.realpath(__file__))
+
 
 class ConfigTest(unittest.TestCase):
     """Basic configuration tests"""
 
     def test_type(self):
-        cfg_dict = {'config_file': 'tests/configs/copy_in_out.cfg'}
+        cfg_dict = {'config_file': os.path.join(CURR_DIR, 'configs/copy_in_out.cfg')}
         etl = ETL(cfg_dict)
         self.failUnlessEqual(etl.configdict.get('etl', 'chains'), 'input_xml_file|output_std')
 
