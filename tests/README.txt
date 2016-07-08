@@ -10,3 +10,4 @@ nose2 [options]
 If you execute nose2 from another directory, it is best to specify the tests directory, otherwise it can discover potential tests in other directories as well.
 For example to run nose2 from the parent directory (Stetl root), execute:
 nose2 [options] tests
+Note that the given "directory" name is actually the package name.
