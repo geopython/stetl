@@ -8,6 +8,7 @@
 from stetl.output import Output
 from stetl.util import Util
 from stetl.packet import FORMAT
+from stetl.component import Config
 import httplib
 import base64
 
@@ -17,21 +18,100 @@ class HttpOutput(Output):
     """
     Output via HTTP protocol, usually via POST.
 
-    consumes=FORMAT.etree_doc
+    consumes=FORMAT.any
     """
+
+    @Config(ptype=str, default=None, required=True)
+    def host(self):
+        """
+        The hostname/IP addr for target request.
+
+        Required: True
+
+        Default: None
+        """
+        pass
+
+    @Config(ptype=int, default=80, required=False)
+    def port(self):
+        """
+        The port number for target request.
+
+        Required: True
+
+        Default: 80
+        """
+        pass
+
+    @Config(ptype=str, default='/', required=False)
+    def path(self):
+        """
+        The path number for target request.
+
+        Required: False
+
+        Default: '/'
+        """
+        pass
+
+    @Config(ptype=str, default='POST', required=False)
+    def method(self):
+        """
+        The HTTP method for target request.
+
+        Required: False
+
+        Default: POST
+        """
+        pass
+
+    @Config(ptype=str, default='text/xml', required=False)
+    def content_type(self):
+        """
+        The HTTP ContentType request header for target request.
+
+        Required: False
+
+        Default: 'text/xml'
+        """
+        pass
+
+    @Config(ptype=str, default=None, required=False)
+    def user(self):
+        """
+        The Username for HTTP basic auth for target request.
+
+        Required: False
+
+        Default: None
+        """
+        pass
+
+    @Config(ptype=str, default=None, required=False)
+    def password(self):
+        """
+        The Password for HTTP basic auth for target request.
+
+        Required: False
+
+        Default: None
+        """
+        pass
+
+    @Config(ptype=bool, default=True, required=False)
+    def list_fanout(self):
+        """
+        If we consume a list(), should we create a HTTP req for each member?
+
+        Required: False
+
+        Default: True
+        """
+        pass
+
     def __init__(self, configdict, section, consumes=FORMAT.any):
         Output.__init__(self, configdict, section, consumes)
-        self.host = self.cfg.get('host')
-        self.port = self.cfg.get('port', '80')
-        self.path = self.cfg.get('path')
-        self.method = self.cfg.get('method', 'POST')
-        self.user = self.cfg.get('user', None)
-        self.password = self.cfg.get('password', None)
-        self.content_type = self.cfg.get('content_type', 'text/xml')
         # self.accept_type = self.cfg.get('accept_type', self.content_type)
-
-        # If we receive a list(), should we create a HTTP req for each member?
-        self.list_fanout = self.cfg.get_bool('list_fanout', True)
         self.req_nr = 0
 
     def create_payload(self, packet):
@@ -40,7 +120,7 @@ class HttpOutput(Output):
     def post(self, packet, payload):
         self.req_nr += 1
 
-        webservice = httplib.HTTP(self.host)
+        webservice = httplib.HTTP(self.host, self.port)
         # write your headers
         webservice.putrequest(self.method, self.path)
         webservice.putheader("Host", self.host)
