@@ -46,3 +46,14 @@ class StringFileInputTest(StetlTestCase):
         packet = chain.first_comp.invoke(packet)
         
         assert packet.data == contents
+        
+    def test_format_args(self):
+        chain = StetlTestCase.get_chain(self.etl, 1)
+        chain.first_comp.do_init()
+        packet = Packet()
+        packet.init()
+        packet.component = chain.first_comp
+        chain.first_comp.before_invoke(packet)
+        packet = chain.first_comp.invoke(packet)
+
+        assert packet.data == 'Hello NLExtract!'
