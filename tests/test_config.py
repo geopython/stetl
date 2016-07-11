@@ -17,7 +17,7 @@ class ConfigTest(StetlTestCase):
         self.etl = ETL(cfg_dict)
 
     def test_type(self):
-        assert self.etl.configdict.get('etl', 'chains') == 'input_xml_file|output_std'
+        self.assertEqual(self.etl.configdict.get('etl', 'chains'), 'input_xml_file|output_std')
         
     def test_run(self):
         self.etl.run()

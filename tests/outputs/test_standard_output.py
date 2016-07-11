@@ -21,12 +21,12 @@ class StandardOutputTest(StetlTestCase):
         section = StetlTestCase.get_section(chain, -1)
         class_name = self.etl.configdict.get(section, 'class')
         
-        assert 'outputs.standardoutput.StandardOutput' == class_name
+        self.assertEqual('outputs.standardoutput.StandardOutput', class_name)
     
     def test_instance(self):
         chain = StetlTestCase.get_chain(self.etl)
 
-        assert isinstance(chain.cur_comp, StandardOutput)
+        self.assertTrue(isinstance(chain.cur_comp, StandardOutput))
     
     def test_execute(self):
         # Read content of input file
@@ -38,6 +38,6 @@ class StandardOutputTest(StetlTestCase):
         
         self.etl.run()
         
-        assert len(sys.stdout.getvalue()) > 0
+        self.assertGreater(sys.stdout.getvalue(), 0)
         # Assert includes last linebreak from stdout, due to print function
-        assert sys.stdout.getvalue() == contents + '\n'
+        self.assertEqual(sys.stdout.getvalue(), contents + '\n')

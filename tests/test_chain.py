@@ -20,21 +20,21 @@ class ChainTest(StetlTestCase):
     def test_chain(self):
         chain = StetlTestCase.get_chain(self.etl, assemble=False)
         
-        assert chain.first_comp is None
-        assert chain.cur_comp is None
+        self.assertIsNone(chain.first_comp)
+        self.assertIsNone(chain.cur_comp)
 
     def test_chain_assembly(self):
         chain = StetlTestCase.get_chain(self.etl, assemble=False)
         chain.assemble()
         
-        assert chain.first_comp is not None
-        assert chain.cur_comp is not None
+        self.assertIsNotNone(chain.first_comp)
+        self.assertIsNotNone(chain.cur_comp)
 
-        assert chain.first_comp.next is not None
-        assert chain.cur_comp.next is None
+        self.assertIsNotNone(chain.first_comp.next)
+        self.assertIsNone(chain.cur_comp.next)
         
         comp = chain.first_comp
         while comp.next is not None:
             comp = comp.next
             
-        assert comp == chain.cur_comp
+        self.assertIs(comp, chain.cur_comp)

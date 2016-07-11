@@ -22,12 +22,12 @@ class StringFileInputTest(StetlTestCase):
         section = StetlTestCase.get_section(chain)
         class_name = self.etl.configdict.get(section, 'class')
         
-        assert 'inputs.fileinput.StringFileInput' == class_name
+        self.assertEqual('inputs.fileinput.StringFileInput', class_name)
     
     def test_instance(self):
         chain = StetlTestCase.get_chain(self.etl)
         
-        assert isinstance(chain.first_comp, StringFileInput)
+        self.assertTrue(isinstance(chain.first_comp, StringFileInput))
     
     def test_execute(self):
         # Read content of input file
@@ -45,7 +45,7 @@ class StringFileInputTest(StetlTestCase):
         chain.first_comp.before_invoke(packet)
         packet = chain.first_comp.invoke(packet)
         
-        assert packet.data == contents
+        self.assertEqual(packet.data, contents)
         
     def test_format_args(self):
         chain = StetlTestCase.get_chain(self.etl, 1)
@@ -56,4 +56,4 @@ class StringFileInputTest(StetlTestCase):
         chain.first_comp.before_invoke(packet)
         packet = chain.first_comp.invoke(packet)
 
-        assert packet.data == 'Hello NLExtract!'
+        self.assertEqual(packet.data, 'Hello NLExtract!')
