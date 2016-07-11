@@ -115,6 +115,12 @@ class HttpOutput(Output):
         self.req_nr = 0
 
     def create_payload(self, packet):
+        """
+        Create a HTTP body payload like for POST of an XML or JSON message.
+        Subclasses like WFS and SOS override.
+        :param packet:
+        :return payload as string:
+        """
         return packet.data
 
     def post(self, packet, payload):
@@ -146,6 +152,8 @@ class HttpOutput(Output):
             log.error("Headers: %s" % str(header))
             res = webservice.getfile().read()
             log.info('Content: %s' % res)
+        else:
+            res = webservice.getfile().read()
 
         # conn = httplib.HTTPConnection(self.host, self.port)
         # conn.request(self.method, self.path, payload, headers)
@@ -154,7 +162,7 @@ class HttpOutput(Output):
         # log.info('status=%s msg=%s' % (response.status, response.msg))
         # log.info('response=%s' % response.read(1024))
         # conn.close()
-        return packet
+        return statuscode, statusmessage, res
 
     def write(self, packet):
         if packet.data is None:
@@ -166,7 +174,8 @@ class HttpOutput(Output):
                 for data_elm in original_data:
                     packet.data = data_elm
                     self.post(packet, self.create_payload(packet))
-                    packet.data = original_data
+
+                packet.data = original_data
 
         else:
             # Regular, single data element or list_fanout is False
