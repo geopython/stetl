@@ -25,7 +25,7 @@ Known uses of Stetl. More detail in the chapter on :ref:`cases`.
 * `NLExtract <http://nlextract.nl>`_
 * `SOSPilot <http://sospilot.geonovum.nl>`_
 * `Smart Emission <http://smartemission.nl>`_
-* `INSPIRE FOSS Project Archive <https://github.com/justb4/inspire-foss>`_
+* `INSPIRE FOSS Project (Archived) <https://github.com/justb4/inspire-foss>`_
 
 Tools
 =====
@@ -41,4 +41,5 @@ Tools/components used by/with Stetl.
 Other
 =====
 
+* `More Geospatial Python projects, <https://github.com/geopython>`_
 * `INSPIRE, <http://inspire.ec.europa.eu/>`_

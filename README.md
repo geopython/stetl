@@ -5,6 +5,8 @@ Stetl, streaming ETL, pronounced "staedl", is a lightweight ETL-framework for ge
 [![Documentation Status](https://img.shields.io/badge/docs-latest-brightgreen.svg)](http://stetl.readthedocs.org/en/latest)
 [![Gitter Chat](http://img.shields.io/badge/chat-online-brightgreen.svg)](https://gitter.im/justb4/stetl)
 
+Notice: the Stetl GH repo is now at the [GeoPython GH organization](https://github.com/geopython).
+
 # License
 
 Stetl is released under a [GNU GPL v3](https://en.wikipedia.org/wiki/GNU_General_Public_License) license

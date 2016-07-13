@@ -115,6 +115,6 @@ open geo-datasets. Stetl development is now (april 2013) in an initial phase and
 GitHub. The current version is workable but we hope to present a v1.0 at FOSS4G with more
 documentation and as a standard Python Package via PyPi. The main link is:
 http://stetl.org (now links to GitHub).
-To get started find some basic examples here: https://github.com/justb4/stetl/tree/master/examples/basics.
+To get started find some basic examples here: https://github.com/geopython/stetl/tree/master/examples/basics.
 
 

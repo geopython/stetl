@@ -53,7 +53,7 @@ Ordnance Survey
 
 A successful Proof-of-Concept to convert Ordnance Survey Mastermap GML to PostGIS:
 
-https://github.com/justb4/stetl/tree/master/examples/ordnancesurvey
+https://github.com/geopython/stetl/tree/master/examples/ordnancesurvey
 
 SOSPilot
 --------

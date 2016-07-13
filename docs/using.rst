@@ -5,12 +5,12 @@ Using Stetl
 
 This section explains how to use Stetl for your ETL. It assumes Stetl is installed and
 you are able to run the examples. It may be useful to study some of the examples,
-especially the core ones found in the `examples/basics directory <https://github.com/justb4/stetl/tree/master/examples/basics>`_.
+especially the core ones found in the `examples/basics directory <https://github.com/geopython/stetl/tree/master/examples/basics>`_.
 These examples start numbering from 1, building up more complex ETL cases like `(INSPIRE) transformation using
-Jinja2 Templating <https://github.com/justb4/stetl/tree/master/examples/basics/10_jinja2_templating>`_.
+Jinja2 Templating <https://github.com/geopython/stetl/tree/master/examples/basics/10_jinja2_templating>`_.
 
 In addition there are example cases like the Dutch
-Topo map (Top10NL) ETL in the `examples/top10nl directory <https://github.com/justb4/stetl/tree/master/examples/top10nl>`_ .
+Topo map (Top10NL) ETL in the `examples/top10nl directory <https://github.com/geopython/stetl/tree/master/examples/top10nl>`_ .
 
 The core concepts of Stetl remain pretty simple: an input resource like a file or a database table is
 mapped to an output resource (also a file, a database, etc) via one or more filters.
@@ -25,7 +25,7 @@ Stetl Config
 Stetl components (inputs, filters, outputs) and their interconnection (the Pipeline/Chain)
 are specified in a Stetl config file. The file format follows the Python ``.ini`` file-format.
 
-To illustrate, let's look at the example `2_xslt <https://github.com/justb4/stetl/tree/master/examples/basics/2_xslt>`_.
+To illustrate, let's look at the example `2_xslt <https://github.com/geopython/stetl/tree/master/examples/basics/2_xslt>`_.
 This example takes the input file ``input/cities.xml`` and transforms this file to a valid GML file called
 ``output/gmlcities.gml``. The Stetl config file looks as follows. ::
 
@@ -144,7 +144,7 @@ with more complex transformations.
 
 Suppose we want to convert the resulting GML to an `ESRI Shapefile`. As we cannot use GDAL ``ogr2ogr`` on the input
 file, we need to combine XSLT and `ogr2ogr`. See example
-`3_shape <https://github.com/justb4/stetl/tree/master/examples/basics/3_shape>`_. Now we replace the output
+`3_shape <https://github.com/geopython/stetl/tree/master/examples/basics/3_shape>`_. Now we replace the output
 by using `outputs.ogroutput.Ogr2OgrOutput`, which can execute any `ogr2ogr` command, converting
 whatever it gets as input from the previous Filter in the Chain. ::
 
@@ -218,7 +218,7 @@ Reusable Stetl Configs
 What we saw in the last example is that it is hard to reuse this `etl.cfg` when we have for example a different input file
 or want to map to different output files. For this Stetl supports `parameter substitution`. Here command line parameters are substituted
 for variables in `etl.cfg`. A variable is declared between curly brackets like `{out_xml}`. See
-example `6_cmdargs <https://github.com/justb4/stetl/tree/master/examples/basics/6_cmdargs>`_. ::
+example `6_cmdargs <https://github.com/geopython/stetl/tree/master/examples/basics/6_cmdargs>`_. ::
 
 	[etl]
 	chains = input_xml_file|transformer_xslt|output_file
@@ -252,7 +252,7 @@ Where the content of the `etl.args` properties file is: ::
 	out_xml=output/gmlcities.gml
 
 This makes an ETL chain highly reusable. A very elaborate Stetl config with parameter substitution can be seen in the
-`Top10NL ETL <https://github.com/justb4/stetl/blob/master/examples/top10nl/etl-top10nl.cfg>`_.
+`Top10NL ETL <https://github.com/geopython/stetl/blob/master/examples/top10nl/etl-top10nl.cfg>`_.
 
 Connection Compatibility
 ------------------------
@@ -336,7 +336,7 @@ The syntax: chains are separated by commas (steps are sill separated by pipe sym
 Chains are executed in order. We can even reuse the
 specified components from within the same file. Each will have a separate instance within a Chain.
 
-For example in the `Top10NL example <https://github.com/justb4/stetl/blob/master/examples/top10nl/etl-top10nl.cfg>`_  we see three Chains::
+For example in the `Top10NL example <https://github.com/geopython/stetl/blob/master/examples/top10nl/etl-top10nl.cfg>`_  we see three Chains::
 
 		[etl]
 		chains = input_sql_pre|schema_name_filter|output_postgres,

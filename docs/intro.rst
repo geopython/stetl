@@ -15,7 +15,7 @@ Stetl originated in the `INSPIRE-FOSS project <http//www.inspire-foss.org>`_
 and was originally created by `Just van den Broecke <http://nl.linkedin.com/in/justb4>`_.
 Subsequently, Stetl evolved into a wider use
 transforming Dutch GML-based datasets such as Top10NL, IMGEO/BGT (Large Scale Topography)
-and IMKAD/BRK (Kadastral Data). Therefore Stetl now has a repository of its own at `GitHub <https://github.com/justb4/stetl>`_.
+and IMKAD/BRK (Kadastral Data). Therefore Stetl now has a repository of its own at `GitHub <https://github.com/geopython/stetl>`_.
 
 Stetl basically glues together existing parsing and transformation tools like `GDAL/OGR (ogr2ogr) <http://gdal.org>`_ and
 `XSLT <http://en.wikipedia.org/wiki/XSLT>`_. By using native tools like `libxml2` and `libxslt` (via `Python lxml <http://lxml.de>`_)

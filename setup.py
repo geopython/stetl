@@ -52,7 +52,7 @@ setup(
     author_email='justb4@gmail.com',
     maintainer='Just van den Broecke',
     maintainer_email='justb4@gmail.com',
-    url='http://github.com/justb4/stetl',
+    url='http://github.com/geopython/stetl',
     long_description=readme + "\n" + changes + "\n" + credits,
     packages=find_packages(exclude=['tests']),
     namespace_packages=['stetl'],

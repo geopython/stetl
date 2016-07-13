@@ -1,11 +1,16 @@
 Changes
 =======
 
+v1.1.0 - upcoming - july 2016
+-----------------------------
+
+Biggest change is that the Stetl repo moved to https://github.com/geopython/stetl/
+
 
 v1.0.9 - 17 june 2016
 ---------------------
 
-See https://github.com/justb4/stetl/issues?q=milestone%3A%22Version+1.0.9%22+is%3Aclosed
+See https://github.com/geopython/stetl/issues?q=milestone%3A%22Version+1.0.9%22+is%3Aclosed
 
 Highlights:
 
@@ -16,7 +21,7 @@ Highlights:
 v1.0.8 - 2 july 2015
 --------------------
 
-See https://github.com/justb4/stetl/issues?q=milestone%3A%22Version+1.0.8%22
+See https://github.com/geopython/stetl/issues?q=milestone%3A%22Version+1.0.8%22
 
 - generic OgrOutput component
 - Apache Log File Input

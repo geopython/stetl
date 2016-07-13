@@ -3,7 +3,7 @@
 Installation
 ============
 
-Stetl currently only runs with Python 2 (2.7+). `Work is underway <https://github.com/justb4/stetl/pull/27>`_ for Python3 support.
+Stetl currently only runs with Python 2 (2.7+). `Work is underway <https://github.com/geopython/stetl/pull/27>`_ for Python3 support.
 
 Easiest is to first install the Stetl-dependencies (see below) and then
 install and maintain Stetl on your system as a Python package (pip is preferred). ::
@@ -13,7 +13,7 @@ install and maintain Stetl on your system as a Python package (pip is preferred)
     easy_install stetl
 
 Alternatively you can download Stetl from
-Github: by cloning (preferred) or downloading: https://github.com/justb4/stetl/archive/master.zip
+Github: by cloning (preferred) or downloading: https://github.com/geopython/stetl/archive/master.zip
 and then install locally  ::
 
 	(sudo) python setup.py install
@@ -157,7 +157,7 @@ is a bit out of scope here.
 
 Assuming you have a working Docker environment, there are two ways to install Stetl with Docker:
 
-* build a Docker image yourself using the Dockerfile in https://github.com/justb4/stetl/tree/master/docker
+* build a Docker image yourself using the Dockerfile in https://github.com/geopython/stetl/tree/master/docker
 * use a prebuilt public Stetl Docker image: https://hub.docker.com/r/justb4/stetl
 
 For running Stetl using Docker see  :ref:`run_docker`.

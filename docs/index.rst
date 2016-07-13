@@ -12,7 +12,8 @@ XSLT. Stetl processing is driven from a configuration (.ini) file.
 Stetl is written in Python and in particular suited for processing GML.
 
 This is the documentation of the Stetl toolkit.
-The code is on GitHub: https://github.com/justb4/stetl.
+The code is on GitHub: https://github.com/geopython/stetl. Since July 2016 the project is a proud
+member of the `GeoPython GitHub organization <https://github.com/geopython>`_.
 
 See an `introductory Stetl presentation on Slideshare <http://www.slideshare.net/justb4/geospatial-etl-with-stetl-geopython-2016>`_.
 

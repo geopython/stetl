@@ -34,7 +34,7 @@ RUN apt-get update && \
     python-setuptools
 
 # Get latest Stetl from git
-RUN git clone https://github.com/justb4/stetl /opt/stetl
+RUN git clone https://github.com/geopython/stetl /opt/stetl
 
 # Use Stetl installer
 RUN cd /opt/stetl; python setup.py install
