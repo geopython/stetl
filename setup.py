@@ -35,7 +35,7 @@ with open('CHANGES.txt', 'r') as f:
 requirements = [
     'psycopg2',
     'lxml',
-    'GDAL<2.0',
+    'GDAL',
     'Jinja2'
 ]
 
