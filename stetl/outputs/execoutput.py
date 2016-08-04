@@ -34,6 +34,23 @@ class ExecOutput(Output):
         log.info("executing cmd=%s" % cmd)
         subprocess.call(cmd, shell=use_shell)
         log.info("execute done")
+        
+        
+class CommandExecOutput(ExecOutput):
+    """
+    Executes an arbitrary command.
+
+    consumes=FORMAT.string
+    """    
+
+    def __init__(self, configdict, section):
+        ExecOutput.__init__(self, configdict, section, consumes=FORMAT.string)
+
+    def write(self, packet):
+        if packet.data is not None:
+            self.execute_cmd(packet.data)
+        
+        return packet
 
         
 class Ogr2OgrExecOutput(ExecOutput):
