@@ -6,7 +6,7 @@ from stetl.outputs.standardoutput import StandardOutput
 from tests.stetl_test_case import StetlTestCase
 
 class StandardOutputTest(StetlTestCase):
-    """Unit tests for StandardOutputTest"""
+    """Unit tests for StandardOutput"""
 
     def setUp(self):
         super(StandardOutputTest, self).setUp()
