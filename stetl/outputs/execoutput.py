@@ -184,7 +184,10 @@ class Ogr2OgrExecOutput(ExecOutput):
             self.ogr2ogr_cmd += ' -spat ' + spatial_extent
         if options:
             self.ogr2ogr_cmd += ' ' + options
-        self.cleanup_input = self.cfg.get('cleanup_input')
+            
+        import ast
+        ci = self.cfg.get('cleanup_input')
+        self.cleanup_input = ast.literal_eval(ci) if ci is not None else False
             
         self.first_run = True
 
