@@ -616,3 +616,32 @@ class ZipFileInput(FileInput):
             self.file_content = None
 
         return packet
+
+        
+class GlobFileInput(FileInput):
+    """
+    Returns file names based on the glob.glob pattern given as filename_filter.
+    
+    produces=FORMAT.string or FORMAT.line_stream
+    """
+    
+    def __init__(self, configdict, section, produces=[FORMAT.string, FORMAT.line_stream]):
+        FileInput.__init__(self, configdict, section, produces)
+
+    def read(self, packet):
+        if not len(self.file_list):
+            return packet
+
+        file_path = self.file_list.pop(0)
+
+        # TODO: os.path.join?
+        packet.data = file_path
+
+        # One-time read: we're all done
+        packet.set_end_of_doc()
+        if not len(self.file_list):
+            log.info("all files done")
+            packet.set_end_of_stream()
+
+        self.file_list_done.append(file_path)
+        return packet
