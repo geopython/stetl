@@ -185,3 +185,17 @@ class Ogr2OgrExecOutputTest(StetlTestCase):
         # Check if GFS file has already been removed
         gfs_path = orig_file_ext[0] + "_temp.gfs"
         self.assertFalse(os.path.exists(gfs_path))
+        
+    @mock.patch('subprocess.call', autospec=True)
+    def test_execute_no_cleanup(self, mock_call):
+        chain = StetlTestCase.get_chain(self.etl, 7)
+        file_path = self.etl.configdict.get(StetlTestCase.get_section(chain), 'file_path')
+        chain.run()
+        
+        # Check command line
+        args, kwargs = mock_call.call_args
+        list = self.parse_command(args[0])
+        self.assertEqual(len(list), 5)
+        
+        # Check if input file still exists
+        self.assertTrue(os.path.exists(file_path))
