@@ -1,7 +1,5 @@
 import mock
 import os
-import shutil
-import sys
 
 from stetl.etl import ETL
 from stetl.filters.zipfileextractor import ZipFileExtractor
