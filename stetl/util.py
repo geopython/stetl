@@ -288,7 +288,7 @@ class Util:
     # Handy for e.g. XPath expressions
     @staticmethod
     def stripNamespaces(node):
-        if not Util.xslt_strip_ns_doc:
+        if Util.xslt_strip_ns_doc is not None:
             Util.xslt_strip_ns_doc = etree.fromstring(Util.xslt_strip_ns)
 
         transform = etree.XSLT(Util.xslt_strip_ns_doc)
