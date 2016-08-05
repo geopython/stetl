@@ -34,14 +34,14 @@ class ExecOutput(Output):
         log.info("executing cmd=%s" % cmd)
         subprocess.call(cmd, shell=use_shell)
         log.info("execute done")
-        
-        
+
+
 class CommandExecOutput(ExecOutput):
     """
     Executes an arbitrary command.
 
     consumes=FORMAT.string
-    """    
+    """
 
     def __init__(self, configdict, section):
         ExecOutput.__init__(self, configdict, section, consumes=FORMAT.string)
@@ -49,10 +49,10 @@ class CommandExecOutput(ExecOutput):
     def write(self, packet):
         if packet.data is not None:
             self.execute_cmd(packet.data)
-        
+
         return packet
 
-        
+
 class Ogr2OgrExecOutput(ExecOutput):
     """
     Executes an Ogr2Ogr command.
@@ -161,34 +161,13 @@ class Ogr2OgrExecOutput(ExecOutput):
     def __init__(self, configdict, section):
         ExecOutput.__init__(self, configdict, section, consumes=FORMAT.string)
 
-        # For creating tables the GFS file needs to be newer than
-        # the .gml file. -lco GML_GFS_TEMPLATE somehow does not work
-        # so we copy the .gfs file each time with the .gml file with
-        # the same base name
-        self.lco = self.cfg.get('lco')
-        self.gfs_template = self.cfg.get('gfs_template')
-        spatial_extent = self.cfg.get('spatial_extent')
-        options = self.cfg.get('options')
-        
-        dest_format = self.cfg.get('dest_format')
-        dest_data_source = self.cfg.get('dest_data_source')
-        
-        if not dest_format:
-            raise ValueError('Verplichte parameter dest_format ontbreekt')
-        if not dest_data_source:
-            raise ValueError('Verplichte parameter dest_data_source ontbreekt')
-                
-        self.ogr2ogr_cmd = 'ogr2ogr -f ' + dest_format + ' ' + dest_data_source
-        
-        if spatial_extent:
-            self.ogr2ogr_cmd += ' -spat ' + spatial_extent
-        if options:
-            self.ogr2ogr_cmd += ' ' + options
-            
-        import ast
-        ci = self.cfg.get('cleanup_input')
-        self.cleanup_input = ast.literal_eval(ci) if ci is not None else False
-            
+        self.ogr2ogr_cmd = 'ogr2ogr -f ' + self.dest_format + ' ' + self.dest_data_source
+
+        if self.spatial_extent:
+            self.ogr2ogr_cmd += ' -spat ' + self.spatial_extent
+        if self.options:
+            self.ogr2ogr_cmd += ' ' + self.options
+
         self.first_run = True
 
     def write(self, packet):
@@ -200,8 +179,6 @@ class Ogr2OgrExecOutput(ExecOutput):
         if self.lco and self.first_run is True:
             ogr2ogr_cmd += ' ' + self.lco
             self.first_run = False
-            
-        import os.path
 
         if type(packet.data) is list:
             for item in packet.data:
@@ -210,20 +187,25 @@ class Ogr2OgrExecOutput(ExecOutput):
             self.execute(ogr2ogr_cmd, packet.data)
 
         return packet
-        
+
     def execute(self, ogr2ogr_cmd, file_path):
+
+        # For creating tables the GFS file needs to be newer than
+        # the .gml file. -lco GML_GFS_TEMPLATE somehow does not work
+        # so we copy the .gfs file each time with the .gml file with
+        # the same base name
         # Copy the .gfs file if required, use the same base name
         # so ogr2ogr will pick it up.
+        gfs_path = None
         if self.gfs_template:
             file_ext = os.path.splitext(file_path)
             gfs_path = file_ext[0] + '.gfs'
             shutil.copy(self.gfs_template, gfs_path)
-            
+
         # Append file name to command as last argument
         self.execute_cmd(ogr2ogr_cmd + ' ' + file_path)
-            
+
         if self.cleanup_input:
             os.remove(file_path)
-            if self.gfs_template:
+            if gfs_path:
                 os.remove(gfs_path)
-    
