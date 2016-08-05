@@ -92,30 +92,30 @@ class Ogr2OgrExecOutput(ExecOutput):
         """
         pass
 
-    @Config(ptype=list, default=[], required=False)
+    @Config(ptype=str, default=None, required=False)
     def lco(self):
         """
         Options for newly created layer (-lco).
 
-        Type: list
+        Type: string
 
         Required: False
 
-        Default: []
+        Default: None
         """
 
         pass
 
-    @Config(ptype=list, default=None, required=False)
+    @Config(ptype=str, default=None, required=False)
     def spatial_extent(self):
         """
         Spatial extent (-spat), to pass as xmin ymin xmax ymax
 
-        Type: list
+        Type: string
 
         Required: False
 
-        Default: []
+        Default: None
         """
         pass
 
@@ -131,10 +131,12 @@ class Ogr2OgrExecOutput(ExecOutput):
         """
         pass
 
-    @Config(ptype=list, default=None, required=False)
+    @Config(ptype=str, default=None, required=False)
     def options(self):
         """
         Miscellaneous options to pass to ogr2ogr.
+
+        Type: string
 
         Required: False
 
