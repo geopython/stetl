@@ -7,7 +7,7 @@ from stetl.outputs.dboutput import PostgresDbOutput
 from tests.stetl_test_case import StetlTestCase
 
 class PostgresDbOutputTest(StetlTestCase):
-    """Unit tests for PostgresDbOutputTest"""
+    """Unit tests for PostgresDbOutput"""
 
     def setUp(self):
         super(PostgresDbOutputTest, self).setUp()

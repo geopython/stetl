@@ -1,19 +1,20 @@
+import mock
 import os
 import sys
 
 from stetl.etl import ETL
-from stetl.outputs.standardoutput import StandardOutput
+from stetl.outputs.execoutput import CommandExecOutput
 from tests.stetl_test_case import StetlTestCase
 
-class StandardOutputTest(StetlTestCase):
-    """Unit tests for StandardOutput"""
+class CommandExecOutputTest(StetlTestCase):
+    """Unit tests for CommandExecOutput"""
 
     def setUp(self):
-        super(StandardOutputTest, self).setUp()
+        super(CommandExecOutputTest, self).setUp()
 
         # Initialize Stetl
         curr_dir = os.path.dirname(os.path.realpath(__file__))
-        cfg_dict = {'config_file': os.path.join(curr_dir, 'configs/standardoutput.cfg')}
+        cfg_dict = {'config_file': os.path.join(curr_dir, 'configs/commandexecoutput.cfg')}
         self.etl = ETL(cfg_dict)
     
     def test_class(self):
@@ -21,23 +22,26 @@ class StandardOutputTest(StetlTestCase):
         section = StetlTestCase.get_section(chain, -1)
         class_name = self.etl.configdict.get(section, 'class')
         
-        self.assertEqual('outputs.standardoutput.StandardOutput', class_name)
+        self.assertEqual('outputs.execoutput.CommandExecOutput', class_name)
     
     def test_instance(self):
         chain = StetlTestCase.get_chain(self.etl)
 
-        self.assertTrue(isinstance(chain.cur_comp, StandardOutput))
+        self.assertTrue(isinstance(chain.cur_comp, CommandExecOutput))
     
-    def test_execute(self):
+    @mock.patch('subprocess.call', autospec=True)
+    def test_execute(self, mock_call):
         # Read content of input file
         chain = StetlTestCase.get_chain(self.etl)
         section = StetlTestCase.get_section(chain)
         fn = self.etl.configdict.get(section, 'file_path')
         with open(fn, 'r') as f:
             contents = f.read()
-        
+
         self.etl.run()
         
-        self.assertGreater(sys.stdout.getvalue(), 0)
-        # Assert includes last linebreak from stdout, due to print function
-        self.assertEqual(sys.stdout.getvalue(), contents + '\n')
+        self.assertTrue(mock_call.called)
+        self.assertEqual(1, mock_call.call_count)
+        args, kwargs = mock_call.call_args
+        self.assertEqual(contents, args[0])
+        
