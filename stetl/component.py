@@ -110,6 +110,7 @@ class Component(object):
         # The actual typed values as populated within Config Decorator
         self.cfg_vals = dict()
         self.next = None
+        self.section = section
 
         # First assume single output provided by derived class
         self._output_format = produces
@@ -141,6 +142,10 @@ class Component(object):
         if not self.is_compatible():
             raise ValueError(
                 'Incompatible components are linked: %s and %s' % (str(self), str(self.next)))
+
+    # Get our id: currently the [section] name
+    def get_id(self):
+        return self.section
 
     # Check our compatibility with the next Component in the Chain
     def is_compatible(self):

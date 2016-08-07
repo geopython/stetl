@@ -59,6 +59,54 @@ class Chain:
         # Remember current
         self.cur_comp = etl_comp
 
+    def get_by_class(self, clazz):
+        """
+        Get Component instance from Chain by class, mainly for testing.
+        :param clazz:
+        :return Component:
+        """
+        cur_comp = self.first_comp
+        while cur_comp:
+            if cur_comp.__class__ == clazz:
+                return cur_comp
+
+            # Try next in Chain
+            cur_comp = cur_comp.next
+
+        return None
+
+
+    def get_by_id(self, id):
+        """
+        Get Component instance from Chain, mainly for testing.
+        :param name:
+        :return Component:
+        """
+        cur_comp = self.first_comp
+        while cur_comp:
+            if cur_comp.get_id() == id:
+                return cur_comp
+
+            # Try next in Chain
+            cur_comp = cur_comp.next
+
+        return None
+
+    def get_by_index(self, index):
+        """
+        Get Component instance from Chain by position/index in Chain, mainly for testing.
+        :param clazz:
+        :return Component:
+        """
+        cur_comp = self.first_comp
+        i = 0
+        while cur_comp and i < index:
+            # Try next in Chain
+            cur_comp = cur_comp.next
+            i += 1
+
+        return cur_comp
+
     def run(self):
         """
         Run the ETL Chain.
