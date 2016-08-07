@@ -50,15 +50,15 @@ class XmlAssembler(Filter):
         # Always move the data (element) from packet
         element = packet.consume()
 
-        if element is None or packet.is_end_of_stream() is True:
-            return packet
+        if element:
+            self.total_element_count += 1
+            self.element_arr.append(element)
 
-        self.total_element_count += 1
-
-        self.element_arr.append(element)
         return packet
 
     def flush_elements(self, packet):
+        packet.set_end_of_doc()
+
         if len(self.element_arr) == 0:
             return packet
 
