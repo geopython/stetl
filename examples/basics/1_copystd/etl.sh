@@ -4,5 +4,10 @@
 #
 # Shortcut to call Stetl main.py with etl config.
 #
-stetl  -c etl.cfg
+stetl=stetl
+
+# PYTHONPATH=${PYTHONPATH}:../../..
+# stetl=../../../stetl/main.py
+
+$stetl  -c etl.cfg
 

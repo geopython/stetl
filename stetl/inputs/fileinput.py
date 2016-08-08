@@ -130,41 +130,24 @@ class StringFileInput(FileInput):
         # Optional formatting of content according to Python String.format()
         # Input file should have substitutable values like {schema} {foo}
         # format_args should be of the form format_args = schema:test foo:bar
-
         if self.format_args:
             # Convert string to dict: http://stackoverflow.com/a/1248990
             self.format_args = Util.string_to_dict(self.format_args, ':')
 
-    def read(self, packet):
-        # No more files left and done with current file ?
-        if not len(self.file_list) and self.file is None:
-            packet.set_end_of_stream()
-            log.info("EOF file list, all files done")
-            return packet
+    def read_file(self, file_path):
+        """
+        Overridden from base class.
+        """
 
-        # Done with current file or first file ?
-        if self.file is None:
-            self.cur_file_path = self.file_list.pop(0)
-            self.file = open(self.cur_file_path, 'r')
-            log.info("file opened : %s" % self.cur_file_path)
+        file_content = None
+        with open(file_path, 'r') as f:
+            file_content = f.read()
+            # Optional: string substitution based on Python String.format()
+            # But you can also use StringSubstitutionFilter from filters.
+            if self.format_args:
+                file_content = file_content.format(**self.format_args)
 
-        # Assume valid file content
-        file_content = self.file.read()
-
-        # Optional: string substitution based on Python String.format()
-        # But you can also use StringSubstitutionFilter from filters.
-        if self.format_args:
-            file_content = file_content.format(**self.format_args)
-
-        # Cleanup
-        self.file.close()
-        self.file = None
-
-        log.info("file read : %s size=%d" % (self.cur_file_path, len(file_content)))
-
-        packet.data = file_content
-        return packet
-
+        return file_content
 
 class XmlFileInput(FileInput):
     """

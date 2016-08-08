@@ -4,6 +4,6 @@
 #
 # Author: Just van den Broecke
 #
-stetl  -c etl.cfg
+stetl -c etl.cfg
 
 
