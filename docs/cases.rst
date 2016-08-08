@@ -14,25 +14,25 @@ Dutch Open Geo-Datasets, in particular the country wide
 Buildings and Addresses (BAG). These datasets are provided as XML/GML. The ETL mostly provides
 a transformation to PostGIS. For all Key Registries, except for the BAG, Stetl is used, basically
 as-is, without extra (Python) programming.  See also the NLExtract GitHub:
-https://github.com/opengeogroep/NLExtract
+https://github.com/nlextract/NLExtract
 
 Topography (BRT/Top10NL)
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-See https://github.com/opengeogroep/NLExtract/tree/master/top10nl/etl and the Stetl conf at
-https://github.com/opengeogroep/NLExtract/tree/master/top10nl/etl/conf/
+See https://github.com/nlextract/NLExtract/tree/master/top10nl/etl and the Stetl conf at
+https://github.com/nlextract/NLExtract/tree/master/top10nl/etl/conf/
 
 Detailed Topography (BGT)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-See https://github.com/opengeogroep/NLExtract/tree/master/bgt and the Stetl conf at
-https://github.com/opengeogroep/NLExtract/blob/master/bgt/etl/conf/
+See https://github.com/nlextract/NLExtract/tree/master/bgt and the Stetl conf at
+https://github.com/nlextract/NLExtract/blob/master/bgt/etl/conf/
 
 Cadastral Parcels (BRK)
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-See https://github.com/opengeogroep/NLExtract/tree/master/brk/etl
-and the Stetl conf at https://github.com/opengeogroep/NLExtract/tree/master/brk/etl/conf
+See https://github.com/nlextract/NLExtract/tree/master/brk/etl
+and the Stetl conf at https://github.com/nlextract/NLExtract/tree/master/brk/etl/conf
 
 INSPIRE
 -------
