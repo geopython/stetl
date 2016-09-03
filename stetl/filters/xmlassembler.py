@@ -39,6 +39,10 @@ class XmlAssembler(Filter):
             # Valid element: consume and handle
             self.consume_element(packet)
 
+            # Document is obviously not finished, reset EoD/EoS in packet
+            packet.set_end_of_stream(False)
+            packet.set_end_of_doc(False)
+
         if packet.is_end_of_stream() or packet.is_end_of_doc() or len(self.element_arr) >= self.max_elements:
             # EOF but still data in buffer: make doc
             # log.info("Flush doc")
