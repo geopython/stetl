@@ -1,6 +1,4 @@
 import os
-#import re
-import sys
 
 from stetl.etl import ETL
 from stetl.filters.xmlassembler import XmlAssembler
@@ -40,11 +38,11 @@ class XmlAssemblerTest(StetlTestCase):
         # most Packets are empty, but we need to find 2 filled with etree docs
         doc_packet_list = []
         for packet in packet_list:
-            if packet.data:
+            if packet.data is not None:
                 doc_packet_list.append(packet)
 
         # Assertion: we need to see 2 documents
-        self.assertEqual(len(doc_packet_list), 2)
+        self.assertEqual(len(doc_packet_list), 4)
         namespaces={'gml': 'http://www.opengis.net/gml/3.2', 'top10nl': 'http://register.geostandaarden.nl/gmlapplicatieschema/top10nl/1.2.0'}
 
         # Assertion: first doc has two FeatureMember elements with proper Namespaces
@@ -52,8 +50,9 @@ class XmlAssemblerTest(StetlTestCase):
         feature_elms = xml_doc1.xpath('/gml:FeatureCollectionT10NL/top10nl:FeatureMember', namespaces=namespaces)
         self.assertEqual(len(feature_elms), 2)
 
-        # Assertion: second doc has one FeatureMember with proper Namespaces
-        xml_doc2 = doc_packet_list[1].data
+        # Assertion: last doc has one FeatureMember with proper Namespaces
+        last = len(doc_packet_list) - 1
+        xml_doc2 = doc_packet_list[last].data
         feature_elms = xml_doc2.xpath('/gml:FeatureCollectionT10NL/top10nl:FeatureMember', namespaces=namespaces)
         self.assertEqual(len(feature_elms), 1)
 
@@ -61,6 +60,6 @@ class XmlAssemblerTest(StetlTestCase):
         self.assertTrue(doc_packet_list[0].end_of_doc, msg='doc1: end_of_doc if False')
         self.assertFalse(doc_packet_list[0].end_of_stream, msg='doc1: end_of_stream is True')
 
-        # Assertion: second doc has end_of_doc and end_of_stream set
-        self.assertTrue(doc_packet_list[1].end_of_doc, msg='doc2: end_of_doc if False')
-        self.assertTrue(doc_packet_list[1].end_of_stream, msg='doc2: end_of_stream if False')
+        # Assertion: last doc has end_of_doc and end_of_stream set
+        self.assertTrue(doc_packet_list[last].end_of_doc, msg='doc2: end_of_doc if False')
+        self.assertTrue(doc_packet_list[last].end_of_stream, msg='doc2: end_of_stream if False')

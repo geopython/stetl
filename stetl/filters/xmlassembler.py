@@ -50,7 +50,7 @@ class XmlAssembler(Filter):
         # Always move the data (element) from packet
         element = packet.consume()
 
-        if element:
+        if element is not None:
             self.total_element_count += 1
             self.element_arr.append(element)
 
