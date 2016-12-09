@@ -148,20 +148,15 @@ class HttpOutput(Output):
         # get the response
         statuscode, statusmessage, header = webservice.getreply()
         log.info("Req nr %d - response status: code=%d msg=%s" % (self.req_nr, statuscode, statusmessage))
-        if statuscode != 200:
+        if statuscode == 200:
+            res = webservice.getfile().read()
+        elif statuscode == 204:
+            res = ''
+        else:
             log.error("Headers: %s" % str(header))
             res = webservice.getfile().read()
             log.info('Content: %s' % res)
-        else:
-            res = webservice.getfile().read()
 
-        # conn = httplib.HTTPConnection(self.host, self.port)
-        # conn.request(self.method, self.path, payload, headers)
-
-        # response = conn.getresponse()
-        # log.info('status=%s msg=%s' % (response.status, response.msg))
-        # log.info('response=%s' % response.read(1024))
-        # conn.close()
         return statuscode, statusmessage, res
 
     def write(self, packet):
