@@ -238,4 +238,3 @@ class Component(object):
         Allows derived Components to perform a one-time exit/cleanup.
         """
         pass
-

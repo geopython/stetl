@@ -8,6 +8,7 @@
 from factory import factory
 from packet import Packet
 from util import Util
+from splitter import Splitter
 
 log = Util.get_log('chain')
 
@@ -37,9 +38,26 @@ class Chain:
 
         # Create linked list of input/filter/output (ETL Component) objects
         chain_str_arr = self.chain_str.split('|')
+
         for etl_section_name in chain_str_arr:
-            # Create the ETL component by name and properties
-            etl_comp = factory.create_obj(self.config_dict, etl_section_name)
+
+            # Check for splitting outputs construct using '+'
+            # TODO: may also construct combining Inputs or split to multiple sub-Chains
+            # for now only Outputs supported for splitting
+            if '+' in etl_section_name:
+                section_names = etl_section_name.split('+')
+
+                log.info('Splitting to: %s' % etl_section_name)
+                child_comps = []
+                for section_name in section_names:
+                    # Create the child ETL component by name and properties
+                    child_comp = factory.create_obj(self.config_dict, section_name.strip())
+                    child_comps.append(child_comp)
+                etl_comp = Splitter(self.config_dict, child_comps)
+            else:
+
+                # Create the ETL component by name and properties
+                etl_comp = factory.create_obj(self.config_dict, etl_section_name.strip())
 
             # Add component to end of Chain
             self.add(etl_comp)

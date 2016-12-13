@@ -58,8 +58,16 @@ a the Unix pipe symbol "|".
 So the above Chain is ``input_xml_file|transformer_xslt|output_file``. The names
 of the component sections like ``[input_xml_file]`` are arbitrary.
 
+Note: since v1.1.0 a datastream can be split (see below) to multiple ``Outputs`` using a ``+`` like : ::
+
+	[etl]
+	chains = input_xml_file|transformer_xslt|output_gml_file+output_wfs
+
+In later versions also combining ``Inputs`` and ``Filter``-splitting will be provided.
+
 Configuring Components
 ----------------------
+
 Most Stetl Components, i.e. inputs, filters, outputs, have properties that can be configured within their
 respective [section] in the config file. But what are the possible properties, values and defaults?
 This is documented within each Component class using the ``@Config`` decorator much similar to the standard Python
@@ -336,7 +344,8 @@ The syntax: chains are separated by commas (steps are sill separated by pipe sym
 Chains are executed in order. We can even reuse the
 specified components from within the same file. Each will have a separate instance within a Chain.
 
-For example in the `Top10NL example <https://github.com/geopython/stetl/blob/master/examples/top10nl/etl-top10nl.cfg>`_  we see three Chains::
+For example in the `Top10NL example <https://github.com/geopython/stetl/blob/master/examples/top10nl/etl-top10nl.cfg>`_
+we see three Chains::
 
 		[etl]
 		chains = input_sql_pre|schema_name_filter|output_postgres,
@@ -346,3 +355,37 @@ For example in the `Top10NL example <https://github.com/geopython/stetl/blob/mas
 Here the Chain `input_sql_pre|schema_name_filter|output_postgres` sets up a PostgreSQL schema and
 creates tables.  `input_big_gml_files|xml_assembler|transformer_xslt|output_ogr2ogr` does the actual ETL and
 `input_sql_post|schema_name_filter|output_postgres` does some PostgreSQL postprocessing.
+
+Multiple Outputs
+----------------
+
+In some cases we may want to split processed data to multiple ``Outputs``.
+For example to produce output files in multiple formats like GML, GeoJSON etc
+or to publish converted (Filtered) data to multiple remote services (SOS, SensorThings API)
+or just for simple debugging to a target ``Output`` and ``StandardOutput``.
+
+See issue https://github.com/geopython/stetl/issues/35 and
+the `Splitter example <https://github.com/geopython/stetl/tree/master/examples/basics/15_splitoutput>`_.
+
+Here the GML-output is split to two ``Outputs`` by using a ``+`` in the ETL Chain definition: ::
+
+	# Transform input xml to valid GML file using an XSLT filter and pass to multiple outputs.
+
+	[etl]
+	chains = input_xml_file|transformer_xslt |output_file + output_std
+
+	[input_xml_file]
+	class = inputs.fileinput.XmlFileInput
+	file_path = input/cities.xml
+
+	[transformer_xslt]
+	class = filters.xsltfilter.XsltFilter
+	script = cities2gml.xsl
+
+	[output_file]
+	class = outputs.fileoutput.FileOutput
+	file_path = output/gmlcities.gml
+
+	[output_std]
+	class = outputs.standardoutput.StandardOutput
+
