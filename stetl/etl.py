@@ -94,8 +94,8 @@ class ETL:
         chains_str_arr = chains_str.split(',')
         for chain_str in chains_str_arr:
             # Build single Chain of components and let it run
-            chain = Chain(chain_str.strip(), self.configdict)
-            chain.assemble()
+            chain = Chain(chain_str, self.configdict)
+            chain.assemble2()
 
             # Run the ETL for this Chain
             chain.run()

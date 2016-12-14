@@ -27,7 +27,7 @@ class Chain:
         self.first_comp = None
         self.cur_comp = None
         self.config_dict = config_dict
-        self.chain_str = chain_str
+        self.chain_str = chain_str.strip()
 
     def assemble(self):
         """
@@ -50,11 +50,73 @@ class Chain:
                 log.info('Splitting to: %s' % etl_section_name)
                 child_comps = []
                 for section_name in section_names:
+
+                    if '(' in section_name and ')' in section_name:
+                        section_name = section_name.replace(',', '|')
+                        section_name = section_name.strip('(')
+                        section_name = section_name.strip(')')
+
                     # Create the child ETL component by name and properties
                     child_comp = factory.create_obj(self.config_dict, section_name.strip())
                     child_comps.append(child_comp)
                 etl_comp = Splitter(self.config_dict, child_comps)
             else:
+
+                # Create the ETL component by name and properties
+                etl_comp = factory.create_obj(self.config_dict, etl_section_name.strip())
+
+            # Add component to end of Chain
+            self.add(etl_comp)
+
+    def assemble2(self):
+        """
+        Builder method: build a Chain of linked Components
+        :return:
+        """
+        log.info('Assembling Chain: %s...' % self.chain_str)
+
+        # Create linked list of input/filter/output (ETL Component) objects
+        chain_str = self.chain_str
+        split_comps = []
+        while chain_str:
+            chain_str = chain_str.strip()
+
+            # Check and handle Splitter construct
+            # e.g. input_xml_file |(transformer_xslt|output_file) (output_std) (transformer_xslt|output_std)
+            if chain_str.startswith('('):
+                etl_section_name, chain_str = chain_str.split(')', 1)
+                etl_section_name = etl_section_name.strip('(')
+
+                # Check for subchain (split at Filter level)
+                if '|' in etl_section_name:
+                    # Have subchain: use Chain to assemble
+                    sub_chain = Chain(etl_section_name, self.config_dict)
+                    sub_chain.assemble2()
+                    child_comp = sub_chain.first_comp
+                else:
+                    # Single component (Output) to split
+                    child_comp = factory.create_obj(self.config_dict, etl_section_name.strip())
+
+                # Assemble Components (can be subchains) for Splitter later
+                split_comps.append(child_comp)
+                if '(' in chain_str:
+                    # Still components (subchains) to assemble for Splitter
+                    continue
+
+            if len(split_comps) > 0:
+                # Next component is Splitter with children
+                etl_comp = Splitter(self.config_dict, split_comps)
+                split_comps = []
+            else:
+
+                # "Normal" case: regular Components piped in Chain
+                if '|' in chain_str:
+                    # More than one component in remaining Chain
+                    etl_section_name, chain_str = chain_str.split('|', 1)
+                else:
+                    # Last element, we're done!
+                    etl_section_name = chain_str
+                    chain_str = None
 
                 # Create the ETL component by name and properties
                 etl_comp = factory.create_obj(self.config_dict, etl_section_name.strip())
