@@ -11,6 +11,7 @@ logging.basicConfig()
 log = logging.getLogger()
 
 # Parse the version from the stetl module.
+version = ''
 with open('stetl/version.py', 'r') as f:
     for line in f:
         if line.find("__version__") >= 0:
