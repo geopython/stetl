@@ -22,6 +22,7 @@ addons:
       - libgdal-dev
       - libgdal1h
       - gdal-bin
+      - python-gdal
 
 #before_install:
   # - sudo apt-add-repository -y ppa:ubuntugis/ubuntugis-unstable GDAL2 conflicts!
