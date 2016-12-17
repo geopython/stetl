@@ -160,7 +160,7 @@ class PostgresDbInput(SqlDbInput):
     @Config(ptype=str, required=False, default='5432')
     def port(self):
         """
-        port for host, defaults to `'5432'
+        port for host, defaults to '5432'
         """
         pass
 

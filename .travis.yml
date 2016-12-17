@@ -36,6 +36,7 @@ install:
 script:
 #  - find stetl -name "*.py" | xargs flake8
   - cd docs && make html
+  - nose2 -v -c setup.cfg
 
 #after-script:
 #  - python todo
