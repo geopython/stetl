@@ -5,6 +5,8 @@
 #
 # Author: Frank Steggink
 #
+from copy import deepcopy
+
 from stetl.component import Config
 from stetl.filter import Filter
 from stetl.util import Util, etree
@@ -110,16 +112,10 @@ class XmlElementReader(Filter):
 
             if tag in self.element_tags:
                 if event == "start":
-                    # TODO check if deepcopy is the right thing to do here.
-                    # packet.data = elem
                     pass
-                # self.root.remove(elem)
                 elif event == "end":
-                    # Delete the element from the tree
-                    # self.root.clear()
-                    packet.data = elem
+                    packet.data = deepcopy(elem)
                     self.elem_count += 1
-                    self.root.remove(elem)
 
                     if self.strip_namespaces:
                         packet.data = Util.stripNamespaces(elem).getroot()
