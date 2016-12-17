@@ -1,33 +1,32 @@
 language: python
 sudo: true
 
-env:
-  global:
-   - CPLUS_INCLUDE_PATH=/usr/include/gdal
-   - C_INCLUDE_PATH=/usr/include/gdal
+#env:
+#  global:
+#   - CPLUS_INCLUDE_PATH=/usr/include/gdal
+#   - C_INCLUDE_PATH=/usr/include/gdal
 
 python:
   - "2.7"
 
-#addons:
-#  apt:
-#    packages:
-#      - libproj0
-#      - libgeos-dev
-#      - libgdal-dev
-#      - libgdal1h
-#      - libxslt1-dev
-#      - libxml2-dev
-#      - build-essential
-#      - python-dev
+addons:
+  apt:
+    packages:
+      - libxslt1-dev
+      - libxml2-dev
+      - build-essential
+      - python-dev
+      - python-setuptools
+      - libproj0
+      - libgeos-dev
+      - libgdal-dev
+      - libgdal1h
+      - gdal-bin
 
-
-before_install:
+#before_install:
   # - sudo apt-add-repository -y ppa:ubuntugis/ubuntugis-unstable GDAL2 conflicts!
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq build-essential python-dev python-setuptools
-  - sudo apt-get install -qq python-lxml
-  - sudo apt-get install -qq gdal-bin libgeos-dev libproj-dev libgdal-dev
+#  - sudo apt-get install -qq python-lxml
+#  - sudo apt-get install -qq gdal-bin libgeos-dev libproj-dev libgdal-dev
 
 install:
   - pip install -r requirements.txt
