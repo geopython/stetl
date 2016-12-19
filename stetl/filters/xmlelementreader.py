@@ -118,7 +118,7 @@ class XmlElementReader(Filter):
                     self.elem_count += 1
 
                     if self.strip_namespaces:
-                        packet.data = Util.stripNamespaces(elem).getroot()
+                        packet.data = Util.stripNamespaces(packet.data).getroot()
 
             # If there is a next component, let it process
             if self.next:
