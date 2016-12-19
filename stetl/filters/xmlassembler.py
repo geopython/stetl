@@ -5,6 +5,8 @@
 #
 # Author: Just van den Broecke
 #
+from lxml import etree
+
 from stetl.util import Util, etree
 from stetl.filter import Filter
 from stetl.packet import FORMAT
@@ -54,7 +56,7 @@ class XmlAssembler(Filter):
         # Always move the data (element) from packet
         element = packet.consume()
 
-        if element is not None:
+        if element is not None and etree.iselement(element):
             self.total_element_count += 1
             self.element_arr.append(element)
 
