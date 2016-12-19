@@ -116,6 +116,7 @@ class XmlElementReader(Filter):
                 elif event == "end":
                     packet.data = deepcopy(elem)
                     self.elem_count += 1
+                    elem.clear()
 
                     if self.strip_namespaces:
                         packet.data = Util.stripNamespaces(packet.data).getroot()
