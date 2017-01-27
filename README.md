@@ -44,7 +44,7 @@ Stetl has been found particularly useful for complex GML-related ETL-cases, like
 within [EU INSPIRE](http://inspire.ec.europa.eu/) Data Harmonization and the transformation
 of GML/XML-based National geo-datasets to for example PostGIS.
 
-Most of the data conversions within the [Dutch NLExtract Project](https://github.com/opengeogroep/NLExtract) apply Stetl.
+Most of the data conversions within the [Dutch NLExtract Project](https://github.com/nlextract/NLExtract) apply Stetl.
 
 Stetl also proved to be very effective in [IoT-related transformations involving the SensorWeb/SOS](https://github.com/Geonovum/smartemission).
 
@@ -71,7 +71,7 @@ review the [guidelines for contributing](CONTRIBUTING.md).
 
 Stetl originated in the INSPIRE-FOSS project: [2009-2013 now archived](https://github.com/justb4/inspire-foss). 
 Since then Stetl evolved into a wider use like
-transforming [Dutch GML-based Open Datasets](https://github.com/opengeogroep/NLExtract) such as IMGEO/BGT (Large Scale Topography) 
+transforming [Dutch GML-based Open Datasets](https://github.com/nlextract/NLExtract) such as IMGEO/BGT (Large Scale Topography) 
 and IMKAD/BRK (Cadastral Data).
 
 ## Finally

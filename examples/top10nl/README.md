@@ -5,7 +5,7 @@ This example was the base for the full implementation in the NLExtract project w
 it will be maintained more actively.
 
 **This example is outdated.**
-**For a production version see https://github.com/opengeogroep/NLExtract/tree/master/top10nl/etl**
+**For a production version see https://github.com/nlextract/NLExtract/tree/master/top10nl/etl**
 
 ## Notes - kept for historic reasons
 
@@ -14,7 +14,7 @@ PostGIS.
 
 NB this is an example. The official and actively maintained
 Top10NL extract prog is now part of the NLExtract project and located at:
-https://github.com/opengeogroep/NLExtract/tree/master/top10nl/etl !!
+https://github.com/nlextract/NLExtract/tree/master/top10nl/etl !!
 
 The entire ETL is driven through the file etl-top10nl.cfg without any
 programming (except for the XSLT step). The script etl-top10nl.sh is a shortcut to
