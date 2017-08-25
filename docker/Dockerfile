@@ -31,7 +31,8 @@ RUN apt-get update && \
     libgdal-dev \
     build-essential \
     python-dev \
-    python-setuptools
+    python-setuptools \
+    gdal-bin
 
 # Get latest Stetl from git
 RUN git clone https://github.com/geopython/stetl /opt/stetl
