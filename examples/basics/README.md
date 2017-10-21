@@ -19,4 +19,5 @@ As a general Stetl-health test you may run all examples using `./runall.sh`.
 * 12_gdal_ogr - direct OgrInput (and later output)
 * 13_dbinput - input from SQL sources, here SLQLite Input
 * 14_logfileinput - input from Apache Logfile
-* 15_splitchain - split Chain over multiple outputs or sub-Chains
+* 15_splitter - Splitter Component: split Chain over multiple outputs or sub-Chains
+* 16_merger - Merger Component: combines multiple inputs into single input

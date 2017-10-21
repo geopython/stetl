@@ -41,10 +41,22 @@ class Config(object):
         self.property_name = fget.__name__
         # print "Inside __call__() name=%s" % self.property_name
 
-        # For Spinx documention build we need the original function with docstring.
+        # For Spinx documentation build we need the original function with docstring.
         IS_SPHINX_BUILD = bool(os.getenv('SPHINX_BUILD'))
         if IS_SPHINX_BUILD:
             fget.__doc__ = '``CONFIG`` - %s' % fget.__doc__
+            doc = doc.strip()
+            # TODO more detail, example below
+            # doc = '``Parameter`` - %s\n\n' % doc
+            # doc += '* type: %s\n' % self.ptype
+            #
+            # if self.value:
+            #     doc += '* value: %s\n' % self.value
+            # else:
+            #     doc += '* required: %s\n' % self.required
+            #     doc += '* default: %s\n' % self.default
+            #     doc += '* value_range: %s\n' % self.value_range
+
             return fget
         else:
             return self

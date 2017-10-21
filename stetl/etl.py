@@ -95,7 +95,7 @@ class ETL:
         for chain_str in chains_str_arr:
             # Build single Chain of components and let it run
             chain = Chain(chain_str, self.configdict)
-            chain.assemble2()
+            chain.assemble()
 
             # Run the ETL for this Chain
             chain.run()

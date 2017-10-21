@@ -5,9 +5,9 @@
 # Author: Just van den Broecke
 #
 
+import random
 from util import Util
 from component import Component
-from packet import Packet
 
 log = Util.get_log('splitter')
 
@@ -25,7 +25,7 @@ class Splitter(Component):
         children = []
         section_name = ''
         for child in child_list:
-            section_name += '-' + child.get_id()
+            section_name += '-%s_%d'% (child.get_id(), random.randrange(0, 100000))
             children.append(child)
 
         # Add ourselves to config for compat with Component
@@ -45,7 +45,7 @@ class Splitter(Component):
     # Check our compatibility with our child Components
     def is_compatible(self):
         for comp in self.next:
-            if not comp.is_compatable():
+            if not comp.is_compatible():
                 return False
         return True
 

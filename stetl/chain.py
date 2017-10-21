@@ -9,6 +9,7 @@ from factory import factory
 from packet import Packet
 from util import Util
 from splitter import Splitter
+from merger import Merger
 
 log = Util.get_log('chain')
 
@@ -37,47 +38,8 @@ class Chain:
         log.info('Assembling Chain: %s...' % self.chain_str)
 
         # Create linked list of input/filter/output (ETL Component) objects
-        chain_str_arr = self.chain_str.split('|')
-
-        for etl_section_name in chain_str_arr:
-
-            # Check for splitting outputs construct using '+'
-            # TODO: may also construct combining Inputs or split to multiple sub-Chains
-            # for now only Outputs supported for splitting
-            if '+' in etl_section_name:
-                section_names = etl_section_name.split('+')
-
-                log.info('Splitting to: %s' % etl_section_name)
-                child_comps = []
-                for section_name in section_names:
-
-                    if '(' in section_name and ')' in section_name:
-                        section_name = section_name.replace(',', '|')
-                        section_name = section_name.strip('(')
-                        section_name = section_name.strip(')')
-
-                    # Create the child ETL component by name and properties
-                    child_comp = factory.create_obj(self.config_dict, section_name.strip())
-                    child_comps.append(child_comp)
-                etl_comp = Splitter(self.config_dict, child_comps)
-            else:
-
-                # Create the ETL component by name and properties
-                etl_comp = factory.create_obj(self.config_dict, etl_section_name.strip())
-
-            # Add component to end of Chain
-            self.add(etl_comp)
-
-    def assemble2(self):
-        """
-        Builder method: build a Chain of linked Components
-        :return:
-        """
-        log.info('Assembling Chain: %s...' % self.chain_str)
-
-        # Create linked list of input/filter/output (ETL Component) objects
         chain_str = self.chain_str
-        split_comps = []
+        sub_comps = []
         while chain_str:
             chain_str = chain_str.strip()
 
@@ -91,22 +53,27 @@ class Chain:
                 if '|' in etl_section_name:
                     # Have subchain: use Chain to assemble
                     sub_chain = Chain(etl_section_name, self.config_dict)
-                    sub_chain.assemble2()
+                    sub_chain.assemble()
                     child_comp = sub_chain.first_comp
                 else:
                     # Single component (Output) to split
                     child_comp = factory.create_obj(self.config_dict, etl_section_name.strip())
 
                 # Assemble Components (can be subchains) for Splitter later
-                split_comps.append(child_comp)
+                sub_comps.append(child_comp)
                 if '(' in chain_str:
                     # Still components (subchains) to assemble for Splitter
                     continue
 
-            if len(split_comps) > 0:
-                # Next component is Splitter with children
-                etl_comp = Splitter(self.config_dict, split_comps)
-                split_comps = []
+            if len(sub_comps) > 0:
+                if chain_str.startswith('|'):
+                    # Next component is Merger with children
+                    etl_comp = Merger(self.config_dict, sub_comps)
+                    dummy, chain_str = chain_str.split('|', 1)
+                else:
+                    # Next component is Splitter with children
+                    etl_comp = Splitter(self.config_dict, sub_comps)
+                sub_comps = []
             else:
 
                 # "Normal" case: regular Components piped in Chain
@@ -202,7 +169,7 @@ class Chain:
         rounds = 0
         try:
             while not packet.is_end_of_stream():
-            #            try:
+            # try:
                 # Invoke the first component to start the chain
                 packet.init()
                 packet = self.first_comp.process(packet)
