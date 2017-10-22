@@ -1,4 +1,9 @@
 .coverage
+.cache
 .gitignore
 *.pyc
+VERSION.txt
+build/
+dist/
 htmlcov/
+Stetl.egg-info

@@ -159,6 +159,15 @@ class Component(object):
     def get_id(self):
         return self.section
 
+    # Get last Component in Chain
+    def get_last(self):
+        last = self
+        while last.next:
+            last = last.next
+            if isinstance(last, list):
+                last = last[0]
+        return last
+
     # Check our compatibility with the next Component in the Chain
     def is_compatible(self):
 

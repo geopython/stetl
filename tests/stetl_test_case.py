@@ -57,4 +57,3 @@ class StetlTestCase(unittest.TestCase):
     @classmethod
     def get_section(cls, chain, index=0):
         return chain.chain_str.split('|')[index]
-    
