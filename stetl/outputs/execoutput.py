@@ -71,10 +71,6 @@ class Ogr2OgrExecOutput(ExecOutput):
         """
         String denoting the OGR data destination. Usually a path to a file like "path/rivers.shp" or connection string
         to PostgreSQL like "PG: host=localhost dbname='rivers' user='postgres'".
-
-        Required: True
-
-        Default: None
         """
         pass
 
@@ -85,10 +81,6 @@ class Ogr2OgrExecOutput(ExecOutput):
         many standard formats that are self-describing like ESRI Shapefile.
 
         Examples: 'PostgreSQL', 'GeoJSON' etc
-
-        Required: False
-
-        Default: None
         """
         pass
 
@@ -96,12 +88,6 @@ class Ogr2OgrExecOutput(ExecOutput):
     def lco(self):
         """
         Options for newly created layer (-lco).
-
-        Type: string
-
-        Required: False
-
-        Default: None
         """
 
         pass
@@ -110,12 +96,6 @@ class Ogr2OgrExecOutput(ExecOutput):
     def spatial_extent(self):
         """
         Spatial extent (-spat), to pass as xmin ymin xmax ymax
-
-        Type: string
-
-        Required: False
-
-        Default: None
         """
         pass
 
@@ -124,10 +104,6 @@ class Ogr2OgrExecOutput(ExecOutput):
         """
         Name of GFS template file to use during loading. Passed to ogr2ogr as
         --config GML_GFS_TEMPLATE <name>
-
-        Required: False
-
-        Default: None
         """
         pass
 
@@ -135,12 +111,6 @@ class Ogr2OgrExecOutput(ExecOutput):
     def options(self):
         """
         Miscellaneous options to pass to ogr2ogr.
-
-        Type: string
-
-        Required: False
-
-        Default: None
         """
         pass
 
@@ -148,12 +118,6 @@ class Ogr2OgrExecOutput(ExecOutput):
     def cleanup_input(self):
         """
         Flag to indicate whether the input file to ogr2ogr should be cleaned up.
-
-        Type: boolean
-
-        Required: False
-
-        Default: False
         """
 
         pass

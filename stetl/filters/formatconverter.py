@@ -32,12 +32,6 @@ class FormatConverter(Filter):
     def converter_args(self):
         """
         Custom converter-specific arguments.
-
-        Type: dictionary
-
-        Required: False
-
-        Default: None
         """
         pass
 

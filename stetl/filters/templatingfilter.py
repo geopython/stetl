@@ -36,8 +36,6 @@ class TemplatingFilter(Filter):
     def template_file(self):
         """
         Path to template file. One of template_file or template_string needs to be configured.
-        Required: False
-        Default: None
         """
         pass
 
@@ -45,8 +43,6 @@ class TemplatingFilter(Filter):
     def template_string(self):
         """
         Template string. One of template_file or template_string needs to be configured.
-        Required: False
-        Default: None
         """
         pass
 
@@ -147,8 +143,6 @@ class Jinja2TemplatingFilter(TemplatingFilter):
     def template_search_paths(self):
         """
         List of directories where to search for templates, default is current working directory only.
-        Required: False
-        Default: [os.getcwd()]
         """
         pass
 
@@ -157,8 +151,6 @@ class Jinja2TemplatingFilter(TemplatingFilter):
         """
         One or more JSON files or URLs with global variables that can be used anywhere in template.
         Multiple files will be merged into one globals dictionary
-        Required: False
-        Default: None
         """
         pass
 
@@ -174,7 +166,7 @@ class Jinja2TemplatingFilter(TemplatingFilter):
     def create_template(self):
         try:
             from jinja2 import Environment, FileSystemLoader
-        except Exception, e:
+        except Exception as e:
             log.error(
                 'Cannot import modules from Jinja2, err= %s; You probably need to install Jinja2 first, see http://jinja.pocoo.org',
                 str(e))

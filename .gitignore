@@ -4,6 +4,7 @@
 *.pyc
 VERSION.txt
 build/
+_build/
 dist/
 htmlcov/
 Stetl.egg-info

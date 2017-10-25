@@ -68,6 +68,29 @@ class Packet:
 
 
 class FORMAT:
+    """
+    Format of Packet (enumeration).
+
+    Current possible values:
+
+    * 'none'
+    * 'xml_line_stream'
+    * 'line_stream'
+    * 'etree_doc'
+    * 'etree_element'
+    * 'etree_feature_array'
+    * 'xml_doc_as_string'
+    * 'string'
+    * 'record'
+    * 'record_array'
+    * 'struct'
+    * 'geojson_feature'
+    * 'geojson_collection'
+    * 'ogr_feature'
+    * 'ogr_feature_array'
+    * 'any'
+
+    """
     none = 'none'
     xml_line_stream = 'xml_line_stream'
     line_stream = 'line_stream'

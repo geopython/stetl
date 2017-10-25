@@ -63,7 +63,16 @@ Note: since v1.1.0 a datastream can be split (see below) to multiple ``Outputs``
 	[etl]
 	chains = input_xml_file|transformer_xslt|(output_gml_file)(output_wfs)
 
-In later versions also combining ``Inputs`` and ``Filter``-splitting will be provided.
+Or multiple Input streams can be combined/merged like: ::
+
+	[etl]
+	chains = (input_http_api_1) (input_http_api_2) | data_transformer | output_db
+
+It is even possible to have both Splitting and Merging together with filtering: ::
+
+	[etl]
+	chains = (input_http_api_1 | cleaner_filter) (input_http_api_2) | data_transformer | (output_db) (output_file)
+
 
 Configuring Components
 ----------------------
@@ -82,49 +91,48 @@ For class authors: this information is added
 via the Python Decorators much similar to ``@property``. The :class:`stetl.component.Config`
 is used to define read-only properties for each Component instance. For example, ::
 
-    class FileInput(Input):
-        """
-        Abstract base class for specific FileInputs, use derived classes.
-        """
+	class FileInput(Input):
+	    """
+	    Abstract base class for specific FileInputs, use derived classes.
+	    """
 
-        # Start attribute config meta
-        # Applying Decorator pattern with the Config class to provide
-        # read-only config values from the configured properties.
+	    # Start attribute config meta
+	    # Applying Decorator pattern with the Config class to provide
+	    # read-only config values from the configured properties.
 
-        @Config(ptype=str, default=None, required=False)
-        def file_path(self):
-            """
-            Path to file or files or URLs: can be a dir or files or URLs
-            or even multiple, comma separated. For URLs only JSON is supported now.
+	    @Config(ptype=str, default=None, required=False)
+	    def file_path(self):
+	        """
+	        Path to file or files or URLs: can be a dir or files or URLs
+	        or even multiple, comma separated. For URLs only JSON is supported now.
+	        """
+	        pass
 
-            Required: True
+	    @Config(ptype=str, default='*.[gxGX][mM][lL]', required=False)
+	    def filename_pattern(self):
+	        """
+	        Filename pattern according to Python ``glob.glob`` for example:
+	        '\\*.[gxGX][mM][lL]'
+	        """
+	        pass
 
-            Default: None
-            """
-            pass
+	    @Config(ptype=bool, default=False, required=False)
+	    def depth_search(self):
+	        """
+	        Should we recurse into sub-directories to find files?
+	        """
+	        pass
 
-        @Config(ptype=str, default='*.[gxGX][mM][lL]', required=False)
-        def filename_pattern(self):
-            """
-            Filename pattern according to Python glob.glob for example:
-            '\*.[gxGX][mM][lL]'
+	    # End attribute config meta
 
-            Required: False
+	    def __init__(self, configdict, section, produces):
+	        Input.__init__(self, configdict, section, produces)
 
-            Default: '\*.[gxGX][mM][lL]'
-            """
-            pass
+	        # Create the list of files to be used as input
+	        self.file_list = Util.make_file_list(self.file_path, None, self.filename_pattern, self.depth_search)
 
-        # End attribute config meta
-
-        def __init__(self, configdict, section, produces):
-            Input.__init__(self, configdict, section, produces)
-
-            # Create the list of files to be used as input
-            self.file_list = Util.make_file_list(self.file_path, None, self.filename_pattern, self.depth_search)
-
-This defines two configurable properties for the class FileInput.
-Each ``@Config`` has three parameters: ``p_type``, the Python type (``str``, ``list``, ``dict``, ``bool``, ``int``),
+This defines three configurable properties for the class FileInput.
+Each ``@Config`` has three parameters: ``ptype``, the Python type (``str``, ``list``, ``dict``, ``bool``, ``int``),
 ``default`` (default value if not present) and ``required`` (if property in mandatory or optional).
 
 Within the config one can set specific
@@ -365,7 +373,7 @@ or to publish converted (Filtered) data to multiple remote services (SOS, Sensor
 or just for simple debugging to a target ``Output`` and ``StandardOutput``.
 
 See issue https://github.com/geopython/stetl/issues/35 and
-the `Chain Split example <https://github.com/geopython/stetl/tree/master/examples/basics/15_splitchain>`_.
+the `Chain Split example <https://github.com/geopython/stetl/tree/master/examples/basics/15_splitter>`_.
 
 Here the Chains are split by using ``()`` in the ETL Chain definition: ::
 
@@ -380,6 +388,46 @@ Here the Chains are split by using ``()`` in the ETL Chain definition: ::
 	[input_xml_file]
 	class = inputs.fileinput.XmlFileInput
 	file_path = input/cities.xml
+
+	[transformer_xslt]
+	class = filters.xsltfilter.XsltFilter
+	script = cities2gml.xsl
+
+	[output_file]
+	class = outputs.fileoutput.FileOutput
+	file_path = output/gmlcities.gml
+
+	[output_std]
+	class = outputs.standardoutput.StandardOutput
+
+Chain Merging
+-------------
+
+In some cases we may want to merge (combine, join) multiple input streams.
+
+For example to harvest data from multiple HTTP REST APIs, or to realize a `Filter` that
+integrates data from two data-sources.
+
+See issue https://github.com/geopython/stetl/issues/59 and
+the `Chain Merge example <https://github.com/geopython/stetl/tree/master/examples/basics/16_merger>`_.
+
+Here the Chains are merged by using ``()`` notation in the ETL Chain definition, possibly even combined with Splitting
+Outputs: ::
+
+	# Merge two inputs into single Filter.
+
+	[etl]
+	chains = (input_1) (input_2)|transformer_xslt|output_std,
+			 (input_1) (input_2)|transformer_xslt|(output_file)(output_std)
+
+
+	[input_1]
+	class = inputs.fileinput.XmlFileInput
+	file_path = input1/cities.xml
+
+	[input_2]
+	class = inputs.fileinput.XmlFileInput
+	file_path = input2/cities.xml
 
 	[transformer_xslt]
 	class = filters.xsltfilter.XsltFilter

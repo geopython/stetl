@@ -30,10 +30,6 @@ class FileInput(Input):
         """
         Path to file or files or URLs: can be a dir or files or URLs
         or even multiple, comma separated. For URLs only JSON is supported now.
-
-        Required: True
-
-        Default: None
         """
         pass
 
@@ -41,11 +37,7 @@ class FileInput(Input):
     def filename_pattern(self):
         """
         Filename pattern according to Python ``glob.glob`` for example:
-        '\*.[gxGX][mM][lL]'
-
-        Required: False
-
-        Default: '\*.[gxGX][mM][lL]'
+        '\\*.[gxGX][mM][lL]'
         """
         pass
 
@@ -53,10 +45,6 @@ class FileInput(Input):
     def depth_search(self):
         """
         Should we recurse into sub-directories to find files?
-
-        Required: False
-
-        Default: False
         """
         pass
 
@@ -114,10 +102,6 @@ class StringFileInput(FileInput):
         Formatting of content according to Python String.format()
         Input file should have substitutable values like {schema} {foo}
         format_args should be of the form ``format_args = schema:test foo:bar``
-
-        Required: False
-
-        Default: None
         """
         pass
 
@@ -165,7 +149,7 @@ class XmlFileInput(FileInput):
         data = None
         try:
             data = etree.parse(file_path)
-        except Exception, e:
+        except Exception as e:
             log.info("file read and parsed NOT OK : %s" % file_path)
 
         return data
@@ -186,10 +170,6 @@ class XmlElementStreamerFileInput(FileInput):
         """
         Comma-separated string of XML (feature) element tag names of the elements that should be extracted
         and added to the output element stream.
-
-        Required: True
-
-        Default: None
         """
         pass
 
@@ -197,10 +177,6 @@ class XmlElementStreamerFileInput(FileInput):
     def strip_namespaces(self):
         """
         should namespaces be removed from the input document and thus not be present in the output element stream?
-
-        Required: False
-
-        Default: False
         """
         pass
 
@@ -368,10 +344,6 @@ class CsvFileInput(FileInput):
     def delimiter(self):
         """
         A one-character string used to separate fields. It defaults to ','.
-
-        Required: False
-
-        Default: ',' (comma)
         """
         pass
 
@@ -379,10 +351,6 @@ class CsvFileInput(FileInput):
     def quote_char(self):
         """
         A one-character string used to quote fields containing special characters, such as the delimiter or quotechar, or which contain new-line characters. It defaults to '"'
-
-        Required: False
-
-        Default: "
         """
         pass
 
@@ -410,7 +378,7 @@ class CsvFileInput(FileInput):
                     packet.data = self.csv_reader.next()
 
             log.info("CSV row nr %d read: %s" % (self.csv_reader.line_num - 1, packet.data))
-        except Exception, e:
+        except Exception as e:
             if self._output_format == FORMAT.record_array:
                 packet.data = self.arr
 
@@ -448,7 +416,7 @@ class JsonFileInput(FileInput):
                 with open(file_path) as data_file:
                     file_data = json.load(data_file)
 
-        except Exception, e:
+        except Exception as e:
             log.error('Cannot read JSON from %s, err= %s' % (file_path, str(e)))
             raise e
 
@@ -472,12 +440,6 @@ class ApacheLogFileInput(FileInput):
         """
         Map of cryptic %-field names to readable keys in record.
 
-        Type: dictionary
-
-        Required: False
-
-        Default:  {'%l': 'logname', '%>s': 'status', '%D': 'deltat', '%{User-agent}i': 'agent', '%b': 'bytes', '%{Referer}i': 'referer', '%u': 'user', '%t': 'time', "'%h": 'host', '%r': 'request'}
-
         """
         pass
 
@@ -485,10 +447,6 @@ class ApacheLogFileInput(FileInput):
     def log_format(self):
         """
         Log format according to Apache CLF
-
-        Required: False
-
-        Default: '%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\"'
         """
         pass
 
@@ -555,10 +513,6 @@ class ZipFileInput(FileInput):
     def name_filter(self):
         """
         Regular "glob.glob" expression for filtering out filenames from the ZIP archive.
-
-        Required: False
-
-        Default: * (all files in zip-archive)
         """
         pass
 

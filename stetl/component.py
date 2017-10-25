@@ -30,7 +30,7 @@ class Config(object):
         self.default = default
         self.required = required
 
-    def __call__(self, fget, doc=None):
+    def __call__(self, fget, doc=''):
         """
         The __call__ method is not called until the
         decorated function is called. self is returned such that __get__ below is called
@@ -44,12 +44,13 @@ class Config(object):
         # For Spinx documentation build we need the original function with docstring.
         IS_SPHINX_BUILD = bool(os.getenv('SPHINX_BUILD'))
         if IS_SPHINX_BUILD:
-            fget.__doc__ = '``CONFIG`` - %s' % fget.__doc__
             doc = doc.strip()
             # TODO more detail, example below
             # doc = '``Parameter`` - %s\n\n' % doc
-            # doc += '* type: %s\n' % self.ptype
-            #
+            doc += '* type: %s\n' % str(self.ptype).split("'")[1]
+            doc += '* required: %s\n' % self.required
+            doc += '* default: %s\n' % self.default
+
             # if self.value:
             #     doc += '* value: %s\n' % self.value
             # else:
@@ -57,6 +58,7 @@ class Config(object):
             #     doc += '* default: %s\n' % self.default
             #     doc += '* value_range: %s\n' % self.value_range
 
+            fget.__doc__ = '``CONFIG`` %s\n%s' % (fget.__doc__, doc)
             return fget
         else:
             return self
@@ -101,8 +103,6 @@ class Component(object):
     def input_format(self):
         """
         The specific input format if the consumes parameter is a list or the format to be converted to the output_format.
-        Required: False
-        Default: None
         """
         pass
 
@@ -110,8 +110,6 @@ class Component(object):
     def output_format(self):
         """
         The specific output format if the produces parameter is a list or the format to which the input format is converted.
-        Required: False
-        Default: None
         """
         pass
 

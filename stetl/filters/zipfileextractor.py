@@ -26,10 +26,6 @@ class ZipFileExtractor(Filter):
     def file_path(self):
         """
         File name to write the extracted file to.
-
-        Required: True
-
-        Default: None
         """
         pass
 

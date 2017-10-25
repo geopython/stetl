@@ -36,10 +36,6 @@ class OgrInput(Input):
         """
         String denoting the OGR datasource. Usually a path to a file like "path/rivers.shp" or connection string
         to PostgreSQL like "PG: host=localhost dbname='rivers' user='postgres'".
-
-        Required: True
-
-        Default: None
         """
         pass
 
@@ -50,10 +46,6 @@ class OgrInput(Input):
         many standard formats that are self-describing like ESRI Shapefile.
 
         Examples: 'PostgreSQL', 'GeoJSON' etc
-
-        Required: False
-
-        Default: None
         """
         pass
 
@@ -61,12 +53,6 @@ class OgrInput(Input):
     def source_options(self):
         """
         Custom datasource-specific options. Used in gdal.SetConfigOption().
-
-        Type: dictionary
-
-        Required: False
-
-        Default: None
         """
         pass
 
@@ -74,10 +60,6 @@ class OgrInput(Input):
     def sql(self):
         """
         String with SQL query. Mandatory for PostgreSQL OGR source.
-
-        Required: False  (True for PostgreSQL OGR source)
-
-        Default: None
         """
         pass
 

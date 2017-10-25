@@ -70,7 +70,7 @@ class ETL:
             else:
                 # Parse config file directly
                 self.configdict.read(config_file)
-        except Exception, e:
+        except Exception as e:
             log.error("Fatal Error reading config file: err=%s" % str(e))
 
 

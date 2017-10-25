@@ -30,10 +30,6 @@ class XmlElementReader(Filter):
         """
         Comma-separated string of XML (feature) element tag names of the elements that should be extracted
         and added to the output element stream.
-
-        Required: True
-
-        Default: None
         """
         pass
 
@@ -41,10 +37,6 @@ class XmlElementReader(Filter):
     def strip_namespaces(self):
         """
         should namespaces be removed from the input document and thus not be present in the output element stream?
-
-        Required: False
-
-        Default: False
         """
         pass
 

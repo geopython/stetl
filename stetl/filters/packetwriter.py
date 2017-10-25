@@ -27,10 +27,6 @@ class PacketWriter(Filter):
     def file_path(self):
         """
         File path to write content to.
-
-        Required: True
-
-        Default: None
         """
         pass
 

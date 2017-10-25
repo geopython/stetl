@@ -25,10 +25,6 @@ class HttpOutput(Output):
     def host(self):
         """
         The hostname/IP addr for target request.
-
-        Required: True
-
-        Default: None
         """
         pass
 
@@ -36,10 +32,6 @@ class HttpOutput(Output):
     def port(self):
         """
         The port number for target request.
-
-        Required: True
-
-        Default: 80
         """
         pass
 
@@ -47,10 +39,6 @@ class HttpOutput(Output):
     def path(self):
         """
         The path number for target request.
-
-        Required: False
-
-        Default: '/'
         """
         pass
 
@@ -58,10 +46,6 @@ class HttpOutput(Output):
     def method(self):
         """
         The HTTP method for target request.
-
-        Required: False
-
-        Default: POST
         """
         pass
 
@@ -69,10 +53,6 @@ class HttpOutput(Output):
     def content_type(self):
         """
         The HTTP ContentType request header for target request.
-
-        Required: False
-
-        Default: 'text/xml'
         """
         pass
 
@@ -80,10 +60,6 @@ class HttpOutput(Output):
     def user(self):
         """
         The Username for HTTP basic auth for target request.
-
-        Required: False
-
-        Default: None
         """
         pass
 
@@ -91,10 +67,6 @@ class HttpOutput(Output):
     def password(self):
         """
         The Password for HTTP basic auth for target request.
-
-        Required: False
-
-        Default: None
         """
         pass
 
@@ -102,10 +74,6 @@ class HttpOutput(Output):
     def list_fanout(self):
         """
         If we consume a list(), should we create a HTTP req for each member?
-
-        Required: False
-
-        Default: True
         """
         pass
 

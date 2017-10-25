@@ -34,12 +34,6 @@ class OgrOutput(Output):
     def append(self):
         """
         Add to destination destination if it extists (ogr2ogr -append option).
-
-        Type: boolean
-
-        Required: False
-
-        Default: False
         """
 
         pass
@@ -49,10 +43,6 @@ class OgrOutput(Output):
         """
         String denoting the OGR data destination. Usually a path to a file like "path/rivers.shp" or connection string
         to PostgreSQL like "PG: host=localhost dbname='rivers' user='postgres'".
-
-        Required: True
-
-        Default: None
         """
         pass
 
@@ -63,10 +53,6 @@ class OgrOutput(Output):
         many standard formats that are self-describing like ESRI Shapefile.
 
         Examples: 'PostgreSQL', 'GeoJSON' etc
-
-        Required: False
-
-        Default: None
         """
         pass
 
@@ -76,10 +62,6 @@ class OgrOutput(Output):
         Creation options.
 
         Examples: ..
-
-        Required: False
-
-        Default: []
         """
         pass
 
@@ -87,12 +69,6 @@ class OgrOutput(Output):
     def dest_options(self):
         """
         Custom data destination-specific options. Used in gdal.SetConfigOption().
-
-        Type: dictionary
-
-        Required: False
-
-        Default: None
         """
         pass
 
@@ -101,12 +77,6 @@ class OgrOutput(Output):
     def layer_create_options(self):
         """
         Options for newly created layer (-lco).
-
-        Type: list
-
-        Required: True
-
-        Default: []
         """
 
         pass
@@ -116,10 +86,6 @@ class OgrOutput(Output):
         """
         Layer name for layer created in the destination source.
 
-        Type: string
-
-        Required: True
-
         """
 
         pass
@@ -128,12 +94,6 @@ class OgrOutput(Output):
     def overwrite(self):
         """
         Overwrite destination if it extists (ogr2ogr -overwrite option).
-
-        Type: boolean
-
-        Required: False
-
-        Default: False
         """
 
         pass
@@ -142,12 +102,6 @@ class OgrOutput(Output):
     def target_srs(self):
         """
         SRS (projection) for the target.
-
-        Type: string
-
-        Required: False
-
-        Default: None (take from Input)
         """
         pass
 
@@ -155,10 +109,6 @@ class OgrOutput(Output):
     def sql(self):
         """
         String with SQL query. Mandatory for PostgreSQL OGR dest.
-
-        Required: False  (True for PostgreSQL OGR dest)
-
-        Default: None
         """
         pass
 

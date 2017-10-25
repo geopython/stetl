@@ -23,14 +23,10 @@ class FileOutput(Output):
 
     # Start attribute config meta
 
-    @Config(ptype=str, default=None, required=False)
+    @Config(ptype=str, default=None, required=True)
     def file_path(self):
         """
         Path to file, for MultiFileOutput can be of the form like: gmlcities-%03d.gml
-
-        Required: True
-
-        Default: None
         """
         pass
 
