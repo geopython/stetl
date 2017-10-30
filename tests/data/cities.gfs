@@ -1,0 +1,23 @@
+<GMLFeatureClassList>
+  <GMLFeatureClass>
+    <Name>City</Name>
+    <ElementPath>City</ElementPath>
+    <GeometryName>geometry</GeometryName>
+    <GeometryElementPath>geometry</GeometryElementPath>
+    <GeometryType>1</GeometryType>
+    <SRSName>GEOGCS["WGS 84",DATUM["WGS_1984",SPHEROID["WGS 84",6378137,298.257223563,AUTHORITY["EPSG","7030"]],AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4326"]]</SRSName>
+    <DatasetSpecificInfo>
+      <FeatureCount>3</FeatureCount>
+      <ExtentXMin>4.90000</ExtentXMin>
+      <ExtentXMax>12.50000</ExtentXMax>
+      <ExtentYMin>41.90000</ExtentYMin>
+      <ExtentYMax>52.40000</ExtentYMax>
+    </DatasetSpecificInfo>
+    <PropertyDefn>
+      <Name>name</Name>
+      <ElementPath>name</ElementPath>
+      <Type>String</Type>
+      <Width>9</Width>
+    </PropertyDefn>
+  </GMLFeatureClass>
+</GMLFeatureClassList>

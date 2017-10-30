@@ -13,7 +13,7 @@
                                                                                                                         
   <gml:featureMember>
     <ogr:cities fid="cities.0">
-      <ogr:geometryProperty><gml:Point><gml:coordinates>4.894836363636363,52.373045454545455</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:4326"><gml:coordinates>4.89483636363636,52.3730454545455</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:id>1359</ogr:id>
       <ogr:STATUS>National capital</ogr:STATUS>
       <ogr:ObjectID>12386305</ogr:ObjectID>
@@ -31,7 +31,7 @@
   </gml:featureMember>
   <gml:featureMember>
     <ogr:cities fid="cities.1">
-      <ogr:geometryProperty><gml:Point><gml:coordinates>7.099818181818182,50.734554545454543</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:4326"><gml:coordinates>7.09981818181818,50.7345545454545</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:id>1374</ogr:id>
       <ogr:STATUS>Other</ogr:STATUS>
       <ogr:ObjectID>12517379</ogr:ObjectID>
@@ -49,7 +49,7 @@
   </gml:featureMember>
   <gml:featureMember>
     <ogr:cities fid="cities.2">
-      <ogr:geometryProperty><gml:Point><gml:coordinates>12.52,41.88</gml:coordinates></gml:Point></ogr:geometryProperty>
+      <ogr:geometryProperty><gml:Point srsName="EPSG:4326"><gml:coordinates>12.52,41.88</gml:coordinates></gml:Point></ogr:geometryProperty>
       <ogr:id>1027</ogr:id>
       <ogr:STATUS>National and provincial capital</ogr:STATUS>
       <ogr:ObjectID>9306117</ogr:ObjectID>
