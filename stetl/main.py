@@ -9,10 +9,12 @@ from etl import ETL
 from factory import factory
 from util import Util
 from version import __version__
-import argparse #apt-get install python-argparse
+import argparse  # apt-get install python-argparse
 import inspect
 import os
+
 log = Util.get_log('main')
+
 
 def parse_args():
     log.info("Stetl version = %s" % __version__)
@@ -29,8 +31,8 @@ def parse_args():
                            dest='config_args', required=False)
 
     argparser.add_argument('-d ', '--doc', type=str,
-                          help='Get component documentation like its configuration parameters, e.g. stetl doc stetl.inputs.fileinput.FileInput',
-                          dest='doc_args', required=False)
+                           help='Get component documentation like its configuration parameters, e.g. stetl doc stetl.inputs.fileinput.FileInput',
+                           dest='doc_args', required=False)
 
     args = argparser.parse_args()
 
@@ -44,16 +46,16 @@ def parse_args():
 
     return args
 
+
 # DEPRECATED, now using @Config which also documents with Sphinx
 def print_config_attrs(clazz):
-    skip =['Filter', 'Input', 'Output', 'Component']
+    skip = ['Filter', 'Input', 'Output', 'Component']
     for base in clazz.__bases__:
 
         if base.__name__ not in skip:
             print_config_attrs(base)
 
     """Print documentation for Attr object"""
-
 
     module_name, _, class_name = clazz.__name__.rpartition('.')
     # print 'From class: %s' % class_name
@@ -73,13 +75,14 @@ def print_config_attrs(clazz):
     if attr_count == 0:
         print ('No config attributes or class not yet documented')
 
+
 def print_classes(package):
     # is_module = inspect.ismodule(class_name)
     import inputs
     import pkgutil
-    package=inputs
+    package = inputs
     for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__,
-                                                          prefix=package.__name__+'.',
+                                                          prefix=package.__name__ + '.',
                                                           onerror=lambda x: None):
         print('stetl.' + modname)
         for name, data in inspect.getmembers(modname, inspect.isclass):
@@ -107,6 +110,7 @@ def print_doc(class_name):
         log.error("cannot print info class named '%s' e=%s - you made a typo?" % (class_name, str(e)))
         raise e
 
+
 def main():
     """The `main` function, to be called from commandline, like `python src/main.py -c etl.cfg`.
 
@@ -129,6 +133,7 @@ def main():
         print_doc(args.doc_args)
     else:
         print('Unknown option, try stetl -h for help')
+
 
 if __name__ == "__main__":
     main()

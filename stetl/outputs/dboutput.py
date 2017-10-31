@@ -24,6 +24,7 @@ class DbOutput(Output):
     def write(self, packet):
         return packet
 
+
 class PostgresDbOutput(DbOutput):
     """
     Output to PostgreSQL database.
@@ -32,6 +33,7 @@ class PostgresDbOutput(DbOutput):
 
     consumes=FORMAT.string
     """
+
     # Start attribute config meta
     @Config(ptype=str, required=True, default=None)
     def database(self):
@@ -82,6 +84,7 @@ class PostgresDbOutput(DbOutput):
         log.info('executed SQL, rowcount=%d' % rowcount)
         return packet
 
+
 class PostgresInsertOutput(PostgresDbOutput):
     """
     Output by inserting single record into Postgres database.
@@ -95,6 +98,7 @@ class PostgresInsertOutput(PostgresDbOutput):
 
     consumes=FORMAT.record
     """
+
     # Start attribute config meta
     @Config(ptype=str, required=False, default='public')
     def table(self):
@@ -116,6 +120,7 @@ class PostgresInsertOutput(PostgresDbOutput):
         The key column name of the table, required when replacing records.
         """
         pass
+
     # End attribute config meta
 
     def __init__(self, configdict, section, consumes=FORMAT.record):
@@ -138,7 +143,8 @@ class PostgresInsertOutput(PostgresDbOutput):
         # We assume that all records do the same INSERT key/values
         # See http://grokbase.com/t/postgresql/psycopg/12735bvkmv/insert-into-with-a-dictionary-or-generally-with-a-variable-number-of-columns
         # e.g. INSERT INTO lml_files ("file_name", "file_data") VALUES (%s,%s)
-        query = "INSERT INTO %s (%s) VALUES (%s)" % (self.cfg.get('table'), ",".join(['%s' % k for k in record]), ",".join(["%s",]*len(record.keys())))
+        query = "INSERT INTO %s (%s) VALUES (%s)" % (
+        self.cfg.get('table'), ",".join(['%s' % k for k in record]), ",".join(["%s", ] * len(record.keys())))
         log.info('query is %s', query)
         return query
 

@@ -10,6 +10,7 @@ from stetl.packet import FORMAT
 
 log = Util.get_log("stringfilter")
 
+
 class StringFilter(Filter):
     """
     Base class for any string filtering
@@ -53,7 +54,3 @@ class StringSubstitutionFilter(StringFilter):
         # String substitution based on Python String.format()
         packet.data = packet.data.format(**self.format_args_dict)
         return packet
-
-
-
-

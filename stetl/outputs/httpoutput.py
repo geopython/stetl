@@ -14,6 +14,7 @@ import base64
 
 log = Util.get_log('httpoutput')
 
+
 class HttpOutput(Output):
     """
     Output via HTTP protocol, usually via POST.
@@ -132,13 +133,13 @@ class HttpOutput(Output):
             return packet
 
         if type(packet.data) is list and self.list_fanout is True:
-                # Multiple records in list, save original
-                original_data = packet.data
-                for data_elm in original_data:
-                    packet.data = data_elm
-                    self.post(packet, self.create_payload(packet))
+            # Multiple records in list, save original
+            original_data = packet.data
+            for data_elm in original_data:
+                packet.data = data_elm
+                self.post(packet, self.create_payload(packet))
 
-                packet.data = original_data
+            packet.data = original_data
 
         else:
             # Regular, single data element or list_fanout is False

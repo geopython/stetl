@@ -25,7 +25,7 @@ class Splitter(Component):
         children = []
         section_name = ''
         for child in child_list:
-            section_name += '-%s_%d'% (child.get_id(), random.randrange(0, 100000))
+            section_name += '-%s_%d' % (child.get_id(), random.randrange(0, 100000))
             children.append(child)
 
         # Add ourselves to config for compat with Component

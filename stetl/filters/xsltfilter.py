@@ -39,4 +39,3 @@ class XsltFilter(Filter):
         packet.data = self.xslt_obj(packet.data)
         log.info("XSLT Transform OK")
         return packet
-

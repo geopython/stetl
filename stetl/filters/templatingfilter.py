@@ -115,7 +115,7 @@ class StringTemplatingFilter(TemplatingFilter):
             packet.data = [self.template.substitute(item) for item in packet.data]
         else:
             packet.data = self.template.substitute(packet.data)
-            
+
         return packet
 
 
@@ -299,4 +299,3 @@ class Jinja2TemplatingFilter(TemplatingFilter):
             log.error(gml_str)
 
         return gml_str
-

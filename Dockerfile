@@ -13,6 +13,7 @@ ENV GDAL_VERSION 2.1.3
 
 ARG TZ="Europe/Amsterdam"
 
+# Core system installs/config
 RUN \
     # Add edge repo
     # echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories && \
@@ -20,17 +21,21 @@ RUN \
     echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
 
     # Update packages
-    apk --no-cache upgrade
+    apk --no-cache upgrade \
 
-
-RUN apk add --no-cache --virtual .build-deps gcc build-base linux-headers postgresql-dev tzdata \
+	&& apk add --no-cache --virtual .build-deps \
+		gcc \
+		build-base \
+		linux-headers \
+		postgresql-dev \
+		tzdata \
     && apk add --no-cache \
-    bash \
-    vim \
+	    bash \
     && echo $TZ > /etc/timezone \
     && cp /usr/share/zoneinfo/$TZ /etc/localtime \
     && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
+# App-specific installs/config
 RUN apk add --no-cache \
 	   expat \
 	   expat-dev \
@@ -61,12 +66,13 @@ RUN apk add --no-cache \
 
 RUN \
 	pip install -U pip  && \
-	pip install gdal==${GDAL_VERSION} && \
-	pip install psycopg2==2.7.3.2 && \
-	pip install Jinja2==2.9.6 && \
-	pip install lxml==4.1.0 && \
-	pip install nose2 && \
-	pip install mock
+	pip install \
+		gdal==${GDAL_VERSION} \
+		psycopg2==2.7.3.2 \
+		Jinja2==2.9.6 \
+		lxml==4.1.0 \
+		nose2 \
+		mock
 
 # Add Source Code
 ADD . /stetl

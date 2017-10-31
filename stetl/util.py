@@ -4,12 +4,16 @@
 #
 # Author:Just van den Broecke
 
-import logging, os, glob, sys, types
-from time import *
+import logging
+import os
+import glob
+import types
+from time import time
 from ConfigParser import ConfigParser
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(name)s %(levelname)s %(message)s')
+
 
 # Static utility methods
 class Util:
@@ -392,10 +396,12 @@ except ImportError:
         import ogr
         import osr
     except ImportError:
-        log.warn("No GDAL/OGR Python bindings. Ok if not using GDAL/OGR functions. See https://pypi.python.org/pypi/GDAL")
+        log.warn(
+            "No GDAL/OGR Python bindings. Ok if not using GDAL/OGR functions. See https://pypi.python.org/pypi/GDAL")
 
 if ogr and gdal and osr:
     log.info("Found GDAL/OGR Python bindings, super!!")
+
 
 class ConfigSection():
     def __init__(self, config_section):
@@ -470,4 +476,3 @@ class ConfigSection():
 
     def to_string(self):
         return repr(self.config_dict)
-

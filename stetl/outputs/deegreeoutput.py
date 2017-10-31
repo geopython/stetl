@@ -15,12 +15,14 @@ import os
 
 log = Util.get_log('deegreeoutput')
 
+
 class DeegreeBlobstoreOutput(Output):
     """
     Insert features into deegree Blobstore from an etree doc.
 
     consumes=FORMAT.etree_doc
     """
+
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)
         self.overwrite = self.cfg.get_bool('overwrite')
@@ -94,8 +96,8 @@ class DeegreeBlobstoreOutput(Output):
             for gmlMember in gmlMembers:
                 if geom_str is None:
                     geom_str = etree.tostring(gmlMember)
-                #                   no need for GDAL Python bindings for now, maybe when we'll optimize with COPY iso INSERT
-            #                    ogrGeom = ogr.CreateGeometryFromGML(str(gmlStr))
+                    #                   no need for GDAL Python bindings for now, maybe when we'll optimize with COPY iso INSERT
+            # ogrGeom = ogr.CreateGeometryFromGML(str(gmlStr))
             #                    if ogrGeom is not None:
             #                        ogrGeomWKT = ogrGeom.ExportToWkt()
             #                        if ogrGeomWKT is not None:
@@ -131,6 +133,7 @@ class DeegreeBlobstoreOutput(Output):
 
         log.info("inserted %s features" % count)
         return packet
+
 
 #
 class DeegreeFSLoaderOutput(Output):
@@ -174,4 +177,3 @@ class DeegreeFSLoaderOutput(Output):
         return packet
 
         # print(result)
-

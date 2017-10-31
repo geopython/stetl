@@ -12,6 +12,7 @@ import httplib
 
 log = Util.get_log('wfsoutput')
 
+
 class WFSTOutput(Output):
     """
     Insert features via WFS-T (WFS Transaction) OGC protocol from an etree doc.

@@ -7,6 +7,7 @@
 from util import etree
 import json
 
+
 class Packet:
     """
     Represents units of (any) data and status passed along Chain of Components.
@@ -55,6 +56,7 @@ class Packet:
         else:
             s = str(self.data)
         return s
+
 
 # Simple enum emulation NOT ANY MORE: TOO INVOLVED AND INFLEXIBLE: use Strings with predefined ones in FORMAT.*
 # See http://stackoverflow.com/questions/1969005/enumerations-in-python

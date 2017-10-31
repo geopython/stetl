@@ -133,6 +133,7 @@ class StringFileInput(FileInput):
 
         return file_content
 
+
 class XmlFileInput(FileInput):
     """
     Parses XML files into etree docs (do not use for large files!).
@@ -435,7 +436,7 @@ class ApacheLogFileInput(FileInput):
     @Config(ptype=dict, default=
     {'%l': 'logname', '%>s': 'status', '%D': 'deltat', '%{User-agent}i': 'agent', '%b': 'bytes',
      '%{Referer}i': 'referer', '%u': 'user', '%t': 'time', "'%h": 'host', '%r': 'request'}
-            , required=False)
+        , required=False)
     def key_map(self):
         """
         Map of cryptic %-field names to readable keys in record.
@@ -554,14 +555,14 @@ class ZipFileInput(FileInput):
 
         return packet
 
-        
+
 class GlobFileInput(FileInput):
     """
     Returns file names based on the glob.glob pattern given as filename_filter.
     
     produces=FORMAT.string or FORMAT.line_stream
     """
-    
+
     def __init__(self, configdict, section, produces=[FORMAT.string, FORMAT.line_stream]):
         FileInput.__init__(self, configdict, section, produces)
 

@@ -20,6 +20,7 @@ class Config(object):
     Each property is defined by @Config(type, default, required).
     Basic idea comes from:  https://wiki.python.org/moin/PythonDecoratorLibrary#Cached_Properties
     """
+
     def __init__(self, ptype=str, default=None, required=False):
         """
         If there are no decorator arguments, the function

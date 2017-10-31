@@ -72,7 +72,6 @@ class OgrOutput(Output):
         """
         pass
 
-
     @Config(ptype=list, default=[], required=False)
     def layer_create_options(self):
         """
@@ -118,7 +117,6 @@ class OgrOutput(Output):
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=[FORMAT.ogr_feature, FORMAT.ogr_feature_array])
 
-
     def init(self):
 
         self.ogr = ogr
@@ -158,9 +156,9 @@ class OgrOutput(Output):
 
         # Loosely based on https://github.com/OSGeo/gdal/blob/trunk/gdal/swig/python/samples/ogr2ogr.py
 
-        #/* -------------------------------------------------------------------- */
-        #/*      Try opening the output data source as an existing, writable      */
-        #/* -------------------------------------------------------------------- */
+        # /* -------------------------------------------------------------------- */
+        # /*      Try opening the output data source as an existing, writable      */
+        # /* -------------------------------------------------------------------- */
         if self.update:
             # Try opening in update mode
             self.dest_fd = ogr.Open(self.dest_data_source, True)
@@ -176,9 +174,9 @@ class OgrOutput(Output):
                     self.dest_driver = None
                     self.update = False
 
-        #/* -------------------------------------------------------------------- */
-        #/*      Find the output driver.                                         */
-        #/* -------------------------------------------------------------------- */
+        # /* -------------------------------------------------------------------- */
+        # /*      Find the output driver.                                         */
+        # /* -------------------------------------------------------------------- */
         if self.dest_driver is None:
 
             # Open OGR data dest in write-only mode.
@@ -197,18 +195,18 @@ class OgrOutput(Output):
                 log.error("%s driver does not support data source creation." % self.dest_format)
                 raise Exception()
 
-        #/* -------------------------------------------------------------------- */
-        #/*      Create the output data source.                                  */
-        #/* -------------------------------------------------------------------- */
+        # /* -------------------------------------------------------------------- */
+        # /*      Create the output data source.                                  */
+        # /* -------------------------------------------------------------------- */
         if self.dest_fd is None:
             self.dest_fd = self.dest_driver.CreateDataSource(self.dest_data_source, options=self.dest_create_options)
             if self.dest_fd is None:
                 log.error("%s driver failed to create %s" % (self.dest_format, self.dest_data_source))
                 raise Exception()
 
-        #/* -------------------------------------------------------------------- */
-        #/*      Parse the output SRS definition if possible.                    */
-        #/* -------------------------------------------------------------------- */
+        # /* -------------------------------------------------------------------- */
+        # /*      Parse the output SRS definition if possible.                    */
+        # /* -------------------------------------------------------------------- */
         output_srs_ref = None
         if self.target_srs is not None:
             output_srs_ref = osr.SpatialReference()
@@ -341,4 +339,3 @@ class Ogr2OgrOutput(Output):
 
         self.execute_cmd(ogr2ogr_cmd)
         return packet
-

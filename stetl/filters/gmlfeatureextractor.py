@@ -50,5 +50,3 @@ class GmlFeatureExtractor(Filter):
         self.total_features += len(packet.data)
         log.info('extracted %d features from GML etree doc (total = %d)' % (len(packet.data), self.total_features))
         return packet
-
-

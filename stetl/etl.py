@@ -14,6 +14,7 @@ import StringIO
 
 log = Util.get_log('ETL')
 
+
 class ETL:
     """The main class: builds ETL Chains with connected Components from a config and let them run.
 
@@ -72,7 +73,6 @@ class ETL:
                 self.configdict.read(config_file)
         except Exception as e:
             log.error("Fatal Error reading config file: err=%s" % str(e))
-
 
     def run(self):
         # The main ETL processing

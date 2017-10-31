@@ -65,6 +65,7 @@ class SqlDbInput(DbInput):
         The query (string) to fire.
         """
         pass
+
     # End attribute config meta
 
     def __init__(self, configdict, section):
@@ -184,6 +185,7 @@ class PostgresDbInput(SqlDbInput):
         The postgres schema name, defaults to 'public'
         """
         pass
+
     # End attribute config meta
 
     def __init__(self, configdict, section):
@@ -224,6 +226,7 @@ class PostgresDbInput(SqlDbInput):
         log.info('read recs: %d' % len(db_records))
 
         return db_records
+
 
 class SqliteDbInput(SqlDbInput):
     """

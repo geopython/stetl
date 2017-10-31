@@ -11,6 +11,7 @@ from stetl.packet import FORMAT
 
 log = Util.get_log('xmlassembler')
 
+
 class XmlAssembler(Filter):
     """
     Split a stream of etree DOM XML elements (usually Features) into etree DOM docs.
@@ -84,5 +85,3 @@ class XmlAssembler(Filter):
         packet.data = etree_doc
         self.element_arr = []
         return packet
-
-

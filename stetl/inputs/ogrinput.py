@@ -289,6 +289,3 @@ class OgrPostgisInput(Input):
             log.info('EOF ogr2ogr output')
 
         return packet
-
-
-

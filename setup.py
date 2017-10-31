@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 # To publish: python setup.py sdist upload -r pypi
 
 # Have to do this after importing setuptools, which monkey patches distutils.
-from distutils.extension import Extension
+# from distutils.extension import Extension
 
 logging.basicConfig()
 log = logging.getLogger()

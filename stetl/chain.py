@@ -122,7 +122,6 @@ class Chain:
 
         return None
 
-
     def get_by_id(self, id):
         """
         Get Component instance from Chain, mainly for testing.
@@ -169,14 +168,14 @@ class Chain:
         rounds = 0
         try:
             while not packet.is_end_of_stream():
-            # try:
+                # try:
                 # Invoke the first component to start the chain
                 packet.init()
                 packet = self.first_comp.process(packet)
                 rounds += 1
                 #            except (Exception), e:
-            #                log.error("Fatal Error in ETL: %s"% str(e))
-            #                break
+                #                log.error("Fatal Error in ETL: %s"% str(e))
+                #                break
         finally:
             # Always one time exit for entire Chain
             self.first_comp.do_exit()

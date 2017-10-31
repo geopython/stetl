@@ -331,6 +331,7 @@ formats = {
 if __name__ == '__main__':
     import unittest
 
+
     class TestApacheLogParser(unittest.TestCase):
         def setUp(self):
             self.format = r'%h %l %u %t \"%r\" %>s ' \
@@ -389,7 +390,6 @@ if __name__ == '__main__':
                 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.2) Gecko/20021202',
                 msg='Line 1 %{User-Agent}i'
             )
-
 
         def testline2(self):
             data = self.p.parse(self.line2)
@@ -451,7 +451,6 @@ if __name__ == '__main__':
                 msg='Line 3 %{User-Agent}i'
             )
 
-
         def testjunkline(self):
             self.assertRaises(ApacheLogParserError, self.p.parse, 'foobar')
 
@@ -466,5 +465,6 @@ if __name__ == '__main__':
         def testparsedate(self):
             date = '[05/Dec/2006:10:51:44 +0000]'
             self.assertEqual(('20061205105144', '+0000'), parse_date(date))
+
 
     unittest.main()

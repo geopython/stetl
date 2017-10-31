@@ -65,7 +65,7 @@ class FormatConverter(Filter):
 
         # OGR feature def
         self.feat_def = None
-        
+
     def invoke(self, packet):
 
         if packet.data is None:
@@ -134,7 +134,8 @@ class FormatConverter(Filter):
         return packet
 
     @staticmethod
-    def etree_doc2struct(packet, strip_space=True, strip_ns=True, sub=False, attr_prefix='', gml2ogr=True, ogr2json=True):
+    def etree_doc2struct(packet, strip_space=True, strip_ns=True, sub=False, attr_prefix='', gml2ogr=True,
+                         ogr2json=True):
         """
         :param packet:
         :param strip_space:
@@ -162,7 +163,8 @@ class FormatConverter(Filter):
         return packet
 
     @staticmethod
-    def etree_elem2struct(packet, strip_space=True, strip_ns=True, sub=False, attr_prefix='', gml2ogr=True, ogr2json=True):
+    def etree_elem2struct(packet, strip_space=True, strip_ns=True, sub=False, attr_prefix='', gml2ogr=True,
+                          ogr2json=True):
         """
         :param packet:
         :param strip_space:
@@ -350,6 +352,7 @@ class FormatConverter(Filter):
 
         packet.data = feature
         return packet
+
 
 # 'xml_line_stream', 'etree_doc', 'etree_element', 'etree_feature_array', 'xml_doc_as_string',
 #  'string', 'record', 'record_array', 'geojson_collection', geojson_feature', 'struct',

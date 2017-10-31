@@ -11,6 +11,7 @@ from stetl.packet import FORMAT
 
 log = Util.get_log("packetbuffer")
 
+
 class PacketBuffer(Filter):
     """
     Buffers all incoming Packets, main use is unit-testing to inspect Packets after ETL is done.

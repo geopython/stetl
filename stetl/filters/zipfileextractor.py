@@ -38,11 +38,11 @@ class ZipFileExtractor(Filter):
 
     def invoke(self, packet):
         event = None
-            
+
         if packet.data is None:
             log.info("No file name given")
             return packet
-        
+
         import os
         import zipfile
 
@@ -57,10 +57,10 @@ class ZipFileExtractor(Filter):
 
         packet.data = self.cur_file_path
         return packet
-        
+
     def after_chain_invoke(self, packet):
         import os.path
         if os.path.isfile(self.cur_file_path):
             os.remove(self.cur_file_path)
-            
+
         return True

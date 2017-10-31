@@ -52,6 +52,6 @@ class PacketWriter(Filter):
 
         out_file.close()
         log.info("written to %s" % file_path)
-        
+
         packet.data = file_path
         return packet

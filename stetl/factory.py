@@ -4,6 +4,7 @@ from util import Util
 
 log = Util.get_log('factory')
 
+
 class Factory:
     """
     Object and class Factory (Pattern).
@@ -52,7 +53,6 @@ class Factory:
 
         return class_obj
 
-
     def new_instance(self, class_obj, configdict, section):
         """Returns object instance from class instance.
 
@@ -66,11 +66,11 @@ class Factory:
 
 factory = Factory()
 
-#bar="bar"
-#foo="foo"
+# bar="bar"
+# foo="foo"
 # x = mkinst("factory.Foo", bar, 0, 4, disc="bust")
-#y = mkinst("Bar", foo, batman="robin")
+# y = mkinst("Bar", foo, batman="robin")
 # = import_class("foo.Foo", foo)
 #
-#o = x(foo)
-#x.p()
+# o = x(foo)
+# x.p()

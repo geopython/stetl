@@ -59,6 +59,7 @@ class MultiFileOutput(FileOutput):
 
     consumes=FORMAT.any
     """
+
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.any)
         self.file_num = 1

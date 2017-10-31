@@ -61,7 +61,7 @@ class XmlElementReader(Filter):
 
         event = None
         packet.data = None
-        
+
         if self.context is None:
             # Open file
             fd = open(self.cur_file_path)
@@ -77,7 +77,7 @@ class XmlElementReader(Filter):
 
     def process_xml(self, packet):
         while not self.context is None:
-            #while not packet.is_end_of_doc():
+            # while not packet.is_end_of_doc():
             try:
                 event, elem = self.context.next()
             except (etree.XMLSyntaxError, StopIteration):
@@ -111,7 +111,7 @@ class XmlElementReader(Filter):
 
                     if self.strip_namespaces:
                         packet.data = Util.stripNamespaces(elem).getroot()
-                        
+
                     # Clear the root element, since iterparse still builds a tree
                     # See http://effbot.org/zone/element-iterparse.htm
                     self.root.clear()

@@ -10,6 +10,7 @@ from stetl.packet import FORMAT
 
 log = Util.get_log('standardoutput')
 
+
 #
 class StandardOutput(Output):
     """
@@ -17,6 +18,7 @@ class StandardOutput(Output):
 
     consumes=FORMAT.any
     """
+
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.any)
 
@@ -28,12 +30,14 @@ class StandardOutput(Output):
         print(packet.to_string())
         return packet
 
+
 class StandardXmlOutput(Output):
     """
     Pretty print XML from etree doc to standard output. OBSOLETE, can be done with  StandardOutput
 
     consumes=FORMAT.etree_doc
     """
+
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)
 
@@ -44,4 +48,3 @@ class StandardXmlOutput(Output):
         # Default: print to stdout
         print(packet.to_string())
         return packet
-

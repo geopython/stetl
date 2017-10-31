@@ -278,4 +278,3 @@ class ApacheDirInput(HttpInput):
         :return string or None:
         """
         return file_name
-

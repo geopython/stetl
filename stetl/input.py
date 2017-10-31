@@ -26,4 +26,3 @@ class Input(Component):
 
     def read(self, packet):
         return packet
-

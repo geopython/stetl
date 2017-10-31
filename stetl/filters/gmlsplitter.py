@@ -12,6 +12,7 @@ from stetl.packet import FORMAT
 
 log = Util.get_log('gmlsplitter')
 
+
 class GmlSplitter(Filter):
     """
     Split a stream of text XML lines into documents
@@ -20,6 +21,7 @@ class GmlSplitter(Filter):
 
     consumes=FORMAT.xml_line_stream, produces=FORMAT.etree_doc
     """
+
     def __init__(self, configdict, section='gml_splitter'):
         Filter.__init__(self, configdict, section, consumes=FORMAT.xml_line_stream, produces=FORMAT.etree_doc)
 
@@ -126,7 +128,7 @@ class GmlSplitter(Filter):
         try:
             # print '[' + self.buffer.getvalue() + ']'
             packet.data = etree.parse(self.buffer, self.xml_parser)
-        #            print buffer.getvalue()
+        # print buffer.getvalue()
         except Exception, e:
             bufStr = self.buffer.getvalue()
             if not bufStr:
@@ -179,4 +181,3 @@ class GmlSplitter(Filter):
 
         # Still within feature
         return False
-

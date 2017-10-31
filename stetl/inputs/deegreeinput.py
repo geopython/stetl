@@ -15,6 +15,7 @@ from stetl.packet import FORMAT
 
 log = Util.get_log('deegreeinput')
 
+
 class DeegreeBlobstoreInput(Input):
     """
     Read features from deegree Blobstore DB into an etree doc.
@@ -154,7 +155,7 @@ class DeegreeBlobstoreInput(Input):
         try:
             # print '[' + self.buffer.getvalue() + ']'
             packet.data = etree.parse(self.buffer, self.xml_parser)
-        #            print buffer.getvalue()
+        # print buffer.getvalue()
         except Exception, e:
             bufStr = self.buffer.getvalue()
             if not bufStr:
@@ -165,4 +166,3 @@ class DeegreeBlobstoreInput(Input):
                 raise
         self.buffer.close()
         self.buffer = None
-
