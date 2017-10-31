@@ -32,7 +32,7 @@ with open('CREDITS.txt', 'r') as f:
 with open('CHANGES.txt', 'r') as f:
     changes = f.read()
 
-with open('requirements.txt') as f:
+with open('requirements-main.txt') as f:
     requirements = f.read().splitlines()
 
 setup(
