@@ -1,73 +1,48 @@
-FROM python:2.7.14-alpine3.6
+FROM python:2.7.14-slim-stretch
 
 LABEL maintainer "Just van den Broecke <justb4@gmail.com>"
 
-# These are default values,
-# Override when running container via docker(-compose)
-
 # General ENV settings
 ENV LC_ALL "en_US.UTF-8"
+ENV LC_TYPE "en_US.UTF-8"
 ENV LANG "en_US.UTF-8"
 ENV LANGUAGE "en_US.UTF-8"
-ENV GDAL_VERSION 2.1.3
+ENV GDAL_VERSION 2.1.0
+ENV BUILD_DEPS "tzdata build-essential locales apt-utils"
+ENV DEBIAN_FRONTEND noninteractive
 
 ARG TZ="Europe/Amsterdam"
 
-# Core system installs/config
+# Set time right and configure timezone and locale
 RUN \
-    # Add edge repo
-    # echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories && \
-    # echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories && \
-    echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
+	apt-get update && \
+	apt-get install -y ${BUILD_DEPS} && \
 
-    # Update packages
-    apk --no-cache upgrade \
+	# Timezone
+	echo "${TZ}" > /etc/timezone && \
+	cp /usr/share/zoneinfo/${TZ} /etc/localtime && \
+	dpkg-reconfigure -f noninteractive tzdata && \
 
-	&& apk add --no-cache --virtual .build-deps \
-		gcc \
-		build-base \
-		linux-headers \
-		postgresql-dev \
-		tzdata \
-    && apk add --no-cache \
-	    bash \
-    && echo $TZ > /etc/timezone \
-    && cp /usr/share/zoneinfo/$TZ /etc/localtime \
-    && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
+	# Locale
+	echo "LANG=${LANG}" >/etc/default/locale && \
+	echo "${LANG} UTF-8" > /etc/locale.gen && \
+    locale-gen && \
+    dpkg-reconfigure locales && \
+    /usr/sbin/update-locale LANG=${LANG}
 
 # App-specific installs/config
-RUN apk add --no-cache \
-	   expat \
-	   expat-dev \
-       libxml2-dev \
-       libxslt-dev \
-       postgresql-client \
-	   py-lxml \
-	   proj4-dev \
-	   geos-dev \
-	   gdal-dev \
-	   py-gdal \
-	   gdal \
-    --repository http://nl.alpinelinux.org/alpine/edge/testing \
-    && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
-
-# May need to build APK ourselves  example:
-# https://github.com/HBKEngineering/alpine-packages
-# original is here: https://git.alpinelinux.org/cgit/aports/tree/testing/gdal/APKBUILD
-# use Docker to build with Alpine APK SDK :
-# https://github.com/andyshinn/docker-alpine-abuild
-
-# Install GDAL by compile, takes extremely long!
-# RUN \
-# example at https://github.com/winsento/geoserver-alpine/blob/master/2.8/Dockerfile
-#    wget http://download.osgeo.org/gdal/${GDAL_VERSION}/gdal-${GDAL_VERSION}.tar.gz -O /tmp/gdal.tar.gz && \
-#    tar xzf /tmp/gdal.tar.gz -C /tmp && \
-#    cd /tmp/gdal-${GDAL_VERSION} && ./configure  --prefix=/usr --with-curl=/usr/bin/curl-config --with-expat && make && make install
+RUN apt-get install -y \
+		python-lxml \
+		libgdal-dev \
+		python-gdal \
+		gdal-bin
 
 RUN \
+	apt-get install -y build-essential && \
 	pip install -U pip  && \
 	pip install \
-		gdal==${GDAL_VERSION} \
+		gdal==`gdalinfo --version | cut -d' ' -f2 | cut -d',' -f1` \
+		# gdal==2.2.0 \
 		psycopg2==2.7.3.2 \
 		Jinja2==2.9.6 \
 		lxml==4.1.0 \
@@ -81,7 +56,12 @@ ADD . /stetl
 RUN cd /stetl \
 	&& python setup.py install  \
 	&& nose2 \
-	&& apk del .build-deps
+	&& apt-get purge ${BUILD_DEPS} -y \
+	&& apt autoremove -y
+
+RUN \
+	echo "For ${TZ} date=`date`" && \
+	echo "locale=`locale`"
 
 # Allow docker run
 # ENTRYPOINT ["/usr/local/bin/stetl"]
