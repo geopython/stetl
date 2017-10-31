@@ -1,0 +1,5 @@
+psycopg2==2.7.3.2
+lxml==4.1.0
+Jinja2==2.9.6
+GDAL>=2
+argparse ; python_version < '2.7'

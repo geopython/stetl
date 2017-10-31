@@ -1,5 +1,4 @@
 import logging
-import sys
 from setuptools import setup, find_packages
 
 # To publish: python setup.py sdist upload -r pypi
@@ -33,15 +32,8 @@ with open('CREDITS.txt', 'r') as f:
 with open('CHANGES.txt', 'r') as f:
     changes = f.read()
 
-requirements = [
-    'psycopg2',
-    'lxml',
-    'GDAL',
-    'Jinja2'
-]
-
-if sys.version_info < (2, 7):
-    requirements.append('argparse')
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
 
 setup(
     name='Stetl',

@@ -386,6 +386,7 @@ try:
     from osgeo import ogr
     from osgeo import osr
 except ImportError:
+    log.warn("No osgeo.gdal|ogr|osr packages found, trying direct import...")
     try:
         import gdal
         import ogr
