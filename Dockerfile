@@ -9,7 +9,10 @@ ENV TZ=${TIMEZONE}
 
 ARG LOCALE="en_US.UTF-8"
 
-ARG ADD_PYTHON_DEB_PACKAGES="python-requests"
+# ARG ADD_PYTHON_DEB_PACKAGES="python-requests python-tz python-geohash python-numpy python-pandas python-scipy python-seaborn python-matplotlib"
+ARG ADD_PYTHON_DEB_PACKAGES=""
+# ARG ADD_PYTHON_PIP_PACKAGES="scikit-learn==0.18 influxdb"
+ARG ADD_PYTHON_PIP_PACKAGES=""
 
 # General ENV settings
 ENV LC_ALL="${LOCALE}"
@@ -18,9 +21,10 @@ ENV LANG="${LOCALE}"
 ENV LANGUAGE="${LOCALE}"
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV BUILD_DEPS="tzdata locales"
-ENV PYTHON_CORE_PACKAGES="python-setuptools python-lxml python-gdal python-psycopg2 python-jinja2 gdal-bin"
+ENV PYTHON_CORE_PACKAGES="python-setuptools python-pip python-lxml python-gdal python-psycopg2 python-jinja2 gdal-bin"
 ENV PYTHON_TEST_PACKAGES="python-nose2 python-mock"
-ENV PYTHON_EXTRA_PACKAGES="${ADD_PYTHON_DEB_PACKAGES}"
+ENV PYTHON_EXTRA_DEB_PACKAGES="${ADD_PYTHON_DEB_PACKAGES}"
+ENV PYTHON_EXTRA_PIP_PACKAGES="${ADD_PYTHON_PIP_PACKAGES}"
 
 # Add Source Code
 ADD . /stetl
@@ -32,7 +36,7 @@ RUN \
 		${BUILD_DEPS} \
 	    ${PYTHON_CORE_PACKAGES} \
 	    ${PYTHON_TEST_PACKAGES} \
-	    ${PYTHON_EXTRA_PACKAGES} \
+	    ${PYTHON_EXTRA_DEB_PACKAGES} \
 
 	# Timezone
 	# echo "${TZ}" > /etc/timezone && \
@@ -45,6 +49,14 @@ RUN \
     && locale-gen\
     && dpkg-reconfigure locales \
     && /usr/sbin/update-locale LANG=${LANG} \
+
+    # Optional packages to install via Pip
+	&& if [ "x${PYTHON_EXTRA_PIP_PACKAGES}" = "x" ] ;\
+	    then \
+	        echo "No extra Pip apackges to install" ;\
+	    else \
+	        pip install ${PYTHON_EXTRA_PIP_PACKAGES} ;\
+	    fi  \
 
 	# Install and Remove build-related packages for smaller image size
 	&& cd /stetl \
