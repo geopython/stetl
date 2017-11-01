@@ -1,67 +1,62 @@
-FROM python:2.7.14-slim-stretch
+FROM debian:stretch-slim
 
 LABEL maintainer "Just van den Broecke <justb4@gmail.com>"
 
+# ARGS
+
+ARG TIMEZONE="Europe/Amsterdam"
+ENV TZ=${TIMEZONE}
+
+ARG LOCALE="en_US.UTF-8"
+
+ARG ADD_PYTHON_DEB_PACKAGES="python-requests"
+
 # General ENV settings
-ENV LC_ALL "en_US.UTF-8"
-ENV LC_TYPE "en_US.UTF-8"
-ENV LANG "en_US.UTF-8"
-ENV LANGUAGE "en_US.UTF-8"
-ENV GDAL_VERSION 2.1.0
-ENV BUILD_DEPS "tzdata build-essential locales apt-utils"
-ENV DEBIAN_FRONTEND noninteractive
-
-ARG TZ="Europe/Amsterdam"
-
-# Set time right and configure timezone and locale
-RUN \
-	apt-get update && \
-	apt-get install -y ${BUILD_DEPS} && \
-
-	# Timezone
-	echo "${TZ}" > /etc/timezone && \
-	cp /usr/share/zoneinfo/${TZ} /etc/localtime && \
-	dpkg-reconfigure -f noninteractive tzdata && \
-
-	# Locale
-	echo "LANG=${LANG}" >/etc/default/locale && \
-	echo "${LANG} UTF-8" > /etc/locale.gen && \
-    locale-gen && \
-    dpkg-reconfigure locales && \
-    /usr/sbin/update-locale LANG=${LANG}
-
-# App-specific installs/config
-RUN apt-get install -y \
-		python-lxml \
-		libgdal-dev \
-		python-gdal \
-		gdal-bin
-
-RUN \
-	apt-get install -y build-essential && \
-	pip install -U pip  && \
-	pip install \
-		gdal==`gdalinfo --version | cut -d' ' -f2 | cut -d',' -f1` \
-		# gdal==2.2.0 \
-		psycopg2==2.7.3.2 \
-		Jinja2==2.9.6 \
-		lxml==4.1.0 \
-		nose2 \
-		mock
+ENV LC_ALL="${LOCALE}"
+ENV LC_TYPE="${LOCALE}"
+ENV LANG="${LOCALE}"
+ENV LANGUAGE="${LOCALE}"
+ENV DEBIAN_FRONTEND="noninteractive"
+ENV BUILD_DEPS="tzdata locales"
+ENV PYTHON_CORE_PACKAGES="python-setuptools python-lxml python-gdal python-psycopg2 python-jinja2 gdal-bin"
+ENV PYTHON_TEST_PACKAGES="python-nose2 python-mock"
+ENV PYTHON_EXTRA_PACKAGES="${ADD_PYTHON_DEB_PACKAGES}"
 
 # Add Source Code
 ADD . /stetl
 
-# Install and Remove build-related packages for smaller image size
-RUN cd /stetl \
-	&& python setup.py install  \
-	&& nose2 \
-	&& apt-get purge ${BUILD_DEPS} -y \
-	&& apt autoremove -y
-
+# Set time right and configure timezone and locale
 RUN \
-	echo "For ${TZ} date=`date`" && \
-	echo "locale=`locale`"
+	apt-get update \
+	&& apt-get --no-install-recommends install  -y \
+		${BUILD_DEPS} \
+	    ${PYTHON_CORE_PACKAGES} \
+	    ${PYTHON_TEST_PACKAGES} \
+	    ${PYTHON_EXTRA_PACKAGES} \
+
+	# Timezone
+	# echo "${TZ}" > /etc/timezone && \
+	&& cp /usr/share/zoneinfo/${TZ} /etc/localtime\
+	&& dpkg-reconfigure tzdata \
+
+	# Locale
+	&& echo "LANG=${LANG}" >/etc/default/locale  \
+	&& echo "${LANG} UTF-8" > /etc/locale.gen \
+    && locale-gen\
+    && dpkg-reconfigure locales \
+    && /usr/sbin/update-locale LANG=${LANG} \
+
+	# Install and Remove build-related packages for smaller image size
+	&& cd /stetl \
+		&& python setup.py install  \
+		&& nose2 \
+		&& apt-get purge ${PYTHON_TEST_PACKAGES} -y \
+		&& apt autoremove -y  \
+        && rm -rf /var/lib/apt/lists/* \
+        
+	&& echo "For ${TZ} date=`date`" \
+	&& echo "locale=`locale`"
 
 # Allow docker run
-# ENTRYPOINT ["/usr/local/bin/stetl"]
+# docker run --rm -it geopython/stetl  stetl
+# docker run --rm -it geopython/stetl  bash

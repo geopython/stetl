@@ -1,4 +1,4 @@
-psycopg2==2.7.3.2
-lxml==4.1.0
-Jinja2==2.9.6
+psycopg2>=2.6
+lxml>=3.7
+Jinja2>=2.8
 GDAL>=2
