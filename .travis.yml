@@ -24,9 +24,9 @@ install:
 
 script:
 #  - flake8
-  - cd docs && make html
-  - nose2 -v -c setup.cfg
-  - cd examples/basics && runall.sh
+  - cd docs && make html && cd ..
+  - nose2 -v
+  - cd examples/basics && runall.sh  && cd ..
 
 #after-script:
 #  - python todo
