@@ -46,8 +46,9 @@ Stetl depends on the following Python packages:
 * GDAL bindings for Python
 * psycopg2 (PostgreSQL client)
 * lxml
+* Jinja2 templating
 
-``GDAL`` requires the native GDAL/OGR tools to be installed.
+``GDAL`` Python binding requires the native GDAL/OGR tools to be installed.
 
 ``lxml`` http://lxml.de/installation.html requires the native (C) libraries:
 
@@ -63,17 +64,14 @@ Platform-specific guidelines for dependencies follow next.
 Linux
 ~~~~~
 
-Most packages should be able to be installed by apt-get or Python ``pip`` or ``easy_install``.
+For Debian-based distro's like Ubuntu and Debian itself, most packages should be able to be installed via apt-get.
 
 Tip: to get latest versions of GDAL and other Open Source geospatial software, best is
 to add the `UbuntuGIS Repository <https://wiki.ubuntu.com/UbuntuGIS>`_.
 
-
 - Optional: Python package dependencies: ::
 
-   sudo apt-get install python-setuptools
-   sudo apt-get install python-dev
-   sudo apt-get install libpq-dev
+	apt-get install python-setuptools
 
 - ``libxml2/libxslt`` libs are usually already installed. Together with Python ``lxml``
   the total install for ``lxml`` is: ::
@@ -82,18 +80,19 @@ to add the `UbuntuGIS Repository <https://wiki.ubuntu.com/UbuntuGIS>`_.
    apt-get of yum install libxslt1.1
    apt-get of yum install python-lxml
 
-- GDAL (http://gdal.org) with Python bindings: ::
+- ``GDAL`` (http://gdal.org) with Python bindings: ::
 
    apt-get of yum install gdal-bin
    apt-get of yum install python-gdal
 
 - the PostgreSQL client library for Python ``psycopg2``: ::
 
-   sudo easy_install psycopg2
+   apt-get of yum install python-psycopg2
 
-- Python package ``argparse`` if you have Python < 2.7: ::
+- for ``Jinja2``: ::
 
-   sudo easy_install argparse
+   apt-get of yum install python-jinja2
+
 
 Mac OSX
 ~~~~~~~
@@ -145,19 +144,47 @@ Try running the examples when running with a downloaded distro. ::
 
 Look for any error messages in your output.
 
+Run Unit Tests
+--------------
+
+You can run unit tests to completely verify your installation. First install some extra packages: ::
+
+	pip install -r requirements-dev.txt
+
+Then run the tests using `nose2`. ::
+
+	nose2
+
 .. _install_docker:
 
 Install with Docker
 -------------------
 
-One of the cleanest ways to use Stetl is via `Docker <http://docker.com>`_. Your environment needs to be
+The fastest way to use Stetl is via `Docker <http://docker.com>`_. The Stetl Docker Image is lightweight,
+compressed just over 100MB, based on a Debian "slim" Docker Image.
+
+Your environment needs to be
 setup to use Docker and probably you want to use some tooling like `Vagrant <https://www.vagrantup.com/>`_. The author uses
 a combination of VirtualBox with Ubuntu and Vagrant on Mac OSX to run Docker, but this
 is a bit out of scope here.
 
 Assuming you have a working Docker environment, there are two ways to install Stetl with Docker:
 
-* build a Docker image yourself using the Dockerfile in https://github.com/geopython/stetl/tree/master/docker
-* use a prebuilt public Stetl Docker image: https://hub.docker.com/r/justb4/stetl
+* build a Docker image yourself using the Dockerfile in https://github.com/geopython/stetl/blob/master/Dockerfile
+* use a prebuilt public Stetl Docker image from Docker Hub: https://hub.docker.com/r/geopython/stetl
+
+When rebuilding you can add build arguments for your environment, defaults:  ::
+
+	ARG TIMEZONE="Europe/Amsterdam"
+	ARG LOCALE="en_US.UTF-8"
+	ARG ADD_PYTHON_DEB_PACKAGES=""
+	ARG ADD_PYTHON_PIP_PACKAGES=""
+
+For example building with extra Python packages: ::
+
+	docker build --build-arg ADD_PYTHON_DEB_PACKAGES="python-requests python-tz" -t geopython/stetl:latest .
+	docker build --build-arg ADD_PYTHON_PIP_PACKAGES="scikit-learn==0.18 influxdb" -t geopython/stetl:latest .
+
+Or you may extend the Stetl Dockerfile with your own Dockerfile.
 
 For running Stetl using Docker see  :ref:`run_docker`.
