@@ -1,10 +1,10 @@
 language: python
 sudo: true
 
-#env:
-#  global:
-#   - CPLUS_INCLUDE_PATH=/usr/include/gdal
-#   - C_INCLUDE_PATH=/usr/include/gdal
+env:
+  global:
+   - CPLUS_INCLUDE_PATH=/usr/include/gdal
+   - C_INCLUDE_PATH=/usr/include/gdal
 
 python:
   - "2.7"
@@ -17,7 +17,7 @@ before_install:
 
 install:
   # follow GDAL installed version for Python bindings
-  - pip install GDAL==`gdalinfo --version | cut -d' ' -f2 | cut -d',' -f1`
+  # - pip install GDAL==`gdalinfo --version | cut -d' ' -f2 | cut -d',' -f1`
   # - pip install -r requirements-main.txt
   - python setup.py install
   - pip install -r requirements-dev.txt
