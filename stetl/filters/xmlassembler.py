@@ -71,7 +71,7 @@ class XmlAssembler(Filter):
         try:
             etree_doc = etree.fromstring(self.container_doc, self.xml_parser)
         except Exception as e:
-            log.error("new container doc not OK")
+            log.error('new container doc not OK: %s' % str(e))
             return packet
 
         parent_element = etree_doc.xpath(self.element_container_xpath)
@@ -81,7 +81,7 @@ class XmlAssembler(Filter):
         for element in self.element_arr:
             parent_element.append(element)
 
-        log.info("xmldoc ready: elms=%d total_elms=%d" % (len(self.element_arr), self.total_element_count))
+        log.info('xmldoc ready: elms=%d total_elms=%d' % (len(self.element_arr), self.total_element_count))
         packet.data = etree_doc
         self.element_arr = []
         return packet

@@ -43,12 +43,12 @@ Dependencies
 
 Stetl depends on the following Python packages:
 
-* GDAL bindings for Python
+* GDAL (v2+) bindings for Python
 * psycopg2 (PostgreSQL client)
 * lxml
 * Jinja2 templating
 
-``GDAL`` Python binding requires the native GDAL/OGR tools to be installed.
+``GDAL`` Python binding requires the native GDAL/OGR libs and tools (version 2+) to be installed.
 
 ``lxml`` http://lxml.de/installation.html requires the native (C) libraries:
 
@@ -77,7 +77,7 @@ to add the `UbuntuGIS Repository <https://wiki.ubuntu.com/UbuntuGIS>`_.
   the total install for ``lxml`` is: ::
 
    apt-get of yum install libxml2
-   apt-get of yum install libxslt1.1
+   apt-get of yum install libxslt
    apt-get of yum install python-lxml
 
 - ``GDAL`` (http://gdal.org) with Python bindings: ::

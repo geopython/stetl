@@ -151,7 +151,7 @@ class XmlFileInput(FileInput):
         try:
             data = etree.parse(file_path)
         except Exception as e:
-            log.info("file read and parsed NOT OK : %s" % file_path)
+            log.info('file read and parsed NOT OK : %s, err=%s' % (file_path, str(e)))
 
         return data
 
@@ -351,7 +351,8 @@ class CsvFileInput(FileInput):
     @Config(ptype=str, default='"', required=False)
     def quote_char(self):
         """
-        A one-character string used to quote fields containing special characters, such as the delimiter or quotechar, or which contain new-line characters. It defaults to '"'
+        A one-character string used to quote fields containing special characters, such as the delimiter or quotechar,
+        or which contain new-line characters. It defaults to '"'.
         """
         pass
 
@@ -379,7 +380,7 @@ class CsvFileInput(FileInput):
                     packet.data = self.csv_reader.next()
 
             log.info("CSV row nr %d read: %s" % (self.csv_reader.line_num - 1, packet.data))
-        except Exception as e:
+        except Exception:
             if self._output_format == FORMAT.record_array:
                 packet.data = self.arr
 
@@ -433,10 +434,9 @@ class ApacheLogFileInput(FileInput):
 
     """
 
-    @Config(ptype=dict, default=
-    {'%l': 'logname', '%>s': 'status', '%D': 'deltat', '%{User-agent}i': 'agent', '%b': 'bytes',
-     '%{Referer}i': 'referer', '%u': 'user', '%t': 'time', "'%h": 'host', '%r': 'request'}
-        , required=False)
+    @Config(ptype=dict, default={'%l': 'logname', '%>s': 'status', '%D': 'deltat',
+                                 '%{User-agent}i': 'agent', '%b': 'bytes', '%{Referer}i': 'referer',
+                                 '%u': 'user', '%t': 'time', "'%h": 'host', '%r': 'request'}, required=False)
     def key_map(self):
         """
         Map of cryptic %-field names to readable keys in record.
@@ -559,7 +559,7 @@ class ZipFileInput(FileInput):
 class GlobFileInput(FileInput):
     """
     Returns file names based on the glob.glob pattern given as filename_filter.
-    
+
     produces=FORMAT.string or FORMAT.line_stream
     """
 

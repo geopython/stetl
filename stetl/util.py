@@ -194,7 +194,7 @@ class Util:
                         result = dict(prepend.items() + {"$": parseChildren(x.getchildren())}.items())
 
                 if tag in final:
-                    if type(final[tag]) is not types.ListType:
+                    if not isinstance(final[tag], types.ListType):
                         final[tag] = [final[tag]]
 
                     final[tag].append(result)
@@ -333,7 +333,7 @@ class Util:
                     elem = elem[x]
                 except ValueError:
                     elem = elem.get(x)
-        except:
+        except Exception:
             pass
 
         return elem
@@ -346,10 +346,10 @@ try:
     from cStringIO import StringIO
 
     log.info("Found cStringIO, good!")
-except:
+except Exception:
     from StringIO import StringIO
 
-    log.warning("Found StringIO (this is suboptimal, try cStringIO")
+    log.warning("Found %s - this is suboptimal, try cStringIO" % str(type(StringIO)))
 
 try:
     from lxml import etree
@@ -411,7 +411,7 @@ class ConfigSection():
         return name in self.config_dict
 
     def get(self, name, default=None):
-        if not self.config_dict.has_key(name):
+        if name not in self.config_dict:
             return default
         return self.config_dict[name]
 

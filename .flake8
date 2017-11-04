@@ -2,4 +2,4 @@
 ignore = 
 max-line-length = 160
 exclude = setup.py,.git,.cache,docs,docker,build,dist,examples,tests
-max-complexity = 10
+max-complexity = 38

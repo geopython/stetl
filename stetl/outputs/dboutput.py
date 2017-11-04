@@ -144,7 +144,7 @@ class PostgresInsertOutput(PostgresDbOutput):
         # See http://grokbase.com/t/postgresql/psycopg/12735bvkmv/insert-into-with-a-dictionary-or-generally-with-a-variable-number-of-columns
         # e.g. INSERT INTO lml_files ("file_name", "file_data") VALUES (%s,%s)
         query = "INSERT INTO %s (%s) VALUES (%s)" % (
-        self.cfg.get('table'), ",".join(['%s' % k for k in record]), ",".join(["%s", ] * len(record.keys())))
+            self.cfg.get('table'), ",".join(['%s' % k for k in record]), ",".join(["%s", ] * len(record.keys())))
         log.info('query is %s', query)
         return query
 

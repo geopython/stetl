@@ -103,7 +103,7 @@ class HttpInput(Input):
         """
         Add authorization from config data. Authorization scheme-specific.
         May be extended or overloaded for additional schemes.
-        
+
         :param request: the HTTP Request
         :return:
         """
@@ -273,7 +273,7 @@ class ApacheDirInput(HttpInput):
     def filter_file(self, file_name):
         """
         Filter the file_name, e.g. to suppress reading, default: return file_name.
-        
+
         :param file_name:
         :return string or None:
         """

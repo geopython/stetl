@@ -77,21 +77,21 @@ class DeegreeBlobstoreOutput(Output):
         gml_ns = None
         for childNode in featureMembers:
             if gml_ns is None:
-                if childNode.nsmap.has_key('gml'):
+                if 'gml' in childNode.nsmap:
                     gml_ns = childNode.nsmap['gml']
-                else:
-                    if childNode.nsmap.has_key('GML'):
-                        gml_ns = childNode.nsmap['GML']
+                elif 'GML' in childNode.nsmap:
+                    gml_ns = childNode.nsmap['GML']
 
             gml_id = childNode.get('{%s}id' % gml_ns)
 
             feature_type_id = self.feature_type_ids[childNode.tag]
 
             # Find a GML geometry in the GML NS
-            ogrGeomWKT = None
+            # ogrGeomWKT = None
             #            gmlMembers = childNode.xpath(".//gml:Point|.//gml:Curve|.//gml:Surface|.//gml:MultiSurface", namespaces=NS)
             gmlMembers = childNode.xpath(
-                ".//*[local-name() = 'Point']|.//*[local-name() = 'Polygon']|.//*[local-name() = 'Curve']|.//*[local-name() = 'Surface']|.//*[local-name() = 'MultiSurface']")
+                ".//*[local-name() = 'Point']|.//*[local-name() = 'Polygon']|.//*[local-name() =\
+                 'Curve']|.//*[local-name() = 'Surface']|.//*[local-name() = 'MultiSurface']")
             geom_str = None
             for gmlMember in gmlMembers:
                 if geom_str is None:
@@ -155,7 +155,6 @@ class DeegreeFSLoaderOutput(Output):
         if packet.data is None:
             return packet
 
-        gml_doc = packet.data
         d3tools_path = self.cfg.get('d3tools_path')
         workspace_path = self.cfg.get('workspace_path')
         feature_store = self.cfg.get('feature_store')
@@ -173,7 +172,6 @@ class DeegreeFSLoaderOutput(Output):
 
         p.stdin.write(packet.to_string())
 
-        result = p.communicate()[0]
-        return packet
-
+        # result = p.communicate()[0]
         # print(result)
+        return packet

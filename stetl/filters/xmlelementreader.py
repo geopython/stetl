@@ -76,7 +76,7 @@ class XmlElementReader(Filter):
         return packet
 
     def process_xml(self, packet):
-        while not self.context is None:
+        while self.context is not None:
             # while not packet.is_end_of_doc():
             try:
                 event, elem = self.context.next()

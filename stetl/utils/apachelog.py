@@ -153,7 +153,8 @@ class parser:
         for element in format.split(' '):
 
             hasquotes = 0
-            if findquotes.search(element): hasquotes = 1
+            if findquotes.search(element):
+                hasquotes = 1
 
             if hasquotes:
                 element = lstripquotes.sub('', element)
@@ -201,12 +202,12 @@ class parser:
                     if k in ['%>s', '%b', '%D']:
                         try:
                             v = int(v)
-                        except:
+                        except Exception:
                             v = 0
                     elif k == '%t':
                         try:
                             v = int(parse_date(v)[0])
-                        except:
+                        except Exception:
                             v = 0
                     elif v == '-':
                         v = None
@@ -222,7 +223,7 @@ class parser:
                     if self._options['request_path_only']:
                         try:
                             v = v.split(' ')[1]
-                        except:
+                        except Exception:
                             v = ''
 
                 # JvdB map %-like keys to readable names using key map
@@ -331,7 +332,6 @@ formats = {
 if __name__ == '__main__':
     import unittest
 
-
     class TestApacheLogParser(unittest.TestCase):
         def setUp(self):
             self.format = r'%h %l %u %t \"%r\" %>s ' \
@@ -431,8 +431,8 @@ if __name__ == '__main__':
             )
             self.assertEqual(
                 data['%r'],
-                r'GET /core/listing/pl_boat_detail.jsp?&units=Feet&checked_boats=' \
-                r'1176818&slim=broker&&hosturl=giffordmarine&&ywo=giffordmarine& ' \
+                r'GET /core/listing/pl_boat_detail.jsp?&units=Feet&checked_boats='
+                r'1176818&slim=broker&&hosturl=giffordmarine&&ywo=giffordmarine& '
                 r'HTTP/1.1',
                 msg='Line 3 %r'
             )
@@ -440,13 +440,13 @@ if __name__ == '__main__':
             self.assertEqual(data['%b'], '2888', msg='Line 3 %b')
             self.assertEqual(
                 data['%{Referer}i'],
-                r'http://search.yahoo.com/bin/search?p=\"grady%20white%20306' \
+                r'http://search.yahoo.com/bin/search?p=\"grady%20white%20306'
                 r'%20bimini\"',
                 msg='Line 3 %{Referer}i'
             )
             self.assertEqual(
                 data['%{User-Agent}i'],
-                'Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; YPC 3.0.3; ' \
+                'Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; YPC 3.0.3; '
                 'yplus 4.0.00d)',
                 msg='Line 3 %{User-Agent}i'
             )
@@ -465,6 +465,5 @@ if __name__ == '__main__':
         def testparsedate(self):
             date = '[05/Dec/2006:10:51:44 +0000]'
             self.assertEqual(('20061205105144', '+0000'), parse_date(date))
-
 
     unittest.main()

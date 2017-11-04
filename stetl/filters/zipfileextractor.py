@@ -37,13 +37,11 @@ class ZipFileExtractor(Filter):
         self.cur_file_path = self.cfg.get('file_path')
 
     def invoke(self, packet):
-        event = None
 
         if packet.data is None:
             log.info("No file name given")
             return packet
 
-        import os
         import zipfile
 
         with zipfile.ZipFile(packet.data['file_path']) as z:
