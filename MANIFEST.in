@@ -1,6 +1,5 @@
-exclude *.txt *.py *.md .DS_Store
-include CHANGES.txt CREDITS.txt LICENSE.txt VERSION.txt README.md setup.py
-recursive-include docker *
+exclude *.txt *.py *.md *.cfg .DS_Store
+include CHANGES.txt CONTRIBUTING.md CREDITS.txt LICENSE.txt VERSION.txt README.md requirements-main.txt requirements-dev.txt setup.py setup.cfg .flake8
 recursive-include docs *
 recursive-exclude docs/_build *
 recursive-include examples  *
