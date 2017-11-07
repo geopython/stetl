@@ -1,12 +1,12 @@
 Changes
 =======
 
-v1.1.0 - november 7, 2017
+v1.1.1 - november 7, 2017
 -------------------------
 
 Biggest change is that the Stetl repo moved to https://github.com/geopython/stetl/.
 
-See closed issues in Milestone 1.1.0: https://github.com/geopython/stetl/milestone/6?closed=1
+See closed issues in Milestone 1.1.1: https://github.com/geopython/stetl/milestone/6?closed=1
 
 Highlights:
 
