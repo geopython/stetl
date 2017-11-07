@@ -34,7 +34,8 @@ from an :class:`stetl.input.Input` via zero or more :class:`stetl.filter.Filter`
 
 As a trivial example: an :class:`stetl.input.Input` could be an XML file, a :class:`stetl.filter.Filter` could represent
 an XSLT file and an :class:`stetl.output.Output` a PostGIS database. This is effected by specialized classes in
-the subpackages inputs, filters, and outputs. New in 1.1.0: :class:`stetl.Splitter` to split data to multiple Outputs.
+the subpackages inputs, filters, and outputs. New in 1.1.0: :class:`stetl.Splitter` to split data to multiple Outputs
+and :class:`stetl.Merger` to combine multiple `Inputs`.
 
 .. automodule:: stetl.factory
    :members:
@@ -64,6 +65,9 @@ the subpackages inputs, filters, and outputs. New in 1.1.0: :class:`stetl.Splitt
    :members:
    :show-inheritance:
 
+.. automodule:: stetl.merger
+   :members:
+   :show-inheritance:
 
 Components: Inputs
 ------------------
@@ -96,6 +100,10 @@ Components: Filters
    :show-inheritance:
 
 .. automodule:: stetl.filters.xmlassembler
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.filters.xmlelementreader
    :members:
    :show-inheritance:
 
@@ -139,6 +147,10 @@ Components: Outputs
    :show-inheritance:
 
 .. automodule:: stetl.outputs.ogroutput
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.outputs.execoutput
    :members:
    :show-inheritance:
 

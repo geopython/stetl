@@ -189,6 +189,101 @@ class OgrPostgisInput(Input):
      produces=FORMAT.xml_line_stream
     """
 
+    # Start attribute config meta
+    @Config(ptype=str, required=False, default='localhost')
+    def in_pg_host(self):
+        """
+        Host of input DB.
+        """
+        pass
+
+    @Config(ptype=str, required=False, default='5432')
+    def in_pg_port(self):
+        """
+        Port of input DB.
+        """
+        pass
+
+    @Config(ptype=str, required=True, default=None)
+    def in_pg_db(self):
+        """
+        Database name input DB.
+
+        """
+        pass
+
+    @Config(ptype=str, required=False, default=None)
+    def in_pg_schema(self):
+        """
+        DB Schema name input DB.
+        """
+        pass
+
+    @Config(ptype=str, required=False, default='postgres')
+    def in_pg_user(self):
+        """
+        User input DB.
+        """
+        pass
+
+    @Config(ptype=str, required=False, default='postgres')
+    def in_pg_password(self):
+        """
+        Password input DB.
+        """
+        pass
+
+    @Config(ptype=str, required=False, default=None)
+    def in_srs(self):
+        """
+        SRS (projection) (ogr2ogr -s_srs) input DB e.g. 'EPSG:28992'.
+        """
+        pass
+
+    @Config(ptype=str, required=False, default=None)
+    def in_pg_sql(self):
+        """
+        The input query (string) to fire.
+        """
+        pass
+
+    @Config(ptype=str, required=False, default=None)
+    def out_srs(self):
+        """
+        Target SRS (ogr2ogr -t_srs) code output stream.
+        """
+        pass
+
+    @Config(ptype=str, required=False, default='2')
+    def out_dimension(self):
+        """
+        Dimension (OGR: DIM=N) of features in output stream.
+        """
+        pass
+
+    @Config(ptype=str, required=False, default=None)
+    def out_gml_format(self):
+        """
+        GML format OGR name in output stream, e.g. 'GML3'.
+        """
+        pass
+
+    @Config(ptype=str, required=False, default=None)
+    def out_layer_name(self):
+        """
+        New Layer name (ogr2ogr -nln) output stream, e.g. 'address'.
+        """
+        pass
+
+    @Config(ptype=str, required=False, default=None)
+    def out_geotype(self):
+        """
+        OGR Geometry type new layer in output stream, e.g. POINT.
+        """
+        pass
+
+    # End attribute config meta
+
     # TODO make this template configurable so we can have generic ogr2ogr input....
     pg_conn_tmpl = "PG:host=%s dbname=%s active_schema=%s user=%s password=%s port=%s"
     cmd_tmpl = 'ogr2ogr|-t_srs|%s|-s_srs|%s|-f|GML|%s|-dsco|FORMAT=%s|-lco|DIM=%s|%s|-SQL|%s|-nln|%s|%s'
@@ -201,33 +296,19 @@ class OgrPostgisInput(Input):
         self.ogr_process = None
         self.eof_stdout = False
         self.eof_stderr = False
-
-        in_pg_host = self.cfg.get('in_pg_host', 'localhost')
-        in_pg_db = self.cfg.get('in_pg_db')
-        in_pg_schema = self.cfg.get('in_pg_schema', 'public')
-        in_pg_user = self.cfg.get('in_pg_user', 'postgres')
-        in_pg_password = self.cfg.get('in_pg_password', 'postgres')
-        in_pg_port = self.cfg.get('in_pg_port', '5432')
-        in_srs = self.cfg.get('in_srs')
-        in_pg_sql = self.cfg.get('in_pg_sql')
-
-        out_srs = self.cfg.get('out_srs')
-        out_file = '/vsistdout/'
-        out_gml_format = self.cfg.get('out_gml_format')
-        out_dimension = self.cfg.get('out_dimension', '2')
-        out_layer_name = self.cfg.get('out_layer_name')
-        out_geotype = self.cfg.get('out_geotype', '')
+        self.out_file = '/vsistdout/'
 
         #
         # Build ogr2ogr command line
         #
         # PostGIS PG: options
         self.pg = OgrPostgisInput.pg_conn_tmpl % (
-            in_pg_host, in_pg_db, in_pg_schema, in_pg_user, in_pg_password, in_pg_port)
+            self.in_pg_host, self.in_pg_db, self.in_pg_schema, self.in_pg_user, self.in_pg_password, self.in_pg_port)
 
         # Entire ogr2ogr command line
         self.cmd = OgrPostgisInput.cmd_tmpl % (
-            out_srs, in_srs, out_file, out_gml_format, out_dimension, self.pg, in_pg_sql, out_layer_name, out_geotype)
+            self.out_srs, self.in_srs, self.out_file, self.out_gml_format, self.out_dimension, self.pg, self.in_pg_sql,
+            self.out_layer_name, self.out_geotype)
 
         # Make array to make it easy for Popen with quotes etc
         self.cmd = self.cmd.split('|')

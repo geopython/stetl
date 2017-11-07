@@ -8,6 +8,7 @@
 import codecs
 import re
 
+from stetl.component import Config
 from stetl.postgis import PostGIS
 from stetl.input import Input
 from stetl.util import Util, etree, StringIO
@@ -23,13 +24,47 @@ class DeegreeBlobstoreInput(Input):
     produces=FORMAT.etree_doc
     """
 
+    # Start attribute config meta
+
+    @Config(ptype=int, required=False, default=10000)
+    def max_features_per_doc(self):
+        """
+        Max features to read from input feature GML stream per internal document.
+        """
+        pass
+
+    @Config(ptype=str, required=True, default=None)
+    def start_container(self):
+        """
+        Tag that starts container.
+        """
+        pass
+
+    @Config(ptype=str, required=True, default=None)
+    def end_container(self):
+        """
+        Tag that ends container.
+        """
+        pass
+
+    @Config(ptype=str, required=False, default=False)
+    def start_feature_tag(self):
+        """
+        XML tag that starts Feature.
+        """
+        pass
+
+    @Config(ptype=str, required=False, default=None)
+    def end_feature_tag(self):
+        """
+        XML tag that ends Feature.
+        """
+        pass
+
+    # End attribute config meta
+
     def __init__(self, configdict, section):
         Input.__init__(self, configdict, section, produces=FORMAT.etree_doc)
-        self.max_features_per_doc = self.cfg.get_int('max_features_per_doc', 10000)
-        self.start_container = self.cfg.get('start_container')
-        self.end_container = self.cfg.get('end_container')
-        self.start_feature_tag = self.cfg.get('start_feature_tag')
-        self.end_feature_tag = self.cfg.get('end_feature_tag')
         self.cur_feature_blob = None
         self.rowcount = 0
 
@@ -156,13 +191,13 @@ class DeegreeBlobstoreInput(Input):
             # print '[' + self.buffer.getvalue() + ']'
             packet.data = etree.parse(self.buffer, self.xml_parser)
         # print buffer.getvalue()
-        except Exception, e:
+        except Exception as e:
             bufStr = self.buffer.getvalue()
             if not bufStr:
                 log.info("parse buffer empty: content=[%s]" % bufStr)
             else:
                 log.error("error in buffer parsing %s" % str(e))
-                print bufStr
+                # print(bufStr)
                 raise
         self.buffer.close()
         self.buffer = None

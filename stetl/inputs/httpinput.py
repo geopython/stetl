@@ -188,6 +188,13 @@ class ApacheDirInput(HttpInput):
      date time is too fragile over different Apache servers).
     """
 
+    @Config(ptype=str, default='xml', required=False)
+    def file_ext(self):
+        """
+        The file extension for target files in Apache dir.
+        """
+        pass
+
     def __init__(self, configdict, section, produces=FORMAT.record):
         HttpInput.__init__(self, configdict, section, produces)
         # look for a link + a timestamp + a size ('-' for dir)
@@ -195,8 +202,7 @@ class ApacheDirInput(HttpInput):
         # This appeared to be too fragile, e.g. different date formats per apache server
 
         # default file extension to filter
-        self.file_ext = self.cfg.get('file_ext', 'xml')
-        # default regular expresion for file
+        # default regular expression for file
         self.file_reg_exp = self.cfg.get('file_reg_exp', 'href="([^"]*%s)"' % self.file_ext)
         self.parse_re = re.compile(self.file_reg_exp)
         self.file_list = None

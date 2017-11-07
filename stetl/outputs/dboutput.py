@@ -71,6 +71,7 @@ class PostgresDbOutput(DbOutput):
         pass
 
     # End attribute config meta
+
     def __init__(self, configdict, section):
         DbOutput.__init__(self, configdict, section, consumes=FORMAT.string)
 
