@@ -37,6 +37,8 @@ Thanks to Bas Couwenberg, work is performed to provide Stetl as Debian packages 
 https://packages.debian.org/search?keywords=stetl (Debian) and
 https://launchpad.net/ubuntu/+source/python-stetl (Ubuntu, Xenial and later).
 Stetl is split into 2 packages ``python-stetl``, the Python framework and ``stetl`` the command line utility.
+NB the versions of these packages may be older than when installing Stetl via `pip` from PyPi
+or directly from GitHub. Always check this first.
 
 Dependencies
 ------------
@@ -53,7 +55,7 @@ Stetl depends on the following Python packages:
 ``lxml`` http://lxml.de/installation.html requires the native (C) libraries:
 
 * libxslt (required by lxml)
-* libxml2 (required by lxml)
+* libxml2 with Python bindings (required by lxml)
 
 When using the ``Jinja2`` templating filter, ``Jinja2TemplatingFilter``, see http://jinja.pocoo.org:
 
@@ -68,30 +70,41 @@ For Debian-based distro's like Ubuntu and Debian itself, most packages should be
 
 Tip: to get latest versions of GDAL and other Open Source geospatial software, best is
 to add the `UbuntuGIS Repository <https://wiki.ubuntu.com/UbuntuGIS>`_.
+Below a setup that works in Ubuntu 16.04 Xenial using Debian/Ubuntu packages. In some cases you may
+choose to install the same packages via `pip` to have more recent versions like for `lxml`.
 
-- Optional: Python package dependencies: ::
+- Python dependencies: ::
 
 	apt-get install python-setuptools
+	apt-get install python-dev
+	apt-get install python-pip
+	pip install --upgrade pip
+	
+- ``libxml2/libxslt`` libs are usually already installed. Together with Python ``lxml``, the total install for ``lxml`` is: ::
 
-- ``libxml2/libxslt`` libs are usually already installed. Together with Python ``lxml``
-  the total install for ``lxml`` is: ::
+	apt-get install python-libxml2
+	apt-get install python-libxslt1
+	apt-get install libxml2-dev libxslt1-dev lib32z1-dev
+	apt-get install python-lxml
 
-   apt-get of yum install libxml2
-   apt-get of yum install libxslt
-   apt-get of yum install python-lxml
+- ``GDAL`` (http://gdal.org) version 2+ with Python bindings: ::
 
-- ``GDAL`` (http://gdal.org) with Python bindings: ::
+	# Add UbuntuGIS repo to get latest GDAL, at least v2 on Ubuntu 16.04, Xenial.
+	add-apt-repository ppa:ubuntugis/ubuntugis-unstable
+	apt-get update
+	apt-get install gdal-bin
+	gdalinfo --version
+	# should show something like: GDAL 2.2.1, released 2017/06/23
 
-   apt-get of yum install gdal-bin
-   apt-get of yum install python-gdal
+	apt-get install python-gdal
 
 - the PostgreSQL client library for Python ``psycopg2``: ::
 
-   apt-get of yum install python-psycopg2
+	apt-get install python-psycopg2
 
 - for ``Jinja2``: ::
 
-   apt-get of yum install python-jinja2
+	apt-get install python-jinja2
 
 
 Mac OSX

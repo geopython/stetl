@@ -1,11 +1,24 @@
 Changes
 =======
 
-v1.1.0 - upcoming - july 2016
------------------------------
+v1.1.0 - november 7, 2017
+-------------------------
 
-Biggest change is that the Stetl repo moved to https://github.com/geopython/stetl/
+Biggest change is that the Stetl repo moved to https://github.com/geopython/stetl/.
 
+See closed issues in Milestone 1.1.0: https://github.com/geopython/stetl/milestone/6?closed=1
+
+Highlights:
+
+- new Component Splitter to split (Filter/Output) data streams within a Chain
+- new Component Merger to combine (Input) data streams within a Chain
+- Splitter and Merger can be combined in single Chain
+- automatic Travis build
+- more Unit tests
+- flake8 for clean Python code
+- move to GDAL v2 (though v1 may still work)
+- new compact Docker Image based on debian:stretch-slim
+- bugfixes XML stream support
 
 v1.0.9 - 17 june 2016
 ---------------------
