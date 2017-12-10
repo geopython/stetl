@@ -139,7 +139,7 @@ class Jinja2TemplatingFilter(TemplatingFilter):
     # Applying Decorator pattern with the Config class to provide
     # read-only config values from the configured properties.
 
-    @Config(ptype=str, default=[os.getcwd()], required=False)
+    @Config(ptype=str, default=None, required=False)
     def template_search_paths(self):
         """
         List of directories where to search for templates, default is current working directory only.
@@ -207,7 +207,7 @@ class Jinja2TemplatingFilter(TemplatingFilter):
                     raise e
 
         # Load and Init Template once
-        loader = FileSystemLoader(self.template_search_paths)
+        loader = FileSystemLoader(self.template_search_paths or [os.getcwd()])
         self.jinja2_env = Environment(loader=loader, extensions=['jinja2.ext.do'], lstrip_blocks=True, trim_blocks=True)
 
         # Register additional Filters on the template environment by updating the filters dict:
