@@ -33,7 +33,7 @@ class FileInput(Input):
         """
         pass
 
-    @Config(ptype=str, default='*.[gxGX][mM][lL]', required=False)
+    @Config(ptype=str, default='\*.[gxGX][mM][lL]', required=False)
     def filename_pattern(self):
         """
         Filename pattern according to Python ``glob.glob`` for example:

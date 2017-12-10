@@ -55,7 +55,7 @@ Best is to start with the [basic examples](examples/basics)
 
 ## Installation
  
-Stetl can be installed via PyPi `pip install stetl` and recently as a [Stetl Docker image](https://hub.docker.com/r/justb4/stetl).
+Stetl can be installed via PyPi `pip install stetl` and recently as a [Stetl Docker image](https://hub.docker.com/r/geopython/stetl).
 More on [installation in the documentation](http://www.stetl.org/en/latest/install.html).
 
 ## Contributing
@@ -72,7 +72,7 @@ review the [guidelines for contributing](CONTRIBUTING.md).
 Stetl originated in the INSPIRE-FOSS project: [2009-2013 now archived](https://github.com/justb4/inspire-foss). 
 Since then Stetl evolved into a wider use like
 transforming [Dutch GML-based Open Datasets](https://github.com/nlextract/NLExtract) such as IMGEO/BGT (Large Scale Topography) 
-and IMKAD/BRK (Cadastral Data).
+and IMKAD/BRK (Cadastral Data) and []Sensor Data Transformation and Calibration](https://github.com/Geonovum/smartemission/tree/master/etl).
 
 ## Finally
 
