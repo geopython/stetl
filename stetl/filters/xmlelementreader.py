@@ -114,7 +114,7 @@ class XmlElementReader(Filter):
 
                     # Clear the root element, since iterparse still builds a tree
                     # See http://effbot.org/zone/element-iterparse.htm
-                    self.root.clear()
+                    elem.clear()
 
             # If there is a next component, let it process
             if self.next:
