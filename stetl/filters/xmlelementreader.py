@@ -112,8 +112,8 @@ class XmlElementReader(Filter):
                     if self.strip_namespaces:
                         packet.data = Util.stripNamespaces(elem).getroot()
 
-                    # Clear the root element, since iterparse still builds a tree
-                    # See http://effbot.org/zone/element-iterparse.htm
+                    # Clear the element which has been read. Don't clear the root document,
+                    # since the last element hasn't been processed yet.
                     elem.clear()
 
             # If there is a next component, let it process
