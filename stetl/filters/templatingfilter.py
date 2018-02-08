@@ -94,6 +94,13 @@ class StringTemplatingFilter(TemplatingFilter):
     consumes=FORMAT.record or FORMAT.record_array, produces=FORMAT.string
     """
 
+    @Config(ptype=bool, default=False, required=False)
+    def safe_substitution(self):
+        """
+        Apply safe substitution?
+        """
+        pass
+
     def __init__(self, configdict, section):
         TemplatingFilter.__init__(self, configdict, section, consumes=[FORMAT.record, FORMAT.record_array])
 
@@ -111,10 +118,16 @@ class StringTemplatingFilter(TemplatingFilter):
         self.template = Template(self.template_string)
 
     def render_template(self, packet):
-        if type(packet.data) is list:
-            packet.data = [self.template.substitute(item) for item in packet.data]
+        if self.safe_substitution:
+            if type(packet.data) is list:
+                packet.data = [self.template.safe_substitute(item) for item in packet.data]
+            else:
+                packet.data = self.template.safe_substitute(packet.data)
         else:
-            packet.data = self.template.substitute(packet.data)
+            if type(packet.data) is list:
+                packet.data = [self.template.substitute(item) for item in packet.data]
+            else:
+                packet.data = self.template.substitute(packet.data)
 
         return packet
 
