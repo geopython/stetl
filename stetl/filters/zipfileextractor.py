@@ -28,6 +28,13 @@ class ZipFileExtractor(Filter):
         File name to write the extracted file to.
         """
         pass
+        
+    @Config(ptype=bool, default=True, required=False)
+    def delete_file(self):
+        """
+        Delete the file when the chain has been completed?
+        """
+        pass
 
     # End attribute config meta
 
@@ -58,7 +65,7 @@ class ZipFileExtractor(Filter):
 
     def after_chain_invoke(self, packet):
         import os.path
-        if os.path.isfile(self.cur_file_path):
+        if os.path.isfile(self.cur_file_path) and self.delete_file:
             os.remove(self.cur_file_path)
 
         return True
