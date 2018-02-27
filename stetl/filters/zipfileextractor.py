@@ -28,7 +28,7 @@ class ZipFileExtractor(Filter):
         File name to write the extracted file to.
         """
         pass
-        
+
     @Config(ptype=bool, default=True, required=False)
     def delete_file(self):
         """

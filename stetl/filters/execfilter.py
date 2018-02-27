@@ -7,7 +7,6 @@
 #
 import subprocess
 import os
-import shutil
 from stetl.filter import Filter
 from stetl.util import Util
 from stetl.packet import FORMAT
