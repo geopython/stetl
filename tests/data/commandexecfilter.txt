@@ -1,0 +1,1 @@
+python -c "print '{0}/{1}'.format('foo','bar')"
