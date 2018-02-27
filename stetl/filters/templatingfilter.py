@@ -97,7 +97,9 @@ class StringTemplatingFilter(TemplatingFilter):
     @Config(ptype=bool, default=False, required=False)
     def safe_substitution(self):
         """
-        Apply safe substitution?
+        Apply safe substitution? With this method, string.Template.safe_substitute will be invoked, instead of
+        string.Template.substitute. If placeholders are missing from mapping and keywords, instead of raising an
+        exception, the original placeholder will appear in the resulting string intact.
         """
         pass
 

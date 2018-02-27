@@ -37,6 +37,8 @@ class RegexFilter(Filter):
     def __init__(self, configdict, section, consumes=FORMAT.string, produces=FORMAT.record):
         Filter.__init__(self, configdict, section, consumes, produces)
 
+        self.regex_object = re.compile(self.pattern_string, re.S)
+
     def init(self):
         log.info('Init: regex filter')
         if self.pattern_string is None:
@@ -52,7 +54,7 @@ class RegexFilter(Filter):
         if packet.data is None:
             return packet
 
-        m = re.match(self.pattern_string, packet.data, re.S)
+        m = self.regex_object.match(packet.data)
         if m is not None:
             packet.data = m.groupdict()
         else:
