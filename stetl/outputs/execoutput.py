@@ -173,5 +173,5 @@ class Ogr2OgrExecOutput(ExecOutput):
 
         if self.cleanup_input:
             os.remove(file_path)
-            if gfs_path:
+            if gfs_path and os.path.exists(gfs_path):
                 os.remove(gfs_path)
