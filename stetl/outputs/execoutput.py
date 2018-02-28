@@ -162,10 +162,10 @@ class Ogr2OgrExecOutput(ExecOutput):
         # the same base name
         # Copy the .gfs file if required, use the same base name
         # so ogr2ogr will pick it up.
-        gfs_path = None
+        # Always assemble the GFS path, in case it is provided from outside.
+        file_ext = os.path.splitext(file_path)
+        gfs_path = file_ext[0] + '.gfs'
         if self.gfs_template:
-            file_ext = os.path.splitext(file_path)
-            gfs_path = file_ext[0] + '.gfs'
             shutil.copy(self.gfs_template, gfs_path)
 
         # Append file name to command as last argument
@@ -173,5 +173,5 @@ class Ogr2OgrExecOutput(ExecOutput):
 
         if self.cleanup_input:
             os.remove(file_path)
-            if gfs_path:
+            if gfs_path and os.path.exists(gfs_path):
                 os.remove(gfs_path)
