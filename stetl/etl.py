@@ -96,7 +96,7 @@ class ETL:
 
                 # Set: optionally override any existing value
                 args_dict[args_key] = args_value
-                
+
         return args_dict
 
     def run(self):
