@@ -96,6 +96,7 @@ class ETL:
 
                 # Set: optionally override any existing value
                 args_dict[args_key] = args_value
+                log.info("Set/override from env var: %s" % name)
 
         return args_dict
 
