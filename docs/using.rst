@@ -235,8 +235,12 @@ or even OGC WPS servers (planned).
 Reusable Stetl Configs
 ----------------------
 What we saw in the last example is that it is hard to reuse this `etl.cfg` when we have for example a different input file
-or want to map to different output files. For this Stetl supports `parameter substitution`. Here command line parameters are substituted
-for variables in `etl.cfg`. A variable is declared between curly brackets like `{out_xml}`. See
+or want to map to different output files. For this Stetl supports `config parameter substitution`.
+
+Dynamic or secret (e.g. database credentials) parameters in `etl.cfg` are declared
+symbolically and substituted at runtime via the commandline or the OS environment (new in 2018).
+
+A variable is declared between curly brackets like `{out_xml}`. See
 example `6_cmdargs <https://github.com/geopython/stetl/tree/master/examples/basics/6_cmdargs>`_. ::
 
 	[etl]
@@ -259,7 +263,7 @@ One, passing the arguments on the commandline, like ::
 
 	stetl -c etl.cfg -a "in_xml=input/cities.xml in_xsl=cities2gml.xsl out_xml=output/gmlcities.gml"
 
-Two, passing the arguments in a properties file, here called `etl.args` (the name of the suffix .args is not significant). ::
+Two, passing the arguments in a properties file, here called `etl.args` (the name of the suffix .args is not significant, could be .env as well). ::
 
 	stetl -c etl.cfg -a etl.args
 
@@ -270,7 +274,26 @@ Where the content of the `etl.args` properties file is: ::
 	in_xsl=cities2gml.xsl
 	out_xml=output/gmlcities.gml
 
-This makes an ETL chain highly reusable. A very elaborate Stetl config with parameter substitution can be seen in the
+A third way is to pass these key/value pairs (partly) as OS Environment variables.
+This is especially handy in Docker-based deployments like Docker Compose and Kubernetes.
+In this case the variable names need to be prepended with `STETL_` or `stetl_` as
+to not mix-up with other non-related OS-env vars. A mixture of commandline args (file)
+and environment vars is possible. The rule is that *OS Environment variables always take prevalence*.
+
+For example, the above args could also be passed as follows: ::
+
+	export stetl_in_xml="input/cities.xml"
+	export stetl_in_xsl="cities2gml.xsl"
+	export stetl_out_xml="output/gmlcities.gml"
+	stetl -c etl.cfg
+
+or only override the input file name from `etl.args`: ::
+
+	export stetl_in_xml="input/cities2.xml"
+	stetl -c etl.cfg -a etl.args
+
+This makes an ETL chain highly reusable.
+A very elaborate Stetl config with parameter substitution can be seen in the
 `Top10NL ETL <https://github.com/geopython/stetl/blob/master/examples/top10nl/etl-top10nl.cfg>`_.
 
 Connection Compatibility

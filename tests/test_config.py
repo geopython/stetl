@@ -5,6 +5,7 @@ import os
 from stetl.etl import ETL
 from tests.stetl_test_case import StetlTestCase
 
+
 class ConfigTest(StetlTestCase):
     """Basic configuration tests"""
 
@@ -18,6 +19,6 @@ class ConfigTest(StetlTestCase):
 
     def test_type(self):
         self.assertEqual(self.etl.configdict.get('etl', 'chains'), 'input_xml_file|output_std')
-        
+
     def test_run(self):
         self.etl.run()

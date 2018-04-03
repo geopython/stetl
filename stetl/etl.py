@@ -49,6 +49,7 @@ class ETL:
         self.configdict = ConfigParser()
 
         sys.path.append(ETL.CONFIG_DIR)
+        args_dict = self.env_expand_args_dict(args_dict)
 
         try:
             log.info("Reading config_file = %s" % config_file)
@@ -73,6 +74,30 @@ class ETL:
                 self.configdict.read(config_file)
         except Exception as e:
             log.error("Fatal Error reading config file: err=%s" % str(e))
+
+    def env_expand_args_dict(self, args_dict):
+        """
+        Expand values in dict with equivalent values from the
+        OS Env. NB vars in OS Env should be prefixed with STETL_ or stetl_
+        as to get overrides by accident.
+
+        :return: expanded args_dict or None
+        """
+
+        env_dict = os.environ
+        for name in env_dict:
+            if name.lower().startswith('stetl_'):
+                # Get real key, e.g. "STETL_HOST" becomes "HOST"
+                # "stetl_host" becomes "host".
+                args_key = '_'.join(name.split('_')[1:])
+                args_value = env_dict[name]
+                if not args_dict:
+                    args_dict = dict()
+
+                # Set: optionally override any existing value
+                args_dict[args_key] = args_value
+                
+        return args_dict
 
     def run(self):
         # The main ETL processing
