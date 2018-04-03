@@ -12,15 +12,19 @@ class ConfigTest(StetlTestCase):
     def setUp(self):
         super(ConfigTest, self).setUp()
 
+
+        # Initialize Stetl
+        self.curr_dir = os.path.dirname(os.path.realpath(__file__))
+        self.cfg_dict = {'config_file': os.path.join(self.curr_dir, 'configs/copy_in_out_file.cfg')}
+
+    def tearDown(self):
+        super(ConfigTest, self).tearDown()
+        # Restore old enviroment
         try:
             del os.environ['stetl_out_file']
             del os.environ['stetl_in_file']
         except:
             pass
-        
-        # Initialize Stetl
-        self.curr_dir = os.path.dirname(os.path.realpath(__file__))
-        self.cfg_dict = {'config_file': os.path.join(self.curr_dir, 'configs/copy_in_out_file.cfg')}
 
     def test_args_dict(self):
         args_dict = {'in_file': 'infile.txt', 'out_file': 'outfile.txt'}

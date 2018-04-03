@@ -78,7 +78,7 @@ class ETL:
     def env_expand_args_dict(self, args_dict):
         """
         Expand values in dict with equivalent values from the
-        OS Env. NB vars in OS Env should be prefixed with STETL_ or stetl_
+        OS Env. NB vars in OS Env should be prefixed with `STETL_` or `stetl_`
         as to get overrides by accident.
 
         :return: expanded args_dict or None
