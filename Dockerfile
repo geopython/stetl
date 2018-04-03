@@ -24,7 +24,6 @@ ENV TZ=${TIMEZONE} \
    DEBIAN_FRONTEND="noninteractive" \
    BUILD_DEPS="tzdata locales" \
    PYTHON_CORE_PACKAGES="cython python-requests python-tz python-numpy python-pandas python-setuptools python-pip python-lxml python-gdal python-psycopg2 python-jinja2 gdal-bin" \
-   PYTHON_TEST_PACKAGES="python-nose2 python-mock" \
    PYTHON_EXTRA_DEB_PACKAGES="${ADD_PYTHON_DEB_PACKAGES}"  \
    PYTHON_EXTRA_PIP_PACKAGES="${ADD_PYTHON_PIP_PACKAGES}"
 
@@ -37,7 +36,6 @@ RUN \
 	&& apt-get --no-install-recommends install  -y \
 		${BUILD_DEPS} \
 	    ${PYTHON_CORE_PACKAGES} \
-	    ${PYTHON_TEST_PACKAGES} \
 	    ${PYTHON_EXTRA_DEB_PACKAGES} \
 
 	# Timezone
@@ -63,8 +61,6 @@ RUN \
 	# Install and Remove build-related packages for smaller image size
 	&& cd /stetl \
 		&& python setup.py install  \
-		&& nose2 \
-		&& apt-get purge ${PYTHON_TEST_PACKAGES} -y \
 		&& apt autoremove -y  \
         && rm -rf /var/lib/apt/lists/* \
         
