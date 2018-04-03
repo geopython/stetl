@@ -118,7 +118,7 @@ class Ogr2OgrExecOutputTest(StetlTestCase):
         # Check command line
         args, kwargs = mock_call.call_args
         list = self.parse_command(args[0])
-        self.assertEqual(len(list), 12)
+        self.assertEqual(len(list), 13)
         
         # Check spatial extent
         self.assertTrue('-append' in list)
