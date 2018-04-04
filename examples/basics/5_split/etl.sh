@@ -4,6 +4,10 @@
 #
 # Author: Just van den Broecke
 #
-stetl  -c etl.cfg
+stetl=stetl
+
+PYTHONPATH=${PYTHONPATH}:../../..
+# stetl=../../../stetl/main.py
+$stetl  -c etl.cfg
 
 

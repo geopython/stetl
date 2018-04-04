@@ -5,6 +5,7 @@
 # Author: Just van den Broecke
 #
 import os
+import re
 import sys
 from ConfigParser import ConfigParser
 import version
@@ -49,33 +50,60 @@ class ETL:
         self.configdict = ConfigParser()
 
         sys.path.append(ETL.CONFIG_DIR)
-        args_dict = self.env_expand_args_dict(args_dict)
+
+        config_str = ''
+        try:
+            # Get config file as string
+            log.info("Reading config_file = %s" % config_file)
+            f = open(config_file, 'r')
+            config_str = f.read()
+            f.close()
+        except Exception as e:
+            log.error("Cannot read config file: err=%s" % str(e))
+            raise e
 
         try:
-            log.info("Reading config_file = %s" % config_file)
+            # Optional: expand symbolic arguments from args_dict and or OS Env
+            # https://www.machinelearningplus.com/python/python-regex-tutorial-examples/
+            args_names = re.findall('{[A-Z|a-z]\w+}', config_str)
+            args_names = [name.split('{')[1].split('}')[0] for name in args_names]
+
+            # Optional: expand from equivalent env vars
+            args_dict = self.env_expand_args_dict(args_dict, args_names)
+
+            for args_name in args_names:
+                if args_name not in args_dict:
+                    log.warn("Arg not found in args nor environment: name=%s" % args_name)
+                    # raise Exception("name=%s" % args_name)
+
+        except Exception as e:
+            log.warn("Expanding config arguments (non fatal yet): %s" % str(e))
+
+        try:
             if args_dict:
                 log.info("Substituting %d args in config file from args_dict: %s" % (len(args_dict), str(args_dict)))
-                # Get config file as string
-                f = open(config_file, 'r')
-                config_str = f.read()
-                f.close()
 
                 # Do replacements  see http://docs.python.org/2/library/string.html#formatstrings
+                # and render substituted config string
                 config_str = config_str.format(**args_dict)
 
                 log.info("Substituting args OK")
-                # Put Config string into buffer (readfp() needs a readline() method)
-                config_buf = StringIO.StringIO(config_str)
 
-                # Parse config from file buffer
-                self.configdict.readfp(config_buf, config_file)
-            else:
-                # Parse config file directly
-                self.configdict.read(config_file)
         except Exception as e:
-            log.error("Fatal Error reading config file: err=%s" % str(e))
+            log.error("Error substituting config arguments: err=%s" % str(e))
+            raise e
 
-    def env_expand_args_dict(self, args_dict):
+        try:
+            # Put Config string into buffer (readfp() needs a readline() method)
+            config_buf = StringIO.StringIO(config_str)
+
+            # Parse config from file buffer
+            self.configdict.readfp(config_buf, config_file)
+        except Exception as e:
+            log.error("Error populating config dict from config string: err=%s" % str(e))
+            raise e
+
+    def env_expand_args_dict(self, args_dict, args_names):
         """
         Expand values in dict with equivalent values from the
         OS Env. NB vars in OS Env should be prefixed with `STETL_` or `stetl_`
@@ -83,13 +111,12 @@ class ETL:
 
         :return: expanded args_dict or None
         """
-
         env_dict = os.environ
         for name in env_dict:
-            if name.lower().startswith('stetl_'):
+            args_key = '_'.join(name.split('_')[1:])
+            if name.lower().startswith('stetl_') and args_key in args_names:
                 # Get real key, e.g. "STETL_HOST" becomes "HOST"
                 # "stetl_host" becomes "host".
-                args_key = '_'.join(name.split('_')[1:])
                 args_value = env_dict[name]
                 if not args_dict:
                     args_dict = dict()

@@ -1,92 +1,92 @@
 ~/project/stetl/git/examples/basics/10_jinja2_templating ~/project/stetl/git/examples/basics
 ==== running etl.sh for 10_jinja2_templating ====
-2017-11-07 15:34:32,338 util INFO Found cStringIO, good!
-2017-11-07 15:34:32,356 util INFO Found lxml.etree, native XML parsing, fabulous!
-2017-11-07 15:34:32,382 util INFO Found GDAL/OGR Python bindings, super!!
-2017-11-07 15:34:32,388 main INFO Stetl version = 1.1.0
-2017-11-07 15:34:32,388 ETL INFO INIT - Stetl version is 1.1.0
-2017-11-07 15:34:32,389 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
-2017-11-07 15:34:32,389 ETL INFO Reading config_file = etl.cfg
-2017-11-07 15:34:32,390 ETL INFO START
-2017-11-07 15:34:32,390 util INFO Timer start: total ETL
-2017-11-07 15:34:32,390 chain INFO Assembling Chain: input_json|filter_template_xml|output_xml_file...
-2017-11-07 15:34:32,395 input INFO cfg = {'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'input/cities.json'}
-2017-11-07 15:34:32,396 fileinput INFO file_list=['input/cities.json']
-2017-11-07 15:34:32,397 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.xml'}
-2017-11-07 15:34:32,397 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
-2017-11-07 15:34:32,397 chain INFO Running Chain: input_json|filter_template_xml|output_xml_file
-2017-11-07 15:34:32,397 templatingfilter INFO Init: templating
-2017-11-07 15:34:32,427 templatingfilter INFO template file read and template created OK: templates/cities-json2xml.jinja2
-2017-11-07 15:34:32,427 fileinput INFO Read/parse for start for file=input/cities.json....
-2017-11-07 15:34:32,427 fileinput INFO Read/parse ok for file=input/cities.json
-2017-11-07 15:34:32,427 fileinput INFO all files done
-2017-11-07 15:34:32,428 fileoutput INFO writing to file output/cities.xml
-2017-11-07 15:34:32,428 fileoutput INFO written to output/cities.xml
-2017-11-07 15:34:32,428 templatingfilter INFO Exit: templating
-2017-11-07 15:34:32,428 chain INFO DONE - 1 rounds - chain=input_json|filter_template_xml|output_xml_file 
-2017-11-07 15:34:32,428 chain INFO Assembling Chain: input_json|filter_template_gml|output_gml_file...
-2017-11-07 15:34:32,428 input INFO cfg = {'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'input/cities.json'}
-2017-11-07 15:34:32,428 fileinput INFO file_list=['input/cities.json']
-2017-11-07 15:34:32,428 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.gml'}
-2017-11-07 15:34:32,428 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
-2017-11-07 15:34:32,429 chain INFO Running Chain: input_json|filter_template_gml|output_gml_file
-2017-11-07 15:34:32,429 templatingfilter INFO Init: templating
-2017-11-07 15:34:32,429 templatingfilter INFO Read JSON file with globals from: input/globals.json
-2017-11-07 15:34:32,437 templatingfilter INFO template file read and template created OK: templates/cities-json2gml.jinja2
-2017-11-07 15:34:32,437 fileinput INFO Read/parse for start for file=input/cities.json....
-2017-11-07 15:34:32,437 fileinput INFO Read/parse ok for file=input/cities.json
-2017-11-07 15:34:32,437 fileinput INFO all files done
-2017-11-07 15:34:32,449 fileoutput INFO writing to file output/cities.gml
-2017-11-07 15:34:32,450 fileoutput INFO written to output/cities.gml
-2017-11-07 15:34:32,450 templatingfilter INFO Exit: templating
-2017-11-07 15:34:32,450 chain INFO DONE - 1 rounds - chain=input_json|filter_template_gml|output_gml_file 
-2017-11-07 15:34:32,450 chain INFO Assembling Chain: input_geojson|filter_template_geojson2gml|output_gml_file2...
-2017-11-07 15:34:32,450 input INFO cfg = {'output_format': 'geojson_collection', 'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json'}
-2017-11-07 15:34:32,450 fileinput INFO file_list=['https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json']
-2017-11-07 15:34:32,451 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities-gjson.gml'}
-2017-11-07 15:34:32,451 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
-2017-11-07 15:34:32,451 chain INFO Running Chain: input_geojson|filter_template_geojson2gml|output_gml_file2
-2017-11-07 15:34:32,451 templatingfilter INFO Init: templating
-2017-11-07 15:34:32,451 templatingfilter INFO Read JSON file with globals from: input/globals.json
-2017-11-07 15:34:32,451 templatingfilter INFO Read JSON file with globals from: https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/more-globals.json
-2017-11-07 15:34:37,691 templatingfilter INFO template file read and template created OK: templates/cities-gjson2gml.jinja2
-2017-11-07 15:34:37,691 fileinput INFO Read/parse for start for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json....
-2017-11-07 15:34:38,268 fileinput INFO Read/parse ok for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json
-2017-11-07 15:34:38,268 fileinput INFO all files done
-2017-11-07 15:34:38,283 fileoutput INFO writing to file output/cities-gjson.gml
-2017-11-07 15:34:38,283 fileoutput INFO written to output/cities-gjson.gml
-2017-11-07 15:34:38,283 templatingfilter INFO Exit: templating
-2017-11-07 15:34:38,283 chain INFO DONE - 1 rounds - chain=input_geojson|filter_template_geojson2gml|output_gml_file2 
-2017-11-07 15:34:38,284 chain INFO Assembling Chain: input_geojson|filter_template_geojson2gml|output_std...
-2017-11-07 15:34:38,284 input INFO cfg = {'output_format': 'geojson_collection', 'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json'}
-2017-11-07 15:34:38,284 fileinput INFO file_list=['https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json']
-2017-11-07 15:34:38,284 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
-2017-11-07 15:34:38,284 chain INFO Running Chain: input_geojson|filter_template_geojson2gml|output_std
-2017-11-07 15:34:38,284 templatingfilter INFO Init: templating
-2017-11-07 15:34:38,284 templatingfilter INFO Read JSON file with globals from: input/globals.json
-2017-11-07 15:34:38,284 templatingfilter INFO Read JSON file with globals from: https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/more-globals.json
-2017-11-07 15:34:38,349 templatingfilter INFO template file read and template created OK: templates/cities-gjson2gml.jinja2
-2017-11-07 15:34:38,349 fileinput INFO Read/parse for start for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json....
-2017-11-07 15:34:38,411 fileinput INFO Read/parse ok for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json
-2017-11-07 15:34:38,411 fileinput INFO all files done
-2017-11-07 15:34:38,418 templatingfilter INFO Exit: templating
-2017-11-07 15:34:38,418 chain INFO DONE - 1 rounds - chain=input_geojson|filter_template_geojson2gml|output_std 
-2017-11-07 15:34:38,418 chain INFO Assembling Chain: input_addresses_csv|convert_record_array_to_struct|filter_template_addresses2inspire|output_inspire_addresses...
-2017-11-07 15:34:38,419 input INFO cfg = {'class': 'inputs.fileinput.CsvFileInput', 'file_path': 'input/addresses.csv'}
-2017-11-07 15:34:38,419 fileinput INFO file_list=['input/addresses.csv']
-2017-11-07 15:34:38,419 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/inspire-addresses.gml'}
-2017-11-07 15:34:38,419 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
-2017-11-07 15:34:38,419 chain INFO Running Chain: input_addresses_csv|convert_record_array_to_struct|filter_template_addresses2inspire|output_inspire_addresses
-2017-11-07 15:34:38,419 fileinput INFO Open CSV file: input/addresses.csv
-2017-11-07 15:34:38,419 templatingfilter INFO Init: templating
-2017-11-07 15:34:38,419 templatingfilter INFO Read JSON file with globals from: input/addresses-globals.json
-2017-11-07 15:34:38,445 templatingfilter INFO template file read and template created OK: templates/addresses2inspire-ad.jinja2
-2017-11-07 15:34:38,453 fileoutput INFO writing to file output/inspire-addresses.gml
-2017-11-07 15:34:38,453 fileoutput INFO written to output/inspire-addresses.gml
-2017-11-07 15:34:38,453 templatingfilter INFO Exit: templating
-2017-11-07 15:34:38,453 chain INFO DONE - 1 rounds - chain=input_addresses_csv|convert_record_array_to_struct|filter_template_addresses2inspire|output_inspire_addresses 
-2017-11-07 15:34:38,453 util INFO Timer end: total ETL time=6.0 sec
-2017-11-07 15:34:38,453 ETL INFO ALL DONE
+2018-04-04 14:04:07,412 util INFO Found cStringIO, good!
+2018-04-04 14:04:07,434 util INFO Found lxml.etree, native XML parsing, fabulous!
+2018-04-04 14:04:07,579 util INFO Found GDAL/OGR Python bindings, super!!
+2018-04-04 14:04:07,599 main INFO Stetl version = 1.2-dev
+2018-04-04 14:04:07,601 ETL INFO INIT - Stetl version is 1.2-dev
+2018-04-04 14:04:07,601 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
+2018-04-04 14:04:07,601 ETL INFO Reading config_file = etl.cfg
+2018-04-04 14:04:07,603 ETL INFO START
+2018-04-04 14:04:07,603 util INFO Timer start: total ETL
+2018-04-04 14:04:07,603 chain INFO Assembling Chain: input_json|filter_template_xml|output_xml_file...
+2018-04-04 14:04:07,609 input INFO cfg = {'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'input/cities.json'}
+2018-04-04 14:04:07,609 fileinput INFO file_list=['input/cities.json']
+2018-04-04 14:04:07,611 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.xml'}
+2018-04-04 14:04:07,611 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
+2018-04-04 14:04:07,612 chain INFO Running Chain: input_json|filter_template_xml|output_xml_file
+2018-04-04 14:04:07,612 templatingfilter INFO Init: templating
+2018-04-04 14:04:07,658 templatingfilter INFO template file read and template created OK: templates/cities-json2xml.jinja2
+2018-04-04 14:04:07,658 fileinput INFO Read/parse for start for file=input/cities.json....
+2018-04-04 14:04:07,659 fileinput INFO Read/parse ok for file=input/cities.json
+2018-04-04 14:04:07,659 fileinput INFO all files done
+2018-04-04 14:04:07,659 fileoutput INFO writing to file output/cities.xml
+2018-04-04 14:04:07,659 fileoutput INFO written to output/cities.xml
+2018-04-04 14:04:07,659 templatingfilter INFO Exit: templating
+2018-04-04 14:04:07,659 chain INFO DONE - 1 rounds - chain=input_json|filter_template_xml|output_xml_file 
+2018-04-04 14:04:07,660 chain INFO Assembling Chain: input_json|filter_template_gml|output_gml_file...
+2018-04-04 14:04:07,660 input INFO cfg = {'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'input/cities.json'}
+2018-04-04 14:04:07,660 fileinput INFO file_list=['input/cities.json']
+2018-04-04 14:04:07,660 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.gml'}
+2018-04-04 14:04:07,660 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
+2018-04-04 14:04:07,660 chain INFO Running Chain: input_json|filter_template_gml|output_gml_file
+2018-04-04 14:04:07,660 templatingfilter INFO Init: templating
+2018-04-04 14:04:07,660 templatingfilter INFO Read JSON file with globals from: input/globals.json
+2018-04-04 14:04:07,669 templatingfilter INFO template file read and template created OK: templates/cities-json2gml.jinja2
+2018-04-04 14:04:07,669 fileinput INFO Read/parse for start for file=input/cities.json....
+2018-04-04 14:04:07,670 fileinput INFO Read/parse ok for file=input/cities.json
+2018-04-04 14:04:07,670 fileinput INFO all files done
+2018-04-04 14:04:07,677 fileoutput INFO writing to file output/cities.gml
+2018-04-04 14:04:07,678 fileoutput INFO written to output/cities.gml
+2018-04-04 14:04:07,678 templatingfilter INFO Exit: templating
+2018-04-04 14:04:07,678 chain INFO DONE - 1 rounds - chain=input_json|filter_template_gml|output_gml_file 
+2018-04-04 14:04:07,678 chain INFO Assembling Chain: input_geojson|filter_template_geojson2gml|output_gml_file2...
+2018-04-04 14:04:07,678 input INFO cfg = {'output_format': 'geojson_collection', 'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json'}
+2018-04-04 14:04:07,678 fileinput INFO file_list=['https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json']
+2018-04-04 14:04:07,679 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities-gjson.gml'}
+2018-04-04 14:04:07,679 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
+2018-04-04 14:04:07,679 chain INFO Running Chain: input_geojson|filter_template_geojson2gml|output_gml_file2
+2018-04-04 14:04:07,679 templatingfilter INFO Init: templating
+2018-04-04 14:04:07,679 templatingfilter INFO Read JSON file with globals from: input/globals.json
+2018-04-04 14:04:07,679 templatingfilter INFO Read JSON file with globals from: https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/more-globals.json
+2018-04-04 14:04:09,752 templatingfilter INFO template file read and template created OK: templates/cities-gjson2gml.jinja2
+2018-04-04 14:04:09,752 fileinput INFO Read/parse for start for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json....
+2018-04-04 14:04:10,879 fileinput INFO Read/parse ok for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json
+2018-04-04 14:04:10,879 fileinput INFO all files done
+2018-04-04 14:04:10,897 fileoutput INFO writing to file output/cities-gjson.gml
+2018-04-04 14:04:10,897 fileoutput INFO written to output/cities-gjson.gml
+2018-04-04 14:04:10,898 templatingfilter INFO Exit: templating
+2018-04-04 14:04:10,898 chain INFO DONE - 1 rounds - chain=input_geojson|filter_template_geojson2gml|output_gml_file2 
+2018-04-04 14:04:10,898 chain INFO Assembling Chain: input_geojson|filter_template_geojson2gml|output_std...
+2018-04-04 14:04:10,898 input INFO cfg = {'output_format': 'geojson_collection', 'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json'}
+2018-04-04 14:04:10,898 fileinput INFO file_list=['https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json']
+2018-04-04 14:04:10,902 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
+2018-04-04 14:04:10,903 chain INFO Running Chain: input_geojson|filter_template_geojson2gml|output_std
+2018-04-04 14:04:10,903 templatingfilter INFO Init: templating
+2018-04-04 14:04:10,903 templatingfilter INFO Read JSON file with globals from: input/globals.json
+2018-04-04 14:04:10,904 templatingfilter INFO Read JSON file with globals from: https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/more-globals.json
+2018-04-04 14:04:11,964 templatingfilter INFO template file read and template created OK: templates/cities-gjson2gml.jinja2
+2018-04-04 14:04:11,964 fileinput INFO Read/parse for start for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json....
+2018-04-04 14:04:13,218 fileinput INFO Read/parse ok for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json
+2018-04-04 14:04:13,218 fileinput INFO all files done
+2018-04-04 14:04:13,226 templatingfilter INFO Exit: templating
+2018-04-04 14:04:13,226 chain INFO DONE - 1 rounds - chain=input_geojson|filter_template_geojson2gml|output_std 
+2018-04-04 14:04:13,226 chain INFO Assembling Chain: input_addresses_csv|convert_record_array_to_struct|filter_template_addresses2inspire|output_inspire_addresses...
+2018-04-04 14:04:13,226 input INFO cfg = {'class': 'inputs.fileinput.CsvFileInput', 'file_path': 'input/addresses.csv'}
+2018-04-04 14:04:13,226 fileinput INFO file_list=['input/addresses.csv']
+2018-04-04 14:04:13,228 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/inspire-addresses.gml'}
+2018-04-04 14:04:13,228 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/10_jinja2_templating
+2018-04-04 14:04:13,229 chain INFO Running Chain: input_addresses_csv|convert_record_array_to_struct|filter_template_addresses2inspire|output_inspire_addresses
+2018-04-04 14:04:13,229 fileinput INFO Open CSV file: input/addresses.csv
+2018-04-04 14:04:13,229 templatingfilter INFO Init: templating
+2018-04-04 14:04:13,229 templatingfilter INFO Read JSON file with globals from: input/addresses-globals.json
+2018-04-04 14:04:13,254 templatingfilter INFO template file read and template created OK: templates/addresses2inspire-ad.jinja2
+2018-04-04 14:04:13,261 fileoutput INFO writing to file output/inspire-addresses.gml
+2018-04-04 14:04:13,261 fileoutput INFO written to output/inspire-addresses.gml
+2018-04-04 14:04:13,262 templatingfilter INFO Exit: templating
+2018-04-04 14:04:13,262 chain INFO DONE - 1 rounds - chain=input_addresses_csv|convert_record_array_to_struct|filter_template_addresses2inspire|output_inspire_addresses 
+2018-04-04 14:04:13,262 util INFO Timer end: total ETL time=6.0 sec
+2018-04-04 14:04:13,262 ETL INFO ALL DONE
 <?xml version='1.0' encoding='utf-8'?>
 <cities:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                        xmlns:cities="http://cities.maptools.org/"
@@ -158,164 +158,165 @@
 ~/project/stetl/git/examples/basics
 ~/project/stetl/git/examples/basics/11_formatconvert ~/project/stetl/git/examples/basics
 ==== running etl.sh for 11_formatconvert ====
-2017-11-07 15:34:38,791 util INFO Found cStringIO, good!
-2017-11-07 15:34:38,810 util INFO Found lxml.etree, native XML parsing, fabulous!
-2017-11-07 15:34:38,835 util INFO Found GDAL/OGR Python bindings, super!!
-2017-11-07 15:34:38,841 main INFO Stetl version = 1.1.0
-2017-11-07 15:34:38,842 ETL INFO INIT - Stetl version is 1.1.0
-2017-11-07 15:34:38,842 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/11_formatconvert
-2017-11-07 15:34:38,842 ETL INFO Reading config_file = etl.cfg
-2017-11-07 15:34:38,844 ETL INFO START
-2017-11-07 15:34:38,844 util INFO Timer start: total ETL
-2017-11-07 15:34:38,844 chain INFO Assembling Chain: input_xml_file|convert_xml_to_string|convert_string_to_xml|output_xml_file...
-2017-11-07 15:34:38,847 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
-2017-11-07 15:34:38,847 fileinput INFO file_list=['input/cities.xml']
-2017-11-07 15:34:38,848 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.xml'}
-2017-11-07 15:34:38,849 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/11_formatconvert
-2017-11-07 15:34:38,849 chain INFO Running Chain: input_xml_file|convert_xml_to_string|convert_string_to_xml|output_xml_file
-2017-11-07 15:34:38,849 fileinput INFO Read/parse for start for file=input/cities.xml....
-2017-11-07 15:34:38,852 fileinput INFO Read/parse ok for file=input/cities.xml
-2017-11-07 15:34:38,852 fileinput INFO all files done
-2017-11-07 15:34:38,853 fileoutput INFO writing to file output/cities.xml
-2017-11-07 15:34:38,853 fileoutput INFO written to output/cities.xml
-2017-11-07 15:34:38,853 chain INFO DONE - 1 rounds - chain=input_xml_file|convert_xml_to_string|convert_string_to_xml|output_xml_file 
-2017-11-07 15:34:38,853 chain INFO Assembling Chain: input_complex_xml_file|convert_to_json|output_json_file...
-2017-11-07 15:34:38,854 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/building-dutch-bag.xml'}
-2017-11-07 15:34:38,854 fileinput INFO file_list=['input/building-dutch-bag.xml']
-2017-11-07 15:34:38,854 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/building-dutch.json'}
-2017-11-07 15:34:38,854 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/11_formatconvert
-2017-11-07 15:34:38,854 chain INFO Running Chain: input_complex_xml_file|convert_to_json|output_json_file
-2017-11-07 15:34:38,854 fileinput INFO Read/parse for start for file=input/building-dutch-bag.xml....
-2017-11-07 15:34:38,855 fileinput INFO Read/parse ok for file=input/building-dutch-bag.xml
-2017-11-07 15:34:38,855 fileinput INFO all files done
-2017-11-07 15:34:38,865 fileoutput INFO writing to file output/building-dutch.json
-2017-11-07 15:34:38,869 fileoutput INFO written to output/building-dutch.json
-2017-11-07 15:34:38,870 chain INFO DONE - 1 rounds - chain=input_complex_xml_file|convert_to_json|output_json_file 
-2017-11-07 15:34:38,870 chain INFO Assembling Chain: input_gml_sf_file|convert_to_geojson|output_geojson_file...
-2017-11-07 15:34:38,870 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.gml'}
-2017-11-07 15:34:38,870 fileinput INFO file_list=['input/cities.gml']
-2017-11-07 15:34:38,870 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities-gjson.json'}
-2017-11-07 15:34:38,871 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/11_formatconvert
-2017-11-07 15:34:38,871 chain INFO Running Chain: input_gml_sf_file|convert_to_geojson|output_geojson_file
-2017-11-07 15:34:38,871 fileinput INFO Read/parse for start for file=input/cities.gml....
-2017-11-07 15:34:38,871 fileinput INFO Read/parse ok for file=input/cities.gml
-2017-11-07 15:34:38,872 fileinput INFO all files done
-2017-11-07 15:34:38,874 fileoutput INFO writing to file output/cities-gjson.json
-2017-11-07 15:34:38,874 fileoutput INFO written to output/cities-gjson.json
-2017-11-07 15:34:38,875 chain INFO DONE - 1 rounds - chain=input_gml_sf_file|convert_to_geojson|output_geojson_file 
-2017-11-07 15:34:38,875 util INFO Timer end: total ETL time=0.0 sec
-2017-11-07 15:34:38,875 ETL INFO ALL DONE
+2018-04-04 14:04:13,571 util INFO Found cStringIO, good!
+2018-04-04 14:04:13,581 util INFO Found lxml.etree, native XML parsing, fabulous!
+2018-04-04 14:04:13,622 util INFO Found GDAL/OGR Python bindings, super!!
+2018-04-04 14:04:13,628 main INFO Stetl version = 1.2-dev
+2018-04-04 14:04:13,629 ETL INFO INIT - Stetl version is 1.2-dev
+2018-04-04 14:04:13,629 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/11_formatconvert
+2018-04-04 14:04:13,629 ETL INFO Reading config_file = etl.cfg
+2018-04-04 14:04:13,631 ETL INFO START
+2018-04-04 14:04:13,631 util INFO Timer start: total ETL
+2018-04-04 14:04:13,631 chain INFO Assembling Chain: input_xml_file|convert_xml_to_string|convert_string_to_xml|output_xml_file...
+2018-04-04 14:04:13,634 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2018-04-04 14:04:13,634 fileinput INFO file_list=['input/cities.xml']
+2018-04-04 14:04:13,635 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.xml'}
+2018-04-04 14:04:13,635 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/11_formatconvert
+2018-04-04 14:04:13,635 chain INFO Running Chain: input_xml_file|convert_xml_to_string|convert_string_to_xml|output_xml_file
+2018-04-04 14:04:13,635 fileinput INFO Read/parse for start for file=input/cities.xml....
+2018-04-04 14:04:13,637 fileinput INFO Read/parse ok for file=input/cities.xml
+2018-04-04 14:04:13,638 fileinput INFO all files done
+2018-04-04 14:04:13,638 fileoutput INFO writing to file output/cities.xml
+2018-04-04 14:04:13,639 fileoutput INFO written to output/cities.xml
+2018-04-04 14:04:13,639 chain INFO DONE - 1 rounds - chain=input_xml_file|convert_xml_to_string|convert_string_to_xml|output_xml_file 
+2018-04-04 14:04:13,639 chain INFO Assembling Chain: input_complex_xml_file|convert_to_json|output_json_file...
+2018-04-04 14:04:13,639 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/building-dutch-bag.xml'}
+2018-04-04 14:04:13,639 fileinput INFO file_list=['input/building-dutch-bag.xml']
+2018-04-04 14:04:13,639 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/building-dutch.json'}
+2018-04-04 14:04:13,639 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/11_formatconvert
+2018-04-04 14:04:13,639 chain INFO Running Chain: input_complex_xml_file|convert_to_json|output_json_file
+2018-04-04 14:04:13,639 fileinput INFO Read/parse for start for file=input/building-dutch-bag.xml....
+2018-04-04 14:04:13,641 fileinput INFO Read/parse ok for file=input/building-dutch-bag.xml
+2018-04-04 14:04:13,642 fileinput INFO all files done
+2018-04-04 14:04:13,653 fileoutput INFO writing to file output/building-dutch.json
+2018-04-04 14:04:13,658 fileoutput INFO written to output/building-dutch.json
+2018-04-04 14:04:13,659 chain INFO DONE - 1 rounds - chain=input_complex_xml_file|convert_to_json|output_json_file 
+2018-04-04 14:04:13,659 chain INFO Assembling Chain: input_gml_sf_file|convert_to_geojson|output_geojson_file...
+2018-04-04 14:04:13,659 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.gml'}
+2018-04-04 14:04:13,659 fileinput INFO file_list=['input/cities.gml']
+2018-04-04 14:04:13,659 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities-gjson.json'}
+2018-04-04 14:04:13,659 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/11_formatconvert
+2018-04-04 14:04:13,659 chain INFO Running Chain: input_gml_sf_file|convert_to_geojson|output_geojson_file
+2018-04-04 14:04:13,659 fileinput INFO Read/parse for start for file=input/cities.gml....
+2018-04-04 14:04:13,660 fileinput INFO Read/parse ok for file=input/cities.gml
+2018-04-04 14:04:13,660 fileinput INFO all files done
+2018-04-04 14:04:13,661 fileoutput INFO writing to file output/cities-gjson.json
+2018-04-04 14:04:13,661 fileoutput INFO written to output/cities-gjson.json
+2018-04-04 14:04:13,662 chain INFO DONE - 1 rounds - chain=input_gml_sf_file|convert_to_geojson|output_geojson_file 
+2018-04-04 14:04:13,662 util INFO Timer end: total ETL time=0.0 sec
+2018-04-04 14:04:13,662 ETL INFO ALL DONE
 ~/project/stetl/git/examples/basics
 ~/project/stetl/git/examples/basics/12_gdal_ogr ~/project/stetl/git/examples/basics
 ==== running etl.sh for 12_gdal_ogr ====
-2017-11-07 15:34:39,190 util INFO Found cStringIO, good!
-2017-11-07 15:34:39,209 util INFO Found lxml.etree, native XML parsing, fabulous!
-2017-11-07 15:34:39,234 util INFO Found GDAL/OGR Python bindings, super!!
-2017-11-07 15:34:39,241 main INFO Stetl version = 1.1.0
-2017-11-07 15:34:39,241 ETL INFO INIT - Stetl version is 1.1.0
-2017-11-07 15:34:39,242 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/12_gdal_ogr
-2017-11-07 15:34:39,242 ETL INFO Reading config_file = etl.cfg
-2017-11-07 15:34:39,243 ETL INFO START
-2017-11-07 15:34:39,243 util INFO Timer start: total ETL
-2017-11-07 15:34:39,243 chain INFO Assembling Chain: input_geojson_file|geojson_coll_to_ogr_feature_arr|output_ogr_gmlfile...
-2017-11-07 15:34:39,247 input INFO cfg = {'output_format': 'geojson_collection', 'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'input/cities.geojson'}
-2017-11-07 15:34:39,247 fileinput INFO file_list=['input/cities.geojson']
-2017-11-07 15:34:39,250 output INFO cfg = {'input_format': 'ogr_feature_array', 'dest_data_source': 'output/cities.gml', 'dest_format': 'GML', 'new_layer_name': 'cities', 'class': 'outputs.ogroutput.OgrOutput', 'overwrite': 'True'}
-2017-11-07 15:34:39,250 chain INFO Running Chain: input_geojson_file|geojson_coll_to_ogr_feature_arr|output_ogr_gmlfile
-2017-11-07 15:34:39,250 ogroutput INFO Using GDAL/OGR version: 2020200
-2017-11-07 15:34:39,255 ogroutput INFO Opened OGR dest ok: output/cities.gml 
-2017-11-07 15:34:39,255 fileinput INFO Read/parse for start for file=input/cities.geojson....
-2017-11-07 15:34:39,256 fileinput INFO Read/parse ok for file=input/cities.geojson
-2017-11-07 15:34:39,256 fileinput INFO all files done
-2017-11-07 15:34:39,257 ogroutput INFO End writing to: output/cities.gml
-2017-11-07 15:34:39,258 chain INFO DONE - 1 rounds - chain=input_geojson_file|geojson_coll_to_ogr_feature_arr|output_ogr_gmlfile 
-2017-11-07 15:34:39,258 chain INFO Assembling Chain: input_gml_file_to_array|ogr_feature_array_to_geojson_collection|tolowercase_filter|output_file...
-2017-11-07 15:34:39,258 input INFO cfg = {'source_format': 'GML', 'data_source': 'input/cities.gml', 'output_format': 'ogr_feature_array', 'class': 'inputs.ogrinput.OgrInput'}
-2017-11-07 15:34:39,259 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.geojson'}
-2017-11-07 15:34:39,259 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/12_gdal_ogr
-2017-11-07 15:34:39,259 chain INFO Running Chain: input_gml_file_to_array|ogr_feature_array_to_geojson_collection|tolowercase_filter|output_file
-2017-11-07 15:34:39,259 ogrinput INFO Using GDAL/OGR version: 2020200
-2017-11-07 15:34:39,261 ogrinput INFO Opened OGR source ok: input/cities.gml layer count=1
-2017-11-07 15:34:39,261 ogrinput INFO Start reading from OGR Source: input/cities.gml, Layer: heronfeat
-2017-11-07 15:34:39,261 ogrinput INFO End reading all features from Layer: heronfeat count=5
-2017-11-07 15:34:39,264 fileoutput INFO writing to file output/cities.geojson
-2017-11-07 15:34:39,265 fileoutput INFO written to output/cities.geojson
-2017-11-07 15:34:39,265 ogrinput INFO Closing OGR source: input/cities.gml
-2017-11-07 15:34:39,266 chain INFO DONE - 2 rounds - chain=input_gml_file_to_array|ogr_feature_array_to_geojson_collection|tolowercase_filter|output_file 
-2017-11-07 15:34:39,266 chain INFO Assembling Chain: input_gml_file|output_ogr_shapefile...
-2017-11-07 15:34:39,266 input INFO cfg = {'source_format': 'GML', 'data_source': 'input/cities.gml', 'output_format': 'ogr_feature', 'class': 'inputs.ogrinput.OgrInput', 'source_options': "{'GDAL_CACHEMAX': '64', 'CPL_DEBUG': 'OFF'}"}
-2017-11-07 15:34:39,266 output INFO cfg = {'input_format': 'ogr_feature', 'dest_data_source': 'output/cities.shp', 'dest_format': 'ESRI Shapefile', 'new_layer_name': 'cities', 'class': 'outputs.ogroutput.OgrOutput', 'overwrite': 'True'}
-2017-11-07 15:34:39,266 chain INFO Running Chain: input_gml_file|output_ogr_shapefile
-2017-11-07 15:34:39,266 ogrinput INFO Using GDAL/OGR version: 2020200
-2017-11-07 15:34:39,267 ogrinput INFO Opened OGR source ok: input/cities.gml layer count=1
-2017-11-07 15:34:39,267 ogroutput INFO Using GDAL/OGR version: 2020200
-2017-11-07 15:34:39,270 ogroutput INFO Opened OGR dest ok: output/cities.shp 
-2017-11-07 15:34:39,270 ogrinput INFO Start reading from OGR Source: input/cities.gml, Layer: heronfeat
-2017-11-07 15:34:39,270 ogrinput INFO End reading from Layer: heronfeat
-2017-11-07 15:34:39,271 ogroutput INFO End writing to: output/cities.shp
-2017-11-07 15:34:39,271 ogrinput INFO Closing OGR source: input/cities.gml
-2017-11-07 15:34:39,271 ogroutput INFO End writing to: output/cities.shp
-2017-11-07 15:34:39,271 chain INFO DONE - 7 rounds - chain=input_gml_file|output_ogr_shapefile 
-2017-11-07 15:34:39,271 util INFO Timer end: total ETL time=0.0 sec
-2017-11-07 15:34:39,271 ETL INFO ALL DONE
+2018-04-04 14:04:13,919 util INFO Found cStringIO, good!
+2018-04-04 14:04:13,930 util INFO Found lxml.etree, native XML parsing, fabulous!
+2018-04-04 14:04:13,970 util INFO Found GDAL/OGR Python bindings, super!!
+2018-04-04 14:04:13,976 main INFO Stetl version = 1.2-dev
+2018-04-04 14:04:13,977 ETL INFO INIT - Stetl version is 1.2-dev
+2018-04-04 14:04:13,977 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/12_gdal_ogr
+2018-04-04 14:04:13,977 ETL INFO Reading config_file = etl.cfg
+2018-04-04 14:04:13,979 ETL INFO START
+2018-04-04 14:04:13,979 util INFO Timer start: total ETL
+2018-04-04 14:04:13,979 chain INFO Assembling Chain: input_geojson_file|geojson_coll_to_ogr_feature_arr|output_ogr_gmlfile...
+2018-04-04 14:04:13,982 input INFO cfg = {'output_format': 'geojson_collection', 'class': 'inputs.fileinput.JsonFileInput', 'file_path': 'input/cities.geojson'}
+2018-04-04 14:04:13,982 fileinput INFO file_list=['input/cities.geojson']
+2018-04-04 14:04:13,988 output INFO cfg = {'input_format': 'ogr_feature_array', 'dest_data_source': 'output/cities.gml', 'dest_format': 'GML', 'new_layer_name': 'cities', 'class': 'outputs.ogroutput.OgrOutput', 'overwrite': 'True'}
+2018-04-04 14:04:13,988 chain INFO Running Chain: input_geojson_file|geojson_coll_to_ogr_feature_arr|output_ogr_gmlfile
+2018-04-04 14:04:13,988 ogroutput INFO Using GDAL/OGR version: 2020300
+2018-04-04 14:04:13,996 ogroutput INFO Opened OGR dest ok: output/cities.gml 
+2018-04-04 14:04:13,996 fileinput INFO Read/parse for start for file=input/cities.geojson....
+2018-04-04 14:04:13,997 fileinput INFO Read/parse ok for file=input/cities.geojson
+2018-04-04 14:04:13,997 fileinput INFO all files done
+2018-04-04 14:04:13,998 ogroutput INFO End writing to: output/cities.gml
+2018-04-04 14:04:13,999 chain INFO DONE - 1 rounds - chain=input_geojson_file|geojson_coll_to_ogr_feature_arr|output_ogr_gmlfile 
+2018-04-04 14:04:13,999 chain INFO Assembling Chain: input_gml_file_to_array|ogr_feature_array_to_geojson_collection|tolowercase_filter|output_file...
+2018-04-04 14:04:14,000 input INFO cfg = {'source_format': 'GML', 'data_source': 'input/cities.gml', 'output_format': 'ogr_feature_array', 'class': 'inputs.ogrinput.OgrInput'}
+2018-04-04 14:04:14,001 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.geojson'}
+2018-04-04 14:04:14,001 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/12_gdal_ogr
+2018-04-04 14:04:14,001 chain INFO Running Chain: input_gml_file_to_array|ogr_feature_array_to_geojson_collection|tolowercase_filter|output_file
+2018-04-04 14:04:14,001 ogrinput INFO Using GDAL/OGR version: 2020300
+2018-04-04 14:04:14,002 ogrinput INFO Opened OGR source ok: input/cities.gml layer count=1
+2018-04-04 14:04:14,003 ogrinput INFO Start reading from OGR Source: input/cities.gml, Layer: heronfeat
+2018-04-04 14:04:14,004 ogrinput INFO End reading all features from Layer: heronfeat count=5
+2018-04-04 14:04:14,008 fileoutput INFO writing to file output/cities.geojson
+2018-04-04 14:04:14,008 fileoutput INFO written to output/cities.geojson
+2018-04-04 14:04:14,008 ogrinput INFO Closing OGR source: input/cities.gml
+2018-04-04 14:04:14,009 chain INFO DONE - 2 rounds - chain=input_gml_file_to_array|ogr_feature_array_to_geojson_collection|tolowercase_filter|output_file 
+2018-04-04 14:04:14,009 chain INFO Assembling Chain: input_gml_file|output_ogr_shapefile...
+2018-04-04 14:04:14,009 input INFO cfg = {'source_format': 'GML', 'data_source': 'input/cities.gml', 'output_format': 'ogr_feature', 'class': 'inputs.ogrinput.OgrInput', 'source_options': "{'GDAL_CACHEMAX': '64', 'CPL_DEBUG': 'OFF'}"}
+2018-04-04 14:04:14,009 output INFO cfg = {'input_format': 'ogr_feature', 'dest_data_source': 'output/cities.shp', 'dest_format': 'ESRI Shapefile', 'new_layer_name': 'cities', 'class': 'outputs.ogroutput.OgrOutput', 'overwrite': 'True'}
+2018-04-04 14:04:14,009 chain INFO Running Chain: input_gml_file|output_ogr_shapefile
+2018-04-04 14:04:14,009 ogrinput INFO Using GDAL/OGR version: 2020300
+2018-04-04 14:04:14,010 ogrinput INFO Opened OGR source ok: input/cities.gml layer count=1
+2018-04-04 14:04:14,010 ogroutput INFO Using GDAL/OGR version: 2020300
+2018-04-04 14:04:14,013 ogroutput INFO Opened OGR dest ok: output/cities.shp 
+2018-04-04 14:04:14,013 ogrinput INFO Start reading from OGR Source: input/cities.gml, Layer: heronfeat
+2018-04-04 14:04:14,014 ogrinput INFO End reading from Layer: heronfeat
+2018-04-04 14:04:14,014 ogroutput INFO End writing to: output/cities.shp
+2018-04-04 14:04:14,014 ogrinput INFO Closing OGR source: input/cities.gml
+2018-04-04 14:04:14,014 ogroutput INFO End writing to: output/cities.shp
+2018-04-04 14:04:14,015 chain INFO DONE - 7 rounds - chain=input_gml_file|output_ogr_shapefile 
+2018-04-04 14:04:14,015 util INFO Timer end: total ETL time=0.0 sec
+2018-04-04 14:04:14,015 ETL INFO ALL DONE
 ~/project/stetl/git/examples/basics
 ~/project/stetl/git/examples/basics/13_dbinput ~/project/stetl/git/examples/basics
 ==== running etl.sh for 13_dbinput ====
-2017-11-07 15:34:39,636 util INFO Found cStringIO, good!
-2017-11-07 15:34:39,656 util INFO Found lxml.etree, native XML parsing, fabulous!
-2017-11-07 15:34:39,681 util INFO Found GDAL/OGR Python bindings, super!!
-2017-11-07 15:34:39,688 main INFO Stetl version = 1.1.0
-2017-11-07 15:34:39,689 ETL INFO INIT - Stetl version is 1.1.0
-2017-11-07 15:34:39,689 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/13_dbinput
-2017-11-07 15:34:39,690 ETL INFO Reading config_file = etl.cfg
-2017-11-07 15:34:39,691 ETL INFO START
-2017-11-07 15:34:39,691 util INFO Timer start: total ETL
-2017-11-07 15:34:39,691 chain INFO Assembling Chain: input_sqlite_all|convert_records_to_json|output_cities_file...
-2017-11-07 15:34:39,715 input INFO cfg = {'database_name': 'input/cities.sdb', 'class': 'inputs.dbinput.SqliteDbInput', 'read_once': 'True', 'table': 'cities', 'query': 'select * from cities', 'output_format': 'record_array'}
-2017-11-07 15:34:39,720 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.json'}
-2017-11-07 15:34:39,720 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/13_dbinput
-2017-11-07 15:34:39,721 chain INFO Running Chain: input_sqlite_all|convert_records_to_json|output_cities_file
-2017-11-07 15:34:39,721 dbinput INFO Connect to SQLite DB: input/cities.sdb
-2017-11-07 15:34:39,726 dbinput INFO Connect to SQLite DB: input/cities.sdb
-2017-11-07 15:34:39,726 dbinput INFO 3 records read
-2017-11-07 15:34:39,726 dbinput INFO Nothing to do. All file_records done
-2017-11-07 15:34:39,727 fileoutput INFO writing to file output/cities.json
-2017-11-07 15:34:39,727 fileoutput INFO written to output/cities.json
-2017-11-07 15:34:39,727 chain INFO DONE - 1 rounds - chain=input_sqlite_all|convert_records_to_json|output_cities_file 
-2017-11-07 15:34:39,727 chain INFO Assembling Chain: input_sqlite_single|convert_record_to_json|output_city_file...
-2017-11-07 15:34:39,727 input INFO cfg = {'database_name': 'input/cities.sdb', 'class': 'inputs.dbinput.SqliteDbInput', 'read_once': 'True', 'table': 'cities', 'query': "select * from cities where name = 'Rome'", 'output_format': 'record'}
-2017-11-07 15:34:39,727 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/city.json'}
-2017-11-07 15:34:39,727 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/13_dbinput
-2017-11-07 15:34:39,727 chain INFO Running Chain: input_sqlite_single|convert_record_to_json|output_city_file
-2017-11-07 15:34:39,728 dbinput INFO Connect to SQLite DB: input/cities.sdb
-2017-11-07 15:34:39,728 dbinput INFO Connect to SQLite DB: input/cities.sdb
-2017-11-07 15:34:39,728 dbinput INFO 1 records read
-2017-11-07 15:34:39,728 dbinput INFO Nothing to do. All file_records done
-2017-11-07 15:34:39,728 fileoutput INFO writing to file output/city.json
-2017-11-07 15:34:39,728 fileoutput INFO written to output/city.json
-2017-11-07 15:34:39,729 chain INFO DONE - 1 rounds - chain=input_sqlite_single|convert_record_to_json|output_city_file 
-2017-11-07 15:34:39,729 util INFO Timer end: total ETL time=0.0 sec
-2017-11-07 15:34:39,729 ETL INFO ALL DONE
+2018-04-04 14:04:14,275 util INFO Found cStringIO, good!
+2018-04-04 14:04:14,285 util INFO Found lxml.etree, native XML parsing, fabulous!
+2018-04-04 14:04:14,325 util INFO Found GDAL/OGR Python bindings, super!!
+2018-04-04 14:04:14,331 main INFO Stetl version = 1.2-dev
+2018-04-04 14:04:14,332 ETL INFO INIT - Stetl version is 1.2-dev
+2018-04-04 14:04:14,332 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/13_dbinput
+2018-04-04 14:04:14,332 ETL INFO Reading config_file = etl.cfg
+2018-04-04 14:04:14,334 ETL INFO START
+2018-04-04 14:04:14,334 util INFO Timer start: total ETL
+2018-04-04 14:04:14,334 chain INFO Assembling Chain: input_sqlite_all|convert_records_to_json|output_cities_file...
+2018-04-04 14:04:14,356 input INFO cfg = {'database_name': 'input/cities.sdb', 'class': 'inputs.dbinput.SqliteDbInput', 'read_once': 'True', 'table': 'cities', 'query': 'select * from cities', 'output_format': 'record_array'}
+2018-04-04 14:04:14,362 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/cities.json'}
+2018-04-04 14:04:14,362 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/13_dbinput
+2018-04-04 14:04:14,362 chain INFO Running Chain: input_sqlite_all|convert_records_to_json|output_cities_file
+2018-04-04 14:04:14,362 dbinput INFO Connect to SQLite DB: input/cities.sdb
+2018-04-04 14:04:14,366 dbinput INFO Connect to SQLite DB: input/cities.sdb
+2018-04-04 14:04:14,366 dbinput INFO 3 records read
+2018-04-04 14:04:14,366 dbinput INFO Nothing to do. All file_records done
+2018-04-04 14:04:14,367 fileoutput INFO writing to file output/cities.json
+2018-04-04 14:04:14,367 fileoutput INFO written to output/cities.json
+2018-04-04 14:04:14,367 chain INFO DONE - 1 rounds - chain=input_sqlite_all|convert_records_to_json|output_cities_file 
+2018-04-04 14:04:14,367 chain INFO Assembling Chain: input_sqlite_single|convert_record_to_json|output_city_file...
+2018-04-04 14:04:14,367 input INFO cfg = {'database_name': 'input/cities.sdb', 'class': 'inputs.dbinput.SqliteDbInput', 'read_once': 'True', 'table': 'cities', 'query': "select * from cities where name = 'Rome'", 'output_format': 'record'}
+2018-04-04 14:04:14,367 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/city.json'}
+2018-04-04 14:04:14,367 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/13_dbinput
+2018-04-04 14:04:14,368 chain INFO Running Chain: input_sqlite_single|convert_record_to_json|output_city_file
+2018-04-04 14:04:14,368 dbinput INFO Connect to SQLite DB: input/cities.sdb
+2018-04-04 14:04:14,368 dbinput INFO Connect to SQLite DB: input/cities.sdb
+2018-04-04 14:04:14,368 dbinput INFO 1 records read
+2018-04-04 14:04:14,368 dbinput INFO Nothing to do. All file_records done
+2018-04-04 14:04:14,368 fileoutput INFO writing to file output/city.json
+2018-04-04 14:04:14,369 fileoutput INFO written to output/city.json
+2018-04-04 14:04:14,369 chain INFO DONE - 1 rounds - chain=input_sqlite_single|convert_record_to_json|output_city_file 
+2018-04-04 14:04:14,369 util INFO Timer end: total ETL time=0.0 sec
+2018-04-04 14:04:14,369 ETL INFO ALL DONE
 ~/project/stetl/git/examples/basics
 ~/project/stetl/git/examples/basics/14_logfileinput ~/project/stetl/git/examples/basics
 ==== running etl.sh for 14_logfileinput ====
-2017-11-07 15:34:40,032 util INFO Found cStringIO, good!
-2017-11-07 15:34:40,049 util INFO Found lxml.etree, native XML parsing, fabulous!
-2017-11-07 15:34:40,075 util INFO Found GDAL/OGR Python bindings, super!!
-2017-11-07 15:34:40,081 main INFO Stetl version = 1.1.0
-2017-11-07 15:34:40,082 ETL INFO INIT - Stetl version is 1.1.0
-2017-11-07 15:34:40,082 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/14_logfileinput
-2017-11-07 15:34:40,082 ETL INFO Reading config_file = etl.cfg
-2017-11-07 15:34:40,084 ETL INFO START
-2017-11-07 15:34:40,084 util INFO Timer start: total ETL
-2017-11-07 15:34:40,084 chain INFO Assembling Chain: input_apache_log|to_record_array|output_std...
-2017-11-07 15:34:40,086 input INFO cfg = {'file_path': 'input', 'log_format': '%h %l %u %t \\"%r\\" %>s %b \\"%{Referer}i\\" \\"%{User-agent}i\\" %D', 'filename_pattern': '*.log', 'class': 'inputs.fileinput.ApacheLogFileInput', 'key_map': '{\'%>s\': \'status\', \'%D\': \'deltat\', \'%{User-agent}i\': \'agent\', \'%b\': \'bytes\', \'%{Referer}i\': \'referer\', \'%t\': \'time\', "\'%h": \'host\', \'%r\': \'request\'}'}
-2017-11-07 15:34:40,086 fileinput INFO file_list=['input/apache.log', 'input/apache2.log']
-2017-11-07 15:34:40,090 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
-2017-11-07 15:34:40,090 chain INFO Running Chain: input_apache_log|to_record_array|output_std
-2017-11-07 15:34:40,091 fileinput INFO file opened : input/apache.log
-2017-11-07 15:34:40,091 fileinput INFO EOF file
-2017-11-07 15:34:40,091 fileinput INFO file opened : input/apache2.log
+2018-04-04 14:04:14,625 util INFO Found cStringIO, good!
+2018-04-04 14:04:14,635 util INFO Found lxml.etree, native XML parsing, fabulous!
+2018-04-04 14:04:14,677 util INFO Found GDAL/OGR Python bindings, super!!
+2018-04-04 14:04:14,684 main INFO Stetl version = 1.2-dev
+2018-04-04 14:04:14,685 ETL INFO INIT - Stetl version is 1.2-dev
+2018-04-04 14:04:14,686 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/14_logfileinput
+2018-04-04 14:04:14,686 ETL INFO Reading config_file = etl.cfg
+2018-04-04 14:04:14,686 ETL WARNING Expanding config arguments (non fatal yet): err=argument of type 'NoneType' is not iterable
+2018-04-04 14:04:14,687 ETL INFO START
+2018-04-04 14:04:14,687 util INFO Timer start: total ETL
+2018-04-04 14:04:14,687 chain INFO Assembling Chain: input_apache_log|to_record_array|output_std...
+2018-04-04 14:04:14,690 input INFO cfg = {'file_path': 'input', 'log_format': '%h %l %u %t \\"%r\\" %>s %b \\"%{Referer}i\\" \\"%{User-agent}i\\" %D', 'filename_pattern': '*.log', 'class': 'inputs.fileinput.ApacheLogFileInput', 'key_map': '{\'%>s\': \'status\', \'%D\': \'deltat\', \'%{User-agent}i\': \'agent\', \'%b\': \'bytes\', \'%{Referer}i\': \'referer\', \'%t\': \'time\', "\'%h": \'host\', \'%r\': \'request\'}'}
+2018-04-04 14:04:14,691 fileinput INFO file_list=['input/apache.log', 'input/apache2.log']
+2018-04-04 14:04:14,695 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
+2018-04-04 14:04:14,695 chain INFO Running Chain: input_apache_log|to_record_array|output_std
+2018-04-04 14:04:14,695 fileinput INFO file opened : input/apache.log
+2018-04-04 14:04:14,696 fileinput INFO EOF file
+2018-04-04 14:04:14,696 fileinput INFO file opened : input/apache2.log
 [{'status': 200, 'deltat': 2580, 'request': '/map/gast/tms/1.0.0/opentopo/EPSG28992/6/32/40.png', 'bytes': 32085, 'agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko', 'referer': 'http://217.21.192.135/sekaarten/?id=baggeren', 'key': 'fbc25dbc7cc817a75f0b1bee87958480', 'time': 20150420084459}, {'status': 200, 'deltat': 2939, 'request': '/map/gast/tms/1.0.0/opentopo/EPSG28992/6/32/41.png', 'bytes': 10891, 'agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko', 'referer': 'http://217.21.192.135/sekaarten/?id=baggeren', 'key': '64d17eacf0a99b5fb60c040bd225d4f0', 'time': 20150420084459}, {'status': 200, 'deltat': 30144, 'request': '/map/gast/tms/1.0.0/opentopo/EPSG28992/8/93/112.png', 'bytes': 6859, 'agent': 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko', 'referer': 'http://kadviewer.kademo.nl/', 'key': 'c26f94f4ff9553192ccb4249ea18ff2f', 'time': 20150422150832}, {'status': 200, 'deltat': 109691, 'request': '/map/gast/tms/1.0.0/opentopo/EPSG28992/12/2306/1962.png', 'bytes': 19305, 'agent': 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko', 'referer': 'http://kadviewer.kademo.nl/', 'key': 'abb1f1f70221783eb964cc2953c8339e', 'time': 20150422151830}, {'status': 404, 'deltat': 1817, 'request': '/map/gast/tms/1.0.0/bonne_test/EPSG900913/1', 'bytes': 141, 'agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 'referer': None, 'key': '4835bb27732d37696244e98e713789ab', 'time': 20150422153023}, {'status': 200, 'deltat': 2208, 'request': '/map/gast/tiles/opentopo/EPSG900913/9/263/167.png', 'bytes': 30537, 'agent': 'Mozilla/5.0 (iPad; CPU OS 8_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12F69 Safari/600.1.4', 'referer': 'http://app.nlextract.nl/ot/opentopo.html', 'key': 'be40bc2a55abc3067cbe82cd23dfa2ba', 'time': 20150422154124}, {'status': 200, 'deltat': 1992, 'request': '/map/gast/tiles/opentopo/EPSG900913/9/262/167.png', 'bytes': 26812, 'agent': 'Mozilla/5.0 (iPad; CPU OS 8_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12F69 Safari/600.1.4', 'referer': 'http://app.nlextract.nl/ot/opentopo.html', 'key': '9e885d89a89c495b637aef7f4b81de58', 'time': 20150422154124}, {'status': 304, 'deltat': 2639355, 'request': '/map/gast/tms/1.0.0/opentopo/EPSG28992/13/4187/3689.png', 'bytes': 0, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': None, 'key': '217527c654da0a4702e71b91bddac70c', 'time': 20150421123121}, {'status': 200, 'deltat': 313308, 'request': '/map/gast/tms/1.0.0/opentopo/EPSG28992/13/4187/3689.png', 'bytes': 36969, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': None, 'key': '84103846e1bdf3e83fc54894cf6781ef', 'time': 20150421123142}, {'status': 404, 'deltat': 383, 'request': '/favicon.ico', 'bytes': 279, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/tms/1.0.0/opentopo/EPSG28992/13/4187/3689.png', 'key': 'f42829bb67f1508cc61f6cdc639f254c', 'time': 20150421123143}]
 [{'status': 500, 'deltat': 251096, 'request': '/map/gast/wmts', 'bytes': 469, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': None, 'key': 'a026db25148bb54e94eda0e2cba28578', 'time': 20150421123333}, {'status': 301, 'deltat': 240, 'request': '/map/gast', 'bytes': 297, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': None, 'key': '3605def476d47854f691bee0bccb46c5', 'time': 20150421123346}, {'status': 200, 'deltat': 309244, 'request': '/map/gast/demo/', 'bytes': 1912, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': None, 'key': 'c0264b5233d846225c59cb5a205d812d', 'time': 20150421123354}, {'status': 200, 'deltat': 93184, 'request': '/map/gast/demo/static/logo.png', 'bytes': 1368, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/', 'key': 'fd0b3da705099c146c73922bf74b336d', 'time': 20150421123354}, {'status': 200, 'deltat': 273346, 'request': '/map/gast/demo/static/site.css', 'bytes': 686, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/', 'key': 'c3cc704e044a52dd4cae1cccc7b26151', 'time': 20150421123354}, {'status': 200, 'deltat': 315229, 'request': '/map/gast/wmts/1.0.0/WMTSCapabilities.xml', 'bytes': 20873, 'agent': 'Python-urllib/2.7', 'referer': None, 'key': '5868c46b14e7bfa50e8a50de73c1d31f', 'time': 20150421123400}, {'status': 200, 'deltat': 623112, 'request': '/map/gast/demo/?wmts_capabilities', 'bytes': 2522, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/', 'key': '253101243a4620aa4aa5bfc0bb565451', 'time': 20150421123400}, {'status': 200, 'deltat': 233173, 'request': '/map/gast/demo/static/site.css', 'bytes': 686, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?wmts_capabilities', 'key': 'b7799ad9fd44c6c33740bd2c1e9c1763', 'time': 20150421123401}, {'status': 200, 'deltat': 219583, 'request': '/map/gast/demo/static/logo.png', 'bytes': 1368, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?wmts_capabilities', 'key': 'eba12e7d07bada7775e46c81e4614bb4', 'time': 20150421123401}, {'status': 200, 'deltat': 18173, 'request': '/map/gast/wmts/1.0.0/WMTSCapabilities.xml', 'bytes': 2093, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/', 'key': '16fdb6bc667f81dba59aa1ca1ff0e5b1', 'time': 20150421123416}]
 [{'status': 500, 'deltat': 3407, 'request': '/map/gast/wmts/1.0.0', 'bytes': 475, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': None, 'key': '1c7ce8547891e786a08d45064e3c6882', 'time': 20150421123420}, {'status': 500, 'deltat': 3203, 'request': '/map/gast/wmts/1.0.0?SERVICE=WMS&REQUEST=GetCapabilities', 'bytes': 475, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': 'ac29dfd21730d13d7c9e6eb5eabb5612', 'time': 20150421123447}, {'status': 500, 'deltat': 3017, 'request': '/map/gast/wmts/1.0.0?SERVICE=WMS&REQUEST=GetCapabilities', 'bytes': 475, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': 'f44ca005c098024254c320ca7ac70e38', 'time': 20150421123447}, {'status': 500, 'deltat': 2807, 'request': '/map/gast/wmts/1.0.0?service=WMTS&SERVICE=WMS&REQUEST=GetCapabilities', 'bytes': 475, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': '1569dd11819c0b8c48173521afea549a', 'time': 20150421123527}, {'status': 500, 'deltat': 2838, 'request': '/map/gast/wmts/1.0.0?service=WMTS&SERVICE=WMS&REQUEST=GetCapabilities', 'bytes': 475, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': '926d9fea9abea2641fd6e076e70f1e76', 'time': 20150421123527}, {'status': 200, 'deltat': 355693, 'request': '/map/gast/service?REQUEST=GetCapabilities', 'bytes': 11637, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/', 'key': '3bcdd748a58c2e96fca4114408d2740e', 'time': 20150421123610}, {'status': 200, 'deltat': 20349, 'request': '/map/gast/service?REQUEST=GetCapabilities', 'bytes': 11637, 'agent': 'Python-urllib/2.7', 'referer': None, 'key': 'fa2f4ec8879999eee7785d72ff1a0bfd', 'time': 20150421123613}, {'status': 200, 'deltat': 33616, 'request': '/map/gast/demo/?wms_capabilities', 'bytes': 2118, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/', 'key': 'd9c685a03eb07bc0f9362a696c0a1294', 'time': 20150421123613}, {'status': 200, 'deltat': 11009, 'request': '/map/gast/demo/static/site.css', 'bytes': 686, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?wms_capabilities', 'key': 'b3c9d4eb14bb7abef34f88a1dae74540', 'time': 20150421123613}, {'status': 200, 'deltat': 548, 'request': '/map/gast/demo/static/logo.png', 'bytes': 1368, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?wms_capabilities', 'key': '28b003ccff3ae1240e97f256d4327f53', 'time': 20150421123613}]
@@ -325,58 +326,58 @@
 [{'status': 200, 'deltat': 96065, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.85085928333482297,52.31989516121636541,4.8529353590157136,52.32049405290776178&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'bytes': 160121, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': '5ca5425f30d7a1fcf5ccf56f3fc0691a', 'time': 20150421123945}, {'status': 200, 'deltat': 390538, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.8512748645681425,52.32004761666721748,4.85231290449639907,52.3203470652173479&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'bytes': 123241, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': '8f0749a7c797adc027e62436f01f4a23', 'time': 20150421123946}, {'status': 200, 'deltat': 147369, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.85093093342004078,52.31990548311836164,4.85300700678140018,52.32050437106456542&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'bytes': 157238, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': 'c80c964858492c86cb997966498dbf58', 'time': 20150421124002}, {'status': 200, 'deltat': 109193, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.85024305101700559,52.31962122226092049,4.85439517176004642,52.32081896153741951&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'bytes': 199468, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': '10fe5a035dbe0ea11340e40d3c01b811', 'time': 20150421124003}, {'status': 200, 'deltat': 218693, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.84886720578289587,52.31905272550537234,4.8571713433574466,52.32144805759834583&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'bytes': 300113, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': 'c6ddc044e9702e628c9495b1bee86b15', 'time': 20150421124004}, {'status': 200, 'deltat': 266274, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.84611519359641374,52.3179158318183184,4.86272305315710884,52.32270591019437944&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'bytes': 489524, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': 'f0083ca70ca48d2e9b33c7fa472ba3c6', 'time': 20150421124005}, {'status': 200, 'deltat': 268617, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.84060980355999337,52.31564884059808662,4.87382386563584902,52.32522665442184007&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'bytes': 634317, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': '5a5e1ad7ef6870e4d28408115ba97749', 'time': 20150421124006}, {'status': 200, 'deltat': 257901, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.82961476217944696,52.31111656397721532,4.89603623584240832,52.33026278690169875&SRS=EPSG:4326&WIDTH=2311&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'bytes': 696250, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': 'e24026f9511a8b052efd97e3b637c647', 'time': 20150421124007}, {'status': 200, 'deltat': 1808540, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.85319246456894948,52.32761554091926115,4.91960915414784417,52.34672235725444267&SRS=EPSG:4326&WIDTH=2305&HEIGHT=663&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'bytes': 750968, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': '31da07deb0226f662fe8f64e9a8f6ecd', 'time': 20150421124009}, {'status': 500, 'deltat': 466396, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 602, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': 'a8d3adda1d598ad2c368c8360956a4e0', 'time': 20150421124512}]
 [{'status': 500, 'deltat': 1937, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 602, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': '9241cff9f045b9f85a76d60ba6eff582', 'time': 20150421124530}, {'status': 500, 'deltat': 288315, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 602, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': 'e6bd755773f52a20030b0ea0c970c8e6', 'time': 20150421124607}, {'status': 200, 'deltat': 549090, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 331806, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': '406f86d0687628903fe718699246443d', 'time': 20150421124759}, {'status': 200, 'deltat': 333467, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 334352, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': 'ade8d5a1dd345923570c2bbaeac79272', 'time': 20150421124803}, {'status': 200, 'deltat': 352004, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 331806, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': '6a3092b4065fbab6d6ce5021353e915b', 'time': 20150421124805}, {'status': 200, 'deltat': 115182, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 331806, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': 'fb2691b4811567a1dca307e121ca8075', 'time': 20150421124808}, {'status': 200, 'deltat': 115765, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 331806, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': '76f87f58cfbee18cc6ca35e36a807adf', 'time': 20150421124810}, {'status': 200, 'deltat': 119957, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 331806, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': '07fdf5caec6e15dbe85ffd6efb2ed5fe', 'time': 20150421124811}, {'status': 200, 'deltat': 363011, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 331806, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': 'ad1b585b9fcf03dfbfa96a8f1609a12e', 'time': 20150421124813}, {'status': 200, 'deltat': 386568, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 331806, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': 'bc9f48ff31eafc7cceacdcb1914b68d7', 'time': 20150421124815}]
 [{'status': 200, 'deltat': 365184, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 334352, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': 'efa2b4c1b5cf3e9e747cad8380cbda34', 'time': 20150421124818}, {'status': 404, 'deltat': 102, 'request': '/favicon.ico', 'bytes': 279, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'key': 'e56f8837cdc447c4ab10b34043153446', 'time': 20150421124819}, {'status': 200, 'deltat': 1757049, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.83005370038209136,52.33939510971103459,4.89651704885155681,52.35854062445694979&SRS=EPSG:4326&WIDTH=2313&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'bytes': 791655, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': 'b36af9c77920df89ff799763e0593cd8', 'time': 20150421124824}, {'status': 200, 'deltat': 1933968, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.79175980191256379,52.34824612602871241,4.85828446955923443,52.36745569430535596&SRS=EPSG:4326&WIDTH=2309&HEIGHT=667&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'bytes': 749230, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': 'c9aa5f9202784faa6e4206442b10d629', 'time': 20150421124828}, {'status': 200, 'deltat': 2185241, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.77385759552589573,52.35751052638513414,4.84041867055299946,52.37675005343851353&SRS=EPSG:4326&WIDTH=2308&HEIGHT=667&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'bytes': 707773, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': 'f1d2890960707e89ee7e57a4d83f3a08', 'time': 20150421124833}, {'status': 200, 'deltat': 1532564, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.77125456138848403,52.37023903120333301,4.83783806710879727,52.3894829312327488&SRS=EPSG:4326&WIDTH=2309&HEIGHT=667&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'bytes': 718675, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': 'ae8ff27e7b4967ed5a36bfd2f0514332', 'time': 20150421124839}, {'status': 200, 'deltat': 1265574, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.76145165848030949,52.37107784519862719,4.82804874484703994,52.39033814774672493&SRS=EPSG:4326&WIDTH=2308&HEIGHT=667&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'bytes': 699224, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'referer': None, 'key': '6cee66783d97694e511af0408269e445', 'time': 20150421124843}, {'status': 200, 'deltat': 486046, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 334352, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': '3cfbf1603cd9fdd2b835853df93e2652', 'time': 20150421124910}, {'status': 200, 'deltat': 376900, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 331806, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': 'd240758bd157e4f9d04fc6414b3cb4f3', 'time': 20150421124914}, {'status': 404, 'deltat': 365, 'request': '/favicon.ico', 'bytes': 279, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'key': 'a486970683ba29295e54b0237246ac2b', 'time': 20150421124914}]
-[{'status': 200, 'deltat': 340430, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 334352, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': '05f1a64d9cc59ace6bb7013be9765af8', 'time': 20150421124916}, {'status': 404, 'deltat': 378, 'request': '/favicon.ico', 'bytes': 279, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'key': '195751fab160a19cea2fd1df0219e67e', 'time': 20150421124916}, {'status': 200, 'deltat': 370053, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 334352, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': '675bbb13d403670483aa72bb3dc4973a', 'time': 20150421124917}, {'status': 404, 'deltat': 379, 'request': '/favicon.ico', 'bytes': 279, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'key': 'f7e53111f0cccc49cd28692e6c89cc9e', 'time': 20150421124918}, {'status': 200, 'deltat': 332777, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 334352, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': 'cebb42394eb350b698d4b3f6571ad11a', 'time': 20150421124919}, {'status': 404, 'deltat': 144, 'request': '/favicon.ico', 'bytes': 279, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'key': '5fa96fd4572ce0a93262863faaf51aa8', 'time': 20150421124920}, {'status': 200, 'deltat': 109812, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 334352, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': 'e580f7a6e8f7b7861e393a7cee9a35db', 'time': 20150421124921}, {'status': 404, 'deltat': 346, 'request': '/favicon.ico', 'bytes': 279, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'key': '40d4fbffb03afab8acb58f29f533483b', 'time': 20150421124921}, {'status': 200, 'deltat': 110987, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 331806, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': 'f640353f45beef5b8ea7e4a7cd69cba5', 'time': 20150421124922}, {'status': 404, 'deltat': 478, 'request': '/favicon.ico', 'bytes': 279, 'agent': 'Mozilla/5.0 (Macintosh;2017-11-07 15:34:40,096 fileinput INFO EOF file
-2017-11-07 15:34:40,096 fileinput INFO EOF file list
-2017-11-07 15:34:40,096 chain INFO DONE - 112 rounds - chain=input_apache_log|to_record_array|output_std 
-2017-11-07 15:34:40,096 util INFO Timer end: total ETL time=0.0 sec
-2017-11-07 15:34:40,096 ETL INFO ALL DONE
+[{'status': 200, 'deltat': 340430, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 334352, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': '05f1a64d9cc59ace6bb7013be9765af8', 'time': 20150421124916}, {'status': 404, 'deltat': 378, 'request': '/favicon.ico', 'bytes': 279, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'key': '195751fab160a19cea2fd1df0219e67e', 'time': 20150421124916}, {'status': 200, 'deltat': 370053, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 334352, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': '675bbb13d403670483aa72bb3dc4973a', 'time': 20150421124917}, {'status': 404, 'deltat': 379, 'request': '/favicon.ico', 'bytes': 279, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'key': 'f7e53111f0cccc49cd28692e6c89cc9e', 'time': 20150421124918}, {'status': 200, 'deltat': 332777, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 334352, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': 'cebb42394eb350b698d4b3f6571ad11a', 'time': 20150421124919}, {'status': 404, 'deltat': 144, 'request': '/favicon.ico', 'bytes': 279, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'key': '5fa96fd4572ce0a93262863faaf51aa8', 'time': 20150421124920}, {'status': 200, 'deltat': 109812, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 334352, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': 'e580f7a6e8f7b7861e393a7cee9a35db', 'time': 20150421124921}, {'status': 404, 'deltat': 346, 'request': '/favicon.ico', 'bytes': 279, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'key': '40d4fbffb03afab8acb58f29f533483b', 'time': 20150421124921}, {'status': 200, 'deltat': 110987, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'bytes': 331806, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'key': 'f640353f45beef5b8ea7e4a7cd69cba5', 'time': 20150421124922}, {'status': 404, 'deltat': 478, 'request': '/favicon.ico', 'bytes': 279, 'agent': 'Mozilla/5.0 (Macintosh;2018-04-04 14:04:14,701 fileinput INFO EOF file
+2018-04-04 14:04:14,701 fileinput INFO EOF file list
+2018-04-04 14:04:14,702 chain INFO DONE - 112 rounds - chain=input_apache_log|to_record_array|output_std 
+2018-04-04 14:04:14,702 util INFO Timer end: total ETL time=0.0 sec
+2018-04-04 14:04:14,702 ETL INFO ALL DONE
  Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'key': 'e161bedea500f0d2201be628b14b8edf', 'time': 20150421124923}]
 ~/project/stetl/git/examples/basics
 ~/project/stetl/git/examples/basics/15_splitter ~/project/stetl/git/examples/basics
 ==== running etl.sh for 15_splitter ====
-2017-11-07 15:34:40,404 util INFO Found cStringIO, good!
-2017-11-07 15:34:40,423 util INFO Found lxml.etree, native XML parsing, fabulous!
-2017-11-07 15:34:40,449 util INFO Found GDAL/OGR Python bindings, super!!
-2017-11-07 15:34:40,456 main INFO Stetl version = 1.1.0
-2017-11-07 15:34:40,457 ETL INFO INIT - Stetl version is 1.1.0
-2017-11-07 15:34:40,457 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/15_splitter
-2017-11-07 15:34:40,457 ETL INFO Reading config_file = etl.cfg
-2017-11-07 15:34:40,457 ETL INFO START
-2017-11-07 15:34:40,457 util INFO Timer start: total ETL
-2017-11-07 15:34:40,457 chain INFO Assembling Chain: input_xml_file|transformer_xslt|(output_file)(output_std)...
-2017-11-07 15:34:40,459 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
-2017-11-07 15:34:40,459 fileinput INFO file_list=['input/cities.xml']
-2017-11-07 15:34:40,463 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
-2017-11-07 15:34:40,463 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/15_splitter
-2017-11-07 15:34:40,464 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
-2017-11-07 15:34:40,464 chain INFO Running Chain: input_xml_file|transformer_xslt|(output_file)(output_std)
-2017-11-07 15:34:40,464 fileinput INFO Read/parse for start for file=input/cities.xml....
-2017-11-07 15:34:40,464 fileinput INFO Read/parse ok for file=input/cities.xml
-2017-11-07 15:34:40,464 fileinput INFO all files done
-2017-11-07 15:34:40,465 xsltfilter INFO XSLT Transform OK
-2017-11-07 15:34:40,465 fileoutput INFO writing to file output/gmlcities.gml
-2017-11-07 15:34:40,465 fileoutput INFO written to output/gmlcities.gml
-2017-11-07 15:34:40,465 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|(output_file)(output_std) 
-2017-11-07 15:34:40,465 chain INFO Assembling Chain: input_xml_file |(transformer_xslt|output_file) (output_std) (transformer_xslt|output_std)...
-2017-11-07 15:34:40,465 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
-2017-11-07 15:34:40,466 fileinput INFO file_list=['input/cities.xml']
-2017-11-07 15:34:40,466 chain INFO Assembling Chain: transformer_xslt|output_file...
-2017-11-07 15:34:40,466 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
-2017-11-07 15:34:40,466 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/15_splitter
-2017-11-07 15:34:40,466 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
-2017-11-07 15:34:40,466 chain INFO Assembling Chain: transformer_xslt|output_std...
-2017-11-07 15:34:40,467 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
-2017-11-07 15:34:40,467 chain INFO Running Chain: input_xml_file |(transformer_xslt|output_file) (output_std) (transformer_xslt|output_std)
-2017-11-07 15:34:40,467 fileinput INFO Read/parse for start for file=input/cities.xml....
-2017-11-07 15:34:40,467 fileinput INFO Read/parse ok for file=input/cities.xml
-2017-11-07 15:34:40,467 fileinput INFO all files done
-2017-11-07 15:34:40,467 xsltfilter INFO XSLT Transform OK
-2017-11-07 15:34:40,467 fileoutput INFO writing to file output/gmlcities.gml
-2017-11-07 15:34:40,468 fileoutput INFO written to output/gmlcities.gml
-2017-11-07 15:34:40,468 xsltfilter INFO XSLT Transform OK
-2017-11-07 15:34:40,468 chain INFO DONE - 1 rounds - chain=input_xml_file |(transformer_xslt|output_file) (output_std) (transformer_xslt|output_std) 
-2017-11-07 15:34:40,468 util INFO Timer end: total ETL time=0.0 sec
-2017-11-07 15:34:40,468 ETL INFO ALL DONE
+2018-04-04 14:04:14,993 util INFO Found cStringIO, good!
+2018-04-04 14:04:15,002 util INFO Found lxml.etree, native XML parsing, fabulous!
+2018-04-04 14:04:15,041 util INFO Found GDAL/OGR Python bindings, super!!
+2018-04-04 14:04:15,048 main INFO Stetl version = 1.2-dev
+2018-04-04 14:04:15,049 ETL INFO INIT - Stetl version is 1.2-dev
+2018-04-04 14:04:15,049 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/15_splitter
+2018-04-04 14:04:15,049 ETL INFO Reading config_file = etl.cfg
+2018-04-04 14:04:15,050 ETL INFO START
+2018-04-04 14:04:15,050 util INFO Timer start: total ETL
+2018-04-04 14:04:15,050 chain INFO Assembling Chain: input_xml_file|transformer_xslt|(output_file)(output_std)...
+2018-04-04 14:04:15,053 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2018-04-04 14:04:15,053 fileinput INFO file_list=['input/cities.xml']
+2018-04-04 14:04:15,058 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2018-04-04 14:04:15,058 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/15_splitter
+2018-04-04 14:04:15,058 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
+2018-04-04 14:04:15,058 chain INFO Running Chain: input_xml_file|transformer_xslt|(output_file)(output_std)
+2018-04-04 14:04:15,058 fileinput INFO Read/parse for start for file=input/cities.xml....
+2018-04-04 14:04:15,059 fileinput INFO Read/parse ok for file=input/cities.xml
+2018-04-04 14:04:15,059 fileinput INFO all files done
+2018-04-04 14:04:15,061 xsltfilter INFO XSLT Transform OK
+2018-04-04 14:04:15,061 fileoutput INFO writing to file output/gmlcities.gml
+2018-04-04 14:04:15,061 fileoutput INFO written to output/gmlcities.gml
+2018-04-04 14:04:15,061 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|(output_file)(output_std) 
+2018-04-04 14:04:15,061 chain INFO Assembling Chain: input_xml_file |(transformer_xslt|output_file) (output_std) (transformer_xslt|output_std)...
+2018-04-04 14:04:15,061 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2018-04-04 14:04:15,062 fileinput INFO file_list=['input/cities.xml']
+2018-04-04 14:04:15,062 chain INFO Assembling Chain: transformer_xslt|output_file...
+2018-04-04 14:04:15,062 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2018-04-04 14:04:15,062 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/15_splitter
+2018-04-04 14:04:15,062 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
+2018-04-04 14:04:15,062 chain INFO Assembling Chain: transformer_xslt|output_std...
+2018-04-04 14:04:15,063 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
+2018-04-04 14:04:15,063 chain INFO Running Chain: input_xml_file |(transformer_xslt|output_file) (output_std) (transformer_xslt|output_std)
+2018-04-04 14:04:15,063 fileinput INFO Read/parse for start for file=input/cities.xml....
+2018-04-04 14:04:15,063 fileinput INFO Read/parse ok for file=input/cities.xml
+2018-04-04 14:04:15,063 fileinput INFO all files done
+2018-04-04 14:04:15,064 xsltfilter INFO XSLT Transform OK
+2018-04-04 14:04:15,064 fileoutput INFO writing to file output/gmlcities.gml
+2018-04-04 14:04:15,064 fileoutput INFO written to output/gmlcities.gml
+2018-04-04 14:04:15,064 xsltfilter INFO XSLT Transform OK
+2018-04-04 14:04:15,064 chain INFO DONE - 1 rounds - chain=input_xml_file |(transformer_xslt|output_file) (output_std) (transformer_xslt|output_std) 
+2018-04-04 14:04:15,064 util INFO Timer end: total ETL time=0.0 sec
+2018-04-04 14:04:15,064 ETL INFO ALL DONE
 <?xml version='1.0' encoding='utf-8'?>
 <ogr:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://ogr.maptools.org/" xmlns:gml="http://www.opengis.net/gml" xsi:schemaLocation="http://ogr.maptools.org/ ../gmlcities.xsd  http://www.opengis.net/gml http://schemas.opengis.net/gml/2.1.2/feature.xsd">
   <gml:boundedBy>
@@ -491,46 +492,46 @@
 ~/project/stetl/git/examples/basics
 ~/project/stetl/git/examples/basics/16_merger ~/project/stetl/git/examples/basics
 ==== running etl.sh for 16_merger ====
-2017-11-07 15:34:40,839 util INFO Found cStringIO, good!
-2017-11-07 15:34:40,857 util INFO Found lxml.etree, native XML parsing, fabulous!
-2017-11-07 15:34:40,884 util INFO Found GDAL/OGR Python bindings, super!!
-2017-11-07 15:34:40,890 main INFO Stetl version = 1.1.0
-2017-11-07 15:34:40,891 ETL INFO INIT - Stetl version is 1.1.0
-2017-11-07 15:34:40,891 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/16_merger
-2017-11-07 15:34:40,892 ETL INFO Reading config_file = etl.cfg
-2017-11-07 15:34:40,893 ETL INFO START
-2017-11-07 15:34:40,893 util INFO Timer start: total ETL
-2017-11-07 15:34:40,893 chain INFO Assembling Chain: (input_1) (input_2)|transformer_xslt|output_std...
-2017-11-07 15:34:40,895 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input1/cities.xml'}
-2017-11-07 15:34:40,895 fileinput INFO file_list=['input1/cities.xml']
-2017-11-07 15:34:40,895 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input2/cities.xml'}
-2017-11-07 15:34:40,895 fileinput INFO file_list=['input2/cities.xml']
-2017-11-07 15:34:40,898 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
-2017-11-07 15:34:40,899 chain INFO Running Chain: (input_1) (input_2)|transformer_xslt|output_std
-2017-11-07 15:34:40,899 fileinput INFO Read/parse for start for file=input1/cities.xml....
-2017-11-07 15:34:40,899 fileinput INFO Read/parse ok for file=input1/cities.xml
-2017-11-07 15:34:40,899 fileinput INFO all files done
-2017-11-07 15:34:40,899 xsltfilter INFO XSLT Transform OK
-2017-11-07 15:34:40,899 fileinput INFO Read/parse for start for file=input2/cities.xml....
-2017-11-07 15:34:40,900 fileinput INFO Read/parse ok for file=input2/cities.xml
-2017-11-07 15:34:40,900 fileinput INFO all files done
-2017-11-07 15:34:40,900 xsltfilter INFO XSLT Transform OK
-2017-11-07 15:34:40,900 chain INFO DONE - 1 rounds - chain=(input_1) (input_2)|transformer_xslt|output_std 
-2017-11-07 15:34:40,900 chain INFO Assembling Chain: (input_1) (input_2)|transformer_xslt|(output_file)(output_std)...
-2017-11-07 15:34:40,900 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input1/cities.xml'}
-2017-11-07 15:34:40,900 fileinput INFO file_list=['input1/cities.xml']
-2017-11-07 15:34:40,900 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input2/cities.xml'}
-2017-11-07 15:34:40,901 fileinput INFO file_list=['input2/cities.xml']
-2017-11-07 15:34:40,901 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
-2017-11-07 15:34:40,901 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/16_merger
-2017-11-07 15:34:40,901 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
-2017-11-07 15:34:40,901 chain INFO Running Chain: (input_1) (input_2)|transformer_xslt|(output_file)(output_std)
-2017-11-07 15:34:40,902 fileinput INFO Read/parse for start for file=input1/cities.xml....
-2017-11-07 15:34:40,902 fileinput INFO Read/parse ok for file=input1/cities.xml
-2017-11-07 15:34:40,902 fileinput INFO all files done
-2017-11-07 15:34:40,902 xsltfilter INFO XSLT Transform OK
-2017-11-07 15:34:40,902 fileoutput INFO writing to file output/gmlcities.gml
-2017-11-07 15:34:40,902 fileoutput INFO written to output/gmlcities.gml
+2018-04-04 14:04:15,336 util INFO Found cStringIO, good!
+2018-04-04 14:04:15,348 util INFO Found lxml.etree, native XML parsing, fabulous!
+2018-04-04 14:04:15,389 util INFO Found GDAL/OGR Python bindings, super!!
+2018-04-04 14:04:15,396 main INFO Stetl version = 1.2-dev
+2018-04-04 14:04:15,398 ETL INFO INIT - Stetl version is 1.2-dev
+2018-04-04 14:04:15,398 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/16_merger
+2018-04-04 14:04:15,398 ETL INFO Reading config_file = etl.cfg
+2018-04-04 14:04:15,400 ETL INFO START
+2018-04-04 14:04:15,400 util INFO Timer start: total ETL
+2018-04-04 14:04:15,400 chain INFO Assembling Chain: (input_1) (input_2)|transformer_xslt|output_std...
+2018-04-04 14:04:15,402 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input1/cities.xml'}
+2018-04-04 14:04:15,403 fileinput INFO file_list=['input1/cities.xml']
+2018-04-04 14:04:15,403 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input2/cities.xml'}
+2018-04-04 14:04:15,403 fileinput INFO file_list=['input2/cities.xml']
+2018-04-04 14:04:15,405 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
+2018-04-04 14:04:15,405 chain INFO Running Chain: (input_1) (input_2)|transformer_xslt|output_std
+2018-04-04 14:04:15,405 fileinput INFO Read/parse for start for file=input1/cities.xml....
+2018-04-04 14:04:15,405 fileinput INFO Read/parse ok for file=input1/cities.xml
+2018-04-04 14:04:15,405 fileinput INFO all files done
+2018-04-04 14:04:15,406 xsltfilter INFO XSLT Transform OK
+2018-04-04 14:04:15,406 fileinput INFO Read/parse for start for file=input2/cities.xml....
+2018-04-04 14:04:15,406 fileinput INFO Read/parse ok for file=input2/cities.xml
+2018-04-04 14:04:15,406 fileinput INFO all files done
+2018-04-04 14:04:15,406 xsltfilter INFO XSLT Transform OK
+2018-04-04 14:04:15,407 chain INFO DONE - 1 rounds - chain=(input_1) (input_2)|transformer_xslt|output_std 
+2018-04-04 14:04:15,407 chain INFO Assembling Chain: (input_1) (input_2)|transformer_xslt|(output_file)(output_std)...
+2018-04-04 14:04:15,407 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input1/cities.xml'}
+2018-04-04 14:04:15,407 fileinput INFO file_list=['input1/cities.xml']
+2018-04-04 14:04:15,407 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input2/cities.xml'}
+2018-04-04 14:04:15,407 fileinput INFO file_list=['input2/cities.xml']
+2018-04-04 14:04:15,408 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2018-04-04 14:04:15,408 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/16_merger
+2018-04-04 14:04:15,409 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
+2018-04-04 14:04:15,409 chain INFO Running Chain: (input_1) (input_2)|transformer_xslt|(output_file)(output_std)
+2018-04-04 14:04:15,409 fileinput INFO Read/parse for start for file=input1/cities.xml....
+2018-04-04 14:04:15,409 fileinput INFO Read/parse ok for file=input1/cities.xml
+2018-04-04 14:04:15,409 fileinput INFO all files done
+2018-04-04 14:04:15,409 xsltfilter INFO XSLT Transform OK
+2018-04-04 14:04:15,409 fileoutput INFO writing to file output/gmlcities.gml
+2018-04-04 14:04:15,410 fileoutput INFO written to output/gmlcities.gml
 <?xml version='1.0' encoding='utf-8'?>
 <ogr:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://ogr.maptools.org/" xmlns:gml="http://www.opengis.net/gml" xsi:schemaLocation="http://ogr.maptools.org/ ../gmlcities.xsd  http://www.opengis.net/gml http://schemas.opengis.net/gml/2.1.2/feature.xsd">
   <gml:boundedBy>
@@ -657,15 +658,15 @@
       </ogr:geometry>
     </ogr:City>
   </gml:featureMember>
-  <g2017-11-07 15:34:40,902 fileinput INFO Read/parse for start for file=input2/cities.xml....
-2017-11-07 15:34:40,902 fileinput INFO Read/parse ok for file=input2/cities.xml
-2017-11-07 15:34:40,902 fileinput INFO all files done
-2017-11-07 15:34:40,902 xsltfilter INFO XSLT Transform OK
-2017-11-07 15:34:40,902 fileoutput INFO writing to file output/gmlcities.gml
-2017-11-07 15:34:40,903 fileoutput INFO written to output/gmlcities.gml
-2017-11-07 15:34:40,903 chain INFO DONE - 1 rounds - chain=(input_1) (input_2)|transformer_xslt|(output_file)(output_std) 
-2017-11-07 15:34:40,903 util INFO Timer end: total ETL time=0.0 sec
-2017-11-07 15:34:40,903 ETL INFO ALL DONE
+  <g2018-04-04 14:04:15,410 fileinput INFO Read/parse for start for file=input2/cities.xml....
+2018-04-04 14:04:15,410 fileinput INFO Read/parse ok for file=input2/cities.xml
+2018-04-04 14:04:15,410 fileinput INFO all files done
+2018-04-04 14:04:15,410 xsltfilter INFO XSLT Transform OK
+2018-04-04 14:04:15,410 fileoutput INFO writing to file output/gmlcities.gml
+2018-04-04 14:04:15,410 fileoutput INFO written to output/gmlcities.gml
+2018-04-04 14:04:15,410 chain INFO DONE - 1 rounds - chain=(input_1) (input_2)|transformer_xslt|(output_file)(output_std) 
+2018-04-04 14:04:15,410 util INFO Timer end: total ETL time=0.0 sec
+2018-04-04 14:04:15,410 ETL INFO ALL DONE
 ml:featureMember>
     <ogr:City>
       <ogr:name>Rome</ogr:name>
@@ -727,26 +728,26 @@ ml:featureMember>
 ~/project/stetl/git/examples/basics
 ~/project/stetl/git/examples/basics/1_copystd ~/project/stetl/git/examples/basics
 ==== running etl.sh for 1_copystd ====
-2017-11-07 15:34:41,242 util INFO Found cStringIO, good!
-2017-11-07 15:34:41,261 util INFO Found lxml.etree, native XML parsing, fabulous!
-2017-11-07 15:34:41,289 util INFO Found GDAL/OGR Python bindings, super!!
-2017-11-07 15:34:41,295 main INFO Stetl version = 1.1.0
-2017-11-07 15:34:41,296 ETL INFO INIT - Stetl version is 1.1.0
-2017-11-07 15:34:41,296 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/1_copystd
-2017-11-07 15:34:41,296 ETL INFO Reading config_file = etl.cfg
-2017-11-07 15:34:41,298 ETL INFO START
-2017-11-07 15:34:41,298 util INFO Timer start: total ETL
-2017-11-07 15:34:41,298 chain INFO Assembling Chain: input_xml_file|output_std...
-2017-11-07 15:34:41,300 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
-2017-11-07 15:34:41,300 fileinput INFO file_list=['input/cities.xml']
-2017-11-07 15:34:41,302 output INFO cfg = {'class': 'outputs.standardoutput.StandardXmlOutput'}
-2017-11-07 15:34:41,302 chain INFO Running Chain: input_xml_file|output_std
-2017-11-07 15:34:41,302 fileinput INFO Read/parse for start for file=input/cities.xml....
-2017-11-07 15:34:41,302 fileinput INFO Read/parse ok for file=input/cities.xml
-2017-11-07 15:34:41,303 fileinput INFO all files done
-2017-11-07 15:34:41,303 chain INFO DONE - 1 rounds - chain=input_xml_file|output_std 
-2017-11-07 15:34:41,303 util INFO Timer end: total ETL time=0.0 sec
-2017-11-07 15:34:41,303 ETL INFO ALL DONE
+2018-04-04 14:04:15,678 util INFO Found cStringIO, good!
+2018-04-04 14:04:15,687 util INFO Found lxml.etree, native XML parsing, fabulous!
+2018-04-04 14:04:15,733 util INFO Found GDAL/OGR Python bindings, super!!
+2018-04-04 14:04:15,739 main INFO Stetl version = 1.2-dev
+2018-04-04 14:04:15,740 ETL INFO INIT - Stetl version is 1.2-dev
+2018-04-04 14:04:15,740 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/1_copystd
+2018-04-04 14:04:15,740 ETL INFO Reading config_file = etl.cfg
+2018-04-04 14:04:15,742 ETL INFO START
+2018-04-04 14:04:15,742 util INFO Timer start: total ETL
+2018-04-04 14:04:15,742 chain INFO Assembling Chain: input_xml_file|output_std...
+2018-04-04 14:04:15,745 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2018-04-04 14:04:15,745 fileinput INFO file_list=['input/cities.xml']
+2018-04-04 14:04:15,745 output INFO cfg = {'class': 'outputs.standardoutput.StandardXmlOutput'}
+2018-04-04 14:04:15,745 chain INFO Running Chain: input_xml_file|output_std
+2018-04-04 14:04:15,746 fileinput INFO Read/parse for start for file=input/cities.xml....
+2018-04-04 14:04:15,746 fileinput INFO Read/parse ok for file=input/cities.xml
+2018-04-04 14:04:15,746 fileinput INFO all files done
+2018-04-04 14:04:15,746 chain INFO DONE - 1 rounds - chain=input_xml_file|output_std 
+2018-04-04 14:04:15,746 util INFO Timer end: total ETL time=0.0 sec
+2018-04-04 14:04:15,746 ETL INFO ALL DONE
 <?xml version='1.0' encoding='utf-8'?>
 <cities>
     <city>
@@ -769,136 +770,136 @@ ml:featureMember>
 ~/project/stetl/git/examples/basics
 ~/project/stetl/git/examples/basics/2_xslt ~/project/stetl/git/examples/basics
 ==== running etl.sh for 2_xslt ====
-2017-11-07 15:34:41,622 util INFO Found cStringIO, good!
-2017-11-07 15:34:41,640 util INFO Found lxml.etree, native XML parsing, fabulous!
-2017-11-07 15:34:41,665 util INFO Found GDAL/OGR Python bindings, super!!
-2017-11-07 15:34:41,671 main INFO Stetl version = 1.1.0
-2017-11-07 15:34:41,671 ETL INFO INIT - Stetl version is 1.1.0
-2017-11-07 15:34:41,672 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/2_xslt
-2017-11-07 15:34:41,672 ETL INFO Reading config_file = etl.cfg
-2017-11-07 15:34:41,673 ETL INFO START
-2017-11-07 15:34:41,673 util INFO Timer start: total ETL
-2017-11-07 15:34:41,673 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_file...
-2017-11-07 15:34:41,675 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
-2017-11-07 15:34:41,675 fileinput INFO file_list=['input/cities.xml']
-2017-11-07 15:34:41,679 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
-2017-11-07 15:34:41,679 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/2_xslt
-2017-11-07 15:34:41,679 chain INFO Running Chain: input_xml_file|transformer_xslt|output_file
-2017-11-07 15:34:41,679 fileinput INFO Read/parse for start for file=input/cities.xml....
-2017-11-07 15:34:41,680 fileinput INFO Read/parse ok for file=input/cities.xml
-2017-11-07 15:34:41,680 fileinput INFO all files done
-2017-11-07 15:34:41,680 xsltfilter INFO XSLT Transform OK
-2017-11-07 15:34:41,680 fileoutput INFO writing to file output/gmlcities.gml
-2017-11-07 15:34:41,680 fileoutput INFO written to output/gmlcities.gml
-2017-11-07 15:34:41,680 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_file 
-2017-11-07 15:34:41,680 util INFO Timer end: total ETL time=0.0 sec
-2017-11-07 15:34:41,680 ETL INFO ALL DONE
+2018-04-04 14:04:16,025 util INFO Found cStringIO, good!
+2018-04-04 14:04:16,038 util INFO Found lxml.etree, native XML parsing, fabulous!
+2018-04-04 14:04:16,099 util INFO Found GDAL/OGR Python bindings, super!!
+2018-04-04 14:04:16,111 main INFO Stetl version = 1.2-dev
+2018-04-04 14:04:16,113 ETL INFO INIT - Stetl version is 1.2-dev
+2018-04-04 14:04:16,114 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/2_xslt
+2018-04-04 14:04:16,114 ETL INFO Reading config_file = etl.cfg
+2018-04-04 14:04:16,115 ETL INFO START
+2018-04-04 14:04:16,115 util INFO Timer start: total ETL
+2018-04-04 14:04:16,115 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_file...
+2018-04-04 14:04:16,118 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2018-04-04 14:04:16,119 fileinput INFO file_list=['input/cities.xml']
+2018-04-04 14:04:16,121 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2018-04-04 14:04:16,121 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/2_xslt
+2018-04-04 14:04:16,121 chain INFO Running Chain: input_xml_file|transformer_xslt|output_file
+2018-04-04 14:04:16,121 fileinput INFO Read/parse for start for file=input/cities.xml....
+2018-04-04 14:04:16,121 fileinput INFO Read/parse ok for file=input/cities.xml
+2018-04-04 14:04:16,122 fileinput INFO all files done
+2018-04-04 14:04:16,122 xsltfilter INFO XSLT Transform OK
+2018-04-04 14:04:16,122 fileoutput INFO writing to file output/gmlcities.gml
+2018-04-04 14:04:16,123 fileoutput INFO written to output/gmlcities.gml
+2018-04-04 14:04:16,123 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_file 
+2018-04-04 14:04:16,123 util INFO Timer end: total ETL time=0.0 sec
+2018-04-04 14:04:16,123 ETL INFO ALL DONE
 ~/project/stetl/git/examples/basics
 ~/project/stetl/git/examples/basics/3_shape ~/project/stetl/git/examples/basics
 ==== running etl.sh for 3_shape ====
-2017-11-07 15:34:42,028 util INFO Found cStringIO, good!
-2017-11-07 15:34:42,053 util INFO Found lxml.etree, native XML parsing, fabulous!
-2017-11-07 15:34:42,086 util INFO Found GDAL/OGR Python bindings, super!!
-2017-11-07 15:34:42,092 main INFO Stetl version = 1.1.0
-2017-11-07 15:34:42,093 ETL INFO INIT - Stetl version is 1.1.0
-2017-11-07 15:34:42,093 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/3_shape
-2017-11-07 15:34:42,094 ETL INFO Reading config_file = etl.cfg
-2017-11-07 15:34:42,095 ETL INFO START
-2017-11-07 15:34:42,095 util INFO Timer start: total ETL
-2017-11-07 15:34:42,095 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_ogr_shape...
-2017-11-07 15:34:42,097 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
-2017-11-07 15:34:42,097 fileinput INFO file_list=['input/cities.xml']
-2017-11-07 15:34:42,104 output INFO cfg = {'ogr2ogr_cmd': 'ogr2ogr\n-overwrite\n-f "ESRI Shapefile"\n-a_srs epsg:4326\noutput/gmlcities.shp\ntemp/gmlcities.gml', 'class': 'outputs.ogroutput.Ogr2OgrOutput', 'temp_file': 'temp/gmlcities.gml'}
-2017-11-07 15:34:42,104 chain INFO Running Chain: input_xml_file|transformer_xslt|output_ogr_shape
-2017-11-07 15:34:42,104 fileinput INFO Read/parse for start for file=input/cities.xml....
-2017-11-07 15:34:42,104 fileinput INFO Read/parse ok for file=input/cities.xml
-2017-11-07 15:34:42,104 fileinput INFO all files done
-2017-11-07 15:34:42,105 xsltfilter INFO XSLT Transform OK
-2017-11-07 15:34:42,105 ogroutput INFO writing to file temp/gmlcities.gml
-2017-11-07 15:34:42,105 ogroutput INFO written to temp/gmlcities.gml
-2017-11-07 15:34:42,105 ogroutput INFO executing cmd=ogr2ogr -overwrite -f "ESRI Shapefile" -a_srs epsg:4326 output/gmlcities.shp temp/gmlcities.gml
-2017-11-07 15:34:42,134 ogroutput INFO execute done
-2017-11-07 15:34:42,134 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_ogr_shape 
-2017-11-07 15:34:42,134 util INFO Timer end: total ETL time=0.0 sec
-2017-11-07 15:34:42,134 ETL INFO ALL DONE
+2018-04-04 14:04:16,423 util INFO Found cStringIO, good!
+2018-04-04 14:04:16,432 util INFO Found lxml.etree, native XML parsing, fabulous!
+2018-04-04 14:04:16,479 util INFO Found GDAL/OGR Python bindings, super!!
+2018-04-04 14:04:16,486 main INFO Stetl version = 1.2-dev
+2018-04-04 14:04:16,486 ETL INFO INIT - Stetl version is 1.2-dev
+2018-04-04 14:04:16,487 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/3_shape
+2018-04-04 14:04:16,487 ETL INFO Reading config_file = etl.cfg
+2018-04-04 14:04:16,488 ETL INFO START
+2018-04-04 14:04:16,489 util INFO Timer start: total ETL
+2018-04-04 14:04:16,489 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_ogr_shape...
+2018-04-04 14:04:16,491 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2018-04-04 14:04:16,491 fileinput INFO file_list=['input/cities.xml']
+2018-04-04 14:04:16,496 output INFO cfg = {'ogr2ogr_cmd': 'ogr2ogr\n-overwrite\n-f "ESRI Shapefile"\n-a_srs epsg:4326\noutput/gmlcities.shp\ntemp/gmlcities.gml', 'class': 'outputs.ogroutput.Ogr2OgrOutput', 'temp_file': 'temp/gmlcities.gml'}
+2018-04-04 14:04:16,496 chain INFO Running Chain: input_xml_file|transformer_xslt|output_ogr_shape
+2018-04-04 14:04:16,496 fileinput INFO Read/parse for start for file=input/cities.xml....
+2018-04-04 14:04:16,496 fileinput INFO Read/parse ok for file=input/cities.xml
+2018-04-04 14:04:16,496 fileinput INFO all files done
+2018-04-04 14:04:16,496 xsltfilter INFO XSLT Transform OK
+2018-04-04 14:04:16,497 ogroutput INFO writing to file temp/gmlcities.gml
+2018-04-04 14:04:16,497 ogroutput INFO written to temp/gmlcities.gml
+2018-04-04 14:04:16,497 ogroutput INFO executing cmd=ogr2ogr -overwrite -f "ESRI Shapefile" -a_srs epsg:4326 output/gmlcities.shp temp/gmlcities.gml
+2018-04-04 14:04:16,540 ogroutput INFO execute done
+2018-04-04 14:04:16,540 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_ogr_shape 
+2018-04-04 14:04:16,540 util INFO Timer end: total ETL time=0.0 sec
+2018-04-04 14:04:16,541 ETL INFO ALL DONE
 ~/project/stetl/git/examples/basics
 ~/project/stetl/git/examples/basics/4_validate ~/project/stetl/git/examples/basics
 ==== running etl.sh for 4_validate ====
-2017-11-07 15:34:42,436 util INFO Found cStringIO, good!
-2017-11-07 15:34:42,454 util INFO Found lxml.etree, native XML parsing, fabulous!
-2017-11-07 15:34:42,481 util INFO Found GDAL/OGR Python bindings, super!!
-2017-11-07 15:34:42,486 main INFO Stetl version = 1.1.0
-2017-11-07 15:34:42,487 ETL INFO INIT - Stetl version is 1.1.0
-2017-11-07 15:34:42,487 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/4_validate
-2017-11-07 15:34:42,487 ETL INFO Reading config_file = etl.cfg
-2017-11-07 15:34:42,489 ETL INFO START
-2017-11-07 15:34:42,489 util INFO Timer start: total ETL
-2017-11-07 15:34:42,489 chain INFO Assembling Chain: input_xml_file|transformer_xslt|xml_schema_validator|output_file...
-2017-11-07 15:34:42,491 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
-2017-11-07 15:34:42,491 fileinput INFO file_list=['input/cities.xml']
-2017-11-07 15:34:42,494 xmlvalidator INFO Building the Schema once with (GML XSD) dependencies for schema=gmlcities.xsd (be patient...)
-2017-11-07 15:34:43,949 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
-2017-11-07 15:34:43,949 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/4_validate
-2017-11-07 15:34:43,949 chain INFO Running Chain: input_xml_file|transformer_xslt|xml_schema_validator|output_file
-2017-11-07 15:34:43,949 fileinput INFO Read/parse for start for file=input/cities.xml....
-2017-11-07 15:34:43,950 fileinput INFO Read/parse ok for file=input/cities.xml
-2017-11-07 15:34:43,950 fileinput INFO all files done
-2017-11-07 15:34:43,950 xsltfilter INFO XSLT Transform OK
-2017-11-07 15:34:43,950 xmlvalidator INFO Validating doc against schema=gmlcities.xsd ...
-2017-11-07 15:34:43,950 xmlvalidator INFO Validation result: True
-2017-11-07 15:34:43,950 fileoutput INFO writing to file output/gmlcities.gml
-2017-11-07 15:34:43,951 fileoutput INFO written to output/gmlcities.gml
-2017-11-07 15:34:43,951 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|xml_schema_validator|output_file 
-2017-11-07 15:34:43,951 util INFO Timer end: total ETL time=1.0 sec
-2017-11-07 15:34:43,951 ETL INFO ALL DONE
+2018-04-04 14:04:16,798 util INFO Found cStringIO, good!
+2018-04-04 14:04:16,808 util INFO Found lxml.etree, native XML parsing, fabulous!
+2018-04-04 14:04:16,848 util INFO Found GDAL/OGR Python bindings, super!!
+2018-04-04 14:04:16,854 main INFO Stetl version = 1.2-dev
+2018-04-04 14:04:16,855 ETL INFO INIT - Stetl version is 1.2-dev
+2018-04-04 14:04:16,855 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/4_validate
+2018-04-04 14:04:16,855 ETL INFO Reading config_file = etl.cfg
+2018-04-04 14:04:16,856 ETL INFO START
+2018-04-04 14:04:16,856 util INFO Timer start: total ETL
+2018-04-04 14:04:16,856 chain INFO Assembling Chain: input_xml_file|transformer_xslt|xml_schema_validator|output_file...
+2018-04-04 14:04:16,858 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2018-04-04 14:04:16,859 fileinput INFO file_list=['input/cities.xml']
+2018-04-04 14:04:16,861 xmlvalidator INFO Building the Schema once with (GML XSD) dependencies for schema=gmlcities.xsd (be patient...)
+2018-04-04 14:04:21,009 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2018-04-04 14:04:21,010 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/4_validate
+2018-04-04 14:04:21,010 chain INFO Running Chain: input_xml_file|transformer_xslt|xml_schema_validator|output_file
+2018-04-04 14:04:21,010 fileinput INFO Read/parse for start for file=input/cities.xml....
+2018-04-04 14:04:21,010 fileinput INFO Read/parse ok for file=input/cities.xml
+2018-04-04 14:04:21,010 fileinput INFO all files done
+2018-04-04 14:04:21,010 xsltfilter INFO XSLT Transform OK
+2018-04-04 14:04:21,010 xmlvalidator INFO Validating doc against schema=gmlcities.xsd ...
+2018-04-04 14:04:21,011 xmlvalidator INFO Validation result: True
+2018-04-04 14:04:21,011 fileoutput INFO writing to file output/gmlcities.gml
+2018-04-04 14:04:21,011 fileoutput INFO written to output/gmlcities.gml
+2018-04-04 14:04:21,011 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|xml_schema_validator|output_file 
+2018-04-04 14:04:21,011 util INFO Timer end: total ETL time=4.0 sec
+2018-04-04 14:04:21,011 ETL INFO ALL DONE
 ~/project/stetl/git/examples/basics
 ~/project/stetl/git/examples/basics/5_split ~/project/stetl/git/examples/basics
 ==== running etl.sh for 5_split ====
-2017-11-07 15:34:44,245 util INFO Found cStringIO, good!
-2017-11-07 15:34:44,263 util INFO Found lxml.etree, native XML parsing, fabulous!
-2017-11-07 15:34:44,290 util INFO Found GDAL/OGR Python bindings, super!!
-2017-11-07 15:34:44,297 main INFO Stetl version = 1.1.0
-2017-11-07 15:34:44,297 ETL INFO INIT - Stetl version is 1.1.0
-2017-11-07 15:34:44,298 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/5_split
-2017-11-07 15:34:44,298 ETL INFO Reading config_file = etl.cfg
-2017-11-07 15:34:44,299 ETL INFO START
-2017-11-07 15:34:44,299 util INFO Timer start: total ETL
-2017-11-07 15:34:44,299 chain INFO Assembling Chain: input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file...
-2017-11-07 15:34:44,301 input INFO cfg = {'element_tags': 'city', 'class': 'inputs.fileinput.XmlElementStreamerFileInput', 'file_path': 'input'}
-2017-11-07 15:34:44,303 fileinput INFO file_list=['input/cities.xml']
-2017-11-07 15:34:44,304 fileinput INFO Element tags to be matched: ['city']
-2017-11-07 15:34:44,304 xmlassembler INFO cfg = {'max_elements': '2', 'element_container_tag': 'cities', 'class': 'filters.xmlassembler.XmlAssembler', 'container_doc': "<?xml version='1.0' encoding='utf-8'?>\n<cities>\n</cities>"}
-2017-11-07 15:34:44,306 output INFO cfg = {'class': 'outputs.fileoutput.MultiFileOutput', 'file_path': 'output/gmlcities-%03d.gml'}
-2017-11-07 15:34:44,307 chain INFO Running Chain: input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file
-2017-11-07 15:34:44,307 fileinput INFO file opened : input/cities.xml
-2017-11-07 15:34:44,309 xmlassembler INFO xmldoc ready: elms=2 total_elms=2
-2017-11-07 15:34:44,309 xsltfilter INFO XSLT Transform OK
-2017-11-07 15:34:44,309 fileoutput INFO writing to file output/gmlcities-001.gml
-2017-11-07 15:34:44,310 fileoutput INFO written to output/gmlcities-001.gml
-2017-11-07 15:34:44,310 fileinput INFO End of doc: input/cities.xml elem_count=3
-2017-11-07 15:34:44,311 fileinput INFO End of stream
-2017-11-07 15:34:44,311 xmlassembler INFO xmldoc ready: elms=1 total_elms=3
-2017-11-07 15:34:44,311 xsltfilter INFO XSLT Transform OK
-2017-11-07 15:34:44,311 fileoutput INFO writing to file output/gmlcities-002.gml
-2017-11-07 15:34:44,311 fileoutput INFO written to output/gmlcities-002.gml
-2017-11-07 15:34:44,311 chain INFO DONE - 26 rounds - chain=input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file 
-2017-11-07 15:34:44,311 chain INFO Assembling Chain: input_big_xml_file|xml_assembler|transformer_xslt|output_std...
-2017-11-07 15:34:44,312 input INFO cfg = {'element_tags': 'city', 'class': 'inputs.fileinput.XmlElementStreamerFileInput', 'file_path': 'input'}
-2017-11-07 15:34:44,312 fileinput INFO file_list=['input/cities.xml']
-2017-11-07 15:34:44,312 fileinput INFO Element tags to be matched: ['city']
-2017-11-07 15:34:44,312 xmlassembler INFO cfg = {'max_elements': '2', 'element_container_tag': 'cities', 'class': 'filters.xmlassembler.XmlAssembler', 'container_doc': "<?xml version='1.0' encoding='utf-8'?>\n<cities>\n</cities>"}
-2017-11-07 15:34:44,313 output INFO cfg = {'class': 'outputs.standardoutput.StandardXmlOutput'}
-2017-11-07 15:34:44,313 chain INFO Running Chain: input_big_xml_file|xml_assembler|transformer_xslt|output_std
-2017-11-07 15:34:44,313 fileinput INFO file opened : input/cities.xml
-2017-11-07 15:34:44,313 xmlassembler INFO xmldoc ready: elms=2 total_elms=2
-2017-11-07 15:34:44,313 xsltfilter INFO XSLT Transform OK
-2017-11-07 15:34:44,313 fileinput INFO End of doc: input/cities.xml elem_count=3
-2017-11-07 15:34:44,313 fileinput INFO End of stream
-2017-11-07 15:34:44,314 xmlassembler INFO xmldoc ready: elms=1 total_elms=3
-2017-11-07 15:34:44,314 xsltfilter INFO XSLT Transform OK
-2017-11-07 15:34:44,314 chain INFO DONE - 26 rounds - chain=input_big_xml_file|xml_assembler|transformer_xslt|output_std 
-2017-11-07 15:34:44,314 util INFO Timer end: total ETL time=0.0 sec
-2017-11-07 15:34:44,314 ETL INFO ALL DONE
+2018-04-04 14:04:21,277 util INFO Found cStringIO, good!
+2018-04-04 14:04:21,288 util INFO Found lxml.etree, native XML parsing, fabulous!
+2018-04-04 14:04:21,345 util INFO Found GDAL/OGR Python bindings, super!!
+2018-04-04 14:04:21,353 main INFO Stetl version = 1.2-dev
+2018-04-04 14:04:21,355 ETL INFO INIT - Stetl version is 1.2-dev
+2018-04-04 14:04:21,355 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/5_split
+2018-04-04 14:04:21,355 ETL INFO Reading config_file = etl.cfg
+2018-04-04 14:04:21,357 ETL INFO START
+2018-04-04 14:04:21,357 util INFO Timer start: total ETL
+2018-04-04 14:04:21,357 chain INFO Assembling Chain: input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file...
+2018-04-04 14:04:21,360 input INFO cfg = {'element_tags': 'city', 'class': 'inputs.fileinput.XmlElementStreamerFileInput', 'file_path': 'input'}
+2018-04-04 14:04:21,360 fileinput INFO file_list=['input/cities.xml']
+2018-04-04 14:04:21,360 fileinput INFO Element tags to be matched: ['city']
+2018-04-04 14:04:21,361 xmlassembler INFO cfg = {'max_elements': '2', 'element_container_tag': 'cities', 'class': 'filters.xmlassembler.XmlAssembler', 'container_doc': "<?xml version='1.0' encoding='utf-8'?>\n<cities>\n</cities>"}
+2018-04-04 14:04:21,365 output INFO cfg = {'class': 'outputs.fileoutput.MultiFileOutput', 'file_path': 'output/gmlcities-%03d.gml'}
+2018-04-04 14:04:21,365 chain INFO Running Chain: input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file
+2018-04-04 14:04:21,365 fileinput INFO file opened : input/cities.xml
+2018-04-04 14:04:21,368 xmlassembler INFO xmldoc ready: elms=2 total_elms=2
+2018-04-04 14:04:21,368 xsltfilter INFO XSLT Transform OK
+2018-04-04 14:04:21,368 fileoutput INFO writing to file output/gmlcities-001.gml
+2018-04-04 14:04:21,368 fileoutput INFO written to output/gmlcities-001.gml
+2018-04-04 14:04:21,369 fileinput INFO End of doc: input/cities.xml elem_count=3
+2018-04-04 14:04:21,369 fileinput INFO End of stream
+2018-04-04 14:04:21,369 xmlassembler INFO xmldoc ready: elms=1 total_elms=3
+2018-04-04 14:04:21,369 xsltfilter INFO XSLT Transform OK
+2018-04-04 14:04:21,369 fileoutput INFO writing to file output/gmlcities-002.gml
+2018-04-04 14:04:21,370 fileoutput INFO written to output/gmlcities-002.gml
+2018-04-04 14:04:21,370 chain INFO DONE - 26 rounds - chain=input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file 
+2018-04-04 14:04:21,370 chain INFO Assembling Chain: input_big_xml_file|xml_assembler|transformer_xslt|output_std...
+2018-04-04 14:04:21,370 input INFO cfg = {'element_tags': 'city', 'class': 'inputs.fileinput.XmlElementStreamerFileInput', 'file_path': 'input'}
+2018-04-04 14:04:21,371 fileinput INFO file_list=['input/cities.xml']
+2018-04-04 14:04:21,371 fileinput INFO Element tags to be matched: ['city']
+2018-04-04 14:04:21,371 xmlassembler INFO cfg = {'max_elements': '2', 'element_container_tag': 'cities', 'class': 'filters.xmlassembler.XmlAssembler', 'container_doc': "<?xml version='1.0' encoding='utf-8'?>\n<cities>\n</cities>"}
+2018-04-04 14:04:21,373 output INFO cfg = {'class': 'outputs.standardoutput.StandardXmlOutput'}
+2018-04-04 14:04:21,373 chain INFO Running Chain: input_big_xml_file|xml_assembler|transformer_xslt|output_std
+2018-04-04 14:04:21,373 fileinput INFO file opened : input/cities.xml
+2018-04-04 14:04:21,374 xmlassembler INFO xmldoc ready: elms=2 total_elms=2
+2018-04-04 14:04:21,374 xsltfilter INFO XSLT Transform OK
+2018-04-04 14:04:21,374 fileinput INFO End of doc: input/cities.xml elem_count=3
+2018-04-04 14:04:21,375 fileinput INFO End of stream
+2018-04-04 14:04:21,375 xmlassembler INFO xmldoc ready: elms=1 total_elms=3
+2018-04-04 14:04:21,375 xsltfilter INFO XSLT Transform OK
+2018-04-04 14:04:21,375 chain INFO DONE - 26 rounds - chain=input_big_xml_file|xml_assembler|transformer_xslt|output_std 
+2018-04-04 14:04:21,375 util INFO Timer end: total ETL time=0.0 sec
+2018-04-04 14:04:21,375 ETL INFO ALL DONE
 <?xml version='1.0' encoding='utf-8'?>
 <ogr:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://ogr.maptools.org/" xmlns:gml="http://www.opengis.net/gml" xsi:schemaLocation="http://ogr.maptools.org/ ../gmlcities.xsd  http://www.opengis.net/gml http://schemas.opengis.net/gml/2.1.2/feature.xsd">
   <gml:boundedBy>
@@ -964,83 +965,83 @@ ml:featureMember>
 ~/project/stetl/git/examples/basics
 ~/project/stetl/git/examples/basics/6_cmdargs ~/project/stetl/git/examples/basics
 ==== running etl.sh for 6_cmdargs ====
-2017-11-07 15:34:44,611 util INFO Found cStringIO, good!
-2017-11-07 15:34:44,632 util INFO Found lxml.etree, native XML parsing, fabulous!
-2017-11-07 15:34:44,658 util INFO Found GDAL/OGR Python bindings, super!!
-2017-11-07 15:34:44,664 main INFO Stetl version = 1.1.0
-2017-11-07 15:34:44,666 ETL INFO INIT - Stetl version is 1.1.0
-2017-11-07 15:34:44,666 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/6_cmdargs
-2017-11-07 15:34:44,666 ETL INFO Reading config_file = etl.cfg
-2017-11-07 15:34:44,666 ETL INFO Substituting 3 args in config file from args_dict: {'out_xml': 'output/gmlcities.gml', 'in_xsl': 'cities2gml.xsl', 'in_xml': 'input/cities.xml'}
-2017-11-07 15:34:44,667 ETL INFO Substituting args OK
-2017-11-07 15:34:44,667 ETL INFO START
-2017-11-07 15:34:44,667 util INFO Timer start: total ETL
-2017-11-07 15:34:44,668 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_file...
-2017-11-07 15:34:44,670 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
-2017-11-07 15:34:44,670 fileinput INFO file_list=['input/cities.xml']
-2017-11-07 15:34:44,673 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
-2017-11-07 15:34:44,673 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/6_cmdargs
-2017-11-07 15:34:44,674 chain INFO Running Chain: input_xml_file|transformer_xslt|output_file
-2017-11-07 15:34:44,674 fileinput INFO Read/parse for start for file=input/cities.xml....
-2017-11-07 15:34:44,674 fileinput INFO Read/parse ok for file=input/cities.xml
-2017-11-07 15:34:44,674 fileinput INFO all files done
-2017-11-07 15:34:44,674 xsltfilter INFO XSLT Transform OK
-2017-11-07 15:34:44,674 fileoutput INFO writing to file output/gmlcities.gml
-2017-11-07 15:34:44,675 fileoutput INFO written to output/gmlcities.gml
-2017-11-07 15:34:44,675 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_file 
-2017-11-07 15:34:44,675 util INFO Timer end: total ETL time=0.0 sec
-2017-11-07 15:34:44,675 ETL INFO ALL DONE
-2017-11-07 15:34:45,022 util INFO Found cStringIO, good!
-2017-11-07 15:34:45,045 util INFO Found lxml.etree, native XML parsing, fabulous!
-2017-11-07 15:34:45,074 util INFO Found GDAL/OGR Python bindings, super!!
-2017-11-07 15:34:45,079 main INFO Stetl version = 1.1.0
-2017-11-07 15:34:45,080 main INFO Found args file at: etl.args
-2017-11-07 15:34:45,081 ETL INFO INIT - Stetl version is 1.1.0
-2017-11-07 15:34:45,081 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/6_cmdargs
-2017-11-07 15:34:45,081 ETL INFO Reading config_file = etl.cfg
-2017-11-07 15:34:45,081 ETL INFO Substituting 4 args in config file from args_dict: OrderedDict([('__name__', 'asection'), ('in_xml', 'input/cities.xml'), ('in_xsl', 'cities2gml.xsl'), ('out_xml', 'output/gmlcities.gml')])
-2017-11-07 15:34:45,081 ETL INFO Substituting args OK
-2017-11-07 15:34:45,081 ETL INFO START
-2017-11-07 15:34:45,081 util INFO Timer start: total ETL
-2017-11-07 15:34:45,081 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_file...
-2017-11-07 15:34:45,084 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
-2017-11-07 15:34:45,084 fileinput INFO file_list=['input/cities.xml']
-2017-11-07 15:34:45,088 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
-2017-11-07 15:34:45,088 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/6_cmdargs
-2017-11-07 15:34:45,088 chain INFO Running Chain: input_xml_file|transformer_xslt|output_file
-2017-11-07 15:34:45,088 fileinput INFO Read/parse for start for file=input/cities.xml....
-2017-11-07 15:34:45,088 fileinput INFO Read/parse ok for file=input/cities.xml
-2017-11-07 15:34:45,088 fileinput INFO all files done
-2017-11-07 15:34:45,089 xsltfilter INFO XSLT Transform OK
-2017-11-07 15:34:45,089 fileoutput INFO writing to file output/gmlcities.gml
-2017-11-07 15:34:45,089 fileoutput INFO written to output/gmlcities.gml
-2017-11-07 15:34:45,089 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_file 
-2017-11-07 15:34:45,089 util INFO Timer end: total ETL time=0.0 sec
-2017-11-07 15:34:45,089 ETL INFO ALL DONE
+2018-04-04 14:04:21,749 util INFO Found cStringIO, good!
+2018-04-04 14:04:21,759 util INFO Found lxml.etree, native XML parsing, fabulous!
+2018-04-04 14:04:21,804 util INFO Found GDAL/OGR Python bindings, super!!
+2018-04-04 14:04:21,811 main INFO Stetl version = 1.2-dev
+2018-04-04 14:04:21,812 ETL INFO INIT - Stetl version is 1.2-dev
+2018-04-04 14:04:21,812 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/6_cmdargs
+2018-04-04 14:04:21,812 ETL INFO Reading config_file = etl.cfg
+2018-04-04 14:04:21,814 ETL INFO Substituting 3 args in config file from args_dict: {'out_xml': 'output/gmlcities.gml', 'in_xsl': 'cities2gml.xsl', 'in_xml': 'input/cities.xml'}
+2018-04-04 14:04:21,814 ETL INFO Substituting args OK
+2018-04-04 14:04:21,814 ETL INFO START
+2018-04-04 14:04:21,815 util INFO Timer start: total ETL
+2018-04-04 14:04:21,815 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_file...
+2018-04-04 14:04:21,818 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2018-04-04 14:04:21,818 fileinput INFO file_list=['input/cities.xml']
+2018-04-04 14:04:21,820 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2018-04-04 14:04:21,820 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/6_cmdargs
+2018-04-04 14:04:21,820 chain INFO Running Chain: input_xml_file|transformer_xslt|output_file
+2018-04-04 14:04:21,820 fileinput INFO Read/parse for start for file=input/cities.xml....
+2018-04-04 14:04:21,820 fileinput INFO Read/parse ok for file=input/cities.xml
+2018-04-04 14:04:21,821 fileinput INFO all files done
+2018-04-04 14:04:21,821 xsltfilter INFO XSLT Transform OK
+2018-04-04 14:04:21,821 fileoutput INFO writing to file output/gmlcities.gml
+2018-04-04 14:04:21,821 fileoutput INFO written to output/gmlcities.gml
+2018-04-04 14:04:21,821 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_file 
+2018-04-04 14:04:21,821 util INFO Timer end: total ETL time=0.0 sec
+2018-04-04 14:04:21,821 ETL INFO ALL DONE
+2018-04-04 14:04:22,120 util INFO Found cStringIO, good!
+2018-04-04 14:04:22,131 util INFO Found lxml.etree, native XML parsing, fabulous!
+2018-04-04 14:04:22,173 util INFO Found GDAL/OGR Python bindings, super!!
+2018-04-04 14:04:22,180 main INFO Stetl version = 1.2-dev
+2018-04-04 14:04:22,181 main INFO Found args file at: etl.args
+2018-04-04 14:04:22,183 ETL INFO INIT - Stetl version is 1.2-dev
+2018-04-04 14:04:22,183 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/6_cmdargs
+2018-04-04 14:04:22,183 ETL INFO Reading config_file = etl.cfg
+2018-04-04 14:04:22,184 ETL INFO Substituting 4 args in config file from args_dict: OrderedDict([('__name__', 'asection'), ('in_xml', 'input/cities.xml'), ('in_xsl', 'cities2gml.xsl'), ('out_xml', 'output/gmlcities.gml')])
+2018-04-04 14:04:22,185 ETL INFO Substituting args OK
+2018-04-04 14:04:22,185 ETL INFO START
+2018-04-04 14:04:22,185 util INFO Timer start: total ETL
+2018-04-04 14:04:22,186 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_file...
+2018-04-04 14:04:22,188 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2018-04-04 14:04:22,189 fileinput INFO file_list=['input/cities.xml']
+2018-04-04 14:04:22,190 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2018-04-04 14:04:22,190 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/6_cmdargs
+2018-04-04 14:04:22,190 chain INFO Running Chain: input_xml_file|transformer_xslt|output_file
+2018-04-04 14:04:22,190 fileinput INFO Read/parse for start for file=input/cities.xml....
+2018-04-04 14:04:22,191 fileinput INFO Read/parse ok for file=input/cities.xml
+2018-04-04 14:04:22,191 fileinput INFO all files done
+2018-04-04 14:04:22,191 xsltfilter INFO XSLT Transform OK
+2018-04-04 14:04:22,191 fileoutput INFO writing to file output/gmlcities.gml
+2018-04-04 14:04:22,191 fileoutput INFO written to output/gmlcities.gml
+2018-04-04 14:04:22,191 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_file 
+2018-04-04 14:04:22,191 util INFO Timer end: total ETL time=0.0 sec
+2018-04-04 14:04:22,191 ETL INFO ALL DONE
 ~/project/stetl/git/examples/basics
 ~/project/stetl/git/examples/basics/7_mycomponent ~/project/stetl/git/examples/basics
 ==== running etl.sh for 7_mycomponent ====
-2017-11-07 15:34:45,391 util INFO Found cStringIO, good!
-2017-11-07 15:34:45,408 util INFO Found lxml.etree, native XML parsing, fabulous!
-2017-11-07 15:34:45,434 util INFO Found GDAL/OGR Python bindings, super!!
-2017-11-07 15:34:45,440 main INFO Stetl version = 1.1.0
-2017-11-07 15:34:45,441 ETL INFO INIT - Stetl version is 1.1.0
-2017-11-07 15:34:45,441 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/7_mycomponent
-2017-11-07 15:34:45,441 ETL INFO Reading config_file = etl.cfg
-2017-11-07 15:34:45,448 ETL INFO START
-2017-11-07 15:34:45,448 util INFO Timer start: total ETL
-2017-11-07 15:34:45,448 chain INFO Assembling Chain: input_xml_file|my_filter|output_std...
-2017-11-07 15:34:45,451 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
-2017-11-07 15:34:45,451 fileinput INFO file_list=['input/cities.xml']
-2017-11-07 15:34:45,460 output INFO cfg = {'class': 'outputs.standardoutput.StandardXmlOutput'}
-2017-11-07 15:34:45,460 chain INFO Running Chain: input_xml_file|my_filter|output_std
-2017-11-07 15:34:45,460 fileinput INFO Read/parse for start for file=input/cities.xml....
-2017-11-07 15:34:45,467 fileinput INFO Read/parse ok for file=input/cities.xml
-2017-11-07 15:34:45,467 fileinput INFO all files done
-2017-11-07 15:34:45,467 myfilter INFO CALLING MyFilter OK!!!!
-2017-11-07 15:34:45,467 chain INFO DONE - 1 rounds - chain=input_xml_file|my_filter|output_std 
-2017-11-07 15:34:45,467 util INFO Timer end: total ETL time=0.0 sec
-2017-11-07 15:34:45,467 ETL INFO ALL DONE
+2018-04-04 14:04:22,482 util INFO Found cStringIO, good!
+2018-04-04 14:04:22,494 util INFO Found lxml.etree, native XML parsing, fabulous!
+2018-04-04 14:04:22,547 util INFO Found GDAL/OGR Python bindings, super!!
+2018-04-04 14:04:22,556 main INFO Stetl version = 1.2-dev
+2018-04-04 14:04:22,558 ETL INFO INIT - Stetl version is 1.2-dev
+2018-04-04 14:04:22,558 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/7_mycomponent
+2018-04-04 14:04:22,559 ETL INFO Reading config_file = etl.cfg
+2018-04-04 14:04:22,559 ETL INFO START
+2018-04-04 14:04:22,560 util INFO Timer start: total ETL
+2018-04-04 14:04:22,560 chain INFO Assembling Chain: input_xml_file|my_filter|output_std...
+2018-04-04 14:04:22,563 input INFO cfg = {'class': 'inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2018-04-04 14:04:22,564 fileinput INFO file_list=['input/cities.xml']
+2018-04-04 14:04:22,568 output INFO cfg = {'class': 'outputs.standardoutput.StandardXmlOutput'}
+2018-04-04 14:04:22,568 chain INFO Running Chain: input_xml_file|my_filter|output_std
+2018-04-04 14:04:22,568 fileinput INFO Read/parse for start for file=input/cities.xml....
+2018-04-04 14:04:22,570 fileinput INFO Read/parse ok for file=input/cities.xml
+2018-04-04 14:04:22,570 fileinput INFO all files done
+2018-04-04 14:04:22,570 myfilter INFO CALLING MyFilter OK!!!!
+2018-04-04 14:04:22,570 chain INFO DONE - 1 rounds - chain=input_xml_file|my_filter|output_std 
+2018-04-04 14:04:22,570 util INFO Timer end: total ETL time=0.0 sec
+2018-04-04 14:04:22,570 ETL INFO ALL DONE
 <?xml version='1.0' encoding='utf-8'?>
 <cities>
     <city>
@@ -1063,52 +1064,52 @@ ml:featureMember>
 ~/project/stetl/git/examples/basics
 ~/project/stetl/git/examples/basics/8_wfs ~/project/stetl/git/examples/basics
 ==== running etl.sh for 8_wfs ====
-2017-11-07 15:34:45,778 util INFO Found cStringIO, good!
-2017-11-07 15:34:45,796 util INFO Found lxml.etree, native XML parsing, fabulous!
-2017-11-07 15:34:45,823 util INFO Found GDAL/OGR Python bindings, super!!
-2017-11-07 15:34:45,829 main INFO Stetl version = 1.1.0
-2017-11-07 15:34:45,830 ETL INFO INIT - Stetl version is 1.1.0
-2017-11-07 15:34:45,830 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/8_wfs
-2017-11-07 15:34:45,830 ETL INFO Reading config_file = etl.cfg
-2017-11-07 15:34:45,832 ETL INFO START
-2017-11-07 15:34:45,832 util INFO Timer start: total ETL
-2017-11-07 15:34:45,832 chain INFO Assembling Chain: input_wfs|output_std...
-2017-11-07 15:34:45,838 input INFO cfg = {'url': 'http://geodata.nationaalgeoregister.nl/bag/wfs', 'class': 'inputs.httpinput.HttpInput', 'parameters': '{\n\'service\' : \'WFS\',\n\'version\' : \'1.1.0\',\n\'request\' : \'GetFeature\',\n\'srsName\' : \'EPSG:28992\',\n\'outputFormat\' : \'text/xml; subtype=gml/2.1.2\',\n\'typename\' : \'verblijfsobject\',\n\'filter\' :\'<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc"><ogc:BBOX><gml:Envelope xmlns:gml="http://www.opengis.net/gml" srsName="EPSG:28992"><gml:lowerCorner>183774.83 450577.24</gml:lowerCorner><gml:upperCorner>184277.99 450809.92</gml:upperCorner></gml:Envelope></ogc:BBOX></ogc:Filter>\'\n}'}
-2017-11-07 15:34:45,839 httpinput INFO url=http://geodata.nationaalgeoregister.nl/bag/wfs parameters={'srsName': 'EPSG:28992', 'outputFormat': 'text/xml; subtype=gml/2.1.2', 'service': 'WFS', 'request': 'GetFeature', 'filter': '<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc"><ogc:BBOX><gml:Envelope xmlns:gml="http://www.opengis.net/gml" srsName="EPSG:28992"><gml:lowerCorner>183774.83 450577.24</gml:lowerCorner><gml:upperCorner>184277.99 450809.92</gml:upperCorner></gml:Envelope></ogc:BBOX></ogc:Filter>', 'typename': 'verblijfsobject', 'version': '1.1.0'}
-2017-11-07 15:34:45,839 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
-2017-11-07 15:34:45,839 chain INFO Running Chain: input_wfs|output_std
-2017-11-07 15:34:45,910 httpinput INFO EOF URL reading done
-2017-11-07 15:34:45,910 chain INFO DONE - 2 rounds - chain=input_wfs|output_std 
-2017-11-07 15:34:45,910 util INFO Timer end: total ETL time=0.0 sec
-2017-11-07 15:34:45,910 ETL INFO ALL DONE
-<?xml version="1.0" encoding="UTF-8"?><wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs" xmlns:gml="http://www.opengis.net/gml" xmlns:bag="http://bag.geonovum.nl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.0.0/WFS-basic.xsd http://bag.geonovum.nl https://geodata.nationaalgeoregister.nl/bag/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=bag%3Averblijfsobject"><gml:boundedBy><gml:null>unknown</gml:null></gml:boundedBy><gml:featureMember><bag:verblijfsobject fid="verblijfsobject.2508542"><bag:identificatie>228010000047219</bag:identificatie><bag:oppervlakte>121</bag:oppervlakte><bag:status>Verblijfsobject in gebruik</bag:status><bag:gebruiksdoel>woonfunctie</bag:gebruiksdoel><bag:openbare_ruimte>Harderwijkerweg</bag:openbare_ruimte><bag:huisnummer>1</bag:huisnummer><bag:postcode>6731ST</bag:postcode><bag:woonplaats>Otterlo</bag:woonplaats><bag:bouwjaar>1947</bag:bouwjaar><bag:pandidentificatie>228100000027383</bag:pandidentificatie><bag:pandstatus>Pand in gebruik</bag:pandstatus><bag:geometrie><gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#28992"><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">183936,450637,0</gml:coordinates></gml:Point></bag:geometrie><bag:pandgeometrie><gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#28992"><gml:polygonMember><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">183932.603,450639.512,0 183934.594,450634.73,0 183933.375,450634.222,0 183935.064,450630.167,0 183936.343,450630.691,0 183938.458,450625.344,0 183943.859,450627.593,0 183939.957,450636.963,0 183938.748,450636.46,0 183936.757,450641.242,0 183932.603,450639.512,0</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></gml:polygonMember></gml:MultiPolygon></bag:pandgeometrie></bag:verblijfsobject></gml:featureMember><gml:featureMember><bag:verblijfsobject fid="verblijfsobject.2552568"><bag:identificatie>228010000047281</bag:identificatie><bag:oppervlakte>71</bag:oppervlakte><bag:status>Verblijfsobject in gebruik</bag:status><bag:gebruiksdoel>woonfunctie</bag:gebruiksdoel><bag:openbare_ruimte>Harderwijkerweg</bag:openbare_ruimte><bag:huisnummer>2</bag:huisnummer><bag:postcode>6731ST</bag:postcode><bag:woonplaats>Otterlo</bag:woonplaats><bag:bouwjaar>1947</bag:bouwjaar><bag:pandidentificatie>228100000006908</bag:pandidentificatie><bag:pandstatus>Pand in gebruik</bag:pandstatus><bag:geometrie><gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#28992"><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">183987,450673,0</gml:coordinates></gml:Point></bag:geometrie><bag:pandgeometrie><gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#28992"><gml:polygonMember><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">183980.433,450671.062,0 183984.017,450666.347,0 183995.069,450674.891,0 183991.349,450679.562,0 183980.433,450671.062,0</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></gml:polygonMember></gml:MultiPolygon></bag:pandgeometrie></bag:verblijfsobject></gml:featureMember></wfs:FeatureCollection>
+2018-04-04 14:04:22,880 util INFO Found cStringIO, good!
+2018-04-04 14:04:22,893 util INFO Found lxml.etree, native XML parsing, fabulous!
+2018-04-04 14:04:22,943 util INFO Found GDAL/OGR Python bindings, super!!
+2018-04-04 14:04:22,952 main INFO Stetl version = 1.2-dev
+2018-04-04 14:04:22,954 ETL INFO INIT - Stetl version is 1.2-dev
+2018-04-04 14:04:22,954 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/8_wfs
+2018-04-04 14:04:22,954 ETL INFO Reading config_file = etl.cfg
+2018-04-04 14:04:22,956 ETL INFO START
+2018-04-04 14:04:22,956 util INFO Timer start: total ETL
+2018-04-04 14:04:22,956 chain INFO Assembling Chain: input_wfs|output_std...
+2018-04-04 14:04:22,964 input INFO cfg = {'url': 'http://geodata.nationaalgeoregister.nl/bag/wfs', 'class': 'inputs.httpinput.HttpInput', 'parameters': '{\n\'service\' : \'WFS\',\n\'version\' : \'1.1.0\',\n\'request\' : \'GetFeature\',\n\'srsName\' : \'EPSG:28992\',\n\'outputFormat\' : \'text/xml; subtype=gml/2.1.2\',\n\'typename\' : \'verblijfsobject\',\n\'filter\' :\'<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc"><ogc:BBOX><gml:Envelope xmlns:gml="http://www.opengis.net/gml" srsName="EPSG:28992"><gml:lowerCorner>183774.83 450577.24</gml:lowerCorner><gml:upperCorner>184277.99 450809.92</gml:upperCorner></gml:Envelope></ogc:BBOX></ogc:Filter>\'\n}'}
+2018-04-04 14:04:22,965 httpinput INFO url=http://geodata.nationaalgeoregister.nl/bag/wfs parameters={'srsName': 'EPSG:28992', 'outputFormat': 'text/xml; subtype=gml/2.1.2', 'service': 'WFS', 'request': 'GetFeature', 'filter': '<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc"><ogc:BBOX><gml:Envelope xmlns:gml="http://www.opengis.net/gml" srsName="EPSG:28992"><gml:lowerCorner>183774.83 450577.24</gml:lowerCorner><gml:upperCorner>184277.99 450809.92</gml:upperCorner></gml:Envelope></ogc:BBOX></ogc:Filter>', 'typename': 'verblijfsobject', 'version': '1.1.0'}
+2018-04-04 14:04:22,965 output INFO cfg = {'class': 'outputs.standardoutput.StandardOutput'}
+2018-04-04 14:04:22,965 chain INFO Running Chain: input_wfs|output_std
+2018-04-04 14:04:24,645 httpinput INFO EOF URL reading done
+2018-04-04 14:04:24,645 chain INFO DONE - 2 rounds - chain=input_wfs|output_std 
+2018-04-04 14:04:24,646 util INFO Timer end: total ETL time=2.0 sec
+2018-04-04 14:04:24,646 ETL INFO ALL DONE
+<?xml version="1.0" encoding="UTF-8"?><wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs" xmlns:gml="http://www.opengis.net/gml" xmlns:bag="http://bag.geonovum.nl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.0.0/WFS-basic.xsd http://bag.geonovum.nl https://geodata.nationaalgeoregister.nl/bag/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=bag%3Averblijfsobject"><gml:boundedBy><gml:null>unknown</gml:null></gml:boundedBy><gml:featureMember><bag:verblijfsobject fid="verblijfsobject.2527990"><bag:identificatie>228010000047219</bag:identificatie><bag:oppervlakte>121</bag:oppervlakte><bag:status>Verblijfsobject in gebruik</bag:status><bag:gebruiksdoel>woonfunctie</bag:gebruiksdoel><bag:openbare_ruimte>Harderwijkerweg</bag:openbare_ruimte><bag:huisnummer>1</bag:huisnummer><bag:postcode>6731ST</bag:postcode><bag:woonplaats>Otterlo</bag:woonplaats><bag:bouwjaar>1947</bag:bouwjaar><bag:pandidentificatie>228100000027383</bag:pandidentificatie><bag:pandstatus>Pand in gebruik</bag:pandstatus><bag:geometrie><gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#28992"><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">183936,450637,0</gml:coordinates></gml:Point></bag:geometrie><bag:pandgeometrie><gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#28992"><gml:polygonMember><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">183932.603,450639.512,0 183934.594,450634.73,0 183933.375,450634.222,0 183935.064,450630.167,0 183936.343,450630.691,0 183938.458,450625.344,0 183943.859,450627.593,0 183939.957,450636.963,0 183938.748,450636.46,0 183936.757,450641.242,0 183932.603,450639.512,0</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></gml:polygonMember></gml:MultiPolygon></bag:pandgeometrie></bag:verblijfsobject></gml:featureMember><gml:featureMember><bag:verblijfsobject fid="verblijfsobject.2572061"><bag:identificatie>228010000047281</bag:identificatie><bag:oppervlakte>71</bag:oppervlakte><bag:status>Verblijfsobject in gebruik</bag:status><bag:gebruiksdoel>woonfunctie</bag:gebruiksdoel><bag:openbare_ruimte>Harderwijkerweg</bag:openbare_ruimte><bag:huisnummer>2</bag:huisnummer><bag:postcode>6731ST</bag:postcode><bag:woonplaats>Otterlo</bag:woonplaats><bag:bouwjaar>1947</bag:bouwjaar><bag:pandidentificatie>228100000006908</bag:pandidentificatie><bag:pandstatus>Pand in gebruik</bag:pandstatus><bag:geometrie><gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#28992"><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">183987,450673,0</gml:coordinates></gml:Point></bag:geometrie><bag:pandgeometrie><gml:MultiPolygon srsName="http://www.opengis.net/gml/srs/epsg.xml#28992"><gml:polygonMember><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">183980.433,450671.062,0 183984.017,450666.347,0 183995.069,450674.891,0 183991.349,450679.562,0 183980.433,450671.062,0</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></gml:polygonMember></gml:MultiPolygon></bag:pandgeometrie></bag:verblijfsobject></gml:featureMember></wfs:FeatureCollection>
 ~/project/stetl/git/examples/basics
 ~/project/stetl/git/examples/basics/9_string_templating ~/project/stetl/git/examples/basics
 ==== running etl.sh for 9_string_templating ====
-2017-11-07 15:34:46,296 util INFO Found cStringIO, good!
-2017-11-07 15:34:46,315 util INFO Found lxml.etree, native XML parsing, fabulous!
-2017-11-07 15:34:46,339 util INFO Found GDAL/OGR Python bindings, super!!
-2017-11-07 15:34:46,346 main INFO Stetl version = 1.1.0
-2017-11-07 15:34:46,347 ETL INFO INIT - Stetl version is 1.1.0
-2017-11-07 15:34:46,347 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/9_string_templating
-2017-11-07 15:34:46,347 ETL INFO Reading config_file = etl.cfg
-2017-11-07 15:34:46,349 ETL INFO START
-2017-11-07 15:34:46,349 util INFO Timer start: total ETL
-2017-11-07 15:34:46,349 chain INFO Assembling Chain: input_csv|filter_template|output_file...
-2017-11-07 15:34:46,351 input INFO cfg = {'output_format': 'record', 'class': 'inputs.fileinput.CsvFileInput', 'file_path': 'input/city.csv'}
-2017-11-07 15:34:46,351 fileinput INFO file_list=['input/city.csv']
-2017-11-07 15:34:46,354 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/city.xml'}
-2017-11-07 15:34:46,354 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/9_string_templating
-2017-11-07 15:34:46,354 chain INFO Running Chain: input_csv|filter_template|output_file
-2017-11-07 15:34:46,354 fileinput INFO Open CSV file: input/city.csv
-2017-11-07 15:34:46,354 templatingfilter INFO Init: templating
-2017-11-07 15:34:46,354 templatingfilter INFO Init: reading template file %s ..." % self.template_file
-2017-11-07 15:34:46,354 templatingfilter INFO template file read OK: city_template.xml
-2017-11-07 15:34:46,355 fileinput INFO CSV row nr 1 read: {'lat': '52.4', 'city': 'amsterdam', 'lon': '4.9'}
-2017-11-07 15:34:46,355 fileoutput INFO writing to file output/city.xml
-2017-11-07 15:34:46,355 fileoutput INFO written to output/city.xml
-2017-11-07 15:34:46,355 templatingfilter INFO Exit: templating
-2017-11-07 15:34:46,355 chain INFO DONE - 2 rounds - chain=input_csv|filter_template|output_file 
-2017-11-07 15:34:46,355 util INFO Timer end: total ETL time=0.0 sec
-2017-11-07 15:34:46,355 ETL INFO ALL DONE
+2018-04-04 14:04:24,939 util INFO Found cStringIO, good!
+2018-04-04 14:04:24,949 util INFO Found lxml.etree, native XML parsing, fabulous!
+2018-04-04 14:04:24,987 util INFO Found GDAL/OGR Python bindings, super!!
+2018-04-04 14:04:24,994 main INFO Stetl version = 1.2-dev
+2018-04-04 14:04:24,995 ETL INFO INIT - Stetl version is 1.2-dev
+2018-04-04 14:04:24,995 ETL INFO Config/working dir = /Users/just/project/stetl/git/examples/basics/9_string_templating
+2018-04-04 14:04:24,995 ETL INFO Reading config_file = etl.cfg
+2018-04-04 14:04:24,997 ETL INFO START
+2018-04-04 14:04:24,997 util INFO Timer start: total ETL
+2018-04-04 14:04:24,997 chain INFO Assembling Chain: input_csv|filter_template|output_file...
+2018-04-04 14:04:25,000 input INFO cfg = {'output_format': 'record', 'class': 'inputs.fileinput.CsvFileInput', 'file_path': 'input/city.csv'}
+2018-04-04 14:04:25,001 fileinput INFO file_list=['input/city.csv']
+2018-04-04 14:04:25,002 output INFO cfg = {'class': 'outputs.fileoutput.FileOutput', 'file_path': 'output/city.xml'}
+2018-04-04 14:04:25,002 fileoutput INFO working dir /Users/just/project/stetl/git/examples/basics/9_string_templating
+2018-04-04 14:04:25,002 chain INFO Running Chain: input_csv|filter_template|output_file
+2018-04-04 14:04:25,002 fileinput INFO Open CSV file: input/city.csv
+2018-04-04 14:04:25,003 templatingfilter INFO Init: templating
+2018-04-04 14:04:25,003 templatingfilter INFO Init: reading template file %s ..." % self.template_file
+2018-04-04 14:04:25,003 templatingfilter INFO template file read OK: city_template.xml
+2018-04-04 14:04:25,003 fileinput INFO CSV row nr 1 read: {'lat': '52.4', 'city': 'amsterdam', 'lon': '4.9'}
+2018-04-04 14:04:25,003 fileoutput INFO writing to file output/city.xml
+2018-04-04 14:04:25,004 fileoutput INFO written to output/city.xml
+2018-04-04 14:04:25,004 templatingfilter INFO Exit: templating
+2018-04-04 14:04:25,004 chain INFO DONE - 2 rounds - chain=input_csv|filter_template|output_file 
+2018-04-04 14:04:25,004 util INFO Timer end: total ETL time=0.0 sec
+2018-04-04 14:04:25,004 ETL INFO ALL DONE
 ~/project/stetl/git/examples/basics
