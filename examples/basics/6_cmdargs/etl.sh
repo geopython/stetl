@@ -14,3 +14,6 @@ stetl  -c etl.cfg -a "in_xml=input/cities.xml in_xsl=cities2gml.xsl out_xml=outp
 
 # Option 2: using a properties file
 stetl  -c etl.cfg -a etl.args
+
+# Option 3: multiple -a options e.g. overriding one or more default args (file)
+stetl  -c etl.cfg -a etl.args -a "in_xml=input/amsterdam.xml"

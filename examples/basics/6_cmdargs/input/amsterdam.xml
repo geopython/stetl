@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<cities>
+    <city>
+        <name>Amsterdam</name>
+        <lat>52.4</lat>
+        <lon>4.9</lon>
+    </city>
+</cities>

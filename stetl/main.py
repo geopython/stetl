@@ -12,11 +12,12 @@ from version import __version__
 import argparse  # apt-get install python-argparse
 import inspect
 import os
+import sys
 
 log = Util.get_log('main')
 
 
-def parse_args():
+def parse_args(args_list):
     log.info("Stetl version = %s" % __version__)
 
     argparser = argparse.ArgumentParser(description='Invoke Stetl')
@@ -27,22 +28,27 @@ def parse_args():
                            dest='config_section', required=False)
 
     argparser.add_argument('-a ', '--args', type=str,
-                           help='Arguments or .properties file to be substituted for {argN}s in config file, as -a "arg1=foo arg2=bar" or -a args.properties',
-                           dest='config_args', required=False)
+                           help='Arguments or .properties files to be substituted for symbolic {argN}s in Stetl config file,\
+                                as -a "arg1=foo arg2=bar" and/or -a args.properties, multiple -a options are possible',
+                           dest='config_args', required=False, action='append')
 
     argparser.add_argument('-d ', '--doc', type=str,
                            help='Get component documentation like its configuration parameters, e.g. stetl doc stetl.inputs.fileinput.FileInput',
                            dest='doc_args', required=False)
 
-    args = argparser.parse_args()
+    args = argparser.parse_args(args_list)
 
     if args.config_args:
-        if os.path.isfile(args.config_args):
-            log.info('Found args file at: %s' % args.config_args)
-            args.config_args = Util.propsfile_to_dict(args.config_args)
-        else:
-            # Convert string to dict: http://stackoverflow.com/a/1248990
-            args.config_args = Util.string_to_dict(args.config_args)
+        args_total = dict()
+        for arg in args.config_args:
+            if os.path.isfile(arg):
+                log.info('Found args file at: %s' % arg)
+                args_total = Util.merge_two_dicts(args_total, Util.propsfile_to_dict(arg))
+            else:
+                # Convert string to dict: http://stackoverflow.com/a/1248990
+                args_total = Util.merge_two_dicts(args_total, Util.string_to_dict(arg))
+
+        args.config_args = args_total
 
     return args
 
@@ -117,12 +123,14 @@ def main():
     Args:
        -c  --config <config_file>  the Stetl config file.
        -s  --section <section_name> the section in the Stetl config (ini) file to execute (default is [etl]).
-       -a  --args <arglist> substitutable args for symbolic, {arg}, values in Stetl config file, in format "arg1=foo arg2=bar" etc.
+       -a  --args <arglist> sero or more substitutable args for symbolic, {arg}, values in Stetl config file, in format -a arg1=foo -a arg2=bar etc.
        -d  --doc <class> Get component documentation like its configuration parameters, e.g. stetl --doc stetl.inputs.fileinput.FileInput
        -h  --help get help info
 
     """
-    args = parse_args()
+
+    # Pass arguments explicitly, facilitates testing
+    args = parse_args(sys.argv[1:])
 
     if args.config_file:
         # Do the ETL

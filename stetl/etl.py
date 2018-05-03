@@ -62,15 +62,20 @@ class ETL:
             log.error("Cannot read config file: err=%s" % str(e))
             raise e
 
+        args_names = list()
         try:
             # Optional: expand symbolic arguments from args_dict and or OS Env
+            # ignore errors here as { .. } may appear at random.
+
+            # Parse unique list of argument names from config file string.
             # https://www.machinelearningplus.com/python/python-regex-tutorial-examples/
-            args_names = re.findall('{[A-Z|a-z]\w+}', config_str)
+            args_names = list(set(re.findall('{[A-Z|a-z]\w+}', config_str)))
             args_names = [name.split('{')[1].split('}')[0] for name in args_names]
 
             # Optional: expand from equivalent env vars
             args_dict = self.env_expand_args_dict(args_dict, args_names)
 
+            # In general all arg names should be present in args dict
             for args_name in args_names:
                 if args_name not in args_dict:
                     log.warn("Arg not found in args nor environment: name=%s" % args_name)
@@ -81,7 +86,7 @@ class ETL:
 
         try:
             if args_dict:
-                log.info("Substituting %d args in config file from args_dict: %s" % (len(args_dict), str(args_dict)))
+                log.info("Substituting %d args in config file from args_dict: %s" % (len(args_names), str(args_names)))
 
                 # Do replacements  see http://docs.python.org/2/library/string.html#formatstrings
                 # and render substituted config string

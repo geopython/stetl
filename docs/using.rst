@@ -234,11 +234,13 @@ or even OGC WPS servers (planned).
 
 Reusable Stetl Configs
 ----------------------
-What we saw in the last example is that it is hard to reuse this `etl.cfg` when we have for example a different input file
-or want to map to different output files. For this Stetl supports `config parameter substitution`.
+What we saw in the last example is that it is hard to reuse this `etl.cfg`
+when we have for example a different input file
+or want to map to different output files.
+For this Stetl supports `config parameter substitution`.
 
 Dynamic or secret (e.g. database credentials) parameters in `etl.cfg` are declared
-symbolically and substituted at runtime via the commandline or the OS environment (new in 2018).
+symbolically and substituted at runtime via the commandline or the OS environment.
 
 A variable is declared between curly brackets like `{out_xml}`. See
 example `6_cmdargs <https://github.com/geopython/stetl/tree/master/examples/basics/6_cmdargs>`_. ::
@@ -258,7 +260,8 @@ example `6_cmdargs <https://github.com/geopython/stetl/tree/master/examples/basi
 	class = outputs.fileoutput.FileOutput
 	file_path = {out_xml}
 
-Note the symbolic input, xsl and output files. We can now perform this ETL using the `stetl -a option` in two ways.
+Note the symbolic input, xsl and output files. We can now perform
+the ETL using the `stetl -a option` in two basic ways.
 One, passing the arguments on the commandline, like ::
 
 	stetl -c etl.cfg -a "in_xml=input/cities.xml in_xsl=cities2gml.xsl out_xml=output/gmlcities.gml"
@@ -274,11 +277,21 @@ Where the content of the `etl.args` properties file is: ::
 	in_xsl=cities2gml.xsl
 	out_xml=output/gmlcities.gml
 
-A third way is to pass these key/value pairs (partly) as OS Environment variables.
+It is also possible to specify **multiple -a arguments**. This provides for situations
+where a `default.args` contains all default arguments and a `my.args` or explicit `-a` settings
+that override the default values in `default.args`. Overriding is determined by the order of
+the `-a` arguments. Examples: ::
+
+	stetl -c etl.cfg -a default.args -a my.args
+	stetl -c etl.cfg -a default.args -a "db_user=docker db_password=pass"
+	stetl -c etl.cfg -a default.args -a db_user=docker -a db_password=pass
+
+It is also possible to pass these key/value pairs via OS Environment variables.
 This is especially handy in Docker-based deployments like Docker Compose and Kubernetes.
 In this case the variable names need to be prepended with `STETL_` or `stetl_` as
 to not mix-up with other non-related OS-env vars. A mixture of commandline args (file)
-and environment vars is possible. The rule is that *OS Environment variables always take prevalence*.
+and environment vars is possible. The rule is that
+*OS Environment variables always override/overrule arguments specified with -a option(s)*.
 
 For example, the above args could also be passed as follows: ::
 
@@ -287,10 +300,15 @@ For example, the above args could also be passed as follows: ::
 	export stetl_out_xml="output/gmlcities.gml"
 	stetl -c etl.cfg
 
-or only override the input file name from `etl.args`: ::
+or only override the input file name `in_xml` from `etl.args`: ::
 
 	export stetl_in_xml="input/cities2.xml"
 	stetl -c etl.cfg -a etl.args
+
+or even with multiple `-a args`: ::
+
+	export stetl_in_xml="input/cities2.xml"
+	stetl -c etl.cfg -a etl.args -a my.args
 
 This makes an ETL chain highly reusable.
 A very elaborate Stetl config with parameter substitution can be seen in the

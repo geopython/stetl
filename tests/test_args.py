@@ -4,6 +4,7 @@ import os
 
 from stetl.etl import ETL
 from tests.stetl_test_case import StetlTestCase
+from stetl.main import parse_args
 
 
 class ConfigTest(StetlTestCase):
@@ -17,14 +18,70 @@ class ConfigTest(StetlTestCase):
         self.curr_dir = os.path.dirname(os.path.realpath(__file__))
         self.cfg_dict = {'config_file': os.path.join(self.curr_dir, 'configs/copy_in_out_file.cfg')}
 
-    def tearDown(self):
-        super(ConfigTest, self).tearDown()
+    def clear_stetl_env(self):
         # Restore old enviroment
         try:
             del os.environ['stetl_out_file']
             del os.environ['stetl_in_file']
         except:
             pass
+
+    def tearDown(self):
+        super(ConfigTest, self).tearDown()
+        self.clear_stetl_env()
+
+    def test_config_args_file_single(self):
+        """
+        Test single -a argsfile option
+        :return:
+        """
+        args_default = os.path.join(self.curr_dir, 'configs/copy_in_out_file_default.args')
+        args_parsed = parse_args(['-a', args_default])
+
+        # Test args substitution from args_dict
+        config_args = args_parsed.config_args
+        self.assertEqual(config_args['in_file'], 'default_infile.txt')
+        self.assertEqual(config_args['out_file'], 'default_outfile.txt')
+
+    def test_config_args_explicit_single(self):
+        """
+        Test single -a "arg1=x arg2=y" option
+        :return:
+        """
+        args_default = os.path.join(self.curr_dir, 'configs/copy_in_out_file_default.args')
+        args_parsed = parse_args(['-a', 'in_file=default_infile.txt out_file=default_outfile.txt'])
+
+        # Test args substitution from args_dict
+        config_args = args_parsed.config_args
+        self.assertEqual(config_args['in_file'], 'default_infile.txt')
+        self.assertEqual(config_args['out_file'], 'default_outfile.txt')
+
+    def test_config_args_file_multi(self):
+        """
+        Test multiple: -a argsfile1 -a argsfile2 option with override
+        :return:
+        """
+        args_default = os.path.join(self.curr_dir, 'configs/copy_in_out_file_default.args')
+        args_my = os.path.join(self.curr_dir, 'configs/copy_in_out_file_my.args')
+        args_parsed = parse_args(['-a', args_default, '-a', args_my])
+
+        # Test args substitution from args_dict
+        config_args = args_parsed.config_args
+        self.assertEqual(config_args['in_file'], 'my_infile.txt')
+        self.assertEqual(config_args['out_file'], 'default_outfile.txt')
+
+    def test_config_args_file_explicit_multi(self):
+        """
+        Test multiple: -a argsfile1 -a arg=myarg option with override
+        :return:
+        """
+        args_default = os.path.join(self.curr_dir, 'configs/copy_in_out_file_default.args')
+        args_parsed = parse_args(['-a', args_default, '-a', 'in_file=my_infile.txt'])
+
+        # Test args substitution from args_dict
+        config_args = args_parsed.config_args
+        self.assertEqual(config_args['in_file'], 'my_infile.txt')
+        self.assertEqual(config_args['out_file'], 'default_outfile.txt')
 
     def test_args_dict(self):
         args_dict = {'in_file': 'infile.txt', 'out_file': 'outfile.txt'}

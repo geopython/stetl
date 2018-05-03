@@ -111,6 +111,16 @@ class Util:
         # Convert/flatten dict to string http://codereview.stackexchange.com/questions/7953/how-do-i-flatten-a-dictionary-into-a-string
         return ' '.join("%s=%r" % (key, val) for (key, val) in dict_v.iteritems())
 
+    @staticmethod
+    def merge_two_dicts(x, y):
+        """
+        Given two dicts, merge them into a new dict as a shallow copy.
+        From: https://stackoverflow.com/questions/38987/how-to-merge-two-dictionaries-in-a-single-expression
+        """
+        z = x.copy()
+        z.update(y)
+        return z
+
     # Convert a properties file to a dict
     @staticmethod
     def propsfile_to_dict(file_path):

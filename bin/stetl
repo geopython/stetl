@@ -8,6 +8,7 @@
 from stetl.main import parse_args
 from stetl.etl import ETL
 from stetl.util import Util
+import sys
 
 log = Util.get_log('main')
 
@@ -18,12 +19,12 @@ def main():
     Args:
        -c  --config <config_file>  the Stetl config file.
        -s  --section <section_name> the section in the Stetl config (ini) file to execute (default is [etl]).
-       -a  --args <arglist> substitutable args for symbolic, {arg}, values in Stetl config file, in format "arg1=foo arg2=bar" etc.
+       -a  --args <arglist> zero or more substitutable args for symbolic, {arg}, values in Stetl config file, in format -a arg1=foo -a arg2=bar etc.
        -h  --help <subject> Get component documentation like its configuration parameters, e.g. stetl doc stetl.inputs.fileinput.FileInput
 
     """
 
-    args = parse_args()
+    args = parse_args(sys.argv[1:])
 
     if args.config_file:
         # Do the ETL

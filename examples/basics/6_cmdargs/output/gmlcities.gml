@@ -22,24 +22,4 @@
       </ogr:geometry>
     </ogr:City>
   </gml:featureMember>
-  <gml:featureMember>
-    <ogr:City>
-      <ogr:name>Bonn</ogr:name>
-      <ogr:geometry>
-        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
-          <gml:coordinates>50.7,7.1</gml:coordinates>
-        </gml:Point>
-      </ogr:geometry>
-    </ogr:City>
-  </gml:featureMember>
-  <gml:featureMember>
-    <ogr:City>
-      <ogr:name>Rome</ogr:name>
-      <ogr:geometry>
-        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
-          <gml:coordinates>41.9,12.5</gml:coordinates>
-        </gml:Point>
-      </ogr:geometry>
-    </ogr:City>
-  </gml:featureMember>
 </ogr:FeatureCollection>
