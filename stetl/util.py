@@ -485,4 +485,12 @@ class ConfigSection():
         return result
 
     def to_string(self):
-        return repr(self.config_dict)
+        # Need to hide some sensitive values, usually used for logging
+        safe_copy = self.config_dict.copy()
+        hides = ['passw', 'pasw', 'token', 'user']
+        for key in safe_copy:
+            for hide_key in hides:
+                if hide_key in key.lower():
+                    safe_copy[key] = '<hidden>'
+
+        return repr(safe_copy)
