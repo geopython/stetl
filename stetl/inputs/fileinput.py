@@ -499,7 +499,11 @@ class ApacheLogFileInput(FileInput):
             return packet
 
         # Parse logfile line into record (dict)
-        packet.data = self.parser.parse(line)
+        packet.data = None
+        try:
+            self.parser.parse(line)
+        except Exception as e:
+            log.warn("Cannot parse line: %s e=%s" % (line, str(e)))
         return packet
 
 
