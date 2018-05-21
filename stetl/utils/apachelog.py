@@ -191,58 +191,62 @@ class parser:
 
         Raises and exception if it couldn't parse the line
         """
-        line = line.strip()
-        match = self._regex.match(line)
+        data = None
+        try:
+            line = line.strip()
+            match = self._regex.match(line)
 
-        if match:
-            data = {}
-            for k, v in zip(self._names, match.groups()):
-                # JvdB convert to native Python types if needed
-                if self._options['use_native_types']:
-                    if k in ['%>s', '%b', '%D']:
+            if match:
+                data = {}
+                for k, v in zip(self._names, match.groups()):
+                    # JvdB convert to native Python types if needed
+                    if self._options['use_native_types']:
+                        if k in ['%>s', '%b', '%D']:
+                            try:
+                                v = int(v)
+                            except Exception:
+                                v = 0
+                        elif k == '%t':
+                            try:
+                                v = int(parse_date(v)[0])
+                            except Exception:
+                                v = 0
+                        elif v == '-':
+                            v = None
+
+                    # JvdB: elaborate request '%r' string
+                    if k == '%r':
+                        v_elms = v.split(' ')
+
+                        # Filter out methods of no interest
+                        if v_elms[0] not in self._options['methods']:
+                            return None
+
+                        if self._options['request_path_only']:
+                            try:
+                                v = v.split(' ')[1]
+                            except Exception:
+                                v = ''
+
+                    # JvdB map %-like keys to readable names using key map
+                    if self._key_map:
                         try:
-                            v = int(v)
-                        except Exception:
-                            v = 0
-                    elif k == '%t':
-                        try:
-                            v = int(parse_date(v)[0])
-                        except Exception:
-                            v = 0
-                    elif v == '-':
-                        v = None
+                            data[self._key_map[k]] = v
+                        except KeyError:
+                            pass
+                    else:
+                        data[k] = v
 
-                # JvdB: elaborate request '%r' string
-                if k == '%r':
-                    v_elms = v.split(' ')
+                # JvdB option to generate unique key, e.g. for database insert
+                if self._options['gen_key']:
+                    # Generate  unique key as md5-string from all values
+                    data['key'] = hashlib.md5(str(data.values())).hexdigest()
 
-                    # Filter out methods of no interest
-                    if v_elms[0] not in self._options['methods']:
-                        return None
 
-                    if self._options['request_path_only']:
-                        try:
-                            v = v.split(' ')[1]
-                        except Exception:
-                            v = ''
+        except Exception as e:
+            raise ApacheLogParserError("Unable to parse: %s with the %s regular expression e=%s" % (line, self._pattern, str(e)))
 
-                # JvdB map %-like keys to readable names using key map
-                if self._key_map:
-                    try:
-                        data[self._key_map[k]] = v
-                    except KeyError:
-                        pass
-                else:
-                    data[k] = v
-
-            # JvdB option to generate unique key, e.g. for database insert
-            if self._options['gen_key']:
-                # Generate  unique key as md5-string from all values
-                data['key'] = hashlib.md5(str(data.values())).hexdigest()
-
-            return data
-
-        raise ApacheLogParserError("Unable to parse: %s with the %s regular expression" % (line, self._pattern))
+        return data
 
     def alias(self, name):
         """

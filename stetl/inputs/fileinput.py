@@ -501,9 +501,10 @@ class ApacheLogFileInput(FileInput):
         # Parse logfile line into record (dict)
         packet.data = None
         try:
-            self.parser.parse(line)
+            packet.data = self.parser.parse(line)
         except Exception as e:
-            log.warn("Cannot parse line: %s e=%s" % (line, str(e)))
+            log.warn("Cannot parse e=%s" % str(e))
+
         return packet
 
 
