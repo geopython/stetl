@@ -242,7 +242,6 @@ class parser:
                     # Generate  unique key as md5-string from all values
                     data['key'] = hashlib.md5(str(data.values())).hexdigest()
 
-
         except Exception as e:
             raise ApacheLogParserError("Unable to parse: %s with the %s regular expression e=%s" % (line, self._pattern, str(e)))
 
