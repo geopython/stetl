@@ -46,7 +46,7 @@ class StringSubstitutionFilter(StringFilter):
         # String should have substitutable values like {schema} {foo}
         # format_args should be of the form format_args = schema:test foo:bar ...
         self.format_args = self.cfg.get('format_args')
-        
+
         # Use a different separator, if provided
         self.separator = self.cfg.get('separator', default=':')
 
