@@ -46,9 +46,12 @@ class StringSubstitutionFilter(StringFilter):
         # String should have substitutable values like {schema} {foo}
         # format_args should be of the form format_args = schema:test foo:bar ...
         self.format_args = self.cfg.get('format_args')
+        
+        # Use a different separator, if provided
+        self.separator = self.cfg.get('separator', default=':')
 
         # Convert string to dict: http://stackoverflow.com/a/1248990
-        self.format_args_dict = Util.string_to_dict(self.format_args, ':')
+        self.format_args_dict = Util.string_to_dict(self.format_args, self.separator)
 
     def filter_string(self, packet):
         # String substitution based on Python String.format()
