@@ -4,6 +4,7 @@
 #
 # Author:Just van den Broecke
 
+from stetl.component import Config
 from stetl.util import Util
 from stetl.filter import Filter
 from stetl.packet import FORMAT
@@ -38,17 +39,26 @@ class StringSubstitutionFilter(StringFilter):
     consumes=FORMAT.string, produces=FORMAT.string
     """
 
+    @Config(ptype=str, default=None, required=True)
+    def format_args(self):
+        """
+        Provides a list of format arguments used by the string substitution filter. Formatting of content according to Python String.format().
+        String should have substitutable values like {schema} {foo}.
+
+        Example: format_args = schema:test foo:bar
+        """
+        pass
+
+    @Config(ptype=str, default=':', required=False)
+    def separator(self):
+        """
+        Provides the separator to split the format argument names from their values.
+        """
+        pass
+
     # Constructor
     def __init__(self, configdict, section):
         StringFilter.__init__(self, configdict, section, consumes=FORMAT.string, produces=FORMAT.string)
-
-        # Formatting of content according to Python String.format()
-        # String should have substitutable values like {schema} {foo}
-        # format_args should be of the form format_args = schema:test foo:bar ...
-        self.format_args = self.cfg.get('format_args')
-
-        # Use a different separator, if provided
-        self.separator = self.cfg.get('separator', default=':')
 
         # Convert string to dict: http://stackoverflow.com/a/1248990
         self.format_args_dict = Util.string_to_dict(self.format_args, self.separator)
