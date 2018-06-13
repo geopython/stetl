@@ -43,17 +43,13 @@ class ExecOutput(Output):
         return packet
 
     def execute_cmd(self, cmd):
-        use_shell = True
-        if os.name == 'nt':
-            use_shell = False
-
         env_vars = Util.string_to_dict(self.env_args, self.env_separator)
         old_environ = os.environ.copy()
 
         try:
             os.environ.update(env_vars)
             log.info("executing cmd=%s" % cmd)
-            subprocess.call(cmd, shell=use_shell)
+            subprocess.call(cmd, shell=True)
             log.info("execute done")
         finally:
             os.environ = old_environ

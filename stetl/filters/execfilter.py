@@ -43,17 +43,13 @@ class ExecFilter(Filter):
         return packet
 
     def execute_cmd(self, cmd):
-        use_shell = True
-        if os.name == 'nt':
-            use_shell = False
-
         env_vars = Util.string_to_dict(self.env_args, self.env_separator)
         old_environ = os.environ.copy()
 
         try:
             os.environ.update(env_vars)
             log.info("executing cmd=%s" % cmd)
-            result = subprocess.check_output(cmd, shell=use_shell)
+            result = subprocess.check_output(cmd, shell=True)
             log.info("execute done")
             return result
         finally:
