@@ -7,6 +7,7 @@
 #
 import subprocess
 import os
+from stetl.component import Config
 from stetl.filter import Filter
 from stetl.util import Util
 from stetl.packet import FORMAT
@@ -19,6 +20,22 @@ class ExecFilter(Filter):
     Executes any command (abstract base class).
     """
 
+    @Config(ptype=str, default='', required=False)
+    def env_args(self):
+        """
+        Provides of list of environment variables which will be used when executing the given command.
+
+        Example: env_args = pgpassword=postgres othersetting=value~with~spaces
+        """
+        pass
+
+    @Config(ptype=str, default='=', required=False)
+    def env_separator(self):
+        """
+        Provides the separator to split the environment variable names from their values.
+        """
+        pass
+
     def __init__(self, configdict, section, consumes, produces):
         Filter.__init__(self, configdict, section, consumes, produces)
 
@@ -30,10 +47,17 @@ class ExecFilter(Filter):
         if os.name == 'nt':
             use_shell = False
 
-        log.info("executing cmd=%s" % cmd)
-        result = subprocess.check_output(cmd, shell=use_shell)
-        log.info("execute done")
-        return result
+        env_vars = Util.string_to_dict(self.env_args, self.env_separator)
+        old_environ = os.environ.copy()
+
+        try:
+            os.environ.update(env_vars)
+            log.info("executing cmd=%s" % cmd)
+            result = subprocess.check_output(cmd, shell=use_shell)
+            log.info("execute done")
+            return result
+        finally:
+            os.environ = old_environ
 
 
 class CommandExecFilter(ExecFilter):
