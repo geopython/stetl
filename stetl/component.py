@@ -5,6 +5,8 @@
 # Author: Just van den Broecke
 #
 import os
+import sys
+from time import time
 from util import Util, ConfigSection
 from packet import FORMAT
 
@@ -122,6 +124,10 @@ class Component(object):
         self.cfg_vals = dict()
         self.next = None
         self.section = section
+        self._max_time = -1
+        self._min_time = sys.maxint
+        self._total_time = 0
+        self._invoke_count = 0
 
         # First assume single output provided by derived class
         self._output_format = produces
@@ -184,10 +190,14 @@ class Component(object):
         # Current processor of packet
         packet.component = self
 
+        start_time = self.timer_start()
+        self._invoke_count += 1
+
         # Do something with the data
         result = self.before_invoke(packet)
         if result is False:
             # Component indicates it does not want the chain to proceed
+            self.timer_stop(start_time)
             return packet
 
         # Do component-specific processing, e.g. read or write or filter
@@ -196,7 +206,10 @@ class Component(object):
         result = self.after_invoke(packet)
         if result is False:
             # Component indicates it does not want the chain to proceed
+            self.timer_stop(start_time)
             return packet
+
+        self.timer_stop(start_time)
 
         # If there is a next component, let it process
         if self.next:
@@ -218,6 +231,12 @@ class Component(object):
     def do_exit(self):
         # Notify all comps that we exit
         self.exit()
+
+        # Simple performance stats in one line (issue #77)
+        log.info("%s invokes=%d time(total, min, max, avg) = %.3f %.3f %.3f %.3f" %
+                 (self.__class__.__name__, self._invoke_count,
+                  self._total_time, self._min_time, self._max_time,
+                  self._total_time / self._invoke_count))
 
         # If there is a next component, let it do its exit()
         if self.next:
@@ -258,3 +277,23 @@ class Component(object):
         Allows derived Components to perform a one-time exit/cleanup.
         """
         pass
+
+    def timer_start(self):
+        return time()
+
+    def timer_stop(self, start_time):
+        """
+        Collect and calculate per-Component performance timing stats.
+        :param start_time:
+        :return:
+        """
+        delta_time = time() - start_time
+
+        # Calc timing stats for Component invocation
+        self._total_time += delta_time
+
+        if delta_time > self._max_time:
+            self._max_time = delta_time
+
+        if delta_time < self._min_time and '%.3f' % delta_time != '0.000':
+            self._min_time = delta_time
