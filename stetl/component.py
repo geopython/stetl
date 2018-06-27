@@ -233,10 +233,15 @@ class Component(object):
         self.exit()
 
         # Simple performance stats in one line (issue #77)
+        # Calc average processing time, watch for 0 invoke-case
+        avg_time = 0.0
+        if self._invoke_count > 0:
+            avg_time = self._total_time / self._invoke_count
+
         log.info("%s invokes=%d time(total, min, max, avg) = %.3f %.3f %.3f %.3f" %
                  (self.__class__.__name__, self._invoke_count,
                   self._total_time, self._min_time, self._max_time,
-                  self._total_time / self._invoke_count))
+                  avg_time))
 
         # If there is a next component, let it do its exit()
         if self.next:
