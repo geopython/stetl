@@ -20,6 +20,22 @@ class ExecOutput(Output):
     Executes any command (abstract base class).
     """
 
+    @Config(ptype=str, default='', required=False)
+    def env_args(self):
+        """
+        Provides of list of environment variables which will be used when executing the given command.
+
+        Example: env_args = pgpassword=postgres othersetting=value~with~spaces
+        """
+        pass
+
+    @Config(ptype=str, default='=', required=False)
+    def env_separator(self):
+        """
+        Provides the separator to split the environment variable names from their values.
+        """
+        pass
+
     def __init__(self, configdict, section, consumes):
         Output.__init__(self, configdict, section, consumes)
 
@@ -27,13 +43,16 @@ class ExecOutput(Output):
         return packet
 
     def execute_cmd(self, cmd):
-        use_shell = True
-        if os.name == 'nt':
-            use_shell = False
+        env_vars = Util.string_to_dict(self.env_args, self.env_separator)
+        old_environ = os.environ.copy()
 
-        log.info("executing cmd=%s" % cmd)
-        subprocess.call(cmd, shell=use_shell)
-        log.info("execute done")
+        try:
+            os.environ.update(env_vars)
+            log.info("executing cmd=%s" % cmd)
+            subprocess.call(cmd, shell=True)
+            log.info("execute done")
+        finally:
+            os.environ = old_environ
 
 
 class CommandExecOutput(ExecOutput):
