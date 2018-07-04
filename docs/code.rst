@@ -111,6 +111,10 @@ Components: Filters
    :members:
    :show-inheritance:
 
+.. automodule:: stetl.filters.sieve
+   :members:
+   :show-inheritance:
+
 .. automodule:: stetl.filters.stringfilter
    :members:
    :show-inheritance:
@@ -128,6 +132,30 @@ Components: Filters
    :show-inheritance:
 
 .. automodule:: stetl.filters.formatconverter
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.filters.execfilter
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.filters.nullfilter
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.filters.packetbuffer
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.filters.packetwriter
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.filters.regexfilter
+   :members:
+   :show-inheritance:
+
+.. automodule:: stetl.filters.zipfileextractor
    :members:
    :show-inheritance:
 
