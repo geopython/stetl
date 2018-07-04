@@ -46,7 +46,7 @@ of GML/XML-based National geo-datasets to for example PostGIS.
 
 Most of the data conversions within the [Dutch NLExtract Project](https://github.com/nlextract/NLExtract) apply Stetl.
 
-Stetl also proved to be very effective in [IoT-related transformations involving the SensorWeb/SOS](https://github.com/Geonovum/smartemission).
+Stetl also proved to be very effective in [IoT-related transformations involving the SensorWeb/SOS](https://github.com/smartemission).
 
 ## Examples
 
@@ -72,7 +72,7 @@ review the [guidelines for contributing](CONTRIBUTING.md).
 Stetl originated in the INSPIRE-FOSS project: [2009-2013 now archived](https://github.com/justb4/inspire-foss). 
 Since then Stetl evolved into a wider use like
 transforming [Dutch GML-based Open Datasets](https://github.com/nlextract/NLExtract) such as IMGEO/BGT (Large Scale Topography) 
-and IMKAD/BRK (Cadastral Data) and []Sensor Data Transformation and Calibration](https://github.com/Geonovum/smartemission/tree/master/etl).
+and IMKAD/BRK (Cadastral Data) and [Sensor Data Transformation and Calibration](https://github.com/smartemission/docker-se-stetl).
 
 ## Finally
 
