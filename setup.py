@@ -38,9 +38,9 @@ with open('requirements-main.txt') as f:
 setup(
     name='Stetl',
     version=version,
-    description="Stetl provides transformation for spatial data",
+    description="Transformation and conversion framework (ETL) mainly for geospatial data",
     license='GNU GPL v3',
-    keywords='etl xsl gdal gis vector feature data',
+    keywords='etl xsl gdal gis vector feature data gml xml',
     author='Just van den Broecke',
     author_email='justb4@gmail.com',
     maintainer='Just van den Broecke',
@@ -56,7 +56,7 @@ setup(
     tests_require=['nose'],
     test_suite='nose.collector',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
