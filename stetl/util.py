@@ -15,6 +15,15 @@ from ConfigParser import ConfigParser
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(name)s %(levelname)s %(message)s')
 
+# Constants for precompiled regular expressions
+RE_PG_START = re.compile(r'\bPG:', flags=re.IGNORECASE)
+RE_PG_PWD = re.compile(r'\bpassword=[^\'"]\S*', flags=re.IGNORECASE)
+RE_PG_PWD_DBL = re.compile(r'\bpassword="(?:[^"\\]|\\.)*"', flags=re.IGNORECASE)
+RE_PG_PWD_SNG = re.compile(r'\bpassword=\'(?:[^\'\\]|\\.)*\'', flags=re.IGNORECASE)
+RE_PG_USER = re.compile(r'\buser=[^\'"]\S*', flags=re.IGNORECASE)
+RE_PG_USER_DBL = re.compile(r'\buser="(?:[^"\\]|\\.)*"', flags=re.IGNORECASE)
+RE_PG_USER_SNG = re.compile(r'\buser=\'(?:[^\'\\]|\\.)*\'', flags=re.IGNORECASE)
+
 
 # Static utility methods
 class Util:
@@ -354,14 +363,14 @@ class Util:
     @staticmethod
     def safe_string_value(value, hide_value='***'):
         # PostgreSQL connection strings as used by GDAL/OGR
-        if re.search(r'\bPG:', value, flags=re.IGNORECASE) is not None:
-            value = re.sub(r'\bpassword=[^\'"]\S*', 'password=%s' % hide_value, value, flags=re.IGNORECASE)
-            value = re.sub(r'\bpassword="(?:[^"\\]|\\.)*"', 'password="%s"' % hide_value, value, flags=re.IGNORECASE)
-            value = re.sub(r'\bpassword=\'(?:[^\'\\]|\\.)*\'', 'password=\'%s\'' % hide_value, value, flags=re.IGNORECASE)
+        if RE_PG_START.search(value) is not None:
+            value = RE_PG_PWD.sub('password=%s' % hide_value, value)
+            value = RE_PG_PWD_DBL.sub('password="%s"' % hide_value, value)
+            value = RE_PG_PWD_SNG.sub('password=\'%s\'' % hide_value, value)
 
-            value = re.sub(r'\buser=[^\'"]\S*', 'user=%s' % hide_value, value, flags=re.IGNORECASE)
-            value = re.sub(r'\buser="(?:[^"\\]|\\.)*"', 'user="%s"' % hide_value, value, flags=re.IGNORECASE)
-            value = re.sub(r'\buser=\'(?:[^\'\\]|\\.)*\'', 'user=\'%s\'' % hide_value, value, flags=re.IGNORECASE)
+            value = RE_PG_USER.sub('user=%s' % hide_value, value)
+            value = RE_PG_USER_DBL.sub('user="%s"' % hide_value, value)
+            value = RE_PG_USER_SNG.sub('user=\'%s\'' % hide_value, value)
 
         # Add more cases as needed ...
 
