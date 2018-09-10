@@ -4,15 +4,25 @@
 #
 # Author:Just van den Broecke
 
+import glob
 import logging
 import os
-import glob
+import re
 import types
 from time import time
 from ConfigParser import ConfigParser
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(name)s %(levelname)s %(message)s')
+
+# Constants for precompiled regular expressions
+RE_PG_START = re.compile(r'\bPG:', flags=re.IGNORECASE)
+RE_PG_PWD = re.compile(r'\bpassword=[^\'"]\S*', flags=re.IGNORECASE)
+RE_PG_PWD_DBL = re.compile(r'\bpassword="(?:[^"\\]|\\.)*"', flags=re.IGNORECASE)
+RE_PG_PWD_SNG = re.compile(r'\bpassword=\'(?:[^\'\\]|\\.)*\'', flags=re.IGNORECASE)
+RE_PG_USER = re.compile(r'\buser=[^\'"]\S*', flags=re.IGNORECASE)
+RE_PG_USER_DBL = re.compile(r'\buser="(?:[^"\\]|\\.)*"', flags=re.IGNORECASE)
+RE_PG_USER_SNG = re.compile(r'\buser=\'(?:[^\'\\]|\\.)*\'', flags=re.IGNORECASE)
 
 
 # Static utility methods
@@ -348,6 +358,24 @@ class Util:
 
         return elem
 
+    # Hide user names and passwords in string values, like the Postgres connection string as used by GDAL/OGR
+    # See https://stackoverflow.com/questions/249791/regex-for-quoted-string-with-escaping-quotes for the escaped quotes expressions
+    @staticmethod
+    def safe_string_value(value, hide_value='***'):
+        # PostgreSQL connection strings as used by GDAL/OGR
+        if RE_PG_START.search(value) is not None:
+            value = RE_PG_PWD.sub('password=%s' % hide_value, value)
+            value = RE_PG_PWD_DBL.sub('password="%s"' % hide_value, value)
+            value = RE_PG_PWD_SNG.sub('password=\'%s\'' % hide_value, value)
+
+            value = RE_PG_USER.sub('user=%s' % hide_value, value)
+            value = RE_PG_USER_DBL.sub('user="%s"' % hide_value, value)
+            value = RE_PG_USER_SNG.sub('user=\'%s\'' % hide_value, value)
+
+        # Add more cases as needed ...
+
+        return value
+
 
 log = Util.get_log("util")
 
@@ -488,9 +516,14 @@ class ConfigSection():
         # Need to hide some sensitive values, usually used for logging
         safe_copy = self.config_dict.copy()
         hides = ['passw', 'pasw', 'token', 'user']
+        hide_value = '<hidden>'
+
         for key in safe_copy:
             for hide_key in hides:
                 if hide_key in key.lower():
-                    safe_copy[key] = '<hidden>'
+                    safe_copy[key] = hide_value
+
+            # Also hide usernames/passwords  in string values, like Postgres connection strings used by GDAL/OGR
+            safe_copy[key] = Util.safe_string_value(safe_copy[key], hide_value)
 
         return repr(safe_copy)

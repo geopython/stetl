@@ -48,7 +48,7 @@ class ExecOutput(Output):
 
         try:
             os.environ.update(env_vars)
-            log.info("executing cmd=%s" % cmd)
+            log.info("executing cmd=%s" % Util.safe_string_value(cmd))
             subprocess.call(cmd, shell=True)
             log.info("execute done")
         finally:
