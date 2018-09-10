@@ -109,7 +109,7 @@ class OgrInput(Input):
 
         # Report failure if failed
         if self.data_source_p is None:
-            log.error("Cannot open OGR datasource: %s with the following drivers." % Util.safe_pg_conn_string(self.data_source))
+            log.error("Cannot open OGR datasource: %s with the following drivers." % Util.safe_string_value(self.data_source))
 
             for iDriver in range(self.ogr.GetDriverCount()):
                 log.info("  ->  " + self.ogr.GetDriver(iDriver).GetName())
@@ -126,11 +126,11 @@ class OgrInput(Input):
                 self.layer_count = self.data_source_p.GetLayerCount()
                 self.layer_idx = 0
 
-            log.info("Opened OGR source ok: %s layer count=%d" % (Util.safe_pg_conn_string(self.data_source), self.layer_count))
+            log.info("Opened OGR source ok: %s layer count=%d" % (Util.safe_string_value(self.data_source), self.layer_count))
 
     def read(self, packet):
         if not self.data_source_p:
-            log.info("End reading from: %s" % Util.safe_pg_conn_string(self.data_source))
+            log.info("End reading from: %s" % Util.safe_string_value(self.data_source))
             return packet
 
         if self.layer is None:
@@ -145,11 +145,11 @@ class OgrInput(Input):
                 if self.layer is None:
                     log.error("Could not fetch layer %d" % 0)
                     raise Exception()
-                log.info("Start reading from OGR Source: %s, Layer: %s" % (Util.safe_pg_conn_string(self.data_source), self.layer.GetName()))
+                log.info("Start reading from OGR Source: %s, Layer: %s" % (Util.safe_string_value(self.data_source), self.layer.GetName()))
             else:
                 # No more Layers left: cleanup
                 packet.set_end_of_stream()
-                log.info("Closing OGR source: %s" % Util.safe_pg_conn_string(self.data_source))
+                log.info("Closing OGR source: %s" % Util.safe_string_value(self.data_source))
                 # Destroy not required anymore: http://trac.osgeo.org/gdal/wiki/PythonGotchas
                 # self.data_source_p.Destroy()
                 self.data_source_p = None
@@ -314,7 +314,7 @@ class OgrPostgisInput(Input):
         self.cmd = self.cmd.split('|')
 
     def exec_cmd(self):
-        log.info("start ogr2ogr cmd = %s" % Util.safe_pg_conn_string(repr(self.cmd)))
+        log.info("start ogr2ogr cmd = %s" % Util.safe_string_value(repr(self.cmd)))
         self.ogr_process = subprocess.Popen(self.cmd,
                                             shell=False,
                                             stdout=subprocess.PIPE,

@@ -349,10 +349,11 @@ class Util:
 
         return elem
 
-    # Hide user names and passwords in the Postgres connection string as used by GDAL/OGR
+    # Hide user names and passwords in string values, like the Postgres connection string as used by GDAL/OGR
     # See https://stackoverflow.com/questions/249791/regex-for-quoted-string-with-escaping-quotes for the escaped quotes expressions
     @staticmethod
-    def safe_pg_conn_string(value, hide_value='***'):
+    def safe_string_value(value, hide_value='***'):
+        # PostgreSQL connection strings as used by GDAL/OGR
         if re.search(r'\bPG:', value, flags=re.IGNORECASE) is not None:
             value = re.sub(r'\bpassword=[^\'"]\S*', 'password=%s' % hide_value, value, flags=re.IGNORECASE)
             value = re.sub(r'\bpassword="(?:[^"\\]|\\.)*"', 'password="%s"' % hide_value, value, flags=re.IGNORECASE)
@@ -361,6 +362,8 @@ class Util:
             value = re.sub(r'\buser=[^\'"]\S*', 'user=%s' % hide_value, value, flags=re.IGNORECASE)
             value = re.sub(r'\buser="(?:[^"\\]|\\.)*"', 'user="%s"' % hide_value, value, flags=re.IGNORECASE)
             value = re.sub(r'\buser=\'(?:[^\'\\]|\\.)*\'', 'user=\'%s\'' % hide_value, value, flags=re.IGNORECASE)
+
+        # Add more cases as needed ...
 
         return value
 
@@ -511,7 +514,7 @@ class ConfigSection():
                 if hide_key in key.lower():
                     safe_copy[key] = hide_value
 
-            # Also hide usernames/passwords in Postgres connection strings used by GDAL/OGR
-            safe_copy[key] = Util.safe_pg_conn_string(safe_copy[key], hide_value)
+            # Also hide usernames/passwords  in string values, like Postgres connection strings used by GDAL/OGR
+            safe_copy[key] = Util.safe_string_value(safe_copy[key], hide_value)
 
         return repr(safe_copy)
