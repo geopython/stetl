@@ -180,7 +180,7 @@ class OgrOutput(Output):
         if self.dest_driver is None:
 
             # Open OGR data dest in write-only mode.
-            self.dest_driver = ogr.GetDriverByName(self.dest_format)
+            self.dest_driver = ogr.GetDriverByName(str(self.dest_format))
 
             # Report failure if failed
             if self.dest_driver is None:
@@ -214,7 +214,7 @@ class OgrOutput(Output):
                 log.error("Failed to process SRS definition: %s" % self.target_srs)
             raise Exception()
 
-        self.layer = self.dest_fd.CreateLayer(self.new_layer_name, output_srs_ref, ogr.wkbUnknown,
+        self.layer = self.dest_fd.CreateLayer(str(self.new_layer_name), output_srs_ref, ogr.wkbUnknown,
                                               self.layer_create_options)
         self.feature_def = None
 

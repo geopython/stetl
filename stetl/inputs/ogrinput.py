@@ -103,7 +103,7 @@ class OgrInput(Input):
 
         # Open OGR data source in read-only mode.
         if self.source_format:
-            self.data_source_p = ogr.GetDriverByName(self.source_format).Open(self.data_source, 0)
+            self.data_source_p = ogr.GetDriverByName(str(self.source_format)).Open(self.data_source, 0)
         else:
             self.data_source_p = self.ogr.Open(self.data_source, 0)
 
