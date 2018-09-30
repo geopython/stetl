@@ -44,7 +44,7 @@ class Packet:
 
     def to_string(self, args=dict):
         if self.data is None:
-            return ''
+            return ''.decode('utf-8')
 
         # TODO: jumptable
         if self.format == FORMAT.etree_doc:
@@ -55,7 +55,7 @@ class Packet:
             s = self.data.ExportToJson()
         else:
             s = str(self.data)
-        return s
+        return s.decode('utf-8')
 
 
 # Simple enum emulation NOT ANY MORE: TOO INVOLVED AND INFLEXIBLE: use Strings with predefined ones in FORMAT.*

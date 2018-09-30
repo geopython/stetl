@@ -27,7 +27,7 @@ class StandardOutput(Output):
             return packet
 
         # Default: print to stdout
-        print(packet.to_string().decode('utf-8'))
+        print(packet.to_string())
         return packet
 
 
@@ -46,5 +46,5 @@ class StandardXmlOutput(Output):
             return packet
 
         # Default: print to stdout
-        print(packet.to_string().decode('utf-8'))
+        print(packet.to_string())
         return packet
