@@ -5,8 +5,16 @@
 # Author: Just van den Broecke
 #
 import re
-from urllib2 import Request, urlopen, URLError, HTTPError
-import urllib
+try:
+    from urllib2 import Request, urlopen, URLError, HTTPError
+    from urllib import urlencode
+except ImportError:
+    # we are on python 3
+    # change to requests package?
+    from urllib.parse import urlencode
+    from urllib.request import Request, urlopen
+    from urllib.error import URLError, HTTPError
+
 import base64
 
 from stetl.component import Config
@@ -137,7 +145,7 @@ class HttpInput(Input):
             # Urlencode optional parameters
             query_string = None
             if parameters:
-                query_string = urllib.urlencode(parameters)
+                query_string = str.encode(urlencode(parameters))
 
             # Add optional Authorization
             if self.auth:

@@ -48,14 +48,14 @@ class Packet:
 
         # TODO: jumptable
         if self.format == FORMAT.etree_doc:
-            s = etree.tostring(self.data, pretty_print=True, xml_declaration=True, encoding='utf-8')
+            s = etree.tostring(self.data, pretty_print=True, xml_declaration=True, encoding='utf-8').decode('utf-8')
         elif self.format == FORMAT.struct or self.format == FORMAT.geojson_collection or self.format == FORMAT.geojson_feature:
-            s = json.dumps(self.data, sort_keys=False, indent=4, separators=(',', ': '))
+            s = json.dumps(self.data, sort_keys=False, indent=4, separators=(',', ': ')).decode('utf-8')
         elif self.format == FORMAT.ogr_feature:
             s = self.data.ExportToJson()
         else:
-            s = str(self.data)
-        return s.decode('utf-8')
+            s = str(self.data.decode('utf-8'))
+        return s
 
 
 # Simple enum emulation NOT ANY MORE: TOO INVOLVED AND INFLEXIBLE: use Strings with predefined ones in FORMAT.*
