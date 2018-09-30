@@ -8,9 +8,9 @@ import os
 import re
 import sys
 try:
-    from ConfigParser import ConfigParser
+    from ConfigParser import ConfigParser, ExtendedInterpolation
 except ImportError:
-    from configparser import ConfigParser
+    from configparser import ConfigParser, ExtendedInterpolation
 import version
 from util import Util
 from chain import Chain
@@ -53,7 +53,7 @@ class ETL:
         ETL.CONFIG_DIR = os.path.dirname(os.path.abspath(config_file))
         log.info("Config/working dir = %s" % ETL.CONFIG_DIR)
 
-        self.configdict = ConfigParser()
+        self.configdict = ConfigParser(interpolation=ExtendedInterpolation())
 
         sys.path.append(ETL.CONFIG_DIR)
 
