@@ -8,3 +8,7 @@ _build/
 dist/
 htmlcov/
 Stetl.egg-info
+
+env2/
+env3/
+.idea
