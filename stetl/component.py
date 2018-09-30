@@ -121,11 +121,16 @@ class Component(object):
         self.cfg = ConfigSection(configdict.items(section))
 
         # The actual typed values as populated within Config Decorator
+        try:
+            maxint  = sys.maxint
+        except AttributeError:
+            maxint = sys.maxsize
+
         self.cfg_vals = dict()
         self.next = None
         self.section = section
         self._max_time = -1
-        self._min_time = sys.maxint
+        self._min_time = maxint
         self._total_time = 0
         self._invoke_count = 0
 

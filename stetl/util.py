@@ -10,7 +10,10 @@ import os
 import re
 import types
 from time import time
-from ConfigParser import ConfigParser
+try:
+    from ConfigParser import ConfigParser
+except ImportError:
+    from configparser import ConfigParser
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(name)s %(levelname)s %(message)s')
@@ -385,9 +388,14 @@ try:
 
     log.info("Found cStringIO, good!")
 except Exception:
-    from StringIO import StringIO
+    try:
+        from StringIO import StringIO
 
-    log.warning("Found %s - this is suboptimal, try cStringIO" % str(type(StringIO)))
+        log.warning("Found %s - this is suboptimal, try cStringIO" % str(type(StringIO)))
+    except ImportError:
+        from io import StringIO
+
+        log.warning("Found %s - this is suboptimal, try cStringIO" % str(type(StringIO)))
 
 try:
     from lxml import etree

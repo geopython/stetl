@@ -94,7 +94,7 @@ def print_classes(package):
         for name, data in inspect.getmembers(modname, inspect.isclass):
             if name == '__builtins__':
                 continue
-            print name, data
+            print(name, data)
 
 
 # DEPRECATED, now using @Config which also documents with Sphinx
@@ -112,7 +112,7 @@ def print_doc(class_name):
         # print ('\nConfiguration attributes: \n')
         # print_config_attrs(class_obj)
 
-    except Exception, e:
+    except Exception as e:
         log.error("cannot print info class named '%s' e=%s - you made a typo?" % (class_name, str(e)))
         raise e
 

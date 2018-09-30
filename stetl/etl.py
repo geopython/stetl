@@ -7,11 +7,17 @@
 import os
 import re
 import sys
-from ConfigParser import ConfigParser
+try:
+    from ConfigParser import ConfigParser
+except ImportError:
+    from configparser import ConfigParser
 import version
 from util import Util
 from chain import Chain
-import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 log = Util.get_log('ETL')
 
@@ -100,7 +106,7 @@ class ETL:
 
         try:
             # Put Config string into buffer (readfp() needs a readline() method)
-            config_buf = StringIO.StringIO(config_str)
+            config_buf = StringIO(config_str)
 
             # Parse config from file buffer
             self.configdict.readfp(config_buf, config_file)
