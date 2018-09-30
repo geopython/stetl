@@ -53,8 +53,10 @@ class Packet:
             s = json.dumps(self.data, sort_keys=False, indent=4, separators=(',', ': '))
         elif self.format == FORMAT.ogr_feature:
             s = self.data.ExportToJson()
-        elif type(self.data) in [str, list]:
-            s = self.data
+        elif type(self.data) is str:
+            s = str(self.data)
+        elif type(self.data) is list:
+                s = json.dumps(self.data)  # fixes python3 OrderedDict
         else:
             s = str(self.data.decode('utf-8'))
         return s

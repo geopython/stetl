@@ -373,11 +373,17 @@ class CsvFileInput(FileInput):
 
     def read(self, packet):
         try:
-            packet.data = self.csv_reader.next()
+            try:  # python 2/3 solution
+                packet.data = self.csv_reader.__next__()
+            except AttributeError:
+                packet.data = self.csv_reader.next()
             if self._output_format == FORMAT.record_array:
                 while True:
                     self.arr.append(packet.data)
-                    packet.data = self.csv_reader.next()
+                    try:  # python 2/3 solution
+                        packet.data = self.csv_reader.__next__()
+                    except AttributeError:
+                        packet.data = self.csv_reader.next()
 
             log.info("CSV row nr %d read: %s" % (self.csv_reader.line_num - 1, packet.data))
         except Exception:
