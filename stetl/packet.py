@@ -53,6 +53,8 @@ class Packet:
             s = json.dumps(self.data, sort_keys=False, indent=4, separators=(',', ': ')).decode('utf-8')
         elif self.format == FORMAT.ogr_feature:
             s = self.data.ExportToJson()
+        elif type(self.data) is str:
+            s = self.data
         else:
             s = str(self.data.decode('utf-8'))
         return s

@@ -203,9 +203,13 @@ class Jinja2TemplatingFilter(TemplatingFilter):
                     log.info('Read JSON file with globals from: %s', file_path)
                     # Globals can come from local file or remote URL
                     if file_path.startswith('http'):
-                        import urllib2
+                        try:
+                            from urllib2 import urlopen
+                        except ImportError:
+                            # python 3
+                            from urllib.request import urlopen
 
-                        fp = urllib2.urlopen(file_path)
+                        fp = urlopen(file_path)
                         globals_struct = json.loads(fp.read())
                     else:
                         with open(file_path) as data_file:

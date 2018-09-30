@@ -410,9 +410,13 @@ class JsonFileInput(FileInput):
             import json
             # may read/parse JSON from file or URL
             if file_path.startswith('http'):
-                import urllib2
+                try:
+                    from urllib2 import urlopen
+                except ImportError:
+                    # python 3
+                    from urllib.request import urlopen
 
-                fp = urllib2.urlopen(file_path)
+                fp = urlopen(file_path)
                 file_data = json.loads(fp.read())
             else:
                 with open(file_path) as data_file:
