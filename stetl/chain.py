@@ -4,12 +4,18 @@
 #
 # Author: Just van den Broecke
 #
-
-from factory import factory
-from packet import Packet
-from util import Util
-from splitter import Splitter
-from merger import Merger
+try:
+    from factory import factory
+    from packet import Packet
+    from util import Util
+    from splitter import Splitter
+    from merger import Merger
+except ImportError:
+    from stetl.factory import factory
+    from stetl.packet import Packet
+    from stetl.util import Util
+    from stetl.splitter import Splitter
+    from stetl.merger import Merger
 
 log = Util.get_log('chain')
 

@@ -38,6 +38,6 @@ class StandardOutputTest(StetlTestCase):
         
         self.etl.run()
         
-        self.assertGreater(sys.stdout.getvalue(), 0)
+        self.assertGreater(sys.stdout.getvalue(), str(0))
         # Assert includes last linebreak from stdout, due to print function
         self.assertEqual(sys.stdout.getvalue(), contents + '\n')

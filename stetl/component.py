@@ -7,8 +7,12 @@
 import os
 import sys
 from time import time
-from util import Util, ConfigSection
-from packet import FORMAT
+try:
+    from util import Util, ConfigSection
+    from packet import FORMAT
+except ImportError:
+    from stetl.util import Util, ConfigSection
+    from stetl.packet import FORMAT
 
 log = Util.get_log('component')
 

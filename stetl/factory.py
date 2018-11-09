@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from util import Util
+try:
+    from util import Util
+except ImportError:
+    from stetl.util import Util
 
 log = Util.get_log('factory')
 
@@ -16,6 +19,8 @@ class Factory:
 
         # Get value for 'class' property
         class_string = configdict.get(section, 'class')
+        if not class_string.startswith('stetl.'):
+            class_string = 'stetl.' + class_string
         try:
             if not class_string:
                 raise ValueError('Class name not defined in section %s.' % section)

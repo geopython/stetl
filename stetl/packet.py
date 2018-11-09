@@ -4,7 +4,10 @@
 #
 # Author: Just van den Broecke
 #
-from util import etree
+try:
+    from util import etree
+except ImportError:
+    from stetl.util import etree
 import json
 
 
@@ -48,17 +51,21 @@ class Packet:
 
         # TODO: jumptable
         if self.format == FORMAT.etree_doc:
-            s = etree.tostring(self.data, pretty_print=True, xml_declaration=True, encoding='utf-8').decode('utf-8')
+            s = etree.tostring(self.data, pretty_print=True, xml_declaration=True, encoding='utf-8')
         elif self.format == FORMAT.struct or self.format == FORMAT.geojson_collection or self.format == FORMAT.geojson_feature:
             s = json.dumps(self.data, sort_keys=False, indent=4, separators=(',', ': '))
         elif self.format == FORMAT.ogr_feature:
             s = self.data.ExportToJson()
         elif type(self.data) is str:
             s = str(self.data)
-        elif type(self.data) is list:
-                s = json.dumps(self.data)  # fixes python3 OrderedDict
+        elif type(self.data) in (list, dict):
+            s = json.dumps(self.data)
         else:
-            s = str(self.data.decode('utf-8'))
+            try:
+                s = str(self.data.decode('utf-8'))
+            except AttributeError:
+                # not all types have a decode method
+                s = str(self.data)
         return s
 
 

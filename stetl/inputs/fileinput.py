@@ -307,7 +307,11 @@ class LineStreamerFileInput(FileInput):
 
             return packet
 
-        line = line.decode('utf-8')
+        try:
+            line = line.decode('utf-8')
+        except AttributeError:
+            # no need to decode
+            pass
         packet.data = self.process_line(line)
 
         return packet
@@ -366,7 +370,7 @@ class CsvFileInput(FileInput):
         log.info('Open CSV file: %s', self.file_path)
         self.file = open(self.file_path)
 
-        self.csv_reader = csv.DictReader(self.file, delimiter=self.delimiter, quotechar=self.quote_char)
+        self.csv_reader = csv.DictReader(self.file, delimiter=str(self.delimiter), quotechar=str(self.quote_char))
 
         if self._output_format == FORMAT.record_array:
             self.arr = list()

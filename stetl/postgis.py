@@ -4,7 +4,10 @@
 #
 # Author: Just van den Broecke
 #
-from util import Util
+try:
+    from util import Util
+except ImportError:
+    from stetl.util import Util
 
 log = Util.get_log("postgis")
 

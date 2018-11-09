@@ -5,10 +5,17 @@
 #
 # Author: Just van den Broecke
 #
-from etl import ETL
-from factory import factory
-from util import Util
-from version import __version__
+try:
+    from etl import ETL
+    from factory import factory
+    from util import Util
+    from version import __version__
+except ImportError:
+    from stetl.etl import ETL
+    from stetl.factory import factory
+    from stetl.util import Util
+    from stetl.version import __version__
+
 import argparse  # apt-get install python-argparse
 import inspect
 import os

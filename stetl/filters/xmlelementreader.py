@@ -12,6 +12,9 @@ from stetl.filter import Filter
 from stetl.util import Util, etree
 from stetl.packet import FORMAT
 
+#import StringIO
+from io import StringIO
+
 log = Util.get_log('xmlelementreader')
 
 
@@ -64,12 +67,13 @@ class XmlElementReader(Filter):
 
         if self.context is None:
             # Open file
-            fd = open(self.cur_file_path)
+            fd = open(self.cur_file_path, 'rb')
             self.elem_count = 0
             log.info("file opened : %s" % self.cur_file_path)
+
             self.context = etree.iterparse(fd, events=("start", "end"))
             self.context = iter(self.context)
-            event, self.root = self.context.next()
+            event, self.root = self.context.__next__()
 
         packet = self.process_xml(packet)
 
@@ -79,7 +83,7 @@ class XmlElementReader(Filter):
         while self.context is not None:
             # while not packet.is_end_of_doc():
             try:
-                event, elem = self.context.next()
+                event, elem = self.context.__next__()
             except (etree.XMLSyntaxError, StopIteration):
                 # workaround for etree.XMLSyntaxError https://bugs.launchpad.net/lxml/+bug/1185701
                 self.context = None

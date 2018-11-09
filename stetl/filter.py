@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 # Author: Just van den Broecke
 #
-from component import Component
-
+try:
+    from component import Component
+except ImportError:
+    from stetl.component import Component
 
 class Filter(Component):
     """

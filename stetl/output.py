@@ -4,8 +4,12 @@
 #
 # Author: Just van den Broecke
 #
-from component import Component
-from util import Util
+try:
+    from component import Component
+    from util import Util
+except ImportError:
+    from stetl.component import Component
+    from stetl.util import Util
 
 log = Util.get_log('output')
 

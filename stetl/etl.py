@@ -11,9 +11,18 @@ try:
     from ConfigParser import ConfigParser, ExtendedInterpolation
 except ImportError:
     from configparser import ConfigParser, ExtendedInterpolation
-import version
-from util import Util
-from chain import Chain
+try:
+    import version
+except ImportError:
+    from  stetl import version
+try:
+    from util import Util
+except ImportError:
+    from stetl.util import Util
+try:
+    from chain import Chain
+except ImportError:
+    from stetl.chain import Chain
 try:
     from StringIO import StringIO
 except ImportError:

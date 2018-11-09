@@ -35,4 +35,4 @@ class CommandExecFilterTest(StetlTestCase):
         buffer_filter = chain.get_by_class(PacketBuffer)
         packet_list = buffer_filter.packet_list
 
-        self.assertEqual(packet_list[0].data.strip(), "foo/bar")
+        self.assertEqual(packet_list[0].data.strip().decode('utf-8'), "foo/bar")

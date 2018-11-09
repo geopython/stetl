@@ -5,7 +5,10 @@ import unittest
 
 from stetl.chain import Chain
 from stetl.util import Util
-from StringIO import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 

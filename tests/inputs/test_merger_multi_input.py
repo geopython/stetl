@@ -6,6 +6,7 @@ from stetl.inputs.fileinput import LineStreamerFileInput
 from stetl.filters.nullfilter import NullFilter
 from stetl.outputs.standardoutput import StandardOutput
 from stetl.merger import Merger
+from stetl import merger
 from tests.stetl_test_case import StetlTestCase
 
 
@@ -26,7 +27,7 @@ class MergerMultiInputTest(StetlTestCase):
         chain = StetlTestCase.get_chain(self.etl)
 
         merger_comp = chain.first_comp
-        self.assertTrue(isinstance(merger_comp, Merger))
+        self.assertTrue(isinstance(merger_comp, merger.Merger))
         self.assertEqual(len(merger_comp.children), 2)
         self.assertTrue(isinstance(merger_comp.children[0][0], LineStreamerFileInput),
                         "Next is not LineStreamerFileInput")

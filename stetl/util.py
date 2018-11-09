@@ -10,10 +10,7 @@ import os
 import re
 import types
 from time import time
-try:
-    from ConfigParser import ConfigParser
-except ImportError:
-    from configparser import ConfigParser
+from configparser import ConfigParser
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(name)s %(levelname)s %(message)s')
@@ -151,10 +148,23 @@ class Util:
                     finally:
                         self.sechead = None
                 else:
-                    return self.fp.readline()
+                    line = self.fp.readline()
+                    if line:
+                        return line
+                    else:
+                        raise StopIteration
+
+            def __iter__(self):
+                return self
+
+            def next(self):
+                return self.readline()
+
+            def __next__(self):
+                return self.next()
 
         cp = ConfigParser()
-        cp.readfp(FakeSecHead(open(file_path)))
+        cp.read_file(FakeSecHead(open(file_path)))
         return cp._sections['asection']
 
     @staticmethod
