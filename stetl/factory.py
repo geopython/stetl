@@ -19,7 +19,9 @@ class Factory:
 
         # Get value for 'class' property
         class_string = configdict.get(section, 'class')
-        if not class_string.startswith('stetl.'):
+        # Check if this is a class from the non-standard stelt library
+        from_stetl_lib = configdict.getboolean(section, 'stetl', fallback=True)
+        if not class_string.startswith('stetl.') and from_stetl_lib:
             class_string = 'stetl.' + class_string
         try:
             if not class_string:

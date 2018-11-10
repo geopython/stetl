@@ -303,7 +303,7 @@ class Ogr2OgrOutput(Output):
 
         log.info('writing to file %s' % file_path)
         out_file = open(file_path, 'w')
-        out_file.writelines(packet.to_string())
+        out_file.writelines(str(packet.to_string()))
         out_file.close()
 
         # Copy the .gfs file if required, use the same base name

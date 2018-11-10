@@ -46,7 +46,7 @@ class FileOutput(Output):
         log.info('writing to file %s' % file_path)
         out_file = open(file_path, 'w')
 
-        out_file.write(packet.to_string())
+        out_file.write(str(packet.to_string()))
 
         out_file.close()
         log.info("written to %s" % file_path)
