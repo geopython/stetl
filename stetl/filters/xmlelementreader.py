@@ -73,7 +73,7 @@ class XmlElementReader(Filter):
 
             self.context = etree.iterparse(fd, events=("start", "end"))
             self.context = iter(self.context)
-            event, self.root = self.context.__next__()
+            event, self.root = next(self.context)
 
         packet = self.process_xml(packet)
 
@@ -83,7 +83,7 @@ class XmlElementReader(Filter):
         while self.context is not None:
             # while not packet.is_end_of_doc():
             try:
-                event, elem = self.context.__next__()
+                event, elem = next(self.context)
             except (etree.XMLSyntaxError, StopIteration):
                 # workaround for etree.XMLSyntaxError https://bugs.launchpad.net/lxml/+bug/1185701
                 self.context = None
