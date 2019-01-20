@@ -126,7 +126,7 @@ class Component(object):
 
         # The actual typed values as populated within Config Decorator
         try:
-            maxint  = sys.maxint
+            maxint = sys.maxint
         except AttributeError:
             maxint = sys.maxsize
 

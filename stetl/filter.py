@@ -6,6 +6,7 @@ try:
 except ImportError:
     from stetl.component import Component
 
+
 class Filter(Component):
     """
     Maps input to output. Abstract base class for specific Filters.

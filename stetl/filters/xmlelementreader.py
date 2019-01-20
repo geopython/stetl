@@ -5,15 +5,13 @@
 #
 # Author: Frank Steggink
 #
+
 from copy import deepcopy
 
 from stetl.component import Config
 from stetl.filter import Filter
 from stetl.util import Util, etree
 from stetl.packet import FORMAT
-
-#import StringIO
-from io import StringIO
 
 log = Util.get_log('xmlelementreader')
 

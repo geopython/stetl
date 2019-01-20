@@ -210,8 +210,8 @@ class FormatConverter(Filter):
 
                 # OGR needs UTF-8 internally
                 if isinstance(field_name, str):
-                  #field_name is already utf8, since we're using python3
-                  pass
+                    # field_name is already utf8, since we're using python3
+                    pass
                 elif isinstance(field_name, unicode):
                     field_name = field_name.encode('utf8')
 
@@ -251,7 +251,7 @@ class FormatConverter(Filter):
 
             # OGR needs UTF-8 internally
             if isinstance(field_name, str):
-                #ok: python 3
+                # ok: python 3
                 pass
             elif isinstance(field_name, unicode):
                 field_name = field_name.encode('utf8')

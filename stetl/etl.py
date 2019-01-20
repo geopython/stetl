@@ -14,7 +14,7 @@ except ImportError:
 try:
     import version
 except ImportError:
-    from  stetl import version
+    from stetl import version
 try:
     from util import Util
 except ImportError:
