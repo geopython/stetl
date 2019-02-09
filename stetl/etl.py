@@ -69,7 +69,7 @@ class ETL:
 
             # Parse unique list of argument names from config file string.
             # https://www.machinelearningplus.com/python/python-regex-tutorial-examples/
-            args_names = list(set(re.findall('{[A-Z|a-z]\w+}', config_str)))
+            args_names = list(set(re.findall(r'{[A-Z|a-z]\w+}', config_str)))
             args_names = [name.split('{')[1].split('}')[0] for name in args_names]
 
             # Optional: expand from equivalent env vars
