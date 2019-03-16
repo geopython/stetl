@@ -1,16 +1,15 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 # Converts Stetl Packet FORMATs. This can be used to connect
 # Stetl components with different output/input formats.
 #
 # Author:Just van den Broecke
 
+import json
 from stetl.component import Config
 from stetl.util import Util, etree
 from stetl.filter import Filter
 from stetl.packet import FORMAT
-import json
 
 log = Util.get_log("formatconverter")
 
@@ -207,11 +206,6 @@ class FormatConverter(Filter):
             comp.feat_def.AddFieldDefn(field_def)
 
             for field_name in json_props:
-
-                # OGR needs UTF-8 internally
-                if isinstance(field_name, unicode):
-                    field_name = field_name.encode('utf8')
-
                 field_def = ogr.FieldDefn(field_name, ogr.OFTString)
                 comp.feat_def.AddFieldDefn(field_def)
 
@@ -221,24 +215,11 @@ class FormatConverter(Filter):
         # Create and populate Feature with id, geom and attributes
         feature = ogr.Feature(comp.feat_def)
         json_id = json_feat["id"]
-        if isinstance(json_id, unicode):
-            json_id = json_id.encode('utf8')
-
         feature.SetField("id", json_id)
         feature.SetGeometry(ogr_geom)
         for field_name in json_props:
 
-            # OGR needs UTF-8 internally
-            field_value = json_props[field_name]
-            if isinstance(field_value, unicode):
-                field_value = field_value.encode('utf8')
-
-            if not isinstance(field_value, basestring):
-                field_value = str(field_value)
-
-            # OGR needs UTF-8 internally
-            if isinstance(field_name, unicode):
-                field_name = field_name.encode('utf8')
+            field_value = str(json_props[field_name])
 
             # print("id=%s k=%s v=%s" % (json_id, field_name, field_value))
             feature.SetField(field_name, field_value)

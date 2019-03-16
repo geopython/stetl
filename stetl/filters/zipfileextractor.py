@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Extracts a file from a ZIP file, and saves it as the given file name.
 #
 # Author: Frank Steggink

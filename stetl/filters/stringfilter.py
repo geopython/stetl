@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # String filtering.
 #
 # Author:Just van den Broecke

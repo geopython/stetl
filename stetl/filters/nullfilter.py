@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Filter that does noting, just passes any data through.
 #
 # Author:Just van den Broecke

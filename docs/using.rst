@@ -33,20 +33,20 @@ This example takes the input file ``input/cities.xml`` and transforms this file 
 	chains = input_xml_file|transformer_xslt|output_file
 
 	[input_xml_file]
-	class = inputs.fileinput.XmlFileInput
+	class = stetl.inputs.fileinput.XmlFileInput
 	file_path = input/cities.xml
 
 	[transformer_xslt]
-	class = filters.xsltfilter.XsltFilter
+	class = stetl.filters.xsltfilter.XsltFilter
 	script = cities2gml.xsl
 
 	[output_file]
-	class = outputs.fileoutput.FileOutput
+	class = stetl.outputs.fileoutput.FileOutput
 	file_path = output/gmlcities.gml
 
 Most of the sections in this ini-file specify a Stetl component: an Input, Filter or Output component.
 Each component is specified by its (Python) class and per-component specific parameters.
-For example ``[input_xml_file]`` uses the class  :class:`inputs.fileinput.XmlFileInput` reading and parsing the
+For example ``[input_xml_file]`` uses the class  :class:`stetl.inputs.fileinput.XmlFileInput` reading and parsing the
 file ``input/cities.xml`` specified by the ``file_path`` property.  ``[transformer_xslt]`` is a Filter that
 applies XSLT with the script file  ``cities2gml.xsl`` that is in the same directory. The ``[output_file]``
 component specifies the output, in this case a file.
@@ -72,6 +72,9 @@ It is even possible to have both Splitting and Merging together with filtering: 
 
 	[etl]
 	chains = (input_http_api_1 | cleaner_filter) (input_http_api_2) | data_transformer | (output_db) (output_file)
+
+Note: since version 2 of stetl it is required that the call to *stetl* components actually start with `stetl`. This is
+not necessary when you write your own components (see `example 7 <https://github.com/geopython/stetl/tree/master/examples/basics/7_mycomponent>`_)
 
 
 Configuring Components
@@ -168,17 +171,17 @@ whatever it gets as input from the previous Filter in the Chain. ::
 	chains = input_xml_file|transformer_xslt|output_ogr_shape
 
 	[input_xml_file]
-	class = inputs.fileinput.XmlFileInput
+	class = stetl.inputs.fileinput.XmlFileInput
 	file_path = input/cities.xml
 
 	[transformer_xslt]
-	class = filters.xsltfilter.XsltFilter
+	class = stetl.filters.xsltfilter.XsltFilter
 	script = cities2gml.xsl
 
 	# The ogr2ogr command-line. May be split over multiple lines for readability.
 	# Backslashes not required in that case.
 	[output_ogr_shape]
-	class = outputs.ogroutput.Ogr2OgrOutput
+	class = stetl.outputs.ogroutput.Ogr2OgrOutput
 	temp_file = temp/gmlcities.gml
 	ogr2ogr_cmd = ogr2ogr
 		-overwrite
@@ -205,6 +208,9 @@ For example within the current directory you may have an ``etl.cfg`` Stetl file:
 
 	WORK_DIR=`pwd`
 	sudo docker run -v ${WORK_DIR}:${WORK_DIR} -w ${WORK_DIR} geopython/stetl:latest stetl -c etl.cfg
+
+	# or leaner
+	sudo docker run --rm -v $(pwd):/work -w /work geopython/stetl:latest stetl -c etl.cfg
 
 A more advanced setup would be (network-)linking to a PostGIS Docker image
 like `kartoza/postgis <https://hub.docker.com/r/kartoza/postgis/>`_: ::
@@ -249,15 +255,15 @@ example `6_cmdargs <https://github.com/geopython/stetl/tree/master/examples/basi
 	chains = input_xml_file|transformer_xslt|output_file
 
 	[input_xml_file]
-	class = inputs.fileinput.XmlFileInput
+	class = stetl.inputs.fileinput.XmlFileInput
 	file_path = {in_xml}
 
 	[transformer_xslt]
-	class = filters.xsltfilter.XsltFilter
+	class = stetl.filters.xsltfilter.XsltFilter
 	script = {in_xsl}
 
 	[output_file]
-	class = outputs.fileoutput.FileOutput
+	class = stetl.outputs.fileoutput.FileOutput
 	file_path = {out_xml}
 
 Note the symbolic input, xsl and output files. We can now perform
@@ -430,19 +436,19 @@ Here the Chains are split by using ``()`` in the ETL Chain definition: ::
 
 
 	[input_xml_file]
-	class = inputs.fileinput.XmlFileInput
+	class = stetl.inputs.fileinput.XmlFileInput
 	file_path = input/cities.xml
 
 	[transformer_xslt]
-	class = filters.xsltfilter.XsltFilter
+	class = stetl.filters.xsltfilter.XsltFilter
 	script = cities2gml.xsl
 
 	[output_file]
-	class = outputs.fileoutput.FileOutput
+	class = stetl.outputs.fileoutput.FileOutput
 	file_path = output/gmlcities.gml
 
 	[output_std]
-	class = outputs.standardoutput.StandardOutput
+	class = stetl.outputs.standardoutput.StandardOutput
 
 Chain Merging
 -------------
@@ -466,20 +472,20 @@ Outputs: ::
 
 
 	[input_1]
-	class = inputs.fileinput.XmlFileInput
+	class = stetl.inputs.fileinput.XmlFileInput
 	file_path = input1/cities.xml
 
 	[input_2]
-	class = inputs.fileinput.XmlFileInput
+	class = stetl.inputs.fileinput.XmlFileInput
 	file_path = input2/cities.xml
 
 	[transformer_xslt]
-	class = filters.xsltfilter.XsltFilter
+	class = stetl.filters.xsltfilter.XsltFilter
 	script = cities2gml.xsl
 
 	[output_file]
-	class = outputs.fileoutput.FileOutput
+	class = stetl.outputs.fileoutput.FileOutput
 	file_path = output/gmlcities.gml
 
 	[output_std]
-	class = outputs.standardoutput.StandardOutput
+	class = stetl.outputs.standardoutput.StandardOutput

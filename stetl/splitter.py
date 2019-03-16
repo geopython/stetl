@@ -1,13 +1,11 @@
-# -*- coding: utf-8 -*-
-#
 # Splitter Component base class for ETL.
 #
 # Author: Just van den Broecke
 #
 
 import random
-from util import Util
-from component import Component
+from .util import Util
+from .component import Component
 
 log = Util.get_log('splitter')
 

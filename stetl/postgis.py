@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
-#
 # PostGIS support wrapper.
 #
 # Author: Just van den Broecke
 #
-from util import Util
+from .util import Util
 
 log = Util.get_log("postgis")
 
