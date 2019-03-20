@@ -87,6 +87,8 @@ project's developers might not want to merge into the project.
 
 Please adhere to the coding conventions used throughout a project (indentation,
 accurate comments, etc.) and any other requirements (such as test coverage).
+You can run the `nose` and `flake8` tools to check your code with respect to
+unit tests and coding style.
 
 Follow this process if you'd like your work considered for inclusion in the
 project:

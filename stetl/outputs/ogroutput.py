@@ -201,7 +201,7 @@ class OgrOutput(Output):
         if self.dest_fd is None:
             self.dest_fd = self.dest_driver.CreateDataSource(self.dest_data_source, options=self.dest_create_options)
             if self.dest_fd is None:
-                log.error("%s driver failed to create %s" % (self.dest_format, self.dest_data_source))
+                log.error("%s driver failed to create %s" % (self.dest_format, Util.safe_string_value(self.dest_data_source)))
                 raise Exception()
 
         # /* -------------------------------------------------------------------- */
@@ -218,7 +218,7 @@ class OgrOutput(Output):
                                               self.layer_create_options)
         self.feature_def = None
 
-        log.info("Opened OGR dest ok: %s " % self.dest_data_source)
+        log.info("Opened OGR dest ok: %s " % Util.safe_string_value(self.dest_data_source))
 
     def write(self, packet):
 
@@ -228,7 +228,7 @@ class OgrOutput(Output):
             return packet
 
         if self.layer is None:
-            log.info("No Layer, end writing to: %s" % self.dest_data_source)
+            log.info("No Layer, end writing to: %s" % Util.safe_string_value(self.dest_data_source))
             return packet
 
         # Assume ogr_feature_array input, otherwise convert ogr_feature to list
@@ -268,7 +268,7 @@ class OgrOutput(Output):
     def write_end(self, packet):
         # Destroy not required anymore: http://trac.osgeo.org/gdal/wiki/PythonGotchas
         # self.dest_fd.Destroy()
-        log.info("End writing to: %s" % self.dest_data_source)
+        log.info("End writing to: %s" % Util.safe_string_value(self.dest_data_source))
         self.dest_fd = None
         self.layer = None
         return packet
