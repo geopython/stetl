@@ -3,10 +3,11 @@
 Installation
 ============
 
-Stetl currently only runs with Python 2 (2.7+). `Work is underway <https://github.com/geopython/stetl/pull/27>`_ for Python3 support.
+Stetl up to and including version 1.3 only runs with Python 2 (2.7+).
+Starting with Stetl v2.0 only Python 3 (3.4.2+) will be supported.
 
 Easiest is to first install the Stetl-dependencies (see below) and then
-install and maintain Stetl on your system as a Python package (pip is preferred). ::
+install and maintain Stetl on your system as a Python package (`pip` is preferred). ::
 
     (sudo) pip install stetl
     or
@@ -106,11 +107,15 @@ choose to install the same packages via `pip` to have more recent versions like 
 
 	apt-get install python-jinja2
 
-
 Mac OSX
 ~~~~~~~
 
 Dependencies can best be installed via `Homebrew <http://brew.sh/>`_.
+
+Tip: sometimes installing GDAL Python bindings can be tricky as the
+installed GDAL binaries must be compatible. To install the right version you may use: ::
+
+	pip install GDAL==`gdalinfo --version | cut -d' ' -f2 | cut -d',' -f1`
 
 Windows
 ~~~~~~~

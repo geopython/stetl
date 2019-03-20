@@ -1,6 +1,38 @@
 Changes
 =======
 
+v2.0 - TO BE RELEASED
+---------------------
+
+FIRST VERSION SUPPORTING PYTHON3-ONLY!
+
+See closed issues in Milestone 2.0: https://github.com/geopython/stetl/milestone/10?closed=1
+These are all related to the Py2 to Py3 migration. Other issues arevmoved to later Milestones/releases.
+
+Main is the PR worked on for the Py2 to Py3 migration:
+https://github.com/geopython/stetl/pull/81
+
+v1.3 - march 20, 2019
+---------------------
+
+LAST VERSION SUPPORTING PYTHON2!
+See closed issues in Milestone 1.3: https://github.com/geopython/stetl/milestone/9?closed=1
+
+Very few changes, this release is mainly to make a baseline for v2.0 (Python3).
+
+v1.2 - july 7, 2018
+-------------------
+
+See closed issues in Milestone 1.2: https://github.com/geopython/stetl/milestone/8?closed=1
+
+Most important changes are related to deployment in Docker and Kubernetes environments, dealing
+with (env) variables, Stetl arguments and logging, for example:
+
+- issue #71: Allow Environment vars to substitute/override config template arg-variables
+- issue #72: Allow multiple -a args for Stetl main prog. Allowing multiple -a arguments allows
+  for more simpler overriding of for example default options.
+- #68 Stetl should not output passwords and other particular data in its log
+
 v1.1.1 - november 7, 2017
 -------------------------
 

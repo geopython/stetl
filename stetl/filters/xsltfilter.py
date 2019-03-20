@@ -5,6 +5,7 @@
 #
 # Author:Just van den Broecke
 
+from stetl.component import Config
 from stetl.util import Util, etree
 from stetl.filter import Filter
 from stetl.packet import FORMAT
@@ -19,12 +20,19 @@ class XsltFilter(Filter):
     consumes=FORMAT.etree_doc, produces=FORMAT.etree_doc
     """
 
+    @Config(ptype=str, required=True)
+    def script(self):
+        """
+        Path to XSLT script file.
+        """
+        pass
+
     # Constructor
     def __init__(self, configdict, section):
         Filter.__init__(self, configdict, section, consumes=FORMAT.etree_doc, produces=FORMAT.etree_doc)
 
-        self.xslt_file_path = self.cfg.get('script')
-        self.xslt_file = open(self.xslt_file_path, 'r')
+        self.xslt_file = open(self.script, 'r')
+
         # Parse XSLT file only once
         self.xslt_doc = etree.parse(self.xslt_file)
         self.xslt_obj = etree.XSLT(self.xslt_doc)
