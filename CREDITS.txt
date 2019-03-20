@@ -10,6 +10,8 @@ Stetl is developed by:
 
 Bas Couwenberg is providing Debian/Ubuntu packaging.
 
+Rob van Loon preparing Python3 migration and other.
+
 This project would not be possible without the great work of Frank Warmerdam and other
 GDAL/OGR developers (http://gdal.org).
 

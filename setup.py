@@ -47,6 +47,7 @@ setup(
     maintainer_email='justb4@gmail.com',
     url='http://github.com/geopython/stetl',
     long_description=readme + "\n" + changes + "\n" + credits,
+    long_description_content_type="text/markdown",
     packages=find_packages(exclude=['tests']),
     namespace_packages=['stetl'],
     include_package_data=True,
