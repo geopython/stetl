@@ -8,3 +8,4 @@ _build/
 dist/
 htmlcov/
 Stetl.egg-info
+STETL.iml
