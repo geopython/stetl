@@ -111,6 +111,14 @@ class OgrOutput(Output):
         """
         pass
 
+    @Config(ptype=bool, default=False, required=False)
+    def always_apply_lco(self):
+        """
+        Flag to indicate whether the layer creation options should be applied
+        to all runs.
+        """
+        pass
+
     # End attribute config meta
 
     # Constructor
@@ -333,7 +341,7 @@ class Ogr2OgrOutput(Output):
 
         # Execute ogr2ogr
         ogr2ogr_cmd = self.ogr2ogr_cmd
-        if self.lco and self.first_run is True:
+        if self.lco and (self.first_run or self.always_apply_lco):
             ogr2ogr_cmd += ' ' + self.lco
             self.first_run = False
 
