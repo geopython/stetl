@@ -81,7 +81,7 @@ class Util:
 
             for dir in os.listdir(candidate_file):
                 dir = os.path.join(candidate_file, dir)
-                if os.path.isdir(dir):
+                if os.path.isdir(dir) and depth_search:
                     Util.make_file_list(dir, file_list, filename_pattern, depth_search)
         elif candidate_file.startswith('http'):
             file_list.append(candidate_file)
