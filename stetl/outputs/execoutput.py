@@ -6,6 +6,7 @@
 #
 import subprocess
 import os
+import re
 import shutil
 from stetl.component import Config
 from stetl.output import Output
@@ -153,6 +154,8 @@ class Ogr2OgrExecOutput(ExecOutput):
     def __init__(self, configdict, section):
         ExecOutput.__init__(self, configdict, section, consumes=FORMAT.string)
 
+        self.regex_vsi_filter = re.compile("^/vsi[a-z0-9_]+/.*", re.I)
+
         self.ogr2ogr_cmd = 'ogr2ogr -f ' + self.dest_format + ' ' + self.dest_data_source
 
         if self.spatial_extent:
@@ -189,15 +192,16 @@ class Ogr2OgrExecOutput(ExecOutput):
         # Copy the .gfs file if required, use the same base name
         # so ogr2ogr will pick it up.
         # Always assemble the GFS path, in case it is provided from outside.
+        # Note that for now using a GFS file is not supported with a VSI filter.
         file_ext = os.path.splitext(file_path)
         gfs_path = file_ext[0] + '.gfs'
-        if self.gfs_template:
+        if self.gfs_template and not self.regex_vsi_filter.match(file_path):
             shutil.copy(self.gfs_template, gfs_path)
 
         # Append file name to command as last argument
         self.execute_cmd(ogr2ogr_cmd + ' ' + file_path)
 
-        if self.cleanup_input:
+        if self.cleanup_input and not self.regex_vsi_filter.match(file_path):
             os.remove(file_path)
             if gfs_path and os.path.exists(gfs_path):
                 os.remove(gfs_path)

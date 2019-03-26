@@ -7,6 +7,7 @@
 #
 import subprocess
 import os
+import re
 import shutil
 from stetl.component import Config
 from stetl.output import Output
@@ -291,7 +292,9 @@ class Ogr2OgrOutput(Output):
 
     def __init__(self, configdict, section):
         Output.__init__(self, configdict, section, consumes=FORMAT.etree_doc)
+
         self.temp_file = self.cfg.get('temp_file')
+        self.regex_vsi_filter = re.compile("^/vsi[a-z0-9_]+/.*", re.I)
 
         # For creating tables the GFS file needs to be newer than
         # the .gml file. -lco GML_GFS_TEMPLATE somehow does not work
@@ -316,7 +319,8 @@ class Ogr2OgrOutput(Output):
 
         # Copy the .gfs file if required, use the same base name
         # so ogr2ogr will pick it up.
-        if self.gfs_file:
+        # Note that for now using a GFS file is not supported with a VSI filter.
+        if self.gfs_file and not self.regex_vsi_filter.match(file_path):
             file_ext = os.path.splitext(file_path)
             shutil.copy(self.gfs_file, file_ext[0] + '.gfs')
 
