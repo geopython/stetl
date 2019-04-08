@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Output classes for ETL, executing commands.
 #
 # Author: Frank Steggink

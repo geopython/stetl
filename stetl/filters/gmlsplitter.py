@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 # Splits stream of GML lines into etree docs.
 #
 # Author: Just van den Broecke
 #
 import codecs
+from deprecated.sphinx import deprecated
 from stetl.util import Util, etree, StringIO
 from stetl.filter import Filter
 from stetl.packet import FORMAT
@@ -13,10 +13,10 @@ from stetl.packet import FORMAT
 log = Util.get_log('gmlsplitter')
 
 
+@deprecated(version='1.0.4', reason='Use the more robust XmlElementStreamerFileInput + XmlAssembler instead!!!')
 class GmlSplitter(Filter):
     """
     Split a stream of text XML lines into documents
-    DEPRECATED: use the more robust XmlElementStreamerFileInput+XmlAssembler instead!!!
     TODO phase out
 
     consumes=FORMAT.xml_line_stream, produces=FORMAT.etree_doc
@@ -126,16 +126,14 @@ class GmlSplitter(Filter):
         # Process/transform data in buffer
         self.buffer.seek(0)
         try:
-            # print '[' + self.buffer.getvalue() + ']'
             packet.data = etree.parse(self.buffer, self.xml_parser)
-        # print buffer.getvalue()
-        except Exception, e:
+        except Exception as e:
             bufStr = self.buffer.getvalue()
             if not bufStr:
                 log.info("parse buffer empty: content=[%s]" % bufStr)
             else:
                 log.error("error in buffer parsing %s" % str(e))
-                print bufStr
+                print(bufStr)
                 raise
         self.buffer.close()
         self.buffer = None

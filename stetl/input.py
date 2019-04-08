@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-#
 # Input classes for ETL.
 #
 # Author: Just van den Broecke
 #
-from util import Util
-from component import Component
+from .util import Util
+from .component import Component
 
 log = Util.get_log('input')
 

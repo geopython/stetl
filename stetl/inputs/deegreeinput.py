@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 # Input classes for ETL.
 #
@@ -188,16 +187,13 @@ class DeegreeBlobstoreInput(Input):
         # Process/transform data in buffer
         self.buffer.seek(0)
         try:
-            # print '[' + self.buffer.getvalue() + ']'
             packet.data = etree.parse(self.buffer, self.xml_parser)
-        # print buffer.getvalue()
         except Exception as e:
             bufStr = self.buffer.getvalue()
             if not bufStr:
                 log.info("parse buffer empty: content=[%s]" % bufStr)
             else:
                 log.error("error in buffer parsing %s" % str(e))
-                # print(bufStr)
                 raise
         self.buffer.close()
         self.buffer = None

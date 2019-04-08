@@ -1,5 +1,8 @@
 language: python
+
 sudo: true
+
+dist: xenial
 
 env:
   global:
@@ -7,7 +10,10 @@ env:
    - C_INCLUDE_PATH=/usr/include/gdal
 
 python:
-  - "2.7"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "3.7"
 
 before_install:
   - sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable -y

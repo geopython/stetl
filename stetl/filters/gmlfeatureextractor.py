@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 # Extracts arrays of etree GML features from an GML etree document.
 #

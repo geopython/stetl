@@ -1,1 +1,1 @@
-[{'lat': '52.4', 'city': 'amsterdam', 'lon': '4.9'}, {'lat': '52.101', 'city': 'otterlo', 'lon': '5.773'}]
+[{'city': 'amsterdam', 'lat': '52.4', 'lon': '4.9'}, {'city': 'otterlo', 'lat': '52.101', 'lon': '5.773'}]

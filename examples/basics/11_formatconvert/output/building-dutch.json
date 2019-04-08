@@ -2,16 +2,26 @@
     "BAG-Extract-Deelbestand-LVC": {
         "schemaLocation": "http://www.kadaster.nl/schemas/bag-verstrekkingen/extract-deelbestand-lvc/v20090901 http://www.kadaster.nl/schemas/bag-verstrekkingen/extract-deelbestand-lvc/v20090901/BagvsExtractDeelbestandExtractLvc-1.4.xsd",
         "antwoord": {
+            "vraag": {
+                "Gebied-Registratief": {
+                    "Gebied-NLD": {
+                        "GebiedIdentificatie": "9999",
+                        "GebiedNaam": "Nederland",
+                        "gebiedTypeNederland": "1"
+                    }
+                },
+                "StandTechnischeDatum": "20111001",
+                "StandPeildatum": "20111001"
+            },
             "producten": {
                 "LVC-product": {
                     "productcode": "DNLDPXEE02",
                     "Pand": [
                         {
-                            "tijdvakgeldigheid": {
-                                "begindatumTijdvakGeldigheid": "2010072000000099"
-                            },
-                            "aanduidingRecordCorrectie": "0",
+                            "identificatie": "0003100000117485",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -104,22 +114,22 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "1991",
                             "pandstatus": "Pand in gebruik",
-                            "officieel": "N",
+                            "tijdvakgeldigheid": {
+                                "begindatumTijdvakGeldigheid": "2010072000000099"
+                            },
+                            "inOnderzoek": "N",
                             "bron": {
                                 "documentdatum": "20100720",
                                 "documentnummer": "FB 2010/PANDEN001"
-                            },
-                            "identificatie": "0003100000117485"
+                            }
                         },
                         {
-                            "tijdvakgeldigheid": {
-                                "begindatumTijdvakGeldigheid": "2009090100000010"
-                            },
-                            "aanduidingRecordCorrectie": "0",
+                            "identificatie": "0007100000004001",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -177,22 +187,22 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "1974",
                             "pandstatus": "Pand in gebruik",
-                            "officieel": "N",
+                            "tijdvakgeldigheid": {
+                                "begindatumTijdvakGeldigheid": "2009090100000010"
+                            },
+                            "inOnderzoek": "N",
                             "bron": {
                                 "documentdatum": "20090901",
                                 "documentnummer": "192/1973\n                                192/1973"
-                            },
-                            "identificatie": "0007100000004001"
+                            }
                         },
                         {
-                            "tijdvakgeldigheid": {
-                                "begindatumTijdvakGeldigheid": "2009090100000000"
-                            },
-                            "aanduidingRecordCorrectie": "0",
+                            "identificatie": "0007100000004002",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -250,22 +260,22 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "1974",
                             "pandstatus": "Pand in gebruik",
-                            "officieel": "N",
-                            "bron": {
-                                "documentdatum": "20090901",
-                                "documentnummer": "2009\\090113~/c"
-                            },
-                            "identificatie": "0007100000004002"
-                        },
-                        {
                             "tijdvakgeldigheid": {
                                 "begindatumTijdvakGeldigheid": "2009090100000000"
                             },
-                            "aanduidingRecordCorrectie": "0",
+                            "inOnderzoek": "N",
+                            "bron": {
+                                "documentdatum": "20090901",
+                                "documentnummer": "2009\\090113~/c"
+                            }
+                        },
+                        {
+                            "identificatie": "0007100000004003",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -318,22 +328,22 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "1974",
                             "pandstatus": "Pand in gebruik",
-                            "officieel": "N",
-                            "bron": {
-                                "documentdatum": "20090901",
-                                "documentnummer": "2009090113/c"
-                            },
-                            "identificatie": "0007100000004003"
-                        },
-                        {
                             "tijdvakgeldigheid": {
                                 "begindatumTijdvakGeldigheid": "2009090100000000"
                             },
-                            "aanduidingRecordCorrectie": "0",
+                            "inOnderzoek": "N",
+                            "bron": {
+                                "documentdatum": "20090901",
+                                "documentnummer": "2009090113/c"
+                            }
+                        },
+                        {
+                            "identificatie": "0007100000004004",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -391,22 +401,22 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "1974",
                             "pandstatus": "Pand in gebruik",
-                            "officieel": "N",
+                            "tijdvakgeldigheid": {
+                                "begindatumTijdvakGeldigheid": "2009090100000000"
+                            },
+                            "inOnderzoek": "N",
                             "bron": {
                                 "documentdatum": "20090901",
                                 "documentnummer": "2009090113/c"
-                            },
-                            "identificatie": "0007100000004004"
+                            }
                         },
                         {
-                            "tijdvakgeldigheid": {
-                                "begindatumTijdvakGeldigheid": "1992120800000000"
-                            },
-                            "aanduidingRecordCorrectie": "0",
+                            "identificatie": "0007100000004005",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -514,22 +524,22 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "1979",
                             "pandstatus": "Pand in gebruik",
-                            "officieel": "N",
+                            "tijdvakgeldigheid": {
+                                "begindatumTijdvakGeldigheid": "1992120800000000"
+                            },
+                            "inOnderzoek": "N",
                             "bron": {
                                 "documentdatum": "19921208",
                                 "documentnummer": "15-09-1938-\u00bf40"
-                            },
-                            "identificatie": "0007100000004005"
+                            }
                         },
                         {
-                            "tijdvakgeldigheid": {
-                                "begindatumTijdvakGeldigheid": "2009090100000000"
-                            },
-                            "aanduidingRecordCorrectie": "0",
+                            "identificatie": "0007100000004006",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -582,22 +592,22 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "1979",
                             "pandstatus": "Pand in gebruik",
-                            "officieel": "N",
-                            "bron": {
-                                "documentdatum": "20090901",
-                                "documentnummer": "2009090113/c"
-                            },
-                            "identificatie": "0007100000004006"
-                        },
-                        {
                             "tijdvakgeldigheid": {
                                 "begindatumTijdvakGeldigheid": "2009090100000000"
                             },
-                            "aanduidingRecordCorrectie": "0",
+                            "inOnderzoek": "N",
+                            "bron": {
+                                "documentdatum": "20090901",
+                                "documentnummer": "2009090113/c"
+                            }
+                        },
+                        {
+                            "identificatie": "0007100000004007",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -640,22 +650,22 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "1980",
                             "pandstatus": "Pand in gebruik",
-                            "officieel": "N",
-                            "bron": {
-                                "documentdatum": "20090901",
-                                "documentnummer": "2009090113/c"
-                            },
-                            "identificatie": "0007100000004007"
-                        },
-                        {
                             "tijdvakgeldigheid": {
                                 "begindatumTijdvakGeldigheid": "2009090100000000"
                             },
-                            "aanduidingRecordCorrectie": "0",
+                            "inOnderzoek": "N",
+                            "bron": {
+                                "documentdatum": "20090901",
+                                "documentnummer": "2009090113/c"
+                            }
+                        },
+                        {
+                            "identificatie": "0007100000004008",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -698,22 +708,22 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "1980",
                             "pandstatus": "Pand in gebruik",
-                            "officieel": "N",
-                            "bron": {
-                                "documentdatum": "20090901",
-                                "documentnummer": "2009090113/c"
-                            },
-                            "identificatie": "0007100000004008"
-                        },
-                        {
                             "tijdvakgeldigheid": {
                                 "begindatumTijdvakGeldigheid": "2009090100000000"
                             },
-                            "aanduidingRecordCorrectie": "0",
+                            "inOnderzoek": "N",
+                            "bron": {
+                                "documentdatum": "20090901",
+                                "documentnummer": "2009090113/c"
+                            }
+                        },
+                        {
+                            "identificatie": "0007100000004009",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -756,22 +766,22 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "1980",
                             "pandstatus": "Pand in gebruik",
-                            "officieel": "N",
-                            "bron": {
-                                "documentdatum": "20090901",
-                                "documentnummer": "2009090113/c"
-                            },
-                            "identificatie": "0007100000004009"
-                        },
-                        {
                             "tijdvakgeldigheid": {
                                 "begindatumTijdvakGeldigheid": "2009090100000000"
                             },
-                            "aanduidingRecordCorrectie": "0",
+                            "inOnderzoek": "N",
+                            "bron": {
+                                "documentdatum": "20090901",
+                                "documentnummer": "2009090113/c"
+                            }
+                        },
+                        {
+                            "identificatie": "0007100000004010",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -814,22 +824,22 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "1980",
                             "pandstatus": "Pand in gebruik",
-                            "officieel": "N",
+                            "tijdvakgeldigheid": {
+                                "begindatumTijdvakGeldigheid": "2009090100000000"
+                            },
+                            "inOnderzoek": "N",
                             "bron": {
                                 "documentdatum": "20090901",
                                 "documentnummer": "2009090113/c"
-                            },
-                            "identificatie": "0007100000004010"
+                            }
                         },
                         {
-                            "tijdvakgeldigheid": {
-                                "begindatumTijdvakGeldigheid": "2000101700000000"
-                            },
-                            "aanduidingRecordCorrectie": "0",
+                            "identificatie": "0007100000004011",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -882,22 +892,22 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "1979",
                             "pandstatus": "Pand in gebruik",
-                            "officieel": "N",
+                            "tijdvakgeldigheid": {
+                                "begindatumTijdvakGeldigheid": "2000101700000000"
+                            },
+                            "inOnderzoek": "N",
                             "bron": {
                                 "documentdatum": "20001017",
                                 "documentnummer": "2000216"
-                            },
-                            "identificatie": "0007100000004011"
+                            }
                         },
                         {
-                            "tijdvakgeldigheid": {
-                                "begindatumTijdvakGeldigheid": "2009090100000000"
-                            },
-                            "aanduidingRecordCorrectie": "0",
+                            "identificatie": "0007100000004012",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -960,22 +970,22 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "1979",
                             "pandstatus": "Pand in gebruik",
-                            "officieel": "N",
-                            "bron": {
-                                "documentdatum": "20090901",
-                                "documentnummer": "2009090113/c"
-                            },
-                            "identificatie": "0007100000004012"
-                        },
-                        {
                             "tijdvakgeldigheid": {
                                 "begindatumTijdvakGeldigheid": "2009090100000000"
                             },
-                            "aanduidingRecordCorrectie": "0",
+                            "inOnderzoek": "N",
+                            "bron": {
+                                "documentdatum": "20090901",
+                                "documentnummer": "2009090113/c"
+                            }
+                        },
+                        {
+                            "identificatie": "0007100000004013",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -1028,22 +1038,22 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "1979",
                             "pandstatus": "Pand in gebruik",
-                            "officieel": "N",
-                            "bron": {
-                                "documentdatum": "20090901",
-                                "documentnummer": "2009090113/c"
-                            },
-                            "identificatie": "0007100000004013"
-                        },
-                        {
                             "tijdvakgeldigheid": {
                                 "begindatumTijdvakGeldigheid": "2009090100000000"
                             },
-                            "aanduidingRecordCorrectie": "0",
+                            "inOnderzoek": "N",
+                            "bron": {
+                                "documentdatum": "20090901",
+                                "documentnummer": "2009090113/c"
+                            }
+                        },
+                        {
+                            "identificatie": "0007100000004014",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -1096,22 +1106,22 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "1979",
                             "pandstatus": "Pand in gebruik",
-                            "officieel": "N",
+                            "tijdvakgeldigheid": {
+                                "begindatumTijdvakGeldigheid": "2009090100000000"
+                            },
+                            "inOnderzoek": "N",
                             "bron": {
                                 "documentdatum": "20090901",
                                 "documentnummer": "2009090113/c"
-                            },
-                            "identificatie": "0007100000004014"
+                            }
                         },
                         {
-                            "tijdvakgeldigheid": {
-                                "begindatumTijdvakGeldigheid": "2000030700000000"
-                            },
-                            "aanduidingRecordCorrectie": "0",
+                            "identificatie": "0007100000004015",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -1169,22 +1179,22 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "2000",
                             "pandstatus": "Pand in gebruik",
-                            "officieel": "N",
-                            "bron": {
-                                "documentdatum": "20000307",
-                                "documentnummer": "1999291"
-                            },
-                            "identificatie": "0007100000004015"
-                        },
-                        {
                             "tijdvakgeldigheid": {
                                 "begindatumTijdvakGeldigheid": "2000030700000000"
                             },
-                            "aanduidingRecordCorrectie": "0",
+                            "inOnderzoek": "N",
+                            "bron": {
+                                "documentdatum": "20000307",
+                                "documentnummer": "1999291"
+                            }
+                        },
+                        {
+                            "identificatie": "0007100000004016",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -1242,22 +1252,22 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "2000",
                             "pandstatus": "Pand in gebruik",
-                            "officieel": "N",
+                            "tijdvakgeldigheid": {
+                                "begindatumTijdvakGeldigheid": "2000030700000000"
+                            },
+                            "inOnderzoek": "N",
                             "bron": {
                                 "documentdatum": "20000307",
                                 "documentnummer": "1999291"
-                            },
-                            "identificatie": "0007100000004016"
+                            }
                         },
                         {
-                            "tijdvakgeldigheid": {
-                                "begindatumTijdvakGeldigheid": "1973112600000000"
-                            },
-                            "aanduidingRecordCorrectie": "0",
+                            "identificatie": "1895100000002619",
                             "aanduidingRecordInactief": "N",
+                            "aanduidingRecordCorrectie": "0",
+                            "officieel": "N",
                             "pandGeometrie": {
                                 "type": "Polygon",
                                 "coordinates": [
@@ -1290,28 +1300,18 @@
                                     ]
                                 ]
                             },
-                            "inOnderzoek": "N",
                             "bouwjaar": "1973",
                             "pandstatus": "Pand in gebruik (niet ingemeten)",
-                            "officieel": "N",
+                            "tijdvakgeldigheid": {
+                                "begindatumTijdvakGeldigheid": "1973112600000000"
+                            },
+                            "inOnderzoek": "N",
                             "bron": {
                                 "documentdatum": "19731126",
                                 "documentnummer": "192/1973\n                               192/1973"
-                            },
-                            "identificatie": "1895100000002619"
+                            }
                         }
                     ]
-                }
-            },
-            "vraag": {
-                "StandPeildatum": "20111001",
-                "StandTechnischeDatum": "20111001",
-                "Gebied-Registratief": {
-                    "Gebied-NLD": {
-                        "gebiedTypeNederland": "1",
-                        "GebiedIdentificatie": "9999",
-                        "GebiedNaam": "Nederland"
-                    }
                 }
             }
         }

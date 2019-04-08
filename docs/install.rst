@@ -5,6 +5,7 @@ Installation
 
 Stetl up to and including version 1.3 only runs with Python 2 (2.7+).
 Starting with Stetl v2.0 only Python 3 (3.4.2+) will be supported.
+You may want to read :ref:`py3upgrade` when upgrading from a Stetl pre-v2 version.
 
 Easiest is to first install the Stetl-dependencies (see below) and then
 install and maintain Stetl on your system as a Python package (`pip` is preferred). ::
@@ -50,6 +51,7 @@ Stetl depends on the following Python packages:
 * psycopg2 (PostgreSQL client)
 * lxml
 * Jinja2 templating
+* Deprecated
 
 ``GDAL`` Python binding requires the native GDAL/OGR libs and tools (version 2+) to be installed.
 
@@ -60,7 +62,9 @@ Stetl depends on the following Python packages:
 
 When using the ``Jinja2`` templating filter, ``Jinja2TemplatingFilter``, see http://jinja.pocoo.org:
 
-* Python Jinja2 package
+* Python ``Jinja2`` package
+
+``Deprecated`` is used to indicated deprecated functions and classes.
 
 Platform-specific guidelines for dependencies follow next.
 
@@ -76,17 +80,17 @@ choose to install the same packages via `pip` to have more recent versions like 
 
 - Python dependencies: ::
 
-	apt-get install python-setuptools
-	apt-get install python-dev
-	apt-get install python-pip
+	apt-get install python3-setuptools
+	apt-get install python3-dev
+	apt-get install python3-pip
 	pip install --upgrade pip
 	
 - ``libxml2/libxslt`` libs are usually already installed. Together with Python ``lxml``, the total install for ``lxml`` is: ::
 
-	apt-get install python-libxml2
+	apt-get install python3-libxml2
 	apt-get install python-libxslt1
 	apt-get install libxml2-dev libxslt1-dev lib32z1-dev
-	apt-get install python-lxml
+	apt-get install python3-lxml
 
 - ``GDAL`` (http://gdal.org) version 2+ with Python bindings: ::
 
@@ -95,17 +99,17 @@ choose to install the same packages via `pip` to have more recent versions like 
 	apt-get update
 	apt-get install gdal-bin
 	gdalinfo --version
-	# should show something like: GDAL 2.2.1, released 2017/06/23
+	# should show something like: GDAL 2.4.0, released 2019/03/04
 
 	apt-get install python-gdal
 
 - the PostgreSQL client library for Python ``psycopg2``: ::
 
-	apt-get install python-psycopg2
+	apt-get install python3-psycopg2
 
 - for ``Jinja2``: ::
 
-	apt-get install python-jinja2
+	apt-get install python3-jinja2
 
 Mac OSX
 ~~~~~~~
@@ -153,7 +157,7 @@ You should get meaningful output like ::
 	2013-09-16 18:25:12,122 main INFO Stetl version = 1.0.3
 	usage: stetl [-h] -c  CONFIG_FILE [-s  CONFIG_SECTION] [-a  CONFIG_ARGS]
 
-Especially check the Stetl version number.
+Especially check the Stetl version number. You can also use the `-v` or `--version` option for stetl.
 
 Try running the examples when running with a downloaded distro. ::
 

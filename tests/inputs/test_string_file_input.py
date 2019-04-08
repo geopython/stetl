@@ -22,7 +22,7 @@ class StringFileInputTest(StetlTestCase):
         section = StetlTestCase.get_section(chain)
         class_name = self.etl.configdict.get(section, 'class')
         
-        self.assertEqual('inputs.fileinput.StringFileInput', class_name)
+        self.assertEqual('stetl.inputs.fileinput.StringFileInput', class_name)
     
     def test_instance(self):
         chain = StetlTestCase.get_chain(self.etl)

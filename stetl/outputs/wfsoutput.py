@@ -1,15 +1,15 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 # POST data via WFS Transactional protocol (WFS-T).
 #
 # Author: Just van den Broecke
 #
+import httplib
+
 from stetl.component import Config
 from stetl.output import Output
 from stetl.util import Util
 from stetl.packet import FORMAT
-import httplib
 
 log = Util.get_log('wfsoutput')
 

@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-
-from util import Util
+from .util import Util
 
 log = Util.get_log('factory')
 
@@ -25,7 +23,7 @@ class Factory:
 
             # class instance from class object with constructor args
             class_obj_inst = self.new_instance(class_obj, configdict, section)
-        except Exception, e:
+        except Exception as e:
             log.error("cannot create object instance from class '%s' e=%s" % (class_string, str(e)))
             raise e
 
@@ -46,8 +44,8 @@ class Factory:
             if module_name == '':
                 raise ValueError('Class name must contain module part.')
             class_obj = getattr(
-                __import__(module_name, globals(), locals(), [class_name], -1), class_name)
-        except Exception, e:
+                __import__(module_name, globals(), locals(), [class_name], 0), class_name)
+        except Exception as e:
             log.error("cannot create class '%s'" % class_string)
             raise e
 

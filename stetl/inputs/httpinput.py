@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
-#
 # Input classes for fetching data via HTTP.
 #
 # Author: Just van den Broecke
 #
 import re
-from urllib2 import Request, urlopen, URLError, HTTPError
-import urllib
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
+from urllib.error import URLError, HTTPError
 import base64
 
 from stetl.component import Config
@@ -137,7 +136,7 @@ class HttpInput(Input):
             # Urlencode optional parameters
             query_string = None
             if parameters:
-                query_string = urllib.urlencode(parameters)
+                query_string = str.encode(urlencode(parameters))
 
             # Add optional Authorization
             if self.auth:

@@ -21,7 +21,7 @@ class CommandExecFilterTest(StetlTestCase):
         section = StetlTestCase.get_section(chain, 1)
         class_name = self.etl.configdict.get(section, 'class')
         
-        self.assertEqual('filters.execfilter.CommandExecFilter', class_name)
+        self.assertEqual('stetl.filters.execfilter.CommandExecFilter', class_name)
     
     def test_instance(self):
         chain = StetlTestCase.get_chain(self.etl)
@@ -35,4 +35,4 @@ class CommandExecFilterTest(StetlTestCase):
         buffer_filter = chain.get_by_class(PacketBuffer)
         packet_list = buffer_filter.packet_list
 
-        self.assertEqual(packet_list[0].data.strip(), "foo/bar")
+        self.assertEqual(packet_list[0].data.strip(), b"foo/bar")
