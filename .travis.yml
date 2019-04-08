@@ -11,6 +11,9 @@ env:
 
 python:
   - "3.4"
+  - "3.5"
+  - "3.6"
+  - "3.7"
 
 before_install:
   - sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable -y
