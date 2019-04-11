@@ -36,8 +36,8 @@ script:
   - flake8
   - cd docs && make html && cd ..
   - nose2 -v
-  - cd examples/basics && ./runall.sh  && cd ..
-  - cd examples/basics && ./runall-docker.sh  && cd ..
+  - pushd examples/basics && ./runall.sh  && popd
+  - pushd examples/basics && ./runall-docker.sh  && popd
 
 #after-script:
 #  - python todo
