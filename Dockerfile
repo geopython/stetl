@@ -44,7 +44,7 @@ RUN \
     && dpkg-reconfigure --frontend=noninteractive locales \
     && update-locale LANG=${LOCALE} \
     # Install GDAL version matching installed binary - MESSY - need cleaner solution!
-    # && pip install GDAL==`gdalinfo --version | cut -d' ' -f2 | cut -d',' -f1` \
+    # && pip3 install GDAL==`gdalinfo --version | cut -d' ' -f2 | cut -d',' -f1` \
     && export CPLUS_INCLUDE_PATH=/usr/include/gdal \
     && export C_INCLUDE_PATH=/usr/include/gdal \
     && pip3 install GDAL==${GDAL_PYTHON_BINDINGS_VERSION} \
@@ -53,7 +53,7 @@ RUN \
 	    then \
 	        echo "No extra Pip packages to install" ;\
 	    else \
-	        pip install ${PYTHON_EXTRA_PIP_PACKAGES} ;\
+	        pip3 install ${PYTHON_EXTRA_PIP_PACKAGES} ;\
 	    fi  \
 	# Install and Remove build-related packages for smaller image size
 	&& cd /stetl \
