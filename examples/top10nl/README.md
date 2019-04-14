@@ -14,7 +14,7 @@ PostGIS.
 
 NB this is an example. The official and actively maintained
 Top10NL extract prog is now part of the NLExtract project and located at:
-https://github.com/nlextract/NLExtract/tree/master/top10nl/etl !!
+https://github.com/nlextract/NLExtract/tree/master/brt/top10nl/etl !!
 
 The entire ETL is driven through the file etl-top10nl.cfg without any
 programming (except for the XSLT step). The script etl-top10nl.sh is a shortcut to
