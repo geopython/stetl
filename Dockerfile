@@ -47,7 +47,7 @@ RUN \
     # && pip install GDAL==`gdalinfo --version | cut -d' ' -f2 | cut -d',' -f1` \
     && export CPLUS_INCLUDE_PATH=/usr/include/gdal \
     && export C_INCLUDE_PATH=/usr/include/gdal \
-    && pip install GDAL==${GDAL_PYTHON_BINDINGS_VERSION} \
+    && pip3 install GDAL==${GDAL_PYTHON_BINDINGS_VERSION} \
     # Optional packages to install via Pip
 	&& if [ "x${PYTHON_EXTRA_PIP_PACKAGES}" = "x" ] ;\
 	    then \
@@ -57,7 +57,7 @@ RUN \
 	    fi  \
 	# Install and Remove build-related packages for smaller image size
 	&& cd /stetl \
-		&& python setup.py install  \
+		&& python3 setup.py install  \
 		&& apt-get remove --purge ${BUILD_DEPS} -y \
 		&& apt autoremove -y  \
         && rm -rf /var/lib/apt/lists/* 
