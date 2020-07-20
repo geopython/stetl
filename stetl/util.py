@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Utility functions and classes.
 #
 # Author:Just van den Broecke
@@ -10,7 +8,7 @@ import os
 import re
 import types
 from time import time
-from ConfigParser import ConfigParser
+from configparser import ConfigParser
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(name)s %(levelname)s %(message)s')
@@ -54,9 +52,9 @@ class Util:
     xslt_strip_ns_doc = False
 
     @staticmethod
-    def get_log(name):
+    def get_log(name, level=logging.DEBUG):
         log = logging.getLogger(name)
-        log.setLevel(logging.DEBUG)
+        log.setLevel(level)
         return log
 
     @staticmethod
@@ -136,10 +134,16 @@ class Util:
     def propsfile_to_dict(file_path):
         # See http://stackoverflow.com/questions/2819696/parsing-properties-file-in-python
         # Need a [section] header to parse .ini files, so fake it!
-        class FakeSecHead(object):
+        class FakeSecHead:
             def __init__(self, fp):
                 self.fp = fp
                 self.sechead = '[asection]\n'
+
+            def __iter__(self):
+                return self
+
+            def __next__(self):
+                return self.readline()
 
             def readline(self):
                 if self.sechead:
@@ -148,7 +152,11 @@ class Util:
                     finally:
                         self.sechead = None
                 else:
-                    return self.fp.readline()
+                    line = self.fp.readline()
+                    if line:
+                        return line
+                    else:
+                        raise StopIteration
 
         cp = ConfigParser()
         cp.readfp(FakeSecHead(open(file_path)))
@@ -247,6 +255,8 @@ class Util:
 
                 # Create OGR Geometry object from GML string
                 value = etree.tostring(subelem)
+                if type(value) == bytes:
+                    value = value.decode('utf-8')
                 from osgeo import ogr
                 geom = ogr.CreateGeometryFromGML(value)
 
@@ -339,7 +349,7 @@ class Util:
                           ]
                }
 
-            print xpath_get(foo, "/morefoo/0/morebar/bacon")
+            print (xpath_get(foo, "/morefoo/0/morebar/bacon"))
 
         :param mydict: a nested dict
         :param path: path to member
@@ -380,15 +390,6 @@ class Util:
 log = Util.get_log("util")
 
 # Try several imports, centralized to give warnings once
-try:
-    from cStringIO import StringIO
-
-    log.info("Found cStringIO, good!")
-except Exception:
-    from StringIO import StringIO
-
-    log.warning("Found %s - this is suboptimal, try cStringIO" % str(type(StringIO)))
-
 try:
     from lxml import etree
 

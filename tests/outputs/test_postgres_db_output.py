@@ -22,7 +22,7 @@ class PostgresDbOutputTest(StetlTestCase):
         section = StetlTestCase.get_section(chain, -1)
         class_name = self.etl.configdict.get(section, 'class')
         
-        self.assertEqual('outputs.dboutput.PostgresDbOutput', class_name)
+        self.assertEqual('stetl.outputs.dboutput.PostgresDbOutput', class_name)
     
     def test_instance(self):
         chain = StetlTestCase.get_chain(self.etl)

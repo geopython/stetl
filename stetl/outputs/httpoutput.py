@@ -1,16 +1,16 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 # Base classes for HTTP output like WFS-T and SOS-T or any other HTTP writing service.
 #
 # Author: Just van den Broecke
 #
+import httplib
+import base64
+
 from stetl.output import Output
 from stetl.util import Util
 from stetl.packet import FORMAT
 from stetl.component import Config
-import httplib
-import base64
 
 log = Util.get_log('httpoutput')
 

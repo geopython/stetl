@@ -23,5 +23,20 @@ class MyFilter(Filter):
 
     def do_something(self, packet):
         log.info("CALLING MyFilter OK!!!!")
+        data = packet.data
+        self.show_data(data)
+
         return packet
+
+    def show_data(self, data):
+        try:
+            from lxml import etree
+        except ImportError:
+            # No lxml, so just print data
+            print(data)
+        else:
+            root = data.getroot()
+            for city in root.iterchildren():
+                city_name = city.find('name').text
+                print('Welcome to {c} !'.format(c=city_name))
 

@@ -1,16 +1,14 @@
-# -*- coding: utf-8 -*-
-#
 # Writes the payload of a packet as a string to a file.
 # Based on outputs.fileoutput.FileOutput.
 #
 # Author: Frank Steggink
 #
+import os
+
 from stetl.component import Config
 from stetl.filter import Filter
 from stetl.util import Util
 from stetl.packet import FORMAT
-
-import os
 
 log = Util.get_log('packetwriter')
 

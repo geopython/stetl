@@ -21,7 +21,7 @@ class StandardOutputTest(StetlTestCase):
         section = StetlTestCase.get_section(chain, -1)
         class_name = self.etl.configdict.get(section, 'class')
         
-        self.assertEqual('outputs.standardoutput.StandardOutput', class_name)
+        self.assertEqual('stetl.outputs.standardoutput.StandardOutput', class_name)
     
     def test_instance(self):
         chain = StetlTestCase.get_chain(self.etl)
@@ -38,6 +38,6 @@ class StandardOutputTest(StetlTestCase):
         
         self.etl.run()
         
-        self.assertGreater(sys.stdout.getvalue(), 0)
+        self.assertGreater(len(sys.stdout.getvalue()), 0)
         # Assert includes last linebreak from stdout, due to print function
         self.assertEqual(sys.stdout.getvalue(), contents + '\n')

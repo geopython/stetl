@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Component base class for ETL.
 #
 # Author: Just van den Broecke
@@ -7,13 +5,13 @@
 import os
 import sys
 from time import time
-from util import Util, ConfigSection
-from packet import FORMAT
+from .util import Util, ConfigSection
+from .packet import FORMAT
 
 log = Util.get_log('component')
 
 
-class Config(object):
+class Config:
     """
     Decorator class to tie config values from the .ini file to object instance
     property values. Somewhat like the Python standard @property but with
@@ -28,7 +26,6 @@ class Config(object):
         If there are no decorator arguments, the function
         to be decorated is passed to the constructor.
         """
-        # print "Inside __init__()"
         self.ptype = ptype
         self.default = default
         self.required = required
@@ -42,7 +39,6 @@ class Config(object):
         """
         # Save the property name (is the name of the function calling us).
         self.property_name = fget.__name__
-        # print "Inside __call__() name=%s" % self.property_name
 
         # For Spinx documentation build we need the original function with docstring.
         IS_SPHINX_BUILD = bool(os.getenv('SPHINX_BUILD'))
@@ -67,7 +63,6 @@ class Config(object):
             return self
 
     def __get__(self, comp_inst, owner):
-        # print "Inside __get__() owner=%s" % owner
         """ descr.__get__(obj[, type]) -> value """
         if self.property_name not in comp_inst.cfg_vals:
             cfg, name, default_value = comp_inst.cfg, self.property_name, self.default
@@ -96,7 +91,7 @@ class Config(object):
         return comp_inst.cfg_vals[self.property_name]
 
 
-class Component(object):
+class Component:
     """
     Abstract Base class for all Input, Filter and Output Components.
 
@@ -125,7 +120,7 @@ class Component(object):
         self.next = None
         self.section = section
         self._max_time = -1
-        self._min_time = sys.maxint
+        self._min_time = sys.maxsize
         self._total_time = 0
         self._invoke_count = 0
 
