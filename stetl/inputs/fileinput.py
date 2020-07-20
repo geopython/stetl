@@ -1,17 +1,18 @@
-# -*- coding: utf-8 -*-
-#
 # Input classes for ETL, Files.
 #
 # Author: Just van den Broecke
 #
+import csv
+import re
+import fnmatch
+
+from deprecated.sphinx import deprecated
+
 from stetl.component import Config
 from stetl.input import Input
 from stetl.util import Util, etree
 from stetl.utils.apachelog import formats, parser
 from stetl.packet import FORMAT
-import csv
-import re
-import fnmatch
 
 log = Util.get_log('fileinput')
 
@@ -204,15 +205,15 @@ class XmlElementStreamerFileInput(FileInput):
 
             # Files available: pop next file
             self.cur_file_path = self.file_list.pop(0)
-            fd = open(self.cur_file_path)
+            fd = open(self.cur_file_path, 'rb')
             self.elem_count = 0
             log.info("file opened : %s" % self.cur_file_path)
             self.context = etree.iterparse(fd, events=("start", "end"))
             self.context = iter(self.context)
-            event, self.root = self.context.next()
+            event, self.root = next(self.context)
 
         try:
-            event, elem = self.context.next()
+            event, elem = next(self.context)
         except (etree.XMLSyntaxError, StopIteration):
             # workaround for etree.XMLSyntaxError https://bugs.launchpad.net/lxml/+bug/1185701
             self.context = None
@@ -307,7 +308,11 @@ class LineStreamerFileInput(FileInput):
 
             return packet
 
-        line = line.decode('utf-8')
+        try:
+            line = line.decode('utf-8')
+        except AttributeError:
+            # no need to decode
+            pass
         packet.data = self.process_line(line)
 
         return packet
@@ -319,11 +324,11 @@ class LineStreamerFileInput(FileInput):
         return line
 
 
+@deprecated(version='1.0.9', reason='Better to use XmlElementStreamerFileInput for GML features')
 class XmlLineStreamerFileInput(LineStreamerFileInput):
     """
     DEPRECATED Streams lines from an XML file(s)
     NB assumed is that lines in the file have newlines !!
-    DEPRECATED better is to use XmlElementStreamerFileInput for GML features.
 
     produces=FORMAT.xml_line_stream
     """
@@ -373,11 +378,13 @@ class CsvFileInput(FileInput):
 
     def read(self, packet):
         try:
-            packet.data = self.csv_reader.next()
+            # To comply with Stetl record type: force ordinary/base dict-type.
+            # Python 3.6+ returns OrderedDict which may not play nice up the Chain
+            packet.data = dict(next(self.csv_reader))
             if self._output_format == FORMAT.record_array:
                 while True:
                     self.arr.append(packet.data)
-                    packet.data = self.csv_reader.next()
+                    packet.data = dict(next(self.csv_reader))
 
             log.info("CSV row nr %d read: %s" % (self.csv_reader.line_num - 1, packet.data))
         except Exception:
@@ -410,10 +417,10 @@ class JsonFileInput(FileInput):
             import json
             # may read/parse JSON from file or URL
             if file_path.startswith('http'):
-                import urllib2
+                from urllib.request import urlopen
 
-                fp = urllib2.urlopen(file_path)
-                file_data = json.loads(fp.read())
+                fp = urlopen(file_path)
+                file_data = json.loads(fp.read().decode('utf-8'))
             else:
                 with open(file_path) as data_file:
                     file_data = json.load(data_file)

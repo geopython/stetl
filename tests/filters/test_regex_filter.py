@@ -21,7 +21,7 @@ class RegexFilterTest(StetlTestCase):
         section = StetlTestCase.get_section(chain, 1)
         class_name = self.etl.configdict.get(section, 'class')
         
-        self.assertEqual('filters.regexfilter.RegexFilter', class_name)
+        self.assertEqual('stetl.filters.regexfilter.RegexFilter', class_name)
     
     def test_instance(self):
         chain = StetlTestCase.get_chain(self.etl)
@@ -35,4 +35,5 @@ class RegexFilterTest(StetlTestCase):
         buffer_filter = chain.get_by_class(PacketBuffer)
         packet_list = buffer_filter.packet_list
 
-        self.assertEqual(str(packet_list[0].data), "{'elemtype': 'BuildingInstallation', 'featurecount': '1162'}")
+        self.assertEqual(packet_list[0].data.get('elemtype'), "BuildingInstallation")
+        self.assertEqual(int(packet_list[0].data.get('featurecount')), 1162)

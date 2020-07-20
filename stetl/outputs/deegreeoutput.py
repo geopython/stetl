@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 # Output Components for deegree server storage (www.deegree.org).
 #
@@ -7,11 +6,11 @@
 #
 # NB deegree also supports WFS-T!
 #
+import os
 from stetl.postgis import PostGIS
 from stetl.output import Output
 from stetl.util import Util, etree
 from stetl.packet import FORMAT
-import os
 
 log = Util.get_log('deegreeoutput')
 
@@ -69,7 +68,7 @@ class DeegreeBlobstoreOutput(Output):
         log.info('inserting features in DB')
         db = PostGIS(self.cfg.get_dict())
         db.connect()
-        #        print self.to_string(gml_doc, False, False)
+        #        print (self.to_string(gml_doc, False, False))
         #        NS = {'base': 'urn:x-inspire:specification:gmlas:BaseTypes:3.2', 'gml': 'http://www.opengis.net/gml/3.2'}
         #        featureMembers = gml_doc.xpath('//base:member/*', namespaces=NS)
         featureMembers = gml_doc.xpath("//*[local-name() = '%s']/*" % self.feature_member_tag)

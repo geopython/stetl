@@ -21,7 +21,7 @@ class XmlAssemblerTest(StetlTestCase):
         section = StetlTestCase.get_section(chain, 1)
         class_name = self.etl.configdict.get(section, 'class')
         
-        self.assertEqual('filters.xmlassembler.XmlAssembler', class_name)
+        self.assertEqual('stetl.filters.xmlassembler.XmlAssembler', class_name)
     
     def test_instance(self):
         chain = StetlTestCase.get_chain(self.etl)

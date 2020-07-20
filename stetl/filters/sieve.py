@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
 # Lets data Packets pass-through, "sieve", based on criteria in their data.
 # See issue: https://github.com/geopython/stetl/issues/78
 #

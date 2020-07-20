@@ -23,7 +23,7 @@ class Ogr2OgrExecOutputTest(StetlTestCase):
         section = StetlTestCase.get_section(chain, -1)
         class_name = self.etl.configdict.get(section, 'class')
         
-        self.assertEqual('outputs.execoutput.Ogr2OgrExecOutput', class_name)
+        self.assertEqual('stetl.outputs.execoutput.Ogr2OgrExecOutput', class_name)
     
     def test_instance(self):
         chain = StetlTestCase.get_chain(self.etl)

@@ -5,7 +5,7 @@ import unittest
 
 from stetl.chain import Chain
 from stetl.util import Util
-from StringIO import StringIO
+from io import StringIO
 
 logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
 
@@ -17,9 +17,9 @@ class StetlTestCase(unittest.TestCase):
         self._old_get_log = Util.get_log
         
         @staticmethod
-        def get_log_new(name):
+        def get_log_new(name, level=logging.WARN):
             log = logging.getLogger(name)
-            log.setLevel(logging.WARN)
+            log.setLevel(level)
             return log
             
         Util.get_log = get_log_new

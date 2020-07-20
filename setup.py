@@ -54,8 +54,8 @@ setup(
     package_data={'': ['*.cfg','*.xml','*.gml']},
     scripts=['bin/stetl'],
     install_requires=requirements,
-    tests_require=['nose'],
-    test_suite='nose.collector',
+    tests_require=['nose2'],
+    test_suite='nose2.collector.collector',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',

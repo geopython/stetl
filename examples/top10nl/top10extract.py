@@ -56,7 +56,7 @@ def elaborate_args(args):
 
 	# Check geldigheid dir
 	if not os.path.isdir(args.temp_dir):
-		print 'De opgegeven lokatie `%s` is geen geldige directory' % args.temp_dir
+		print ('De opgegeven lokatie `%s` is geen geldige directory' % args.temp_dir)
 		sys.exit(1)
 
 # 	args.gml_files = str(args.gml_files)
@@ -99,7 +99,7 @@ def main():
 	argparser.add_argument('--pg_password', type=str, help='PostgreSQL wachtwoord', dest='password', default='top10nl')
 	args = argparser.parse_args()
 
-	print 'Begintijd top10-extract:', strftime('%a, %d %b %Y %H:%M:%S', localtime())
+	print ('Begintijd top10-extract:', strftime('%a, %d %b %Y %H:%M:%S', localtime()))
 
 	# Argumenten checken/bewerken
 	args = elaborate_args(args)
@@ -107,7 +107,7 @@ def main():
 	### Verwerken data
 	process(args)
 
-	print 'Eindtijd top10-extract:', strftime('%a, %d %b %Y %H:%M:%S', localtime())
+	print ('Eindtijd top10-extract:', strftime('%a, %d %b %Y %H:%M:%S', localtime()))
 
 if __name__ == "__main__":
 	main()

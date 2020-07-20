@@ -90,6 +90,8 @@ accurate comments, etc.) and any other requirements (such as test coverage).
 You can run the `nose` and `flake8` tools to check your code with respect to
 unit tests and coding style.
 
+### Getting started
+
 Follow this process if you'd like your work considered for inclusion in the
 project:
 
@@ -105,12 +107,18 @@ project:
    git remote add upstream https://github.com/<upstream-owner>/<repo-name>
    ```
 
+2. make a `virtualenv`  e.g. for Python 3.4.2 (e.g. `pyenv` on MacOSX Homebrew)
+
+2. install dependencies, GDAL may be tricky, usually `pip install gdal==<version>` with v from `gdalinfo --version`
+
 2. If you cloned a while ago, get the latest changes from upstream:
 
    ```bash
    git checkout <dev-branch>
    git pull upstream <dev-branch>
    ```
+
+3. Run ``python setup.py install`` to install the ``stetl`` command and Stetl code in the ``site-packages`` for ``venv``.
 
 3. Create a new topic branch (off the main project development branch) to
    contain your feature, change, or fix:
@@ -131,6 +139,12 @@ project:
    git pull [--rebase] upstream <dev-branch>
    ```
 
+5. Run ``flake8`` from the root directory to verify the syntax and coding standards.
+
+5. Run ``nose2`` from the root direcotry to verify all tests are ok.
+
+5. Check the basic examples still work: ``cd examples/basics; ./runall.sh > runall.log 2>&1``. Inspect ``runall.log`` for errors or strange outputs
+
 6. Push your topic branch up to your fork:
 
    ```bash
@@ -142,6 +156,14 @@ project:
 
 **IMPORTANT**: By submitting a patch, you agree to allow the project owner to
 license your work under the same license as that used by the project.
+
+### Docker
+
+To verify the Docker image build:
+
+*  build Docker Image: `docker build -t geopython/stetl:2.0 .`
+* `cd examples/basics; ./runall-docker.sh > runall-docker.log 2>&1` - run all basic examples from Docker Image
+* inspect `runall-docker.log` for errors or strange outputs
 
 ## Thanks
 

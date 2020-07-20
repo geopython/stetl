@@ -26,6 +26,7 @@ Contents:
 
    intro.rst
    install.rst
+   py3upgrade.rst
    background.rst
    using.rst
    cases.rst

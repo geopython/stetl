@@ -240,7 +240,9 @@ class parser:
                 # JvdB option to generate unique key, e.g. for database insert
                 if self._options['gen_key']:
                     # Generate  unique key as md5-string from all values
-                    data['key'] = hashlib.md5(str(data.values())).hexdigest()
+                    # RvL: need to convert to string and encode to utf-8 before hashing
+                    dat_val = (str(val) for val in data.values())
+                    data['key'] = hashlib.md5(','.join(dat_val).encode('utf-8')).hexdigest()
 
         except Exception as e:
             raise ApacheLogParserError("Unable to parse: %s with the %s regular expression e=%s" % (line, self._pattern, str(e)))
