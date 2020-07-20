@@ -1,0 +1,1267 @@
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/10_jinja2_templating ~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+==== running etl.sh for example 10_jinja2_templating ====
+2019-03-21 14:10:31,188 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:10:31,245 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:10:31,250 main INFO Stetl version = 1.2
+2019-03-21 14:10:31,252 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:10:31,255 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/10_jinja2_templating
+2019-03-21 14:10:31,255 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:10:31,259 ETL INFO START
+2019-03-21 14:10:31,259 util INFO Timer start: total ETL
+2019-03-21 14:10:31,259 chain INFO Assembling Chain: input_json|filter_template_xml|output_xml_file...
+2019-03-21 14:10:31,262 input INFO cfg = {'class': 'stetl.inputs.fileinput.JsonFileInput', 'file_path': 'input/cities.json'}
+2019-03-21 14:10:31,264 fileinput INFO file_list=['input/cities.json']
+2019-03-21 14:10:31,266 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/cities.xml'}
+2019-03-21 14:10:31,266 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/10_jinja2_templating
+2019-03-21 14:10:31,267 chain INFO Running Chain: input_json|filter_template_xml|output_xml_file
+2019-03-21 14:10:31,267 templatingfilter INFO Init: templating
+2019-03-21 14:10:31,435 templatingfilter INFO template file read and template created OK: templates/cities-json2xml.jinja2
+2019-03-21 14:10:31,435 fileinput INFO Read/parse for start for file=input/cities.json....
+2019-03-21 14:10:31,439 fileinput INFO Read/parse ok for file=input/cities.json
+2019-03-21 14:10:31,439 fileinput INFO all files done
+2019-03-21 14:10:31,440 fileoutput INFO writing to file output/cities.xml
+2019-03-21 14:10:31,442 fileoutput INFO written to output/cities.xml
+2019-03-21 14:10:31,443 component INFO JsonFileInput invokes=1 time(total, min, max, avg) = 0.004 0.004 0.004 0.004
+2019-03-21 14:10:31,443 templatingfilter INFO Exit: templating
+2019-03-21 14:10:31,444 component INFO Jinja2TemplatingFilter invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:31,444 component INFO FileOutput invokes=1 time(total, min, max, avg) = 0.003 0.003 0.003 0.003
+2019-03-21 14:10:31,444 chain INFO DONE - 1 rounds - chain=input_json|filter_template_xml|output_xml_file 
+2019-03-21 14:10:31,445 chain INFO Assembling Chain: input_json|filter_template_gml|output_gml_file...
+2019-03-21 14:10:31,445 input INFO cfg = {'class': 'stetl.inputs.fileinput.JsonFileInput', 'file_path': 'input/cities.json'}
+2019-03-21 14:10:31,446 fileinput INFO file_list=['input/cities.json']
+2019-03-21 14:10:31,447 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/cities.gml'}
+2019-03-21 14:10:31,447 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/10_jinja2_templating
+2019-03-21 14:10:31,447 chain INFO Running Chain: input_json|filter_template_gml|output_gml_file
+2019-03-21 14:10:31,448 templatingfilter INFO Init: templating
+2019-03-21 14:10:31,448 templatingfilter INFO Read JSON file with globals from: input/globals.json
+2019-03-21 14:10:31,460 templatingfilter INFO template file read and template created OK: templates/cities-json2gml.jinja2
+2019-03-21 14:10:31,461 fileinput INFO Read/parse for start for file=input/cities.json....
+2019-03-21 14:10:31,464 fileinput INFO Read/parse ok for file=input/cities.json
+2019-03-21 14:10:31,465 fileinput INFO all files done
+2019-03-21 14:10:31,475 fileoutput INFO writing to file output/cities.gml
+2019-03-21 14:10:31,479 fileoutput INFO written to output/cities.gml
+2019-03-21 14:10:31,480 component INFO JsonFileInput invokes=1 time(total, min, max, avg) = 0.004 0.004 0.004 0.004
+2019-03-21 14:10:31,480 templatingfilter INFO Exit: templating
+2019-03-21 14:10:31,481 component INFO Jinja2TemplatingFilter invokes=1 time(total, min, max, avg) = 0.010 0.010 0.010 0.010
+2019-03-21 14:10:31,481 component INFO FileOutput invokes=1 time(total, min, max, avg) = 0.005 0.005 0.005 0.005
+2019-03-21 14:10:31,481 chain INFO DONE - 1 rounds - chain=input_json|filter_template_gml|output_gml_file 
+2019-03-21 14:10:31,482 chain INFO Assembling Chain: input_geojson|filter_template_geojson2gml|output_gml_file2...
+2019-03-21 14:10:31,483 input INFO cfg = {'class': 'stetl.inputs.fileinput.JsonFileInput', 'file_path': 'https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json', 'output_format': 'geojson_collection'}
+2019-03-21 14:10:31,483 fileinput INFO file_list=['https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json']
+2019-03-21 14:10:31,484 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/cities-gjson.gml'}
+2019-03-21 14:10:31,485 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/10_jinja2_templating
+2019-03-21 14:10:31,485 chain INFO Running Chain: input_geojson|filter_template_geojson2gml|output_gml_file2
+2019-03-21 14:10:31,485 templatingfilter INFO Init: templating
+2019-03-21 14:10:31,486 templatingfilter INFO Read JSON file with globals from: input/globals.json
+2019-03-21 14:10:31,489 templatingfilter INFO Read JSON file with globals from: https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/more-globals.json
+2019-03-21 14:10:32,185 templatingfilter INFO template file read and template created OK: templates/cities-gjson2gml.jinja2
+2019-03-21 14:10:32,185 fileinput INFO Read/parse for start for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json....
+2019-03-21 14:10:32,423 fileinput INFO Read/parse ok for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json
+2019-03-21 14:10:32,423 fileinput INFO all files done
+2019-03-21 14:10:32,436 fileoutput INFO writing to file output/cities-gjson.gml
+2019-03-21 14:10:32,440 fileoutput INFO written to output/cities-gjson.gml
+2019-03-21 14:10:32,440 component INFO JsonFileInput invokes=1 time(total, min, max, avg) = 0.238 0.238 0.238 0.238
+2019-03-21 14:10:32,440 templatingfilter INFO Exit: templating
+2019-03-21 14:10:32,441 component INFO Jinja2TemplatingFilter invokes=1 time(total, min, max, avg) = 0.012 0.012 0.012 0.012
+2019-03-21 14:10:32,441 component INFO FileOutput invokes=1 time(total, min, max, avg) = 0.004 0.004 0.004 0.004
+2019-03-21 14:10:32,441 chain INFO DONE - 1 rounds - chain=input_geojson|filter_template_geojson2gml|output_gml_file2 
+2019-03-21 14:10:32,442 chain INFO Assembling Chain: input_geojson|filter_template_geojson2gml|output_std...
+2019-03-21 14:10:32,442 input INFO cfg = {'class': 'stetl.inputs.fileinput.JsonFileInput', 'file_path': 'https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json', 'output_format': 'geojson_collection'}
+2019-03-21 14:10:32,443 fileinput INFO file_list=['https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json']
+2019-03-21 14:10:32,444 output INFO cfg = {'class': 'stetl.outputs.standardoutput.StandardOutput'}
+2019-03-21 14:10:32,444 chain INFO Running Chain: input_geojson|filter_template_geojson2gml|output_std
+2019-03-21 14:10:32,445 templatingfilter INFO Init: templating
+2019-03-21 14:10:32,445 templatingfilter INFO Read JSON file with globals from: input/globals.json
+2019-03-21 14:10:32,449 templatingfilter INFO Read JSON file with globals from: https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/more-globals.json
+2019-03-21 14:10:32,510 templatingfilter INFO template file read and template created OK: templates/cities-gjson2gml.jinja2
+2019-03-21 14:10:32,511 fileinput INFO Read/parse for start for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json....
+2019-03-21 14:10:32,559 fileinput INFO Read/parse ok for file=https://raw.githubusercontent.com/justb4/stetl/master/examples/basics/10_jinja2_templating/input/cities-gjson.json
+2019-03-21 14:10:32,559 fileinput INFO all files done
+2019-03-21 14:10:32,570 component INFO JsonFileInput invokes=1 time(total, min, max, avg) = 0.049 0.049 0.049 0.049
+2019-03-21 14:10:32,570 templatingfilter INFO Exit: templating
+2019-03-21 14:10:32,571 component INFO Jinja2TemplatingFilter invokes=1 time(total, min, max, avg) = 0.010 0.010 0.010 0.010
+2019-03-21 14:10:32,571 component INFO StandardOutput invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:32,571 chain INFO DONE - 1 rounds - chain=input_geojson|filter_template_geojson2gml|output_std 
+2019-03-21 14:10:32,571 chain INFO Assembling Chain: input_addresses_csv|convert_record_array_to_struct|filter_template_addresses2inspire|output_inspire_addresses...
+2019-03-21 14:10:32,572 input INFO cfg = {'class': 'stetl.inputs.fileinput.CsvFileInput', 'file_path': 'input/addresses.csv'}
+2019-03-21 14:10:32,574 fileinput INFO file_list=['input/addresses.csv']
+2019-03-21 14:10:32,575 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/inspire-addresses.gml'}
+2019-03-21 14:10:32,575 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/10_jinja2_templating
+2019-03-21 14:10:32,575 chain INFO Running Chain: input_addresses_csv|convert_record_array_to_struct|filter_template_addresses2inspire|output_inspire_addresses
+2019-03-21 14:10:32,575 fileinput INFO Open CSV file: input/addresses.csv
+2019-03-21 14:10:32,577 templatingfilter INFO Init: templating
+2019-03-21 14:10:32,577 templatingfilter INFO Read JSON file with globals from: input/addresses-globals.json
+2019-03-21 14:10:32,611 templatingfilter INFO template file read and template created OK: templates/addresses2inspire-ad.jinja2
+2019-03-21 14:10:32,621 fileoutput INFO writing to file output/inspire-addresses.gml
+2019-03-21 14:10:32,625 fileoutput INFO written to output/inspire-addresses.gml
+2019-03-21 14:10:32,625 component INFO CsvFileInput invokes=1 time(total, min, max, avg) = 0.002 0.002 0.002 0.002
+2019-03-21 14:10:32,625 component INFO FormatConverter invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:32,626 templatingfilter INFO Exit: templating
+2019-03-21 14:10:32,626 component INFO Jinja2TemplatingFilter invokes=1 time(total, min, max, avg) = 0.008 0.008 0.008 0.008
+2019-03-21 14:10:32,626 component INFO FileOutput invokes=1 time(total, min, max, avg) = 0.004 0.004 0.004 0.004
+2019-03-21 14:10:32,626 chain INFO DONE - 1 rounds - chain=input_addresses_csv|convert_record_array_to_struct|filter_template_addresses2inspire|output_inspire_addresses 
+2019-03-21 14:10:32,627 util INFO Timer end: total ETL time=1.0 sec
+2019-03-21 14:10:32,627 ETL INFO ALL DONE
+<?xml version='1.0' encoding='utf-8'?>
+<cities:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xmlns:cities="http://cities.maptools.org/"
+                       xmlns:gml="http://www.opengis.net/gml"
+                       xsi:schemaLocation="http://cities.maptools.org/ ../gmlcities.xsd  http://www.opengis.net/gml http://schemas.opengis.net/gml/2.1.2/feature.xsd">
+
+    <!--
+    Generated with a Jinja2 template. The 'globs' variables come from the file globals.json containing global
+    variables/structures. The actual/dynamic data (cities) comes from the input CSV file cities.json.
+    Also a file with macros templates/macros.tpl.xml is imported, allowing reuse for common structures like INSPIRE id's.
+    -->
+
+
+    <gml:description>
+       This example tests GML generation with Jinja2 templating, including the use of Jinja2 globals., such as for this description. Globals provide more or less constant/semi static information like point of contacts, global names, id-prefixes etc.
+    </gml:description>
+
+
+
+    <!-- Rendered by macro render_name() -->
+    <gml:name>
+       Test for GML generation via Jinja2 templating
+    </gml:name>
+
+
+    <!-- bbox present in geojson input -->
+    <gml:boundedBy>
+        <gml:Box>
+            <gml:coord>
+                <gml:X>4.88</gml:X>
+                <gml:Y>41.88</gml:Y>
+            </gml:coord>
+            <gml:coord>
+                <gml:X>12.52</gml:X>
+                <gml:Y>53.98</gml:Y>
+            </gml:coord>
+        </gml:Box>
+    </gml:boundedBy>
+
+        <gml:featureMember>
+            <cities:City>
+                <cities:name>Amsterdam</cities:name>
+                <cities:population>779808</cities:population>
+                <cities:geometry>
+                    <gml:Point srsName="urn:ogc:def:crs:EPSG::4258" gml:id="point-1"><gml:pos>52.3730454545455 4.89483636363636</gml:pos></gml:Point>
+                </cities:geometry>
+            </cities:City>
+        </gml:featureMember>
+        <gml:featureMember>
+            <cities:City>
+                <cities:name>Bonn</cities:name>
+                <cities:population>327913</cities:population>
+                <cities:geometry>
+                    <gml:Point srsName="urn:ogc:def:crs:EPSG::4258" gml:id="point-2"><gml:pos>50.7345545454545 7.09981818181818</gml:pos></gml:Point>
+                </cities:geometry>
+            </cities:City>
+        </gml:featureMember>
+        <gml:featureMember>
+            <cities:City>
+                <cities:name>Rome</cities:name>
+                <cities:population>2753000</cities:population>
+                <cities:geometry>
+                    <gml:Point srsName="urn:ogc:def:crs:EPSG::4258" gml:id="point-3"><gml:pos>41.88 12.52</gml:pos></gml:Point>
+                </cities:geometry>
+            </cities:City>
+        </gml:featureMember>
+
+</cities:FeatureCollection>
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/11_formatconvert ~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+==== running etl.sh for example 11_formatconvert ====
+2019-03-21 14:10:34,107 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:10:34,172 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:10:34,178 main INFO Stetl version = 1.2
+2019-03-21 14:10:34,180 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:10:34,181 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/11_formatconvert
+2019-03-21 14:10:34,181 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:10:34,186 ETL INFO START
+2019-03-21 14:10:34,186 util INFO Timer start: total ETL
+2019-03-21 14:10:34,186 chain INFO Assembling Chain: input_xml_file|convert_xml_to_string|convert_string_to_xml|output_xml_file...
+2019-03-21 14:10:34,190 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2019-03-21 14:10:34,192 fileinput INFO file_list=['input/cities.xml']
+2019-03-21 14:10:34,194 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/cities.xml'}
+2019-03-21 14:10:34,194 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/11_formatconvert
+2019-03-21 14:10:34,194 chain INFO Running Chain: input_xml_file|convert_xml_to_string|convert_string_to_xml|output_xml_file
+2019-03-21 14:10:34,194 fileinput INFO Read/parse for start for file=input/cities.xml....
+2019-03-21 14:10:34,198 fileinput INFO Read/parse ok for file=input/cities.xml
+2019-03-21 14:10:34,198 fileinput INFO all files done
+2019-03-21 14:10:34,198 fileoutput INFO writing to file output/cities.xml
+2019-03-21 14:10:34,202 fileoutput INFO written to output/cities.xml
+2019-03-21 14:10:34,202 component INFO XmlFileInput invokes=1 time(total, min, max, avg) = 0.004 0.004 0.004 0.004
+2019-03-21 14:10:34,202 component INFO FormatConverter invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:34,202 component INFO FormatConverter invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:34,202 component INFO FileOutput invokes=1 time(total, min, max, avg) = 0.004 0.004 0.004 0.004
+2019-03-21 14:10:34,203 chain INFO DONE - 1 rounds - chain=input_xml_file|convert_xml_to_string|convert_string_to_xml|output_xml_file 
+2019-03-21 14:10:34,203 chain INFO Assembling Chain: input_complex_xml_file|convert_to_json|output_json_file...
+2019-03-21 14:10:34,203 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlFileInput', 'file_path': 'input/building-dutch-bag.xml'}
+2019-03-21 14:10:34,205 fileinput INFO file_list=['input/building-dutch-bag.xml']
+2019-03-21 14:10:34,205 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/building-dutch.json'}
+2019-03-21 14:10:34,205 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/11_formatconvert
+2019-03-21 14:10:34,205 chain INFO Running Chain: input_complex_xml_file|convert_to_json|output_json_file
+2019-03-21 14:10:34,205 fileinput INFO Read/parse for start for file=input/building-dutch-bag.xml....
+2019-03-21 14:10:34,210 fileinput INFO Read/parse ok for file=input/building-dutch-bag.xml
+2019-03-21 14:10:34,210 fileinput INFO all files done
+2019-03-21 14:10:34,220 fileoutput INFO writing to file output/building-dutch.json
+2019-03-21 14:10:34,227 fileoutput INFO written to output/building-dutch.json
+2019-03-21 14:10:34,227 component INFO XmlFileInput invokes=1 time(total, min, max, avg) = 0.005 0.005 0.005 0.005
+2019-03-21 14:10:34,227 component INFO FormatConverter invokes=1 time(total, min, max, avg) = 0.009 0.009 0.009 0.009
+2019-03-21 14:10:34,227 component INFO FileOutput invokes=1 time(total, min, max, avg) = 0.007 0.007 0.007 0.007
+2019-03-21 14:10:34,228 chain INFO DONE - 1 rounds - chain=input_complex_xml_file|convert_to_json|output_json_file 
+2019-03-21 14:10:34,228 chain INFO Assembling Chain: input_gml_sf_file|convert_to_geojson|output_geojson_file...
+2019-03-21 14:10:34,228 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.gml'}
+2019-03-21 14:10:34,230 fileinput INFO file_list=['input/cities.gml']
+2019-03-21 14:10:34,231 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/cities-gjson.json'}
+2019-03-21 14:10:34,231 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/11_formatconvert
+2019-03-21 14:10:34,231 chain INFO Running Chain: input_gml_sf_file|convert_to_geojson|output_geojson_file
+2019-03-21 14:10:34,231 fileinput INFO Read/parse for start for file=input/cities.gml....
+2019-03-21 14:10:34,235 fileinput INFO Read/parse ok for file=input/cities.gml
+2019-03-21 14:10:34,235 fileinput INFO all files done
+2019-03-21 14:10:34,237 fileoutput INFO writing to file output/cities-gjson.json
+2019-03-21 14:10:34,241 fileoutput INFO written to output/cities-gjson.json
+2019-03-21 14:10:34,241 component INFO XmlFileInput invokes=1 time(total, min, max, avg) = 0.004 0.004 0.004 0.004
+2019-03-21 14:10:34,241 component INFO FormatConverter invokes=1 time(total, min, max, avg) = 0.001 0.001 0.001 0.001
+2019-03-21 14:10:34,241 component INFO FileOutput invokes=1 time(total, min, max, avg) = 0.004 0.004 0.004 0.004
+2019-03-21 14:10:34,242 chain INFO DONE - 1 rounds - chain=input_gml_sf_file|convert_to_geojson|output_geojson_file 
+2019-03-21 14:10:34,242 util INFO Timer end: total ETL time=0.0 sec
+2019-03-21 14:10:34,242 ETL INFO ALL DONE
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/12_gdal_ogr ~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+==== running etl.sh for example 12_gdal_ogr ====
+2019-03-21 14:10:35,808 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:10:35,897 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:10:35,908 main INFO Stetl version = 1.2
+2019-03-21 14:10:35,913 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:10:35,916 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/12_gdal_ogr
+2019-03-21 14:10:35,917 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:10:35,923 ETL INFO START
+2019-03-21 14:10:35,924 util INFO Timer start: total ETL
+2019-03-21 14:10:35,924 chain INFO Assembling Chain: input_geojson_file|geojson_coll_to_ogr_feature_arr|output_ogr_gmlfile...
+2019-03-21 14:10:35,929 input INFO cfg = {'class': 'stetl.inputs.fileinput.JsonFileInput', 'file_path': 'input/cities.geojson', 'output_format': 'geojson_collection'}
+2019-03-21 14:10:35,931 fileinput INFO file_list=['input/cities.geojson']
+2019-03-21 14:10:35,934 output INFO cfg = {'class': 'stetl.outputs.ogroutput.OgrOutput', 'input_format': 'ogr_feature_array', 'dest_data_source': 'output/cities.gml', 'overwrite': 'True', 'new_layer_name': 'cities', 'dest_format': 'GML'}
+2019-03-21 14:10:35,934 chain INFO Running Chain: input_geojson_file|geojson_coll_to_ogr_feature_arr|output_ogr_gmlfile
+2019-03-21 14:10:35,935 ogroutput INFO Using GDAL/OGR version: 2010200
+2019-03-21 14:10:35,968 ogroutput INFO Opened OGR dest ok: output/cities.gml 
+2019-03-21 14:10:35,968 fileinput INFO Read/parse for start for file=input/cities.geojson....
+2019-03-21 14:10:35,974 fileinput INFO Read/parse ok for file=input/cities.geojson
+2019-03-21 14:10:35,974 fileinput INFO all files done
+2019-03-21 14:10:35,976 ogroutput INFO End writing to: output/cities.gml
+2019-03-21 14:10:35,983 component INFO JsonFileInput invokes=1 time(total, min, max, avg) = 0.006 0.006 0.006 0.006
+2019-03-21 14:10:35,984 component INFO FormatConverter invokes=1 time(total, min, max, avg) = 0.001 0.001 0.001 0.001
+2019-03-21 14:10:35,985 component INFO OgrOutput invokes=1 time(total, min, max, avg) = 0.008 0.008 0.008 0.008
+2019-03-21 14:10:35,986 chain INFO DONE - 1 rounds - chain=input_geojson_file|geojson_coll_to_ogr_feature_arr|output_ogr_gmlfile 
+2019-03-21 14:10:35,987 chain INFO Assembling Chain: input_gml_file_to_array|ogr_feature_array_to_geojson_collection|tolowercase_filter|output_file...
+2019-03-21 14:10:35,991 input INFO cfg = {'class': 'stetl.inputs.ogrinput.OgrInput', 'data_source': 'input/cities.gml', 'source_format': 'GML', 'output_format': 'ogr_feature_array'}
+2019-03-21 14:10:36,007 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/cities.geojson'}
+2019-03-21 14:10:36,008 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/12_gdal_ogr
+2019-03-21 14:10:36,008 chain INFO Running Chain: input_gml_file_to_array|ogr_feature_array_to_geojson_collection|tolowercase_filter|output_file
+2019-03-21 14:10:36,009 ogrinput INFO Using GDAL/OGR version: 2010200
+2019-03-21 14:10:36,017 ogrinput INFO Opened OGR source ok: input/cities.gml layer count=1
+2019-03-21 14:10:36,017 ogrinput INFO Start reading from OGR Source: input/cities.gml, Layer: heronfeat
+2019-03-21 14:10:36,019 ogrinput INFO End reading all features from Layer: heronfeat count=5
+2019-03-21 14:10:36,028 fileoutput INFO writing to file output/cities.geojson
+2019-03-21 14:10:36,032 fileoutput INFO written to output/cities.geojson
+2019-03-21 14:10:36,033 ogrinput INFO Closing OGR source: input/cities.gml
+2019-03-21 14:10:36,034 component INFO OgrInput invokes=2 time(total, min, max, avg) = 0.003 0.001 0.002 0.002
+2019-03-21 14:10:36,035 component INFO FormatConverter invokes=2 time(total, min, max, avg) = 0.008 0.008 0.008 0.004
+2019-03-21 14:10:36,037 component INFO ToLowerFilter invokes=2 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:36,038 component INFO FileOutput invokes=2 time(total, min, max, avg) = 0.005 0.005 0.005 0.003
+2019-03-21 14:10:36,039 chain INFO DONE - 2 rounds - chain=input_gml_file_to_array|ogr_feature_array_to_geojson_collection|tolowercase_filter|output_file 
+2019-03-21 14:10:36,039 chain INFO Assembling Chain: input_gml_file|output_ogr_shapefile...
+2019-03-21 14:10:36,040 input INFO cfg = {'class': 'stetl.inputs.ogrinput.OgrInput', 'data_source': 'input/cities.gml', 'source_format': 'GML', 'source_options': "{'GDAL_CACHEMAX': '64', 'CPL_DEBUG': 'OFF'}", 'output_format': 'ogr_feature'}
+2019-03-21 14:10:36,041 output INFO cfg = {'class': 'stetl.outputs.ogroutput.OgrOutput', 'input_format': 'ogr_feature', 'dest_data_source': 'output/cities.shp', 'overwrite': 'True', 'new_layer_name': 'cities', 'dest_format': 'ESRI Shapefile'}
+2019-03-21 14:10:36,041 chain INFO Running Chain: input_gml_file|output_ogr_shapefile
+2019-03-21 14:10:36,042 ogrinput INFO Using GDAL/OGR version: 2010200
+2019-03-21 14:10:36,052 ogrinput INFO Opened OGR source ok: input/cities.gml layer count=1
+2019-03-21 14:10:36,052 ogroutput INFO Using GDAL/OGR version: 2010200
+2019-03-21 14:10:36,087 ogroutput INFO Opened OGR dest ok: output/cities.shp 
+2019-03-21 14:10:36,087 ogrinput INFO Start reading from OGR Source: input/cities.gml, Layer: heronfeat
+2019-03-21 14:10:36,094 ogrinput INFO End reading from Layer: heronfeat
+2019-03-21 14:10:36,095 ogroutput INFO End writing to: output/cities.shp
+2019-03-21 14:10:36,102 ogrinput INFO Closing OGR source: input/cities.gml
+2019-03-21 14:10:36,104 ogroutput INFO End writing to: output/cities.shp
+2019-03-21 14:10:36,105 component INFO OgrInput invokes=7 time(total, min, max, avg) = 0.006 0.001 0.002 0.001
+2019-03-21 14:10:36,105 component INFO OgrOutput invokes=7 time(total, min, max, avg) = 0.011 0.001 0.006 0.002
+2019-03-21 14:10:36,106 chain INFO DONE - 7 rounds - chain=input_gml_file|output_ogr_shapefile 
+2019-03-21 14:10:36,107 util INFO Timer end: total ETL time=0.0 sec
+2019-03-21 14:10:36,107 ETL INFO ALL DONE
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/13_dbinput ~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+==== running etl.sh for example 13_dbinput ====
+2019-03-21 14:10:37,783 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:10:37,858 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:10:37,863 main INFO Stetl version = 1.2
+2019-03-21 14:10:37,866 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:10:37,867 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/13_dbinput
+2019-03-21 14:10:37,867 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:10:37,871 ETL INFO START
+2019-03-21 14:10:37,871 util INFO Timer start: total ETL
+2019-03-21 14:10:37,871 chain INFO Assembling Chain: input_sqlite_all|convert_records_to_json|output_cities_file...
+/usr/local/lib/python3.6/site-packages/psycopg2-2.7.7-py3.6-linux-x86_64.egg/psycopg2/__init__.py:144: UserWarning: The psycopg2 wheel package will be renamed from release 2.8; in order to keep installing from binary please use "pip install psycopg2-binary" instead. For details see: <http://initd.org/psycopg/docs/install.html#binary-install-from-pypi>.
+  """)
+2019-03-21 14:10:37,905 input INFO cfg = {'class': 'stetl.inputs.dbinput.SqliteDbInput', 'output_format': 'record_array', 'database_name': 'input/cities.sdb', 'table': 'cities', 'read_once': 'True', 'query': 'select * from cities'}
+2019-03-21 14:10:37,911 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/cities.json'}
+2019-03-21 14:10:37,911 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/13_dbinput
+2019-03-21 14:10:37,912 chain INFO Running Chain: input_sqlite_all|convert_records_to_json|output_cities_file
+2019-03-21 14:10:37,912 dbinput INFO Connect to SQLite DB: input/cities.sdb
+2019-03-21 14:10:37,919 dbinput INFO Connect to SQLite DB: input/cities.sdb
+2019-03-21 14:10:37,923 dbinput INFO 3 records read
+2019-03-21 14:10:37,925 dbinput INFO Nothing to do. All file_records done
+2019-03-21 14:10:37,926 fileoutput INFO writing to file output/cities.json
+2019-03-21 14:10:37,929 fileoutput INFO written to output/cities.json
+2019-03-21 14:10:37,930 component INFO SqliteDbInput invokes=1 time(total, min, max, avg) = 0.007 0.007 0.007 0.007
+2019-03-21 14:10:37,931 component INFO FormatConverter invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:37,931 component INFO FileOutput invokes=1 time(total, min, max, avg) = 0.004 0.004 0.004 0.004
+2019-03-21 14:10:37,932 chain INFO DONE - 1 rounds - chain=input_sqlite_all|convert_records_to_json|output_cities_file 
+2019-03-21 14:10:37,932 chain INFO Assembling Chain: input_sqlite_single|convert_record_to_json|output_city_file...
+2019-03-21 14:10:37,933 input INFO cfg = {'class': 'stetl.inputs.dbinput.SqliteDbInput', 'output_format': 'record', 'database_name': 'input/cities.sdb', 'table': 'cities', 'read_once': 'True', 'query': "select * from cities where name = 'Rome'"}
+2019-03-21 14:10:37,936 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/city.json'}
+2019-03-21 14:10:37,937 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/13_dbinput
+2019-03-21 14:10:37,937 chain INFO Running Chain: input_sqlite_single|convert_record_to_json|output_city_file
+2019-03-21 14:10:37,938 dbinput INFO Connect to SQLite DB: input/cities.sdb
+2019-03-21 14:10:37,945 dbinput INFO Connect to SQLite DB: input/cities.sdb
+2019-03-21 14:10:37,953 dbinput INFO 1 records read
+2019-03-21 14:10:37,955 dbinput INFO Nothing to do. All file_records done
+2019-03-21 14:10:37,957 fileoutput INFO writing to file output/city.json
+2019-03-21 14:10:37,960 fileoutput INFO written to output/city.json
+2019-03-21 14:10:37,961 component INFO SqliteDbInput invokes=1 time(total, min, max, avg) = 0.011 0.011 0.011 0.011
+2019-03-21 14:10:37,961 component INFO FormatConverter invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:37,962 component INFO FileOutput invokes=1 time(total, min, max, avg) = 0.004 0.004 0.004 0.004
+2019-03-21 14:10:37,962 chain INFO DONE - 1 rounds - chain=input_sqlite_single|convert_record_to_json|output_city_file 
+2019-03-21 14:10:37,963 util INFO Timer end: total ETL time=0.0 sec
+2019-03-21 14:10:37,963 ETL INFO ALL DONE
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/14_logfileinput ~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+==== running etl.sh for example 14_logfileinput ====
+2019-03-21 14:10:39,505 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:10:39,575 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:10:39,581 main INFO Stetl version = 1.2
+2019-03-21 14:10:39,583 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:10:39,584 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/14_logfileinput
+2019-03-21 14:10:39,585 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:10:39,589 ETL WARNING Expanding config arguments (non fatal yet): argument of type 'NoneType' is not iterable
+2019-03-21 14:10:39,590 ETL INFO START
+2019-03-21 14:10:39,590 util INFO Timer start: total ETL
+2019-03-21 14:10:39,591 chain INFO Assembling Chain: input_apache_log|to_record_array|output_std...
+2019-03-21 14:10:39,594 input INFO cfg = {'class': 'stetl.inputs.fileinput.ApacheLogFileInput', 'log_format': '%h %l %u %t \\"%r\\" %>s %b \\"%{Referer}i\\" \\"%{User-agent}i\\" %D', 'key_map': '{\'%>s\': \'status\', \'%D\': \'deltat\', \'%{User-agent}i\': \'agent\', \'%b\': \'bytes\', \'%{Referer}i\': \'referer\', \'%t\': \'time\', "\'%h": \'host\', \'%r\': \'request\'}', 'file_path': 'input', 'filename_pattern': '*.log'}
+2019-03-21 14:10:39,606 fileinput INFO file_list=['input/apache.log', 'input/apache2.log']
+2019-03-21 14:10:39,611 output INFO cfg = {'class': 'stetl.outputs.standardoutput.StandardOutput'}
+2019-03-21 14:10:39,611 chain INFO Running Chain: input_apache_log|to_record_array|output_std
+2019-03-21 14:10:39,613 fileinput INFO file opened : input/apache.log
+2019-03-21 14:10:39,616 fileinput INFO EOF file
+2019-03-21 14:10:39,619 fileinput INFO file opened : input/apache2.log
+[{'time': 20150420084459, 'request': '/map/gast/tms/1.0.0/opentopo/EPSG28992/6/32/40.png', 'status': 200, 'bytes': 32085, 'referer': 'http://217.21.192.135/sekaarten/?id=baggeren', 'agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko', 'deltat': 2580, 'key': 'ebaac59b6e8d3b7ab59d51af0ed172e6'}, {'time': 20150420084459, 'request': '/map/gast/tms/1.0.0/opentopo/EPSG28992/6/32/41.png', 'status': 200, 'bytes': 10891, 'referer': 'http://217.21.192.135/sekaarten/?id=baggeren', 'agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko', 'deltat': 2939, 'key': '4b1188e4af8d72201d4588a7ad9eaff4'}, {'time': 20150422150832, 'request': '/map/gast/tms/1.0.0/opentopo/EPSG28992/8/93/112.png', 'status': 200, 'bytes': 6859, 'referer': 'http://kadviewer.kademo.nl/', 'agent': 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko', 'deltat': 30144, 'key': '1f798d3fa23682f3b50ceca93d762282'}, {'time': 20150422151830, 'request': '/map/gast/tms/1.0.0/opentopo/EPSG28992/12/2306/1962.png', 'status': 200, 'bytes': 19305, 'referer': 'http://kadviewer.kademo.nl/', 'agent': 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko', 'deltat': 109691, 'key': 'd8cba52492542c87fe51377316fd6990'}, {'time': 20150422153023, 'request': '/map/gast/tms/1.0.0/bonne_test/EPSG900913/1', 'status': 404, 'bytes': 141, 'referer': None, 'agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)', 'deltat': 1817, 'key': '3cf998185c137a40525c920184bbe45c'}, {'time': 20150422154124, 'request': '/map/gast/tiles/opentopo/EPSG900913/9/263/167.png', 'status': 200, 'bytes': 30537, 'referer': 'http://app.nlextract.nl/ot/opentopo.html', 'agent': 'Mozilla/5.0 (iPad; CPU OS 8_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12F69 Safari/600.1.4', 'deltat': 2208, 'key': 'c72b3f33a7f9460efb56bf6f0d6854ec'}, {'time': 20150422154124, 'request': '/map/gast/tiles/opentopo/EPSG900913/9/262/167.png', 'status': 200, 'bytes': 26812, 'referer': 'http://app.nlextract.nl/ot/opentopo.html', 'agent': 'Mozilla/5.0 (iPad; CPU OS 8_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12F69 Safari/600.1.4', 'deltat': 1992, 'key': 'b0f0bb899689f5a552d12a1598c7ab33'}, {'time': 20150421123121, 'request': '/map/gast/tms/1.0.0/opentopo/EPSG28992/13/4187/3689.png', 'status': 304, 'bytes': 0, 'referer': None, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 2639355, 'key': 'd425582b2c2732e746e0597df83445ab'}, {'time': 20150421123142, 'request': '/map/gast/tms/1.0.0/opentopo/EPSG28992/13/4187/3689.png', 'status': 200, 'bytes': 36969, 'referer': None, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 313308, 'key': 'a713075f19bebc775e5bd2142533befb'}, {'time': 20150421123143, 'request': '/favicon.ico', 'status': 404, 'bytes': 279, 'referer': 'http://s.test.map5.nl/map/gast/tms/1.0.0/opentopo/EPSG28992/13/4187/3689.png', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 383, 'key': 'c9f87eb2b23df50405dc3c56b4fa206c'}]
+[{'time': 20150421123333, 'request': '/map/gast/wmts', 'status': 500, 'bytes': 469, 'referer': None, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 251096, 'key': 'c81ebd6e57b57f3e2cb7601020dba92e'}, {'time': 20150421123346, 'request': '/map/gast', 'status': 301, 'bytes': 297, 'referer': None, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 240, 'key': 'b478500c42cee868ef3412cdcd8edd18'}, {'time': 20150421123354, 'request': '/map/gast/demo/', 'status': 200, 'bytes': 1912, 'referer': None, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 309244, 'key': '3bb5447ae4fea97ecb8f3c4533a16cff'}, {'time': 20150421123354, 'request': '/map/gast/demo/static/logo.png', 'status': 200, 'bytes': 1368, 'referer': 'http://s.test.map5.nl/map/gast/demo/', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 93184, 'key': 'fe6b2a0eae0f127ace876ab4ce575974'}, {'time': 20150421123354, 'request': '/map/gast/demo/static/site.css', 'status': 200, 'bytes': 686, 'referer': 'http://s.test.map5.nl/map/gast/demo/', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 273346, 'key': '1269913ae3e14d5d50de22faced225d6'}, {'time': 20150421123400, 'request': '/map/gast/wmts/1.0.0/WMTSCapabilities.xml', 'status': 200, 'bytes': 20873, 'referer': None, 'agent': 'Python-urllib/2.7', 'deltat': 315229, 'key': 'a5e3f27196de18f34243f95b6458c336'}, {'time': 20150421123400, 'request': '/map/gast/demo/?wmts_capabilities', 'status': 200, 'bytes': 2522, 'referer': 'http://s.test.map5.nl/map/gast/demo/', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 623112, 'key': '40e71cbab8c6730cf3a775ccd4ae15d5'}, {'time': 20150421123401, 'request': '/map/gast/demo/static/site.css', 'status': 200, 'bytes': 686, 'referer': 'http://s.test.map5.nl/map/gast/demo/?wmts_capabilities', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 233173, 'key': '4f7c57f020b6799d73d197de93f0d171'}, {'time': 20150421123401, 'request': '/map/gast/demo/static/logo.png', 'status': 200, 'bytes': 1368, 'referer': 'http://s.test.map5.nl/map/gast/demo/?wmts_capabilities', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 219583, 'key': '65ab4672b9e0781515bc0bb528c61113'}, {'time': 20150421123416, 'request': '/map/gast/wmts/1.0.0/WMTSCapabilities.xml', 'status': 200, 'bytes': 2093, 'referer': 'http://s.test.map5.nl/map/gast/demo/', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 18173, 'key': '246ffee704fbe097d1402d3a1ed1219c'}]
+[{'time': 20150421123420, 'request': '/map/gast/wmts/1.0.0', 'status': 500, 'bytes': 475, 'referer': None, 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 3407, 'key': '6280443cec1aeb5fef103018db2986f3'}, {'time': 20150421123447, 'request': '/map/gast/wmts/1.0.0?SERVICE=WMS&REQUEST=GetCapabilities', 'status': 500, 'bytes': 475, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 3203, 'key': '8c3590164c49c05c7a9b3d6234af6d9d'}, {'time': 20150421123447, 'request': '/map/gast/wmts/1.0.0?SERVICE=WMS&REQUEST=GetCapabilities', 'status': 500, 'bytes': 475, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 3017, 'key': '81aa1bf8abdd15d3d890bb9872e6c08d'}, {'time': 20150421123527, 'request': '/map/gast/wmts/1.0.0?service=WMTS&SERVICE=WMS&REQUEST=GetCapabilities', 'status': 500, 'bytes': 475, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 2807, 'key': 'e310e1cb5b13e0582a78fcf2868ec55e'}, {'time': 20150421123527, 'request': '/map/gast/wmts/1.0.0?service=WMTS&SERVICE=WMS&REQUEST=GetCapabilities', 'status': 500, 'bytes': 475, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 2838, 'key': '42e11e5c1970f448c14256bcd17da89a'}, {'time': 20150421123610, 'request': '/map/gast/service?REQUEST=GetCapabilities', 'status': 200, 'bytes': 11637, 'referer': 'http://s.test.map5.nl/map/gast/demo/', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 355693, 'key': '2958d227b88a685cc5b42a1190e3193e'}, {'time': 20150421123613, 'request': '/map/gast/service?REQUEST=GetCapabilities', 'status': 200, 'bytes': 11637, 'referer': None, 'agent': 'Python-urllib/2.7', 'deltat': 20349, 'key': '40f435dbe6a8e8a07c1057e32bc6abd8'}, {'time': 20150421123613, 'request': '/map/gast/demo/?wms_capabilities', 'status': 200, 'bytes': 2118, 'referer': 'http://s.test.map5.nl/map/gast/demo/', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 33616, 'key': '36ee1840512b1e1c403dddad2013866c'}, {'time': 20150421123613, 'request': '/map/gast/demo/static/site.css', 'status': 200, 'bytes': 686, 'referer': 'http://s.test.map5.nl/map/gast/demo/?wms_capabilities', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 11009, 'key': '944c43b2f9b543fd6fad1c3146784121'}, {'time': 20150421123613, 'request': '/map/gast/demo/static/logo.png', 'status': 200, 'bytes': 1368, 'referer': 'http://s.test.map5.nl/map/gast/demo/?wms_capabilities', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 548, 'key': '1c72a05fe738f1eafbeb8a2ddd73cb7d'}]
+[{'time': 20150421123639, 'request': '/map/gast/service?SERVICE=WMS&REQUEST=GetCapabilities', 'status': 200, 'bytes': 11637, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 243456, 'key': 'c3cb6885b18a2ebbeda0bbd55c7de69c'}, {'time': 20150421123657, 'request': '/map/gast/service?SERVICE=WMS&REQUEST=GetCapabilities', 'status': 200, 'bytes': 11637, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 18184, 'key': '384d826747691d3d7fb6785c5d90000e'}, {'time': 20150421123657, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&SLD_VERSION=1.1.0&REQUEST=GetLegendGraphic&FORMAT=image/jpeg&LAYER=opentopo&STYLE=', 'status': 200, 'bytes': 299, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 23229, 'key': '472a83cd945bcdf8e500214596788c58'}, {'time': 20150421123657, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.88164117735196346,52.31994791109101328,4.89823868298099274,52.32472313490021776&SRS=EPSG:4326&WIDTH=2304&HEIGHT=663&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 435275, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 2497535, 'key': 'a7087b9f4e3893e0f816d9673ef33a4b'}, {'time': 20150421123831, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.88229860033138774,52.32140511929905102,4.89059794862468866,52.32379346153169308&SRS=EPSG:4326&WIDTH=2304&HEIGHT=663&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 303472, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 2524536, 'key': 'e097ff94711600a89c27aacd3837eec0'}, {'time': 20150421123835, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.88262727962318266,52.32213390486452909,4.88677710265483434,52.32332825857095315&SRS=EPSG:4326&WIDTH=2304&HEIGHT=663&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 211421, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 100590, 'key': 'bf871baf1c60e493b26563365c1d5437'}, {'time': 20150421123836, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.87973479282001321,52.32194070900506233,4.88388482393072909,52.32313536508878826&SRS=EPSG:4326&WIDTH=2303&HEIGHT=663&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 203168, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 733634, 'key': 'f569232c1cc8b044e5f5853c573c9ce9'}, {'time': 20150421123840, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.87937162596551133,52.32102294377313711,4.88767136038388816,52.32341189790105318&SRS=EPSG:4326&WIDTH=2304&HEIGHT=663&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 285902, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 720723, 'key': 'efb02c9c1d7433024abfe22c83466236'}, {'time': 20150421123842, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.87864515655996378,52.31919416543242818,4.89524331676138758,52.32397064165057543&SRS=EPSG:4326&WIDTH=2304&HEIGHT=663&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 415065, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 208428, 'key': 'dec22a8688dc93f17a397dd64d5c7cab'}, {'time': 20150421123843, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.87719189388992547,52.31554442593828469,4.91038298583838273,52.32509165098211668&SRS=EPSG:4326&WIDTH=2304&HEIGHT=663&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 533192, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 2053654, 'key': '79ecdee9ea0254e3c127cdad65a761ba'}]
+[{'time': 20150421123846, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.87428421837786807,52.30826341961707726,4.94064551776737115,52.32733496592636868&SRS=EPSG:4326&WIDTH=2306&HEIGHT=663&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 682877, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 2593224, 'key': '42ba8b73064c6bd477cb18403c955c22'}, {'time': 20150421123849, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.86846485697270648,52.29372410561443019,5.0011039973744742,52.33177562740801392&SRS=EPSG:4326&WIDTH=2299&HEIGHT=659&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 844321, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 1725956, 'key': '50c379ca256661340dcdf0eacbd5228c'}, {'time': 20150421123853, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.8386881899267058,52.26824729178458995,5.10374475576453523,52.34410523064467924&SRS=EPSG:4326&WIDTH=2302&HEIGHT=659&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 812335, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 716366, 'key': '60d8ea6774bbcbe81103896f7a9a1f79'}, {'time': 20150421123855, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.77894557379025109,52.21751645706958556,5.30817506128564354,52.36825370247181155&SRS=EPSG:4326&WIDTH=2298&HEIGHT=655&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 779078, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 692476, 'key': 'fdab043d42ece6d9d17422e5a5ed81e5'}, {'time': 20150421123857, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.65903537607470053,52.11649001307762319,5.72053894950784159,52.41540823102885582&SRS=EPSG:4326&WIDTH=2309&HEIGHT=650&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 682860, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 695197, 'key': '2ee339900bdde19db73b3a81ffc1563d'}, {'time': 20150421123859, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.4167226914176565,51.91069625797302223,6.55825004706046322,52.51214626634031646&SRS=EPSG:4326&WIDTH=2320&HEIGHT=651&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 817945, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 591190, 'key': 'b3dae38a189c37222c68519091ee1ce1'}, {'time': 20150421123901, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=3.91960989940337212,51.47689466327312147,7.27517291177000036,52.7270589886328267&SRS=EPSG:4326&WIDTH=1819&HEIGHT=678&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 593483, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 287085, 'key': 'e7a61b0ca02c86f82d2d3d6f318640c5'}, {'time': 20150421123903, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=3.19733405078999988,50.67175914229999734,7.27517291177000036,53.22782022896856802&SRS=EPSG:4326&WIDTH=1106&HEIGHT=693&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 317587, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 198528, 'key': 'f40689e447bcd0790099cee1dc2e3a3c'}, {'time': 20150421123905, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=3.91960989940337212,51.47689466327312147,7.27517291177000036,52.7270589886328267&SRS=EPSG:4326&WIDTH=1819&HEIGHT=678&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 593483, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 441662, 'key': '8a5c7bd42c7508ba0ecdc64569d1db54'}, {'time': 20150421123906, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.41536394174170166,51.91072288572560467,6.5568903118917472,52.51213375315666809&SRS=EPSG:4326&WIDTH=2320&HEIGHT=651&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 816821, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 280547, 'key': '35795db3bccb94bf07c54c080eedad64'}]
+[{'time': 20150421123906, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.65634629858872362,52.116047279264194,5.71784019987099157,52.41501733832054555&SRS=EPSG:4326&WIDTH=2308&HEIGHT=650&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 687988, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 1008772, 'key': '64439acf3e46f3a77291023cb2d5d390'}, {'time': 20150421123908, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.77526617288530009,52.21666243590728129,5.30452226852465358,52.36744868951445397&SRS=EPSG:4326&WIDTH=2298&HEIGHT=655&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 780735, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 252914, 'key': 'b30e4e0e48d7ec00d86dcbebeed01dce'}, {'time': 20150421123909, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.83418264422592525,52.26709043929363219,5.09925482811618025,52.34297845193199805&SRS=EPSG:4326&WIDTH=2301&HEIGHT=659&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 811840, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 1417207, 'key': 'ae4ee7e29cbfab46fc2de968f41cec69'}, {'time': 20150421123911, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.86354731013050845,52.29241753793147041,4.99619483822194965,52.33048548888342566&SRS=EPSG:4326&WIDTH=2298&HEIGHT=659&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 847725, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 390434, 'key': '9ab54eaeb7b45e684cff8aac3701ae7e'}, {'time': 20150421123926, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.7983907345342578,52.30068851058355506,4.9312260836665196,52.33897414157453909&SRS=EPSG:4326&WIDTH=2311&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 787450, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 563186, 'key': 'ed23b4a7e23082467d297a4cf480a383'}, {'time': 20150421123930, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.82507774754855934,52.31044365558483378,4.89150389391215157,52.32959746344092622&SRS=EPSG:4326&WIDTH=2311&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 688485, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 927171, 'key': 'c8e3b28333546d94dbaf42ac14790b89'}, {'time': 20150421123932, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.83838815624467333,52.31532167233618935,4.87160336391397841,52.32490134373566093&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 628432, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 440856, 'key': '0eae21d76aa865a6dc5f8faeef37e9ca'}, {'time': 20150421123936, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.84504031284738623,52.31776082437207975,4.86164845074635377,52.32255135217919673&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 486076, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 1516336, 'key': '641d29c55da009f8fc0cb576a4957ef2'}, {'time': 20150421123940, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.848365629293232,52.31898043640777018,4.85666983181408707,52.32137587336808338&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 282828, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 1670260, 'key': 'dd9204535fb6519ad3c1ab52d6fd7c6b'}, {'time': 20150421123943, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.85002809706240523,52.31959025144288944,4.85418023172258284,52.32078801319095618&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 194466, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 215961, 'key': '00174d6069605a259e981d32e5693cc4'}]
+[{'time': 20150421123945, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.85085928333482297,52.31989516121636541,4.8529353590157136,52.32049405290776178&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 160121, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 96065, 'key': 'b2b875a12dc9f84cd1a15808a2770642'}, {'time': 20150421123946, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.8512748645681425,52.32004761666721748,4.85231290449639907,52.3203470652173479&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 123241, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 390538, 'key': 'e4ee311694bc8ccff2c03d01ed20b505'}, {'time': 20150421124002, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.85093093342004078,52.31990548311836164,4.85300700678140018,52.32050437106456542&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 157238, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 147369, 'key': '81cd0aa96263882a66dd75e80a8ffb39'}, {'time': 20150421124003, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.85024305101700559,52.31962122226092049,4.85439517176004642,52.32081896153741951&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 199468, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 109193, 'key': '396264f0d5af44c57fca605d05a912f4'}, {'time': 20150421124004, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.84886720578289587,52.31905272550537234,4.8571713433574466,52.32144805759834583&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 300113, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 218693, 'key': '69111071cde61dd567de8ed0c5225a03'}, {'time': 20150421124005, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.84611519359641374,52.3179158318183184,4.86272305315710884,52.32270591019437944&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 489524, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 266274, 'key': '5c95ee33232301ed9d3c9e760d10682b'}, {'time': 20150421124006, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.84060980355999337,52.31564884059808662,4.87382386563584902,52.32522665442184007&SRS=EPSG:4326&WIDTH=2310&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 634317, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 268617, 'key': 'd306a68550d38971a3c18df20b507c88'}, {'time': 20150421124007, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.82961476217944696,52.31111656397721532,4.89603623584240832,52.33026278690169875&SRS=EPSG:4326&WIDTH=2311&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 696250, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 257901, 'key': '6fe96192df9dfe49f046bab41c2fd784'}, {'time': 20150421124009, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.85319246456894948,52.32761554091926115,4.91960915414784417,52.34672235725444267&SRS=EPSG:4326&WIDTH=2305&HEIGHT=663&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 750968, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 1808540, 'key': '7fb50072ed919d6b5c704e8f51cdc901'}, {'time': 20150421124512, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 500, 'bytes': 602, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 466396, 'key': 'e071dd1f5fff22baf1c74fd67e8218c8'}]
+[{'time': 20150421124530, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 500, 'bytes': 602, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 1937, 'key': '3fc2779d18d89281610f3909fd10eb9c'}, {'time': 20150421124607, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 500, 'bytes': 602, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 288315, 'key': '6e3aa859d7a2266f6069df276d6c42cb'}, {'time': 20150421124759, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 200, 'bytes': 331806, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 549090, 'key': 'd08cebca97d5f654b49c952b8ff44072'}, {'time': 20150421124803, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 200, 'bytes': 334352, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 333467, 'key': 'e78feb50d1d9a5e0c0e7d35a2ef9b067'}, {'time': 20150421124805, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 200, 'bytes': 331806, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 352004, 'key': '7fabd8ebb12bbf38f108f01b770009c3'}, {'time': 20150421124808, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 200, 'bytes': 331806, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 115182, 'key': '8c9de89621b623da59284f897e7d1f49'}, {'time': 20150421124810, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 200, 'bytes': 331806, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 115765, 'key': '509962636ac252e3d6fa376e97d984d4'}, {'time': 20150421124811, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 200, 'bytes': 331806, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 119957, 'key': '7b7e3cd94834c0e443fdeffb97b8a5ff'}, {'time': 20150421124813, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 200, 'bytes': 331806, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 363011, 'key': '13db62066ea7da96759af80d2b5b96fb'}, {'time': 20150421124815, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 200, 'bytes': 331806, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 386568, 'key': '46bf084dd695bb157f801a6a4b8aa51e'}]
+[{'time': 20150421124818, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 200, 'bytes': 334352, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 365184, 'key': '3b5aebf0135fced85af5740e8c10e21c'}, {'time': 20150421124819, 'request': '/favicon.ico', 'status': 404, 'bytes': 279, 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 102, 'key': 'd09b23b15fc8afdad0fa44b5ac7277f6'}, {'time': 20150421124824, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.83005370038209136,52.33939510971103459,4.89651704885155681,52.35854062445694979&SRS=EPSG:4326&WIDTH=2313&HEIGHT=666&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 791655, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 1757049, 'key': '2581e096d90bc840f05895dca4b51c2e'}, {'time': 20150421124828, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.79175980191256379,52.34824612602871241,4.85828446955923443,52.36745569430535596&SRS=EPSG:4326&WIDTH=2309&HEIGHT=667&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 749230, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 1933968, 'key': '8206b19abb899ee47155ddf9eaaeab6f'}, {'time': 20150421124833, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.77385759552589573,52.35751052638513414,4.84041867055299946,52.37675005343851353&SRS=EPSG:4326&WIDTH=2308&HEIGHT=667&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 707773, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 2185241, 'key': '79442a1a17486347cde28cbed8674d34'}, {'time': 20150421124839, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.77125456138848403,52.37023903120333301,4.83783806710879727,52.3894829312327488&SRS=EPSG:4326&WIDTH=2309&HEIGHT=667&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 718675, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 1532564, 'key': '043403e16ef23c168fcc45aa13b62129'}, {'time': 20150421124843, 'request': '/map/gast/service?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&BBOX=4.76145165848030949,52.37107784519862719,4.82804874484703994,52.39033814774672493&SRS=EPSG:4326&WIDTH=2308&HEIGHT=667&LAYERS=opentopo&STYLES=&FORMAT=image/jpeg&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72', 'status': 200, 'bytes': 699224, 'referer': None, 'agent': 'Mozilla/5.0 QGIS/2.2.0-Valmiera', 'deltat': 1265574, 'key': '33db4f80078e75fd3153da085a4f8a02'}, {'time': 20150421124910, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 200, 'bytes': 334352, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 486046, 'key': '50581490a43cd0a1505f283ad25263cc'}, {'time': 20150421124914, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 200, 'bytes': 331806, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 376900, 'key': 'd9054c397c8f9a201c0c7ba21a86b29a'}, {'time': 20150421124914, 'request': '/favicon.ico', 'status': 404, 'bytes': 279, 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 365, 'key': 'a46a7dca0a22a96173a629f1e402c50f'}]2019-03-21 14:10:39,632 fileinput INFO EOF file
+2019-03-21 14:10:39,633 fileinput INFO EOF file list
+2019-03-21 14:10:39,634 component INFO ApacheLogFileInput invokes=112 time(total, min, max, avg) = 0.015 0.001 0.003 0.000
+2019-03-21 14:10:39,634 component INFO FormatConverter invokes=112 time(total, min, max, avg) = 0.001 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:39,635 component INFO StandardOutput invokes=112 time(total, min, max, avg) = 0.002 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:39,635 chain INFO DONE - 112 rounds - chain=input_apache_log|to_record_array|output_std 
+2019-03-21 14:10:39,636 util INFO Timer end: total ETL time=0.0 sec
+2019-03-21 14:10:39,636 ETL INFO ALL DONE
+
+[{'time': 20150421124916, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 200, 'bytes': 334352, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 340430, 'key': '87ff75f499f763a2961cf548948ef352'}, {'time': 20150421124916, 'request': '/favicon.ico', 'status': 404, 'bytes': 279, 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 378, 'key': '6a83dc1a105390e1008e7192bbe5a1be'}, {'time': 20150421124917, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 200, 'bytes': 334352, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 370053, 'key': '31f6b28a33aeaa15869d3d59c268689a'}, {'time': 20150421124918, 'request': '/favicon.ico', 'status': 404, 'bytes': 279, 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 379, 'key': '4ccdcbed272c57ca281962a7a6ae016e'}, {'time': 20150421124919, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 200, 'bytes': 334352, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 332777, 'key': 'c997cf43a1f5aebc5ad3927476ba05d3'}, {'time': 20150421124920, 'request': '/favicon.ico', 'status': 404, 'bytes': 279, 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 144, 'key': 'd0e0eadef74800211ed54589819bf8c6'}, {'time': 20150421124921, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 200, 'bytes': 334352, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 109812, 'key': '5ae1a1c1833b39fb87341f93e1e4c599'}, {'time': 20150421124921, 'request': '/favicon.ico', 'status': 404, 'bytes': 279, 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 346, 'key': '58f8953967caa07f410268ba78cfbb6b'}, {'time': 20150421124922, 'request': '/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'status': 200, 'bytes': 331806, 'referer': 'http://s.test.map5.nl/map/gast/demo/?srs=EPSG%3A4326&format=image%2Fpng&wms_layer=opentopo', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 110987, 'key': '65a58d40b7c036dea544864e62aa7201'}, {'time': 20150421124923, 'request': '/favicon.ico', 'status': 404, 'bytes': 279, 'referer': 'http://s.test.map5.nl/map/gast/service?LAYERS=opentopo&FORMAT=image%2Fpng&SRS=EPSG%3A4326&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&TRANSPARENT=TRUE&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&BBOX=3.1235377115391,50.892941613156,5.4511713191977,52.087620966958&WIDTH=1169&HEIGHT=600', 'agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36', 'deltat': 478, 'key': '8f0db52735a42b970a136e905ec68cec'}]
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/15_splitter ~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+==== running etl.sh for example 15_splitter ====
+2019-03-21 14:10:41,183 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:10:41,263 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:10:41,270 main INFO Stetl version = 1.2
+2019-03-21 14:10:41,272 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:10:41,274 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/15_splitter
+2019-03-21 14:10:41,275 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:10:41,280 ETL INFO START
+2019-03-21 14:10:41,280 util INFO Timer start: total ETL
+2019-03-21 14:10:41,281 chain INFO Assembling Chain: input_xml_file|transformer_xslt|(output_file)(output_std)...
+2019-03-21 14:10:41,284 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2019-03-21 14:10:41,286 fileinput INFO file_list=['input/cities.xml']
+2019-03-21 14:10:41,294 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2019-03-21 14:10:41,294 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/15_splitter
+2019-03-21 14:10:41,295 output INFO cfg = {'class': 'stetl.outputs.standardoutput.StandardOutput'}
+2019-03-21 14:10:41,295 chain INFO Running Chain: input_xml_file|transformer_xslt|(output_file)(output_std)
+2019-03-21 14:10:41,296 fileinput INFO Read/parse for start for file=input/cities.xml....
+2019-03-21 14:10:41,300 fileinput INFO Read/parse ok for file=input/cities.xml
+2019-03-21 14:10:41,300 fileinput INFO all files done
+2019-03-21 14:10:41,301 xsltfilter INFO XSLT Transform OK
+2019-03-21 14:10:41,302 fileoutput INFO writing to file output/gmlcities.gml
+2019-03-21 14:10:41,312 fileoutput INFO written to output/gmlcities.gml
+2019-03-21 14:10:41,313 component INFO XmlFileInput invokes=1 time(total, min, max, avg) = 0.005 0.005 0.005 0.005
+2019-03-21 14:10:41,314 component INFO XsltFilter invokes=1 time(total, min, max, avg) = 0.001 0.001 0.001 0.001
+2019-03-21 14:10:41,314 component INFO FileOutput invokes=1 time(total, min, max, avg) = 0.011 0.011 0.011 0.011
+2019-03-21 14:10:41,314 component INFO StandardOutput invokes=1 time(total, min, max, avg) = 0.001 0.001 0.001 0.001
+2019-03-21 14:10:41,314 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|(output_file)(output_std) 
+2019-03-21 14:10:41,315 chain INFO Assembling Chain: input_xml_file |(transformer_xslt|output_file) (output_std) (transformer_xslt|output_std)...
+2019-03-21 14:10:41,316 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2019-03-21 14:10:41,320 fileinput INFO file_list=['input/cities.xml']
+2019-03-21 14:10:41,320 chain INFO Assembling Chain: transformer_xslt|output_file...
+2019-03-21 14:10:41,331 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2019-03-21 14:10:41,331 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/15_splitter
+2019-03-21 14:10:41,332 output INFO cfg = {'class': 'stetl.outputs.standardoutput.StandardOutput'}
+2019-03-21 14:10:41,333 chain INFO Assembling Chain: transformer_xslt|output_std...
+2019-03-21 14:10:41,337 output INFO cfg = {'class': 'stetl.outputs.standardoutput.StandardOutput'}
+2019-03-21 14:10:41,337 chain INFO Running Chain: input_xml_file |(transformer_xslt|output_file) (output_std) (transformer_xslt|output_std)
+2019-03-21 14:10:41,338 fileinput INFO Read/parse for start for file=input/cities.xml....
+2019-03-21 14:10:41,344 fileinput INFO Read/parse ok for file=input/cities.xml
+2019-03-21 14:10:41,344 fileinput INFO all files done
+2019-03-21 14:10:41,345 xsltfilter INFO XSLT Transform OK
+2019-03-21 14:10:41,345 fileoutput INFO writing to file output/gmlcities.gml
+2019-03-21 14:10:41,349 fileoutput INFO written to output/gmlcities.gml
+2019-03-21 14:10:41,349 xsltfilter INFO XSLT Transform OK
+2019-03-21 14:10:41,351 component INFO XmlFileInput invokes=1 time(total, min, max, avg) = 0.007 0.007 0.007 0.007
+2019-03-21 14:10:41,351 component INFO XsltFilter invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:41,351 component INFO FileOutput invokes=1 time(total, min, max, avg) = 0.004 0.004 0.004 0.004
+2019-03-21 14:10:41,352 component INFO StandardOutput invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:41,352 component INFO XsltFilter invokes=1 time(total, min, max, avg) = 0.001 0.001 0.001 0.001
+2019-03-21 14:10:41,352 component INFO StandardOutput invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:41,352 chain INFO DONE - 1 rounds - chain=input_xml_file |(transformer_xslt|output_file) (output_std) (transformer_xslt|output_std) 
+<?xml version='1.0' encoding='utf-8'?>
+<ogr:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://ogr.maptools.org/" xmlns:gml="http://www.opengis.net/gml" xsi:schemaLocation="http://ogr.maptools.org/ ../gmlcities.xsd  http://www.opengis.net/gml http://schemas.opengis.net/gml/2.1.2/feature.xsd">
+  <gml:boundedBy>
+    <gml:Box>
+      <gml:coord>
+        <gml:X>-180.0</gml:X>
+        <gml:Y>-90.0</gml:Y>
+      </gml:coord>
+      <gml:coord>
+        <gml:X>180.0</gml:X>
+        <gml:Y>90.0</gml:Y>
+      </gml:coord>
+    </gml:Box>
+  </gml:boundedBy>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Amsterdam</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>52.4,4.9</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Bonn</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>50.7,7.1</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Rome</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>41.9,12.5</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+</ogr:FeatureCollection>
+
+<?xml version='1.0' encoding='utf-8'?>
+<cities>
+  <city>
+    <name>Amsterdam</name>
+    <lat>52.4</lat>
+    <lon>4.9</lon>
+  </city>
+  <city>
+    <name>Bonn</name>
+    <lat>50.7</lat>
+    <lon>7.1</lon>
+  </city>
+  <city>
+    <name>Rome</name>
+    <lat>41.9</lat>
+    <lon>12.5</lon>
+  </city>
+</cities>
+
+<?xml version='1.0' encoding='utf-8'?>
+<ogr:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://ogr.maptools.org/" xmlns:gml="http://www.opengis.net/gml" xsi:schemaLocation="http://ogr.maptools.org/ ../gmlcities.xsd  http://www.opengis.net/gml http://schemas.opengis.net/gml/2.1.2/feature.xsd">
+  <gml:boundedBy>
+    <gml:Box>
+      <gml:coord>
+        <gml:X>-180.0</gml:X>
+        <gml:Y>-90.0</gml:Y>
+      </gml:coord>
+      <gml:coord>
+        <gml:X>180.0</gml:X>
+        <gml:Y>90.0</gml:Y>
+      </gml:coord>
+    </gml:Box>
+  </gml:boundedBy>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Amsterdam</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>52.4,4.9</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Bonn</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>50.7,7.1</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Rome</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>41.9,12.5</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+</ogr:FeatureCollection>
+
+2019-03-21 14:10:41,352 util INFO Timer end: total ETL time=0.0 sec
+2019-03-21 14:10:41,352 ETL INFO ALL DONE
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/16_merger ~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+==== running etl.sh for example 16_merger ====
+2019-03-21 14:10:43,037 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:10:43,114 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:10:43,120 main INFO Stetl version = 1.2
+2019-03-21 14:10:43,122 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:10:43,124 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/16_merger
+2019-03-21 14:10:43,125 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:10:43,130 ETL INFO START
+2019-03-21 14:10:43,131 util INFO Timer start: total ETL
+2019-03-21 14:10:43,131 chain INFO Assembling Chain: (input_1) (input_2)|transformer_xslt|output_std...
+2019-03-21 14:10:43,134 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlFileInput', 'file_path': 'input1/cities.xml'}
+2019-03-21 14:10:43,136 fileinput INFO file_list=['input1/cities.xml']
+2019-03-21 14:10:43,137 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlFileInput', 'file_path': 'input2/cities.xml'}
+2019-03-21 14:10:43,142 fileinput INFO file_list=['input2/cities.xml']
+2019-03-21 14:10:43,148 output INFO cfg = {'class': 'stetl.outputs.standardoutput.StandardOutput'}
+2019-03-21 14:10:43,149 chain INFO Running Chain: (input_1) (input_2)|transformer_xslt|output_std
+2019-03-21 14:10:43,150 fileinput INFO Read/parse for start for file=input1/cities.xml....
+2019-03-21 14:10:43,153 fileinput INFO Read/parse ok for file=input1/cities.xml
+2019-03-21 14:10:43,154 fileinput INFO all files done
+2019-03-21 14:10:43,154 xsltfilter INFO XSLT Transform OK
+2019-03-21 14:10:43,155 fileinput INFO Read/parse for start for file=input2/cities.xml....
+2019-03-21 14:10:43,158 fileinput INFO Read/parse ok for file=input2/cities.xml
+2019-03-21 14:10:43,159 fileinput INFO all files done
+2019-03-21 14:10:43,160 xsltfilter INFO XSLT Transform OK
+2019-03-21 14:10:43,161 component INFO XmlFileInput invokes=1 time(total, min, max, avg) = 0.005 0.005 0.005 0.005
+2019-03-21 14:10:43,161 component INFO XmlFileInput invokes=1 time(total, min, max, avg) = 0.005 0.005 0.005 0.005
+2019-03-21 14:10:43,162 component INFO XsltFilter invokes=2 time(total, min, max, avg) = 0.002 0.001 0.001 0.001
+2019-03-21 14:10:43,163 component INFO StandardOutput invokes=2 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:43,164 chain INFO DONE - 1 rounds - chain=(input_1) (input_2)|transformer_xslt|output_std 
+2019-03-21 14:10:43,165 chain INFO Assembling Chain: (input_1) (input_2)|transformer_xslt|(output_file)(output_std)...
+2019-03-21 14:10:43,166 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlFileInput', 'file_path': 'input1/cities.xml'}
+2019-03-21 14:10:43,167 fileinput INFO file_list=['input1/cities.xml']
+2019-03-21 14:10:43,169 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlFileInput', 'file_path': 'input2/cities.xml'}
+2019-03-21 14:10:43,173 fileinput INFO file_list=['input2/cities.xml']
+2019-03-21 14:10:43,179 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2019-03-21 14:10:43,180 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/16_merger
+2019-03-21 14:10:43,181 output INFO cfg = {'class': 'stetl.outputs.standardoutput.StandardOutput'}
+2019-03-21 14:10:43,182 chain INFO Running Chain: (input_1) (input_2)|transformer_xslt|(output_file)(output_std)
+2019-03-21 14:10:43,182 fileinput INFO Read/parse for start for file=input1/cities.xml....
+2019-03-21 14:10:43,187 fileinput INFO Read/parse ok for file=input1/cities.xml
+2019-03-21 14:10:43,187 fileinput INFO all files done
+2019-03-21 14:10:43,188 xsltfilter INFO XSLT Transform OK
+2019-03-21 14:10:43,189 fileoutput INFO writing to file output/gmlcities.gml
+2019-03-21 14:10:43,195 fileoutput INFO written to output/gmlcities.gml
+2019-03-21 14:10:43,196 fileinput INFO Read/parse for start for file=input2/cities.xml....
+2019-03-21 14:10:43,199 fileinput INFO Read/parse ok for file=input2/cities.xml
+2019-03-21 14:10:43,200 fileinput INFO all files done
+2019-03-21 14:10:43,201 xsltfilter INFO XSLT Transform OK
+2019-03-21 14:10:43,202 fileoutput INFO writing to file output/gmlcities.gml
+2019-03-21 14:10:43,206 fileoutput INFO written to output/gmlcities.gml
+2019-03-21 14:10:43,207 component INFO XmlFileInput invokes=1 time(total, min, max, avg) = 0.006 0.006 0.006 0.006
+2019-03-21 14:10:43,208 component INFO XmlFileInput invokes=1 time(total, min, max, avg) = 0.005 0.005 0.005 0.005
+2019-03-21 14:10:43,209 component INFO XsltFilter invokes=2 time(total, min, max, avg) = 0.001 0.001 0.001 0.001
+2019-03-21 14:10:43,210 component INFO FileOutput invokes=2 time(total, min, max, avg) = 0.011 0.005 0.006 0.006
+2019-03-21 14:10:43,211 component INFO StandardOutput invokes=2 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:43,212 chain INFO DONE - 1 rounds - chain=(input_1) (input_2)|transformer_xslt|(output_file)(output_std) 
+<?xml version='1.0' encoding='utf-8'?>
+<ogr:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://ogr.maptools.org/" xmlns:gml="http://www.opengis.net/gml" xsi:schemaLocation="http://ogr.maptools.org/ ../gmlcities.xsd  http://www.opengis.net/gml http://schemas.opengis.net/gml/2.1.2/feature.xsd">
+  <gml:boundedBy>
+    <gml:Box>
+      <gml:coord>
+        <gml:X>-180.0</gml:X>
+        <gml:Y>-90.0</gml:Y>
+      </gml:coord>
+      <gml:coord>
+        <gml:X>180.0</gml:X>
+        <gml:Y>90.0</gml:Y>
+      </gml:coord>
+    </gml:Box>
+  </gml:boundedBy>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Amsterdam</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>52.4,4.9</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Bonn</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>50.7,7.1</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Rome</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>41.9,12.5</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+</ogr:FeatureCollection>
+
+<?xml version='1.0' encoding='utf-8'?>
+<ogr:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://ogr.maptools.org/" xmlns:gml="http://www.opengis.net/gml" xsi:schemaLocation="http://ogr.maptools.org/ ../gmlcities.xsd  http://www.opengis.net/gml http://schemas.opengis.net/gml/2.1.2/feature.xsd">
+  <gml:boundedBy>
+    <gml:Box>
+      <gml:coord>
+        <gml:X>-180.0</gml:X>
+        <gml:Y>-90.0</gml:Y>
+      </gml:coord>
+      <gml:coord>
+        <gml:X>180.0</gml:X>
+        <gml:Y>90.0</gml:Y>
+      </gml:coord>
+    </gml:Box>
+  </gml:boundedBy>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Amsterdam</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>52.4,4.9</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Bonn</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>50.7,7.1</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Rome</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>41.9,12.5</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+</ogr:FeatureCollection>
+
+<?xml version='1.0' encoding='utf-8'?>
+<ogr:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://ogr.maptools.org/" xmlns:gml="http://www.opengis.net/gml" xsi:schemaLocation="http://ogr.maptools.org/ ../gmlcities.xsd  http://www.opengis.net/gml http://schemas.opengis.net/gml/2.1.2/feature.xsd">
+  <gml:boundedBy>
+    <gml:Box>
+      <gml:coord>
+        <gml:X>-180.0</gml:X>
+        <gml:Y>-90.0</gml:Y>
+      </gml:coord>
+      <gml:coord>
+        <gml:X>180.0</gml:X>
+        <gml:Y>90.0</gml:Y>
+      </gml:coord>
+    </gml:Box>
+  </gml:boundedBy>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Amsterdam</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>52.4,4.9</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Bonn</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>50.7,7.1</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Rome</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>41.9,12.5</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+</ogr:FeatureCollection>
+
+<?xml version='1.0' encoding='utf-8'?>
+<ogr:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://ogr.maptools.org/" xmlns:gml="http://www.opengis.net/gml" xsi:schemaLocation="http://ogr.maptools.org/ ../gmlcities.xsd  http://www.opengis.net/gml http://schemas.opengis.net/gml/2.1.2/feature.xsd">
+  <gml:boundedBy>
+    <gml:Box>
+      <gml:coord>
+        <gml:X>-180.0</gml:X>
+        <gml:Y>-90.0</gml:Y>
+      </gml:coord>
+      <gml:coord>
+        <gml:X>180.0</gml:X>
+        <gml:Y>90.0</gml:Y>
+      </gml:coord>
+    </gml:Box>
+  </gml:boundedBy>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Amsterdam</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>52.4,4.9</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Bonn</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>50.7,7.1</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Rome</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>41.9,12.5</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+</ogr:FeatureCollection>
+
+2019-03-21 14:10:43,213 util INFO Timer end: total ETL time=0.0 sec
+2019-03-21 14:10:43,213 ETL INFO ALL DONE
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/17_sieve ~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+==== running etl.sh for example 17_sieve ====
+2019-03-21 14:10:45,036 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:10:45,161 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:10:45,169 main INFO Stetl version = 1.2
+2019-03-21 14:10:45,173 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:10:45,175 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/17_sieve
+2019-03-21 14:10:45,176 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:10:45,183 ETL INFO START
+2019-03-21 14:10:45,184 util INFO Timer start: total ETL
+2019-03-21 14:10:45,184 chain INFO Assembling Chain: input_csv|attr_value_sieve|output_std...
+2019-03-21 14:10:45,190 input INFO cfg = {'class': 'stetl.inputs.fileinput.CsvFileInput', 'file_path': 'input/cities.csv', 'output_format': 'record_array'}
+2019-03-21 14:10:45,192 fileinput INFO file_list=['input/cities.csv']
+2019-03-21 14:10:45,196 output INFO cfg = {'class': 'stetl.outputs.standardoutput.StandardOutput'}
+2019-03-21 14:10:45,196 chain INFO Running Chain: input_csv|attr_value_sieve|output_std
+2019-03-21 14:10:45,197 fileinput INFO Open CSV file: input/cities.csv
+2019-03-21 14:10:45,205 component INFO CsvFileInput invokes=1 time(total, min, max, avg) = 0.003 0.003 0.003 0.003
+2019-03-21 14:10:45,206 component INFO AttrValueRecordSieve invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:45,207 component INFO StandardOutput invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:45,207 chain INFO DONE - 1 rounds - chain=input_csv|attr_value_sieve|output_std 
+2019-03-21 14:10:45,208 chain INFO Assembling Chain: input_csv|attr_value_sieve|output_file...
+2019-03-21 14:10:45,208 input INFO cfg = {'class': 'stetl.inputs.fileinput.CsvFileInput', 'file_path': 'input/cities.csv', 'output_format': 'record_array'}
+2019-03-21 14:10:45,211 fileinput INFO file_list=['input/cities.csv']
+2019-03-21 14:10:45,212 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/cities_sieved.txt'}
+2019-03-21 14:10:45,216 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/17_sieve
+2019-03-21 14:10:45,217 chain INFO Running Chain: input_csv|attr_value_sieve|output_file
+2019-03-21 14:10:45,217 fileinput INFO Open CSV file: input/cities.csv
+2019-03-21 14:10:45,222 fileoutput INFO writing to file output/cities_sieved.txt
+2019-03-21 14:10:45,225 fileoutput INFO written to output/cities_sieved.txt
+2019-03-21 14:10:45,226 component INFO CsvFileInput invokes=1 time(total, min, max, avg) = 0.002 0.002 0.002 0.002
+2019-03-21 14:10:45,227 component INFO AttrValueRecordSieve invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:45,228 component INFO FileOutput invokes=1 time(total, min, max, avg) = 0.005 0.005 0.005 0.005
+2019-03-21 14:10:45,228 chain INFO DONE - 1 rounds - chain=input_csv|attr_value_sieve|output_file 
+2019-03-21 14:10:45,229 util INFO Timer end: total ETL time=0.0 sec
+2019-03-21 14:10:45,230 ETL INFO ALL DONE
+[OrderedDict([('city', 'amsterdam'), ('lat', '52.4'), ('lon', '4.9')]), OrderedDict([('city', 'otterlo'), ('lat', '52.101'), ('lon', '5.773')])]
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/1_copystd ~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+==== running etl.sh for example 1_copystd ====
+2019-03-21 14:10:46,914 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:10:46,985 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:10:46,991 main INFO Stetl version = 1.2
+2019-03-21 14:10:46,993 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:10:46,995 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/1_copystd
+2019-03-21 14:10:46,997 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:10:47,002 ETL INFO START
+2019-03-21 14:10:47,002 util INFO Timer start: total ETL
+2019-03-21 14:10:47,003 chain INFO Assembling Chain: input_xml_file|output_std...
+2019-03-21 14:10:47,008 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2019-03-21 14:10:47,010 fileinput INFO file_list=['input/cities.xml']
+2019-03-21 14:10:47,012 output INFO cfg = {'class': 'stetl.outputs.standardoutput.StandardXmlOutput'}
+2019-03-21 14:10:47,012 chain INFO Running Chain: input_xml_file|output_std
+2019-03-21 14:10:47,012 fileinput INFO Read/parse for start for file=input/cities.xml....
+2019-03-21 14:10:47,016 fileinput INFO Read/parse ok for file=input/cities.xml
+2019-03-21 14:10:47,016 fileinput INFO all files done
+2019-03-21 14:10:47,017 component INFO XmlFileInput invokes=1 time(total, min, max, avg) = 0.005 0.005 0.005 0.005
+2019-03-21 14:10:47,017 component INFO StandardXmlOutput invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:47,018 chain INFO DONE - 1 rounds - chain=input_xml_file|output_std 
+2019-03-21 14:10:47,018 util INFO Timer end: total ETL time=0.0 sec
+<?xml version='1.0' encoding='utf-8'?>
+<cities>
+    <city>
+        <name>Amsterdam</name>
+        <lat>52.4</lat>
+        <lon>4.9</lon>
+    </city>
+    <city>
+        <name>Bonn</name>
+        <lat>50.7</lat>
+        <lon>7.1</lon>
+    </city>
+    <city>
+        <name>Rome</name>
+        <lat>41.9</lat>
+        <lon>12.5</lon>
+    </city>
+</cities>
+
+2019-03-21 14:10:47,018 ETL INFO ALL DONE
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/2_xslt ~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+==== running etl.sh for example 2_xslt ====
+2019-03-21 14:10:48,567 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:10:48,641 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:10:48,650 main INFO Stetl version = 1.2
+2019-03-21 14:10:48,651 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:10:48,652 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/2_xslt
+2019-03-21 14:10:48,653 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:10:48,658 ETL INFO START
+2019-03-21 14:10:48,658 util INFO Timer start: total ETL
+2019-03-21 14:10:48,659 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_file...
+2019-03-21 14:10:48,666 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2019-03-21 14:10:48,668 fileinput INFO file_list=['input/cities.xml']
+2019-03-21 14:10:48,677 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2019-03-21 14:10:48,677 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/2_xslt
+2019-03-21 14:10:48,678 chain INFO Running Chain: input_xml_file|transformer_xslt|output_file
+2019-03-21 14:10:48,678 fileinput INFO Read/parse for start for file=input/cities.xml....
+2019-03-21 14:10:48,682 fileinput INFO Read/parse ok for file=input/cities.xml
+2019-03-21 14:10:48,683 fileinput INFO all files done
+2019-03-21 14:10:48,683 xsltfilter INFO XSLT Transform OK
+2019-03-21 14:10:48,684 fileoutput INFO writing to file output/gmlcities.gml
+2019-03-21 14:10:48,688 fileoutput INFO written to output/gmlcities.gml
+2019-03-21 14:10:48,688 component INFO XmlFileInput invokes=1 time(total, min, max, avg) = 0.005 0.005 0.005 0.005
+2019-03-21 14:10:48,689 component INFO XsltFilter invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:10:48,689 component INFO FileOutput invokes=1 time(total, min, max, avg) = 0.004 0.004 0.004 0.004
+2019-03-21 14:10:48,689 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_file 
+2019-03-21 14:10:48,689 util INFO Timer end: total ETL time=0.0 sec
+2019-03-21 14:10:48,689 ETL INFO ALL DONE
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/3_shape ~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+==== running etl.sh for example 3_shape ====
+2019-03-21 14:10:50,261 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:10:50,332 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:10:50,338 main INFO Stetl version = 1.2
+2019-03-21 14:10:50,340 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:10:50,343 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/3_shape
+2019-03-21 14:10:50,343 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:10:50,348 ETL INFO START
+2019-03-21 14:10:50,348 util INFO Timer start: total ETL
+2019-03-21 14:10:50,349 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_ogr_shape...
+2019-03-21 14:10:50,352 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2019-03-21 14:10:50,354 fileinput INFO file_list=['input/cities.xml']
+2019-03-21 14:10:50,362 output INFO cfg = {'class': 'stetl.outputs.ogroutput.Ogr2OgrOutput', 'temp_file': 'temp/gmlcities.gml', 'ogr2ogr_cmd': 'ogr2ogr\n-overwrite\n-f "ESRI Shapefile"\n-a_srs epsg:4326\noutput/gmlcities.shp\ntemp/gmlcities.gml'}
+2019-03-21 14:10:50,363 chain INFO Running Chain: input_xml_file|transformer_xslt|output_ogr_shape
+2019-03-21 14:10:50,363 fileinput INFO Read/parse for start for file=input/cities.xml....
+2019-03-21 14:10:50,367 fileinput INFO Read/parse ok for file=input/cities.xml
+2019-03-21 14:10:50,367 fileinput INFO all files done
+2019-03-21 14:10:50,368 xsltfilter INFO XSLT Transform OK
+2019-03-21 14:10:50,369 ogroutput INFO writing to file temp/gmlcities.gml
+2019-03-21 14:10:50,376 ogroutput INFO written to temp/gmlcities.gml
+2019-03-21 14:10:50,377 ogroutput INFO executing cmd=ogr2ogr -overwrite -f "ESRI Shapefile" -a_srs epsg:4326 output/gmlcities.shp temp/gmlcities.gml
+2019-03-21 14:10:50,494 ogroutput INFO execute done
+2019-03-21 14:10:50,495 component INFO XmlFileInput invokes=1 time(total, min, max, avg) = 0.004 0.004 0.004 0.004
+2019-03-21 14:10:50,496 component INFO XsltFilter invokes=1 time(total, min, max, avg) = 0.001 0.001 0.001 0.001
+2019-03-21 14:10:50,496 component INFO Ogr2OgrOutput invokes=1 time(total, min, max, avg) = 0.126 0.126 0.126 0.126
+2019-03-21 14:10:50,497 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_ogr_shape 
+2019-03-21 14:10:50,497 util INFO Timer end: total ETL time=0.0 sec
+2019-03-21 14:10:50,498 ETL INFO ALL DONE
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/4_validate ~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+==== running etl.sh for example 4_validate ====
+2019-03-21 14:10:52,221 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:10:52,300 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:10:52,308 main INFO Stetl version = 1.2
+2019-03-21 14:10:52,310 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:10:52,312 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/4_validate
+2019-03-21 14:10:52,312 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:10:52,317 ETL INFO START
+2019-03-21 14:10:52,317 util INFO Timer start: total ETL
+2019-03-21 14:10:52,317 chain INFO Assembling Chain: input_xml_file|transformer_xslt|xml_schema_validator|output_file...
+2019-03-21 14:10:52,321 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2019-03-21 14:10:52,323 fileinput INFO file_list=['input/cities.xml']
+2019-03-21 14:10:52,330 xmlvalidator INFO Building the Schema once with (GML XSD) dependencies for schema=gmlcities.xsd (be patient...)
+2019-03-21 14:11:08,937 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2019-03-21 14:11:08,937 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/4_validate
+2019-03-21 14:11:08,937 chain INFO Running Chain: input_xml_file|transformer_xslt|xml_schema_validator|output_file
+2019-03-21 14:11:08,937 fileinput INFO Read/parse for start for file=input/cities.xml....
+2019-03-21 14:11:08,941 fileinput INFO Read/parse ok for file=input/cities.xml
+2019-03-21 14:11:08,942 fileinput INFO all files done
+2019-03-21 14:11:08,942 xsltfilter INFO XSLT Transform OK
+2019-03-21 14:11:08,942 xmlvalidator INFO Validating doc against schema=gmlcities.xsd ...
+2019-03-21 14:11:08,942 xmlvalidator INFO Validation result: True
+2019-03-21 14:11:08,942 fileoutput INFO writing to file output/gmlcities.gml
+2019-03-21 14:11:08,947 fileoutput INFO written to output/gmlcities.gml
+2019-03-21 14:11:08,947 component INFO XmlFileInput invokes=1 time(total, min, max, avg) = 0.004 0.004 0.004 0.004
+2019-03-21 14:11:08,947 component INFO XsltFilter invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:11:08,947 component INFO XmlSchemaValidator invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:11:08,947 component INFO FileOutput invokes=1 time(total, min, max, avg) = 0.005 0.005 0.005 0.005
+2019-03-21 14:11:08,947 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|xml_schema_validator|output_file 
+2019-03-21 14:11:08,947 util INFO Timer end: total ETL time=17.0 sec
+2019-03-21 14:11:08,947 ETL INFO ALL DONE
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/5_split ~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+==== running etl.sh for example 5_split ====
+2019-03-21 14:11:10,787 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:11:10,850 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:11:10,856 main INFO Stetl version = 1.2
+2019-03-21 14:11:10,857 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:11:10,858 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/5_split
+2019-03-21 14:11:10,859 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:11:10,864 ETL INFO START
+2019-03-21 14:11:10,864 util INFO Timer start: total ETL
+2019-03-21 14:11:10,865 chain INFO Assembling Chain: input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file...
+2019-03-21 14:11:10,869 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlElementStreamerFileInput', 'file_path': 'input', 'element_tags': 'city'}
+2019-03-21 14:11:10,875 fileinput INFO file_list=['input/cities.xml']
+2019-03-21 14:11:10,875 fileinput INFO Element tags to be matched: ['city']
+2019-03-21 14:11:10,877 xmlassembler INFO cfg = {'class': 'stetl.filters.xmlassembler.XmlAssembler', 'max_elements': '2', 'container_doc': "<?xml version='1.0' encoding='utf-8'?>\n<cities>\n</cities>", 'element_container_tag': 'cities'}
+2019-03-21 14:11:10,882 output INFO cfg = {'class': 'stetl.outputs.fileoutput.MultiFileOutput', 'file_path': 'output/gmlcities-%03d.gml'}
+2019-03-21 14:11:10,882 chain INFO Running Chain: input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file
+2019-03-21 14:11:10,884 fileinput INFO file opened : input/cities.xml
+2019-03-21 14:11:10,886 xmlassembler INFO xmldoc ready: elms=2 total_elms=2
+2019-03-21 14:11:10,887 xsltfilter INFO XSLT Transform OK
+2019-03-21 14:11:10,887 fileoutput INFO writing to file output/gmlcities-001.gml
+2019-03-21 14:11:10,891 fileoutput INFO written to output/gmlcities-001.gml
+2019-03-21 14:11:10,892 fileinput INFO End of doc: input/cities.xml elem_count=3
+2019-03-21 14:11:10,893 fileinput INFO End of stream
+2019-03-21 14:11:10,893 xmlassembler INFO xmldoc ready: elms=1 total_elms=3
+2019-03-21 14:11:10,894 xsltfilter INFO XSLT Transform OK
+2019-03-21 14:11:10,894 fileoutput INFO writing to file output/gmlcities-002.gml
+2019-03-21 14:11:10,897 fileoutput INFO written to output/gmlcities-002.gml
+2019-03-21 14:11:10,898 component INFO XmlElementStreamerFileInput invokes=26 time(total, min, max, avg) = 0.004 0.001 0.003 0.000
+2019-03-21 14:11:10,898 component INFO XmlAssembler invokes=26 time(total, min, max, avg) = 0.001 0.001 0.001 0.000
+2019-03-21 14:11:10,898 component INFO XsltFilter invokes=26 time(total, min, max, avg) = 0.001 9223372036854775808.000 0.000 0.000
+2019-03-21 14:11:10,898 component INFO MultiFileOutput invokes=26 time(total, min, max, avg) = 0.008 0.003 0.004 0.000
+2019-03-21 14:11:10,899 chain INFO DONE - 26 rounds - chain=input_big_xml_file|xml_assembler|transformer_xslt|multi_output_file 
+2019-03-21 14:11:10,899 chain INFO Assembling Chain: input_big_xml_file|xml_assembler|transformer_xslt|output_std...
+2019-03-21 14:11:10,900 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlElementStreamerFileInput', 'file_path': 'input', 'element_tags': 'city'}
+2019-03-21 14:11:10,909 fileinput INFO file_list=['input/cities.xml']
+2019-03-21 14:11:10,909 fileinput INFO Element tags to be matched: ['city']
+2019-03-21 14:11:10,910 xmlassembler INFO cfg = {'class': 'stetl.filters.xmlassembler.XmlAssembler', 'max_elements': '2', 'container_doc': "<?xml version='1.0' encoding='utf-8'?>\n<cities>\n</cities>", 'element_container_tag': 'cities'}
+2019-03-21 14:11:10,919 output INFO cfg = {'class': 'stetl.outputs.standardoutput.StandardXmlOutput'}
+2019-03-21 14:11:10,921 chain INFO Running Chain: input_big_xml_file|xml_assembler|transformer_xslt|output_std
+2019-03-21 14:11:10,924 fileinput INFO file opened : input/cities.xml
+2019-03-21 14:11:10,927 xmlassembler INFO xmldoc ready: elms=2 total_elms=2
+2019-03-21 14:11:10,927 xsltfilter INFO XSLT Transform OK
+2019-03-21 14:11:10,930 fileinput INFO End of doc: input/cities.xml elem_count=3
+2019-03-21 14:11:10,930 fileinput INFO End of stream
+2019-03-21 14:11:10,931 xmlassembler INFO xmldoc ready: elms=1 total_elms=3
+2019-03-21 14:11:10,931 xsltfilter INFO XSLT Transform OK
+2019-03-21 14:11:10,932 component INFO XmlElementStreamerFileInput invokes=26 time(total, min, max, avg) = 0.006 0.002 0.004 0.000
+2019-03-21 14:11:10,933 component INFO XmlAssembler invokes=26 time(total, min, max, avg) = 0.001 0.001 0.001 0.000
+2019-03-21 14:11:10,933 component INFO XsltFilter invokes=26 time(total, min, max, avg) = 0.002 0.001 0.001 0.000
+2019-03-21 14:11:10,933 component INFO StandardXmlOutput invokes=26 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:11:10,934 chain INFO DONE - 26 rounds - chain=input_big_xml_file|xml_assembler|transformer_xslt|output_std 
+2019-03-21 14:11:10,934 util INFO Timer end: total ETL time=0.0 sec
+2019-03-21 14:11:10,935 ETL INFO ALL DONE
+<?xml version='1.0' encoding='utf-8'?>
+<ogr:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://ogr.maptools.org/" xmlns:gml="http://www.opengis.net/gml" xsi:schemaLocation="http://ogr.maptools.org/ ../gmlcities.xsd  http://www.opengis.net/gml http://schemas.opengis.net/gml/2.1.2/feature.xsd">
+  <gml:boundedBy>
+    <gml:Box>
+      <gml:coord>
+        <gml:X>-180.0</gml:X>
+        <gml:Y>-90.0</gml:Y>
+      </gml:coord>
+      <gml:coord>
+        <gml:X>180.0</gml:X>
+        <gml:Y>90.0</gml:Y>
+      </gml:coord>
+    </gml:Box>
+  </gml:boundedBy>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Amsterdam</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>52.4,4.9</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Bonn</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>50.7,7.1</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+</ogr:FeatureCollection>
+
+<?xml version='1.0' encoding='utf-8'?>
+<ogr:FeatureCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogr="http://ogr.maptools.org/" xmlns:gml="http://www.opengis.net/gml" xsi:schemaLocation="http://ogr.maptools.org/ ../gmlcities.xsd  http://www.opengis.net/gml http://schemas.opengis.net/gml/2.1.2/feature.xsd">
+  <gml:boundedBy>
+    <gml:Box>
+      <gml:coord>
+        <gml:X>-180.0</gml:X>
+        <gml:Y>-90.0</gml:Y>
+      </gml:coord>
+      <gml:coord>
+        <gml:X>180.0</gml:X>
+        <gml:Y>90.0</gml:Y>
+      </gml:coord>
+    </gml:Box>
+  </gml:boundedBy>
+  <gml:featureMember>
+    <ogr:City>
+      <ogr:name>Rome</ogr:name>
+      <ogr:geometry>
+        <gml:Point srsName="urn:ogc:def:crs:EPSG:4326">
+          <gml:coordinates>41.9,12.5</gml:coordinates>
+        </gml:Point>
+      </ogr:geometry>
+    </ogr:City>
+  </gml:featureMember>
+</ogr:FeatureCollection>
+
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/6_cmdargs ~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+==== running etl.sh for example 6_cmdargs ====
+= Special case for 6_cmdargs - testing -a options =
+2019-03-21 14:11:12,431 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:11:12,490 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:11:12,494 main INFO Stetl version = 1.2
+2019-03-21 14:11:12,496 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:11:12,497 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/6_cmdargs
+2019-03-21 14:11:12,498 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:11:12,503 ETL INFO Substituting 3 args in config file from args_dict: ['in_xsl', 'out_xml', 'in_xml']
+2019-03-21 14:11:12,503 ETL INFO Substituting args OK
+2019-03-21 14:11:12,504 ETL INFO START
+2019-03-21 14:11:12,505 util INFO Timer start: total ETL
+2019-03-21 14:11:12,505 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_file...
+2019-03-21 14:11:12,508 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2019-03-21 14:11:12,511 fileinput INFO file_list=['input/cities.xml']
+2019-03-21 14:11:12,517 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2019-03-21 14:11:12,517 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/6_cmdargs
+2019-03-21 14:11:12,518 chain INFO Running Chain: input_xml_file|transformer_xslt|output_file
+2019-03-21 14:11:12,518 fileinput INFO Read/parse for start for file=input/cities.xml....
+2019-03-21 14:11:12,522 fileinput INFO Read/parse ok for file=input/cities.xml
+2019-03-21 14:11:12,523 fileinput INFO all files done
+2019-03-21 14:11:12,523 xsltfilter INFO XSLT Transform OK
+2019-03-21 14:11:12,524 fileoutput INFO writing to file output/gmlcities.gml
+2019-03-21 14:11:12,527 fileoutput INFO written to output/gmlcities.gml
+2019-03-21 14:11:12,528 component INFO XmlFileInput invokes=1 time(total, min, max, avg) = 0.005 0.005 0.005 0.005
+2019-03-21 14:11:12,528 component INFO XsltFilter invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:11:12,528 component INFO FileOutput invokes=1 time(total, min, max, avg) = 0.004 0.004 0.004 0.004
+2019-03-21 14:11:12,529 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_file 
+2019-03-21 14:11:12,529 util INFO Timer end: total ETL time=0.0 sec
+2019-03-21 14:11:12,529 ETL INFO ALL DONE
+2019-03-21 14:11:14,211 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:11:14,269 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:11:14,274 main INFO Stetl version = 1.2
+2019-03-21 14:11:14,276 main INFO Found args file at: etl.args
+2019-03-21 14:11:14,284 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:11:14,285 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/6_cmdargs
+2019-03-21 14:11:14,286 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:11:14,305 ETL INFO Substituting 3 args in config file from args_dict: ['out_xml', 'in_xsl', 'in_xml']
+2019-03-21 14:11:14,305 ETL INFO Substituting args OK
+2019-03-21 14:11:14,306 ETL INFO START
+2019-03-21 14:11:14,307 util INFO Timer start: total ETL
+2019-03-21 14:11:14,308 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_file...
+2019-03-21 14:11:14,313 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2019-03-21 14:11:14,315 fileinput INFO file_list=['input/cities.xml']
+2019-03-21 14:11:14,322 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2019-03-21 14:11:14,322 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/6_cmdargs
+2019-03-21 14:11:14,322 chain INFO Running Chain: input_xml_file|transformer_xslt|output_file
+2019-03-21 14:11:14,323 fileinput INFO Read/parse for start for file=input/cities.xml....
+2019-03-21 14:11:14,333 fileinput INFO Read/parse ok for file=input/cities.xml
+2019-03-21 14:11:14,333 fileinput INFO all files done
+2019-03-21 14:11:14,333 xsltfilter INFO XSLT Transform OK
+2019-03-21 14:11:14,333 fileoutput INFO writing to file output/gmlcities.gml
+2019-03-21 14:11:14,342 fileoutput INFO written to output/gmlcities.gml
+2019-03-21 14:11:14,342 component INFO XmlFileInput invokes=1 time(total, min, max, avg) = 0.010 0.010 0.010 0.010
+2019-03-21 14:11:14,342 component INFO XsltFilter invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:11:14,343 component INFO FileOutput invokes=1 time(total, min, max, avg) = 0.009 0.009 0.009 0.009
+2019-03-21 14:11:14,343 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_file 
+2019-03-21 14:11:14,343 util INFO Timer end: total ETL time=0.0 sec
+2019-03-21 14:11:14,343 ETL INFO ALL DONE
+2019-03-21 14:11:16,040 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:11:16,101 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:11:16,106 main INFO Stetl version = 1.2
+2019-03-21 14:11:16,108 main INFO Found args file at: etl.args
+2019-03-21 14:11:16,112 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:11:16,113 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/6_cmdargs
+2019-03-21 14:11:16,114 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:11:16,118 ETL INFO Substituting 3 args in config file from args_dict: ['out_xml', 'in_xml', 'in_xsl']
+2019-03-21 14:11:16,118 ETL INFO Substituting args OK
+2019-03-21 14:11:16,119 ETL INFO START
+2019-03-21 14:11:16,119 util INFO Timer start: total ETL
+2019-03-21 14:11:16,119 chain INFO Assembling Chain: input_xml_file|transformer_xslt|output_file...
+2019-03-21 14:11:16,122 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlFileInput', 'file_path': 'input/amsterdam.xml'}
+2019-03-21 14:11:16,124 fileinput INFO file_list=['input/amsterdam.xml']
+2019-03-21 14:11:16,131 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/gmlcities.gml'}
+2019-03-21 14:11:16,131 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/6_cmdargs
+2019-03-21 14:11:16,131 chain INFO Running Chain: input_xml_file|transformer_xslt|output_file
+2019-03-21 14:11:16,132 fileinput INFO Read/parse for start for file=input/amsterdam.xml....
+2019-03-21 14:11:16,137 fileinput INFO Read/parse ok for file=input/amsterdam.xml
+2019-03-21 14:11:16,138 fileinput INFO all files done
+2019-03-21 14:11:16,138 xsltfilter INFO XSLT Transform OK
+2019-03-21 14:11:16,139 fileoutput INFO writing to file output/gmlcities.gml
+2019-03-21 14:11:16,142 fileoutput INFO written to output/gmlcities.gml
+2019-03-21 14:11:16,143 component INFO XmlFileInput invokes=1 time(total, min, max, avg) = 0.006 0.006 0.006 0.006
+2019-03-21 14:11:16,143 component INFO XsltFilter invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:11:16,143 component INFO FileOutput invokes=1 time(total, min, max, avg) = 0.004 0.004 0.004 0.004
+2019-03-21 14:11:16,144 chain INFO DONE - 1 rounds - chain=input_xml_file|transformer_xslt|output_file 
+2019-03-21 14:11:16,144 util INFO Timer end: total ETL time=0.0 sec
+2019-03-21 14:11:16,144 ETL INFO ALL DONE
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/7_mycomponent ~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+==== running etl.sh for example 7_mycomponent ====
+2019-03-21 14:11:17,652 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:11:17,711 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:11:17,715 main INFO Stetl version = 1.2
+2019-03-21 14:11:17,717 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:11:17,718 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/7_mycomponent
+2019-03-21 14:11:17,718 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:11:17,722 ETL INFO START
+2019-03-21 14:11:17,722 util INFO Timer start: total ETL
+2019-03-21 14:11:17,723 chain INFO Assembling Chain: input_xml_file|my_filter|output_std...
+2019-03-21 14:11:17,726 input INFO cfg = {'class': 'stetl.inputs.fileinput.XmlFileInput', 'file_path': 'input/cities.xml'}
+2019-03-21 14:11:17,727 fileinput INFO file_list=['input/cities.xml']
+2019-03-21 14:11:17,741 output INFO cfg = {'class': 'stetl.outputs.standardoutput.StandardXmlOutput'}
+2019-03-21 14:11:17,741 chain INFO Running Chain: input_xml_file|my_filter|output_std
+2019-03-21 14:11:17,741 fileinput INFO Read/parse for start for file=input/cities.xml....
+2019-03-21 14:11:17,746 fileinput INFO Read/parse ok for file=input/cities.xml
+2019-03-21 14:11:17,746 fileinput INFO all files done
+2019-03-21 14:11:17,746 myfilter INFO CALLING MyFilter OK!!!!
+2019-03-21 14:11:17,747 component INFO XmlFileInput invokes=1 time(total, min, max, avg) = 0.005 0.005 0.005 0.005
+2019-03-21 14:11:17,747 component INFO MyFilter invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:11:17,747 component INFO StandardXmlOutput invokes=1 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:11:17,747 chain INFO DONE - 1 rounds - chain=input_xml_file|my_filter|output_std 
+2019-03-21 14:11:17,747 util INFO Timer end: total ETL time=0.0 sec
+Welcome to Amsterdam !
+Welcome to Bonn !
+Welcome to Rome !
+<?xml version='1.0' encoding='utf-8'?>
+<cities>
+    <city>
+        <name>Amsterdam</name>
+        <lat>52.4</lat>
+        <lon>4.9</lon>
+    </city>
+    <city>
+        <name>Bonn</name>
+        <lat>50.7</lat>
+        <lon>7.1</lon>
+    </city>
+    <city>
+        <name>Rome</name>
+        <lat>41.9</lat>
+        <lon>12.5</lon>
+    </city>
+</cities>
+
+2019-03-21 14:11:17,747 ETL INFO ALL DONE
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/8_wfs ~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+==== running etl.sh for example 8_wfs ====
+2019-03-21 14:11:19,300 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:11:19,354 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:11:19,359 main INFO Stetl version = 1.2
+2019-03-21 14:11:19,360 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:11:19,362 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/8_wfs
+2019-03-21 14:11:19,362 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:11:19,367 ETL INFO START
+2019-03-21 14:11:19,367 util INFO Timer start: total ETL
+2019-03-21 14:11:19,367 chain INFO Assembling Chain: input_wfs|output_std...
+2019-03-21 14:11:19,380 input INFO cfg = {'class': 'stetl.inputs.httpinput.HttpInput', 'url': 'http://geodata.nationaalgeoregister.nl/bag/wfs', 'parameters': '{\n\'service\' : \'WFS\',\n\'version\' : \'1.1.0\',\n\'request\' : \'GetFeature\',\n\'srsName\' : \'EPSG:28992\',\n\'outputFormat\' : \'text/xml; subtype=gml/2.1.2\',\n\'typename\' : \'verblijfsobject\',\n\'filter\' :\'<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc"><ogc:BBOX><gml:Envelope xmlns:gml="http://www.opengis.net/gml" srsName="EPSG:28992"><gml:lowerCorner>183774.83 450577.24</gml:lowerCorner><gml:upperCorner>184277.99 450809.92</gml:upperCorner></gml:Envelope></ogc:BBOX></ogc:Filter>\'\n}'}
+2019-03-21 14:11:19,380 httpinput INFO url=http://geodata.nationaalgeoregister.nl/bag/wfs parameters={'service': 'WFS', 'version': '1.1.0', 'request': 'GetFeature', 'srsName': 'EPSG:28992', 'outputFormat': 'text/xml; subtype=gml/2.1.2', 'typename': 'verblijfsobject', 'filter': '<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc"><ogc:BBOX><gml:Envelope xmlns:gml="http://www.opengis.net/gml" srsName="EPSG:28992"><gml:lowerCorner>183774.83 450577.24</gml:lowerCorner><gml:upperCorner>184277.99 450809.92</gml:upperCorner></gml:Envelope></ogc:BBOX></ogc:Filter>'}
+2019-03-21 14:11:19,382 output INFO cfg = {'class': 'stetl.outputs.standardoutput.StandardOutput'}
+2019-03-21 14:11:19,382 chain INFO Running Chain: input_wfs|output_std
+2019-03-21 14:11:19,478 httpinput INFO EOF URL reading done
+2019-03-21 14:11:19,478 component INFO HttpInput invokes=2 time(total, min, max, avg) = 0.096 0.096 0.096 0.048
+b'<?xml version="1.0" encoding="UTF-8"?><wfs:FeatureCollection xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs" xmlns:gml="http://www.opengis.net/gml" xmlns:bag="http://bag.geonovum.nl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.0.0/WFS-basic.xsd http://bag.geonovum.nl https://geodata.nationaalgeoregister.nl/bag/wfs?service=WFS&amp;version=1.0.0&amp;request=DescribeFeatureType&amp;typeName=bag%3Averblijfsobject"><gml:boundedBy><gml:null>unknown</gml:null></gml:boundedBy><gml:featureMember><bag:verblijfsobject fid="verblijfsobject.7306187"><bag:identificatie>228010000047219</bag:identificatie><bag:oppervlakte>121</bag:oppervlakte><bag:status>Verblijfsobject in gebruik</bag:status><bag:gebruiksdoel>woonfunctie</bag:gebruiksdoel><bag:openbare_ruimte>Harderwijkerweg</bag:openbare_ruimte><bag:huisnummer>1</bag:huisnummer><bag:postcode>6731ST</bag:postcode><bag:woonplaats>Otterlo</bag:woonplaats><bag:bouwjaar>1947</bag:bouwjaar><bag:pandidentificatie>228100000027383</bag:pandidentificatie><bag:pandstatus>Pand in gebruik</bag:pandstatus><bag:geometrie><gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#28992"><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">183936,450637,0</gml:coordinates></gml:Point></bag:geometrie><bag:pandgeometrie><gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#28992"><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">183932.603,450639.512,0 183934.594,450634.73,0 183933.375,450634.222,0 183935.064,450630.167,0 183936.343,450630.691,0 183938.458,450625.344,0 183943.859,450627.593,0 183939.957,450636.963,0 183938.748,450636.46,0 183936.757,450641.242,0 183932.603,450639.512,0</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></bag:pandgeometrie></bag:verblijfsobject></gml:featureMember><gml:featureMember><bag:verblijfsobject fid="verblijfsobject.7306248"><bag:identificatie>228010000047281</bag:identificatie><bag:oppervlakte>71</bag:oppervlakte><bag:status>Verblijfsobject in gebruik</bag:status><bag:gebruiksdoel>woonfunctie</bag:gebruiksdoel><bag:openbare_ruimte>Harderwijkerweg</bag:openbare_ruimte><bag:huisnummer>2</bag:huisnummer><bag:postcode>6731ST</bag:postcode><bag:woonplaats>Otterlo</bag:woonplaats><bag:bouwjaar>1947</bag:bouwjaar><bag:pandidentificatie>228100000006908</bag:pandidentificatie><bag:pandstatus>Pand in gebruik</bag:pandstatus><bag:geometrie><gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#28992"><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">183987,450673,0</gml:coordinates></gml:Point></bag:geometrie><bag:pandgeometrie><gml:Polygon srsName="http://www.opengis.net/gml/srs/epsg.xml#28992"><gml:outerBoundaryIs><gml:LinearRing><gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">183980.433,450671.062,0 183984.017,450666.347,0 183995.069,450674.891,0 183991.349,450679.562,0 183980.433,450671.062,0</gml:coordinates></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></bag:pandgeometrie></bag:verblijfsobject></gml:featureMember></wfs:FeatureCollection>'
+2019-03-21 14:11:19,478 component INFO StandardOutput invokes=2 time(total, min, max, avg) = 0.000 9223372036854775808.000 0.000 0.000
+2019-03-21 14:11:19,478 chain INFO DONE - 2 rounds - chain=input_wfs|output_std 
+2019-03-21 14:11:19,478 util INFO Timer end: total ETL time=0.0 sec
+2019-03-21 14:11:19,479 ETL INFO ALL DONE
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/9_string_templating ~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics
+==== running etl.sh for example 9_string_templating ====
+2019-03-21 14:11:21,082 util INFO Found lxml.etree, native XML parsing, fabulous!
+2019-03-21 14:11:21,143 util INFO Found GDAL/OGR Python bindings, super!!
+2019-03-21 14:11:21,148 main INFO Stetl version = 1.2
+2019-03-21 14:11:21,149 ETL INFO INIT - Stetl version is 1.2
+2019-03-21 14:11:21,151 ETL INFO Config/working dir = /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/9_string_templating
+2019-03-21 14:11:21,152 ETL INFO Reading config_file = etl.cfg
+2019-03-21 14:11:21,157 ETL INFO START
+2019-03-21 14:11:21,157 util INFO Timer start: total ETL
+2019-03-21 14:11:21,158 chain INFO Assembling Chain: input_csv|filter_template|output_file...
+2019-03-21 14:11:21,161 input INFO cfg = {'class': 'stetl.inputs.fileinput.CsvFileInput', 'file_path': 'input/city.csv', 'output_format': 'record'}
+2019-03-21 14:11:21,163 fileinput INFO file_list=['input/city.csv']
+2019-03-21 14:11:21,165 output INFO cfg = {'class': 'stetl.outputs.fileoutput.FileOutput', 'file_path': 'output/city.xml'}
+2019-03-21 14:11:21,165 fileoutput INFO working dir /Users/just/project/stetl/contrib/borrob/stetl.python3.git/examples/basics/9_string_templating
+2019-03-21 14:11:21,165 chain INFO Running Chain: input_csv|filter_template|output_file
+2019-03-21 14:11:21,166 fileinput INFO Open CSV file: input/city.csv
+2019-03-21 14:11:21,168 templatingfilter INFO Init: templating
+2019-03-21 14:11:21,168 templatingfilter INFO Init: reading template file %s ..." % self.template_file
+2019-03-21 14:11:21,139 templatingfilter INFO template file read OK: city_template.xml
+2019-03-21 14:11:21,141 fileinput INFO CSV row nr 1 read: OrderedDict([('city', 'amsterdam'), ('lat', '52.4'), ('lon', '4.9')])
+2019-03-21 14:11:21,142 fileoutput INFO writing to file output/city.xml
+2019-03-21 14:11:21,146 fileoutput INFO written to output/city.xml
+2019-03-21 14:11:21,148 component INFO CsvFileInput invokes=2 time(total, min, max, avg) = 0.002 0.001 0.001 0.001
+2019-03-21 14:11:21,148 templatingfilter INFO Exit: templating
+2019-03-21 14:11:21,148 component INFO StringTemplatingFilter invokes=2 time(total, min, max, avg) = 0.001 0.001 0.001 0.000
+2019-03-21 14:11:21,148 component INFO FileOutput invokes=2 time(total, min, max, avg) = 0.004 0.004 0.004 0.002
+2019-03-21 14:11:21,149 chain INFO DONE - 2 rounds - chain=input_csv|filter_template|output_file 
+2019-03-21 14:11:21,149 util INFO Timer end: total ETL time=-0.0 sec
+2019-03-21 14:11:21,150 ETL INFO ALL DONE
+~/project/stetl/contrib/borrob/stetl.python3.git/examples/basics

@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-#
 # Unit of data streamed through ETL chain.
 #
 # Author: Just van den Broecke
 #
-from util import etree
 import json
+from .util import etree
 
 
 class Packet:
@@ -55,6 +53,12 @@ class Packet:
             s = self.data.ExportToJson()
         else:
             s = str(self.data)
+        try:
+            s = s.decode('utf-8')
+        except AttributeError:
+            # No need to convert to a string
+            pass
+
         return s
 
 

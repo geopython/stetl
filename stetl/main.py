@@ -1,18 +1,19 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
 # Main Stetl program.
 #
 # Author: Just van den Broecke
 #
-from etl import ETL
-from factory import factory
-from util import Util
-from version import __version__
-import argparse  # apt-get install python-argparse
+import argparse
 import inspect
 import os
 import sys
+
+from deprecated.sphinx import deprecated
+
+from stetl.etl import ETL
+from stetl.factory import factory
+from stetl.util import Util
+from stetl.version import __version__
 
 log = Util.get_log('main')
 
@@ -36,6 +37,11 @@ def parse_args(args_list):
                            help='Get component documentation like its configuration parameters, e.g. stetl doc stetl.inputs.fileinput.FileInput',
                            dest='doc_args', required=False)
 
+    argparser.add_argument('-v', '--version',
+                           action='store_true',
+                           help='Show current version of stetl and exit',
+                           required=False)
+
     args = argparser.parse_args(args_list)
 
     if args.config_args:
@@ -53,7 +59,7 @@ def parse_args(args_list):
     return args
 
 
-# DEPRECATED, now using @Config which also documents with Sphinx
+@deprecated(version='1.0.7', reason='now using @Config which also documents with Spinx.')
 def print_config_attrs(clazz):
     skip = ['Filter', 'Input', 'Output', 'Component']
     for base in clazz.__bases__:
@@ -64,22 +70,22 @@ def print_config_attrs(clazz):
     """Print documentation for Attr object"""
 
     module_name, _, class_name = clazz.__name__.rpartition('.')
-    # print 'From class: %s' % class_name
+    # print ('From class: %s' % class_name)
 
     attr_count = 0
     for member in clazz.__dict__.keys():
         if member.startswith('cfg_'):
             config_obj = clazz.__dict__[member]
-            print ('----------------------------------------------')
-            print ('NAME: %s' % member.replace('cfg_', ''))
-            print ('MANDATORY: %s' % config_obj.mandatory)
-            print ('TYPE: %s' % str(config_obj.type))
-            print ('\n%s' % config_obj.doc)
-            print ('\nDEFAULT: %s' % str(config_obj.default))
+            print('----------------------------------------------')
+            print('NAME: %s' % member.replace('cfg_', ''))
+            print('MANDATORY: %s' % config_obj.mandatory)
+            print('TYPE: %s' % str(config_obj.type))
+            print('\n%s' % config_obj.doc)
+            print('\nDEFAULT: %s' % str(config_obj.default))
             attr_count += 1
 
     if attr_count == 0:
-        print ('No config attributes or class not yet documented')
+        print('No config attributes or class not yet documented')
 
 
 def print_classes(package):
@@ -94,10 +100,10 @@ def print_classes(package):
         for name, data in inspect.getmembers(modname, inspect.isclass):
             if name == '__builtins__':
                 continue
-            print name, data
+            print(name, data)
 
 
-# DEPRECATED, now using @Config which also documents with Sphinx
+@deprecated(version='1.0.7', reason='now using @Config which also documents with Spinx.')
 def print_doc(class_name):
     """Print documentation for class in particular config options"""
     # print_classes(class_name)
@@ -106,13 +112,13 @@ def print_doc(class_name):
     try:
         # class object from module.class name
         class_obj = factory.class_forname(class_name)
-        print ('DOCUMENTATION\n')
-        print ('CLASS: %s' % class_name)
-        print (class_obj.__doc__)
-        # print ('\nConfiguration attributes: \n')
+        print('DOCUMENTATION\n')
+        print('CLASS: %s' % class_name)
+        print(class_obj.__doc__)
+        # print('\nConfiguration attributes: \n')
         # print_config_attrs(class_obj)
 
-    except Exception, e:
+    except Exception as e:
         log.error("cannot print info class named '%s' e=%s - you made a typo?" % (class_name, str(e)))
         raise e
 
@@ -125,12 +131,17 @@ def main():
        -s  --section <section_name> the section in the Stetl config (ini) file to execute (default is [etl]).
        -a  --args <arglist> sero or more substitutable args for symbolic, {arg}, values in Stetl config file, in format -a arg1=foo -a arg2=bar etc.
        -d  --doc <class> Get component documentation like its configuration parameters, e.g. stetl --doc stetl.inputs.fileinput.FileInput
+       -v  --version Show the current version of stelt and exit
        -h  --help get help info
 
     """
 
     # Pass arguments explicitly, facilitates testing
     args = parse_args(sys.argv[1:])
+
+    if args.version:
+        print('Stetl version: ', __version__)
+        exit()
 
     if args.config_file:
         # Do the ETL

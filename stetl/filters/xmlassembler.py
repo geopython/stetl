@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 # Splits stream of XML elements into etree docs.
 #
@@ -69,7 +68,7 @@ class XmlAssembler(Filter):
 
         # Start new doc (TODO clone)
         try:
-            etree_doc = etree.fromstring(self.container_doc, self.xml_parser)
+            etree_doc = etree.fromstring(self.container_doc.encode('utf-8'), self.xml_parser)
         except Exception as e:
             log.error('new container doc not OK: %s' % str(e))
             return packet

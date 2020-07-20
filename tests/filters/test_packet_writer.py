@@ -20,7 +20,7 @@ class PacketWriterTest(StetlTestCase):
         section = StetlTestCase.get_section(chain, 1)
         class_name = self.etl.configdict.get(section, 'class')
         
-        self.assertEqual('filters.packetwriter.PacketWriter', class_name)
+        self.assertEqual('stetl.filters.packetwriter.PacketWriter', class_name)
     
     def test_instance(self):
         chain = StetlTestCase.get_chain(self.etl)

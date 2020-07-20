@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-#
 # Output base class for ETL.
 #
 # Author: Just van den Broecke
 #
-from component import Component
-from util import Util
+from .component import Component
+from .util import Util
 
 log = Util.get_log('output')
 

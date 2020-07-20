@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 # Transformation of any input using Python Templating as
 # meant in: https://wiki.python.org/moin/Templating.
@@ -8,13 +7,13 @@
 # The output is a string passed to the next Filter or Output.
 #
 # Author:Just van den Broecke
+import os
 
 from stetl.util import Util, ogr, osr
 from stetl.component import Config
 from stetl.filter import Filter
 from stetl.packet import FORMAT
 from string import Template
-import os
 
 log = Util.get_log("templatingfilter")
 
@@ -203,10 +202,10 @@ class Jinja2TemplatingFilter(TemplatingFilter):
                     log.info('Read JSON file with globals from: %s', file_path)
                     # Globals can come from local file or remote URL
                     if file_path.startswith('http'):
-                        import urllib2
+                        from urllib.request import urlopen
 
-                        fp = urllib2.urlopen(file_path)
-                        globals_struct = json.loads(fp.read())
+                        fp = urlopen(file_path)
+                        globals_struct = json.loads(fp.read().decode('utf-8'))
                     else:
                         with open(file_path) as data_file:
                             globals_struct = json.load(data_file)
@@ -217,7 +216,7 @@ class Jinja2TemplatingFilter(TemplatingFilter):
                     else:
                         template_globals.update(globals_struct)
 
-                except Exception, e:
+                except Exception as e:
                     log.error('Cannot read JSON file, err= %s', str(e))
                     raise e
 
@@ -308,7 +307,7 @@ class Jinja2TemplatingFilter(TemplatingFilter):
                 options.append('GMLID=%s' % gml_id)
 
             gml_str = geom.ExportToGML(options=options)
-        except Exception, e:
+        except Exception as e:
             gml_str = 'Failure in CreateGeometryFromJson or ExportToGML, err= %s; check your data and Stetl log' % str(
                 e)
             log.error(gml_str)

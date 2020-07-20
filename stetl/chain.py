@@ -1,15 +1,13 @@
-# -*- coding: utf-8 -*-
-#
 # Chain class: holds pipeline of components.
 #
 # Author: Just van den Broecke
 #
 
-from factory import factory
-from packet import Packet
-from util import Util
-from splitter import Splitter
-from merger import Merger
+from .factory import factory
+from .packet import Packet
+from .util import Util
+from .splitter import Splitter
+from .merger import Merger
 
 log = Util.get_log('chain')
 

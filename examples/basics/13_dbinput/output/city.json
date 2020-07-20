@@ -1,7 +1,7 @@
 {
     "city": {
+        "name": "Rome",
         "lat": 41.9,
-        "lon": 12.5,
-        "name": "Rome"
+        "lon": 12.5
     }
 }

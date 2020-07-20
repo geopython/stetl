@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-#
 # Packet buffering.
 #
 # Author:Just van den Broecke

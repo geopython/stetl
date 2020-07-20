@@ -1,15 +1,14 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #
 # Extracts data from a string using a regular expression and generates a record.
 #
 # Author: Frank Steggink
+import re
 
 from stetl.component import Config
 from stetl.filter import Filter
 from stetl.packet import FORMAT
 from stetl.util import Util
-import re
 
 log = Util.get_log("regexfilter")
 
