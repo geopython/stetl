@@ -4,7 +4,7 @@ Installation
 ============
 
 Stetl up to and including version 1.3 only runs with Python 2 (2.7+).
-Starting with Stetl v2.0 only Python 3 (3.4.2+) will be supported.
+Starting with Stetl v2.0 only Python 3 (3.6+) will be supported.
 You may want to read :ref:`py3upgrade` when upgrading from a Stetl pre-v2 version.
 
 Easiest is to first install the Stetl-dependencies (see below) and then
