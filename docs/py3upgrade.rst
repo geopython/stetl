@@ -23,7 +23,7 @@ Important changes for developers
 Python 2 and 3 are very similar, but there are a couple of important changes that developers need
 to keep in mind and are worth mentioning:
 
-- Stetl 2 supports Python 3.4.2 and higher (so unfortunately no `f strings <https://www.python.org/dev/peps/pep-0498/>`_)
+- Stetl 2 supports Python 3.6 and higher (so with support of `f strings <https://www.python.org/dev/peps/pep-0498/>`_)
 - Python 3 uses Unicode strings, meaning encoding/decoding is a bit different
 - ``stringIO`` and ``cstringIO`` were moved around
 - slight syntax change on calling ``next()`` for iterators
