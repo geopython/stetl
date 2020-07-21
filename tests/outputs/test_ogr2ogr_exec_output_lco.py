@@ -54,5 +54,5 @@ class Ogr2OgrExecOutputTest(StetlTestCase):
         self.assertTrue('-lco' in list)
         lco_indices = [i for i, x in enumerate(list) if x == '-lco']
         self.assertEqual(len(lco_indices), 2)
-        self.assertEqual(list[lco_indices[0] + 1], 'LAUNDER=YES')
+        self.assertEqual(list[lco_indices[0] + 1], 'GEOMETRY_NAME=geomtest')
         self.assertEqual(list[lco_indices[1] + 1], 'PRECISION=NO')
