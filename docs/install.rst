@@ -47,13 +47,13 @@ Dependencies
 
 Stetl depends on the following Python packages:
 
-* GDAL (v2+) bindings for Python
+* GDAL (>=v2.4) bindings for Python
 * psycopg2 (PostgreSQL client)
-* lxml
+* lxml >=4.4.2
 * Jinja2 templating
 * Deprecated
 
-``GDAL`` Python binding requires the native GDAL/OGR libs and tools (version 2+) to be installed.
+``GDAL`` Python binding requires the native GDAL/OGR libs and tools to be installed.
 
 ``lxml`` http://lxml.de/installation.html requires the native (C) libraries:
 
@@ -76,14 +76,19 @@ For Debian-based distro's like Ubuntu and Debian itself, most packages should be
 Tip: to get latest versions of GDAL and other Open Source geospatial software, best is
 to add the `UbuntuGIS Repository <https://wiki.ubuntu.com/UbuntuGIS>`_.
 Below a setup that works in Ubuntu 16.04 Xenial using Debian/Ubuntu packages. In some cases you may
-choose to install the same packages via `pip` to have more recent versions like for `lxml`.
+choose to install the same packages via `pip3` to have more recent versions like for `lxml`.
+
+More Linux Tips. See also:
+
+* the install commands for Debian in the [Dockerfile](https://github.com/geopython/stetl/blob/master/Dockerfile).
+* the install commands for Ubuntu in the [Travis file](https://github.com/geopython/stetl/blob/master/.travis.yml).
 
 - Python dependencies: ::
 
 	apt-get install python3-setuptools
 	apt-get install python3-dev
 	apt-get install python3-pip
-	pip install --upgrade pip
+	pip3 install --upgrade pip
 	
 - ``libxml2/libxslt`` libs are usually already installed. Together with Python ``lxml``, the total install for ``lxml`` is: ::
 
@@ -101,7 +106,7 @@ choose to install the same packages via `pip` to have more recent versions like 
 	gdalinfo --version
 	# should show something like: GDAL 2.4.0, released 2019/03/04
 
-	apt-get install python-gdal
+	apt-get install python3-gdal
 
 - the PostgreSQL client library for Python ``psycopg2``: ::
 
@@ -110,6 +115,7 @@ choose to install the same packages via `pip` to have more recent versions like 
 - for ``Jinja2``: ::
 
 	apt-get install python3-jinja2
+
 
 Mac OSX
 ~~~~~~~

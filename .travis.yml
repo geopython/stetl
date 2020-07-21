@@ -18,8 +18,8 @@ python:
   - "3.8"
 
 before_install:
-  - docker build -t geopython/stetl .
-  - docker build -t geopython/stetltest:latest -f Dockerfile.test .
+  - docker build -t geopython/stetl:local .
+  - docker build -t geopython/stetltest:local -f Dockerfile.test .
   - sudo apt-add-repository ppa:ubuntugis/ubuntugis-unstable -y
   - sudo apt-get update -q
   - sudo apt-get install -qq build-essential python3-dev python3-setuptools
@@ -36,7 +36,7 @@ script:
   - flake8
   - cd docs && make html && cd ..
   - nose2 -v
-  - docker run geopython/stetltest:latest
+  - docker run geopython/stetltest:local
   - pushd examples/basics && ./runall.sh  && popd
   - pushd examples/basics && ./runall-docker.sh  && popd
 
