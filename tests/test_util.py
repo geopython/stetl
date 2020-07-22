@@ -4,7 +4,7 @@ import os
 from ast import literal_eval
 
 from stetl.etl import ETL
-from stetl.util import ConfigSection
+from stetl.util import ConfigSection, Util
 from tests.stetl_test_case import StetlTestCase
 
 
@@ -31,7 +31,7 @@ class UtilTest(StetlTestCase):
             'ogrconn_dkk': '"PG:dbname=mydb host=myhost port=myport user=myuser password=mypassword active_schema=myschema"',
         }
         obj = literal_eval(ConfigSection(cfg).to_string())
-        
+
         self.assertEqual('Stetl', obj['name'])
         self.assertEqual('<hidden>', obj['password'])
         self.assertEqual('<hidden>', obj['paswoord'])
@@ -45,3 +45,19 @@ class UtilTest(StetlTestCase):
         self.assertEqual('PG:dbname=\'mydb\' host=\'myhost\' port=\'myport\' user=\'<hidden>\' password=\'<hidden>\' active_schema=\'myschema\'', obj['ogrconn_crazypwd1'])
         self.assertEqual('PG:dbname="mydb" host="myhost" port="myport" user="<hidden>" password="<hidden>" active_schema="myschema"', obj['ogrconn_crazypwd2'])
         self.assertEqual('"PG:dbname=mydb host=myhost port=myport user=<hidden> password=<hidden> active_schema=myschema"', obj['ogrconn_dkk'])
+
+    def test_make_file_list_depth_search(self):
+        # Util.make_file_list
+        import sys
+        file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data/depth_search_test')
+        filename_pattern = 'dummy.gml'
+
+        # Test with depth_search enabled
+        depth_search = True
+        file_list = Util.make_file_list(file_path, None, filename_pattern, depth_search)
+        self.assertEqual(len(file_list), 2)
+
+        # Test with depth_search disabled
+        depth_search = False
+        file_list = Util.make_file_list(file_path, None, filename_pattern, depth_search)
+        self.assertEqual(len(file_list), 1)
