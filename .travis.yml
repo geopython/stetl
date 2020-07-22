@@ -2,7 +2,7 @@ language: python
 
 sudo: true
 
-dist: xenial
+dist: bionic
 
 services:
   - docker
@@ -13,10 +13,9 @@ env:
    - C_INCLUDE_PATH=/usr/include/gdal
 
 python:
-  - "3.4"
-  - "3.5"
   - "3.6"
   - "3.7"
+  - "3.8"
 
 before_install:
   - docker build -t geopython/stetl .
