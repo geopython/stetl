@@ -208,10 +208,10 @@ When rebuilding you can add build arguments for your environment, defaults:  ::
 	ARG ADD_PYTHON_DEB_PACKAGES=""
 	ARG ADD_PYTHON_PIP_PACKAGES=""
 
-For example building with extra Python packages: ::
+For example building with extra Python packages, building your local Docker Image: ::
 
-	docker build --build-arg ADD_PYTHON_DEB_PACKAGES="python-requests python-tz" -t geopython/stetl:latest .
-	docker build --build-arg ADD_PYTHON_PIP_PACKAGES="scikit-learn==0.18 influxdb" -t geopython/stetl:latest .
+	docker build --build-arg ADD_PYTHON_DEB_PACKAGES="python-requests python-tz" -t geopython/stetl:local .
+	docker build --build-arg ADD_PYTHON_PIP_PACKAGES="scikit-learn==0.18 influxdb" -t geopython/stetl:local .
 
 Or you may extend the Stetl Dockerfile with your own Dockerfile.
 

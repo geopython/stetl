@@ -8,9 +8,7 @@ LABEL maintainer="Just van den Broecke <justb4@gmail.com>"
 ARG TIMEZONE="Europe/Amsterdam"
 ARG LOCALE="en_US.UTF-8"
 
-# ARG ADD_PYTHON_DEB_PACKAGES="python-scipy python-seaborn python-matplotlib"
 ARG ADD_PYTHON_DEB_PACKAGES=""
-# ARG ADD_PYTHON_PIP_PACKAGES="scikit-learn==0.18"
 ARG ADD_PYTHON_PIP_PACKAGES=""
 
 # Tricky: must match installed GDAL version (2.1.2 on Stretch, 2.4.0 on Buster)
