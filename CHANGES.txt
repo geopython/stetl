@@ -1,6 +1,14 @@
 Changes
 =======
 
+v2.1 - aug, 2020
+----------------
+
+PLANNED.
+
+See closed issues in Milestone 2.1: https://github.com/geopython/stetl/milestone/11?closed=1
+Mainly cleanup of Py3 migration issues, version upgrades for supporting libs (GDAL etc) and Dockerfile.
+
 v2.0 - april 11, 2019
 ---------------------
 
