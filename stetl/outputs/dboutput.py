@@ -164,7 +164,7 @@ class PostgresInsertOutput(PostgresDbOutput):
 
             # Replace option: try UPDATE if existing
             # https://stackoverflow.com/questions/1109061/insert-on-duplicate-update-in-postgresql/6527838#6527838
-            values = record.values()
+            values = list(record.values())
             values.append(record[self.key])
             res = self.db.execute(self.update_query, values)
             # del_query = "DELETE FROM %s WHERE %s = '%s'" % (self.cfg.get('table'), self.key, record[self.key])
@@ -173,7 +173,7 @@ class PostgresInsertOutput(PostgresDbOutput):
         if res < 1:
             # Do insert with values from the record dict
             # only if we did not do an UPDATE (res==0) on existing record.
-            self.db.execute(self.query, record.values())
+            self.db.execute(self.query, list(record.values()))
         self.db.commit(close=False)
 
     def write(self, packet):
