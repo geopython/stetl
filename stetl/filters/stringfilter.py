@@ -65,3 +65,46 @@ class StringSubstitutionFilter(StringFilter):
         # String substitution based on Python String.format()
         packet.data = packet.data.format(**self.format_args_dict)
         return packet
+
+
+class StringConcatFilter(StringFilter):
+    """
+    Concatenates a specified string with the input string (packet.data) either/or as prefix (prepend)
+    or postfix (append) and outputs that concatenation.
+
+    consumes=FORMAT.string, produces=FORMAT.string
+    """
+
+    @Config(ptype=str, default=None, required=False)
+    def append_string(self):
+        """
+        String to be appended.
+
+        Example: append_string = /002PND150904.xml
+        """
+        pass
+
+    @Config(ptype=str, default=None, required=False)
+    def prepend_string(self):
+        """
+        String to be prepended.
+
+        Example: prepend_string = /vsizip/
+        """
+        pass
+
+    # Constructor
+    def __init__(self, configdict, section):
+        StringFilter.__init__(self, configdict, section, consumes=FORMAT.string, produces=FORMAT.string)
+
+    def filter_string(self, packet):
+        if not packet.data:
+            return
+
+        if self.append_string:
+            packet.data = packet.data + self.append_string
+
+        if self.prepend_string:
+            packet.data = self.prepend_string + packet.data
+
+        return packet
