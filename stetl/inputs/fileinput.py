@@ -5,6 +5,7 @@
 import csv
 import re
 import fnmatch
+import io
 
 from deprecated.sphinx import deprecated
 
@@ -529,13 +530,23 @@ class ZipFileInput(FileInput):
         """
         pass
 
-    def __init__(self, configdict, section):
-        FileInput.__init__(self, configdict, section, produces=FORMAT.record)
+    def __init__(self, configdict, section, produces=FORMAT.record):
+        FileInput.__init__(self, configdict, section, produces)
         self.file_content = None
 
         # Pre-compile name filter into regex object to match filenames in zip-archive(s) later
         # See default (*) above, so we alo have a name_filter.
         self.fname_matcher = re.compile(fnmatch.translate(self.name_filter))
+
+    def create_file_content(self, file_path):
+        # Subclasses to override
+        # Assemble list of file names in archive
+        import zipfile
+        zip_file = zipfile.ZipFile(file_path, 'r')
+        file_name_list = [{'file_path': file_path, 'name': name} for name in zip_file.namelist()]
+
+        # Apply filename filter to namelist (TODO could be done in single step with previous step)
+        return [item for item in file_name_list if self.fname_matcher.match(item["name"])]
 
     def read(self, packet):
         # No more files left and done with current file ?
@@ -546,17 +557,11 @@ class ZipFileInput(FileInput):
 
         # Done with current file or first file ?
         if self.file_content is None:
-            self.cur_file_path = self.file_list.pop(0)
+            cur_file_path = self.file_list.pop(0)
 
-            # Assemble list of file names in archive
-            import zipfile
-            zf = zipfile.ZipFile(self.cur_file_path, 'r')
-            namelist = [{'file_path': self.cur_file_path, 'name': name} for name in zf.namelist()]
+            self.file_content = self.create_file_content(cur_file_path)
 
-            # Apply filename filter to namelist (TODO could be done in single step with previous step)
-            self.file_content = [item for item in namelist if self.fname_matcher.match(item["name"])]
-
-            log.info("zip file read : %s filecount=%d" % (self.cur_file_path, len(self.file_content)))
+            log.info("zip file read : %s filecount=%d" % (cur_file_path, len(self.file_content)))
 
         if len(self.file_content):
             packet.data = self.file_content.pop(0)
@@ -566,6 +571,64 @@ class ZipFileInput(FileInput):
             self.file_content = None
 
         return packet
+
+
+class VsiZipFileInput(ZipFileInput):
+    """
+    Parse ZIP file from file system into a stream of strings containing GDAL/OGR /vsizip paths.
+    Also handles cases for embedded zips (zips within zips within zips etc).
+    It outputs strings, where each string is a 'vsizip' path that can be input to mainly
+    OGR-components.
+
+    produces=FORMAT.string
+    """
+
+    def __init__(self, configdict, section):
+        ZipFileInput.__init__(self, configdict, section, produces=FORMAT.string)
+
+    def list_zips(self, f, parent=[]):
+        # https://unix.stackexchange.com/questions/239898/listing-files-from-nested-zip-files-without-extracting
+        import zipfile
+        result = []
+        try:
+            # Example outputs (BAG) zip files:
+            # /vsizip/{test/data/0221PND15092020.zip}/0221PND15092020-000001.xml
+            # /vsizip/{/vsizip/{/Users/just/project/nlextract/data/BAG-2.0/BAGNLDL-08112020.zip}/9999OPR08112020.zip}
+            # /vsizip/{/vsizip/{/vsizip/{test/BAGGEM0221L-15022021.zip}/0221GEM15022021.zip}/0221PND15022021.zip}/0221PND15022021-000001.xml
+            # Handle /vsizip prefixing and embedding.
+            par_last = len(parent) - 1
+            if type(f) is str:
+                # First: f is a filepath, embed path in /vsizip/{path}
+                parent = ['/vsizip/{{{}}}'.format(f)]
+            elif parent[par_last].lower().endswith('.zip'):
+                # Nested .zip: embed in /vsizip/{parent}
+                parent[0] = '/vsizip/{{{}'.format(parent[0])
+                parent[par_last] = '{}}}'.format(parent[par_last])
+
+            # Fetch names from zipfile archive
+            zip_file = zipfile.ZipFile(f)
+            for fname in zip_file.namelist():
+
+                path = parent + [fname]
+
+                if fname.lower().endswith('.zip'):
+                    # .zip in .zip: recurse to handle
+                    result += self.list_zips(io.BytesIO(zip_file.open(fname).read()), path)
+
+                # Filter-in matching filenames from archive
+                if self.fname_matcher.match(fname):
+                    log.debug('MATCH: ' + str(path))
+                    entry = '/'.join(path)
+                    result.append(entry)
+
+        except Exception as ex:
+            log.warn('Exception during vsizip processing: {}'.format(str(ex)))
+            return []
+
+        return result
+
+    def create_file_content(self, file_path):
+        return self.list_zips(file_path)
 
 
 class GlobFileInput(FileInput):
