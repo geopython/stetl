@@ -39,7 +39,7 @@ script:
   - pushd examples/basics && ./runall.sh  && popd
   - pushd examples/basics && ./runall-docker.sh  && popd
 
-#after-script:
+# after-script:
 #  - python todo
 
 
