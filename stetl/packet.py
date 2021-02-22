@@ -92,6 +92,7 @@ class FORMAT:
     * 'struct'
     * 'geojson_feature'
     * 'geojson_collection'
+    * 'gdal_vsi_path`
     * 'ogr_feature'
     * 'ogr_feature_array'
     * 'any'
@@ -110,6 +111,7 @@ class FORMAT:
     struct = 'struct'
     geojson_feature = 'geojson_feature'
     geojson_collection = 'geojson_collection'
+    gdal_vsi_path = 'gdal_vsi_path'
     ogr_feature = 'ogr_feature'
     ogr_feature_array = 'ogr_feature_array'
     any = 'any'

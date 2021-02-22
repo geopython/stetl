@@ -580,11 +580,11 @@ class VsiZipFileInput(ZipFileInput):
     It outputs strings, where each string is a 'vsizip' path that can be input to mainly
     OGR-components.
 
-    produces=FORMAT.string
+    produces=FORMAT.gdal_vsi_path
     """
 
     def __init__(self, configdict, section):
-        ZipFileInput.__init__(self, configdict, section, produces=FORMAT.string)
+        ZipFileInput.__init__(self, configdict, section, produces=FORMAT.gdal_vsi_path)
 
     def list_zips(self, f, parent=[]):
         # https://unix.stackexchange.com/questions/239898/listing-files-from-nested-zip-files-without-extracting

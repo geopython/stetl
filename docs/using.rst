@@ -359,7 +359,9 @@ The following data types are currently symbolically defined in the :class:`stetl
 
 - ``geojson_collection`` - as ``struct`` but following naming conventions for a FeatureCollection according to the GeoJSON spec: http://geojson.org
 
-- ``ogr_feature`` - a single Feature object from an OGR source (via Python SWIG wrapper)
+- ``gdal_vsi_path`` - a single file path in the GDAL Virtual File System (VSI) format (via GDAL Python bindings)
+
+- ``ogr_feature`` - a single Feature object from an OGR source (via GDAL Python bindings)
 
 - ``ogr_feature_array`` - a Python list (array) of a single Feature objects from an OGR source
 
