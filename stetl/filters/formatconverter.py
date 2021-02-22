@@ -246,6 +246,26 @@ class FormatConverter(Filter):
 
     # END geojson_collection
 
+    # START gdal_vsi_path
+
+    @staticmethod
+    def gdal_vsi_path2etree_doc(packet, converter_args=None):
+        from stetl.util import gdal
+
+        # Example input path:
+        # /vsizip/{/vsizip/{BAGGEM0221L-15022021.zip}/GEM-WPL-RELATIE-15022021.zip}/GEM-WPL-RELATIE-15022021-000001.xml
+        vsi_file_path = packet.data
+        vsi_file = gdal.VSIFOpenL(vsi_file_path, 'r')
+        gdal.VSIFSeekL(vsi_file, 0, 2)
+        vsileng = gdal.VSIFTellL(vsi_file)
+        gdal.VSIFSeekL(vsi_file, 0, 0)
+        xml_string = gdal.VSIFReadL(1, vsileng, vsi_file)
+        packet.data = etree.fromstring(xml_string)
+
+        return packet
+
+    # END gdal_vsi_path
+
     # START ogr_feature
 
     @staticmethod
@@ -356,6 +376,9 @@ FORMAT_CONVERTERS = {
     },
     FORMAT.geojson_collection: {
         FORMAT.ogr_feature_array: FormatConverter.geojson_coll2ogr_feature_arr
+    },
+    FORMAT.gdal_vsi_path: {
+        FORMAT.etree_doc: FormatConverter.gdal_vsi_path2etree_doc
     },
     FORMAT.ogr_feature: {
         FORMAT.geojson_feature: FormatConverter.ogr_feature2struct,

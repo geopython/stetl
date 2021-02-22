@@ -150,8 +150,7 @@ class Ogr2OgrExecOutput(ExecOutput):
     # End attribute config meta
 
     def __init__(self, configdict, section):
-        ExecOutput.__init__(self, configdict, section, consumes=FORMAT.string)
-
+        ExecOutput.__init__(self, configdict, section, consumes=[FORMAT.string, FORMAT.gdal_vsi_path])
         self.regex_vsi_filter = re.compile("^/vsi[a-z0-9_]+/.*", re.I)
 
         self.ogr2ogr_cmd = 'ogr2ogr -f ' + self.dest_format + ' ' + self.dest_data_source
