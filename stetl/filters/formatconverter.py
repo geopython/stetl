@@ -255,7 +255,7 @@ class FormatConverter(Filter):
         # Example input path:
         # /vsizip/{/vsizip/{BAGGEM0221L-15022021.zip}/GEM-WPL-RELATIE-15022021.zip}/GEM-WPL-RELATIE-15022021-000001.xml
         vsi_file_path = packet.data
-        vsi_file = gdal.VSIFOpenL(vsi_file_path,'r')
+        vsi_file = gdal.VSIFOpenL(vsi_file_path, 'r')
         gdal.VSIFSeekL(vsi_file, 0, 2)
         vsileng = gdal.VSIFTellL(vsi_file)
         gdal.VSIFSeekL(vsi_file, 0, 0)
