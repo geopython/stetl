@@ -619,6 +619,17 @@ class VsiZipFileInput(ZipFileInput):
                 if self.fname_matcher.match(fname):
                     log.debug('MATCH: ' + str(path))
                     entry = '/'.join(path)
+
+                    # Matched entries for .zip within .zip do not play nice with
+                    # VSI GDAL file handling.
+                    # Example: /vsizip/{/vsizip/{/data/BAG-2.0/BAGNLDL-08112020.zip}/9999OPR08112020.zip}
+                    # Becomes: /vsizip/{/data/BAG-2.0/BAGNLDL-08112020.zip}/9999OPR08112020.zip
+                    if entry.endswith('.zip}') and entry.startswith('/vsizip/{/vsizip'):
+                        log.debug('ZIP ENTRY: ' + entry)
+                        entry = entry.replace('/vsizip/{', '', 1)
+                        entry = entry.rstrip('}')
+
+                    log.debug('ADD ENTRY: ' + entry)
                     result.append(entry)
 
         except Exception as ex:
