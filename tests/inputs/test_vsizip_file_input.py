@@ -33,28 +33,28 @@ class VsiZipFileInputTest(StetlTestCase):
         chain.run()
         
         result = sys.stdout.getvalue().strip().split('\n')
-        self.assertEqual(len(result), 44)
+        self.assertEqual(len(result), 40)
                                     
     def test_zip_name_filter(self):
         chain = StetlTestCase.get_chain(self.etl, 1)
         chain.run()
         
         result = sys.stdout.getvalue().strip().split('\n')
-        self.assertEqual(len(result), 20)
+        self.assertEqual(len(result), 18)
 
     def test_xml_name_filter(self):
         chain = StetlTestCase.get_chain(self.etl, 2)
         chain.run()
 
         result = sys.stdout.getvalue().strip().split('\n')
-        self.assertEqual(len(result), 21)
+        self.assertEqual(len(result), 18)
 
     def test_xml_re_name_filter(self):
         chain = StetlTestCase.get_chain(self.etl, 3)
         chain.run()
 
         result = sys.stdout.getvalue().strip().split('\n')
-        self.assertEqual(len(result), 4)
+        self.assertEqual(len(result), 2)
 
     def test_xml_single_name__nested_filter(self):
         chain = StetlTestCase.get_chain(self.etl, 4)
@@ -70,12 +70,12 @@ class VsiZipFileInputTest(StetlTestCase):
 
         result = sys.stdout.getvalue().strip().split('\n')
         self.assertEqual(len(result), 1)
-        self.assertEqual(result[0], '/vsizip/{/vsizip/{tests/data/vsizipinput.zip}/9999STA15092020.zip}/0221STA15092020-000001.xml')
+        self.assertEqual(result[0], '/vsizip/{/vsizip/{tests/data/vsizipinput.zip}/9999WPL15092020.zip}/0221WPL15092020-000001.xml')
 
     def test_read_xml_from_vsi_path(self):
         chain = StetlTestCase.get_chain(self.etl, 6)
         chain.run()
 
         result = sys.stdout.getvalue()
-        self.assertEqual(len(result), 7220)
+        self.assertEqual(len(result), 25152)
         # self.assertEqual(result[0], 'xml stuff')
