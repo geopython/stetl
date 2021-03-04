@@ -18,7 +18,7 @@ DEFAULT_BUFFER_SIZE = 1024 * 1024 * 1024
 class FileExtractor(Filter):
     """
     Abstract Base Class.
-    Extracts a file an archive and saves it as the given file name.
+    Extracts a file an archive and saves as the configured file name.
 
     consumes=FORMAT.any, produces=FORMAT.string
     """
@@ -112,7 +112,14 @@ class ZipFileExtractor(FileExtractor):
 
 class VsiFileExtractor(FileExtractor):
     """
-    Extracts a file from a /vsi path spec, and saves it as the given file name.
+    Extracts a file from a GDAL /vsi path spec, and saves it as the given file name.
+
+    Example paths:
+    /vsizip/{/project/nlextract/data/BAG-2.0/BAGNLDL-08112020.zip}/9999STA08112020.zip'
+    /vsizip/{/vsizip/{BAGGEM0221L-15022021.zip}/GEM-WPL-RELATIE-15022021.zip}/GEM-WPL-RELATIE-15022021-000001.xml
+
+    See also stetl.inputs.fileinput.VsiZipFileInput that generates these paths.
+
     Author: Just van den Broecke
 
     consumes=FORMAT.gdal_vsi_path, produces=FORMAT.string
@@ -125,13 +132,12 @@ class VsiFileExtractor(FileExtractor):
         from stetl.util import gdal
 
         # Example input path can be as complex as this:
-        # /vsizip/{/vsizip/{BAGGEM0221L-15022021.zip}/GEM-WPL-RELATIE-15022021.zip}/GEM-WPL-RELATIE-15022021-000001.xml
+        #
         vsi_file_path = packet.data
-        # vsi_file_path = '/vsizip/{/Users/just/project/nlextract/data/BAG-2.0/BAGNLDL-08112020.zip}/9999STA08112020.zip'
         vsi = None
         vsi_len = 0
         try:
-            # gdal.VSIF does not support 'with'
+            # gdal.VSIF does not support 'with' so old-school open/close.
             log.info('Extracting {}'.format(vsi_file_path))
             vsi = gdal.VSIFOpenL(vsi_file_path, 'rb')
             with open(self.file_path, 'wb') as f:

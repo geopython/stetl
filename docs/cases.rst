@@ -8,7 +8,7 @@ This chapter lists various cases/projects where Stetl is used.
 NLExtract
 ---------
 
-NLExtract http://nlextract.nl is a development project that aims to provide ETL-tooling for all
+NLExtract https://nlextract.nl is a development project that aims to provide ETL-tooling for all
 Dutch Open Geo-Datasets, in particular the country wide
 "Key Registries" (Dutch: Basisregistraties) like Cadastral Parcels (BRK), Topography (BRT+BGT) and
 Buildings and Addresses (BAG). These datasets are provided as XML/GML. The ETL mostly provides
@@ -16,14 +16,31 @@ a transformation to PostGIS. For all Key Registries, except for the BAG, Stetl i
 as-is, without extra (Python) programming.  See also the NLExtract GitHub:
 https://github.com/nlextract/NLExtract
 
-Topography (BRT/Top10NL)
-~~~~~~~~~~~~~~~~~~~~~~~~
+Adresses and Buildings (BAG v2)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-See https://github.com/nlextract/NLExtract/tree/master/top10nl/etl and the Stetl conf at
-https://github.com/nlextract/NLExtract/tree/master/top10nl/etl/conf/
+BAG version 1 ETL was developed as a custom Python program.
+In 2021 Dutch Kadaster released BAG version 2.
+For NLExtract a moment to switch ETL for BAG to Stetl.
+In particular use is made of the recent (v3.2.1+) GDAL/OGR LVBAG Driver and Python bindings for GDAL
+VSI `/vsizip` file handling.
+
+See https://github.com/nlextract/NLExtract/tree/master/bagv2/etl and the Stetl conf at
+https://github.com/nlextract/NLExtract/tree/master/bagv2/etl/conf/
+
+Topography (BRT)
+~~~~~~~~~~~~~~~~
+
+Includes ETL for 5 scale levels: TOP10NL through TOP1000NL.
+
+See https://github.com/nlextract/NLExtract/tree/master/brt/top10nl/etl and the Stetl conf at e.g.
+https://github.com/nlextract/NLExtract/tree/master/brt/top10nl/etl/conf/
 
 Detailed Topography (BGT)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This is a very large and heavy dataset based on CityGML. Stetl streaming ETL is
+here at its best.
 
 See https://github.com/nlextract/NLExtract/tree/master/bgt and the Stetl conf at
 https://github.com/nlextract/NLExtract/blob/master/bgt/etl/conf/
