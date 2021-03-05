@@ -155,9 +155,16 @@ Components: Filters
    :members:
    :show-inheritance:
 
-.. automodule:: stetl.filters.zipfileextractor
+.. automodule:: stetl.filters.fileextractor
    :members:
    :show-inheritance:
+
+.. automodule:: stetl.filters.vsifilter
+   :members:
+   :show-inheritance:
+
+NB: `stetl.filters.zipfileextractor` is deprecated.
+`ZipFileExtractor` is now part of module `stetl.filters.fileextractor`.
 
 Components: Outputs
 -------------------

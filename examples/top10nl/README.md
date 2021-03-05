@@ -5,7 +5,7 @@ This example was the base for the full implementation in the NLExtract project w
 it will be maintained more actively.
 
 **This example is outdated.**
-**For a production version see https://github.com/nlextract/NLExtract/tree/master/top10nl/etl**
+**For a production version see https://github.com/nlextract/NLExtract/tree/master/brt**
 
 ## Notes - kept for historic reasons
 
