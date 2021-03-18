@@ -251,16 +251,26 @@ class FormatConverter(Filter):
     @staticmethod
     def gdal_vsi_path2etree_doc(packet, converter_args=None):
         from stetl.util import gdal
+        import re
 
         # Example input path:
         # /vsizip/{/vsizip/{BAGGEM0221L-15022021.zip}/GEM-WPL-RELATIE-15022021.zip}/GEM-WPL-RELATIE-15022021-000001.xml
         vsi_file_path = packet.data
-        vsi_file = gdal.VSIFOpenL(vsi_file_path, 'r')
+        vsi_file = gdal.VSIFOpenL(vsi_file_path, 'rb')
         gdal.VSIFSeekL(vsi_file, 0, 2)
         vsileng = gdal.VSIFTellL(vsi_file)
         gdal.VSIFSeekL(vsi_file, 0, 0)
-        xml_string = gdal.VSIFReadL(1, vsileng, vsi_file)
-        packet.data = etree.fromstring(xml_string)
+
+        # read the XML as string (or bytearray)
+        xml_str = gdal.VSIFReadL(1, vsileng, vsi_file)
+
+        # Type is GDAL-version dependent, may be bytes-like
+        if type(xml_str) in [bytearray, bytes]:
+            xml_str = xml_str.decode('utf-8')
+
+        # Need to strip the XML header to avoid XML parse error
+        xml_str = re.sub(r'<\?xml.*?\?>', '', xml_str)
+        packet.data = etree.fromstring(xml_str)
 
         return packet
 
