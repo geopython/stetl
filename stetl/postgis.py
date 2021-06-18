@@ -148,5 +148,14 @@ class PostGIS:
         except Exception as e:
             self.e = e
             log.error("error %s in transaction: %s with parms: %s" % (str(e), str(sql), str(parameters)))
+            # Return a dummy "-1" row count in the same vein as self.execute()
+            return -1
+
+        # Make sure there is a cursor with a row count before returning it, otherwise "return early"
+        if not hasattr(self, 'cursor'):
+            return -1
+
+        if not hasattr(self.cursor, 'rowcount'):
+            return -1
 
         return self.cursor.rowcount
