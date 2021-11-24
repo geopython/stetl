@@ -362,6 +362,13 @@ class CsvFileInput(FileInput):
         """
         pass
 
+    @Config(ptype=bool, default=False, required=False)
+    def empty_string_is_none(self):
+        """
+        Should we use None instead of '' for empty fields
+        """
+        pass
+
     # Constructor
     def __init__(self, configdict, section):
         FileInput.__init__(self, configdict, section, produces=[FORMAT.record_array, FORMAT.record])
@@ -381,11 +388,26 @@ class CsvFileInput(FileInput):
         try:
             # To comply with Stetl record type: force ordinary/base dict-type.
             # Python 3.6+ returns OrderedDict which may not play nice up the Chain
-            packet.data = dict(next(self.csv_reader))
+            record = dict(next(self.csv_reader))
+
+            if self.empty_string_is_none:
+                for field in record:
+                    if record[field] == '':
+                        record[field] = None
+
+            packet.data = record
             if self._output_format == FORMAT.record_array:
                 while True:
                     self.arr.append(packet.data)
-                    packet.data = dict(next(self.csv_reader))
+
+                    record = dict(next(self.csv_reader))
+
+                    if self.empty_string_is_none:
+                        for field in record:
+                            if record[field] == '':
+                                record[field] = None
+
+                    packet.data = record
 
             log.info("CSV row nr %d read: %s" % (self.csv_reader.line_num - 1, packet.data))
         except Exception:
