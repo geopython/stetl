@@ -9,6 +9,8 @@ log = Util.get_log("postgis")
 try:
     import psycopg2
     import psycopg2.extensions
+    import psycopg2.extras
+    from psycopg2 import sql as pg2sql
 except ImportError:
     log.error("cannot find package psycopg2 for Postgres client support, please install psycopg2 first!")
     # sys.exit(-1)
@@ -135,6 +137,19 @@ class PostGIS:
             self.e = e
             self.log_action("file_execute", "n.v.t", "fout=%s" % str(e), True)
             log.warn("can't execute SQL script, error: %s" % (str(e)))
+
+    def truncate_table(self, table):
+        log.info("Truncating table: %s" % table)
+
+        sqlfmt = {
+            'table': pg2sql.Identifier(table),
+        }
+
+        query = pg2sql.SQL('TRUNCATE {table}').format(**sqlfmt)
+
+        log.debug("query: %s" % query.as_string(context=self.cursor))
+
+        self.cursor.execute(query)
 
     def tx_execute(self, sql, parameters=None):
         self.e = None

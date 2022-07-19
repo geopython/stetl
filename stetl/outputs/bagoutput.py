@@ -465,17 +465,8 @@ class BAGOutput(Output):
             return True
 
     def truncate_table(self, table):
-        log.info("Truncating table: %s" % table)
-
-        format = {
-            'table': sql.Identifier(table),
-        }
-
-        query = sql.SQL('TRUNCATE {table}').format(**format)
-
-        log.debug("query: %s" % query)
-
-        self.db.cursor.execute(query)
+        self.db.truncate_table(table)
+        self.db.commit(close=False)
 
     def create_table(self, table):
         log.info("Creating table: %s" % table)
@@ -1338,10 +1329,10 @@ class BAGOutput(Output):
         else:
             return True
 
-    def copy_from_csv(self, csv_file, table, fields, delimiter, null):
+    def copy_from_csv(self, csv_file, table, fields, delimiter, null, truncate=False):
         if not self.table_exists(table):
             self.create_table(table)
-        elif self.truncate:
+        elif truncate or self.truncate:
             self.truncate_table(table)
 
         log.info("Copying records from CSV file: %s" % csv_file)
@@ -1630,7 +1621,7 @@ class BAGOutput(Output):
 
                 writer.writerow(row)
 
-        self.copy_from_csv(csv_file, table, fields, delimiter, null)
+        self.copy_from_csv(csv_file, table, fields, delimiter, null, truncate=True)
 
         BAGUtil.remove_temp_file(csv_file)
 
