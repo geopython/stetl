@@ -107,7 +107,7 @@ class BAGInput(Input):
                 for entry in sorted(zip_content):
                     if(
                         re.search(
-                            r'^\d{4}(?:LIG|NUM|OPR|PND|STA|VBO|WPL)\d{8}\.zip$',
+                            r'^\d{4}(MUT)\d{8}-\d{8}\.zip$|^\d{4}(?:LIG|NUM|OPR|PND|STA|VBO|WPL)\d{8}\.zip$',
                             entry,
                         ) or  # noqa: W504
                         re.search(
@@ -137,7 +137,7 @@ class BAGInput(Input):
             else:
                 for entry in sorted(zip_content):
                     if re.search(
-                        r'^\d{4}(?:IA|IO|NB)(?:LIG|NUM|OPR|PND|STA|VBO|WPL)\d{8}\.zip$',
+                        r'^\d{4}(?:IO|)(MUT)\d{8}-\d{8}\.zip$|^\d{4}(?:IA|IO|NB)(?:LIG|NUM|OPR|PND|STA|VBO|WPL)\d{8}\.zip$',
                         entry,
                     ):
                         self.file_list.append(
