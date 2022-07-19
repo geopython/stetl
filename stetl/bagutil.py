@@ -14,6 +14,18 @@ class BAGUtil:
     """
 
     @staticmethod
+    def zip_file_content(zip_file):
+        log.info("Retrieving content from: %s" % zip_file)
+
+        zip_content = []
+
+        with zipfile.ZipFile(zip_file) as z:
+            for name in z.namelist():
+                zip_content.append(name)
+
+        return zip_content
+
+    @staticmethod
     def extract_zip_file(zip_file, temp_dir):
         extracted = []
 
@@ -34,6 +46,14 @@ class BAGUtil:
                 extracted.append(temp_file)
 
         return extracted
+
+    @staticmethod
+    def extract_from_zip_file(name, zip_file, temp_dir):
+        with zipfile.ZipFile(zip_file) as z:
+            if name not in z.namelist():
+                raise Exception("Cannot extract file: %s" % name)
+
+            return z.extract(name, path=temp_dir)
 
     @staticmethod
     def remove_temp_file(temp_file):

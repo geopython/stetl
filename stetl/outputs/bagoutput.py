@@ -1,4 +1,5 @@
 import csv
+import multiprocessing
 import os
 import pprint
 import re
@@ -212,10 +213,24 @@ class BAGOutput(Output):
         """
         pass
 
-    @Config(ptype=int, default=(1024 * 1024 * 1024), required=False)
+    @Config(ptype=int, required=False, default=(1024 * 1024 * 1024))
     def buffer_size(self):
         """
         Buffer size for read buffer during extraction
+        """
+        pass
+
+    @Config(ptype=bool, required=False, default=False)
+    def multiprocessing(self):
+        """
+        Process multiple files in parallel
+        """
+        pass
+
+    @Config(ptype=int, required=False, default=(os.cpu_count() - 1))
+    def workers(self):
+        """
+        Number of parallel processing workers
         """
         pass
 
@@ -223,14 +238,22 @@ class BAGOutput(Output):
         Output.__init__(self, configdict, section, consumes=consumes)
         self.db = None
 
-    def init(self):
+    def db_connect(self):
         log.info('Init: connect to DB')
         self.db = PostGIS(self.cfg.get_dict())
         self.db.connect()
 
-    def exit(self):
+    def db_disconnect(self):
         log.info('Exit: disconnect from DB')
         self.db.disconnect()
+
+    def init(self):
+        if not self.multiprocessing:
+            self.db_connect()
+
+    def exit(self):
+        if not self.multiprocessing:
+            self.db_disconnect()
 
     def update_record(self, table, record, identifiers):
         sqlstr = r'UPDATE {table} SET'
@@ -2916,6 +2939,38 @@ class BAGOutput(Output):
 
                 BAGUtil.remove_temp_file(entry)
 
+    def process_input_file(self, input_file):
+        if self.multiprocessing:
+            self.db_connect()
+
+        if input_file.endswith('.xml'):
+            self.process_xml_file(input_file)
+        elif input_file.endswith('.zip'):
+            zip_content = BAGUtil.zip_file_content(input_file)
+
+            for entry in zip_content:
+                if(
+                    entry.startswith('.') or  # noqa: W504
+                    entry.startswith('_')
+                ):
+                    continue
+
+                if entry.endswith('.xml'):
+                    xml_file = BAGUtil.extract_from_zip_file(
+                        entry,
+                        input_file,
+                        self.temp_dir,
+                    )
+
+                    self.process_xml_file(xml_file)
+                else:
+                    log.warning("Ignoring entry: %s" % entry)
+        else:
+            log.warning("Skipping unsupported file: %s" % input_file)
+
+        if self.multiprocessing:
+            self.db_disconnect()
+
     def process_input_zip_file(self, packet):
         temp_file = os.path.join(self.temp_dir, packet.data['name'])
 
@@ -2956,101 +3011,113 @@ class BAGOutput(Output):
         if packet.data is None or len(packet.data) == 0:
             return packet
 
-        if(
-            (
-                not self.process_inactief and  # noqa: W504
-                re.search(
-                    r'^\d{4}Inactief\d{8}\.zip$',
-                    packet.data['name']
+        if 'file_list' in packet.data:
+            with multiprocessing.Pool(
+                processes=self.workers,
+                maxtasksperchild=1,
+            ) as p:
+                p.map(
+                    self.process_input_file,
+                    packet.data['file_list'],
                 )
-            ) or  # noqa: W504
-            (
-                not self.process_in_onderzoek and  # noqa: W504
-                re.search(
-                    r'^\d{4}InOnderzoek\d{8}\.zip$',
-                    packet.data['name']
-                )
-            ) or  # noqa: W504
-            (
-                not self.process_niet_bag and  # noqa: W504
-                re.search(
-                    r'^\d{4}NietBag\d{8}\.zip$',
-                    packet.data['name']
-                )
-            ) or  # noqa: W504
-            (
-                not self.process_lig and  # noqa: W504
-                re.search(
-                    r'^\d{4}LIG\d{8}\.zip$',
-                    packet.data['name']
-                )
-            ) or  # noqa: W504
-            (
-                not self.process_num and  # noqa: W504
-                re.search(
-                    r'^\d{4}NUM\d{8}\.zip$',
-                    packet.data['name']
-                )
-            ) or  # noqa: W504
-            (
-                not self.process_opr and  # noqa: W504
-                re.search(
-                    r'^\d{4}OPR\d{8}\.zip$',
-                    packet.data['name']
-                )
-            ) or  # noqa: W504
-            (
-                not self.process_pnd and  # noqa: W504
-                re.search(
-                    r'^\d{4}PND\d{8}\.zip$',
-                    packet.data['name']
-                )
-            ) or  # noqa: W504
-            (
-                not self.process_sta and  # noqa: W504
-                re.search(
-                    r'^\d{4}STA\d{8}\.zip$',
-                    packet.data['name']
-                )
-            ) or  # noqa: W504
-            (
-                not self.process_vbo and  # noqa: W504
-                re.search(
-                    r'^\d{4}VBO\d{8}\.zip$',
-                    packet.data['name']
-                )
-            ) or  # noqa: W504
-            (
-                not self.process_wpl and  # noqa: W504
-                re.search(
-                    r'^\d{4}WPL\d{8}\.zip$',
-                    packet.data['name']
-                )
-            ) or  # noqa: W504
-            (
-                not self.process_gwr and  # noqa: W504
-                re.search(
-                    r'^GEM\-WPL\-RELATIE\-\d{8}\.zip$',
-                    packet.data['name']
-                )
-            ) or  # noqa: W504
-            (
-                not self.process_levering and  # noqa: W504
-                re.search(
-                    r'^Leveringsdocument\-BAG\-Extract\.xml$',
-                    packet.data['name']
-                )
-            )
-        ):
-            log.info("Skipping processing of: %s" % packet.data['name'])
 
             return packet
-
-        if packet.data['name'].endswith('.xml'):
-            return self.process_xml_file_packet(packet)
-        elif packet.data['name'].endswith('.zip'):
-            return self.process_zip_file_packet(packet)
         else:
-            log.warning("Skipping unsupported file: %s" % packet.data['name'])
+            if(
+                (
+                    not self.process_inactief and  # noqa: W504
+                    re.search(
+                        r'^\d{4}Inactief\d{8}\.zip$',
+                        packet.data['name']
+                    )
+                ) or  # noqa: W504
+                (
+                    not self.process_in_onderzoek and  # noqa: W504
+                    re.search(
+                        r'^\d{4}InOnderzoek\d{8}\.zip$',
+                        packet.data['name']
+                    )
+                ) or  # noqa: W504
+                (
+                    not self.process_niet_bag and  # noqa: W504
+                    re.search(
+                        r'^\d{4}NietBag\d{8}\.zip$',
+                        packet.data['name']
+                    )
+                ) or  # noqa: W504
+                (
+                    not self.process_lig and  # noqa: W504
+                    re.search(
+                        r'^\d{4}LIG\d{8}\.zip$',
+                        packet.data['name']
+                    )
+                ) or  # noqa: W504
+                (
+                    not self.process_num and  # noqa: W504
+                    re.search(
+                        r'^\d{4}NUM\d{8}\.zip$',
+                        packet.data['name']
+                    )
+                ) or  # noqa: W504
+                (
+                    not self.process_opr and  # noqa: W504
+                    re.search(
+                        r'^\d{4}OPR\d{8}\.zip$',
+                        packet.data['name']
+                    )
+                ) or  # noqa: W504
+                (
+                    not self.process_pnd and  # noqa: W504
+                    re.search(
+                        r'^\d{4}PND\d{8}\.zip$',
+                        packet.data['name']
+                    )
+                ) or  # noqa: W504
+                (
+                    not self.process_sta and  # noqa: W504
+                    re.search(
+                        r'^\d{4}STA\d{8}\.zip$',
+                        packet.data['name']
+                    )
+                ) or  # noqa: W504
+                (
+                    not self.process_vbo and  # noqa: W504
+                    re.search(
+                        r'^\d{4}VBO\d{8}\.zip$',
+                        packet.data['name']
+                    )
+                ) or  # noqa: W504
+                (
+                    not self.process_wpl and  # noqa: W504
+                    re.search(
+                        r'^\d{4}WPL\d{8}\.zip$',
+                        packet.data['name']
+                    )
+                ) or  # noqa: W504
+                (
+                    not self.process_gwr and  # noqa: W504
+                    re.search(
+                        r'^GEM\-WPL\-RELATIE\-\d{8}\.zip$',
+                        packet.data['name']
+                    )
+                ) or  # noqa: W504
+                (
+                    not self.process_levering and  # noqa: W504
+                    re.search(
+                        r'^Leveringsdocument\-BAG\-Extract\.xml$',
+                        packet.data['name']
+                    )
+                )
+            ):
+                log.info("Skipping processing of: %s" % packet.data['name'])
 
-            return packet
+                return packet
+
+            if packet.data['name'].endswith('.xml'):
+                return self.process_xml_file_packet(packet)
+            elif packet.data['name'].endswith('.zip'):
+                return self.process_zip_file_packet(packet)
+            else:
+                log.warning("Skipping unsupported file: %s" % packet.data['name'])
+
+                return packet
