@@ -6,7 +6,7 @@ import re
 import zipfile
 
 from lxml import etree
-from osgeo import ogr
+from osgeo import ogr, osr
 from psycopg2 import sql
 
 from stetl.bagutil import BAGUtil
@@ -17,6 +17,9 @@ from stetl.component import Config
 from stetl.postgis import PostGIS
 
 log = Util.get_log('bagoutput')
+
+sr = osr.SpatialReference()
+sr.ImportFromEPSG(28992)
 
 xmlns = {
     'xsi': (
@@ -1411,6 +1414,11 @@ class BAGOutput(Output):
             log.debug("Converting to Point")
 
             geom = geom.Centroid()
+
+        if not geom.GetSpatialReference():
+            log.debug("Converting SRID to 28992")
+
+            geom.AssignSpatialReference(sr)
 
         wkb = geom.ExportToWkb().hex().upper()
 
