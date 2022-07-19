@@ -43,7 +43,13 @@ class PostGIS:
                                                               self.config.get('port', '5432'))
             log.info('Connecting to %s' % conn_str)
             conn_str += ' password=%s' % self.config['password']
-            self.connection = psycopg2.connect(conn_str)
+            self.connection = psycopg2.connect(
+                conn_str,
+                keepalives=1,
+                keepalives_idle=60,
+                keepalives_interval=10,
+                keepalives_count=5,
+            )
             self.cursor = self.connection.cursor()
 
             self.set_schema()
@@ -120,6 +126,28 @@ class PostGIS:
             #            self.log_actie("uitvoeren_db", "n.v.t", "fout=%s" % str(e), True)
             return -1
 
+        return self.cursor.rowcount
+
+    def executemany(self, sql, parameters):
+        try:
+            self.cursor.executemany(sql, parameters)
+            # log.debug(self.cursor.statusmessage)
+        except Exception as e:
+            log.exception("error '%s' in query: %s" % (str(e), str(sql)))
+            return -1
+        return self.cursor.rowcount
+
+    def execute_batch(self, sql, parameters):
+        try:
+            psycopg2.extras.execute_batch(
+                self.cursor,
+                sql,
+                parameters,
+            )
+            # log.debug(self.cursor.statusmessage)
+        except Exception as e:
+            log.exception("error '%s' in query: %s" % (str(e), str(sql)))
+            return -1
         return self.cursor.rowcount
 
     def file_execute(self, sqlfile):
