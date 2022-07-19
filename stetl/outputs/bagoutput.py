@@ -1335,6 +1335,12 @@ class BAGOutput(Output):
         elif truncate or self.truncate:
             self.truncate_table(table)
 
+        mapping = {
+            "begingeldigheid": "begindatumtijdvakgeldigheid",
+            "eindgeldigheid": "einddatumtijdvakgeldigheid",
+        }
+        fields = [mapping.get(field, field) for field in fields]
+
         log.info("Copying records from CSV file: %s" % csv_file)
 
         sqlfmt = {
