@@ -257,7 +257,7 @@ class BAGOutput(Output):
 
     def update_record(self, table, record, identifiers):
         sqlstr = r'UPDATE {table} SET'
-        format = {
+        sqlfmt = {
             'table': sql.Identifier(table),
         }
         param = []
@@ -274,7 +274,7 @@ class BAGOutput(Output):
 
             sqlstr += r' {' + column + r'} = %s'
 
-            format[column] = sql.Identifier(key)
+            sqlfmt[column] = sql.Identifier(key)
             param.append(record[key])
 
             i += 1
@@ -292,17 +292,17 @@ class BAGOutput(Output):
 
             sqlstr += r'{' + column + r'} = %s'
 
-            format[column] = sql.Identifier(key)
+            sqlfmt[column] = sql.Identifier(key)
             param.append(identifiers[key])
 
             i += 1
 
         log.debug("sqlstr: %s" % sqlstr)
-        log.debug("format: %s" % format)
+        log.debug("sqlfmt: %s" % sqlfmt)
 
-        query = sql.SQL(sqlstr).format(**format)
+        query = sql.SQL(sqlstr).format(**sqlfmt)
 
-        log.debug("query: %s" % query)
+        log.debug("query: %s" % query.as_string(context=self.db.cursor))
         log.debug("param: %s" % pprint.pformat(param))
 
         rowcount = self.db.execute(query, param)
@@ -312,7 +312,7 @@ class BAGOutput(Output):
 
     def insert_record(self, table, record):
         sqlstr = r'INSERT INTO {table} ('
-        format = {
+        sqlfmt = {
             'table': sql.Identifier(table),
         }
         values = r') VALUES ('
@@ -329,7 +329,7 @@ class BAGOutput(Output):
             sqlstr += r'{' + column + r'}'
             values += r'%s'
 
-            format[column] = sql.Identifier(key)
+            sqlfmt[column] = sql.Identifier(key)
             param.append(record[key])
 
             i += 1
@@ -337,11 +337,11 @@ class BAGOutput(Output):
         sqlstr += values + r')'
 
         log.debug("sqlstr: %s" % sqlstr)
-        log.debug("format: %s" % format)
+        log.debug("sqlfmt: %s" % sqlfmt)
 
-        query = sql.SQL(sqlstr).format(**format)
+        query = sql.SQL(sqlstr).format(**sqlfmt)
 
-        log.debug("query: %s" % query)
+        log.debug("query: %s" % query.as_string(context=self.db.cursor))
         log.debug("param: %s" % pprint.pformat(param))
 
         rowcount = self.db.execute(query, param)
@@ -360,7 +360,7 @@ class BAGOutput(Output):
 
         if identifiers is not None:
             sqlstr = r'SELECT {primary_key} FROM {table} WHERE '
-            format = {
+            sqlfmt = {
                 'primary_key': sql.Identifier(primary_key),
                 'table': sql.Identifier(table),
             }
@@ -375,17 +375,17 @@ class BAGOutput(Output):
 
                 sqlstr += r'{' + column + r'} = %s'
 
-                format[column] = sql.Identifier(key)
+                sqlfmt[column] = sql.Identifier(key)
                 param.append(identifiers[key])
 
                 i += 1
 
             log.debug("sqlstr: %s" % sqlstr)
-            log.debug("format: %s" % format)
+            log.debug("sqlfmt: %s" % sqlfmt)
 
-            query = sql.SQL(sqlstr).format(**format)
+            query = sql.SQL(sqlstr).format(**sqlfmt)
 
-            log.debug("query: %s" % query)
+            log.debug("query: %s" % query.as_string(context=self.db.cursor))
             log.debug("param: %s" % pprint.pformat(param))
 
             rowcount = self.db.execute(query, param)
@@ -414,7 +414,7 @@ class BAGOutput(Output):
     def create_enum(self, name, values):
         log.info("Creating ENUM: %s" % name)
 
-        format = {
+        sqlfmt = {
             'name': sql.Identifier(name.lower()),
         }
 
@@ -432,11 +432,11 @@ class BAGOutput(Output):
         sqlstr += ')'
 
         log.debug("sqlstr: %s" % sqlstr)
-        log.debug("format: %s" % format)
+        log.debug("sqlfmt: %s" % sqlfmt)
 
-        query = sql.SQL(sqlstr).format(**format)
+        query = sql.SQL(sqlstr).format(**sqlfmt)
 
-        log.debug("query: %s" % query)
+        log.debug("query: %s" % query.as_string(context=self.db.cursor))
         log.debug("param: %s" % pprint.pformat(values))
 
         self.db.cursor.execute(query, values)
@@ -1245,7 +1245,7 @@ class BAGOutput(Output):
 
                 table_enum[key] = table_enum[suffix]
 
-        format = {
+        sqlfmt = {
             'table': sql.Identifier(table),
         }
 
@@ -1300,16 +1300,16 @@ class BAGOutput(Output):
 
             key = 'primary_key'
 
-            format[key] = sql.Identifier(table_structure[table][key])
+            sqlfmt[key] = sql.Identifier(table_structure[table][key])
 
         sqlstr += r')'
 
         log.debug("sqlstr: %s" % sqlstr)
-        log.debug("format: %s" % format)
+        log.debug("sqlfmt: %s" % sqlfmt)
 
-        query = sql.SQL(sqlstr).format(**format)
+        query = sql.SQL(sqlstr).format(**sqlfmt)
 
-        log.debug("query: %s" % query)
+        log.debug("query: %s" % query.as_string(context=self.db.cursor))
 
         self.db.execute(query)
 
@@ -1343,7 +1343,7 @@ class BAGOutput(Output):
 
         log.info("Copying records from CSV file: %s" % csv_file)
 
-        format = {
+        sqlfmt = {
             'table': sql.Identifier(table),
         }
 
@@ -1358,7 +1358,7 @@ class BAGOutput(Output):
 
             sqlstr += r'{' + column + r'}'
 
-            format[column] = sql.Identifier(field)
+            sqlfmt[column] = sql.Identifier(field)
 
             i += 1
 
@@ -1367,15 +1367,15 @@ class BAGOutput(Output):
         sqlstr += ' NULL {null}'
         sqlstr += ' CSV HEADER'
 
-        format['delimiter'] = sql.Literal(delimiter)
-        format['null'] = sql.Literal(null)
+        sqlfmt['delimiter'] = sql.Literal(delimiter)
+        sqlfmt['null'] = sql.Literal(null)
 
         log.debug("sqlstr: %s" % sqlstr)
-        log.debug("format: %s" % format)
+        log.debug("sqlfmt: %s" % sqlfmt)
 
-        query = sql.SQL(sqlstr).format(**format)
+        query = sql.SQL(sqlstr).format(**sqlfmt)
 
-        log.debug("query: %s" % query)
+        log.debug("query: %s" % query.as_string(context=self.db.cursor))
 
         with open(csv_file, 'r') as f:
             self.db.cursor.copy_expert(
@@ -1390,21 +1390,21 @@ class BAGOutput(Output):
             ).decode()
         )
 
-        log.info("Processing GML: %s" % geom.GetGeometryName())
+        log.debug("Processing GML: %s" % geom.GetGeometryName())
 
         if geom.Is3D():
             log.debug("Geometry is 3D, flattening to 2D")
 
             geom.FlattenTo2D()
 
-        if(
+        if (
             convert_to is not None and  # noqa: W504
             convert_to == 'multipolygon'
         ):
             log.debug("Converting to MultiPolygon")
 
             geom = ogr.ForceToMultiPolygon(geom)
-        elif(
+        elif (
             convert_to is not None and  # noqa: W504
             convert_to == 'point'
         ):
@@ -1542,7 +1542,6 @@ class BAGOutput(Output):
                     'begingeldigheid': '',
                     'eindgeldigheid': null,
                     'woonplaatscode': '',
-                    'gemeentecode': '',
                     'gemeentecode': '',
                 }
 
@@ -2949,7 +2948,7 @@ class BAGOutput(Output):
             zip_content = BAGUtil.zip_file_content(input_file)
 
             for entry in zip_content:
-                if(
+                if (
                     entry.startswith('.') or  # noqa: W504
                     entry.startswith('_')
                 ):
@@ -3023,7 +3022,7 @@ class BAGOutput(Output):
 
             return packet
         else:
-            if(
+            if (
                 (
                     not self.process_inactief and  # noqa: W504
                     re.search(
