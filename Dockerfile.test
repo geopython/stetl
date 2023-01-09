@@ -1,4 +1,4 @@
-FROM geopython/stetl:local
+FROM geopython/stetl:latest
 
 WORKDIR /stetl
 

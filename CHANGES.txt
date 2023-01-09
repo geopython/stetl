@@ -1,13 +1,18 @@
 Changes
 =======
 
-v2.1 - aug, 2020
-----------------
+v2.2 - PLANNED
+--------------
 
-PLANNED.
+Leftovers from 2.2, also new GH Workflows for CI/CD and new Dockerfile.
+
+v2.1 - january 9, 2023
+----------------------
 
 See closed issues in Milestone 2.1: https://github.com/geopython/stetl/milestone/11?closed=1
 Mainly cleanup of Py3 migration issues, version upgrades for supporting libs (GDAL etc) and Dockerfile.
+Also many issues related to BAG v2 ETL, which uses the GDAL OGR BAGLV Driver, within NLExtract.
+See https://github.com/nlextract/NLExtract.
 
 v2.0 - april 11, 2019
 ---------------------
