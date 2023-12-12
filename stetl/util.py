@@ -159,7 +159,7 @@ class Util:
                         raise StopIteration
 
         cp = ConfigParser()
-        cp.readfp(FakeSecHead(open(file_path)))
+        cp.read_file(FakeSecHead(open(file_path)))
         return cp._sections['asection']
 
     @staticmethod
