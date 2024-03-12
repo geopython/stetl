@@ -121,6 +121,13 @@ class PostgresInsertOutput(PostgresDbOutput):
         """
         pass
 
+    @Config(ptype=bool, required=False, default=False)
+    def truncate(self):
+        """
+        Truncate database tables
+        """
+        pass
+
     # End attribute config meta
 
     def __init__(self, configdict, section, consumes=FORMAT.record):
@@ -197,6 +204,10 @@ class PostgresInsertOutput(PostgresDbOutput):
 
         if self.replace and self.key and not self.update_query:
             self.update_query = self.create_update_query(first_record)
+
+        # TRUNCATE TABLE
+        if self.truncate:
+            self.db.truncate_table(self.cfg.get('table'))
 
         # Check if record is single (dict) or array (list of dict)
         if type(record) is dict:
