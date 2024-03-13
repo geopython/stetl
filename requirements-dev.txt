@@ -1,6 +1,5 @@
 nose2
 cov-core
-mock
 Sphinx
 flake8
 pylint

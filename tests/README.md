@@ -30,7 +30,9 @@ The test coverage is written to the dir htmlcov.
 
 Mock objects: mock
 
-	pip install mock
+    mock is now part of the Python standard library, available as unittest.mock in Python 3.3 onwards.
+
+    https://github.com/testing-cabal/mock
 
 More information: http://www.voidspace.org.uk/python/mock/
 
