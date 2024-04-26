@@ -4,8 +4,6 @@
     <ElementPath>City</ElementPath>
     <GeometryName>geometry</GeometryName>
     <GeometryElementPath>geometry</GeometryElementPath>
-    <!--POINT-->
-    <GeometryType>1</GeometryType>
     <SRSName>urn:ogc:def:crs:EPSG:4326</SRSName>
     <DatasetSpecificInfo>
       <FeatureCount>3</FeatureCount>

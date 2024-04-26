@@ -160,7 +160,26 @@ class OgrOutput(Output):
             for k in self.dest_options:
                 self.gdal.SetConfigOption(k, self.dest_options[k])
 
-        self.dest_driver = None
+        # /* -------------------------------------------------------------------- */
+        # /*      Find the output driver.                                         */
+        # /* -------------------------------------------------------------------- */
+
+        # Open OGR data dest in write-only mode.
+        self.dest_driver = ogr.GetDriverByName(self.dest_format)
+
+        # Report failure if failed
+        if self.dest_driver is None:
+            log.error("Cannot open OGR data destination: %s with the following drivers." % self.dest_data_source)
+
+            for iDriver in range(self.ogr.GetDriverCount()):
+                log.info("  ->  " + self.ogr.GetDriver(iDriver).GetName())
+
+            raise Exception()
+
+        if self.dest_driver.TestCapability(ogr.ODrCCreateDataSource) is False:
+            log.error("%s driver does not support data source creation." % self.dest_format)
+            raise Exception()
+
         self.dest_fd = None
 
         # Loosely based on https://github.com/OSGeo/gdal/blob/trunk/gdal/swig/python/samples/ogr2ogr.py
@@ -170,39 +189,16 @@ class OgrOutput(Output):
         # /* -------------------------------------------------------------------- */
         if self.update:
             # Try opening in update mode
-            self.dest_fd = ogr.Open(self.dest_data_source, True)
+            self.dest_fd = self.dest_driver.Open(self.dest_data_source, True)
 
             if self.dest_fd is not None:
                 if len(self.dest_create_options) > 0:
                     log.warn("Datasource creation options ignored since an existing datasource being updated.")
 
-                self.dest_driver = self.dest_fd.GetDriver()
                 if self.overwrite:
                     self.dest_driver.DeleteDataSource(self.dest_data_source)
                     self.dest_fd = None
-                    self.dest_driver = None
                     self.update = False
-
-        # /* -------------------------------------------------------------------- */
-        # /*      Find the output driver.                                         */
-        # /* -------------------------------------------------------------------- */
-        if self.dest_driver is None:
-
-            # Open OGR data dest in write-only mode.
-            self.dest_driver = ogr.GetDriverByName(self.dest_format)
-
-            # Report failure if failed
-            if self.dest_driver is None:
-                log.error("Cannot open OGR data destination: %s with the following drivers." % self.dest_data_source)
-
-                for iDriver in range(self.ogr.GetDriverCount()):
-                    log.info("  ->  " + self.ogr.GetDriver(iDriver).GetName())
-
-                raise Exception()
-
-            if self.dest_driver.TestCapability(ogr.ODrCCreateDataSource) is False:
-                log.error("%s driver does not support data source creation." % self.dest_format)
-                raise Exception()
 
         # /* -------------------------------------------------------------------- */
         # /*      Create the output data source.                                  */
