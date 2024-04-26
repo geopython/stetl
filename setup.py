@@ -1,4 +1,5 @@
 import logging
+import os
 from setuptools import setup, find_packages
 
 # To publish: python setup.py sdist upload -r pypi
@@ -32,7 +33,9 @@ with open('CREDITS.txt', 'r') as f:
 with open('CHANGES.txt', 'r') as f:
     changes = f.read()
 
-with open('requirements-main.txt') as f:
+requirements_file = os.environ.get( 'REQUIREMENTS_FILE', 'requirements-main.txt' )
+
+with open(requirements_file) as f:
     requirements = f.read().splitlines()
 
 setup(

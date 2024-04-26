@@ -41,14 +41,9 @@ Regarding the coverage: if you specify the tests directory, only the coverage of
 If you would like to see coverage for the source files as well, you need to execute nose2 from the Stetl root dir.
 
 ## Unit Testing within Docker Container
-
-In root dir:
-
-	docker build -t geopython/stetltest:latest -f Dockerfile.test .
 	
 Run `nose2` within Docker Image:
 
-	docker run geopython/stetltest:latest
+	docker run geopython/stetl:latest nose2
 
 See also the [.travis.yml](../.travis.yml) file.
-	

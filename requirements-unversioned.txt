@@ -1,0 +1,12 @@
+Deprecated
+GDAL
+Jinja2
+lxml
+MarkupSafe
+psycopg2-binary
+wrapt
+nose2
+cov-core
+Sphinx
+flake8
+pylint
