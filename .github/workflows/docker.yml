@@ -46,17 +46,20 @@ jobs:
 #          username: ${{ github.actor }}
 #          password: ${{ secrets.GITHUB_TOKEN }}
 
-#      - name: Build and export to Docker
-#        uses: docker/build-push-action@v3.1.1
-#        with:
-#          context: .
-#          load: true
-#          tags: ${{ env.DOCKER_TEST_IMAGE }}
+      - name: Build for testing
+        uses: docker/build-push-action@v3.3.1
+        with:
+          context: .
+          load: true
+          tags: ${{ env.DOCKER_TEST_IMAGE }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/arm64, linux/amd64
 
-#      - name: stetl Unit Tests with Docker Image ⚙️
-#        run: |
-#          docker run --rm ${{ env.DOCKER_TEST_IMAGE }} nose2
-#          docker run -it --rm -it ${{ env.DOCKER_TEST_IMAGE }} sh -c "cd examples/basics && ./runall.sh"
+      - name: stetl Unit Tests with Docker Image ⚙️
+        run: |
+          docker run --rm ${{ env.DOCKER_TEST_IMAGE }} nose2
+          docker run -it --rm -it ${{ env.DOCKER_TEST_IMAGE }} sh -c "cd examples/basics && ./runall.sh"
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
