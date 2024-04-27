@@ -1,5 +1,5 @@
 Deprecated>1
-GDAL>3
+GDAL==3.8.4
 Jinja2>3
 lxml>5
 MarkupSafe>2
