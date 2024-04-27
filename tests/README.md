@@ -42,8 +42,8 @@ If you would like to see coverage for the source files as well, you need to exec
 
 ## Unit Testing within Docker Container
 	
-Run `nose2` within Docker Image:
+Run `nose2` within standard Stetl Docker Image:
 
 	docker run geopython/stetl:latest nose2
 
-See also the [.travis.yml](../.travis.yml) file.
+See also the [GitHub Workflow file main.yml](../.github/workflows/main.yml) file.

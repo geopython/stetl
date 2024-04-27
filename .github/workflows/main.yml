@@ -1,0 +1,69 @@
+name: Build
+
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - '!**.md'
+      - '!**.rst'
+#  release:
+#    types:
+#      - released
+
+jobs:
+  main:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        include:
+          - python-version: '3.10'
+#    env:
+#      PYGEOAPI_CONFIG: "$(pwd)/pygeoapi-config.yml"
+
+    steps:
+    - name: Clear up GitHub runner diskspace
+      run: |
+        echo "Space before"
+        df -h /
+        sudo rm -rf /usr/local/lib/android
+        sudo rm -rf /usr/share/dotnet
+        echo "Space after"
+        df -h /
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      name: Setup Python ${{ matrix.python-version }}
+      with:
+        python-version: ${{ matrix.python-version }}
+#    - name: Install and run PostgreSQL/PostGIS 📦
+#      uses: huaxk/postgis-action@v1
+#      with:
+#        postgresql password: ${{ secrets.DatabasePassword || 'postgres' }}
+#        postgresql db: 'test'
+    - name: Use ubuntuGIS unstable ppa
+      run: sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable && sudo apt update
+      shell: bash
+    - name: Install GDAL with Python bindings
+      uses: awalsh128/cache-apt-pkgs-action@latest
+      with:
+        packages: gdal-bin libgdal-dev
+        version: 3.8.5
+    - name: Install requirements 📦
+      run: |
+        apt -y install python3-cov-core python3-deprecated python3-flake8 python3-jinja2 python3-lxml python3-markupsafe python3-nose2 python3-psycopg2 python3-sphinx
+    - name: Install Stetl 📦
+      run: |
+        export REQUIREMENTS_FILE=requirements-unversioned.txt && python3 setup.py install
+    - name: run unit tests ⚙️
+      run: |
+         nose2 -v
+         pushd examples/basics && ./runall.sh  && popd
+    - name: build docs 🏗️
+      run: pushd docs && make html && popd
+    - name: failed tests 🚩
+      if: ${{ failure() }}
+      run: |
+        pip3 list -v
