@@ -57,7 +57,7 @@ jobs:
         pip install --upgrade pip
         sudo python3 setup.py install
       env:
-        REQUIREMENTS_FILE: "$(pwd)/requirements-unversioned.txt"
+        REQUIREMENTS_FILE: "requirements-unversioned.txt"
     - name: run unit tests ⚙️
       run: |
         nose2 -v
