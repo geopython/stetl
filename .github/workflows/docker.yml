@@ -54,7 +54,6 @@ jobs:
           tags: ${{ env.DOCKER_TEST_IMAGE }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          platforms: linux/arm64, linux/amd64
 
       - name: stetl Unit Tests with Docker Image ⚙️
         run: |
