@@ -58,7 +58,7 @@ jobs:
       - name: stetl Unit Tests with Docker Image ⚙️
         run: |
           docker run --rm ${{ env.DOCKER_TEST_IMAGE }} nose2
-          docker run -it --rm -it ${{ env.DOCKER_TEST_IMAGE }} sh -c "cd examples/basics && ./runall.sh"
+          docker run --rm ${{ env.DOCKER_TEST_IMAGE }} sh -c "cd examples/basics && ./runall.sh"
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
