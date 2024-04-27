@@ -52,7 +52,7 @@ jobs:
     - name: Install Stetl 📦
       run: |
         pip install --upgrade pip
-        pip install nose2
+        pip install nose2 sphinx_rtd_theme
         python3 setup.py install
     - name: run unit tests ⚙️
       run: |
