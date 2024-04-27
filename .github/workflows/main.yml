@@ -51,9 +51,9 @@ jobs:
         version: 1
     - name: Install Stetl 📦
       run: |
-        sudo pip install --upgrade pip
-        sudo pip install nose2
-        sudo python3 setup.py install
+        pip install --upgrade pip
+        pip install nose2
+        python3 setup.py install
     - name: run unit tests ⚙️
       run: |
         nose2 -v
@@ -63,4 +63,4 @@ jobs:
     - name: failed tests 🚩
       if: ${{ failure() }}
       run: |
-        pip3 list -v
+        pip list -v
