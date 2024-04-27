@@ -25,14 +25,14 @@ jobs:
 #      PYGEOAPI_CONFIG: "$(pwd)/pygeoapi-config.yml"
 
     steps:
-    - name: Clear up GitHub runner diskspace
-      run: |
-        echo "Space before"
-        df -h /
-        sudo rm -rf /usr/local/lib/android
-        sudo rm -rf /usr/share/dotnet
-        echo "Space after"
-        df -h /
+#    - name: Clear up GitHub runner diskspace
+#      run: |
+#        echo "Space before"
+#        df -h /
+#        sudo rm -rf /usr/local/lib/android
+#        sudo rm -rf /usr/share/dotnet
+#        echo "Space after"
+#        df -h /
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
       name: Setup Python ${{ matrix.python-version }}
@@ -50,13 +50,14 @@ jobs:
       uses: awalsh128/cache-apt-pkgs-action@latest
       with:
         packages: gdal-bin libgdal-dev
-        version: 3.8.5
+        version: 3.8.4
     - name: Install requirements 📦
       run: |
-        apt -y install python3-cov-core python3-deprecated python3-flake8 python3-jinja2 python3-lxml python3-markupsafe python3-nose2 python3-psycopg2 python3-sphinx
+        sudo apt -y install python3-cov-core python3-deprecated python3-flake8 python3-jinja2 python3-lxml python3-markupsafe python3-nose2 python3-psycopg2 python3-sphinx
     - name: Install Stetl 📦
       run: |
-        export REQUIREMENTS_FILE=requirements-unversioned.txt && python3 setup.py install
+        pip install --upgrade pip
+        export REQUIREMENTS_FILE=requirements-unversioned.txt && sudo python3 setup.py install
     - name: run unit tests ⚙️
       run: |
          nose2 -v
