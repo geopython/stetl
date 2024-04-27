@@ -21,8 +21,8 @@ jobs:
       matrix:
         include:
           - python-version: '3.10'
-#    env:
-#      PYGEOAPI_CONFIG: "$(pwd)/pygeoapi-config.yml"
+    env:
+      REQUIREMENTS_FILE: "$(pwd)/requirements-unversioned.txt"
 
     steps:
 #    - name: Clear up GitHub runner diskspace
@@ -57,7 +57,7 @@ jobs:
     - name: Install Stetl 📦
       run: |
         pip install --upgrade pip
-        export REQUIREMENTS_FILE=requirements-unversioned.txt && sudo python3 setup.py install
+        sudo python3 setup.py install
     - name: run unit tests ⚙️
       run: |
          nose2 -v
