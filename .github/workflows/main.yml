@@ -21,8 +21,6 @@ jobs:
       matrix:
         include:
           - python-version: '3.10'
-    env:
-      REQUIREMENTS_FILE: "$(pwd)/requirements-unversioned.txt"
 
     steps:
 #    - name: Clear up GitHub runner diskspace
@@ -58,10 +56,12 @@ jobs:
       run: |
         pip install --upgrade pip
         sudo python3 setup.py install
+      env:
+        REQUIREMENTS_FILE: "$(pwd)/requirements-unversioned.txt"
     - name: run unit tests ⚙️
       run: |
-         nose2 -v
-         pushd examples/basics && ./runall.sh  && popd
+        nose2 -v
+        pushd examples/basics && ./runall.sh  && popd
     - name: build docs 🏗️
       run: pushd docs && make html && popd
     - name: failed tests 🚩
