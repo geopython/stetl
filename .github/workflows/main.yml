@@ -44,20 +44,15 @@ jobs:
     - name: Use ubuntuGIS unstable ppa
       run: sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable && sudo apt update
       shell: bash
-    - name: Install GDAL with Python bindings
+    - name: Install packages withcaching, like GDAL with Python bindings
       uses: awalsh128/cache-apt-pkgs-action@latest
       with:
-        packages: gdal-bin libgdal-dev
-        version: 3.8.4
-    - name: Install requirements 📦
-      run: |
-        sudo apt -y install python3-cov-core python3-deprecated python3-flake8 python3-jinja2 python3-lxml python3-markupsafe python3-nose2 python3-psycopg2 python3-sphinx
+        packages: gdal-bin libgdal-dev python3-cov-core python3-nose2 python3-deprecated python3-flake8 python3-jinja2 python3-lxml python3-markupsafe python3-nose2 python3-psycopg2 python3-sphinx
+        version: 1
     - name: Install Stetl 📦
       run: |
-        pip install --upgrade pip
+        sudo pip install --upgrade pip
         sudo python3 setup.py install
-      env:
-        REQUIREMENTS_FILE: "requirements-unversioned.txt"
     - name: run unit tests ⚙️
       run: |
         nose2 -v
