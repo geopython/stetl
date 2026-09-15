@@ -52,7 +52,6 @@ setup(
     long_description=readme + "\n" + changes + "\n" + credits,
     long_description_content_type="text/markdown",
     packages=find_packages(exclude=['tests']),
-    namespace_packages=['stetl'],
     include_package_data=True,
     package_data={'': ['*.cfg','*.xml','*.gml']},
     scripts=['bin/stetl'],
