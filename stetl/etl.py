@@ -86,9 +86,15 @@ class ETL:
             if args_dict:
                 log.info("Substituting %d args in config file from args_dict: %s" % (len(args_names), str(args_names)))
 
-                # Do replacements  see http://docs.python.org/2/library/string.html#formatstrings
-                # and render substituted config string
-                config_str = config_str.format(**args_dict)
+                # Do replacements. Use regex instead of str.format so that
+                # literal braces in config values (e.g. converter_args dicts)
+                # are not mistaken for format placeholders.
+                for key, value in args_dict.items():
+                    config_str = re.sub(
+                        r'\{%s\}' % re.escape(key),
+                        str(value),
+                        config_str
+                    )
 
                 log.info("Substituting args OK")
 
