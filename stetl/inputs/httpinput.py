@@ -113,7 +113,8 @@ class HttpInput(Input):
             # Basic auth: http://mozgovipc.blogspot.nl/2012/06/python-http-basic-authentication-with.html
             # base64 encode username and password
             # write the Authorization header like: 'Basic base64encode(username + ':' + password)
-            auth_val = base64.encodestring('%s:%s' % (auth_creds['user'], auth_creds['password']))
+            creds = '%s:%s' % (auth_creds['user'], auth_creds['password'])
+            auth_val = base64.b64encode(creds.encode('utf-8')).decode('utf-8')
             auth_val = "Basic %s" % auth_val
         elif auth_type == 'token':
             # Bearer Type, see eg. https://tools.ietf.org/html/rfc6750

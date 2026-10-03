@@ -107,8 +107,9 @@ class HttpOutput(Output):
         # basic auth: http://mozgovipc.blogspot.nl/2012/06/python-http-basic-authentication-with.html
         # base64 encode the username and password
         # write the Authorization header like: 'Basic base64encode(username + ':' + password)
-        if self.user is not None:
-            auth = base64.encodestring('%s:%s' % (self.user, self.password)).replace('\n', '')
+        if self.user is not None and self.password is not None:
+            creds = '%s:%s' % (self.user, self.password)
+            auth = base64.b64encode(creds.encode('utf-8')).decode('utf-8')
             webservice.putheader("Authorization", "Basic %s" % auth)
 
         webservice.endheaders()
